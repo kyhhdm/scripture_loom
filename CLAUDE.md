@@ -11,6 +11,7 @@ Pre-implementation. There is no source code, build system, dependency manifest, 
 Scripture Loom is **a preparation and reflection system for unplugged family Bible study** — not an app used *during* worship. The design docs are the spec:
 
 - `docs/core_principles.md` — distilled principles and methods reflecting current decisions; read this first, it wins where documents disagree.
+- `docs/design-kit_generator.md` — the eight fluency dimensions (D1–D8, the product's schema) and the kit generator architecture: static human-reviewed content library + personal selector/scheduler; no content generation at session time.
 - `docs/motto.md` — the Bible Fluency Method, the pedagogy the product serves.
 - `docs/unplug_assitant.md` — the invisible-assistant product design and MVP scope. (Filename is misspelled; leave it unless renaming is requested.)
 - `docs/feature-listening_transcription.md` — the optional audio/transcription evidence-capture feature. **Explicitly low priority** (owner decision, 2026-07): high cost, and the unplugged paper workflow is preferred and must stand on its own without it. Do not scope MVP work around transcription.
