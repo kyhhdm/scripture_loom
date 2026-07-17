@@ -1,0 +1,39 @@
+{
+  "name": "Aquila & Priscilla's family",
+  "members": [
+    { "id": "aquila", "name": "Aquila", "age_tier": "adult", "leader": true },
+    { "id": "priscilla", "name": "Priscilla", "age_tier": "adult", "leader": false },
+    { "id": "grace", "name": "Grace", "age_tier": "youth", "leader": false },
+    { "id": "liberty", "name": "Liberty", "age_tier": "child", "leader": false }
+  ],
+  "reading_sequence": ["mt-4-1-11", "mt-5-1-12", "mt-5-13-16"],
+  "used_item_ids": ["mt4-q-who-tempted", "mt4-q-how-answered"],
+  "sessions": [
+    {
+      "date": "2026-07-12",
+      "passage": "mt-4-1-11",
+      "evidence": [
+        {
+          "member": "grace", "dimension": "D6", "code": "Q", "quality": "★", "prompted": false,
+          "note": "Why didn't Jesus just tell the devil to leave at the beginning?"
+        },
+        {
+          "member": "grace", "dimension": "D4", "code": "R", "quality": "✓", "prompted": true,
+          "note": "Recalled that Jesus answered every temptation with Scripture."
+        },
+        {
+          "member": "liberty", "dimension": "D2", "code": "R", "quality": "△", "prompted": true,
+          "note": "Retold the temptations but reversed the order of the second and third."
+        },
+        {
+          "member": "liberty", "dimension": "D3", "code": "U", "quality": "?", "prompted": true,
+          "note": "Confused about what the word 'worship' means."
+        },
+        {
+          "member": "priscilla", "dimension": "D5", "code": "C", "quality": "✓", "prompted": true,
+          "note": "Connected 'man shall not live by bread alone' to the manna in Deuteronomy 8."
+        }
+      ]
+    }
+  ]
+}
