@@ -37,6 +37,20 @@ class TestUsfm(unittest.TestCase):
             ("5", "3", "Salt and Light"),
         ])
 
+    def test_footnote_wrapped_across_lines_stripped(self):
+        text = (
+            "\\id MAT eng-test\n"
+            "\\c 1\n"
+            "\\p\n"
+            "\\v 1 In the beginning\\f + \\fr 1:1 \\ft A long footnote that\n"
+            "wraps onto the next physical line.\\f* was the Word.\n"
+        )
+        _, chapters, _ = usfm.parse(text)
+        verse = chapters["1"]["1"]
+        self.assertNotIn("footnote", verse)
+        self.assertNotIn("\\", verse)
+        self.assertIn("was the Word.", verse)
+
 
 if __name__ == "__main__":
     unittest.main()
