@@ -33537,6 +33537,21 @@
  "license": "public-domain",
  "role": "displayable",
  "source": "sources/cuv-ebible",
- "versification_exceptions": {},
+ "versification_exceptions": {
+  "3JN.1.15": "added",
+  "ACT.15.34": "omitted",
+  "ACT.24.7": "omitted",
+  "ACT.28.29": "omitted",
+  "ACT.8.37": "omitted",
+  "JHN.5.4": "omitted",
+  "JHN.7.53": "omitted",
+  "LUK.17.36": "omitted",
+  "LUK.23.17": "omitted",
+  "MAT.18.11": "omitted",
+  "MAT.23.14": "omitted",
+  "MRK.15.28": "omitted",
+  "MRK.7.16": "omitted",
+  "REV.12.18": "added"
+ },
  "version": "CUV"
 }

@@ -1,7 +1,7 @@
 import json, sys, unittest
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from lib import books
+from lib import books, refs
 
 CANON = Path(__file__).resolve().parents[1] / "canon"
 VERSIONS = ["kjv", "web", "cuv-simp", "bsb"]
@@ -58,6 +58,24 @@ class TestCanonBibles(unittest.TestCase):
                 for ch in data["books"][code].values():
                     for text in ch.values():
                         self.assertNotIn("\\", text, f"{v} {code}")
+
+    def test_versification_exceptions_recorded(self):
+        kjv = self._load("kjv")
+        self.assertEqual(kjv["versification_exceptions"], {})
+
+        bsb = self._load("bsb")["versification_exceptions"]
+        self.assertEqual(bsb.get("MAT.17.21"), "omitted")
+        self.assertEqual(bsb.get("ACT.8.37"), "omitted")
+
+        web = self._load("web")["versification_exceptions"]
+        self.assertEqual(web.get("ROM.16.25"), "omitted")
+        self.assertEqual(web.get("ROM.14.24"), "added")
+
+        for v in VERSIONS:
+            data = self._load(v)
+            for key, kind in data["versification_exceptions"].items():
+                refs.parse(key)
+                self.assertIn(kind, ("omitted", "added"), f"{v} {key}")
 
 
 if __name__ == "__main__":
