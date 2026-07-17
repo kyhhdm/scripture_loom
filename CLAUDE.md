@@ -32,6 +32,8 @@ Anything proposed as a during-session feature is presumptively wrong: live AI qu
 
 **Paper is the primary artifact, not a fallback.** The deliverable of preparation is a printable kit; children's written cards and the Family Bible Fluency Notebook are stronger evidence than a transcript. Audio is *secondary* evidence; automatic transcription is an *optional enhancement*. Don't let a feature invert that hierarchy.
 
+**Worship, not academy — and content is not theologically agnostic.** The app trains fluency (the natural means); revelation belongs to the Spirit; the leader's faith is the unautomatable factor, so the prepare phase addresses the leader's heart before logistics. All Bible-study content (questions, activities, any AI-drafted material) is anchored to the Westminster Confession, especially Chapter 1 on Scripture (infallibility, inerrancy, sufficiency; Scripture interprets Scripture) — inject it as a constraint when drafting, check conformity when reviewing. Theology is not configurable in v1.
+
 **Evidence, never judgment.** Records state observable behavior ("could not remember which book Jesus quoted"), never character or spiritual conclusions ("lacks faith", "spiritually mature"). AI proposes; the leader confirms before anything enters a permanent record.
 
 **The durable value is the longitudinal per-member fluency record**, not any single session's output. Transcripts and photos are inputs that get discarded; confirmed evidence persists.

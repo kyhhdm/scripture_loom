@@ -10,6 +10,25 @@ Where the founding documents and this summary disagree, this document reflects t
 
 ---
 
+## The Governing Conviction: Worship, Not Academy
+
+Scripture reading is not purely objective skill training. It is the revelation of the invisible God to our hearts: **God speaks to us in his Word.** This spiritual dimension is what distinguishes family worship from academic exercise, and it governs everything below.
+
+The division of labor is strict:
+
+- **The app trains fluency** — the natural means: familiarity, memory, attention, active reading.
+- **Only the Spirit gives revelation** — the supernatural end the means serve.
+- **The leader stands where the two meet** — and therefore the leader's faith is the one critical factor that cannot be automated, scaffolded, or measured.
+
+Two consequences run through the whole design:
+
+1. **The leader's heart is prepared, not just their materials.** The prepare phase addresses the leader's faith — prayer, reading the passage devotionally before preparing to teach it, the reminder that they are leading worship, not a class.
+2. **Content is not theologically agnostic.** A fixed confessional standard — the Westminster Confession, especially Chapter 1 on Holy Scripture (its inspiration, infallibility, inerrancy, sufficiency, and clarity) — is the guardrail and lamppost for all content authoring and review. Note that WCF 1.9, "the infallible rule of interpretation of Scripture is Scripture itself," is the Connections dimension stated confessionally: the guardrail and the pedagogy agree.
+
+The fluency methods below are means of grace-adjacent discipline, never a substitute for the encounter they prepare for. This is also the deepest reading of principle 4: the app records observable fluency and never measures faith, because that domain belongs to God and to the leader's discernment, not to software.
+
+---
+
 ## Core Principles
 
 ### 1. Fluency before analysis
@@ -78,7 +97,7 @@ Reflect (digital, ≤5 minutes)
 feeds the next Prepare
 ```
 
-- **Prepare** — the leader selects a passage; the app generates a main objective, review questions, discussion prompts, 2–3 observation targets, and a printable paper session kit.
+- **Prepare** — begins with the leader's own heart: a prayer prompt and a devotional first reading of the passage before any planning. Then the leader selects the passage and the app assembles a main objective, review questions, discussion prompts, 2–3 observation targets, and a printable paper session kit.
 - **Gather** — printed Scripture, Bibles, pencils, index cards, the family notebook. No screens.
 - **Reflect** — the leader photographs paper artifacts, expands shorthand marks into confirmed observations, and the app updates each member's record and suggests the next session.
 

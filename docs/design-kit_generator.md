@@ -201,6 +201,17 @@ Notes:
 - **`pre_reading_quest`** items are handed out *before* the passage is read: a look-for, a prediction, a count, a character to track — one per member, indexed by dimension like everything else. Many can be auto-assembled from `key_facts` ("this passage has a repeated phrase — find it").
 - Only `published` items are ever selectable for a kit.
 
+### The theological guardrail
+
+The library is **not theologically agnostic**. All content authoring and review is anchored to a fixed confessional standard: the **Westminster Confession of Faith, especially Chapter 1** on Holy Scripture — its inspiration, infallibility, inerrancy, sufficiency, clarity, and the principle that Scripture interprets Scripture (WCF 1.9, which is dimension D5 stated confessionally).
+
+The guardrail operates at both stages of the content pipeline:
+
+- **AI-assisted drafting:** the confession (and derived guidance) is injected into every drafting prompt as a hard constraint — the model drafts *within* the tradition, not neutrally.
+- **Human review:** the `draft → reviewed → published` gate includes explicit conformity checking against the standard, alongside accuracy and age-appropriateness. Content that hedges on what the confession affirms (e.g., treating the text's reliability as an open question) fails review.
+
+A guardrail must be fixed to function: v1 commits to this one standard rather than making theology configurable. The evidence system is unaffected — per the governing conviction in `core_principles.md`, the app records observable fluency and never measures faith.
+
 ### The member record
 
 The other input to selection — what reflect-phase confirmations accumulate into:
@@ -237,7 +248,9 @@ Ask {member} to retell {previous_passage} before reading the new passage.
 
 ### The kit composer
 
-Fills the four fixed page templates from the founding design — leader guide, family observation sheet, recall activity, leader observation grid — with the selector's output. Layout templates are static; only slot content varies. Output is print-ready (and hand-copyable: every kit must degrade gracefully to "copy these five lines onto index cards").
+Fills the four fixed page templates from the founding design — leader guide, family observation sheet, recall activity, leader observation grid — with the selector's output.
+
+The **leader guide opens with heart preparation, before any logistics**: a prayer prompt and an instruction to read the passage devotionally once — as a hearer, not yet as a teacher — before reviewing the plan. The leader is leading worship, not delivering a lesson; the page order should say so. Layout templates are static; only slot content varies. Output is print-ready (and hand-copyable: every kit must degrade gracefully to "copy these five lines onto index cards").
 
 The observation grid's columns are the six evidence codes, not the eight dimensions — the taxonomy stays out of the leader's way at the table.
 
@@ -257,5 +270,5 @@ Steps 2–3 alone constitute a shippable paper product.
 
 - Default reading sequence for the first library: single Gospel start (Mark or Matthew) vs. a Genesis + Gospel pair.
 - Age tiers: are four tiers right, and where are the boundaries?
-- Bilingual content (中文/English): authored per language, or translated pairs with shared indexing?
+- Bilingual content (中文/English): authored per language, or translated pairs with shared indexing? (The confessional standard has established Chinese translations — 威斯敏斯特信条 — so the guardrail itself is not a localization obstacle.)
 - How the family notebook page interacts with the kit — preprinted spread in the kit vs. fully handwritten.
