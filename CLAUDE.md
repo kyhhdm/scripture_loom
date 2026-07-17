@@ -4,7 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository state
 
-Pre-implementation. There is no source code, build system, dependency manifest, or test suite yet — only `README.md` (a stub) and the design documents in `docs/`. Do not invent build/test commands; when the first code lands, add the real ones here.
+Two code trees exist so far; the rest is still design docs in `docs/`. No dependency manifest — everything is **Python 3 standard library only**, no third-party packages.
+
+- `corpus/` — the source-text and reference layer beneath the content bank (Bible versions, pericopes, cross-references, and Westminster/commentary "lamppost" documents, normalized into a diff-able JSON canon store). Built per `docs/superpowers/specs/2026-07-17-corpus-assets-design.md`. See `corpus/README.md` and `corpus/PROVENANCE.md`.
+- `prototype/` — the kit-generator proof (`docs/design-kit_generator.md`): static content + records → selector → printable kit.
+
+Commands:
+- Corpus tests: `python3 -m unittest discover -s corpus/tests -v`
+- Prototype tests: `cd prototype && python3 -m unittest test_selector -v`
+- Rebuild the corpus canon from committed sources: see the rebuild command in `corpus/README.md` (deterministic; ingest scripts read only committed `sources/`, no network).
+
+Key invariant in `corpus/`: `corpus/lib/passage.py:get_passage()` is the single read path for Bible text and enforces the license gate — only `role: displayable` assets licensed `public-domain`/`CC-BY` are served in product mode; copyrighted texts live in git-ignored `corpus/sources/private/` and are never committed or shipped.
 
 ## What the product is
 
