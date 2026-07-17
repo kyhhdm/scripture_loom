@@ -11,27 +11,11 @@ import json, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from lib import refs as reflib
+from lib import osis, refs as reflib
 
 CORPUS = Path(__file__).resolve().parents[1]
 
-# OSIS-ish source abbreviation -> canonical USFM 3-letter code.
-BOOK_MAP = {
-    "Gen": "GEN", "Exod": "EXO", "Lev": "LEV", "Num": "NUM", "Deut": "DEU",
-    "Josh": "JOS", "Judg": "JDG", "Ruth": "RUT", "1Sam": "1SA", "2Sam": "2SA",
-    "1Kgs": "1KI", "2Kgs": "2KI", "1Chr": "1CH", "2Chr": "2CH", "Ezra": "EZR",
-    "Neh": "NEH", "Esth": "EST", "Job": "JOB", "Ps": "PSA", "Prov": "PRO",
-    "Eccl": "ECC", "Song": "SNG", "Isa": "ISA", "Jer": "JER", "Lam": "LAM",
-    "Ezek": "EZK", "Dan": "DAN", "Hos": "HOS", "Joel": "JOL", "Amos": "AMO",
-    "Obad": "OBA", "Jonah": "JON", "Mic": "MIC", "Nah": "NAM", "Hab": "HAB",
-    "Zeph": "ZEP", "Hag": "HAG", "Zech": "ZEC", "Mal": "MAL",
-    "Matt": "MAT", "Mark": "MRK", "Luke": "LUK", "John": "JHN", "Acts": "ACT",
-    "Rom": "ROM", "1Cor": "1CO", "2Cor": "2CO", "Gal": "GAL", "Eph": "EPH",
-    "Phil": "PHP", "Col": "COL", "1Thess": "1TH", "2Thess": "2TH",
-    "1Tim": "1TI", "2Tim": "2TI", "Titus": "TIT", "Phlm": "PHM", "Heb": "HEB",
-    "Jas": "JAS", "1Pet": "1PE", "2Pet": "2PE", "1John": "1JN", "2John": "2JN",
-    "3John": "3JN", "Jude": "JUD", "Rev": "REV",
-}
+# OSIS-ish source abbreviation -> canonical USFM 3-letter code (shared: lib/osis).
 
 
 SKIPPED = 0  # whole-chapter proof texts the book.ch.v schema cannot represent
@@ -39,7 +23,7 @@ SKIPPED = 0  # whole-chapter proof texts the book.ch.v schema cannot represent
 
 def _one(ref):
     book, ch, v = ref.split(".")
-    return f"{BOOK_MAP[book]}.{ch}.{v}"
+    return f"{osis.OSIS_TO_USFM[book]}.{ch}.{v}"
 
 
 def _canon_ref(ref):

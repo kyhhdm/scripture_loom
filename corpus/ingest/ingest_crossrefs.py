@@ -3,34 +3,18 @@ import io, json, sys, zipfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from lib import refs as reflib
+from lib import osis, refs as reflib
 
 CORPUS = Path(__file__).resolve().parents[1]
 
-# OpenBible uses OSIS book abbreviations; map to our USFM codes.
-OSIS_TO_USFM = {
-    "Gen": "GEN", "Exod": "EXO", "Lev": "LEV", "Num": "NUM", "Deut": "DEU",
-    "Josh": "JOS", "Judg": "JDG", "Ruth": "RUT", "1Sam": "1SA", "2Sam": "2SA",
-    "1Kgs": "1KI", "2Kgs": "2KI", "1Chr": "1CH", "2Chr": "2CH", "Ezra": "EZR",
-    "Neh": "NEH", "Esth": "EST", "Job": "JOB", "Ps": "PSA", "Prov": "PRO",
-    "Eccl": "ECC", "Song": "SNG", "Isa": "ISA", "Jer": "JER", "Lam": "LAM",
-    "Ezek": "EZK", "Dan": "DAN", "Hos": "HOS", "Joel": "JOL", "Amos": "AMO",
-    "Obad": "OBA", "Jonah": "JON", "Mic": "MIC", "Nah": "NAM", "Hab": "HAB",
-    "Zeph": "ZEP", "Hag": "HAG", "Zech": "ZEC", "Mal": "MAL",
-    "Matt": "MAT", "Mark": "MRK", "Luke": "LUK", "John": "JHN", "Acts": "ACT",
-    "Rom": "ROM", "1Cor": "1CO", "2Cor": "2CO", "Gal": "GAL", "Eph": "EPH",
-    "Phil": "PHP", "Col": "COL", "1Thess": "1TH", "2Thess": "2TH",
-    "1Tim": "1TI", "2Tim": "2TI", "Titus": "TIT", "Phlm": "PHM", "Heb": "HEB",
-    "Jas": "JAS", "1Pet": "1PE", "2Pet": "2PE", "1John": "1JN", "2John": "2JN",
-    "3John": "3JN", "Jude": "JUD", "Rev": "REV",
-}
+# OpenBible uses OSIS book abbreviations; map to our USFM codes (shared: lib/osis).
 
 
 def _conv(osis_ref):
     """'Gen.1.1' -> 'GEN.1.1'; 'Prov.8.22-Prov.8.30' -> 'PRO.8.22-30' or full form."""
     def one(r):
         book, ch, v = r.split(".")
-        return f"{OSIS_TO_USFM[book]}.{ch}.{v}"
+        return f"{osis.OSIS_TO_USFM[book]}.{ch}.{v}"
     if "-" in osis_ref:
         a, b = osis_ref.split("-", 1)
         ra, rb = one(a), one(b)
@@ -80,7 +64,10 @@ def main():
 
     dest = CORPUS / "canon" / "structure" / "crossrefs.json"
     dest.write_text(json.dumps(
-        {"license": "CC-BY (openbible.info)", "role": "displayable", "refs": out},
+        {"license": "CC-BY",
+         "license_note": "openbible.info — attribute in any shipped product",
+         "license_url": "https://www.openbible.info/labs/cross-references/",
+         "role": "displayable", "refs": out},
         indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"{len(out)} refs written, {skipped} skipped -> {dest}")
     if unmatched:

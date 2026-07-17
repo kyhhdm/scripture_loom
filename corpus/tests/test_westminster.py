@@ -32,6 +32,14 @@ class TestWCF(unittest.TestCase):
                 for pt in s["proof_texts"]:
                     refs.parse_range(pt)
 
+    def test_proof_text_total_pinned(self):
+        # Pinned invariant: the "kept" side of the by-design whole-chapter drop.
+        # A parser regression that quietly dropped more proof texts fails here.
+        wcf = _load("wcf.json")
+        total = sum(len(s["proof_texts"])
+                    for ch in wcf["chapters"] for s in ch["sections"])
+        self.assertEqual(total, 1831)
+
 
 class TestCatechisms(unittest.TestCase):
     def test_shorter_has_107_questions(self):
@@ -42,6 +50,11 @@ class TestCatechisms(unittest.TestCase):
 
     def test_larger_has_196_questions(self):
         self.assertEqual(len(_load("wlc.json")["questions"]), 196)
+
+    def test_wlc_proof_text_total_pinned(self):
+        # Pinned invariant: the "kept" side of the by-design whole-chapter drop.
+        total = sum(len(q["proof_texts"]) for q in _load("wlc.json")["questions"])
+        self.assertEqual(total, 2622)
 
     def test_numbering_sequential(self):
         for name in ("wsc.json", "wlc.json"):

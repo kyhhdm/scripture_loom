@@ -1,7 +1,7 @@
 import json, sys, tempfile, unittest
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from lib import passage
+from lib import passage, refs
 
 CORPUS = Path(__file__).resolve().parents[1]
 
@@ -58,6 +58,37 @@ class TestGetPassage(unittest.TestCase):
                 "role": "lamppost", "books": {"MAT": {"5": {"1": "x"}}}}))
             with self.assertRaises(passage.LicenseError):
                 passage._gate(json.loads(bad.read_text()), "product")
+
+    def test_gate_closed_license_displayable_blocked(self):
+        # The AND's license half in isolation: displayable + closed license.
+        with self.assertRaises(passage.LicenseError):
+            passage._gate({"role": "displayable", "license": "copyrighted"},
+                          "product")
+
+    def test_gate_open_license_displayable_allowed(self):
+        # Locks in Fix 1: a bare CC-BY displayable asset passes the product gate.
+        self.assertTrue(
+            passage._gate({"role": "displayable", "license": "CC-BY"}, "product"))
+
+    def test_bridged_verse_key_round_trips(self):
+        priv = CORPUS / "sources" / "private"
+        priv.mkdir(parents=True, exist_ok=True)
+        f = priv / "brdg.json"
+        f.write_text(json.dumps({
+            "version": "BRDG", "lang": "en", "license": "copyrighted",
+            "role": "displayable", "source": "private", "ingested": "2026-07-17",
+            "versification_exceptions": {},
+            "books": {"MAT": {"5": {"16": "before", "17-18": "bridged text"}}}}))
+        try:
+            p = passage.get_passage("BRDG", "MAT.5.16-18", mode="personal")
+            # Every emitted key is a canonical single-verse ref refs.parse accepts.
+            for key in p.verses:
+                refs.parse(key)
+            # The bridged text is retrievable under the first covered verse.
+            self.assertEqual(p.verses["MAT.5.17"], "bridged text")
+            self.assertIn("MAT.5.16", p.verses)
+        finally:
+            f.unlink()
 
 
 if __name__ == "__main__":

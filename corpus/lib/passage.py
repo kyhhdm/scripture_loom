@@ -64,9 +64,13 @@ def get_passage(version, range_str, mode="product"):
     verses = {}
     for ch_key, ch in data["books"].get(book, {}).items():
         for v_key, text in ch.items():
+            # Some versions (WEB, CUV) store a bridged verse under a range key
+            # like "17-18" with shared text. Emit the canonical single-verse ref
+            # for the FIRST covered verse so every key round-trips through
+            # refs.parse (a range string like MAT.5.17-18 would not).
             v = int(v_key.split("-")[0])
             if refs.in_range((book, int(ch_key), v), ((book, c1, v1), (book, c2, v2))):
-                verses[refs.fmt(book, ch_key, v_key)] = text
+                verses[refs.fmt(book, int(ch_key), v)] = text
     return Passage(version=version, range=range_str, verses=verses,
                    license=data["license"], role=data["role"],
                    displayable=displayable)
