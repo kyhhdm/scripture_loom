@@ -1,7 +1,18 @@
 {
  "fetched": "2026-07-18",
- "file": "mhc3.xml",
  "license": "public-domain (1706-1721 text; CCEL digitization, ccel.org public-domain texts)",
- "sha256": "8ba9779eba5d326acbfc9acaccf2ea1fa2d6b5c48b03ab86fc5e80b0bfa5b17e",
- "url": "https://ccel.org/ccel/henry/mhc3.xml"
+ "note": "Matthew Henry's Commentary on the Whole Bible, ThML edition. Used to backfill chapters absent from the HelloAO matthew-henry conversion: SNG (whole book) and PSA 72 from mhc3; MAT 19-28 from mhc5; NUM 31-35 from mhc1; JOS 22-23 and 2SA 23-24 from mhc2. Sections anchored by their built-in id=\"Bible:Book.ch.v-Book.ch.v\".",
+ "sha256": {
+  "mhc1.xml": "6eb946647f806f46129001f83013d65c51e40ac59b939ac1c51404aa50375971",
+  "mhc2.xml": "673fcb4168ad946ab1e6923c0e331cc61e4adca4498fc0ee34cf1507285aa2f7",
+  "mhc3.xml": "8ba9779eba5d326acbfc9acaccf2ea1fa2d6b5c48b03ab86fc5e80b0bfa5b17e",
+  "mhc5.xml": "8b0853b116e9a68215a594bafe29f45502d4c766e1f128cbf5fb050f45cf2518"
+ },
+ "url_template": "https://ccel.org/ccel/henry/{volume}",
+ "volumes": [
+  "mhc1.xml",
+  "mhc2.xml",
+  "mhc3.xml",
+  "mhc5.xml"
+ ]
 }

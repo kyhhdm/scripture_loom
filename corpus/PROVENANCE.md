@@ -17,9 +17,9 @@ personal-use terms from `sources/private/` (git-ignored) and via licensed
 APIs in the future. They never enter `canon/`.
 
 | westminster | WCF / WSC / WLC (lamppost) | [NonlinearFruit/Creeds.json](https://github.com/NonlinearFruit/Creeds.json), raw JSON files under `creeds/westminster_*.json` | Underlying 1646-47 text: public domain (Westminster Assembly). JSON structuring/repackaging: repo-wide Unlicense; the Westminster documents are not among the repo's explicitly copyrighted exceptions (Chicago Statement, Savoy Declaration, Helvetic Consensus translation, etc. — see repo README). Each document's own `Metadata.SourceUrl` points to an archive.org scan of the original 1646/1647 parliamentary edition. | proof texts: ingested for WCF (1831) and WLC (2622); the chosen source carries no `Proofs` field at all for WSC, so all 107 questions have `proof_texts: []` for v1 — not yet ingested for the Shorter Catechism (a different source would be needed to add them). See note below on 33 skipped WCF/WLC references. |
-| mhc/helloao | Matthew Henry's Commentary (lamppost, "voice") | [bible.helloao.org](https://bible.helloao.org) Free Use Bible API, `/api/c/matthew-henry/{books.json,{BOOK}/{n}.json}` | Public domain (source `licenseUrl`: `https://creativecommons.org/publicdomain/mark/1.0/`) | 65/66 books (all but Song of Solomon — see below). Section-level anchoring; each section's own `number` is its starting verse, section end derived from the next section's start / chapter's last verse per KJV. |
-| mhc/ccel | Matthew Henry's Commentary, Vol. III (Job–Song of Solomon), SNG supplement only | [ccel.org/ccel/henry/mhc3.xml](https://ccel.org/ccel/henry/mhc3.xml) (ThML) | Public domain (1706-1721 text; CCEL public-domain digitization) | Used only for Song of Solomon, the one book HelloAO's matthew-henry source omits. ThML `<div class="Commentary" id="Bible:Song.1.2-Song.1.6">` markers give the same kind of built-in section anchoring in a different markup convention. |
-| jfb/helloao | Jamieson-Fausset-Brown Bible Commentary (lamppost, "facts") | [bible.helloao.org](https://bible.helloao.org) Free Use Bible API, `/api/c/jamieson-fausset-brown/{books.json,{BOOK}/{n}.json}` | Public domain (source `licenseUrl`: `https://creativecommons.org/publicdomain/mark/1.0/`) | 66/66 books. Verse-level anchoring (one block per verse), except Song of Solomon, whose JFB text is continuous per-chapter prose (see below). |
+| mhc/helloao | Matthew Henry's Commentary (lamppost, "voice") | [bible.helloao.org](https://bible.helloao.org) Free Use Bible API, `/api/c/matthew-henry/{books.json,{BOOK}/{n}.json}` | Public domain (source `licenseUrl`: `https://creativecommons.org/publicdomain/mark/1.0/`) | Section-level anchoring; each section's own `number` is its starting verse, section end derived from the next section's start / chapter's last verse per KJV. This conversion omits SNG entirely plus a scatter of chapters (MAT 19–28, NUM 31–35, JOS 22–23, 2SA 23–24, PSA 72) — backfilled from CCEL (see below). |
+| mhc/ccel | Matthew Henry's Commentary, Vols. I–V (ThML) — MHC backfill for chapters absent from the HelloAO conversion | [ccel.org/ccel/henry/{mhc1,mhc2,mhc3,mhc5}.xml](https://ccel.org/ccel/henry/mhc3.xml) | Public domain (1706-1721 text; CCEL public-domain digitization) | Backfills chapters HelloAO omits: SNG (whole book) + PSA 72 from `mhc3`; MAT 19–28 from `mhc5`; NUM 31–35 from `mhc1`; JOS 22–23 and 2SA 23–24 from `mhc2`. ThML `<div class="Commentary" id="Bible:Matt.19.3-Matt.19.12">` markers give the same kind of built-in section anchoring in a different markup convention. |
+| jfb/helloao | Jamieson-Fausset-Brown Bible Commentary (lamppost, "facts") | [bible.helloao.org](https://bible.helloao.org) Free Use Bible API, `/api/c/jamieson-fausset-brown/{books.json,{BOOK}/{n}.json}` | Public domain (source `licenseUrl`: `https://creativecommons.org/publicdomain/mark/1.0/`) | 66/66 books. Verse-level anchoring (one block per verse), except chapters JFB writes as continuous per-chapter prose (anchored by their own embedded self-citation; see below). |
 
 ## Pericope seeding source (Task 6, Matthew)
 
@@ -96,87 +96,95 @@ and license URL.
   `MAT.5.43-48` — the last one closing at 48 because that's Matthew 5's real
   last verse per KJV.
 
-**MHC's `matthew-henry` HelloAO source is missing Song of Solomon entirely**
-(65 of 66 books; confirmed by inspecting its `books.json` book list, not a
-transient gap — Henry completed the whole Old Testament himself before his
-death, so this is a digitization gap in this particular conversion, not a
-genuine authorship gap). Rather than ship SNG empty, `ingest_commentary.py`
-supplements it from the CCEL ThML edition of *Commentary on the Whole Bible,
-Volume III (Job–Song of Solomon)* (`sources/mhc/ccel/mhc3.xml`, fetched via
-`corpus/ingest/fetch.py` since it's a single static file). CCEL's ThML marks
-each commentary section with
-`<div class="Commentary" id="Bible:Song.1.2-Song.1.6">` — the same kind of
-built-in section anchoring HelloAO provides, just a different markup
+**MHC's `matthew-henry` HelloAO conversion is missing whole chapters, not
+just Song of Solomon.** SNG is absent entirely, and a scatter of other
+chapters is missing too because the HelloAO catalog itself is truncated for
+those books (the fetch only looks for chapters the catalog claims exist, so a
+truncated catalog is invisible at fetch time). The full list, confirmed by
+comparing each book's populated chapters against the KJV chapter count:
+**SNG (all), MAT 19–28, NUM 31–35, JOS 22–23, 2SA 23–24, PSA 72** — 23
+chapters plus SNG. Henry completed the whole Bible (only the Epistles were
+finished posthumously), so these are digitization gaps in this conversion,
+not authorship gaps.
+
+These are backfilled from the **CCEL ThML edition of Matthew Henry's
+Commentary on the Whole Bible** (`sources/mhc/ccel/{mhc1,mhc2,mhc3,mhc5}.xml`,
+fetched by `fetch_commentary_sources.py::fetch_ccel_volumes`): SNG (whole
+book) and PSA 72 from `mhc3` (Job–Song of Solomon); MAT 19–28 from `mhc5`
+(Matthew–John); NUM 31–35 from `mhc1` (Genesis–Deuteronomy); JOS 22–23 and
+2SA 23–24 from `mhc2` (Joshua–Esther). CCEL marks each commentary section
+with `<div class="Commentary" id="Bible:Matt.19.3-Matt.19.12">` — the same
+kind of built-in section anchoring HelloAO provides, a different markup
 convention, so this is still source-derived anchoring, not hand-reconstructed
-boundaries. `_mhc_ccel_song_blocks` extracts the text between one
-`Commentary` div and the next (or the next chapter's `<div2>` open tag,
-whichever comes first, so a chapter's leading synopsis paragraph never bleeds
-into the previous chapter's last block), strips markup, and converts the
-OSIS-style id (`Song.1.2-Song.1.6`) to our canonical range (`SNG.1.2-6`).
-This is the only book sourced from CCEL; all other 65 MHC books and all 66
-JFB books come from HelloAO.
+boundaries. `_mhc_ccel_blocks` extracts the text between one `Commentary` div
+and the next (or the next chapter's `<div2>` open tag, whichever comes first,
+so a chapter's leading synopsis never bleeds into the previous block), strips
+markup, and converts the OSIS-style id to our canonical range. For a book
+with a partial gap, only the missing chapters are taken from CCEL and merged
+into the HelloAO-derived blocks; SNG (fully absent) is taken whole from CCEL.
 
-**Source data quirks, all verified by direct inspection (re-requesting the
-live endpoint, not just observing a test failure):**
+*Not recoverable this way:* MHC's **JON 2–4**. CCEL's Minor-Prophets
+commentary (`mhc4`) does not wrap Jonah's exposition in
+`id="Bible:..."`-anchored `Commentary` divs (it is plain `<p>` prose with
+inline `<scripRef>` tags only), so there is no built-in section anchoring to
+reuse and we do not hand-reconstruct one. JON 2–4 therefore remains a
+documented MHC gap (JON 1 is present from HelloAO).
 
-- MHC's Isaiah has a genuine gap at chapter 67 (HTTP 200 but an HTML SPA
-  shell instead of JSON, confirmed stable across retries — not a network
-  flake) and a phantom empty chapter 68 (valid JSON, zero content items).
-  Isaiah only has 66 real chapters; both are harmless artifacts of this
-  source's chapter numbering for this one book, and Isaiah's real chapters
-  1-66 are otherwise fully populated. `_mhc_helloao_blocks` fails loudly
-  (raises) if a chapter number outside the KJV canon ever carries non-empty
-  content, so this isn't silently masking a real loss.
+**JFB prose-style chapters and the anchoring fix (the central correction of
+this pass):** JFB frequently writes a whole chapter as one continuous prose
+essay (stored in the chapter's `introduction`, with no per-verse items). In
+this conversion those prose chapters are routinely filed under the **wrong
+api chapter number**, and the number cannot be trusted:
+- the entire back half of the Psalter is shifted — api chapters 70–144 are
+  actually Psalms 71–150 (a growing offset: +1 near Ps 71, +6 by Ps 150,
+  because JFB folds several psalms together);
+- 2SA api 22–23 are actually 2 Sam 23–24; MAT api 24–26 are Matt 25/27/28;
+  MRK api 3–14 are Mark 4–16.
 
-- Most chapters where JFB writes continuous per-chapter prose instead of
-  discrete verse items (the whole chapter's commentary lives in that
-  chapter's `introduction` field, with verse references embedded inline as
-  prose, e.g. Song of Solomon's "(Son. 1:2-2:7)") are correctly numbered by
-  the source, and `_jfb_blocks` emits one whole-chapter block for them (e.g.
-  Song of Solomon: 8 blocks, one per chapter, vs. the verse-level granularity
-  of JFB's other 65 books).
+The api number is therefore ignored for any prose-only chapter. Instead,
+`_jfb_self_citation` reads the pericope's **own embedded self-citation** — the
+first parenthetical scripture reference in the intro that (a) is not an
+`=`-prefixed parallel-passage cross-reference, (b) names *this same book*, and
+(c) is a multi-verse range, e.g. `(Psa. 71:1-24)`, `(Mark 6:14-29)`,
+`(Sa2 23:1-7)`. Condition (c) is what separates the genuine pericope header
+from stray single-verse cross-references that can precede it. Abbreviations
+are resolved generically for all 66 books via `_resolve_book_abbr`, which
+handles number-suffixed (`Sa2`, `Ch2`, `Jo1`), number-prefixed (`2Sa`,
+`1Ki`) and plain/full names (`Psa`, `Mark`, `Acts`); `_CITE_RE` was widened to
+parse letters-then-digit abbreviations like `Sa2 23:1-7`.
 
-- **A real defect was found in this same class of chapter, isolated to
-  Mark's Passion/Resurrection narrative (JFB `MRK` api chapters 3–14) and
-  three of Matthew's (api chapters 24–26).** Several of these "prose"
-  chapters are filed under the *wrong* api chapter number — e.g. api chapter
-  3 is actually Mark 4's commentary (self-titled "PARABLE OF THE SOWER...
-  (Mark 4:1-34)"); api chapter 13 is actually Mark 14's ("(Mar 14:1-11)");
-  api chapter 14 is actually Mark 16's ("(Mark 16:1-20)") — while the real
-  Mark 3 and Mark 15 never appear anywhere in the source under any chapter
-  number, and Mark 16 ends up present twice (once as this condensed prose
-  block under the mislabeled api-14 slot, once again at its own correctly
-  numbered api chapter 16, this time with normal verse-level granularity —
-  both are kept, since both are genuine JFB text). Confirmed by reading each
-  prose chapter's own embedded pericope heading and self-citation and
-  comparing it against the api-reported chapter number.
+**Flipped default (correctness over coverage):** if a prose-only chapter has
+no confident same-book self-citation, its block is **dropped and counted**
+(printed every run) rather than shipped under an uncorroborated reference.
+This recovers all the mis-anchored Psalms, 2 Samuel, Matthew and Mark prose
+blocks under their true references, and drops **7 prose-only chapters**:
+`MRK 4` (a headingless one-sentence stub, "And they came over unto the other
+side of the sea…", no parseable citation) and `SNG 1, 2, 5, 6, 7, 8` (JFB's
+Song-of-Solomon prose whose pericope citations are cross-chapter or absent, so
+they cannot be confidently anchored — MHC's SNG, the devotional voice, is
+fully present from CCEL, so this is a thin loss on the secondary lamppost).
 
-  `ingest_commentary.py::_jfb_own_citation` parses that embedded heading (an
-  ALL-CAPS title line immediately followed by a parenthetical self-citation,
-  e.g. `PARABLE OF THE SOWER... (Mark 4:1-34)`) and, when it names the same
-  book, uses its chapter and precise verse range instead of the api-reported
-  number — this is still source-derived anchoring (the text's own stated
-  reference), not hand-reconstruction. This recovers 11 correctly-labeled
-  MRK blocks and 3 correctly-labeled MAT blocks (`MAT.25.1-13`,
-  `MAT.27.1-10`, `MAT.28.1-15`) that the naive api-number mapping would have
-  shipped under the wrong reference.
+**Residual documented gaps (chapters genuinely absent from a source, after
+the fix):**
+- **MHC:** JON 2–4 (CCEL anchoring unavailable, above). MHC's Isaiah source
+  also has a genuine gap at api chapter 67 (HTML SPA shell instead of JSON,
+  stable across retries) and a phantom empty chapter 68; Isaiah's real 66
+  chapters are fully populated, and `_mhc_helloao_blocks` raises if a
+  non-canonical chapter ever carries real content, so this can't silently
+  mask a loss.
+- **JFB:** 2SA 22, MAT 24, MAT 26, MRK 3, MRK 5, MRK 15, and PSA 70, 108,
+  139, 141, 144, 146. Each is a psalm/chapter that has no source api chapter
+  (JFB's essays skip or fold it): e.g. api 106→Ps 107 then api 107→Ps 109
+  skips Ps 108. These are secondary-lamppost gaps, documented not fabricated.
 
-  One further MRK chapter (api chapter 4) has zero verse items, a non-empty
-  but headingless one-sentence stub ("And they came over unto the other side
-  of the sea, into the country of the Gadarenes.") that is not real
-  commentary and carries no parseable self-citation to correct it. Once a
-  book has shown even one confirmed api-number mismatch elsewhere (as MRK
-  has), its remaining unlabeled prose chapters can no longer be trusted at
-  face value, so rather than guess or hand-label it, `_jfb_blocks` drops it:
-  **1 block dropped**, printed by the ingest script every run
-  (`jfb: dropped 1 unlabeled prose-style chapter(s)...`). No other book
-  triggered this drop path — every other book's prose chapters either had a
-  confirmed self-citation or showed no mismatch evidence anywhere in the
-  book, so their api numbers were trusted as before.
+Both lists are mirrored in `corpus/tests/test_commentary.py`
+(`KNOWN_ABSENT`), whose `test_chapter_level_coverage` fails if any *new*
+within-book chapter gap appears, and `_coverage_report` in the ingest prints
+the missing-chapter list for each work on every run.
 
-Final counts: MHC 66/66 books, 4,150 blocks total. JFB 66/66 books, 17,156
-blocks total. 17,056 of those are genuine per-verse blocks, matching the
-source catalog's own `totalNumberOfVerses: 17056` exactly; the rest are the
-prose-style whole-chapter/citation-range blocks described above. Only the 1
-MRK block noted above was dropped; every other source content item that
-carried text made it into a block, under a verified-correct reference.
+Final counts: MHC 66/66 books, 4,226 blocks total (complete except JON 2–4).
+JFB 66/66 books, 17,150 blocks total; 17,056 are genuine per-verse blocks
+(matching the source catalog's own `totalNumberOfVerses: 17056` exactly), the
+rest are prose-style pericope blocks anchored by self-citation. Every JFB
+prose block's assigned range matches the chapter named in its own embedded
+self-citation (verified across all 94 such blocks corpus-wide).

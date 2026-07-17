@@ -3,19 +3,29 @@
 Sources (see corpus/ingest/fetch_commentary_sources.py and
 corpus/PROVENANCE.md for how they were fetched):
 
-* JFB (66/66 books) and MHC (65/66 books, missing Song of Solomon) come from
-  the HelloAO Free Use Bible API, already carrying scripture anchoring: JFB
-  is one block per verse; MHC is one block per commentary "section", whose
-  content items are keyed by the section's *starting* verse number (e.g. a
-  block numbered 1 that runs through the material up to the next block's
-  starting verse minus one). The end of each MHC section is therefore
-  derived, not given directly by the source -- see `_last_verse`.
-* MHC's missing Song of Solomon is supplemented from the CCEL ThML edition
-  (Commentary on the Whole Bible Volume III), which anchors each commentary
-  section with `<div class="Commentary" id="Bible:Song.1.2-Song.1.6">` --
-  the same kind of built-in section anchoring, a different markup
-  convention. This is the only book sourced from CCEL; all others come from
-  HelloAO.
+* JFB (66/66 books) and MHC come from the HelloAO Free Use Bible API, already
+  carrying scripture anchoring: JFB is one block per verse; MHC is one block
+  per commentary "section", whose content items are keyed by the section's
+  *starting* verse number (its end is derived as the next section's start
+  minus one, or the chapter's last verse -- see `_last_verse`).
+
+* Some JFB chapters are written as one continuous per-chapter prose essay
+  (stored in the chapter's `introduction`, with no per-verse items) rather
+  than verse-by-verse. In this source those prose chapters are frequently
+  filed under the WRONG api chapter number -- e.g. the whole back half of the
+  Psalter (api 70-144 -> true Psalms 71-150) and 2Sa api 22-23 -> true 23-24,
+  Mark api 3-14, Matthew api 24-26. The api chapter number therefore CANNOT be
+  trusted for a prose-only chapter. We instead read the pericope's own
+  embedded self-citation (e.g. "(Psa. 71:1-24)", "(Mark 6:14-29)") and anchor
+  to that; a prose-only chapter with no confident same-book self-citation is
+  DROPPED (never shipped under an uncorroborated reference) and counted.
+
+* MHC's HelloAO conversion is missing a number of chapters (Song of Solomon
+  entirely, plus MAT 19-28, NUM 31-35, JOS 22-23, 2SA 23-24, PSA 72). These
+  are backfilled from the CCEL ThML edition (Commentary on the Whole Bible,
+  Volumes I-V), which anchors each commentary section with a built-in
+  `<div class="Commentary" id="Bible:Matt.19.3-Matt.19.12">` -- the same kind
+  of scripture anchoring, a different markup convention. See `_MHC_CCEL`.
 """
 import json
 import re
@@ -87,71 +97,98 @@ def _load_helloao_chapters(work_dirname, book_code):
         return json.load(f)["chapters"]
 
 
-JFB_DROPPED_INTRO_ONLY = 0  # module-level counter; see _jfb_blocks docstring
+# ---------------------------------------------------------------------------
+# JFB prose-chapter self-citation.
+#
+# A parenthetical scripture citation such as "(Psa. 71:1-24)", "(Mark
+# 6:14-29)" or "(Sa2 23:1-7)". The abbreviation may be number-suffixed
+# ("Sa2"), number-prefixed ("2Sa") or a plain/full name; it may carry a
+# trailing period. We recognise all 66 books via `_resolve_book_abbr` so the
+# recovery is not limited to the handful of books that were hand-inspected.
+# ---------------------------------------------------------------------------
+_CITE_RE = re.compile(
+    r"\(\s*(=?)\s*(\d?[A-Za-z]{2,4}\d?)\.?\s*(\d+):(\d+)(?:-(\d+))?\)")
 
-# Some JFB chapters are written as continuous per-chapter prose (the whole
-# chapter's commentary lives in `introduction`, with verse references
-# embedded inline as prose, e.g. "(Son. 1:2-2:7)") rather than discrete verse
-# items -- confirmed by inspection, not a parsing bug. Most such chapters are
-# correctly numbered by the source and we fall back to a whole-chapter block.
-# But a real defect was also found in this same class of chapter: in MRK's
-# Passion/Resurrection narrative, several "prose" chapters are filed under
-# the WRONG api chapter number (e.g. api chapter 3's prose is actually Mark
-# 4's commentary; api chapter 13's is Mark 14's) while true Mark 3, 5, and 15
-# never appear anywhere in the source at all -- confirmed by cross-checking
-# each prose chapter's own embedded self-citation heading (e.g. "(Mark
-# 4:1-34)") against the api-reported chapter number. Where that self-citation
-# is present we trust it over the api number (source-derived anchoring, not
-# hand reconstruction); where a book shows ANY such mismatch we do not trust
-# that book's unlabeled prose chapters either, and drop them rather than
-# risk shipping content under the wrong reference.
-_CITE_RE = re.compile(r"\(\s*(=?)\s*([1-3]?[A-Za-z]+)\.?\s*(\d+):(\d+)(?:-(\d+))?\)")
-_JFB_OWN_CITE_ABBR = {"Mat": "MAT", "Mark": "MRK", "Mar": "MRK", "2Ch": "2CH"}
+# Non-numbered books: 3-4 letter stem (JFB/older abbreviation styles and full
+# names) -> USFM code.
+_ABBR_SIMPLE = {
+    "Gen": "GEN", "Exo": "EXO", "Lev": "LEV", "Num": "NUM", "Deu": "DEU",
+    "Jos": "JOS", "Jdg": "JDG", "Rut": "RUT", "Rth": "RUT", "Ezr": "EZR",
+    "Ezra": "EZR", "Neh": "NEH", "Est": "EST", "Job": "JOB", "Psa": "PSA",
+    "Pro": "PRO", "Ecc": "ECC", "Son": "SNG", "Sol": "SNG", "Isa": "ISA",
+    "Jer": "JER", "Lam": "LAM", "Eze": "EZK", "Dan": "DAN", "Hos": "HOS",
+    "Joe": "JOL", "Joel": "JOL", "Amo": "AMO", "Amos": "AMO", "Oba": "OBA",
+    "Jon": "JON", "Mic": "MIC", "Nah": "NAM", "Hab": "HAB", "Zep": "ZEP",
+    "Hag": "HAG", "Zec": "ZEC", "Zac": "ZEC", "Mal": "MAL", "Mat": "MAT",
+    "Mar": "MRK", "Mark": "MRK", "Luk": "LUK", "Luke": "LUK", "Joh": "JHN",
+    "John": "JHN", "Act": "ACT", "Acts": "ACT", "Rom": "ROM", "Gal": "GAL",
+    "Eph": "EPH", "Phi": "PHP", "Col": "COL", "Tit": "TIT", "Phm": "PHM",
+    "Plm": "PHM", "Heb": "HEB", "Jam": "JAS", "Jde": "JUD", "Rev": "REV",
+}
+# Numbered books: alpha stem -> USFM family base (combine with the digit).
+_ABBR_NUMBERED = {
+    "Sa": "SA", "Sam": "SA", "Ki": "KI", "Kin": "KI", "Kg": "KI",
+    "Ch": "CH", "Chr": "CH", "Co": "CO", "Cor": "CO", "Th": "TH",
+    "Thes": "TH", "Ti": "TI", "Tim": "TI", "Pe": "PE", "Pet": "PE",
+    "Jo": "JN",
+}
 
 
-def _is_heading_text(s):
-    letters = [c for c in s if c.isalpha()]
-    return len(letters) >= 6 and sum(c.isupper() for c in letters) / len(letters) > 0.8
+def _resolve_book_abbr(token):
+    """Resolve a JFB/older citation abbreviation to a USFM code, or None.
 
-
-def _jfb_own_citation(intro, book_code):
-    """If `intro` opens with an ALL-CAPS pericope heading followed by a
-    parenthetical self-citation (e.g. 'PARABLE OF THE SOWER... (Mark
-    4:1-34)'), return (chapter, v1, v2|None) from that citation -- but only
-    if it names this same book, so a stray cross-reference can't be
-    mistaken for a self-citation. Returns None otherwise."""
-    idx = intro.find("\n\n")
-    header = intro[:idx] if idx != -1 else intro
-    pre = header.split("(", 1)[0]
-    if not _is_heading_text(pre):
+    Handles number-suffixed ('Sa2', 'Ch2', 'Jo1'), number-prefixed ('2Sa',
+    '1Ki') and plain/full names ('Psa', 'Mark', 'Acts')."""
+    num = None
+    stem = token
+    if stem and stem[0].isdigit():
+        num, stem = stem[0], stem[1:]
+    elif stem and stem[-1].isdigit():
+        num, stem = stem[-1], stem[:-1]
+    if not stem:
         return None
-    own = [c for c in _CITE_RE.findall(header) if c[0] != "="]
-    if not own:
-        return None
-    _, abbr, c, v1, v2 = own[-1]
-    if _JFB_OWN_CITE_ABBR.get(abbr) != book_code:
-        return None
-    return int(c), int(v1), int(v2) if v2 else None
+    stem = stem[:1].upper() + stem[1:].lower()
+    if num is None:
+        return _ABBR_SIMPLE.get(stem)
+    base = _ABBR_NUMBERED.get(stem)
+    return f"{num}{base}" if base else None
+
+
+def _jfb_self_citation(intro, book_code):
+    """Return (chapter, v1, v2) from the prose chapter's own embedded pericope
+    self-citation, or None.
+
+    The self-citation is the first parenthetical scripture citation in the
+    intro that (a) is NOT an '='-prefixed parallel-passage cross-reference,
+    (b) names THIS book, and (c) is a multi-verse RANGE (has an end verse) --
+    a whole-chapter/pericope reference like "(Psa. 71:1-24)" or "(Mark
+    6:14-29)". Single-verse parentheticals are ordinary cross-references, not
+    the pericope header, so they are skipped; this is what distinguishes the
+    genuine self-citation from stray same-book cross-references that may
+    precede it in the summary sentence."""
+    for m in _CITE_RE.finditer(intro):
+        eq, token, c, v1, v2 = m.groups()
+        if eq == "=":
+            continue
+        if _resolve_book_abbr(token) != book_code:
+            continue
+        if not v2:
+            continue
+        return int(c), int(v1), int(v2)
+    return None
+
+
+JFB_DROPPED_PROSE = 0            # module-level counter, printed each run
+JFB_DROPPED_DETAIL = []          # (book_code, api_chapter) for reporting
 
 
 def _jfb_blocks(book_code):
-    """One block per verse (HelloAO already gives per-verse granularity),
-    except prose-style chapters -- see module notes above."""
-    global JFB_DROPPED_INTRO_ONLY
+    """One block per verse (HelloAO already gives per-verse granularity).
+    Prose-only chapters (no per-verse items) are anchored by their own
+    embedded self-citation; those without a confident same-book self-citation
+    are dropped and counted -- see module notes above."""
+    global JFB_DROPPED_PROSE
     chapters = _load_helloao_chapters("jfb", book_code)
-
-    citations = {}
-    book_has_mislabeled_chapter = False
-    for ch in chapters:
-        if ch["content"]:
-            continue
-        intro = (ch.get("introduction") or "").strip()
-        if not intro:
-            continue
-        cite = _jfb_own_citation(intro, book_code)
-        citations[ch["number"]] = cite
-        if cite and cite[0] != ch["number"]:
-            book_has_mislabeled_chapter = True
 
     blocks = []
     for ch in chapters:
@@ -162,25 +199,24 @@ def _jfb_blocks(book_code):
             if not text:
                 continue
             blocks.append({"range": refs.fmt(book_code, cnum, item["number"]),
-                            "text": text})
+                           "text": text})
         if verse_items:
             continue
+        # Prose-only chapter: the api chapter number is untrustworthy. Anchor
+        # to the pericope's own self-citation, or drop it.
         intro = (ch.get("introduction") or "").strip()
         if not intro:
             continue
-        cite = citations.get(cnum)
-        if cite:
-            c, v1, v2 = cite
-            rng = (refs.fmt(book_code, c, v1) if not v2 or v2 == v1
-                   else f"{book_code}.{c}.{v1}-{v2}")
-            blocks.append({"range": rng, "text": intro})
-        elif not book_has_mislabeled_chapter:
-            last_v = _last_verse(book_code, cnum)
-            rng = (refs.fmt(book_code, cnum, 1) if last_v == 1
-                   else f"{book_code}.{cnum}.1-{last_v}")
-            blocks.append({"range": rng, "text": intro})
-        else:
-            JFB_DROPPED_INTRO_ONLY += 1
+        cite = _jfb_self_citation(intro, book_code)
+        if cite is None:
+            JFB_DROPPED_PROSE += 1
+            JFB_DROPPED_DETAIL.append((book_code, cnum))
+            continue
+        c, v1, v2 = cite
+        rng = (refs.fmt(book_code, c, v1) if v2 == v1
+               else f"{book_code}.{c}.{v1}-{v2}")
+        blocks.append({"range": rng, "text": intro})
+    blocks.sort(key=lambda b: refs.parse_range(b["range"])[0])
     return blocks
 
 
@@ -218,13 +254,25 @@ def _mhc_helloao_blocks(book_code):
 
 
 # ---------------------------------------------------------------------------
-# CCEL ThML supplement for MHC's Song of Solomon (absent from HelloAO).
+# CCEL ThML supplement for MHC chapters absent from the HelloAO conversion.
 # ---------------------------------------------------------------------------
 _TAG_RE = re.compile(r"<[^>]+>")
 _WS_RE = re.compile(r"[ \t\r\f\v]+")
 _NL_RE = re.compile(r"\n{2,}")
 _COMMENTARY_OPEN_RE = re.compile(r'<div class="Commentary" id="Bible:([^"]+)">')
-_CHAPTER_OPEN_RE = re.compile(r'<div2 title="[^"]*" n="[^"]*"')
+_CHAPTER_OPEN_RE = re.compile(r'<div2[ >]')
+
+# canonical book -> (CCEL volume file, div1 id in that volume, chapters).
+# chapters=None means the whole book is taken from CCEL (HelloAO lacks it);
+# a set means only those chapters are backfilled (HelloAO has the rest).
+_MHC_CCEL = {
+    "SNG": ("mhc3.xml", "Song", None),
+    "PSA": ("mhc3.xml", "Ps", {72}),
+    "MAT": ("mhc5.xml", "Matt", set(range(19, 29))),
+    "NUM": ("mhc1.xml", "Num", {31, 32, 33, 34, 35}),
+    "JOS": ("mhc2.xml", "Jos", {22, 23}),
+    "2SA": ("mhc2.xml", "iiSam", {23, 24}),
+}
 
 
 def _clean_thml_fragment(raw):
@@ -235,39 +283,42 @@ def _clean_thml_fragment(raw):
     return text.strip()
 
 
-def _osis_book_chapter_verse(part, canonical_book):
-    _, c, v = part.split(".")
-    return canonical_book, c, v
-
-
 def _osis_range_to_canonical(osis_range, canonical_book):
-    """'Song.1.2-Song.1.6' -> 'SNG.1.2-6'; 'Song.1.1' -> 'SNG.1.1'."""
+    """'Matt.19.3-Matt.19.12' -> 'MAT.19.3-12'; 'Ps.72.1' -> 'PSA.72.1';
+    'Song.1.2-Song.2.7' -> 'SNG.1.2-SNG.2.7'. The OSIS book token is ignored
+    (we already know the canonical book); only chapter/verse are read."""
+    def cv(part):
+        _, c, v = part.split(".")
+        return c, v
     if "-" not in osis_range:
-        _, c, v = _osis_book_chapter_verse(osis_range, canonical_book)
+        c, v = cv(osis_range)
         return f"{canonical_book}.{c}.{v}"
     left, right = osis_range.split("-", 1)
-    _, c1, v1 = _osis_book_chapter_verse(left, canonical_book)
-    _, c2, v2 = _osis_book_chapter_verse(right, canonical_book)
+    c1, v1 = cv(left)
+    c2, v2 = cv(right)
     left_canon = f"{canonical_book}.{c1}.{v1}"
     return f"{left_canon}-{v2}" if c1 == c2 else f"{left_canon}-{canonical_book}.{c2}.{v2}"
 
 
-def _mhc_ccel_song_blocks():
-    """Song of Solomon (SNG), supplemented from CCEL ThML volume III since
-    HelloAO's matthew-henry source omits this book entirely."""
-    xml_path = CORPUS / "sources" / "mhc" / "ccel" / "mhc3.xml"
+def _mhc_ccel_blocks(volume_file, div1_id, canonical_book, chapters=None):
+    """Extract MHC commentary blocks for one book (optionally restricted to a
+    set of chapters) from a CCEL ThML volume, anchored by each section's
+    built-in `id="Bible:Book.ch.v-Book.ch.v"`."""
+    xml_path = CORPUS / "sources" / "mhc" / "ccel" / volume_file
     xml = xml_path.read_text(encoding="utf-8")
-    section_start = xml.index('<div1 title="Song of Solomon"')
+    m = re.search(r'<div1 [^>]*\bid="' + re.escape(div1_id) + r'"[^>]*>', xml)
+    if not m:
+        raise ValueError(f"{volume_file}: no div1 id={div1_id!r}")
+    section_start = m.start()
     section_end = xml.index("</div1>", section_start) + len("</div1>")
     section = xml[section_start:section_end]
 
     # Boundaries: each commentary-block open tag, plus each chapter-open tag
-    # (which marks the start of a new chapter's synopsis/front matter that
-    # must NOT be absorbed into the previous chapter's last block).
-    boundaries = []
-    for m in _COMMENTARY_OPEN_RE.finditer(section):
-        boundaries.append((m.start(), m.end(), m.group(1)))
-    chapter_starts = {m.start() for m in _CHAPTER_OPEN_RE.finditer(section)}
+    # (so a chapter's leading synopsis is never absorbed into the previous
+    # chapter's last block).
+    boundaries = [(mm.start(), mm.end(), mm.group(1))
+                  for mm in _COMMENTARY_OPEN_RE.finditer(section)]
+    chapter_starts = {mm.start() for mm in _CHAPTER_OPEN_RE.finditer(section)}
     cut_points = sorted(chapter_starts | {b[1] for b in boundaries} | {len(section)})
 
     def next_cut(after):
@@ -278,12 +329,30 @@ def _mhc_ccel_song_blocks():
 
     blocks = []
     for _start, body_start, osis_range in boundaries:
+        start_chapter = int(osis_range.split("-", 1)[0].split(".")[1])
+        if chapters is not None and start_chapter not in chapters:
+            continue
         body_end = next_cut(body_start)
         text = _clean_thml_fragment(section[body_start:body_end])
         if not text:
             continue
-        blocks.append({"range": _osis_range_to_canonical(osis_range, "SNG"),
-                        "text": text})
+        blocks.append({"range": _osis_range_to_canonical(osis_range, canonical_book),
+                       "text": text})
+    return blocks
+
+
+def _mhc_blocks(book_code):
+    """MHC section blocks: HelloAO where available, backfilled from CCEL for
+    chapters (or whole books) the HelloAO conversion omits."""
+    ccel = _MHC_CCEL.get(book_code)
+    if ccel and ccel[2] is None:            # whole book from CCEL
+        volume_file, div1_id, _ = ccel
+        return _mhc_ccel_blocks(volume_file, div1_id, book_code)
+    blocks = _mhc_helloao_blocks(book_code)
+    if ccel:
+        volume_file, div1_id, chapters = ccel
+        blocks = blocks + _mhc_ccel_blocks(volume_file, div1_id, book_code, chapters)
+        blocks.sort(key=lambda b: refs.parse_range(b["range"])[0])
     return blocks
 
 
@@ -294,20 +363,41 @@ def read_source_blocks(source_dir, book_code):
     if dirname == "jfb":
         return _jfb_blocks(book_code)
     if dirname == "mhc":
-        if book_code == "SNG":
-            return _mhc_ccel_song_blocks()
-        return _mhc_helloao_blocks(book_code)
+        return _mhc_blocks(book_code)
     raise ValueError(f"unknown source_dir: {source_dir!r}")
+
+
+def _coverage_report(dirname, blocks_by_book):
+    """Print, for each book, the chapters that have no block vs KJV -- so a
+    within-book chapter gap can never ship silently."""
+    total_missing = 0
+    lines = []
+    for code in books.load():
+        covered = set()
+        for b in blocks_by_book[code]:
+            (_, c1, _), (_, c2, _) = refs.parse_range(b["range"])
+            covered.update(range(c1, c2 + 1))
+        allch = {int(c) for c in _kjv_chapters(code)}
+        missing = sorted(allch - covered)
+        if missing:
+            total_missing += len(missing)
+            lines.append(f"    {code}: missing {missing}")
+    print(f"{dirname}: chapter coverage -- {total_missing} missing chapter(s)"
+          + (":" if lines else " (complete)"))
+    for ln in lines:
+        print(ln)
 
 
 if __name__ == "__main__":
     for work, dirname, src in (
             ("Matthew Henry's Commentary", "mhc", CORPUS / "sources" / "mhc"),
             ("Jamieson-Fausset-Brown", "jfb", CORPUS / "sources" / "jfb")):
+        blocks_by_book = {code: read_source_blocks(src, code) for code in books.load()}
         for code in books.load():
-            write_book(work, dirname, code, read_source_blocks(src, code))
+            write_book(work, dirname, code, blocks_by_book[code])
         print(f"{dirname}: 66 books written")
-    if JFB_DROPPED_INTRO_ONLY:
-        print(f"jfb: dropped {JFB_DROPPED_INTRO_ONLY} unlabeled prose-style "
-              f"chapter(s) in books with a confirmed api-chapter-number "
-              f"mismatch elsewhere (see PROVENANCE.md)")
+        _coverage_report(dirname, blocks_by_book)
+    if JFB_DROPPED_PROSE:
+        print(f"jfb: dropped {JFB_DROPPED_PROSE} prose-only chapter(s) with no "
+              f"confident same-book self-citation (see PROVENANCE.md): "
+              f"{JFB_DROPPED_DETAIL}")

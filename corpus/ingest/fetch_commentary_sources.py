@@ -13,14 +13,23 @@ wrapper objects the live API repeats byte-for-byte on every chapter response
 (that metadata, including the lengthy per-book introductions, is preserved
 once in the sibling books.json).
 
-HelloAO's `matthew-henry` commentary is missing Song of Solomon (65 of 66
-books) -- confirmed by direct inspection of its books.json, not a transient
-gap. corpus/ingest/ingest_commentary.py supplements SNG from the CCEL ThML
-edition (mhc3.xml, "Commentary on the Whole Bible Volume III: Job to Song of
-Solomon"), fetched separately below via corpus/ingest/fetch.py since it is a
-single static file. CCEL's ThML marks each commentary section with
-<div class="Commentary" id="Bible:Song.1.2-Song.1.6"> — the same kind of
-built-in scripture anchoring, just a different markup convention.
+HelloAO's `matthew-henry` conversion is missing a number of chapters: Song of
+Solomon entirely, plus MAT 19-28, NUM 31-35, JOS 22-23, 2SA 23-24 and PSA 72
+(confirmed by direct inspection, not transient gaps).
+corpus/ingest/ingest_commentary.py backfills these from the CCEL ThML edition
+(Commentary on the Whole Bible, Volumes I-V), fetched below. CCEL's ThML marks
+each commentary section with <div class="Commentary"
+id="Bible:Matt.19.3-Matt.19.12"> — the same kind of built-in scripture
+anchoring, just a different markup convention. Volumes fetched:
+
+  * mhc1.xml  Genesis-Deuteronomy  (NUM 31-35)
+  * mhc2.xml  Joshua-Esther        (JOS 22-23, 2SA 23-24)
+  * mhc3.xml  Job-Song of Solomon  (SNG whole book, PSA 72)
+  * mhc5.xml  Matthew-John         (MAT 19-28)
+
+(mhc4 Isaiah-Malachi is not fetched: its Minor-Prophets commentary lacks the
+id="Bible:..." section anchoring, so JON 2-4 cannot be recovered by the same
+method and remains a documented gap -- see corpus/PROVENANCE.md.)
 """
 import concurrent.futures as cf
 import hashlib
@@ -34,10 +43,10 @@ from urllib.request import Request, urlopen
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from lib import books
-from ingest import fetch as fetch_mod
 
 CORPUS = Path(__file__).resolve().parents[1]
 API = "https://bible.helloao.org/api"
+CCEL_VOLUMES = ["mhc1.xml", "mhc2.xml", "mhc3.xml", "mhc5.xml"]
 
 
 def _get(url, retries=5):
@@ -163,6 +172,38 @@ def fetch_helloao_commentary(commentary_id, dirname, book_codes):
           + (f"; missing_chapters={missing_chapters}" if missing_chapters else ""))
 
 
+def fetch_ccel_volumes():
+    """Fetch the CCEL ThML volumes used to backfill MHC chapters missing from
+    the HelloAO conversion, recording a combined provenance meta.json."""
+    dest = CORPUS / "sources" / "mhc" / "ccel"
+    dest.mkdir(parents=True, exist_ok=True)
+    hashes = {}
+    for name in CCEL_VOLUMES:
+        url = f"https://ccel.org/ccel/henry/{name}"
+        data = _get(url)
+        (dest / name).write_bytes(data)
+        hashes[name] = _sha(data)
+        print(f"  {name}: {len(data)} bytes sha256={hashes[name][:12]}…")
+    meta = {
+        "url_template": "https://ccel.org/ccel/henry/{volume}",
+        "volumes": CCEL_VOLUMES,
+        "fetched": date.today().isoformat(),
+        "license": ("public-domain (1706-1721 text; CCEL digitization, "
+                    "ccel.org public-domain texts)"),
+        "note": ("Matthew Henry's Commentary on the Whole Bible, ThML edition. "
+                 "Used to backfill chapters absent from the HelloAO "
+                 "matthew-henry conversion: SNG (whole book) and PSA 72 from "
+                 "mhc3; MAT 19-28 from mhc5; NUM 31-35 from mhc1; JOS 22-23 "
+                 "and 2SA 23-24 from mhc2. Sections anchored by their built-in "
+                 'id="Bible:Book.ch.v-Book.ch.v".'),
+        "sha256": hashes,
+    }
+    (dest / "meta.json").write_text(
+        json.dumps(meta, indent=1, ensure_ascii=False, sort_keys=True) + "\n",
+        encoding="utf-8")
+    print(f"mhc/ccel: wrote {len(CCEL_VOLUMES)} volume(s)")
+
+
 if __name__ == "__main__":
     order = books.BOOK_ORDER
 
@@ -172,9 +213,5 @@ if __name__ == "__main__":
     print("Fetching Matthew Henry (65/66; SNG absent from this source)...")
     fetch_helloao_commentary("matthew-henry", "mhc", [c for c in order if c != "SNG"])
 
-    print("Fetching CCEL ThML volume III (Job-Song of Solomon) for MHC SNG supplement...")
-    fetch_mod.fetch(
-        "https://ccel.org/ccel/henry/mhc3.xml",
-        CORPUS / "sources" / "mhc" / "ccel",
-        "public-domain (1706-1721 text; CCEL digitization, ccel.org public-domain texts)",
-    )
+    print("Fetching CCEL ThML volumes (MHC chapter backfill)...")
+    fetch_ccel_volumes()
