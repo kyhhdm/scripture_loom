@@ -1,0 +1,398 @@
+{
+ "1CH": {
+  "chapters": 29,
+  "n": 13,
+  "name_en": "1 Chronicles",
+  "name_zh": "历代志上"
+ },
+ "1CO": {
+  "chapters": 16,
+  "n": 46,
+  "name_en": "1 Corinthians",
+  "name_zh": "哥林多前书"
+ },
+ "1JN": {
+  "chapters": 5,
+  "n": 62,
+  "name_en": "1 John",
+  "name_zh": "约翰一书"
+ },
+ "1KI": {
+  "chapters": 22,
+  "n": 11,
+  "name_en": "1 Kings",
+  "name_zh": "列王纪上"
+ },
+ "1PE": {
+  "chapters": 5,
+  "n": 60,
+  "name_en": "1 Peter",
+  "name_zh": "彼得前书"
+ },
+ "1SA": {
+  "chapters": 31,
+  "n": 9,
+  "name_en": "1 Samuel",
+  "name_zh": "撒母耳记上"
+ },
+ "1TH": {
+  "chapters": 5,
+  "n": 52,
+  "name_en": "1 Thessalonians",
+  "name_zh": "帖撒罗尼迦前书"
+ },
+ "1TI": {
+  "chapters": 6,
+  "n": 54,
+  "name_en": "1 Timothy",
+  "name_zh": "提摩太前书"
+ },
+ "2CH": {
+  "chapters": 36,
+  "n": 14,
+  "name_en": "2 Chronicles",
+  "name_zh": "历代志下"
+ },
+ "2CO": {
+  "chapters": 13,
+  "n": 47,
+  "name_en": "2 Corinthians",
+  "name_zh": "哥林多后书"
+ },
+ "2JN": {
+  "chapters": 1,
+  "n": 63,
+  "name_en": "2 John",
+  "name_zh": "约翰二书"
+ },
+ "2KI": {
+  "chapters": 25,
+  "n": 12,
+  "name_en": "2 Kings",
+  "name_zh": "列王纪下"
+ },
+ "2PE": {
+  "chapters": 3,
+  "n": 61,
+  "name_en": "2 Peter",
+  "name_zh": "彼得后书"
+ },
+ "2SA": {
+  "chapters": 24,
+  "n": 10,
+  "name_en": "2 Samuel",
+  "name_zh": "撒母耳记下"
+ },
+ "2TH": {
+  "chapters": 3,
+  "n": 53,
+  "name_en": "2 Thessalonians",
+  "name_zh": "帖撒罗尼迦后书"
+ },
+ "2TI": {
+  "chapters": 4,
+  "n": 55,
+  "name_en": "2 Timothy",
+  "name_zh": "提摩太后书"
+ },
+ "3JN": {
+  "chapters": 1,
+  "n": 64,
+  "name_en": "3 John",
+  "name_zh": "约翰三书"
+ },
+ "ACT": {
+  "chapters": 28,
+  "n": 44,
+  "name_en": "Acts",
+  "name_zh": "使徒行传"
+ },
+ "AMO": {
+  "chapters": 9,
+  "n": 30,
+  "name_en": "Amos",
+  "name_zh": "阿摩司书"
+ },
+ "COL": {
+  "chapters": 4,
+  "n": 51,
+  "name_en": "Colossians",
+  "name_zh": "歌罗西书"
+ },
+ "DAN": {
+  "chapters": 12,
+  "n": 27,
+  "name_en": "Daniel",
+  "name_zh": "但以理书"
+ },
+ "DEU": {
+  "chapters": 34,
+  "n": 5,
+  "name_en": "Deuteronomy",
+  "name_zh": "申命记"
+ },
+ "ECC": {
+  "chapters": 12,
+  "n": 21,
+  "name_en": "Ecclesiastes",
+  "name_zh": "传道书"
+ },
+ "EPH": {
+  "chapters": 6,
+  "n": 49,
+  "name_en": "Ephesians",
+  "name_zh": "以弗所书"
+ },
+ "EST": {
+  "chapters": 10,
+  "n": 17,
+  "name_en": "Esther",
+  "name_zh": "以斯帖记"
+ },
+ "EXO": {
+  "chapters": 40,
+  "n": 2,
+  "name_en": "Exodus",
+  "name_zh": "出埃及记"
+ },
+ "EZK": {
+  "chapters": 48,
+  "n": 26,
+  "name_en": "Ezekiel",
+  "name_zh": "以西结书"
+ },
+ "EZR": {
+  "chapters": 10,
+  "n": 15,
+  "name_en": "Ezra",
+  "name_zh": "以斯拉记"
+ },
+ "GAL": {
+  "chapters": 6,
+  "n": 48,
+  "name_en": "Galatians",
+  "name_zh": "加拉太书"
+ },
+ "GEN": {
+  "chapters": 50,
+  "n": 1,
+  "name_en": "Genesis",
+  "name_zh": "创世记"
+ },
+ "HAB": {
+  "chapters": 3,
+  "n": 35,
+  "name_en": "Habakkuk",
+  "name_zh": "哈巴谷书"
+ },
+ "HAG": {
+  "chapters": 2,
+  "n": 37,
+  "name_en": "Haggai",
+  "name_zh": "哈该书"
+ },
+ "HEB": {
+  "chapters": 13,
+  "n": 58,
+  "name_en": "Hebrews",
+  "name_zh": "希伯来书"
+ },
+ "HOS": {
+  "chapters": 14,
+  "n": 28,
+  "name_en": "Hosea",
+  "name_zh": "何西阿书"
+ },
+ "ISA": {
+  "chapters": 66,
+  "n": 23,
+  "name_en": "Isaiah",
+  "name_zh": "以赛亚书"
+ },
+ "JAS": {
+  "chapters": 5,
+  "n": 59,
+  "name_en": "James",
+  "name_zh": "雅各书"
+ },
+ "JDG": {
+  "chapters": 21,
+  "n": 7,
+  "name_en": "Judges",
+  "name_zh": "士师记"
+ },
+ "JER": {
+  "chapters": 52,
+  "n": 24,
+  "name_en": "Jeremiah",
+  "name_zh": "耶利米书"
+ },
+ "JHN": {
+  "chapters": 21,
+  "n": 43,
+  "name_en": "John",
+  "name_zh": "约翰福音"
+ },
+ "JOB": {
+  "chapters": 42,
+  "n": 18,
+  "name_en": "Job",
+  "name_zh": "约伯记"
+ },
+ "JOL": {
+  "chapters": 3,
+  "n": 29,
+  "name_en": "Joel",
+  "name_zh": "约珥书"
+ },
+ "JON": {
+  "chapters": 4,
+  "n": 32,
+  "name_en": "Jonah",
+  "name_zh": "约拿书"
+ },
+ "JOS": {
+  "chapters": 24,
+  "n": 6,
+  "name_en": "Joshua",
+  "name_zh": "约书亚记"
+ },
+ "JUD": {
+  "chapters": 1,
+  "n": 65,
+  "name_en": "Jude",
+  "name_zh": "犹大书"
+ },
+ "LAM": {
+  "chapters": 5,
+  "n": 25,
+  "name_en": "Lamentations",
+  "name_zh": "耶利米哀歌"
+ },
+ "LEV": {
+  "chapters": 27,
+  "n": 3,
+  "name_en": "Leviticus",
+  "name_zh": "利未记"
+ },
+ "LUK": {
+  "chapters": 24,
+  "n": 42,
+  "name_en": "Luke",
+  "name_zh": "路加福音"
+ },
+ "MAL": {
+  "chapters": 4,
+  "n": 39,
+  "name_en": "Malachi",
+  "name_zh": "玛拉基书"
+ },
+ "MAT": {
+  "chapters": 28,
+  "n": 40,
+  "name_en": "Matthew",
+  "name_zh": "马太福音"
+ },
+ "MIC": {
+  "chapters": 7,
+  "n": 33,
+  "name_en": "Micah",
+  "name_zh": "弥迦书"
+ },
+ "MRK": {
+  "chapters": 16,
+  "n": 41,
+  "name_en": "Mark",
+  "name_zh": "马可福音"
+ },
+ "NAM": {
+  "chapters": 3,
+  "n": 34,
+  "name_en": "Nahum",
+  "name_zh": "那鸿书"
+ },
+ "NEH": {
+  "chapters": 13,
+  "n": 16,
+  "name_en": "Nehemiah",
+  "name_zh": "尼希米记"
+ },
+ "NUM": {
+  "chapters": 36,
+  "n": 4,
+  "name_en": "Numbers",
+  "name_zh": "民数记"
+ },
+ "OBA": {
+  "chapters": 1,
+  "n": 31,
+  "name_en": "Obadiah",
+  "name_zh": "俄巴底亚书"
+ },
+ "PHM": {
+  "chapters": 1,
+  "n": 57,
+  "name_en": "Philemon",
+  "name_zh": "腓利门书"
+ },
+ "PHP": {
+  "chapters": 4,
+  "n": 50,
+  "name_en": "Philippians",
+  "name_zh": "腓立比书"
+ },
+ "PRO": {
+  "chapters": 31,
+  "n": 20,
+  "name_en": "Proverbs",
+  "name_zh": "箴言"
+ },
+ "PSA": {
+  "chapters": 150,
+  "n": 19,
+  "name_en": "Psalms",
+  "name_zh": "诗篇"
+ },
+ "REV": {
+  "chapters": 22,
+  "n": 66,
+  "name_en": "Revelation",
+  "name_zh": "启示录"
+ },
+ "ROM": {
+  "chapters": 16,
+  "n": 45,
+  "name_en": "Romans",
+  "name_zh": "罗马书"
+ },
+ "RUT": {
+  "chapters": 4,
+  "n": 8,
+  "name_en": "Ruth",
+  "name_zh": "路得记"
+ },
+ "SNG": {
+  "chapters": 8,
+  "n": 22,
+  "name_en": "Song of Songs",
+  "name_zh": "雅歌"
+ },
+ "TIT": {
+  "chapters": 3,
+  "n": 56,
+  "name_en": "Titus",
+  "name_zh": "提多书"
+ },
+ "ZEC": {
+  "chapters": 14,
+  "n": 38,
+  "name_en": "Zechariah",
+  "name_zh": "撒迦利亚书"
+ },
+ "ZEP": {
+  "chapters": 3,
+  "n": 36,
+  "name_en": "Zephaniah",
+  "name_zh": "西番雅书"
+ }
+}
