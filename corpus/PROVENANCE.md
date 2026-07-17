@@ -10,6 +10,7 @@ contains `meta.json` (url, fetch date, license, sha256). Nothing in
 | web-ebible | WEB Bible text | ebible.org (engwebp, USFM) | Public domain | not usable as pericope-seed source (see below) |
 | cuv-ebible | CUV 和合本 简体 | ebible.org (cmn-cu89s, USFM) | Public domain | only stored Chinese translation |
 | bsb-ebible | BSB Bible text | ebible.org (engbsb, USFM) | Public domain | pericope-seed source for Matthew |
+| openbible-crossrefs | Cross-references (weighted) | openbible.info/labs/cross-references | CC-BY — attribute openbible.info in any shipped product | TSK public-domain base layer deferred until a verified machine-readable source is pinned |
 
 Copyrighted translations (ESV, NKJV, NIV, NLT, CNV 新译本) are used under
 personal-use terms from `sources/private/` (git-ignored) and via licensed
