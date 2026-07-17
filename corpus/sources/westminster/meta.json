@@ -1,0 +1,29 @@
+{
+ "license": "Public domain 1646-47 text (Westminster Assembly); JSON structuring by NonlinearFruit/Creeds.json repo, released under Unlicense (https://github.com/NonlinearFruit/Creeds.json), Westminster documents not in that repo's copyrighted-texts exception list",
+ "source_repo": "https://github.com/NonlinearFruit/Creeds.json",
+ "source_repo_license": "Unlicense",
+ "notes": "Each document Metadata.SourceUrl field points to the archive.org scan of the original 1646/1647 parliamentary editions.",
+ "files": [
+  {
+   "url": "https://raw.githubusercontent.com/NonlinearFruit/Creeds.json/master/creeds/westminster_confession_of_faith.json",
+   "fetched": "2026-07-18",
+   "license": "Public domain 1646-47 text (Westminster Assembly); JSON structuring by NonlinearFruit/Creeds.json repo, released under Unlicense (https://github.com/NonlinearFruit/Creeds.json), Westminster documents not in that repo's copyrighted-texts exception list",
+   "file": "westminster_confession_of_faith.json",
+   "sha256": "90f793e3444f9a6a834c29fc7b6ba21250b33e92979525b5d5158bed16c24f06"
+  },
+  {
+   "url": "https://raw.githubusercontent.com/NonlinearFruit/Creeds.json/master/creeds/westminster_shorter_catechism.json",
+   "fetched": "2026-07-18",
+   "license": "Public domain 1646-47 text (Westminster Assembly); JSON structuring by NonlinearFruit/Creeds.json repo, released under Unlicense (https://github.com/NonlinearFruit/Creeds.json), Westminster documents not in that repo's copyrighted-texts exception list",
+   "file": "westminster_shorter_catechism.json",
+   "sha256": "c73c894d4896c63b44dedd4a91ebc7261682850b088ccf0d33f21d9073ce880c"
+  },
+  {
+   "url": "https://raw.githubusercontent.com/NonlinearFruit/Creeds.json/master/creeds/westminster_larger_catechism.json",
+   "fetched": "2026-07-18",
+   "license": "Public domain 1646-47 text (Westminster Assembly); JSON structuring by NonlinearFruit/Creeds.json repo, released under Unlicense (https://github.com/NonlinearFruit/Creeds.json), Westminster documents not in that repo's copyrighted-texts exception list",
+   "file": "westminster_larger_catechism.json",
+   "sha256": "755274a3ba67aa840021dcefde55e357851a95f87daab52bcd2407d131d7cab5"
+  }
+ ]
+}

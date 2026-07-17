@@ -1,0 +1,3068 @@
+{
+ "title": "Westminster Confession of Faith",
+ "license": "public-domain",
+ "role": "lamppost",
+ "chapters": [
+  {
+   "n": 1,
+   "title": "Of the Holy Scripture",
+   "sections": [
+    {
+     "n": 1,
+     "text": "Although the light of nature, and the works of creation and providence, do so far manifest the goodness, wisdom, and power of God, as to leave men inexcusable; yet are they not sufficient to give that knowledge of God, and of his will, which is necessary unto salvation; therefore it pleased the Lord, at sundry times, and in divers manners, to reveal himself, and to declare that his will unto his Church; and afterwards, for the better preserving and propagating of the truth, and for the more sure establishment and comfort of the Church against the corruption of the flesh, and the malice of Satan and of the world, to commit the same wholly unto writing; which maketh the holy Scripture to be most necessary; those former ways of God's revealing his will unto his people being now ceased.",
+     "proof_texts": [
+      "PSA.19.1-3",
+      "ROM.1.19-20",
+      "ROM.1.32",
+      "ROM.2.1",
+      "ROM.2.14-15",
+      "HEB.1.1",
+      "1CO.1.21",
+      "1CO.2.13-14",
+      "2TI.3.15",
+      "2PE.1.19",
+      "PRO.22.19-21",
+      "ISA.8.19-20",
+      "MAT.4.4",
+      "MAT.4.7",
+      "MAT.4.10",
+      "LUK.1.3-4",
+      "ROM.15.4",
+      "HEB.1.1-2"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "Under the name of holy Scripture, or the Word of God written, are now contained all the books of the Old and New Testaments, which are these: Of the Old Testament: Genesis, Exodus, Leviticus, Numbers, Deuteronomy, Joshua, Judges, Ruth, 1 Samuel, 2 Samuel, 1 Kings, 2 Kings, 1 Chronicles, 2 Chronicles, Ezra, Nehemiah, Esther, Job, Psalms, Proverbs, Ecclesiastes, The Song of Songs, Isaiah, Jeremiah, Lamentations, Ezekiel, Daniel, Hosea, Joel, Amos, Obadiah, Jonah, Micah, Nahum, Habakkuk, Zephaniah, Haggai, Zechariah, Malachi; Of the New Testament: The Gospels according to Matthew, Mark, Luke, John. The Acts of the Apostles, Paul's Epistles to the Romans, 1 Corinthians, 2 Corinthians, Galatians, Ephesians, Philippians, Colossians, 1 Thessalonians, 2 Thessalonians, 1 Timothy, 2 Timothy, Titus, Philemon, The Epistle to the Hebrews, The Epistle of James, The First and Second Epistles of Peter, The First, Second, and Third Epistles of John, The Epistle of Jude, The Revelation. All which are given by inspiration of God, to be the rule of faith and life.",
+     "proof_texts": [
+      "LUK.16.29",
+      "LUK.16.31",
+      "EPH.2.20",
+      "2TI.3.16",
+      "REV.22.18-19"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "The books commonly called Apocrypha, not being of divine inspiration, are no part of the Canon of the Scripture; and therefore are of no authority in the Church of God, nor to be any otherwise approved, or made use of, than other human writings.",
+     "proof_texts": [
+      "LUK.24.27",
+      "LUK.24.44",
+      "ROM.3.2",
+      "2PE.1.21"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "The authority of the holy Scripture, for which it ought to be believed and obeyed, dependeth not upon the testimony of any man or church, but wholly upon God (who is truth itself), the Author thereof; and therefore it is to be received, because it is the Word of God.",
+     "proof_texts": [
+      "1TH.2.13",
+      "2TI.3.16",
+      "2PE.1.19",
+      "2PE.1.21",
+      "1JN.5.9"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "We may be moved and induced by the testimony of the Church to an high and reverent esteem of the holy Scripture; and the heavenliness of the matter, the efficacy of the doctrine, the majesty of the style, the consent of all the parts, the scope of the whole (which is to give all glory to God), the full discovery it makes of the only way of man's salvation, the many other incomparable excellencies, and the entire perfection thereof, are arguments whereby it doth abundantly evidence itself to be the Word of God; yet, notwithstanding, our full persuasion and assurance of the infallible truth, and divine authority thereof, is from the inward work of the Holy Spirit, bearing witness by and with the Word in our hearts.",
+     "proof_texts": [
+      "1TI.3.15",
+      "ISA.59.21",
+      "JHN.16.13-14",
+      "1CO.2.10-12",
+      "1JN.2.20",
+      "1JN.2.27"
+     ]
+    },
+    {
+     "n": 6,
+     "text": "The whole counsel of God, concerning all things necessary for his own glory, man's salvation, faith, and life, is either expressly set down in Scripture, or by good and necessary consequence may be deduced from Scripture: unto which nothing at any time is to be added, whether by new revelations of the Spirit, or traditions of men. Nevertheless we acknowledge the inward illumination of the Spirit of God to be necessary for the saving understanding of such things as are revealed in the Word; and that there are some circumstances concerning the worship of God, and government of the Church, common to human actions and societies, which are to be ordered by the light of nature and Christian prudence, according to the general rules of the Word, which are always to be observed.",
+     "proof_texts": [
+      "GAL.1.8-9",
+      "2TH.2.2",
+      "2TI.3.15-17",
+      "1CO.11.13-14",
+      "1CO.14.26",
+      "1CO.14.40",
+      "JHN.6.45",
+      "1CO.2.9-12"
+     ]
+    },
+    {
+     "n": 7,
+     "text": "All things in Scripture are not alike plain in themselves, nor alike clear unto all; yet those things which are necessary to be known, believed, and observed, for salvation, are so clearly propounded and opened in some place of Scripture or other, that not only the learned, but the unlearned, in a due use of the ordinary means, may attain unto a sufficient understanding of them.",
+     "proof_texts": [
+      "2PE.3.16",
+      "PSA.119.105",
+      "PSA.119.130"
+     ]
+    },
+    {
+     "n": 8,
+     "text": "The Old Testament in Hebrew (which was the native language of the people of God of old), and the New Testament in Greek (which at the time of the writing of it was most generally known to the nations), being immediately inspired by God, and by his singular care and providence kept pure in all ages, are therefore authentical; so as in all controversies of religion the Church is finally to appeal unto them. But because these original tongues are not known to all the people of God who have right unto, and interest in the Scriptures, and are commanded, in the fear of God, to read and search them, therefore they are to be translated into the vulgar language of every nation unto which they come, that the Word of God dwelling plentifully in all, they may worship him in an acceptable manner, and, through patience and comfort of the Scriptures, may have hope.",
+     "proof_texts": [
+      "MAT.5.18",
+      "JHN.5.39",
+      "ISA.8.20",
+      "JHN.5.39",
+      "JHN.5.46",
+      "ACT.15.15",
+      "COL.3.16",
+      "1CO.14.6",
+      "1CO.14.9",
+      "1CO.14.11-12",
+      "1CO.14.24",
+      "1CO.14.27-28",
+      "ROM.15.4"
+     ]
+    },
+    {
+     "n": 9,
+     "text": "The infallible rule of interpretation of Scripture is the Scripture itself; and therefore, when there is a question about the true and full sense of any scripture (which is not manifold, but one), it must be searched and known by other places that speak more clearly.",
+     "proof_texts": [
+      "ACT.15.15",
+      "2PE.1.20-21"
+     ]
+    },
+    {
+     "n": 10,
+     "text": "The Supreme Judge, by which all controversies of religion are to be determined, and all decrees of councils, opinions of ancient writers, doctrines of men, and private spirits, are to be examined, and in whose sentence we are to rest, can be no other but the Holy Spirit speaking in the Scripture.",
+     "proof_texts": [
+      "MAT.22.29",
+      "MAT.22.31",
+      "EPH.2.20",
+      "ACT.28.25"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "title": "Of God, and of the Holy Trinity",
+   "sections": [
+    {
+     "n": 1,
+     "text": "There is but one only living and true God, who is infinite in being and perfection, a most pure spirit, invisible, without body, parts, or passions, immutable, immense, eternal, incomprehensible, almighty, most wise, most holy, most free, most absolute, working all things according to the counsel of his own immutable and most righteous will, for his own glory; most loving, gracious, merciful, long-suffering, abundant in goodness and truth, forgiving iniquity, transgression, and sin; the rewarder of them that diligently seek him; and withal most just and terrible in his judgments; hating all sin, and who will by no means clear the guilty.",
+     "proof_texts": [
+      "DEU.6.4",
+      "1CO.8.4",
+      "1CO.8.6",
+      "JOB.11.7-9",
+      "JOB.26.14",
+      "JER.10.10",
+      "1TH.1.9",
+      "1TI.1.17",
+      "JHN.4.24",
+      "ACT.14.11",
+      "ACT.14.15",
+      "DEU.4.15-16",
+      "JHN.4.24",
+      "LUK.24.39",
+      "1KI.8.27",
+      "JER.23.23-24",
+      "MAL.3.6",
+      "JAS.1.17",
+      "PSA.90.2",
+      "1TI.1.17",
+      "GEN.17.1",
+      "REV.4.8",
+      "PSA.145.3",
+      "ISA.6.3",
+      "REV.4.8",
+      "ROM.16.27",
+      "EXO.3.14",
+      "PSA.115.3",
+      "PRO.16.4",
+      "ROM.11.36",
+      "EPH.1.11",
+      "EXO.34.6-7",
+      "1JN.4.8",
+      "1JN.4.16",
+      "HEB.11.6",
+      "PSA.5.5-6",
+      "NEH.9.32-33",
+      "EXO.34.7",
+      "NAM.1.2-3"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "God hath all life, glory, goodness, blessedness, in and of himself; and is alone in and unto himself all-sufficient, not standing in need of any creatures which he hath made, nor deriving any glory from them, but only manifesting his own glory in, by, unto, and upon them: he is the alone fountain of all being, of whom, through whom, and to whom are all things; and hath most sovereign dominion over them, to do by them, for them, or upon them whatsoever himself pleaseth. In his sight all things are open and manifest; his knowledge is infinite, infallible, and independent upon the creature; so as nothing is to him contingent or uncertain. He is most holy in all his counsels, in all his works, and in all his commands. To him is due from angels and men, and every other creature, whatsoever worship, service, or obedience, he is pleased to require of them.",
+     "proof_texts": [
+      "JHN.5.26",
+      "PSA.119.68",
+      "ACT.7.2",
+      "ACT.17.24-25",
+      "ROM.9.5",
+      "1TI.6.15",
+      "ROM.11.36",
+      "JOB.22.2-3",
+      "HEB.4.13",
+      "DAN.4.25",
+      "DAN.4.35",
+      "1TI.6.15",
+      "REV.4.11",
+      "PSA.147.5",
+      "ROM.11.33-34",
+      "PSA.145.17",
+      "ROM.7.12",
+      "EZK.11.5",
+      "ACT.15.18",
+      "REV.5.12-14"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "In the unity of the Godhead there be three persons, of one substance, power, and eternity: God the Father, God the Son, and God the Holy Ghost. The Father is of none, neither begotten nor proceeding; the Son is eternally begotten of the Father; the Holy Ghost eternally proceeding from the Father and the Son.",
+     "proof_texts": [
+      "MAT.3.16-17",
+      "MAT.28.19",
+      "2CO.13.14",
+      "1JN.5.7",
+      "JHN.15.26",
+      "GAL.4.6",
+      "JHN.1.14",
+      "JHN.1.18"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "title": "Of God's Eternal Decree",
+   "sections": [
+    {
+     "n": 1,
+     "text": "God from all eternity did, by the most wise and holy counsel of his own will, freely and unchangeably ordain whatsoever comes to pass; yet so as thereby neither is God the author of sin, nor is violence offered to the will of the creatures, nor is the liberty or contingency of second causes taken away, but rather established.",
+     "proof_texts": [
+      "ROM.9.15",
+      "ROM.9.18",
+      "ROM.11.33",
+      "EPH.1.11",
+      "HEB.6.17",
+      "PRO.16.33",
+      "MAT.17.12",
+      "JHN.19.11",
+      "ACT.2.23",
+      "ACT.4.27-28",
+      "JAS.1.13",
+      "JAS.1.17",
+      "1JN.1.5"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "Although God knows whatsoever may or can come to pass upon all supposed conditions, yet hath he not decreed anything because he foresaw it as future, or as that which would come to pass upon such conditions.",
+     "proof_texts": [
+      "1SA.23.11-12",
+      "MAT.11.21",
+      "MAT.11.23",
+      "ACT.15.18",
+      "ROM.9.11",
+      "ROM.9.13",
+      "ROM.9.16",
+      "ROM.9.18"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "By the decree of God, for the manifestation of his glory, some men and angels are predestinated unto everlasting life, and others fore-ordained to everlasting death.",
+     "proof_texts": [
+      "MAT.25.41",
+      "1TI.5.21",
+      "PRO.16.4",
+      "ROM.9.22-23",
+      "EPH.1.5-6"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "These angels and men, thus predestinated and fore-ordained, are particularly and unchangeably designed; and their number is so certain and definite that it can not be either increased or diminished.",
+     "proof_texts": [
+      "JHN.13.18",
+      "2TI.2.19"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "Those of mankind that are predestinated unto life, God, before the foundation of the world was laid, according to his eternal and immutable purpose, and the secret counsel and good pleasure of his will, hath chosen in Christ, unto everlasting glory, out of his mere free grace and love, without any foresight of faith or good works, or perseverance in either of them, or any other thing in the creature, as conditions, or causes moving him thereunto; and all to the praise of his glorious grace.",
+     "proof_texts": [
+      "ROM.8.30",
+      "EPH.1.4",
+      "EPH.1.9",
+      "EPH.1.11",
+      "1TH.5.9",
+      "2TI.1.9",
+      "EPH.1.6",
+      "EPH.1.12",
+      "ROM.9.11",
+      "ROM.9.13",
+      "ROM.9.16",
+      "EPH.1.4",
+      "EPH.1.9"
+     ]
+    },
+    {
+     "n": 6,
+     "text": "As God hath appointed the elect unto glory, so hath he, by the eternal and most free purpose of his will, fore-ordained all the means thereunto. Wherefore they who are elected, being fallen in Adam, are redeemed by Christ, are effectually called unto faith in Christ by his Spirit working in due season; are justified, adopted, sanctified, and kept by his power through faith unto salvation. Neither are any other redeemed by Christ, effectually called, justified, adopted, sanctified, and saved, but the elect only.",
+     "proof_texts": [
+      "EPH.1.4-5",
+      "EPH.2.10",
+      "2TH.2.13",
+      "1PE.1.2",
+      "ROM.8.30",
+      "EPH.1.5",
+      "2TH.2.13",
+      "1TH.5.9-10",
+      "TIT.2.14",
+      "JHN.6.64-65",
+      "JHN.8.47",
+      "JHN.10.26",
+      "JHN.17.9",
+      "ROM.8.28-39",
+      "1JN.2.19",
+      "1PE.1.5"
+     ]
+    },
+    {
+     "n": 7,
+     "text": "The rest of mankind God was pleased, according to the unsearchable counsel of his own will, whereby he extendeth or withholdeth mercy as he pleaseth, for the glory of his sovereign power over his creatures, to pass by, and to ordain them to dishonor and wrath for their sin, to the praise of his glorious justice.",
+     "proof_texts": [
+      "MAT.11.25-26",
+      "ROM.9.17-18",
+      "ROM.9.21-22",
+      "2TI.2.19-20",
+      "1PE.2.8",
+      "JUD.1.4"
+     ]
+    },
+    {
+     "n": 8,
+     "text": "The doctrine of this high mystery of predestination is to be handled with special prudence and care, that men attending the will of God revealed in his Word, and yielding obedience thereunto, may, from the certainty of their effectual vocation, be assured of their eternal election. So shall this doctrine afford matter of praise, reverence, and admiration of God; and of humility, diligence, and abundant consolation to all that sincerely obey the gospel.",
+     "proof_texts": [
+      "DEU.29.29",
+      "ROM.9.20",
+      "ROM.11.33",
+      "EPH.1.6",
+      "2PE.1.10",
+      "LUK.10.20",
+      "ROM.8.33",
+      "ROM.11.5-6",
+      "ROM.11.20",
+      "2PE.1.10"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "title": "Of Creation",
+   "sections": [
+    {
+     "n": 1,
+     "text": "It pleased God the Father, Son, and Holy Ghost, for the manifestation of the glory of his eternal power, wisdom, and goodness, in the beginning, to create or make of nothing the world, and all things therein, whether visible or invisible, in the space of six days, and all very good.",
+     "proof_texts": [
+      "GEN.1.2",
+      "JOB.26.13",
+      "JOB.33.4",
+      "JHN.1.2-3",
+      "HEB.1.2",
+      "ACT.17.24",
+      "COL.1.16",
+      "HEB.11.3",
+      "PSA.33.5-6",
+      "PSA.104.24",
+      "JER.10.12",
+      "ROM.1.20"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "After God had made all other creatures, he created man, male and female, with reasonable and immortal souls, endued with knowledge, righteousness, and true holiness, after his own image, having the law of God written in their hearts, and power to fulfil it; and yet under a possibility of transgressing, being left to the liberty of their own will, which was subject unto change. Beside this law written in their hearts, they received a command not to eat of the tree of the knowledge of good and evil; which while they kept they were happy in their communion with God, and had dominion over the creatures.",
+     "proof_texts": [
+      "GEN.1.27",
+      "GEN.1.26",
+      "EPH.4.24",
+      "COL.3.10",
+      "GEN.2.7",
+      "ECC.12.7",
+      "MAT.10.28",
+      "LUK.23.43",
+      "ECC.7.29",
+      "ROM.2.14-15",
+      "GEN.2.17",
+      "GEN.3.8-11",
+      "GEN.3.23",
+      "GEN.3.6",
+      "ECC.7.29",
+      "GEN.1.26",
+      "GEN.1.28"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "title": "Of Providence",
+   "sections": [
+    {
+     "n": 1,
+     "text": "God, the great Creator of all things, doth uphold, direct, dispose, and govern all creatures, actions, and things, from the greatest even to the least, by his most wise and holy providence, according to his infallible fore-knowledge and the free and immutable counsel of his own will, to the praise of the glory of his wisdom, power, justice, goodness, and mercy.",
+     "proof_texts": [
+      "HEB.1.3",
+      "MAT.10.29-31",
+      "PSA.135.6",
+      "DAN.4.34-35",
+      "ACT.17.25-26",
+      "ACT.17.28",
+      "PSA.94.8-11",
+      "ACT.15.18",
+      "PSA.104.24",
+      "PSA.145.17",
+      "PRO.15.3",
+      "GEN.45.7",
+      "PSA.145.7",
+      "ISA.63.14",
+      "ROM.9.17",
+      "EPH.3.10",
+      "PSA.33.10-11",
+      "EPH.1.11"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "Although in relation to the foreknowledge and decree of God, the first cause, all things come to pass immutably and infallibly, yet by the same providence he ordereth them to fall out, according to the nature of second causes, either necessarily, freely, or contingently.",
+     "proof_texts": [
+      "ACT.2.23",
+      "GEN.8.22",
+      "EXO.21.13",
+      "DEU.19.5",
+      "1KI.22.28",
+      "1KI.22.34",
+      "ISA.10.6-7",
+      "JER.31.35"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "God, in his ordinary providence, maketh use of means, yet is free to work without, above, and against them, at his pleasure.",
+     "proof_texts": [
+      "ISA.55.10-11",
+      "HOS.2.21-22",
+      "ACT.27.31",
+      "ACT.27.44",
+      "ROM.4.19-21",
+      "JOB.34.10",
+      "HOS.1.7",
+      "MAT.4.4",
+      "2KI.6.6",
+      "DAN.3.27"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "The almighty power, unsearchable wisdom, and infinite goodness of God so far manifest themselves in his providence that it extendeth itself even to the first fall, and all other sins of angels and men, and that not by a bare permission, but such as hath joined with it a most wise and powerful bounding, and otherwise ordering and governing of them, in a manifold dispensation, to his own holy ends; yet so as the sinfulness thereof proceedeth only from the creature, and not from God; who, being most holy and righteous, neither is nor can be the author or approver of sin.",
+     "proof_texts": [
+      "2SA.16.10",
+      "2SA.24.1",
+      "1CH.21.1",
+      "1KI.22.22-23",
+      "1CH.10.4",
+      "1CH.10.13-14",
+      "ACT.2.23",
+      "ACT.4.27-28",
+      "ROM.11.32-34",
+      "2KI.19.28",
+      "PSA.76.10",
+      "ACT.14.16",
+      "PSA.50.21",
+      "JAS.1.13-14",
+      "JAS.1.17",
+      "1JN.2.16",
+      "GEN.50.20",
+      "ISA.10.6-7",
+      "ISA.10.12"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "The most wise, righteous, and gracious God doth oftentimes leave for a season his own children to manifold temptations and the corruption of their own hearts, to chastise them for their former sins, or to discover unto them the hidden strength of corruption and deceitfulness of their hearts, that they be humbled; and to raise them to a more close and constant dependence for their support unto himself, and to make them more watchful against all future occasions of sin, and for sundry other just and holy ends.",
+     "proof_texts": [
+      "2SA.24.1",
+      "2CH.32.25-26",
+      "2CH.32.31",
+      "PSA.77.1-10",
+      "PSA.77.12",
+      "MRK.14.66-72",
+      "JHN.21.15-17",
+      "2CO.12.7-9"
+     ]
+    },
+    {
+     "n": 6,
+     "text": "As for those wicked and ungodly men whom God, as a righteous judge, for former sins, doth blind and harden, from them he not only withholdeth his grace, whereby they might have been enlightened in their understandings and wrought upon in their hearts, but sometimes also withdraweth the gifts which they had, and exposeth them to such objects as their corruption makes occasion of sin; and withal, gives them over to their own lusts, the temptations of the world, and the power of Satan; whereby it comes to pass that they harden themselves, even under those means which God useth for the softening of others.",
+     "proof_texts": [
+      "ROM.1.24",
+      "ROM.1.26",
+      "ROM.1.28",
+      "ROM.11.7-8",
+      "MAT.13.12",
+      "MAT.25.29",
+      "DEU.29.4",
+      "PSA.81.11-12",
+      "2TH.2.10-12",
+      "DEU.2.30",
+      "2KI.8.12-13",
+      "EXO.7.3",
+      "EXO.8.15",
+      "EXO.8.32",
+      "ISA.6.9-10",
+      "ACT.28.26-27",
+      "ISA.8.14",
+      "2CO.2.15-16",
+      "1PE.2.7-8"
+     ]
+    },
+    {
+     "n": 7,
+     "text": "As the providence of God doth, in general, reach to all creatures, so, after a most special manner, it taketh care of his Church, and disposeth all things to the good thereof.",
+     "proof_texts": [
+      "ISA.43.3-5",
+      "ISA.43.14",
+      "AMO.9.8-9",
+      "ROM.8.28",
+      "1TI.4.10"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "title": "Of the Fall of Man, of Sin, and of the Punishment Thereof",
+   "sections": [
+    {
+     "n": 1,
+     "text": "Our first parents, being seduced by the subtlety and temptation of Satan, sinned in eating the forbidden fruit. This their sin God was pleased, according to his wise and holy counsel, to permit, having purposed to order it to his own glory.",
+     "proof_texts": [
+      "GEN.3.13",
+      "2CO.11.3",
+      "ROM.11.32"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "By this sin they fell from their original righteousness and communion with God, and so became dead in sin, and wholly defiled in all the faculties and parts of soul and body.",
+     "proof_texts": [
+      "GEN.3.6-8",
+      "ECC.7.29",
+      "ROM.3.23",
+      "GEN.6.5",
+      "JER.17.9",
+      "ROM.3.10-19",
+      "TIT.1.15",
+      "GEN.2.17",
+      "EPH.2.1"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "They being the root of all mankind, the guilt of this sin was imputed, and the same death in sin and corrupted nature conveyed to all their posterity descending from them by ordinary generation.",
+     "proof_texts": [
+      "GEN.1.27-28",
+      "GEN.2.16-17",
+      "ACT.17.26",
+      "ROM.5.12",
+      "ROM.5.15-19",
+      "1CO.15.21-22",
+      "1CO.15.45",
+      "1CO.15.49",
+      "GEN.5.3",
+      "JOB.14.4",
+      "JOB.15.14",
+      "PSA.51.5"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "From this original corruption, whereby we are utterly indisposed, disabled, and made opposite to all good, and wholly inclined to all evil, do proceed all actual transgressions.",
+     "proof_texts": [
+      "ROM.5.6",
+      "ROM.7.18",
+      "ROM.8.7",
+      "COL.1.21",
+      "MAT.15.19",
+      "EPH.2.2-3",
+      "JAS.1.14-15",
+      "GEN.6.5",
+      "GEN.8.21",
+      "ROM.3.10-12"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "This corruption of nature, during this life, doth remain in those that are regenerated; and although it be through Christ pardoned and mortified, yet both itself and all the motions thereof are truly and properly sin.",
+     "proof_texts": [
+      "PRO.20.9",
+      "ECC.7.20",
+      "ROM.7.14",
+      "ROM.7.17-18",
+      "ROM.7.23",
+      "JAS.3.2",
+      "1JN.1.8",
+      "1JN.1.10",
+      "ROM.7.5",
+      "ROM.7.7-8",
+      "ROM.7.25",
+      "GAL.5.17"
+     ]
+    },
+    {
+     "n": 6,
+     "text": "Every sin, both original and actual, being a transgression of the righteous law of God, and contrary thereunto, doth, in its own nature, bring guilt upon the sinner, whereby he is bound over to the wrath of God and curse of the law, and so made subject to death, with all miseries spiritual, temporal, and eternal.",
+     "proof_texts": [
+      "1JN.3.4",
+      "EPH.2.3",
+      "ROM.2.15",
+      "ROM.3.9",
+      "ROM.3.19",
+      "ROM.6.23",
+      "GAL.3.10",
+      "LAM.3.39",
+      "ROM.8.20",
+      "EPH.4.18",
+      "MAT.25.41",
+      "2TH.1.9"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "title": "Of God's Covenant with Man",
+   "sections": [
+    {
+     "n": 1,
+     "text": "The distance between God and the creature is so great that although reasonable creatures do owe obedience unto him as their Creator, yet they could never have any fruition of him as their blessedness and reward but by some voluntary condescension on God's part, which he hath been pleased to express by way of covenant.",
+     "proof_texts": [
+      "1SA.2.25",
+      "JOB.9.32-33",
+      "JOB.22.2-3",
+      "JOB.35.7-8",
+      "PSA.100.2-3",
+      "PSA.113.5-6",
+      "ISA.40.13-17",
+      "LUK.17.10",
+      "ACT.17.24-25"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "The first covenant made with man was a covenant of works, wherein life was promised to Adam, and in him to his posterity, upon condition of perfect and personal obedience.",
+     "proof_texts": [
+      "GAL.3.12",
+      "GEN.2.17",
+      "GAL.3.10",
+      "ROM.5.12-20",
+      "ROM.10.5"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "Man by his fall having made himself incapable of life by that covenant, the Lord was pleased to make a second, commonly called the covenant of grace: wherein he freely offered unto sinners life and salvation by Jesus Christ, requiring of them faith in him that they may be saved, and promising to give unto all those that are ordained unto life his Holy Spirit, to make them willing and able to believe.",
+     "proof_texts": [
+      "GEN.3.15",
+      "ISA.42.6",
+      "ROM.3.20-21",
+      "ROM.8.3",
+      "GAL.3.21",
+      "EZK.36.26-27",
+      "JHN.6.44-45",
+      "MRK.16.15-16",
+      "JHN.3.16",
+      "ROM.10.6",
+      "ROM.10.9",
+      "GAL.3.11"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "This covenant of grace is frequently set forth in the Scripture by the name of a testament, in reference to the death of Jesus Christ the testator, and to the everlasting inheritance, with all things belonging to it, therein bequeathed.",
+     "proof_texts": [
+      "LUK.22.20",
+      "1CO.11.25",
+      "HEB.7.22",
+      "HEB.9.15-17"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "This covenant was differently administered in the time of the law and in the time of the gospel: under the law it was administered by promises, prophecies, sacrifices, circumcision, the paschal lamb, and other types and ordinances delivered to the people of the Jews, all fore-signifying Christ to come, which were for that time sufficient and efficacious, through the operation of the Spirit, to instruct and build up the elect in faith in the promised Messiah, by whom they had full remission of sins and eternal salvation; and is called the Old Testament.",
+     "proof_texts": [
+      "2CO.3.6-9",
+      "JHN.8.56",
+      "1CO.10.1-4",
+      "HEB.11.13",
+      "ROM.4.11",
+      "COL.2.11-12",
+      "1CO.5.7",
+      "GAL.3.7-9",
+      "GAL.3.14"
+     ]
+    },
+    {
+     "n": 6,
+     "text": "Under the gospel, when Christ the substance was exhibited, the ordinances in which this covenant is dispensed are the preaching of the Word and the administration of the sacraments of Baptism and the Lord's Supper; which, though fewer in number, and administered with more simplicity and less outward glory, yet in them it is held forth in more fulness, evidence, and spiritual efficacy, to all nations, both Jews and Gentiles; and is called the New Testament. There are not, therefore, two covenants of grace differing in substance, but one and the same under various dispensations.",
+     "proof_texts": [
+      "COL.2.17",
+      "JER.31.33-34",
+      "HEB.12.22-28",
+      "MAT.28.19-20",
+      "1CO.11.23-25",
+      "LUK.22.20",
+      "MAT.28.19",
+      "EPH.2.15-19",
+      "PSA.32.1",
+      "ROM.4.3",
+      "ACT.15.11",
+      "ROM.3.21-23",
+      "ROM.3.30",
+      "ROM.4.6",
+      "ROM.4.16-17",
+      "ROM.4.23-24",
+      "GAL.3.14",
+      "GAL.3.16",
+      "HEB.13.8"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 8,
+   "title": "Of Christ the Mediator",
+   "sections": [
+    {
+     "n": 1,
+     "text": "It pleased God, in his eternal purpose, to choose and ordain the Lord Jesus, his only-begotten Son, to be the Mediator between God and man, the Prophet, Priest, and King; the Head and Saviour of his Church, the Heir of all things, and Judge of the world; unto whom he did, from all eternity, give a people to be his seed, and to be by him in time redeemed, called, justified, sanctified, and glorified.",
+     "proof_texts": [
+      "ISA.42.1",
+      "JHN.3.16",
+      "2TI.2.5",
+      "1PE.1.19-20",
+      "HEB.5.5-6",
+      "ACT.3.22",
+      "EPH.5.23",
+      "PSA.2.6",
+      "LUK.1.33",
+      "ACT.17.31",
+      "HEB.1.2",
+      "ISA.55.4-5",
+      "1CO.1.30",
+      "1TI.2.6",
+      "PSA.22.30",
+      "ISA.53.10",
+      "JHN.17.6"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "The Son of God, the second person in the Trinity, being very and eternal God, of one substance, and equal with the Father, did, when the fulness of time was come, take upon him man's nature, with all the essential properties and common infirmities thereof, yet without sin: being conceived by the power of the Holy Ghost in the womb of the Virgin Mary, of her substance. So that two whole, perfect, and distinct natures, the Godhead and the manhood, were inseparably joined together in one person, without conversion, composition, or confusion. Which person is very God and very man, yet one Christ, the only mediator between God and man.",
+     "proof_texts": [
+      "JHN.1.1",
+      "JHN.1.14",
+      "GAL.4.4",
+      "PHP.2.6",
+      "1JN.5.20",
+      "LUK.1.27",
+      "LUK.1.31",
+      "LUK.1.35",
+      "GAL.4.4",
+      "HEB.2.14",
+      "HEB.2.16-17",
+      "HEB.4.15",
+      "ROM.1.3-4",
+      "1TI.2.5",
+      "LUK.1.35",
+      "ROM.9.5",
+      "COL.2.9",
+      "1TI.3.16",
+      "1PE.3.18"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "The Lord Jesus, in his human nature thus united to the divine, was sanctified and anointed with the Holy Spirit above measure; having in him all the treasures of wisdom and knowledge, in whom it pleased the Father that all fulness should dwell; to the end that, being holy, harmless, undefiled, and full of grace and truth, he might be thoroughly furnished to execute the office of a mediator and surety. Which office he took not unto himself, but was thereunto called by his Father, who put all power and judgment into his hand, and gave him commandment to execute the same.",
+     "proof_texts": [
+      "PSA.45.7",
+      "JHN.3.34",
+      "COL.1.19",
+      "COL.2.3",
+      "ACT.10.38",
+      "HEB.7.22",
+      "HEB.12.24",
+      "JHN.1.14",
+      "HEB.7.26",
+      "MAT.28.18",
+      "JHN.5.22",
+      "JHN.5.27",
+      "ACT.2.36",
+      "HEB.5.4-5"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "This office the Lord Jesus did most willingly undertake, which, that he might discharge, he was made under the law, and did perfectly fulfill it; endured most grievous torments immediately in his soul, and most painful sufferings in his body; was crucified, and died; was buried, and remained under the power of death, yet saw no corruption. On the third day he arose from the dead, with the same body in which he suffered; with which also he ascended into heaven, and there sitteth at the right hand of his Father, making intercession; and shall return to judge men and angels at the end of the world.",
+     "proof_texts": [
+      "PSA.40.7-8",
+      "HEB.10.5-10",
+      "JHN.10.18",
+      "PHP.2.8",
+      "MAT.3.15",
+      "MAT.5.17",
+      "GAL.4.4",
+      "MAT.26.37-38",
+      "MAT.27.46",
+      "LUK.22.44",
+      "ACT.2.23-24",
+      "ACT.2.27",
+      "ACT.13.37",
+      "ROM.6.9",
+      "PHP.2.8",
+      "JHN.20.25",
+      "JHN.20.27",
+      "1CO.15.3-4",
+      "MRK.16.19",
+      "MAT.13.40-42",
+      "ACT.1.11",
+      "ACT.10.42",
+      "ROM.14.9-10",
+      "2PE.2.4",
+      "JUD.1.6",
+      "ROM.8.34",
+      "HEB.7.25",
+      "HEB.9.24"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "The Lord Jesus, by his perfect obedience and sacrifice of himself, which he through the eternal Spirit once offered up unto God, hath fully satisfied the justice of his Father, and purchased not only reconciliation, but an everlasting inheritance in the kingdom of heaven, for all those whom the Father hath given unto him.",
+     "proof_texts": [
+      "ROM.3.25-26",
+      "ROM.5.19",
+      "EPH.5.2",
+      "HEB.9.14",
+      "HEB.9.16",
+      "HEB.10.14",
+      "DAN.9.24",
+      "DAN.9.26",
+      "JHN.17.2",
+      "EPH.1.11",
+      "EPH.1.14",
+      "COL.1.19-20",
+      "HEB.9.12",
+      "HEB.9.15"
+     ]
+    },
+    {
+     "n": 6,
+     "text": "Although the work of redemption was not actually wrought by Christ till after his incarnation, yet the virtue, efficacy, and benefits thereof were communicated unto the elect, in all ages successively from the beginning of the world, in and by those promises, types, and sacrifices, wherein he was revealed, and signified to be the seed of the woman which should bruise the serpent's head, and the Lamb slain from the beginning of the world, being yesterday and today the same, and forever.",
+     "proof_texts": [
+      "GEN.3.15",
+      "GAL.4.4-5",
+      "HEB.13.8",
+      "REV.13.8"
+     ]
+    },
+    {
+     "n": 7,
+     "text": "Christ, in the work of mediation, acteth according to both natures; by each nature doing that which is proper to itself; yet, by reason of the unity of the person, that which is proper to one nature is sometimes, in Scripture, attributed to the person denominated by the other nature.",
+     "proof_texts": [
+      "HEB.9.14",
+      "1PE.3.18",
+      "JHN.3.13",
+      "ACT.20.28",
+      "1JN.3.16"
+     ]
+    },
+    {
+     "n": 8,
+     "text": "To all those for whom Christ hath purchased redemption he doth certainly and effectually apply and communicate the same; making intercession for them, and revealing unto them, in and by the Word, the mysteries of salvation; effectually persuading them by his Spirit to believe and obey; and governing their hearts by his Word and Spirit; overcoming all their enemies by his almighty power and wisdom, in such manner and ways as are most consonant to his wonderful and unsearchable dispensation.",
+     "proof_texts": [
+      "JHN.6.37",
+      "JHN.6.39",
+      "JHN.10.15-16",
+      "JHN.15.13",
+      "JHN.15.15",
+      "JHN.17.6",
+      "EPH.1.7-9",
+      "ROM.8.34",
+      "1JN.2.1-2",
+      "PSA.110.1",
+      "MAL.4.2-3",
+      "1CO.15.25-26",
+      "COL.2.15",
+      "JHN.14.16",
+      "JHN.17.17",
+      "ROM.8.9",
+      "ROM.8.14",
+      "ROM.15.18-19",
+      "2CO.4.13",
+      "HEB.12.2"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 9,
+   "title": "Of Free Will",
+   "sections": [
+    {
+     "n": 1,
+     "text": "God hath endued the will of man with that natural liberty, that is neither forced nor by any absolute necessity of nature determined to good or evil.",
+     "proof_texts": [
+      "DEU.30.19",
+      "MAT.17.12",
+      "JAS.1.14"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "Man, in his state of innocency, had freedom and power to will and to do that which is good and well-pleasing to God, but yet mutably, so that he might fall from it.",
+     "proof_texts": [
+      "GEN.1.26",
+      "ECC.7.29",
+      "GEN.2.16-17",
+      "GEN.3.6"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "Man, by his fall into a state of sin, hath wholly lost all ability of will to any spiritual good accompanying salvation; so as a natural man, being altogether averse from that good, and dead in sin, is not able, by his own strength, to convert himself, or to prepare himself thereunto.",
+     "proof_texts": [
+      "JHN.15.5",
+      "ROM.5.6",
+      "ROM.8.7",
+      "EPH.2.1",
+      "EPH.2.5",
+      "COL.2.13",
+      "ROM.3.10",
+      "ROM.3.12",
+      "JHN.6.44",
+      "JHN.6.65",
+      "1CO.2.14",
+      "EPH.2.2-5",
+      "TIT.3.3-5"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "When God converts a sinner, and translates him into the state of grace, he freeth him from his natural bondage under sin, and by his grace alone enables him freely to will and to do that which is spiritually good; yet so as that, by reason of his remaining corruption, he doth not perfectly, nor only, will that which is good, but doth also will that which is evil.",
+     "proof_texts": [
+      "JHN.8.34",
+      "JHN.8.36",
+      "COL.1.13",
+      "ROM.7.15",
+      "ROM.7.18-19",
+      "ROM.7.21",
+      "ROM.7.23",
+      "GAL.5.17",
+      "ROM.6.18",
+      "ROM.6.22",
+      "PHP.2.13"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "The will of man is made perfectly and immutably free to good alone, in the state of glory only.",
+     "proof_texts": [
+      "EPH.4.13",
+      "HEB.12.23",
+      "1JN.3.2",
+      "JUD.1.24"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 10,
+   "title": "Of Effectual Calling",
+   "sections": [
+    {
+     "n": 1,
+     "text": "All those whom God hath predestinated unto life, and those only, he is pleased, in his appointed and accepted time, effectually to call, by his Word and Spirit, out of that state of sin and death, in which they are by nature, to grace and salvation by Jesus Christ; enlightening their minds, spiritually and savingly, to understand the things of God; taking away their heart of stone, and giving unto them an heart of flesh; renewing their wills, and by his almighty power determining them to that which is good, and effectually drawing them to Jesus Christ; yet so as they come most freely, being made willing by his grace.",
+     "proof_texts": [
+      "ROM.8.30",
+      "ROM.11.7",
+      "EPH.1.10-11",
+      "ROM.8.2",
+      "EPH.2.1-5",
+      "2TI.1.9-10",
+      "2CO.3.3",
+      "2CO.3.6",
+      "2TH.2.13-14",
+      "EZK.36.26",
+      "ACT.26.18",
+      "1CO.2.10",
+      "1CO.2.12",
+      "EPH.1.17-18",
+      "JHN.6.44-45",
+      "EPH.1.19",
+      "DEU.30.6",
+      "EZK.11.19",
+      "EZK.36.27",
+      "PHP.2.13",
+      "PSA.110.3",
+      "SNG.1.4",
+      "JHN.6.37",
+      "ROM.6.16-18"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "This effectual call is of God's free and special grace alone, not from anything at all foreseen in man; who is altogether passive therein, until, being quickened and renewed by the Holy Spirit, he is thereby enabled to answer this call, and to embrace the grace offered and conveyed in it.",
+     "proof_texts": [
+      "ROM.9.11",
+      "EPH.2.4-5",
+      "EPH.2.8-9",
+      "2TI.1.9",
+      "TIT.3.4-5",
+      "EZK.36.27",
+      "JHN.5.25",
+      "JHN.6.37",
+      "ROM.8.7",
+      "1CO.2.14",
+      "EPH.2.5"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "Elect infants, dying in infancy, are regenerated and saved by Christ through the Spirit, who worketh when, and where, and how he pleaseth. So also are all other elect persons who are incapable of being outwardly called by the ministry of the Word.",
+     "proof_texts": [
+      "LUK.18.15-16",
+      "JHN.3.3",
+      "JHN.3.5",
+      "ACT.2.38-39",
+      "ROM.8.9",
+      "1JN.5.12",
+      "ACT.4.12",
+      "1JN.5.12",
+      "JHN.3.8"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "Others, not elected, although they may be called by the ministry of the Word, and may have some common operations of the Spirit, yet they never truly come unto Christ, and therefore cannot be saved: much less can men, not professing the Christian religion, be saved in any other way whatsoever, be they never so diligent to frame their lives according to the light of nature and the law of that religion they do profess; and to assert and maintain that they may is very pernicious, and to be detested.",
+     "proof_texts": [
+      "MAT.22.14",
+      "JHN.6.64-66",
+      "JHN.8.24",
+      "MAT.7.22",
+      "MAT.13.20-21",
+      "HEB.6.4-5",
+      "1CO.16.22",
+      "GAL.1.6-8",
+      "2JN.1.9-11",
+      "JHN.4.22",
+      "JHN.14.6",
+      "JHN.17.3",
+      "ACT.4.12",
+      "EPH.2.12"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 11,
+   "title": "Of Justification",
+   "sections": [
+    {
+     "n": 1,
+     "text": "Those whom God effectually calleth he also freely justifieth; not by infusing righteousness into them, but by pardoning their sins, and by accounting and accepting their persons as righteous: not for anything wrought in them, or done by them, but for Christ's sake alone; nor by imputing faith itself, the act of believing, or any other evangelical obedience to them, as their righteousness; but by imputing the obedience and satisfaction of Christ unto them, they receiving and resting on him and his righteousness by faith; which faith they have not of themselves, it is the gift of God.",
+     "proof_texts": [
+      "ROM.3.24",
+      "ROM.8.30",
+      "ACT.10.44",
+      "ACT.13.38-39",
+      "GAL.2.16",
+      "EPH.2.7-8",
+      "PHP.3.9",
+      "JER.23.6",
+      "ROM.3.22",
+      "ROM.3.24-25",
+      "ROM.3.27-28",
+      "ROM.4.5-8",
+      "ROM.5.17-19",
+      "1CO.1.30-31",
+      "2CO.5.19",
+      "2CO.5.21",
+      "EPH.1.7",
+      "TIT.3.5",
+      "TIT.3.7"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "Faith, thus receiving and resting on Christ and his righteousness, is the alone instrument of justification; yet is it not alone in the person justified, but is ever accompanied with all other saving graces, and is no dead faith, but worketh by love.",
+     "proof_texts": [
+      "JHN.1.12",
+      "ROM.3.28",
+      "ROM.5.1",
+      "GAL.5.6",
+      "JAS.2.17",
+      "JAS.2.22",
+      "JAS.2.26"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "Christ, by his obedience and death, did fully discharge the debt of all those that are thus justified, and did make a proper, real, and full satisfaction to his Father's justice in their behalf. Yet inasmuch as he was given by the Father for them, and his obedience and satisfaction accepted in their stead, and both freely, not for anything in them, their justification is only of free grace; that both the exact justice and rich grace of God might be glorified in the justification of sinners.",
+     "proof_texts": [
+      "ISA.53.4-6",
+      "ISA.53.10-12",
+      "DAN.9.24",
+      "DAN.9.26",
+      "ROM.5.8-10",
+      "ROM.5.19",
+      "1TI.2.5-6",
+      "HEB.10.10",
+      "HEB.10.14",
+      "MAT.3.17",
+      "2CO.5.21",
+      "EPH.5.2",
+      "ROM.8.32",
+      "ROM.3.26",
+      "EPH.2.7",
+      "ROM.3.24",
+      "EPH.1.7"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "God did, from all eternity, decree to justify all the elect, and Christ did, in the fulness of time, die for their sins, and rise again for their justification: nevertheless, they are not justified until the Holy Spirit doth, in due time, actually apply Christ unto them.",
+     "proof_texts": [
+      "ROM.8.30",
+      "GAL.3.8",
+      "1PE.1.2",
+      "1PE.1.19-20",
+      "GAL.2.16",
+      "COL.1.21-22",
+      "TIT.3.4-7",
+      "ROM.4.25",
+      "GAL.4.4",
+      "1TI.2.6"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "God doth continue to forgive the sins of those that are justified; and although they can never fall from the state of justification, yet they may by their sins fall under God's fatherly displeasure, and not have the light of his countenance restored unto them, until they humble themselves, confess their sins, beg pardon, and renew their faith and repentance.",
+     "proof_texts": [
+      "MAT.6.12",
+      "1JN.1.7",
+      "1JN.1.9",
+      "1JN.2.1-2",
+      "PSA.32.5",
+      "PSA.51.7-12",
+      "PSA.89.31-33",
+      "MAT.26.75",
+      "LUK.1.20",
+      "1CO.11.30",
+      "1CO.11.32",
+      "LUK.22.32",
+      "JHN.10.28",
+      "HEB.10.14"
+     ]
+    },
+    {
+     "n": 6,
+     "text": "The justification of believers under the Old Testament was, in all these respects, one and the same with the justification of believers under the New Testament.",
+     "proof_texts": [
+      "ROM.4.22-24",
+      "GAL.3.9",
+      "GAL.3.13-14",
+      "HEB.13.8"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 12,
+   "title": "Of Adoption",
+   "sections": [
+    {
+     "n": 1,
+     "text": "All those that are justified God vouchsafeth, in and for his only Son Jesus Christ, to make partakers of the grace of adoption; by which they are taken into the number, and enjoy the liberties and privileges of the children of God; have his name put upon them; receive the Spirit of adoption; have access to the throne of grace with boldness; are enabled to cry, Abba, Father; are pitied, protected, provided for, and chastened by him as by a father; yet never cast off, but sealed to the day of redemption, and inherit the promises, as heirs of everlasting salvation.",
+     "proof_texts": [
+      "GAL.4.4-5",
+      "EPH.1.5",
+      "JER.14.9",
+      "2CO.6.18",
+      "REV.3.12",
+      "JHN.1.12",
+      "ROM.8.17",
+      "ROM.5.2",
+      "EPH.3.12",
+      "ROM.8.15",
+      "PSA.103.13",
+      "GAL.4.6",
+      "MAT.6.30",
+      "MAT.6.32",
+      "1PE.5.7",
+      "PRO.14.26",
+      "HEB.12.6",
+      "EPH.4.30",
+      "LAM.3.31",
+      "HEB.1.14",
+      "1PE.1.3-4",
+      "HEB.6.12"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 13,
+   "title": "Of Sanctification",
+   "sections": [
+    {
+     "n": 1,
+     "text": "They who are effectually called and regenerated, having a new heart and a new spirit created in them, are further sanctified, really and personally, through the virtue of Christ's death and resurrection, by his Word and Spirit dwelling in them; the dominion of the whole body of sin is destroyed, and the several lusts thereof are more and more weakened and mortified, and they more and more quickened and strengthened, in all saving graces, to the practice of true holiness, without which no man shall see the Lord.",
+     "proof_texts": [
+      "ACT.20.32",
+      "ROM.6.5-6",
+      "1CO.6.11",
+      "PHP.3.10",
+      "ROM.6.6",
+      "ROM.6.14",
+      "JHN.17.17",
+      "EPH.5.26",
+      "2TH.2.13",
+      "EPH.3.16-19",
+      "COL.1.11",
+      "ROM.8.13",
+      "GAL.5.24",
+      "2CO.7.1",
+      "HEB.12.14"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "This sanctification is throughout in the whole man, yet imperfect in this life; there abideth still some remnants of corruption in every part, whence ariseth a continual and irreconcilable war, the flesh lusting against the spirit, and the spirit against the flesh.",
+     "proof_texts": [
+      "1TH.5.23",
+      "GAL.5.17",
+      "1PE.2.11",
+      "ROM.7.18",
+      "ROM.7.23",
+      "PHP.3.12",
+      "1JN.1.10"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "In which war, although the remaining corruption for a time may much prevail, yet, through the continual supply of strength from the sanctifying Spirit of Christ, the regenerate part doth overcome; and so the saints grow in grace, perfecting holiness in the fear of God.",
+     "proof_texts": [
+      "ROM.7.23",
+      "2CO.3.18",
+      "2PE.3.18",
+      "ROM.6.14",
+      "EPH.4.15-16",
+      "1JN.5.4",
+      "2CO.7.1"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 14,
+   "title": "Of Saving Faith",
+   "sections": [
+    {
+     "n": 1,
+     "text": "The grace of faith, whereby the elect are enabled to believe to the saving of their souls, is the work of the Spirit of Christ in their hearts, and is ordinarily wrought by the ministry of the Word; by which also, and by the administration of the sacraments and prayer, it is increased and strengthened.",
+     "proof_texts": [
+      "HEB.10.39",
+      "ROM.10.14",
+      "ROM.10.17",
+      "EPH.1.17-19",
+      "EPH.2.8",
+      "2CO.4.13",
+      "LUK.17.5",
+      "ACT.20.32",
+      "ROM.1.16-17",
+      "ROM.4.11",
+      "1PE.2.2"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "By this faith a Christian believeth to be true whatsoever is revealed in the Word, for the authority of God himself speaking therein; and acteth differently upon that which each particular passage thereof containeth; yielding obedience to the commands, trembling at the threatenings, and embracing the promises of God for this life and that which is to come. But the principal acts of saving faith are accepting, receiving, and resting upon Christ alone for justification, sanctification, and eternal life, by virtue of the covenant of grace.",
+     "proof_texts": [
+      "JHN.4.42",
+      "ACT.24.14",
+      "1TH.2.13",
+      "1JN.5.10",
+      "ISA.66.2",
+      "ROM.16.26",
+      "JHN.1.12",
+      "ACT.15.11",
+      "ACT.16.31",
+      "GAL.2.20",
+      "1TI.4.8",
+      "HEB.11.13"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "This faith is different in degrees, weak or strong; may be often and many ways assailed and weakened, but gets the victory; growing up in many to the attainment of a full assurance through Christ, who is both the author and finisher of our faith.",
+     "proof_texts": [
+      "MAT.6.30",
+      "MAT.8.10",
+      "ROM.4.19-20",
+      "HEB.5.13-14",
+      "COL.2.2",
+      "HEB.6.11-12",
+      "HEB.10.22",
+      "LUK.22.31-32",
+      "EPH.6.16",
+      "1JN.5.4-5",
+      "HEB.12.2"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 15,
+   "title": "Of Repentance unto Life",
+   "sections": [
+    {
+     "n": 1,
+     "text": "Repentance unto life is an evangelical grace, the doctrine whereof is to be preached by every minister of the gospel, as well as that of faith in Christ.",
+     "proof_texts": [
+      "ZEC.12.10",
+      "ACT.11.18",
+      "LUK.24.47",
+      "MRK.1.15",
+      "ACT.20.21"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "By it a sinner, out of the sight and sense, not only of the danger, but also of the filthiness and odiousness of his sins, as contrary to the holy nature and righteous law of God, and upon the apprehension of his mercy in Christ to such as are penitent, so grieves for and hates his sins as to turn from them all unto God, purposing and endeavoring to walk with him in all the ways of his commandments.",
+     "proof_texts": [
+      "PSA.51.4",
+      "PSA.119.128",
+      "ISA.30.22",
+      "JER.31.18-19",
+      "EZK.18.30-31",
+      "EZK.36.31",
+      "JOL.2.12-13",
+      "AMO.5.15",
+      "2CO.7.11",
+      "2KI.23.25",
+      "PSA.119.6",
+      "PSA.119.59",
+      "PSA.119.106",
+      "LUK.1.6"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "Although repentance be not to be rested in as any satisfaction for sin, or any cause of the pardon thereof, which is the act of God's free grace in Christ; yet is it of such necessity to all sinners that none may expect pardon without it.",
+     "proof_texts": [
+      "EZK.16.61-63",
+      "EZK.36.31-32",
+      "LUK.13.3",
+      "LUK.13.5",
+      "ACT.17.30-31",
+      "HOS.14.2",
+      "HOS.14.4",
+      "ROM.3.24",
+      "EPH.1.7"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "As there is no sin so small but it deserves damnation, so there is no sin so great that it can bring damnation upon those who truly repent.",
+     "proof_texts": [
+      "MAT.12.36",
+      "ROM.5.12",
+      "ROM.6.23",
+      "ISA.1.16",
+      "ISA.1.18",
+      "ISA.55.7",
+      "ROM.8.1"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "Men ought not to content themselves with a general repentance, but it is every man's duty to endeavor to repent of his particular sins particularly.",
+     "proof_texts": [
+      "PSA.19.13",
+      "LUK.19.8",
+      "1TI.1.13",
+      "1TI.1.15"
+     ]
+    },
+    {
+     "n": 6,
+     "text": "As every man is bound to make private confession of his sins to God, praying for the pardon thereof, upon which, and the forsaking of them, he shall find mercy; so he that scandalizeth his brother, or the Church of Christ, ought to be willing, by a private or public confession and sorrow for his sin, to declare his repentance to those that are offended, who are thereupon to be reconciled to him, and in love to receive him.",
+     "proof_texts": [
+      "PSA.32.5-6",
+      "PSA.51.4-5",
+      "PSA.51.7",
+      "PSA.51.9",
+      "PSA.51.14",
+      "JOS.7.19",
+      "LUK.17.3-4",
+      "JAS.5.16",
+      "PRO.28.13",
+      "1JN.1.9",
+      "2CO.2.8"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 16,
+   "title": "Of Good Works",
+   "sections": [
+    {
+     "n": 1,
+     "text": "Good works are only such as God hath commanded in his holy Word, and not such as, without the warrant thereof, are devised by men out of blind zeal, or upon any pretense of good intention.",
+     "proof_texts": [
+      "MIC.6.8",
+      "ROM.12.2",
+      "HEB.13.21",
+      "1SA.15.21-23",
+      "ISA.29.13",
+      "MAT.15.9",
+      "JHN.16.2",
+      "ROM.10.2",
+      "1PE.1.18"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "These good works, done in obedience to God's commandments, are the fruits and evidences of a true and lively faith; and by them believers manifest their thankfulness, strengthen their assurance, edify their brethren, adorn the profession of the gospel, stop the mouths of the adversaries, and glorify God, whose workmanship they are, created in Christ Jesus thereunto, that, having their fruit unto holiness, they may have the end, eternal life.",
+     "proof_texts": [
+      "JAS.2.18",
+      "JAS.2.22",
+      "2PE.1.5-10",
+      "1JN.2.3",
+      "1JN.2.5",
+      "PSA.116.12-13",
+      "1PE.2.9",
+      "1TI.6.1",
+      "TIT.2.5",
+      "TIT.2.9-12",
+      "MAT.5.16",
+      "2CO.9.2",
+      "JHN.15.8",
+      "PHP.1.11",
+      "1PE.2.12",
+      "1PE.2.15",
+      "ROM.6.22",
+      "EPH.2.10"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "Their ability to do good works is not at all of themselves, but wholly from the Spirit of Christ. And that they may be enabled thereunto, besides the graces they have already received, there is required an actual influence of the same Holy Spirit to work in them to will and to do of his good pleasure; yet are they not hereupon to grow negligent, as if they were not bound to perform any duty unless upon a special motion of the Spirit; but they ought to be diligent in stirring up the grace of God that is in them.",
+     "proof_texts": [
+      "EZK.36.26-27",
+      "JHN.15.4-6",
+      "ISA.64.7",
+      "ACT.26.6-7",
+      "PHP.2.12",
+      "2TI.1.6",
+      "HEB.6.11-12",
+      "2PE.1.3",
+      "2PE.1.5",
+      "2PE.1.10-11",
+      "JUD.1.20-21",
+      "PHP.2.13",
+      "PHP.4.13",
+      "2CO.3.5"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "They who in their obedience attain to the greatest height which is possible in this life, are so far from being able to supererogate and to do more than God requires, as that they fall short of much which in duty they are bound to do.",
+     "proof_texts": [
+      "NEH.13.22",
+      "JOB.9.2-3",
+      "LUK.17.10",
+      "GAL.5.17"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "We cannot, by our best works, merit pardon of sin, or eternal life at the hand of God, by reason of the great disproportion that is between them and the glory to come, and the infinite distance that is between us and God, whom by them we can neither profit nor satisfy for the debt of our former sins; but when we have done all we can, we have done but our duty, and are unprofitable servants; and because, as they are good, they proceed from his Spirit; and as they are wrought by us, they are defiled and mixed with so much weakness and imperfection that they cannot endure the severity of God's judgment.",
+     "proof_texts": [
+      "JOB.22.2-3",
+      "JOB.35.7-8",
+      "PSA.16.2",
+      "ROM.3.20",
+      "ROM.4.2",
+      "ROM.4.4",
+      "ROM.4.6",
+      "ROM.8.18",
+      "EPH.2.8-9",
+      "TIT.3.5-7",
+      "GAL.5.22-23",
+      "LUK.17.10",
+      "PSA.130.3",
+      "PSA.143.2",
+      "ISA.64.6",
+      "ROM.7.15",
+      "ROM.7.18",
+      "GAL.5.17"
+     ]
+    },
+    {
+     "n": 6,
+     "text": "Yet notwithstanding, the persons of believers being accepted through Christ, their good works also are accepted in him, not as though they were in this life wholly unblamable and unreprovable in God's sight; but that he, looking upon them in his Son, is pleased to accept and reward that which is sincere, although accompanied with many weaknesses and imperfections.",
+     "proof_texts": [
+      "GEN.4.4",
+      "HEB.11.4",
+      "EXO.28.38",
+      "EPH.1.6",
+      "1PE.2.5",
+      "MAT.25.21",
+      "MAT.25.23",
+      "2CO.8.12",
+      "HEB.6.10",
+      "HEB.13.20-21",
+      "JOB.9.20",
+      "PSA.143.2"
+     ]
+    },
+    {
+     "n": 7,
+     "text": "Works done by unregenerate men, although for the matter of them they may be things which God commands, and of good use both to themselves and others; yet because they proceed not from a heart purified by faith, nor are done in a right manner, according to the Word, nor to a right end, the glory of God; they are therefore sinful, and cannot please God, or make a man meet to receive grace from God. And yet their neglect of them is more sinful and displeasing unto God.",
+     "proof_texts": [
+      "1KI.21.27",
+      "1KI.21.29",
+      "2KI.10.30-31",
+      "PHP.1.15-16",
+      "PHP.1.18",
+      "ISA.1.12",
+      "1CO.13.3",
+      "GEN.4.3-5",
+      "HEB.11.4",
+      "HEB.11.6",
+      "AMO.5.21-22",
+      "HOS.1.4",
+      "HAG.2.14",
+      "ROM.9.16",
+      "TIT.1.15",
+      "TIT.3.5",
+      "MAT.6.2",
+      "MAT.6.5",
+      "MAT.6.16",
+      "JOB.21.14-15",
+      "PSA.14.4",
+      "PSA.36.3",
+      "MAT.23.23",
+      "MAT.25.41-45"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 17,
+   "title": "Of the Perseverance of the Saints",
+   "sections": [
+    {
+     "n": 1,
+     "text": "They whom God hath accepted in his Beloved, effectually called and sanctified by his Spirit, can neither totally nor finally fall away from the state of grace; but shall certainly persevere therein to the end, and be eternally saved.",
+     "proof_texts": [
+      "JHN.10.28-29",
+      "PHP.1.6",
+      "1PE.1.5",
+      "1PE.1.9",
+      "2PE.1.10",
+      "1JN.3.9"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "This perseverance of the saints depends, not upon their own free will, but upon the immutability of the decree of election, flowing from the free and unchangeable love of God the Father; upon the efficacy of the merit and intercession of Jesus Christ; the abiding of the Spirit and of the seed of God within them; and the nature of the covenant of grace: from all which ariseth also the certainty and infallibility thereof.",
+     "proof_texts": [
+      "JER.31.3",
+      "2TI.2.18-19",
+      "JHN.14.16-17",
+      "1JN.2.27",
+      "1JN.3.9",
+      "LUK.22.32",
+      "JHN.17.11",
+      "JHN.17.24",
+      "HEB.7.25",
+      "HEB.9.12-15",
+      "HEB.10.10",
+      "HEB.10.14",
+      "HEB.13.20-21",
+      "ROM.8.33-39",
+      "JHN.10.28",
+      "2TH.3.3",
+      "1JN.2.19",
+      "JER.32.40"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "Nevertheless they may, through the temptations of Satan and of the world, the prevalency of corruption remaining in them, and the neglect of the means of their preservation, fall into grievous sins; and for a time continue therein: whereby they incur God's displeasure, and grieve his Holy Spirit; come to be deprived of some measure of their graces and comforts; have their hearts hardened, and their consciences wounded; hurt and scandalize others, and bring temporal judgments upon themselves.",
+     "proof_texts": [
+      "MAT.26.70",
+      "MAT.26.72",
+      "MAT.26.74",
+      "2SA.11.27",
+      "ISA.64.5",
+      "ISA.64.7",
+      "ISA.64.9",
+      "PSA.51.14",
+      "PSA.51.8",
+      "PSA.51.10",
+      "PSA.51.12",
+      "SNG.5.2-4",
+      "SNG.5.6",
+      "REV.2.4",
+      "EPH.4.30",
+      "PSA.32.3-4",
+      "PSA.51.8",
+      "ISA.63.17",
+      "MRK.6.52",
+      "MRK.16.14",
+      "PSA.89.31-32",
+      "1CO.11.32",
+      "2SA.12.14"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 18,
+   "title": "Of the Assurance of Grace and Salvation",
+   "sections": [
+    {
+     "n": 1,
+     "text": "Although hypocrites and other unregenerate men may vainly deceive themselves with false hopes and carnal presumptions of being in the favour of God and estate of salvation, which hope of theirs shall perish: yet such as truly believe in the Lord Jesus, and love him in sincerity, endeavoring to walk in all good conscience before him, may in this life be certainly assured that they are in a state of grace, and may rejoice in the hope of the glory of God, which hope shall never make them ashamed.",
+     "proof_texts": [
+      "DEU.29.19",
+      "JOB.8.13-14",
+      "MIC.3.11",
+      "JHN.8.41",
+      "1JN.2.3",
+      "1JN.3.14",
+      "1JN.3.18-19",
+      "1JN.3.21",
+      "1JN.3.24",
+      "1JN.5.13",
+      "MAT.7.22-23",
+      "ROM.5.2",
+      "ROM.5.5"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "This certainty is not a bare conjectural and probable persuasion, grounded upon a fallible hope; but an infallible assurance of faith, founded upon the divine truth of the promises of salvation, the inward evidence of those graces unto which these promises are made, the testimony of the Spirit of adoption witnessing with our spirits that we are the children of God: which Spirit is the earnest of our inheritance, whereby we are sealed to the day of redemption.",
+     "proof_texts": [
+      "HEB.6.11",
+      "HEB.6.19",
+      "2CO.1.12",
+      "2PE.1.4-5",
+      "2PE.1.10-11",
+      "1JN.2.3",
+      "1JN.3.14",
+      "HEB.6.17-18",
+      "EPH.1.13-14",
+      "EPH.4.30",
+      "2CO.1.21-22",
+      "ROM.8.15-16"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "This infallible assurance doth not so belong to the essence of faith, but that a true believer may wait long, and conflict with many difficulties before he be partaker of it: yet, being enabled by the Spirit to know the things which are freely given him of God, he may, without extraordinary revelation, in the right use of ordinary means, attain thereunto. And therefore it is the duty of everyone to give all diligence to make his calling and election sure; that thereby his heart may be enlarged in peace and joy in the Holy Ghost, in love and thankfulness to God, and in strength and cheerfulness in the duties of obedience, the proper fruits of this assurance: so far is it from inclining men to looseness.",
+     "proof_texts": [
+      "PSA.77.1-12",
+      "ISA.50.10",
+      "MRK.9.24",
+      "1JN.5.13",
+      "2PE.1.10",
+      "1CO.2.12",
+      "EPH.3.17-19",
+      "HEB.6.11-12",
+      "1JN.4.13",
+      "PSA.130.4",
+      "ROM.6.1-2",
+      "ROM.8.1",
+      "ROM.8.12",
+      "2CO.7.1",
+      "TIT.2.11-12",
+      "TIT.2.14",
+      "1JN.1.6-7",
+      "1JN.2.1-2",
+      "1JN.3.2-3",
+      "ROM.5.1-2",
+      "ROM.5.5",
+      "ROM.14.17",
+      "ROM.15.13",
+      "EPH.1.3-4",
+      "PSA.4.6-7",
+      "PSA.119.32"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "True believers may have the assurance of their salvation divers ways shaken, diminished, and intermitted; as, by negligence in preserving of it; by falling into some special sin, which woundeth the conscience, and grieveth the Spirit; by some sudden or vehement temptation; by God's withdrawing the light of his countenance, and suffering even such as fear him to walk in darkness and to have no light: yet are they never utterly destitute of that seed of God, and life of faith, that love of Christ and the brethren, that sincerity of heart and conscience of duty, out of which, by the operation of the Spirit, this assurance may in due time be revived, and by the which, in the meantime, they are supported from utter despair.",
+     "proof_texts": [
+      "PSA.31.22",
+      "PSA.51.8",
+      "PSA.51.12",
+      "PSA.51.14",
+      "PSA.77.1-10",
+      "SNG.5.2-3",
+      "SNG.5.6",
+      "ISA.50.10",
+      "MAT.26.69-72",
+      "EPH.4.30-31",
+      "PSA.22.1",
+      "ISA.54.7-10",
+      "JER.32.40",
+      "MIC.7.7-9",
+      "JOB.13.15",
+      "PSA.51.8",
+      "PSA.51.12",
+      "PSA.73.15",
+      "ISA.50.10",
+      "LUK.22.32",
+      "1JN.3.9"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 19,
+   "title": "Of the Law of God",
+   "sections": [
+    {
+     "n": 1,
+     "text": "God gave to Adam a law, as a covenant of works, by which he bound him and all his posterity to personal, entire, exact, and perpetual obedience; promised life upon the fulfilling, and threatened death upon the breach of it; and endued him with power and ability to keep it.",
+     "proof_texts": [
+      "GEN.1.26-27",
+      "GEN.2.17",
+      "JOB.28.28",
+      "ECC.7.29",
+      "ROM.2.14-15",
+      "ROM.5.12",
+      "ROM.5.19",
+      "ROM.10.5",
+      "GAL.3.10",
+      "GAL.3.12"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "This law, after his fall, continued to be a perfect rule of righteousness; and, as such, was delivered by God upon mount Sinai in ten commandments, and written in two tables; the first four commandments containing our duty towards God, and the other six our duty to man.",
+     "proof_texts": [
+      "EXO.34.1",
+      "DEU.5.32",
+      "DEU.10.4",
+      "ROM.13.8-9",
+      "JAS.1.25",
+      "JAS.2.8",
+      "JAS.2.10-12",
+      "MAT.22.37-40"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "Beside this law, commonly called moral, God was pleased to give to the people of Israel, as a Church under age, ceremonial laws, containing several typical ordinances, partly of worship, prefiguring Christ, his graces, actions, sufferings, and benefits; and partly holding forth divers instructions of moral duties. All which ceremonial laws are now abrogated under the New Testament.",
+     "proof_texts": [
+      "GAL.4.1-3",
+      "COL.2.17",
+      "HEB.10.1",
+      "DAN.9.27",
+      "EPH.2.15-16",
+      "COL.2.14",
+      "COL.2.16-17",
+      "1CO.5.7",
+      "2CO.6.17",
+      "JUD.1.23"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "To them also, as a body politic, he gave sundry judicial laws, which expired together with the State of that people, not obliging any other, now, further than the general equity thereof may require.",
+     "proof_texts": [
+      "GEN.49.10",
+      "1PE.2.13-14",
+      "MAT.5.17",
+      "MAT.5.38-39",
+      "1CO.9.8-10"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "The moral law doth forever bind all, as well justified persons as others, to the obedience thereof; and that not only in regard of the matter contained in it, but also in respect of the authority of God the Creator who gave it. Neither doth Christ in the gospel any way dissolve, but much strengthen, this obligation.",
+     "proof_texts": [
+      "ROM.13.8-10",
+      "EPH.6.2",
+      "1JN.2.3-4",
+      "1JN.2.7-8",
+      "MAT.5.17-19",
+      "ROM.3.31",
+      "JAS.2.8",
+      "JAS.2.10-11"
+     ]
+    },
+    {
+     "n": 6,
+     "text": "Although true believers be not under the law as a covenant of works, to be thereby justified or condemned; yet is it of great use to them, as well as to others; in that, as a rule of life, informing them of the will of God and their duty, it directs and binds them to walk accordingly; discovering also the sinful pollutions of their nature, hearts, and lives; so as, examining themselves thereby, they may come to further conviction of, humiliation for, and hatred against sin; together with a clearer sight of the need they have of Christ, and the perfection of his obedience. It is likewise of use to the regenerate, to restrain their corruptions, in that it forbids sin; and the threatenings of it serve to show what even their sins deserve, and what afflictions in this life they may expect for them, although freed from the curse thereof threatened in the law. The promises of it, in like manner, show them God's approbation of obedience, and what blessings they may expect upon the performance thereof; although not as due to them by the law as a covenant of works: so as a man's doing good, and refraining from evil, because the law encourageth to the one, and deterreth from the other, is no evidence of his being under the law, and not under grace.",
+     "proof_texts": [
+      "ACT.13.39",
+      "ROM.6.14",
+      "ROM.8.1",
+      "GAL.2.16",
+      "GAL.3.13",
+      "GAL.4.4-5",
+      "ROM.3.20",
+      "ROM.7.7",
+      "PSA.119.4-6",
+      "ROM.7.12",
+      "ROM.7.22",
+      "ROM.7.25",
+      "1CO.7.19",
+      "GAL.5.14",
+      "GAL.5.16",
+      "GAL.5.18-23",
+      "ROM.7.24-25",
+      "ROM.8.3-4",
+      "GAL.3.24",
+      "ROM.7.9",
+      "ROM.7.14",
+      "ROM.7.24",
+      "JAS.1.23-25",
+      "EZR.9.13-14",
+      "PSA.89.30-34",
+      "PSA.119.101",
+      "PSA.119.104",
+      "PSA.119.128",
+      "JAS.2.11",
+      "LUK.17.10",
+      "GAL.2.16",
+      "LEV.26.1",
+      "LEV.26.10",
+      "LEV.26.14",
+      "2CO.6.16",
+      "PSA.19.11",
+      "PSA.37.11",
+      "MAT.5.5",
+      "EPH.6.2-3",
+      "ROM.6.12",
+      "ROM.6.14",
+      "HEB.12.28-29",
+      "1PE.3.8-12",
+      "PSA.34.12-16"
+     ]
+    },
+    {
+     "n": 7,
+     "text": "Neither are the forementioned uses of the law contrary to the grace of the gospel, but do sweetly comply with it: the Spirit of Christ subduing and enabling the will of man to do that freely and cheerfully which the will of God, revealed in the law, requireth to be done.",
+     "proof_texts": [
+      "GAL.3.21",
+      "EZK.36.27",
+      "HEB.8.10",
+      "JER.31.33"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 20,
+   "title": "Of Christian Liberty, and Liberty of Conscience",
+   "sections": [
+    {
+     "n": 1,
+     "text": "The liberty which Christ hath purchased for believers under the gospel consists in their freedom from the guilt of sin, the condemning wrath of God, the curse of the moral law; and in their being delivered from this present evil world, bondage to Satan, and dominion of sin, from the evil of afflictions, the sting of death, the victory of the grave, and everlasting damnation; as also in their free access to God, and their yielding obedience unto him, not out of slavish fear, but a child-like love and willing mind. All which were common also to believers under the law; but under the New Testament the liberty of Christians is further enlarged in their freedom from the yoke of the ceremonial law, to which the Jewish Church was subjected; and in greater boldness of access to the throne of grace, and in fuller communications of the free Spirit of God, than believers under the law did ordinarily partake of.",
+     "proof_texts": [
+      "GAL.3.13",
+      "1TH.1.10",
+      "TIT.2.14",
+      "PSA.119.71",
+      "ROM.8.1",
+      "ROM.8.28",
+      "1CO.15.54-57",
+      "ACT.26.18",
+      "ROM.6.14",
+      "GAL.1.4",
+      "COL.1.13",
+      "ROM.8.14-15",
+      "1JN.4.18",
+      "ROM.5.1-2",
+      "ACT.15.10-11",
+      "GAL.4.1-3",
+      "GAL.4.6-7",
+      "GAL.5.1",
+      "GAL.3.9",
+      "GAL.3.14",
+      "JHN.7.38-39",
+      "2CO.3.13",
+      "2CO.3.17-18",
+      "HEB.4.14",
+      "HEB.4.16",
+      "HEB.10.19-22"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "God alone is Lord of the conscience, and hath left it free from the doctrines and commandments of men which are in anything contrary to his Word, or beside it, in matters of faith or worship. So that to believe such doctrines, or to obey such commands out of conscience, is to betray true liberty of conscience; and the requiring of an implicit faith, and an absolute and blind obedience, is to destroy liberty of conscience, and reason also.",
+     "proof_texts": [
+      "ROM.14.4",
+      "JAS.4.12",
+      "PSA.5.1",
+      "GAL.1.10",
+      "GAL.2.4-5",
+      "GAL.5.1",
+      "COL.2.20-23",
+      "MAT.15.9",
+      "MAT.23.8-10",
+      "ACT.4.19",
+      "ACT.5.29",
+      "1CO.7.23",
+      "2CO.1.24",
+      "ISA.8.20",
+      "JER.8.9",
+      "HOS.5.11",
+      "JHN.4.22",
+      "ACT.17.11",
+      "ROM.10.17",
+      "ROM.14.23",
+      "REV.13.12",
+      "REV.13.16-17"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "They who, upon pretense of Christian liberty, do practice any sin, or cherish any lust, do thereby destroy the end of Christian liberty; which is, that, being delivered out of the hands of our enemies, we might serve the Lord without fear, in holiness and righteousness before him, all the days of our life.",
+     "proof_texts": [
+      "LUK.1.74-75",
+      "JHN.8.34",
+      "GAL.5.13",
+      "1PE.2.16",
+      "2PE.2.19"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "And because the power which God hath ordained, and the liberty which Christ hath purchased, are not intended by God to destroy, but mutually to uphold and preserve one another; they who, upon pretense of Christian liberty, shall oppose any lawful power, or the lawful exercise of it, whether it be civil or ecclesiastical, resist the ordinance of God. And for their publishing of such opinions, or maintaining of such practices, as are contrary to the light of nature, or to the known principles of Christianity, whether concerning faith, worship, or conversation; or to the power of godliness; or such erroneous opinions or practices as, either in their own nature, or in the manner of publishing or maintaining them, are destructive to the external peace and order which Christ hath established in the Church; they may lawfully be called to account, and proceeded against by the censures of the Church, and by the power of the Civil Magistrate.",
+     "proof_texts": [
+      "MAT.12.25",
+      "ROM.13.1-8",
+      "HEB.13.17",
+      "1PE.2.13-14",
+      "1PE.2.16",
+      "DEU.13.6-12",
+      "2KI.23.5-6",
+      "2KI.23.9",
+      "2KI.23.20-21",
+      "2CH.15.12-13",
+      "2CH.15.16",
+      "2CH.34.33",
+      "NEH.13.15",
+      "NEH.13.17",
+      "NEH.13.21-22",
+      "NEH.13.25",
+      "NEH.13.30",
+      "ISA.49.23",
+      "DAN.3.29",
+      "ZEC.13.2-3",
+      "ROM.13.3-4",
+      "2JN.1.10-11",
+      "1TI.2.2",
+      "REV.17.12",
+      "REV.17.16-17",
+      "ROM.1.32",
+      "1CO.5.1",
+      "1CO.5.5",
+      "1CO.5.11",
+      "1CO.5.13",
+      "2JN.1.10-11",
+      "2TH.3.14",
+      "1TI.6.3-5",
+      "TIT.1.10-11",
+      "TIT.1.13",
+      "TIT.3.10",
+      "MAT.18.15-17",
+      "1TI.1.19-20",
+      "REV.2.2",
+      "REV.2.14-15",
+      "REV.2.20",
+      "REV.3.9"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 21,
+   "title": "Of Religious Worship and the Sabbath Day",
+   "sections": [
+    {
+     "n": 1,
+     "text": "The light of nature showeth that there is a God, who hath lordship and sovereignty over all; is good, and doeth good unto all; and is therefore to be feared, loved, praised, called upon, trusted in, and served with all the heart, and with all the soul, and with all the might. But the acceptable way of worshipping the true God is instituted by himself, and so limited to his own revealed will, that he may not be worshipped according to the imaginations and devices of men, or the suggestions of Satan, under any visible representations or any other way not prescribed in the Holy Scripture.",
+     "proof_texts": [
+      "JOS.24.14",
+      "PSA.18.3",
+      "PSA.31.23",
+      "PSA.62.8",
+      "PSA.119.68",
+      "JER.10.7",
+      "MRK.12.33",
+      "ACT.17.24",
+      "ROM.1.20",
+      "ROM.10.12",
+      "EXO.20.4-6",
+      "DEU.4.15-20",
+      "DEU.12.32",
+      "MAT.4.9-10",
+      "MAT.15.9",
+      "ACT.17.25",
+      "COL.2.23"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "Religious worship is to be given to God, the Father, Son, and Holy Ghost; and to him alone: not to angels, saints, or any other creature: and since the fall, not without a Mediator; nor in the mediation of any other but of Christ alone.",
+     "proof_texts": [
+      "MAT.4.10",
+      "JHN.5.23",
+      "2CO.13.14",
+      "JHN.14.6",
+      "EPH.2.18",
+      "COL.3.17",
+      "1TI.2.5",
+      "ROM.1.25",
+      "COL.2.18",
+      "REV.19.10"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "Prayer with thanksgiving, being one special part of religious worship, is by God required of all men; and that it may be accepted, it is to be made in the name of the Son, by the help of his Spirit, according to his will, with understanding, reverence, humility, fervency, faith, love, and perseverance; and, if vocal, in a known tongue.",
+     "proof_texts": [
+      "PHP.4.6",
+      "JHN.14.13-14",
+      "1PE.2.5",
+      "PSA.65.2",
+      "1JN.5.14",
+      "ROM.8.26",
+      "1CO.14.14",
+      "GEN.18.27",
+      "PSA.47.7",
+      "ECC.5.1-2",
+      "MAT.6.12",
+      "MAT.6.14-15",
+      "MRK.11.24",
+      "EPH.6.18",
+      "COL.4.2",
+      "HEB.12.28",
+      "JAS.1.6-7",
+      "JAS.5.16"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "Prayer is to be made for things lawful, and for all sorts of men living, or that shall live hereafter; but not for the dead, nor for those of whom it may be known that they have sinned the sin unto death.",
+     "proof_texts": [
+      "1JN.5.14",
+      "2SA.12.21-23",
+      "LUK.16.25-26",
+      "REV.14.13",
+      "RUT.4.12",
+      "2SA.7.29",
+      "JHN.17.20",
+      "1TI.2.1-2",
+      "1JN.5.16"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "The reading of the Scriptures with godly fear; the sound preaching; and conscionable hearing of the Word, in obedience unto God with understanding, faith, and reverence; singing of Psalms with grace in the heart; as, also, the due administration and worthy receiving of the sacraments instituted by Christ; are all parts of the ordinary religious worship of God: besides religious oaths, vows, solemn fastings, and thanksgivings upon several occasions; which are, in their several times and seasons, to be used in an holy and religious manner.",
+     "proof_texts": [
+      "ACT.15.21",
+      "REV.1.3",
+      "ISA.66.2",
+      "MAT.13.19",
+      "ACT.10.33",
+      "HEB.4.2",
+      "JAS.1.22",
+      "2TI.4.2",
+      "MAT.28.19",
+      "ACT.2.42",
+      "1CO.11.23-29",
+      "EPH.5.19",
+      "COL.3.16",
+      "JAS.5.13",
+      "ISA.19.21",
+      "ECC.5.4-5",
+      "DEU.6.13",
+      "NEH.10.29",
+      "EST.9.22",
+      "EST.4.16",
+      "JOL.2.12",
+      "MAT.9.15",
+      "1CO.7.5",
+      "HEB.12.28"
+     ]
+    },
+    {
+     "n": 6,
+     "text": "Neither prayer, nor any other part of religious worship, is now, under the gospel, either tied unto, or made more acceptable by any place in which it is performed, or towards which it is directed: but God is to be worshipped everywhere in spirit and truth; as in private families daily, and in secret each one by himself, so more solemnly in the public assemblies, which are not carelessly or willfully to be neglected or forsaken, when God, by his Word or providence, calleth thereunto.",
+     "proof_texts": [
+      "JHN.4.21",
+      "JHN.4.23-24",
+      "MAL.1.11",
+      "1TI.2.8",
+      "MAT.6.11",
+      "DEU.6.6-7",
+      "2SA.6.18",
+      "2SA.6.20",
+      "JOB.1.5",
+      "JER.10.25",
+      "ACT.10.2",
+      "1PE.3.7",
+      "ISA.56.6-7",
+      "PRO.1.20-21",
+      "PRO.1.24",
+      "PRO.8.34",
+      "LUK.4.16",
+      "ACT.2.42",
+      "ACT.13.42",
+      "HEB.10.25",
+      "MAT.6.6",
+      "EPH.6.18"
+     ]
+    },
+    {
+     "n": 7,
+     "text": "As it is of the law of nature that, in general, a due proportion of time be set apart for the worship of God; so, in his Word, by a positive, moral, and perpetual commandment, binding all men in all ages, he hath particularly appointed one day in seven for a Sabbath, to be kept holy unto him: which, from the beginning of the world to the resurrection of Christ, was the last day of the week; and, from the resurrection of Christ, was changed into the first day of the week, which in Scripture is called the Lord's day, and is to be continued to the end of the world, as the Christian Sabbath.",
+     "proof_texts": [
+      "EXO.20.8",
+      "EXO.20.10-11",
+      "ISA.56.2",
+      "ISA.56.4",
+      "ISA.56.6-7",
+      "REV.1.10",
+      "GEN.2.2-3",
+      "ACT.20.7",
+      "1CO.16.1-2",
+      "EXO.20.8",
+      "EXO.20.10",
+      "MAT.5.17-18"
+     ]
+    },
+    {
+     "n": 8,
+     "text": "This Sabbath is then kept holy unto the Lord, when men, after a due preparing of their hearts, and ordering of their common affairs beforehand, do not only observe an holy rest all the day from their own works, words, and thoughts, about their worldly employments and recreations; but also are taken up the whole time in the public and private exercises of his worship, and in the duties of necessity and mercy.",
+     "proof_texts": [
+      "EXO.20.8",
+      "EXO.16.23",
+      "EXO.16.25-26",
+      "EXO.16.29-30",
+      "EXO.31.15-17",
+      "ISA.58.13",
+      "NEH.13.15-22",
+      "ISA.58.13",
+      "MAT.12.1-13"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 22,
+   "title": "Of Lawful Oaths and Vows",
+   "sections": [
+    {
+     "n": 1,
+     "text": "A lawful oath is a part of religious worship, wherein, upon just occasion, the person swearing solemnly calleth God to witness what he asserteth or promiseth; and to judge him according to the truth or falsehood of what he sweareth.",
+     "proof_texts": [
+      "DEU.10.20",
+      "EXO.20.7",
+      "LEV.19.12",
+      "2CH.6.22-23",
+      "2CO.1.23"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "The name of God only is that by which men ought to swear, and therein it is to be used with all holy fear and reverence; therefore to swear vainly or rashly by that glorious and dreadful name, or to swear at all by any other thing, is sinful, and to be abhorred. Yet as, in matters of weight and moment, an oath is warranted by the Word of God, under the New Testament, as well as under the Old, so a lawful oath, being imposed by lawful authority, in such matters ought to be taken.",
+     "proof_texts": [
+      "DEU.6.13",
+      "ISA.65.16",
+      "2CO.1.23",
+      "HEB.6.16",
+      "EXO.20.7",
+      "JER.5.7",
+      "MAT.5.34",
+      "MAT.5.37",
+      "JAS.5.12",
+      "1KI.8.31",
+      "EZR.10.25",
+      "NEH.13.25"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "Whosoever taketh an oath ought duly to consider the weightiness of so solemn an act, and therein to avouch nothing but what he is fully persuaded is the truth. Neither may any man bind himself by oath to anything but what is good and just, and what he believeth so to be, and what he is able and resolved to perform. Yet it is a sin to refuse an oath touching anything that is good and just, being imposed by lawful authority.",
+     "proof_texts": [
+      "EXO.20.7",
+      "JER.4.2",
+      "EXO.22.7-11",
+      "NUM.5.19",
+      "NUM.5.21",
+      "NEH.5.12",
+      "GEN.24.2-3",
+      "GEN.24.5-6",
+      "GEN.24.8-9"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "An oath is to be taken in the plain and common sense of the words, without equivocation or mental reservation. It cannot oblige to sin; but in anything not sinful, being taken, it binds to performance, although to a man's own hurt: nor is it to be violated, although made to heretics or infidels.",
+     "proof_texts": [
+      "PSA.24.4",
+      "JER.4.2",
+      "EZK.17.16",
+      "EZK.17.18-19",
+      "JOS.9.18-19",
+      "2SA.21.1",
+      "1SA.25.22",
+      "1SA.25.32-34",
+      "PSA.15.4"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "A vow is of the like nature with a promissory oath, and ought to be made with the like religious care, and to be performed with the like faithfulness.",
+     "proof_texts": [
+      "ISA.19.21",
+      "PSA.61.8",
+      "PSA.66.13-14",
+      "ECC.5.4-6"
+     ]
+    },
+    {
+     "n": 6,
+     "text": "It is not to be made to any creature, but to God alone: and that it may be accepted, it is to be made voluntarily, out of faith and conscience of duty, in way of thankfulness for mercy received, or for the obtaining of what we want; whereby we more strictly bind ourselves to necessary duties, or to other things, so far and so long as they may fitly conduce thereunto.",
+     "proof_texts": [
+      "PSA.76.11",
+      "JER.44.25-26",
+      "GEN.28.20-22",
+      "DEU.23.21",
+      "DEU.23.23",
+      "1SA.1.11",
+      "PSA.50.14",
+      "PSA.66.13-14",
+      "PSA.132.2-5"
+     ]
+    },
+    {
+     "n": 7,
+     "text": "No man may vow to do anything forbidden in the Word of God, or what would hinder any duty therein commanded, or which is not in his own power, and for the performance whereof he hath no promise or ability from God. In which respect, Popish monastical vows of perpetual single life, professed poverty, and regular obedience, are so far from being degrees of higher perfection, that they are superstitious and sinful snares, in which no Christian may entangle himself.",
+     "proof_texts": [
+      "NUM.30.5",
+      "NUM.30.8",
+      "NUM.30.12-13",
+      "MRK.6.26",
+      "ACT.23.12",
+      "ACT.23.14",
+      "MAT.19.11-12",
+      "1CO.7.2",
+      "1CO.7.9",
+      "1CO.7.23",
+      "EPH.4.28",
+      "1PE.4.2"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 23,
+   "title": "Of the Civil Magistrate",
+   "sections": [
+    {
+     "n": 1,
+     "text": "God, the Supreme Lord and King of all the world, hath ordained civil magistrates to be under him, over the people, for his own glory and the public good, and to this end hath armed them with the power of the sword, for the defense and encouragement of them that are good, and for the punishment of evil-doers.",
+     "proof_texts": [
+      "ROM.13.1-4",
+      "1PE.2.13-14"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "It is lawful for Christians to accept and execute the office of a magistrate when called thereunto; in the managing whereof, as they ought especially to maintain piety, justice, and peace, according to the wholesome laws of each commonwealth, so, for that end, they may lawfully, now under the New Testament, wage war upon just and necessary occasion.",
+     "proof_texts": [
+      "PRO.8.15-16",
+      "ROM.13.1-2",
+      "ROM.13.4",
+      "MAT.8.9-10",
+      "LUK.3.14",
+      "ACT.10.1-2",
+      "ROM.13.4",
+      "REV.17.14",
+      "REV.17.16",
+      "2SA.23.3",
+      "PSA.2.10-12",
+      "PSA.82.3-4",
+      "1TI.2.2",
+      "1PE.2.13"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "The civil magistrate may not assume to himself the administration of the Word and Sacraments, or the power of the keys of the kingdom of heaven: yet he hath authority, and it is his duty to take order, that unity and peace be preserved in the Church, that the truth of God be kept pure and entire, that all blasphemies and heresies be suppressed, all corruptions and abuses in worship and discipline prevented or reformed, and all the ordinances of God duly settled, administered, and observed. For the better effecting whereof he hath power to call synods, to be present at them, and to provide that whatsoever is transacted in them be according to the mind of God.",
+     "proof_texts": [
+      "2CH.26.18",
+      "MAT.18.17",
+      "MAT.16.19",
+      "ROM.10.15",
+      "1CO.4.1-2",
+      "1CO.12.28-29",
+      "EPH.4.11-12",
+      "HEB.5.4",
+      "2CH.19.8-11",
+      "MAT.2.4-5",
+      "DEU.13.5-6",
+      "DEU.13.12",
+      "LEV.24.16",
+      "2KI.18.4",
+      "2KI.23.1-26",
+      "1CH.13.1-9",
+      "2CH.15.12-13",
+      "2CH.34.33",
+      "EZR.7.23-28",
+      "PSA.122.9",
+      "ISA.49.23"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "It is the duty of people to pray for magistrates, to honor their persons, to pay them tribute and other dues, to obey their lawful commands, and to be subject to their authority, for conscience' sake. Infidelity or difference in religion doth not make void the magistrate's just and legal authority, nor free the people from their due obedience to him: from which ecclesiastical persons are not exempted; much less hath the Pope any power or jurisdiction over them in their dominions, or over any of their people; and least of all to deprive them of their dominions or lives, if he shall judge them to be heretics, or upon any other pretense whatsoever.",
+     "proof_texts": [
+      "1TI.2.1-2",
+      "ROM.13.6-7",
+      "1PE.2.17",
+      "1PE.2.13-14",
+      "1PE.2.16",
+      "ROM.13.5",
+      "TIT.1.3",
+      "2TH.2.4",
+      "REV.13.15-17",
+      "1KI.2.35",
+      "ACT.25.9-11",
+      "ROM.13.1",
+      "2PE.2.1",
+      "2PE.2.10-11",
+      "JUD.1.8-11"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 24,
+   "title": "Of Marriage and Divorce",
+   "sections": [
+    {
+     "n": 1,
+     "text": "Marriage is to be between one man and one woman: neither is it lawful for any man to have more than one wife, nor for any woman to have more than one husband at the same time.",
+     "proof_texts": [
+      "GEN.2.24",
+      "PRO.2.17",
+      "MAT.19.5-6"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "Marriage was ordained for the mutual help of husband and wife; for the increase of mankind with a legitimate issue, and of the Church with an holy seed; and for preventing of uncleanness.",
+     "proof_texts": [
+      "GEN.2.18",
+      "1CO.7.2",
+      "1CO.7.9",
+      "MAL.2.15"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "It is lawful for all sorts of people to marry who are able with judgment to give their consent. Yet it is the duty of Christians to marry only in the Lord. And therefore, such as profess the true reformed religion should not marry with infidels, Papists, or other idolaters: neither should such as are godly be unequally yoked, by marrying with such as are notoriously wicked in their life, or maintain damnable heresies.",
+     "proof_texts": [
+      "GEN.24.57-58",
+      "1CO.7.36-38",
+      "HEB.13.4",
+      "1TI.4.3",
+      "GEN.34.14",
+      "EXO.34.16",
+      "DEU.7.3-4",
+      "1KI.11.4",
+      "NEH.13.25-27",
+      "MAL.2.11-12",
+      "2CO.6.14",
+      "1CO.7.39"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "Marriage ought not to be within the degrees of consanguinity or affinity forbidden in the Word; nor can such incestuous marriages ever be made lawful by any law of man, or consent of parties, so as those persons may live together as man and wife. The man may not marry any of his wife's kindred nearer in blood than he may of his own, nor the woman of her husband's kindred nearer in blood than of her own.",
+     "proof_texts": [
+      "AMO.2.7",
+      "1CO.5.1",
+      "LEV.20.19-21",
+      "LEV.18.24-28",
+      "MRK.6.18"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "Adultery or fornication, committed after a contract, being detected before marriage, giveth just occasion to the innocent party to dissolve that contract. In the case of adultery after marriage, it is lawful for the innocent party to sue out a divorce, and after the divorce to marry another, as if the offending party were dead.",
+     "proof_texts": [
+      "MAT.1.18-20",
+      "MAT.19.9",
+      "ROM.7.2-3",
+      "MAT.5.31-32"
+     ]
+    },
+    {
+     "n": 6,
+     "text": "Although the corruption of man be such as is apt to study arguments, unduly to put asunder those whom God hath joined together in marriage; yet nothing but adultery, or such wilful desertion as can no way be remedied by the Church or civil magistrate, is cause sufficient of dissolving the bond of marriage; wherein a public and orderly course of proceeding is to be observed; and the persons concerned in it, not left to their own wills and discretion in their own case.",
+     "proof_texts": [
+      "MAT.19.6",
+      "MAT.19.8-9",
+      "1CO.7.15",
+      "DEU.24.1-4"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 25,
+   "title": "Of the Church",
+   "sections": [
+    {
+     "n": 1,
+     "text": "The catholic or universal Church, which is invisible, consists of the whole number of the elect, that have been, are, or shall be gathered into one, under Christ the head thereof; and is the spouse, the body, the fulness of him that filleth all in all.",
+     "proof_texts": [
+      "EPH.1.10",
+      "EPH.1.22-23",
+      "EPH.5.23",
+      "EPH.5.27",
+      "EPH.5.32",
+      "COL.1.18"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "The visible Church, which is also catholic or universal under the gospel (not confined to one nation as before under the law) consists of all those, throughout the world, that profess the true religion, and of their children; and is the kingdom of the Lord Jesus Christ, the house and family of God, out of which there is no ordinary possibility of salvation.",
+     "proof_texts": [
+      "PSA.2.8",
+      "ROM.15.9-12",
+      "1CO.1.2",
+      "1CO.12.12-13",
+      "REV.7.9",
+      "ISA.9.7",
+      "MAT.13.47",
+      "GEN.3.15",
+      "GEN.17.7",
+      "EZK.16.20-21",
+      "ACT.2.39",
+      "ROM.11.16",
+      "1CO.7.14",
+      "ACT.2.47",
+      "EPH.2.19",
+      "EPH.3.15"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "Unto this catholic visible Church Christ hath given the ministry, oracles, and ordinances of God, for the gathering and perfecting of the saints, in this life, to the end of the world: and doth by his own presence and Spirit, according to his promise, make them effectual thereunto.",
+     "proof_texts": [
+      "ISA.59.21",
+      "MAT.28.19-20",
+      "1CO.12.28",
+      "EPH.4.11-13"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "This catholic Church hath been sometimes more, sometimes less visible. And particular churches, which are members thereof, are more or less pure, according as the doctrine of the gospel is taught and embraced, ordinances administered, and public worship performed more or less purely in them.",
+     "proof_texts": [
+      "ROM.11.3-4",
+      "REV.12.6",
+      "REV.12.14",
+      "1CO.5.6-7"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "The purest churches under heaven are subject both to mixture and error; and some have so degenerated as to become no churches of Christ, but synagogues of Satan. Nevertheless, there shall be always a Church on earth to worship God according to his will.",
+     "proof_texts": [
+      "MAT.13.24-30",
+      "MAT.13.47",
+      "1CO.13.12",
+      "PSA.72.17",
+      "PSA.102.28",
+      "MAT.16.18",
+      "MAT.28.19-20",
+      "ROM.11.18-22",
+      "REV.18.2"
+     ]
+    },
+    {
+     "n": 6,
+     "text": "There is no other Head of the Church but the Lord Jesus Christ: nor can the Pope of Rome, in any sense be head thereof; but is that Antichrist, that man of sin and son of perdition, that exalteth himself in the Church against Christ, and all that is called God.",
+     "proof_texts": [
+      "EPH.1.22",
+      "COL.1.18",
+      "MAT.23.8-10",
+      "2TH.2.3-4",
+      "2TH.2.8-9",
+      "REV.13.6"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 26,
+   "title": "Of the Communion of Saints",
+   "sections": [
+    {
+     "n": 1,
+     "text": "All saints that are united to Jesus Christ their head, by his Spirit and by faith, have fellowship with him in his graces, sufferings, death, resurrection, and glory: and being united to one another in love, they have communion in each other's gifts and graces, and are obliged to the performance of such duties, public and private, as do conduce to their mutual good, both in the inward and outward man.",
+     "proof_texts": [
+      "JHN.1.16",
+      "ROM.6.5-6",
+      "EPH.2.5-6",
+      "EPH.3.16-19",
+      "PHP.3.10",
+      "2TI.2.12",
+      "1JN.1.3",
+      "ROM.1.11-12",
+      "ROM.1.14",
+      "GAL.6.10",
+      "1TH.5.11",
+      "1TH.5.14",
+      "1JN.3.16-18",
+      "1CO.3.21-23",
+      "1CO.12.7",
+      "EPH.4.15-16",
+      "COL.2.19"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "Saints, by profession, are bound to maintain an holy fellowship and communion in the worship of God, and in performing such other spiritual services as tend to their mutual edification; as also in relieving each other in outward things, according to their several abilities and necessities. Which communion, as God offereth opportunity, is to be extended unto all those who, in every place, call upon the name of the Lord Jesus.",
+     "proof_texts": [
+      "ISA.2.3",
+      "ACT.2.42",
+      "ACT.2.46",
+      "1CO.11.20",
+      "HEB.10.24-25",
+      "ACT.2.44-45",
+      "ACT.11.29-30",
+      "1JN.3.17"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "This communion which the saints have with Christ, doth not make them in any wise partakers of the substance of his Godhead, or to be equal with Christ in any respect: either of which to affirm is impious and blasphemous. Nor doth their communion one with another, as saints, take away or infringe the title or propriety which each man hath in his goods and possessions.",
+     "proof_texts": [
+      "PSA.45.7",
+      "HEB.1.8-9",
+      "ISA.42.8",
+      "1CO.8.6",
+      "COL.1.18-19",
+      "1TI.6.15-16",
+      "EXO.20.15",
+      "ACT.5.4",
+      "EPH.4.28"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 27,
+   "title": "Of the Sacraments",
+   "sections": [
+    {
+     "n": 1,
+     "text": "Sacraments are holy signs and seals of the covenant of grace, immediately instituted by God, to represent Christ and his benefits, and to confirm our interest in him: as also to put a visible difference between those that belong unto the Church and the rest of the world; and solemnly to engage them to the service of God in Christ, according to his Word.",
+     "proof_texts": [
+      "GEN.17.7",
+      "GEN.17.10",
+      "ROM.4.11",
+      "1CO.10.16",
+      "1CO.11.25-26",
+      "GAL.3.27",
+      "MAT.28.19",
+      "1CO.11.23",
+      "ROM.6.3-4",
+      "1CO.10.16",
+      "1CO.10.21",
+      "GEN.34.14",
+      "EXO.12.48",
+      "ROM.15.8"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "There is in every sacrament a spiritual relation or sacramental union, between the sign and the thing signified; whence it comes to pass that the names and the effects of the one are attributed to the other.",
+     "proof_texts": [
+      "GEN.17.10",
+      "MAT.26.27-28",
+      "TIT.3.5"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "The grace which is exhibited in or by the sacraments, rightly used, is not conferred by any power in them; neither doth the efficacy of a sacrament depend upon the piety or intention of him that doth administer it, but upon the work of the Spirit, and the word of institution, which contains, together with a precept authorizing the use thereof, a promise of benefit to worthy receivers.",
+     "proof_texts": [
+      "ROM.2.28-29",
+      "1PE.3.21",
+      "MAT.26.27-28",
+      "MAT.3.11",
+      "1CO.12.13"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "There be only two sacraments ordained by Christ our Lord in the Gospel, that is to say, Baptism and the Supper of the Lord: neither of which may be dispensed by any but by a minister of the Word lawfully ordained.",
+     "proof_texts": [
+      "MAT.28.19-20",
+      "MAT.28.19",
+      "1CO.4.1",
+      "1CO.11.20",
+      "1CO.11.23",
+      "HEB.5.4"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "The sacraments of the Old Testament, in regard of the spiritual things thereby signified and exhibited, were, for substance, the same with those of the New.",
+     "proof_texts": [
+      "1CO.10.1-4"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 28,
+   "title": "Of Baptism",
+   "sections": [
+    {
+     "n": 1,
+     "text": "Baptism is a sacrament of the New Testament, ordained by Jesus Christ, not only for the solemn admission of the party baptized into the visible Church, but also to be unto him a sign and seal of the covenant of grace, of his ingrafting into Christ, of regeneration, of remission of sins, and of his giving up unto God, through Jesus Christ, to walk in newness of life: which sacrament is, by Christ's own appointment, to be continued in his Church until the end of the world.",
+     "proof_texts": [
+      "MAT.28.19",
+      "ROM.4.11",
+      "COL.2.11-12",
+      "1CO.12.13",
+      "TIT.3.5",
+      "ROM.6.5",
+      "GAL.3.27",
+      "ROM.6.3-4",
+      "MRK.1.4",
+      "MAT.28.19-20"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "The outward element to be used in this sacrament is water, wherewith the party is to be baptized in the name of the Father, and of the Son, and of the Holy Ghost, by a minister of the gospel lawfully called thereunto.",
+     "proof_texts": [
+      "MAT.3.11",
+      "MAT.28.19-20",
+      "JHN.1.33"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "Dipping of the person into the water is not necessary; but baptism is rightly administered by pouring or sprinkling water upon the person.",
+     "proof_texts": [
+      "MRK.7.4",
+      "ACT.2.41",
+      "ACT.16.33",
+      "HEB.9.10",
+      "HEB.9.19-22"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "Not only those that do actually profess faith in and obedience unto Christ, but also the infants of one or both believing parents are to be baptized.",
+     "proof_texts": [
+      "MRK.16.15-16",
+      "ACT.8.37-38",
+      "GEN.17.7",
+      "GEN.17.9",
+      "GAL.3.9",
+      "GAL.3.14",
+      "COL.2.11-12",
+      "ACT.2.38-39",
+      "ROM.4.11-12",
+      "MAT.28.19",
+      "MRK.10.13-16",
+      "LUK.18.15",
+      "1CO.7.14"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "Although it be a great sin to contemn or neglect this ordinance, yet grace and salvation are not so inseparably annexed unto it, as that no person can be regenerated or saved without it, or that all that are baptized are undoubtedly regenerated.",
+     "proof_texts": [
+      "LUK.7.30",
+      "EXO.4.24-26",
+      "ACT.8.13",
+      "ACT.8.23",
+      "ACT.10.2",
+      "ACT.10.4",
+      "ACT.10.22",
+      "ACT.10.31",
+      "ACT.10.45",
+      "ACT.10.47",
+      "ROM.4.11"
+     ]
+    },
+    {
+     "n": 6,
+     "text": "The efficacy of baptism is not tied to that moment of time wherein it is administered; yet, notwithstanding, by the right use of this ordinance the grace promised is not only offered, but really exhibited and conferred by the Holy Ghost, to such (whether of age or infants) as that grace belongeth unto, according to the counsel of God's own will, in his appointed time.",
+     "proof_texts": [
+      "JHN.3.5",
+      "JHN.3.8",
+      "ACT.2.38",
+      "ACT.2.41",
+      "GAL.3.27",
+      "EPH.5.25-26",
+      "TIT.3.5"
+     ]
+    },
+    {
+     "n": 7,
+     "text": "The sacrament of baptism is but once to be administered to any person.",
+     "proof_texts": [
+      "TIT.3.5"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 29,
+   "title": "Of the Lord's Supper",
+   "sections": [
+    {
+     "n": 1,
+     "text": "Our Lord Jesus, in the night wherein he was betrayed, instituted the sacrament of his body and blood, called the Lord's Supper, to be observed in his Church, unto the end of the world; for the perpetual remembrance of the sacrifice of himself in his death, the sealing all benefits thereof unto true believers, their spiritual nourishment and growth in him, their further engagement in and to all duties which they owe unto him; and to be a bond and pledge of their communion with him, and with each other, as members of his mystical body.",
+     "proof_texts": [
+      "1CO.10.16-17",
+      "1CO.10.21",
+      "1CO.11.23-26",
+      "1CO.12.13"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "In this sacrament Christ is not offered up to his Father, nor any real sacrifice made at all for remission of sins of the quick or dead, but only a commemoration of that one offering up of himself, by himself, upon the cross, once for all, and a spiritual oblation of all possible praise unto God for the same; so that the Popish sacrifice of the mass, as they call it, is most abominably injurious to Christ's one only sacrifice, the alone propitiation for all the sins of the elect.",
+     "proof_texts": [
+      "HEB.9.22",
+      "HEB.9.25-26",
+      "HEB.9.28",
+      "HEB.7.23-24",
+      "HEB.7.27",
+      "HEB.10.11-12",
+      "HEB.10.14",
+      "HEB.10.18",
+      "MAT.26.26-27",
+      "1CO.11.24-26"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "The Lord Jesus hath, in this ordinance, appointed his ministers to declare his word of institution to the people, to pray, and bless the elements of bread and wine, and thereby to set them apart from a common to an holy use; and to take and break the bread, to take the cup, and (they communicating also themselves) to give both to the communicants; but to none who are not then present in the congregation.",
+     "proof_texts": [
+      "MAT.26.26-28",
+      "MRK.14.22-24",
+      "LUK.22.19-20",
+      "1CO.11.23-27",
+      "ACT.20.7",
+      "1CO.11.20"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "Private masses, or receiving this sacrament by a priest, or any other, alone; as likewise the denial of the cup to the people; worshipping the elements, the lifting them up, or carrying them about for adoration, and the reserving them for any pretended religious use, are all contrary to the nature of this sacrament, and to the institution of Christ.",
+     "proof_texts": [
+      "1CO.10.6",
+      "MAT.15.9",
+      "MRK.4.23",
+      "1CO.11.25-29"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "The outward elements in this sacrament, duly set apart to the uses ordained by Christ, have such relation to him crucified, as that truly, yet sacramentally only, they are sometimes called by the name of the things they represent, to wit, the body and blood of Christ; albeit, in substance and nature, they still remain truly, and only, bread and wine, as they were before.",
+     "proof_texts": [
+      "MAT.26.26-28",
+      "MAT.26.29",
+      "1CO.11.26-28"
+     ]
+    },
+    {
+     "n": 6,
+     "text": "That doctrine which maintains a change of the substance of bread and wine, into the substance of Christ's body and blood (commonly called transubstantiation) by consecration of a priest, or by any other way, is repugnant, not to Scripture alone, but even to common sense and reason; overthroweth the nature of the sacrament; and hath been, and is the cause of manifold superstitions, yea, of gross idolatries.",
+     "proof_texts": [
+      "LUK.24.6",
+      "LUK.24.39",
+      "ACT.3.21",
+      "1CO.11.24-26"
+     ]
+    },
+    {
+     "n": 7,
+     "text": "Worthy receivers, outwardly partaking of the visible elements in this sacrament, do then also inwardly by faith, really and indeed, yet not carnally and corporally, but spiritually, receive and feed upon Christ crucified, and all benefits of his death: the body and blood of Christ being then not corporally or carnally in, with, or under the bread and wine; yet as really, but spiritually, present to the faith of believers in that ordinance, as the elements themselves are, to their outward senses.",
+     "proof_texts": [
+      "1CO.11.28",
+      "1CO.10.16"
+     ]
+    },
+    {
+     "n": 8,
+     "text": "Although ignorant and wicked men receive the outward elements in this sacrament, yet they receive not the thing signified thereby; but by their unworthy coming thereunto are guilty of the body and blood of the Lord, to their own damnation. Wherefore all ignorant and ungodly persons, as they are unfit to enjoy communion with him, so are they unworthy of the Lord's table, and can not, without great sin against Christ, while they remain such, partake of these holy mysteries, or be admitted thereunto.",
+     "proof_texts": [
+      "1CO.11.27-29",
+      "2CO.6.14-16",
+      "MAT.7.6",
+      "1CO.5.6-7",
+      "1CO.5.13",
+      "2TH.3.6",
+      "2TH.3.14-15"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 30,
+   "title": "Of Church Censures",
+   "sections": [
+    {
+     "n": 1,
+     "text": "The Lord Jesus, as king and head of his Church, hath therein appointed a government in the hand of Church officers, distinct from the civil magistrate.",
+     "proof_texts": [
+      "ISA.9.6-7",
+      "MAT.28.18-20",
+      "ACT.20.17",
+      "ACT.20.28",
+      "1CO.12.28",
+      "1TH.5.12",
+      "1TI.5.17",
+      "HEB.13.7",
+      "HEB.13.17",
+      "HEB.13.24"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "To these officers the keys of the kingdom of heaven are committed, by virtue whereof they have power respectively to retain and remit sins, to shut that kingdom against the impenitent, both by the Word and censures; and to open it unto penitent sinners, by the ministry of the gospel, and by absolution from censures, as occasion shall require.",
+     "proof_texts": [
+      "MAT.16.19",
+      "MAT.18.17-18",
+      "JHN.20.21-23",
+      "2CO.2.6-8"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "Church censures are necessary for the reclaiming and gaining of offending brethren; for deterring of others from the like offenses; for purging out of that leaven which might infect the whole lump; for vindicating the honor of Christ, and the holy profession of the gospel; and for preventing the wrath of God, which might justly fall upon the Church, if they should suffer his covenant, and the seals thereof, to be profaned by notorious and obstinate offenders.",
+     "proof_texts": [
+      "MAT.7.6",
+      "1CO.11.27-34",
+      "JUD.1.23",
+      "1TI.1.20",
+      "1TI.5.20"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "For the better attaining of these ends, the officers of the Church are to proceed by admonition, suspension from the Sacrament of the Lord's Supper for a season, and by excommunication from the Church, according to the nature of the crime and demerit of the person.",
+     "proof_texts": [
+      "MAT.18.17",
+      "1CO.5.4-5",
+      "1CO.5.13",
+      "1TH.5.12",
+      "2TH.3.6",
+      "2TH.3.14-15",
+      "TIT.3.10"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 31,
+   "title": "Of Synods and Councils",
+   "sections": [
+    {
+     "n": 1,
+     "text": "For the better government and further edification of the Church, there ought to be such assemblies as are commonly called synods or councils.",
+     "proof_texts": [
+      "ACT.15.2",
+      "ACT.15.4",
+      "ACT.15.6"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "As magistrates may lawfully call a synod of ministers and other fit persons to consult and advise with about matters of religion; so, if magistrates be open enemies to the Church, the ministers of Christ, of themselves, by virtue of their office, or they, with other fit persons, upon delegation from their churches, may meet together in such assemblies.",
+     "proof_texts": [
+      "ISA.49.23",
+      "2CH.19.8-11",
+      "PRO.11.14",
+      "MAT.2.4-5",
+      "1TI.2.1-2",
+      "ACT.15.2",
+      "ACT.15.4",
+      "ACT.15.22-23",
+      "ACT.15.25"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "It belongeth to synods and councils, ministerially, to determine controversies of faith, and cases of conscience; to set down rules and directions for the better ordering of the public worship of God, and government of his Church; to receive complaints in cases of maladministration, and authoritatively to determine the same: which decrees and determinations, if consonant to the Word of God, are to be received with reverence and submission, not only for their agreement with the Word, but also for the power whereby they are made, as being an ordinance of God, appointed thereunto in his Word.",
+     "proof_texts": [
+      "MAT.18.17-20",
+      "ACT.15.15",
+      "ACT.15.19",
+      "ACT.15.24",
+      "ACT.15.27-31",
+      "ACT.16.4"
+     ]
+    },
+    {
+     "n": 4,
+     "text": "All synods or councils since the apostles' times, whether general or particular, may err, and many have erred; therefore they are not to be made the rule of faith or practice, but to be used as a help in both.",
+     "proof_texts": [
+      "ACT.17.11",
+      "1CO.2.5",
+      "2CO.1.24",
+      "EPH.2.20"
+     ]
+    },
+    {
+     "n": 5,
+     "text": "Synods and councils are to handle or conclude nothing but that which is ecclesiastical: and are not to intermeddle with civil affairs which concern the commonwealth, unless by way of humble petition in cases extraordinary; or by way of advice, for satisfaction of conscience, if they be thereunto required by the civil magistrate.",
+     "proof_texts": [
+      "LUK.12.13-14",
+      "JHN.18.36"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 32,
+   "title": "Of the State of Men after Death, and of the Resurrection of the Dead",
+   "sections": [
+    {
+     "n": 1,
+     "text": "The bodies of men, after death, return to dust, and see corruption; but their souls (which neither die nor sleep), having an immortal subsistence, immediately return to God who gave them. The souls of the righteous, being then made perfect in holiness, are received into the highest heavens, where they behold the face of God in light and glory, waiting for the full redemption of their bodies: and the souls of the wicked are cast into hell, where they remain in torments and utter darkness, reserved to the judgment of the great day. Besides these two places for souls separated from their bodies, the Scripture acknowledgeth none.",
+     "proof_texts": [
+      "GEN.3.19",
+      "ACT.13.36",
+      "PHP.1.23",
+      "ACT.3.21",
+      "EPH.4.10",
+      "2CO.5.1",
+      "2CO.5.6",
+      "2CO.5.8",
+      "HEB.12.23",
+      "ECC.12.7",
+      "LUK.23.43",
+      "LUK.16.23-24",
+      "ACT.1.25",
+      "1PE.3.19",
+      "JUD.1.6-7"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "At the last day, such as are found alive shall not die, but be changed; and all the dead shall be raised up with the self-same bodies, and none other, although with different qualities, which shall be united again to their souls forever.",
+     "proof_texts": [
+      "1CO.15.51-52",
+      "1TH.4.17",
+      "JOB.19.26-27",
+      "1CO.15.42-44"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "The bodies of the unjust shall, by the power of Christ, be raised to dishonor; the bodies of the just, by his Spirit, unto honor, and be made conformable to his own glorious body.",
+     "proof_texts": [
+      "JHN.5.28-29",
+      "ACT.24.15",
+      "1CO.15.42",
+      "PHP.3.21"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 33,
+   "title": "Of the Last Judgment",
+   "sections": [
+    {
+     "n": 1,
+     "text": "God hath appointed a day wherein he will judge the world in righteousness by Jesus Christ, to whom all power and judgment is given of the Father. In which day, not only the apostate angels shall be judged, but likewise all persons, that have lived upon earth, shall appear before the tribunal of Christ, to give an account of their thoughts, words, and deeds; and to receive according to what they have done in the body, whether good or evil.",
+     "proof_texts": [
+      "ACT.17.31",
+      "1CO.6.3",
+      "2PE.2.4",
+      "JUD.1.6",
+      "JHN.5.22",
+      "ECC.12.14",
+      "MAT.12.36-37",
+      "ROM.2.16",
+      "ROM.14.10",
+      "ROM.14.12",
+      "2CO.5.12"
+     ]
+    },
+    {
+     "n": 2,
+     "text": "The end of God's appointing this day, is for the manifestation of the glory of his mercy in the eternal salvation of the elect; and of his justice in the damnation of the reprobate, who are wicked and disobedient. For then shall the righteous go into everlasting life, and receive that fulness of joy and refreshing which shall come from the presence of the Lord: but the wicked, who know not God, and obey not the gospel of Jesus Christ, shall be cast into eternal torments, and be punished with everlasting destruction from the presence of the Lord, and from the glory of his power.",
+     "proof_texts": [
+      "MAT.25.21",
+      "ROM.9.23",
+      "MAT.25.31-46",
+      "ACT.3.19",
+      "2TH.1.7",
+      "ROM.2.5-6",
+      "ROM.9.22",
+      "2TH.1.7-8",
+      "MAT.25.41",
+      "MAT.25.46",
+      "2TH.1.9"
+     ]
+    },
+    {
+     "n": 3,
+     "text": "As Christ would have us to be certainly persuaded that there shall be a day of judgment, both to deter all men from sin, and for the greater consolation of the godly in their adversity: so will he have that day unknown to men, that they may shake off all carnal security, and be always watchful, because they know not at what hour the Lord will come; and may be ever prepared to say, Come, Lord Jesus, come quickly. Amen.",
+     "proof_texts": [
+      "LUK.21.27-28",
+      "ROM.8.23-25",
+      "2CO.5.10-11",
+      "2TH.1.5-7",
+      "2PE.3.11",
+      "2PE.3.14",
+      "MAT.24.36",
+      "MAT.24.42-44",
+      "MRK.13.35-37",
+      "LUK.12.35-36",
+      "REV.22.20"
+     ]
+    }
+   ]
+  }
+ ]
+}
