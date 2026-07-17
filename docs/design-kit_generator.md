@@ -122,6 +122,22 @@ Bringing the passage into the learner's own life — kept observable and never g
 
 ## Part 2: Kit Generator Architecture
 
+### The kit's two identities: evidence and activation
+
+The kit serves the leader as **evidence infrastructure** (what to observe, where marks land). It serves the reader as **activation infrastructure** — the questions, quests, and memory work exist to break passive scroll-mode reading and put a question in the reader's mind before the text arrives (core principle 7). Same paper, two functions; the activation function serves the learner directly and is the primary one.
+
+Activation is a scaffold designed to fade. Its arc is dimension D6's progression made operational:
+
+```text
+Stage 1  kit supplies each member's full pre-reading quest
+Stage 2  kit supplies only a category ("find something that repeats");
+         the member forms the specific question
+Stage 3  the sheet says only: "Write your own quest before we read."
+Stage 4  no prompt — the member asks unprompted
+```
+
+Advancement is triggered by evidence the system already collects: when a member's questions and noticings begin appearing **unprompted**, the scheduler fades their scaffold. An unprompted question is the single clearest signal that the active-reading habit is forming — notable (`★`) by definition.
+
 ### The decision: static library, personal selection
 
 The Bible is a finite, unchanging corpus. Good recall questions, event-ordering activities, and vocabulary lists for a given passage do not vary per family. Therefore:
@@ -171,7 +187,7 @@ ContentItem
   dimension      D1–D8
   age_tier       pre-reader | child | youth | adult
   type           question | activity | vocab_list | memory_verse
-                 | key_facts | narration_prompt
+                 | key_facts | narration_prompt | pre_reading_quest
   body           the content itself (print-ready)
   difficulty     within-tier level, for progression
   review_status  draft (AI-assisted) | reviewed | published
@@ -182,6 +198,7 @@ Notes:
 
 - **Pericope-level indexing** matches how sessions actually consume Scripture (whole scenes, not verses) and keeps the library finite: roughly 1,000–1,500 pericopes cover the whole Bible; the library grows book by book following the default reading sequence.
 - **`key_facts`** items (people, places, events, repeated words per pericope) are the raw material for auto-assembling matching/ordering activities without new authoring.
+- **`pre_reading_quest`** items are handed out *before* the passage is read: a look-for, a prediction, a count, a character to track — one per member, indexed by dimension like everything else. Many can be auto-assembled from `key_facts` ("this passage has a repeated phrase — find it").
 - Only `published` items are ever selectable for a kit.
 
 ### The member record
@@ -194,11 +211,13 @@ EvidenceItem
   dimension       D1–D8 (confirmed by leader)
   code            Q | A | R | C | U | P
   quality         ✓ clear | △ partial | ? needs follow-up | ★ notable
+  prompted        yes | no — was this elicited by a kit question/quest,
+                  or did the member produce it unprompted?
   note            one confirmed sentence
   followup_ref    optional pointer to a ContentItem or review target
 ```
 
-Per-member, per-dimension aggregation over these items yields the fluency profile: recent strength, open follow-ups, items due for review, and stage of progression.
+Per-member, per-dimension aggregation over these items yields the fluency profile: recent strength, open follow-ups, items due for review, and stage of progression. The prompted/unprompted ratio over time is the activation metric: the product's success measure per member is movement from prompted toward unprompted, not questions answered correctly. An app whose members stay dependent on its questions forever is failing even while looking engaged.
 
 ### The selector/scheduler
 
@@ -208,7 +227,8 @@ Deterministic rules first; no model needed at session time.
 2. **Review questions (2–3):** spaced review drawn from the member records — items marked `△`/`?` recently, plus older `✓` items due for reinforcement. Longer gaps for solid items, short gaps for shaky ones; simple fixed intervals are sufficient for v1.
 3. **Observation targets (2–3, never more):** rotate through D1–D8 across sessions, biased toward each member's weakest recent dimensions and any dimension not observed for several sessions.
 4. **Discussion questions and activity:** from the library at `passage × selected dimensions × each member's age tier`, preferring items not used with this family before.
-5. **Personalized lines** are templated composition, not generation — slots filled from the member record:
+5. **Pre-reading quests (one per member):** selected like discussion questions, but scaled to each member's activation stage — full quest, category-only, "write your own," or omitted entirely for members who now ask unprompted. The activation stage is derived from the member's recent `prompted: no` evidence in D6 and related dimensions.
+6. **Personalized lines** are templated composition, not generation — slots filled from the member record:
 
 ```text
 Last session, {member} asked: "{question}" — return to it together.

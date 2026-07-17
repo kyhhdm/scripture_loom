@@ -52,6 +52,14 @@ Individual sessions, photos, and any recordings are disposable inputs. The produ
 
 The app amplifies the coaching role — good questions, observation targets, review scheduling — and must never impose data-entry work during the gathering. During a session the leader makes marks of a few characters at most; the post-session reflect flow takes about five minutes, not twenty.
 
+### 7. Active reading over passive consumption — the scaffold is designed to fade
+
+Most readers today are trained by social media into **scroll-mode**: continuous intake, no question held, no retention expected. A beginner brings scroll-mode to Scripture and finishes a passage with almost nothing. Fluency is impossible in passive mode, so the product's toolkit — pre-reading quests, questions, memory work, connection-finding, narration — is first of all **activation infrastructure**: it puts a question in the reader's mind so that reading becomes search, an exploration with its own motivation.
+
+The scaffold exists to make itself unnecessary. At first the kit supplies the questions; the goal is that over months the reader supplies their own. The clearest signal of success is the **unprompted question** — a member asking without being prompted is worth more than any correct answer. The app fades each member's scaffolding as their unprompted questions appear.
+
+This also gives the unplug principle a third, non-negotiable justification: the screen is the passive-mode context itself. You cannot train someone out of scroll-mode inside the medium that trained them into it. Paper, pencil, and a held question are the active-mode posture.
+
 ---
 
 ## Core Methods
@@ -73,6 +81,14 @@ feeds the next Prepare
 - **Prepare** — the leader selects a passage; the app generates a main objective, review questions, discussion prompts, 2–3 observation targets, and a printable paper session kit.
 - **Gather** — printed Scripture, Bibles, pencils, index cards, the family notebook. No screens.
 - **Reflect** — the leader photographs paper artifacts, expands shorthand marks into confirmed observations, and the app updates each member's record and suggests the next session.
+
+### Pre-reading quests and reading twice
+
+Before the passage is read aloud, each member receives a small **quest** to hold in mind — a look-for, a prediction, a count, a character to track ("Listen for a phrase that repeats. How many times do you hear it?"). The question converts listening into search.
+
+A session may read the passage twice: once cold with only "write one thing you noticed," then again with quests in hand. Members feel directly how much more the text yields when approached with a question — the habit-formation moment.
+
+As a member's own questions begin appearing unprompted, their quests fade: full quest → category only ("find something that repeats") → "write your own quest" → no prompt needed (see principle 7).
 
 ### Designed evidence moments
 
