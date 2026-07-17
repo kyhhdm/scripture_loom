@@ -28,3 +28,14 @@ pericopes that pass the full-coverage test against KJV cleanly. `seed()`'s
 default `source_dir` was changed from `"web-ebible"` to `"bsb-ebible"` so
 that `python3 corpus/ingest/seed_pericopes.py MAT` reproduces the committed
 `canon/structure/pericopes/mat.json`.
+
+## Cross-references (Task 7)
+
+Of the 344,799 rows in the OpenBible.info source, 18 are dropped by design
+during ingestion: they are legitimate cross-book ranges (e.g.
+`2Chr.36.22-Ezra.1.3`, `Hag.2.20-Zech.1.1`) that the Task 2 `refs.parse_range`
+schema cannot represent, since it requires a range's start and end to share
+one book. This is real, canonically significant data (e.g. the
+Chronicles→Ezra narrative continuation) lost to a schema limitation, not
+junk — a candidate to revisit if the range schema is extended or the TSK
+base layer lands.

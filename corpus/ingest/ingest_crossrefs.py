@@ -63,7 +63,14 @@ def main():
             t = _conv(to)
             reflib.parse(f), reflib.parse_range(t)
         except (KeyError, ValueError) as e:
-            skipped += 1            # deuterocanon or malformed rows
+            # KeyError: OSIS book token not in OSIS_TO_USFM (unmapped/deuterocanon).
+            # ValueError: refs.parse/parse_range rejected the ref outright — in
+            # practice this is entirely cross-book ranges (e.g. 2Chr.36.22-Ezra.1.3),
+            # which the Task 2 `refs.parse_range` schema categorically cannot
+            # represent (it requires start/end in the same book). These are real,
+            # canonically significant cross-references dropped by schema limitation,
+            # not junk data.
+            skipped += 1
             if isinstance(e, KeyError):
                 tok = e.args[0]
                 unmatched[tok] = unmatched.get(tok, 0) + 1
