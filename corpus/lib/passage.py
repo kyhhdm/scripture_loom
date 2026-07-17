@@ -5,6 +5,7 @@ served in product mode. Copyrighted personal copies (sources/private/) are
 served only in mode='personal' and are never displayable.
 """
 import json
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from . import refs
@@ -12,6 +13,7 @@ from . import refs
 CORPUS = Path(__file__).resolve().parents[1]
 OPEN_LICENSES = {"public-domain", "CC-BY"}
 CANON_VERSIONS = {"KJV": "kjv", "WEB": "web", "CUV": "cuv-simp", "BSB": "bsb"}
+_PRIVATE_VERSION_RE = re.compile(r"[A-Za-z0-9_-]+")
 
 
 class LicenseError(Exception):
@@ -42,6 +44,8 @@ def _load(version, mode):
     if version in CANON_VERSIONS:
         path = CORPUS / "canon" / "bibles" / f"{CANON_VERSIONS[version]}.json"
     else:
+        if not _PRIVATE_VERSION_RE.fullmatch(version):
+            raise LicenseError(f"{version}: invalid version name")
         path = CORPUS / "sources" / "private" / f"{version.lower()}.json"
         if mode != "personal":
             raise LicenseError(f"{version}: private versions require mode='personal'")

@@ -46,6 +46,10 @@ class TestGetPassage(unittest.TestCase):
         finally:
             f.unlink()
 
+    def test_path_traversal_version_refused(self):
+        with self.assertRaises(passage.LicenseError):
+            passage.get_passage("../../canon/bibles/kjv", "MAT.5.1", mode="personal")
+
     def test_lamppost_role_blocked_even_if_open_license(self):
         with tempfile.TemporaryDirectory() as td:
             bad = Path(td) / "fake.json"
