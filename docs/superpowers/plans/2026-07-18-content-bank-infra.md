@@ -459,8 +459,8 @@ class TestCorpusBridge(unittest.TestCase):
 
     def test_wcf_chapter1_mentions_scripture(self):
         text = cb.wcf_chapter1_text()
-        self.assertIn("1.1", text)
-        self.assertIn("Holy Scripture", text) if "Holy Scripture" in text else self.assertTrue(text)
+        self.assertIn("1.1", text)            # section numbering present
+        self.assertIn("Holy Scripture", text)  # chapter 1 title "Of the Holy Scripture"
 
     def test_passage_text_returns_verses(self):
         text = cb.passage_text("MAT.5.13-16", version="BSB")
