@@ -3,7 +3,7 @@ import sys
 import unittest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))
-from content_bank.author import build_draft_prompt, review_checklist, dimensions, rubric
+from content_bank.author import build_draft_prompt, review_checklist, dimensions, rubric, build_reference_prompt
 
 
 class TestBuildDraftPrompt(unittest.TestCase):
@@ -130,6 +130,38 @@ class TestReferenceCriteria(unittest.TestCase):
         checklist_output = review_checklist.build()
         # Assert a distinctive phrase from the rubric appears in the checklist
         self.assertIn("A wrong answer key is worse than none", checklist_output)
+
+
+class TestBuildReferencePrompt(unittest.TestCase):
+    def setUp(self):
+        self.prompt = build_reference_prompt.build(
+            "MAT-014", book="MAT",
+            brief="**Passage's own emphasis.** Jesus pronounces blessing...\n")
+
+    def test_foregrounds_passage_and_brief(self):
+        low = self.prompt.lower()
+        self.assertIn("blessed", low)               # passage present
+        self.assertIn("pronounces blessing", self.prompt)   # brief injected
+
+    def test_lists_eligible_items_with_kind(self):
+        # MAT-014 has questions across closed and open dims; both kinds appear.
+        self.assertIn("answer_key", self.prompt)
+        self.assertIn("leader_note", self.prompt)
+
+    def test_carries_keep_open_instruction(self):
+        self.assertIn("keep it open", self.prompt.lower())
+
+    def test_excludes_memory_verse_items(self):
+        # Every listed item id belongs to a non-memory_verse item.
+        from content_bank.lib import content
+        mv_ids = {i["id"] for i in content.load_book_store("MAT")["items"]
+                  if i["type"] == "memory_verse" and i["passage"] == "MAT-014"}
+        for mid in mv_ids:
+            self.assertNotIn(mid, self.prompt)
+
+    def test_output_schema_present(self):
+        self.assertIn("item_id", self.prompt)
+        self.assertIn("leader_reference", self.prompt)
 
 
 if __name__ == "__main__":
