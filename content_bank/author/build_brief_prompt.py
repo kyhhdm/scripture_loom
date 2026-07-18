@@ -34,6 +34,11 @@ beyond what the lamppost says. If the commentary qualifies a point (e.g. Christ
 as the eternal Word who *voluntarily* honors Scripture, or one text *governing
 the application of* another rather than *correcting* it), keep that qualification.
 
+CITE CONFESSIONAL STATEMENTS FAITHFULLY — attach each WCF/WLC/WSC citation to the
+verse the pack says it was "cited via", not to some other verse; and keep its
+qualifying clauses (e.g. "not as due to them by the law as a covenant of works").
+Never quote only the half of a confessional statement that suits your point.
+
 End with a one-line note of anything set aside as off-agenda."""
 
 

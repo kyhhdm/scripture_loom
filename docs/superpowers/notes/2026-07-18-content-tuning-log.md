@@ -65,3 +65,17 @@ Item defects (fixed, no machinery): a D2 ordering activity printed its options i
 passage order (scrambled it); two items asserted the crowd's position ("nearby"/
 "farther away") — a spatial detail not in 5:1-2 (removed). No machinery change —
 these were content slips already covered by the answerable-from-passage rule.
+
+## Stage 1 — MAT-014 brief (Beatitudes, flagship)
+
+Both fidelity reviewers caught the same HIGH-severity defect: WCF 19.6 (cited in
+the pack "via MAT.5.5", the meek inheriting the earth) was mis-attached to
+vv.10-12 AND its qualifier "not as due... by the law as a covenant of works" was
+dropped — the exact guard against reading the Beatitudes as works-righteousness.
+- item: reattached WCF 19.6 to v.5, restored the covenant-of-works qualifier,
+  softened the v.12 extension to an explicit inference.
+- machinery: added to build_brief_prompt._SHAPE — "CITE CONFESSIONAL STATEMENTS
+  FAITHFULLY: attach each citation to the verse the pack says it was cited via,
+  and keep its qualifying clauses; never quote only the half that suits the point."
+The WLC Q172 safeguard was applied correctly by the drafter (poor/mourning-heart
+reading only; Lord's-Supper subject off-agenda) — the flagship safeguard case held.
