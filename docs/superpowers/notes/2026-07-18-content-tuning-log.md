@@ -91,3 +91,16 @@ vocab_list → question anchored to each term's stated promise; first/last sayin
 disambiguated; D7 kingdom item made text-anchored (declarative "for theirs is..."
 grammar, no works-righteousness, no leader-only reference); child quest made
 unambiguous (count all 8 third-person sayings, not the literal word "those").
+
+## Stage 1+2 — MAT-015 (Salt and Light)
+
+Brief: both fidelity reviewers PASS; WCF 16.2 cited at v.16 with its "fruits and
+evidences, not the ground of standing" qualifier intact. Low polish only
+(over-symmetrized salt/light warning; a cross-ref gloss; dropped a duplicate ref).
+Items: 16, D2-D8 (D1 correctly omitted). Most important quality fixes were axis-1
+(self-display): two D8 application items framed good deeds around "being seen"
+without v.16's "so they glorify God" purpose — restored the God-glory aim in both.
+Also: three D3-tag/answerability slips (a "why did Jesus pick this image" question
+not answerable from the text; consequence-facts mis-tagged D3) retagged/reworded;
+a compound D2 item split to a clean ordering task; a pre_reader activity retagged
+D3. No new machinery (all item-level).
