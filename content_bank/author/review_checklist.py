@@ -49,7 +49,7 @@ On pass, stamp provenance:
 
 
 def build(guardrail="WCF-1"):
-    return _HEAD + rubric.build() + _BOXES.format(guardrail=guardrail)
+    return _HEAD + rubric.build() + rubric.reference_criteria() + _BOXES.format(guardrail=guardrail)
 
 
 def main(argv=None):

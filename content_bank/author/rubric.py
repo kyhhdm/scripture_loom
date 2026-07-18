@@ -53,6 +53,7 @@ A leader reference is leader-only, judged separately from the item it rides on.
 - Leader notes (open dimensions D6-D8). Point where the text leads and flag
   common misreadings, but keep the question open -- never a canned answer the
   leader would read out, never leading toward a reading the text does not compel.
+- Memory verse items receive no reference (the text is the reference).
 """
 
 

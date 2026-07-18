@@ -124,6 +124,13 @@ class TestReferenceCriteria(unittest.TestCase):
         self.assertIn("Leader references", text)
         self.assertIn("keep", text.lower())
 
+    def test_reference_criteria_single_sourced(self):
+        """Verify rubric.reference_criteria() prose is included in checklist output."""
+        rubric_prose = rubric.reference_criteria()
+        checklist_output = review_checklist.build()
+        # Assert a distinctive phrase from the rubric appears in the checklist
+        self.assertIn("A wrong answer key is worse than none", checklist_output)
+
 
 if __name__ == "__main__":
     unittest.main()
