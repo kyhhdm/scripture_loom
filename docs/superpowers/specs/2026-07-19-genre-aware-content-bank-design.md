@@ -15,9 +15,14 @@ genre concept into the data model; genre stays implicit in the passage.
 
 - **Change 1 — availability-driven observation targets** (selector correctness).
 - **Change 2 — genre-aware D3/D7 authoring guidance** (brief prose, no schema).
+- **Change 3 — genre-general D3/D7 assessment language** (docs only).
 
-Each is scoped to one code site with tests. Together they are one implementation
-plan.
+A fourth question the probe raised — whether the member record should sub-label
+*kinds* of D7 — is **decided against** here (derive-don't-store; see Non-goals); its
+one real residual becomes Change 3.
+
+Changes 1–2 are each scoped to one code site with tests; Change 3 is docs-only.
+Together they are one implementation plan.
 
 ---
 
@@ -175,14 +180,70 @@ absence.
 
 ---
 
+## Change 3 — genre-general D3/D7 assessment language (docs only)
+
+### Problem
+
+The probe asked whether the longitudinal record should distinguish *kinds* of D7
+(narrative-meaning vs. argument-tracing vs. figurative-reading). It should **not**
+store that (see the decision under Non-goals). But investigating it surfaced a real,
+separate defect: the D7 and D3 *assessment standard* is narrative-shaped. D7's top
+progression rung in `docs/design-kit_generator.md` is *"explains the passage within
+the book's argument"* — coherent for an epistle, awkward for a psalm. A leader
+marking △/✓ on D7 for Psalm 23 is judging figurative-reading against a standard
+written for narrative meaning.
+
+This matters because the selector's weakness signal (`weak_dimensions`, counting △/?
+per dimension) is only as trustworthy as the marks feeding it. An unfair standard
+produces misleading weakness, which then mis-biases review and observation targets.
+Change 3 is the leader-facing mirror of Change 2: that change makes D3/D7 *authoring*
+guidance genre-aware; this makes D3/D7 *assessment* guidance genre-aware.
+
+### Design
+
+Docs only — no code, no schema. In `docs/design-kit_generator.md`, revise the D3 and
+D7 entries (the "Progression" and evidence lines) so the standard reads fairly across
+genres. Two acceptable shapes:
+
+- make the ladder language genre-general (e.g. D7 top rung: "explains the passage
+  within its larger context — the book's argument, the psalm's movement, the
+  proverb's contrast"); or
+- keep the narrative ladder and add a one-line genre gloss per non-narrative genre.
+
+Prefer the genre-general phrasing; it keeps one ladder while removing the narrative
+assumption. Leave D1/D2 as-is — the probe established they are legitimately
+narrative-specific and simply go unused on non-narrative passages (Change 1 already
+prevents them being assessed where absent).
+
+### Tests
+
+None (prose in a design doc). Verification is editorial review that each revised D3/D7
+rung reads fairly for narrative, poetry, and epistle.
+
+### Scope note
+
+Small and docs-only; rides in the same implementation plan as Changes 1–2 but has no
+code dependency on them.
+
+---
+
 ## Non-goals (explicit)
 
 - No new fluency dimension; D1–D8 unchanged.
 - No `genre` field on pericopes or items; no genre vocabulary in `schema.py`.
 - No `genre → dimension-profile` table; the probe killed it (genre is sub-pericope).
-- No D7 sub-labels distinguishing narrative-meaning / argument-tracing / figurative-
-  reading in the member record. That is a separate open product question
-  (longitudinal-record resolution), deferred and not decided here.
+- **No D7/D3 sub-labels in the evidence schema** (decided, not deferred).
+  Distinguishing narrative-meaning / argument-tracing / figurative-reading is
+  handled by *derive-don't-store*: every evidence record already carries its session's
+  `passage`, so genre context is a derived attribute of the passage and any
+  genre-stratified D7 view can be computed at read time if ever needed. Storing a
+  per-mark sub-label would burden the reflect phase (the leader is not a data-entry
+  clerk), fragment already-thin per-genre evidence, and multiply the schema against
+  the eight-universal-dimensions design. Revisit **only if** cross-genre
+  interpretation *reporting* becomes a product goal **and** reading diets go
+  genre-mixed enough that per-passage derivation is insufficient — neither holds now.
+  The real residual of that question (an unfair, narrative-shaped assessment standard)
+  is addressed by Change 3, not by sub-labels.
 
 ## Testing summary
 
