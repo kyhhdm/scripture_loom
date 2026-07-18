@@ -67,5 +67,35 @@ class TestDimensions(unittest.TestCase):
             self.assertGreater(len(text), 60, f"{d} guidance too thin")
 
 
+class TestBuildBriefPrompt(unittest.TestCase):
+    def setUp(self):
+        from content_bank.author import build_brief_prompt
+        self.pack = build_brief_prompt.build("MAT-014", book="MAT")
+
+    def test_includes_passage_and_full_wcf1(self):
+        self.assertIn("blessed", self.pack.lower())    # passage text
+        self.assertIn("1.1", self.pack)                # full WCF ch.1 sections
+
+    def test_includes_commentary_and_crossrefs(self):
+        p = self.pack.lower()
+        self.assertIn("commentary", p)
+        self.assertIn("cross-reference", p)
+
+    def test_includes_confessional_hits(self):
+        self.assertIn("WCF 19.6", self.pack)
+        self.assertIn("WLC Q172", self.pack)
+
+    def test_states_brief_shape_and_safeguard(self):
+        p = self.pack.lower()
+        self.assertIn("~250", self.pack)               # length target
+        self.assertIn("emphasis", p)                   # passage-primary shape
+        self.assertIn("proof-text", p)                 # safeguard
+
+    def test_setup_pericope_notes_no_confessional(self):
+        from content_bank.author import build_brief_prompt
+        pack = build_brief_prompt.build("MAT-013", book="MAT")
+        self.assertIn("No confessional", pack)
+
+
 if __name__ == "__main__":
     unittest.main()
