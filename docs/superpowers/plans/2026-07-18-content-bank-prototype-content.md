@@ -2,94 +2,120 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Produce the first harness-generated, adversarially-reviewed English content bank for the prototype's four Matthew pericopes — grounded in the corpus lampposts (Bible text, WCF, commentary, cross-references) — and tune the authoring machinery from the defects that review surfaces.
+**Goal:** Produce the first harness-generated, adversarially-reviewed English content bank for the prototype's four Matthew pericopes via a two-stage, passage-first process — distill the corpus lampposts into a compact reviewed theological brief, then draft items from passage + brief — and tune the authoring machinery from the defects review surfaces.
 
-**Architecture:** A per-pericope loop — assemble the offline drafting pack (passage + WCF-1 + commentary + cross-references), draft items, break them with independent adversarial reviewer agents scored against a written rubric and handed the same lampposts as ground truth, triage each confirmed defect into fix-the-item or fix-the-machinery, repair/regenerate until clean. Passing items reach `review_status: "reviewed"`; a human confirmation digest gates the flip to `"published"`, after which the prototype serves them.
+**Architecture:** Per pericope, two stages. **Stage 1:** `build_brief_prompt.py` assembles a distillation pack (passage + full WCF-1 + commentary + cross-references + confessional proof-text hits); a drafter produces a ~250-word brief; adversarial *fidelity* reviewers verify it faithfully distils the lampposts and keeps the passage primary; the brief is committed to `author/briefs/`. **Stage 2:** `build_draft_prompt.py` carries the foregrounded passage + the committed brief + a compact WCF-1 guardrail; a drafter produces items; adversarial *quality* reviewers score them on the seven-axis rubric with the brief as ground truth; defects triage into fix-item or fix-machinery. Passing items reach `review_status: "reviewed"`; a human confirmation digest gates the flip to `"published"`.
 
 **Tech Stack:** Python 3 standard library only (no third-party packages). `unittest`. The existing `content_bank/` infrastructure and `corpus/` canon are dependencies; `corpus_bridge` gains read-only accessors this cycle.
 
 ## Global Constraints
 
 - **Stdlib only.** No third-party packages, no network, no live API calls anywhere in `content_bank/` or `corpus/`. The drafting harness stays offline.
-- **English-only this cycle.** Every item carries `text: {"en": "..."}`. No `zh`. No `zh`-conformity review.
-- **Do not modify:** `content_bank/lib/schema.py`, `content_bank/lib/content.py`, `content_bank/lib/validate.py`, `content_bank/lib/prototype_bank.py`, `prototype/selector.py`, anything under `corpus/` (read-only). `corpus_bridge.py` **is** modified — additively (two new accessors), existing surface untouched.
-- **Item types in scope:** `question`, `activity`, `pre_reading_quest`, `memory_verse`, `narration_prompt`. Not `vocab_list` / `key_facts` (selector does not render them).
-- **Pericopes in scope:** `MAT-009`, `MAT-013`, `MAT-014`, `MAT-015`. No other Matthew pericope.
+- **English-only this cycle.** Every item carries `text: {"en": "..."}`. No `zh`. Briefs are English.
+- **Do not modify:** `content_bank/lib/schema.py`, `content_bank/lib/content.py`, `content_bank/lib/validate.py`, `content_bank/lib/prototype_bank.py`, `prototype/selector.py`, anything under `corpus/` (read-only). `corpus_bridge.py` **is** modified — additively (three new accessors), existing surface untouched.
+- **Item types in scope:** `question`, `activity`, `pre_reading_quest`, `memory_verse`, `narration_prompt`. Not `vocab_list` / `key_facts`.
+- **Pericopes in scope:** `MAT-009`, `MAT-013`, `MAT-014`, `MAT-015`.
+- **Two-stage authoring.** No items are drafted for a pericope until its brief is committed to `content_bank/author/briefs/<pericope>.md` and has passed fidelity review. Draft items are grounded in the brief, not raw lampposts.
+- **Passage-first proportion.** The Stage-2 draft pack foregrounds the passage and carries a **compact** WCF-1 guardrail + the brief — never the full ~11k words of lampposts. Full WCF-1 + commentary appear only in the Stage-1 brief pack.
 - **Provenance dates:** use `"2026-07-18"` for `reviewed_date`.
-- **Answerable-from-this-pericope rule:** every non-D5 item must be answerable from its own pericope's verses. D5 (Connections) is the sole exception and must name where it reaches (grounded in the real cross-references).
-- **Coverage restraint:** cover every dimension the passage *genuinely supports*, at the tiers the selector needs — no more. Under-covering a thin passage (e.g. MAT-013, 2 verses) is correct, not a gap.
-- **Lampposts are authoring-time grounding only.** Commentary (JFB/MHC, public domain) and cross-references (CC-BY) inform the drafter and reviewers; they are never copied into shipped items (verbatim quotations come from the gated Bible text). No new license surface enters the store.
-- **Vocabularies are single-sourced** in `schema.py` and `dimensions.py`. The invariant test `set(dimensions.TEMPLATES) == schema.DIMENSIONS` must stay green.
+- **Answerable-from-this-pericope rule:** every non-D5 item must be answerable from its own pericope's verses. D5 (Connections) may name only a cross-reference that appears in the brief.
+- **Coverage restraint:** cover every dimension the passage *genuinely supports*, at the tiers the selector needs — no more. A pericope with no confessional proof-text hit (MAT-013) simply omits the doctrinal anchor — do not invent one.
+- **Proof-text safeguard:** a confessional proof-text link means "the divines grounded a doctrine partly here," NOT "this passage is a treatise on that doctrine." The brief uses only the part of a citation that fits the passage's emphasis (verified case: WLC Q172 on the Beatitudes is a Lord's-Supper Q&A — take only its reading of "poor in spirit/mourn").
+- **Lampposts are authoring-time grounding only.** Commentary (JFB/MHC), the standards (WCF/WLC/WSC), and cross-references inform the brief, drafter, and reviewers; they are never copied into shipped items (verbatim quotations come from the gated Bible text). No new license surface enters the store.
+- **Vocabularies single-sourced** in `schema.py` and `dimensions.py`; `set(dimensions.TEMPLATES) == schema.DIMENSIONS` must stay green.
 - **Tests:** `python3 -m unittest discover -s content_bank/tests -v`, `cd prototype && python3 -m unittest test_selector -v`, and `python3 -m unittest discover -s corpus/tests -v` must all pass at the end.
 
 ## Corpus asset shapes (verified)
 
-- **Commentary:** `canon/lampposts/{mhc,jfb}/<book>.json` = `{work, book, license, role, blocks: [{range: "MAT.4.1-11", text}]}`. Keying differs by work: **MHC is per-pericope** (`MAT.5.1-2`, `MAT.5.3-12`, …), **JFB is per-verse** (`MAT.5.3`, `MAT.5.4`, …), and neither always aligns to pericope boundaries. Match by **range overlap**, not equality; return an empty list for a work with no overlapping block (robustness — all four in-scope pericopes do have commentary).
-- **Cross-references:** `canon/structure/crossrefs.json` = `{license, role, refs: [{from: "MAT.5.3", to: "PSA.37.11", weight, sources}]}`, ~344k refs. Filter by `from` within the pericope range; rank by `weight` desc; cap the count.
-- **Range format:** `BOOK.CH.V` or `BOOK.CH.V-V` (same as pericope `range`). A minimal parser (book, chapter, start-verse, end-verse) is enough for overlap/membership; a `from`/`to` may itself be a range — use its start verse for membership.
+- **Commentary:** `canon/lampposts/{mhc,jfb}/<book>.json` = `{work, book, license, role, blocks: [{range, text}]}`. **MHC per-pericope**, **JFB per-verse**; match by **range overlap**, empty list when nothing overlaps (all four in-scope pericopes have commentary).
+- **Cross-references:** `canon/structure/crossrefs.json` = `{role, refs: [{from, to, weight, sources}]}`, ~344k. Filter by `from` in range; rank by `weight` desc; cap.
+- **Confessional standards:** `wcf.json` = `{chapters:[{n,title,sections:[{n,text,proof_texts:[...]}]}]}`; `wlc.json`/`wsc.json` = `{questions:[{n,q,a,proof_texts:[...]}]}`. `proof_texts` entries are Scripture refs. Reverse-lookup by proof-text overlap. Verified hit counts: MAT-009 → WCF 4 / WLC 7; MAT-013 → 0; MAT-014 → WCF 19.6 + WLC Q172; MAT-015 → WCF 16.2.
+- **Range format:** `BOOK.CH.V` or `BOOK.CH.V-V`. A minimal parser (book, chapter, start, end) suffices; a `from`/proof-text may be a range — use its start verse for membership.
 
 ## Shared assets (defined once; referenced by the generation tasks)
 
-**`REVIEWER_PROMPT`** — the adversarial reviewer agent is dispatched (Agent tool, `subagent_type: general-purpose`), ≥2 concurrently per pericope for independence, with this prompt:
+**`BRIEF_FIDELITY_REVIEWER`** — Stage-1 reviewer (Agent tool, `subagent_type: general-purpose`, ≥2 concurrent):
 
 ```
-You are an adversarial content reviewer for a Reformed family Bible-study
-preparation tool. Your job is to BREAK the draft items below, not to praise them.
-Assume each item is flawed until it survives every check.
+You are an adversarial fidelity reviewer for a theological brief that will be the
+base for family Bible-study content. Try to BREAK it — assume it drifts until proven faithful.
 
-PASSAGE: <pericope id> — <book name> (<range>)
+PASSAGE: <id> — <book> (<range>)
+PASSAGE TEXT: <passage_text>
+LAMPPOSTS THE BRIEF CLAIMS TO DISTILL:
+  WCF ch.1 (full): <wcf1>
+  COMMENTARY (MHC/JFB): <commentary_blocks>
+  CROSS-REFERENCES (ranked): <crossrefs>
+  CONFESSIONAL/CATECHISM (proof-text hits, with text): <confessional_refs>
+
+BRIEF UNDER REVIEW:
+<brief>
+
+Report every failure:
+- FAITHFUL: each claim is supported by the passage or a lamppost above; flag
+  anything unsupported or invented (private novelty).
+- PASSAGE-PRIMARY: the brief leads with and is governed by THIS passage's own
+  emphasis; doctrine and cross-refs are supporting, not driving.
+- PROOF-TEXT DISCIPLINE: any confessional citation is used only for the part that
+  fits this passage; off-agenda topics are set aside, not imported.
+- WCF-1 METHOD: treats Scripture as inspired/infallible/sufficient; Scripture
+  interprets Scripture; no hedging.
+- LENGTH: <= ~300 words, compact, in the four-part shape.
+Return ONLY JSON: {"pass": <bool>, "defects":[{"kind":"...",
+  "severity":"critical|major|minor","why":"...","fix":"..."}]}
+```
+
+**`ITEM_QUALITY_REVIEWER`** — Stage-2 reviewer (Agent tool, `general-purpose`, ≥2 concurrent):
+
+```
+You are an adversarial content reviewer for a Reformed family Bible-study tool.
+BREAK the draft items — assume each is flawed until it survives every check.
+
+PASSAGE: <id> — <book> (<range>)
 PASSAGE TEXT (the ONLY text a non-D5 item may require to be answerable):
 <passage_text>
+THEOLOGICAL BRIEF (the reviewed base; ground truth for accuracy & doctrine):
+<brief>
+(The brief's cross-references are the ONLY valid targets for a D5 item.)
 
-GROUND TRUTH — check factual and interpretive claims against these:
-COMMENTARY (JFB / MHC, overlapping this pericope):
-<commentary_blocks>
-CROSS-REFERENCES (openbible, ranked; the valid targets for a D5 item):
-<crossrefs>
-
-RUBRIC — score every item against all seven axes:
+RUBRIC — score every item on all seven axes:
 1. Confessional conformity (WCF-1): affirms, never hedges, Scripture's
    inspiration/infallibility/inerrancy/sufficiency/clarity; Scripture interprets
-   Scripture; meaning drawn from the text, not speculation.
-2. Accuracy & answerability: claims correct vs the passage AND the commentary
-   above; names/places/sequence/quotations match; ANSWERABLE FROM THE PASSAGE
-   TEXT ALONE (exception: a D5 item may reach outside, but only to a cross-
-   reference listed above, and must name it).
+   Scripture; meaning from the text, not speculation.
+2. Accuracy & answerability: correct vs the passage and the brief; names/places/
+   sequence/quotations match; ANSWERABLE FROM THE PASSAGE TEXT ALONE (a D5 item
+   may reach out, but only to a cross-reference named in the brief).
 3. Evidence never judgment: elicits observable behavior; never assesses faith,
    character, or spiritual state.
 4. Age fitness: language + difficulty match age_tier; activities doable on paper.
 5. Dimension fit: genuinely exercises its tagged dimension.
-6. Worship not academy: serves fluency/the heart; nothing during-session
-   (live scoring, gamification, dashboards, per-person screens).
+6. Worship not academy: serves fluency/the heart; nothing during-session.
 7. Pedagogical strength: a good prompt — open where it should be, not leading,
    not trivially yes/no unless a deliberate warm-up.
 
 DRAFT ITEMS (JSON array):
 <items_json>
 
-Return ONLY a JSON array, one object per item, in the same order:
-[{"id": "...", "verdicts": {"1": "pass|fail", ..., "7": "pass|fail"},
-  "defects": [{"axis": <n>, "severity": "critical|major|minor", "why": "...",
-               "fix": "item|machinery", "suggestion": "..."}]}]
-An item PASSES only if every axis is "pass". Cite the text/commentary in "why".
-Mark fix="machinery" when the defect would recur across items because the
-drafting instructions never told the drafter otherwise.
+Return ONLY a JSON array, one object per item, same order:
+[{"id":"...","verdicts":{"1":"pass|fail",...,"7":"pass|fail"},
+  "defects":[{"axis":<n>,"severity":"critical|major|minor","why":"...",
+              "fix":"item|machinery","suggestion":"..."}]}]
+An item PASSES only if every axis is "pass". Cite the passage/brief in "why".
+Mark fix="machinery" when a defect would recur because the brief-builder, the
+draft pack, the dimension guidance, or the checklist never told the drafter otherwise.
 ```
 
-**Working files:** drafts and reviewer output live under the session scratchpad (`<scratchpad>/gen/`), not git. Only the assembled store, the tuning writeup, and machinery/code changes are committed.
+**Working files:** brief drafts, item drafts, and reviewer output live under `<scratchpad>/gen/`. **Committed** outputs: the briefs (`author/briefs/*.md`), the store, the tuning writeup, and machinery/code changes.
 
-**`TUNING_LOG`** — `docs/superpowers/notes/2026-07-18-content-tuning-log.md`, appended to as defects are triaged: each machinery fix with the defect (pericope + item + axis) that motivated it. Becomes the deliverable writeup (Task 13).
+**`TUNING_LOG`** — `docs/superpowers/notes/2026-07-18-content-tuning-log.md`, appended as defects are triaged (each machinery fix + the defect that motivated it). Becomes the deliverable writeup (Task 14).
 
 ---
 
 ### Task 1: Rubric module (single source for the seven axes)
 
-**Files:**
-- Create: `content_bank/author/rubric.py`
-- Test: `content_bank/tests/test_author.py` (add a class)
+**Files:** Create `content_bank/author/rubric.py`; Test `content_bank/tests/test_author.py`.
 
-**Interfaces:**
-- Produces: `rubric.build() -> str` (the seven-axis rubric text) and `rubric.AXES: tuple[str, ...]` (seven short axis titles, ordered).
+**Interfaces:** Produces `rubric.build() -> str` and `rubric.AXES: tuple[str, ...]` (seven ordered titles).
 
 - [ ] **Step 1: Write the failing test**
 
@@ -123,9 +149,7 @@ Create `content_bank/author/rubric.py`:
 """The content quality rubric: seven axes, single-sourced.
 
 Both the adversarial reviewers and author/review_checklist.py score against this.
-Substance is judged (by agent then human), never keyword-linted; this text is the
-standard they judge against. Meaning of the fluency dimensions themselves lives in
-docs/design-kit_generator.md Part 1 and author/dimensions.py."""
+Substance is judged (by agent then human), never keyword-linted."""
 
 AXES = (
     "Confessional conformity (WCF-1)",
@@ -144,12 +168,12 @@ axis.
 
 1. Confessional conformity (WCF-1). Affirms, and never hedges on, Scripture's
    inspiration, infallibility, inerrancy, sufficiency, and clarity. Scripture
-   interprets Scripture (WCF 1.9); no private novelty. Meaning is drawn from the
-   text, not from speculation.
+   interprets Scripture (WCF 1.9); no private novelty. Meaning drawn from the
+   text, not speculation.
 2. Accuracy & answerability. Every factual claim is correct against the passage
-   and the corpus lampposts (commentary); names, places, sequence, and quotations
-   match. The item is answerable from THIS pericope's own verses. A D5
-   (Connections) item is the sole exception and must name a real cross-reference.
+   and the theological brief; names, places, sequence, and quotations match. The
+   item is answerable from THIS pericope's own verses. A D5 (Connections) item is
+   the sole exception and must name a cross-reference from the brief.
 3. Evidence, never judgment. Prompts elicit observable behavior; they never ask
    for or imply assessments of faith, character, or spiritual state.
 4. Age fitness. Language and difficulty match the item's age_tier; activities are
@@ -183,13 +207,9 @@ git commit -m "content_bank: seven-axis quality rubric (single source)"
 
 ### Task 2: Review checklist sources from the rubric
 
-**Files:**
-- Modify: `content_bank/author/review_checklist.py`
-- Test: `content_bank/tests/test_author.py` (replace `TestReviewChecklist`)
+**Files:** Modify `content_bank/author/review_checklist.py`; Test `content_bank/tests/test_author.py` (replace `TestReviewChecklist`).
 
-**Interfaces:**
-- Consumes: `rubric.build()`, `rubric.AXES` (Task 1).
-- Produces: `review_checklist.build(guardrail="WCF-1") -> str` — same signature, now covering all seven axes.
+**Interfaces:** Consumes `rubric.build()`. Produces `review_checklist.build(guardrail="WCF-1") -> str` covering all seven axes.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -210,7 +230,7 @@ class TestReviewChecklist(unittest.TestCase):
 - [ ] **Step 2: Run test to verify it fails**
 
 Run: `python3 -m unittest content_bank.tests.test_author.TestReviewChecklist -v`
-Expected: FAIL — `answerab`/`dimension`/`worship`/`pedagog` absent in current checklist.
+Expected: FAIL — new axis tokens absent.
 
 - [ ] **Step 3: Write minimal implementation**
 
@@ -218,9 +238,7 @@ Rewrite `content_bank/author/review_checklist.py`:
 
 ```python
 """Print the draft -> reviewed -> published review checklist a human fills in.
-
-Mirrors the seven-axis rubric (author/rubric.py) so the human confirmation gate
-and the adversarial reviewers judge against the same standard."""
+Mirrors the seven-axis rubric (author/rubric.py)."""
 import argparse
 
 from . import rubric
@@ -236,14 +254,12 @@ _BOXES = """
 ## Confessional conformity ({guardrail}: Westminster Confession, Chapter 1)
 - [ ] Affirms, and does not hedge on, Scripture's inspiration, infallibility,
       inerrancy, sufficiency, and clarity.
-- [ ] Scripture interprets Scripture (WCF 1.9); meaning from the text, not
-      speculation.
+- [ ] Scripture interprets Scripture (WCF 1.9); meaning from the text.
 
 ## Accuracy & answerability
-- [ ] Every factual claim is correct against the passage and the corpus lampposts.
+- [ ] Every factual claim is correct against the passage and the brief.
 - [ ] Names, places, sequence, and quotations match the text.
-- [ ] Answerable from THIS pericope's own verses (D5 Connections may name a real
-      cross-reference).
+- [ ] Answerable from THIS pericope's verses (D5 may name a brief cross-reference).
 
 ## Evidence, never judgment
 - [ ] Elicits observable behavior; never assesses faith, character, or state.
@@ -296,12 +312,9 @@ git commit -m "content_bank: review checklist mirrors the seven-axis rubric"
 
 ### Task 3: Expand per-dimension drafting guidance
 
-**Files:**
-- Modify: `content_bank/author/dimensions.py`
-- Test: `content_bank/tests/test_author.py` (add `TestDimensions`)
+**Files:** Modify `content_bank/author/dimensions.py`; Test `content_bank/tests/test_author.py` (add `TestDimensions`).
 
-**Interfaces:**
-- Produces: `dimensions.TEMPLATES: dict[str, str]` — keys unchanged (`D1`..`D8`, equal to `schema.DIMENSIONS`); values expanded into drafting guidance.
+**Interfaces:** `dimensions.TEMPLATES: dict[str,str]` — keys unchanged (== `schema.DIMENSIONS`); values expanded.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -329,35 +342,29 @@ Rewrite `content_bank/author/dimensions.py`:
 
 ```python
 """The eight fluency dimensions, with drafting guidance for the prompt pack.
-Source of truth for meaning remains docs/design-kit_generator.md Part 1; this
-adds "what a good item does / what to avoid" so drafts fit the dimension and stay
-answerable from the passage's own text."""
+Source of truth for meaning remains docs/design-kit_generator.md Part 1."""
 
 TEMPLATES = {
     "D1": "People & Places — who is present and where events happen. Good items "
-          "name people/roles/locations the passage itself states. Avoid asking "
-          "about people not in this pericope's verses.",
+          "name people/roles/locations the passage itself states. Avoid people "
+          "not in this pericope's verses.",
     "D2": "Event Sequence — the order and flow of what happens. Good items ask "
           "for first/next/last, cause-then-effect, or reordering — all "
-          "recoverable from this passage. Avoid sequence that spans other "
-          "pericopes.",
-    "D3": "Vocabulary — the Bible's own key terms and repeated phrases. Good "
-          "items point at a word/phrase the passage actually uses and ask what it "
-          "means here (commentary may inform the sense). Avoid importing outside "
-          "definitions as the 'answer'.",
+          "recoverable from this passage. Avoid sequence spanning other pericopes.",
+    "D3": "Vocabulary — the Bible's own key terms and repeated phrases. Good items "
+          "point at a word/phrase the passage uses and ask its sense here (the "
+          "brief may inform it). Avoid importing outside definitions as the answer.",
     "D4": "Memory — memory verses, key phrases, recall. Good items quote or cue a "
-          "line from THIS passage. Keep memory verses to one or two verses, "
-          "quoted verbatim.",
-    "D5": "Connections — links to other passages and larger patterns. The one "
-          "dimension allowed to reach outside this pericope; a good item NAMES "
-          "the other text it connects to, drawn from the cross-references.",
+          "line from THIS passage. Memory verses: one or two verses, verbatim.",
+    "D5": "Connections — links to other passages and patterns. The one dimension "
+          "allowed to reach outside this pericope; a good item NAMES the other "
+          "text, drawn from the brief's cross-references.",
     "D6": "Questions — the learner's own question-asking, prompted here. Good "
-          "items invite the learner to raise a wondering of their own; they do "
-          "not smuggle in the leader's answer.",
-    "D7": "Interpretation — what the text says, then why. Good items stay anchored "
-          "to what the passage states before asking why; meaning from the text "
-          "(commentary may confirm), not speculation. Avoid requiring doctrine "
-          "the passage does not carry.",
+          "items invite the learner's own wondering; they don't smuggle in the "
+          "leader's answer.",
+    "D7": "Interpretation — what the text says, then why. Good items anchor to "
+          "what the passage states before asking why; meaning from the text (the "
+          "brief may confirm), not speculation. Avoid doctrine the passage lacks.",
     "D8": "Application — bringing the passage into life, observably. Good items "
           "ask for a concrete, doable response; never assess faith or character, "
           "only observable action.",
@@ -367,7 +374,7 @@ TEMPLATES = {
 - [ ] **Step 4: Run test to verify it passes**
 
 Run: `python3 -m unittest content_bank.tests.test_author -v`
-Expected: PASS (all classes)
+Expected: PASS
 
 - [ ] **Step 5: Commit**
 
@@ -378,17 +385,15 @@ git commit -m "content_bank: expand per-dimension drafting guidance"
 
 ---
 
-### Task 4: corpus_bridge accessors for commentary and cross-references
+### Task 4: corpus_bridge accessors — commentary, cross-references, confessional refs
 
-**Files:**
-- Modify: `content_bank/lib/corpus_bridge.py` (additive)
-- Test: `content_bank/tests/test_corpus_bridge.py` (add classes)
+**Files:** Modify `content_bank/lib/corpus_bridge.py` (additive); Test `content_bank/tests/test_corpus_bridge.py`.
 
-**Interfaces:**
-- Produces:
-  - `corpus_bridge.commentary(range_str, book="MAT", works=("mhc", "jfb")) -> dict[str, list[dict]]` — per work, the blocks whose `range` overlaps `range_str` (each block `{"range","text"}`); a work with no overlap maps to `[]`.
-  - `corpus_bridge.crossrefs(range_str, limit=15) -> list[dict]` — refs whose `from` verse falls in `range_str`, sorted by `weight` desc then `to`, capped at `limit`.
-  - Internal helper `corpus_bridge._parse_range(range_str) -> (book, chapter, v_start, v_end)`.
+**Interfaces:** Produces
+- `commentary(range_str, book="MAT", works=("mhc","jfb")) -> dict[str, list[dict]]` — per work, blocks (`{"range","text"}`) overlapping `range_str`; `[]` when none.
+- `crossrefs(range_str, limit=15) -> list[dict]` — refs whose `from` is in `range_str`, sorted by `weight` desc then `to`, capped.
+- `confessional_refs(range_str) -> dict` — `{"wcf":[{ref,title,text,via}], "wlc":[{ref,q,a,via}], "wsc":[...]}` for sections/Q&As whose `proof_texts` overlap.
+- Helpers `_parse_range`, `_overlaps`.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -399,50 +404,54 @@ class TestCommentary(unittest.TestCase):
     def test_exact_block_returned(self):
         from content_bank.lib import corpus_bridge
         c = corpus_bridge.commentary("MAT.4.1-11")
-        self.assertIn("mhc", c)
-        self.assertTrue(c["mhc"])                      # a block overlaps 4:1-11
-        self.assertIn("range", c["mhc"][0])
-        self.assertIn("text", c["mhc"][0])
+        self.assertTrue(c["mhc"] and "range" in c["mhc"][0] and "text" in c["mhc"][0])
 
     def test_per_verse_jfb_overlaps_pericope(self):
         from content_bank.lib import corpus_bridge
-        # JFB is keyed per verse; a pericope range must gather all overlapping verses
-        c = corpus_bridge.commentary("MAT.5.1-2")
-        self.assertIn("jfb", c)
-        self.assertTrue(c["jfb"])                      # e.g. MAT.5.2 overlaps 5:1-2
+        self.assertTrue(corpus_bridge.commentary("MAT.5.1-2")["jfb"])  # e.g. MAT.5.2
 
     def test_no_overlap_is_graceful_empty(self):
         from content_bank.lib import corpus_bridge
-        c = corpus_bridge.commentary("MAT.28.99-99")   # no such verses -> no blocks
+        c = corpus_bridge.commentary("MAT.28.99-99")
         self.assertEqual(c["mhc"], [])
         self.assertEqual(c["jfb"], [])
 
-    def test_beatitudes_block(self):
-        from content_bank.lib import corpus_bridge
-        c = corpus_bridge.commentary("MAT.5.3-12")
-        self.assertTrue(any("5.3-12" in b["range"] for b in c["mhc"]))
-
 
 class TestCrossrefs(unittest.TestCase):
-    def test_refs_in_range_ranked(self):
+    def test_refs_in_range_ranked_and_capped(self):
         from content_bank.lib import corpus_bridge
         refs = corpus_bridge.crossrefs("MAT.5.3-12", limit=5)
-        self.assertLessEqual(len(refs), 5)
-        self.assertTrue(refs)                          # Beatitudes have OT echoes
+        self.assertTrue(refs and len(refs) <= 5)
         weights = [r["weight"] for r in refs]
         self.assertEqual(weights, sorted(weights, reverse=True))
-        for r in refs:
-            self.assertTrue(r["from"].startswith("MAT.5."))
+        self.assertTrue(all(r["from"].startswith("MAT.5.") for r in refs))
 
     def test_empty_range_is_graceful(self):
         from content_bank.lib import corpus_bridge
         self.assertEqual(corpus_bridge.crossrefs("MAT.999.1-2"), [])
+
+
+class TestConfessionalRefs(unittest.TestCase):
+    def test_beatitudes_hits_wcf_and_wlc(self):
+        from content_bank.lib import corpus_bridge
+        c = corpus_bridge.confessional_refs("MAT.5.3-12")
+        refs = [h["ref"] for h in c["wcf"]] + [h["ref"] for h in c["wlc"]]
+        self.assertIn("WCF 19.6", refs)
+        self.assertIn("WLC Q172", refs)
+        wcf = next(h for h in c["wcf"] if h["ref"] == "WCF 19.6")
+        self.assertIn("text", wcf)
+        self.assertIn("via", wcf)
+
+    def test_setup_pericope_has_no_hits(self):
+        from content_bank.lib import corpus_bridge
+        c = corpus_bridge.confessional_refs("MAT.5.1-2")
+        self.assertEqual(c["wcf"] + c["wlc"] + c["wsc"], [])
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
 
 Run: `python3 -m unittest content_bank.tests.test_corpus_bridge -v`
-Expected: FAIL — `AttributeError: module ... has no attribute 'commentary'`.
+Expected: FAIL — `AttributeError: ... has no attribute 'commentary'`.
 
 - [ ] **Step 3: Write minimal implementation**
 
@@ -452,16 +461,19 @@ Append to `content_bank/lib/corpus_bridge.py`:
 def _parse_range(range_str):
     """'MAT.5.3-12' or 'MAT.5.3' -> ('MAT', 5, 3, 12)."""
     book, chapter, verses = range_str.split(".", 2)
-    if "-" in verses:
-        v1, v2 = verses.split("-", 1)
-    else:
-        v1 = v2 = verses
+    v1, v2 = (verses.split("-", 1) if "-" in verses else (verses, verses))
     return book, int(chapter), int(v1), int(v2)
 
 
 def _overlaps(a, b):
-    """Do two (book, chapter, start, end) tuples overlap?"""
-    return (a[0] == b[0] and a[1] == b[1] and a[2] <= b[3] and b[2] <= a[3])
+    return a[0] == b[0] and a[1] == b[1] and a[2] <= b[3] and b[2] <= a[3]
+
+
+def _safe_overlaps(target, ref):
+    try:
+        return _overlaps(target, _parse_range(ref))
+    except (ValueError, AttributeError):
+        return False
 
 
 def commentary(range_str, book="MAT", works=("mhc", "jfb")):
@@ -470,8 +482,7 @@ def commentary(range_str, book="MAT", works=("mhc", "jfb")):
     for work in works:
         data = _load(f"canon/lampposts/{work}/{book.lower()}.json")
         blocks = data.get("blocks", []) if isinstance(data, dict) else []
-        out[work] = [b for b in blocks
-                     if _overlaps(target, _parse_range(b["range"]))]
+        out[work] = [b for b in blocks if _safe_overlaps(target, b["range"])]
     return out
 
 
@@ -479,93 +490,294 @@ def crossrefs(range_str, limit=15):
     target = _parse_range(range_str)
     data = _load("canon/structure/crossrefs.json")
     refs = data.get("refs", []) if isinstance(data, dict) else data
-    hits = [r for r in refs if _overlaps(target, _parse_range(r["from"]))]
+    hits = [r for r in refs if _safe_overlaps(target, r["from"])]
     hits.sort(key=lambda r: (-r.get("weight", 0), r.get("to", "")))
     return hits[:limit]
+
+
+def confessional_refs(range_str):
+    target = _parse_range(range_str)
+
+    def _via(proof_texts):
+        for pt in proof_texts:
+            if _safe_overlaps(target, pt):
+                return pt
+        return None
+
+    out = {"wcf": [], "wlc": [], "wsc": []}
+    wcf = _load("canon/lampposts/wcf.json")
+    for ch in wcf["chapters"]:
+        for s in ch["sections"]:
+            via = _via(s.get("proof_texts", []))
+            if via:
+                out["wcf"].append({"ref": f"WCF {ch['n']}.{s['n']}",
+                                   "title": ch["title"], "text": s["text"], "via": via})
+    for key, fname in (("wlc", "wlc.json"), ("wsc", "wsc.json")):
+        cat = _load(f"canon/lampposts/{fname}")
+        for q in cat["questions"]:
+            via = _via(q.get("proof_texts", []))
+            if via:
+                out[key].append({"ref": f"{key.upper()} Q{q['n']}",
+                                 "q": q["q"], "a": q["a"], "via": via})
+    return out
 ```
 
 - [ ] **Step 4: Run test to verify it passes**
 
 Run: `python3 -m unittest content_bank.tests.test_corpus_bridge -v`
-Expected: PASS (commentary overlap for MHC per-pericope + JFB per-verse; crossrefs ranked and capped; graceful empty on non-overlapping ranges — all verified against the corpus).
+Expected: PASS (verified against the corpus: MAT-014 → WCF 19.6 + WLC Q172; MAT-013 → none).
 
 - [ ] **Step 5: Commit**
 
 ```bash
 git add content_bank/lib/corpus_bridge.py content_bank/tests/test_corpus_bridge.py
-git commit -m "content_bank: corpus_bridge commentary + crossref accessors"
+git commit -m "content_bank: corpus_bridge commentary + crossref + confessional accessors"
 ```
 
 ---
 
-### Task 5: Fold rubric, answerability, coverage, and lampposts into the drafting pack
+### Task 5: Stage-1 brief pack (`build_brief_prompt.py`)
 
-**Files:**
-- Modify: `content_bank/author/build_draft_prompt.py`
-- Test: `content_bank/tests/test_author.py` (extend `TestBuildDraftPrompt`)
+**Files:** Create `content_bank/author/build_brief_prompt.py`; Test `content_bank/tests/test_author.py` (add `TestBuildBriefPrompt`).
 
-**Interfaces:**
-- Consumes: `rubric.build()` (Task 1), expanded `dimensions.TEMPLATES` (Task 3), `corpus_bridge.commentary` / `corpus_bridge.crossrefs` (Task 4), `schema`.
-- Produces: `build_draft_prompt.build(pericope_id, book="MAT") -> str` — same signature; the pack now also states the answerability rule, coverage guidance, per-type expectations, an evidence-not-judgment constraint, embeds the rubric, and injects the pericope's commentary + top cross-references.
+**Interfaces:** Consumes `corpus_bridge.{pericopes,book_name,passage_text,wcf_chapter1_text,commentary,crossrefs,confessional_refs}`. Produces `build_brief_prompt.build(pericope_id, book="MAT") -> str` and a `main()` CLI with `--out`.
 
 - [ ] **Step 1: Write the failing test**
 
-Add to `TestBuildDraftPrompt` in `content_bank/tests/test_author.py`:
+Add to `content_bank/tests/test_author.py`:
 
 ```python
-    def test_states_answerability_rule(self):
-        self.assertIn("answerable", self.prompt.lower())
+class TestBuildBriefPrompt(unittest.TestCase):
+    def setUp(self):
+        from content_bank.author import build_brief_prompt
+        self.pack = build_brief_prompt.build("MAT-014", book="MAT")
 
-    def test_states_coverage_restraint(self):
-        p = self.prompt.lower()
-        self.assertTrue("genuinely support" in p or "only the dimensions" in p)
+    def test_includes_passage_and_full_wcf1(self):
+        self.assertIn("blessed", self.pack.lower())    # passage text
+        self.assertIn("1.1", self.pack)                # full WCF ch.1 sections
 
-    def test_embeds_rubric_and_evidence_rule(self):
-        p = self.prompt.lower()
-        self.assertIn("pedagog", p)                   # rubric embedded
-        self.assertIn("observable behavior", p)       # evidence-not-judgment
-
-    def test_gives_per_type_expectations(self):
-        p = self.prompt.lower()
-        self.assertIn("memory_verse", p)
-        self.assertIn("pre_reading_quest", p)
-
-    def test_injects_commentary_and_crossrefs(self):
-        p = self.prompt.lower()
-        self.assertIn("commentary", p)                # MAT-014 has MHC/JFB blocks
+    def test_includes_commentary_and_crossrefs(self):
+        p = self.pack.lower()
+        self.assertIn("commentary", p)
         self.assertIn("cross-reference", p)
+
+    def test_includes_confessional_hits(self):
+        self.assertIn("WCF 19.6", self.pack)
+        self.assertIn("WLC Q172", self.pack)
+
+    def test_states_brief_shape_and_safeguard(self):
+        p = self.pack.lower()
+        self.assertIn("~250", self.pack)               # length target
+        self.assertIn("emphasis", p)                   # passage-primary shape
+        self.assertIn("proof-text", p)                 # safeguard
+
+    def test_setup_pericope_notes_no_confessional(self):
+        from content_bank.author import build_brief_prompt
+        pack = build_brief_prompt.build("MAT-013", book="MAT")
+        self.assertIn("No confessional", pack)
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
 
-Run: `python3 -m unittest content_bank.tests.test_author.TestBuildDraftPrompt -v`
-Expected: FAIL on the new assertions.
+Run: `python3 -m unittest content_bank.tests.test_author.TestBuildBriefPrompt -v`
+Expected: FAIL — module missing.
 
 - [ ] **Step 3: Write minimal implementation**
 
-Edit `content_bank/author/build_draft_prompt.py`. Update the import and add constants + blocks:
+Create `content_bank/author/build_brief_prompt.py`:
 
 ```python
-from ..lib import corpus_bridge, schema
-from . import dimensions, rubric
+"""Assemble the Stage-1 distillation pack for one pericope.
+
+Offline: prints a self-contained pack a human/Claude runs by hand to produce a
+compact theological brief. The brief is fidelity-reviewed and committed to
+author/briefs/ before any item is drafted (Stage 2, build_draft_prompt)."""
+import argparse
+
+from ..lib import corpus_bridge
+
+_SHAPE = """## Produce the THEOLOGICAL BRIEF
+
+~250 words (hard max 300), in exactly these four parts:
+
+**Passage's own emphasis (primary).** What THIS passage says and stresses, in the
+text's own terms. This governs everything else.
+**Key terms (from commentary).** A few words/phrases the passage uses, with the
+sense the commentary gives them. Ground, don't speculate.
+**Doctrinal anchors.** Method: WCF ch.1 — treat the text as inspired, sufficient,
+Scripture-interpreting-Scripture. Doctrine: what the cited confessional/catechism
+statements say this passage teaches.
+**Cross-references.** The vetted links above, each with a one-phrase note.
+
+SAFEGUARD — a proof-text link means "the divines grounded a doctrine partly
+here," NOT "this passage is a treatise on that doctrine." Use only the part of a
+confessional citation that fits THIS passage's emphasis; set aside off-agenda
+topics (e.g. a Lord's-Supper Q&A cited for a phrase about the humble heart
+contributes only its reading of that phrase). Add NO doctrine the lampposts do
+not support. End with a one-line note of anything set aside as off-agenda."""
+
+
+def build(pericope_id, book="MAT"):
+    peris = {p["id"]: p for p in corpus_bridge.pericopes(book)}
+    if pericope_id not in peris:
+        raise ValueError(f"{pericope_id} is not a {book} pericope")
+    p = peris[pericope_id]
+    name = corpus_bridge.book_name(book, "en")
+    rng = p["range"]
+    parts = [f"# Brief pack — {pericope_id}: {p['title_en']}\n",
+             f"Passage: {name} ({rng})\n",
+             "## The passage (public-domain text) — the SUBJECT\n",
+             corpus_bridge.passage_text(rng) + "\n",
+             "## WCF Chapter 1 — the method guardrail (full)\n",
+             corpus_bridge.wcf_chapter1_text() + "\n",
+             "## Commentary (exegesis — grounding, do not copy verbatim)\n"]
+    comm = corpus_bridge.commentary(rng, book)
+    if any(comm.values()):
+        for work, blocks in comm.items():
+            for b in blocks:
+                parts.append(f"### {work.upper()} {b['range']}\n{b['text']}\n")
+    else:
+        parts.append("(No commentary block overlaps this pericope.)\n")
+    parts.append("## Cross-references (Scripture interprets Scripture)\n")
+    refs = corpus_bridge.crossrefs(rng)
+    parts.append("\n".join(f"- {r['from']} -> {r['to']} (weight {r.get('weight')})"
+                           for r in refs) if refs else "(none)")
+    parts.append("\n## Confessional & catechism references (doctrine, by proof-text)\n")
+    conf = corpus_bridge.confessional_refs(rng)
+    if conf["wcf"] or conf["wlc"] or conf["wsc"]:
+        for h in conf["wcf"]:
+            parts.append(f"### {h['ref']} — {h['title']} (cited via {h['via']})\n{h['text']}\n")
+        for key in ("wlc", "wsc"):
+            for h in conf[key]:
+                parts.append(f"### {h['ref']} (cited via {h['via']})\nQ: {h['q']}\nA: {h['a']}\n")
+    else:
+        parts.append("(No confessional proof-text cites this pericope — omit the "
+                     "doctrinal-anchor detail; do not invent one.)\n")
+    parts.append("\n" + _SHAPE)
+    return "\n".join(parts)
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser()
+    ap.add_argument("pericope_id")
+    ap.add_argument("--book", default="MAT")
+    ap.add_argument("--out")
+    args = ap.parse_args(argv)
+    text = build(args.pericope_id, args.book)
+    if args.out:
+        with open(args.out, "w", encoding="utf-8") as f:
+            f.write(text)
+    else:
+        print(text)
+
+
+if __name__ == "__main__":
+    main()
 ```
 
-Add module constants above `build()`:
+- [ ] **Step 4: Run test to verify it passes**
+
+Run: `python3 -m unittest content_bank.tests.test_author -v`
+Expected: PASS
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add content_bank/author/build_brief_prompt.py content_bank/tests/test_author.py
+git commit -m "content_bank: Stage-1 brief pack (distills lampposts, passage-first)"
+```
+
+---
+
+### Task 6: Stage-2 draft pack (`build_draft_prompt.py`) — passage-first + brief
+
+**Files:** Modify `content_bank/author/build_draft_prompt.py`; Test `content_bank/tests/test_author.py` (rewrite `TestBuildDraftPrompt`).
+
+**Interfaces:** Consumes `rubric.build()`, `dimensions.TEMPLATES`, `corpus_bridge.{pericopes,book_name,passage_text}`, and the committed brief. Produces `build_draft_prompt.build(pericope_id, book="MAT", brief=None) -> str`: if `brief` is None, load `author/briefs/<pericope_lower>.md` (raise `FileNotFoundError` if absent); the pack foregrounds the passage, carries the brief, a compact WCF-1 guardrail, per-dimension guidance, rules, per-type expectations, and the rubric. Full commentary/WCF are NOT in this pack.
+
+- [ ] **Step 1: Write the failing test**
+
+Replace `TestBuildDraftPrompt` in `content_bank/tests/test_author.py` (it no longer builds without a brief):
 
 ```python
+class TestBuildDraftPrompt(unittest.TestCase):
+    def setUp(self):
+        self.brief = ("**Passage's own emphasis.** Jesus pronounces blessing...\n"
+                      "**Cross-references.** Ps 37:11 — the meek inherit.\n")
+        self.prompt = build_draft_prompt.build("MAT-014", book="MAT", brief=self.brief)
+
+    def test_foregrounds_passage_text(self):
+        self.assertIn("MAT-014", self.prompt)
+        self.assertIn("blessed", self.prompt.lower())          # passage present
+        self.assertIn("subject", self.prompt.lower())          # foregrounded label
+
+    def test_carries_the_brief(self):
+        self.assertIn("pronounces blessing", self.prompt)      # brief injected
+
+    def test_compact_wcf_guardrail_not_full_chapter(self):
+        p = self.prompt.lower()
+        self.assertIn("westminster", p)
+        self.assertNotIn("1.10", self.prompt)                  # full ch.1 absent
+        self.assertLess(len(self.prompt), 6000)                # pack stays lean
+
+    def test_states_rules_types_and_rubric(self):
+        p = self.prompt.lower()
+        self.assertIn("answerable", p)
+        self.assertTrue("genuinely support" in p or "only the dimensions" in p)
+        self.assertIn("observable behavior", p)
+        self.assertIn("memory_verse", p)
+        self.assertIn("pedagog", p)                            # rubric embedded
+
+    def test_all_dimension_templates_present(self):
+        for d in dimensions.TEMPLATES:
+            self.assertIn(d, self.prompt)
+
+    def test_missing_brief_raises(self):
+        with self.assertRaises(FileNotFoundError):
+            build_draft_prompt.build("MAT-999-nobrief", book="MAT", brief=None)
+```
+
+(Note: `MAT-999-nobrief` is not a pericope, but the brief lookup happens first and raises `FileNotFoundError`; if implementation validates the pericope before the brief, use a real id whose brief file is absent, e.g. `MAT-015`, ensuring `author/briefs/mat-015.md` does not exist at test time.)
+
+- [ ] **Step 2: Run test to verify it fails**
+
+Run: `python3 -m unittest content_bank.tests.test_author.TestBuildDraftPrompt -v`
+Expected: FAIL — current `build()` has no `brief` param and injects full WCF/commentary.
+
+- [ ] **Step 3: Write minimal implementation**
+
+Rewrite `content_bank/author/build_draft_prompt.py`:
+
+```python
+"""Assemble the Stage-2 drafting pack for one pericope.
+
+Passage-first: the pericope's verses are the subject; the theological base is the
+committed brief (author/briefs/<pericope>.md, produced by Stage 1). The full
+lampposts are NOT here — only a compact WCF-1 guardrail. Offline, no API."""
+import argparse
+import pathlib
+
+from ..lib import corpus_bridge, schema
+from . import dimensions, rubric
+
+_BRIEFS = pathlib.Path(__file__).parent / "briefs"
+
+_WCF1_GUARDRAIL = """Draft WITHIN the Westminster Confession's doctrine of Scripture
+(WCF ch.1): Scripture is God-inspired, infallible, inerrant, sufficient, and clear;
+Scripture interprets Scripture. Content that hedges on this fails review. (The full
+chapter and this passage's doctrinal anchors are distilled in the brief above.)"""
+
 _RULES_BLOCK = """## How to draft (hard rules)
 
 - ANSWERABLE FROM THIS PASSAGE: every item except a D5 (Connections) item must be
-  answerable from the verses printed above and nothing else. A D5 item may reach
-  to other Scripture but only to one of the cross-references listed below, and
-  must name it.
-- COVER ONLY WHAT THE TEXT SUPPORTS: draft an item for a dimension only if this
-  passage genuinely supports it. A short setup passage may support D1/D2/D6 and
-  not D7/D8 — that is correct, not a gap. Do not pad.
+  answerable from the verses above and nothing else. A D5 item may reach out only
+  to a cross-reference named in the brief, and must name it.
+- COVER ONLY WHAT THE TEXT SUPPORTS: draft for a dimension only if this passage
+  genuinely supports it. A short setup passage may support D1/D2/D6 and not
+  D7/D8 — that is correct, not a gap. Do not pad.
 - EVIDENCE, NEVER JUDGMENT: prompts elicit observable behavior; never assess
   faith, character, or spiritual state.
-- USE THE LAMPPOSTS: let the commentary inform accuracy and interpretation; do
-  not copy it into items (quotations come from the passage text above).
+- STAY ON THE PASSAGE: the brief is your base, but the items are about the PASSAGE.
 - TIERS: give the selector real choice — spread items across age_tiers
   (pre_reader / child / youth / adult / all) and difficulties (1-3)."""
 
@@ -575,44 +787,80 @@ _TYPE_BLOCK = """## What each type should be
 - activity: doable on paper with ordinary materials; include a pre_reader variant
   when the passage allows one.
 - pre_reading_quest: a "listen for X" prompt handed out before reading; include a
-  short `category` label. Draft these at child / youth / adult tiers.
-- memory_verse: one or two verses from THIS passage, quoted verbatim, with the
-  reference.
+  short `category` label. Draft at child / youth / adult tiers.
+- memory_verse: one or two verses from THIS passage, verbatim, with the reference.
 - narration_prompt: "retell in your own words" for the passage as a whole."""
 
+_SCHEMA_BLOCK = """Each item MUST be a JSON object with these fields:
+  id, passage (the pericope id), dimension (one of: {dimensions}),
+  type (one of: {types}), age_tier (one of: {tiers}), difficulty (1|2|3),
+  review_status "draft", text {{ "en": "..." }}, version 1,
+  category {{ "en": "..." }} ONLY for pre_reading_quest.
+Do not add provenance; the reviewer stamps it."""
 
-def _lamppost_block(range_str, book):
-    parts = ["## Commentary (lampposts — grounding, do not copy verbatim)\n"]
-    comm = corpus_bridge.commentary(range_str, book)
-    any_block = False
-    for work, blocks in comm.items():
-        for b in blocks:
-            any_block = True
-            parts.append(f"### {work.upper()} {b['range']}\n{b['text']}\n")
-    if not any_block:
-        parts.append("(No commentary block overlaps this pericope.)\n")
-    parts.append("## Cross-references (the valid targets for a D5 item)\n")
-    refs = corpus_bridge.crossrefs(range_str)
-    if refs:
-        for r in refs:
-            parts.append(f"- {r['from']} -> {r['to']} (weight {r.get('weight')})")
-    else:
-        parts.append("(No cross-references for this pericope.)")
-    return "\n".join(parts)
-```
 
-Then in `build()`, after the dimensions loop's trailing `parts.append("")` and before the `## Output schema` block, insert:
+def _load_brief(pericope_id):
+    f = _BRIEFS / f"{pericope_id.lower()}.md"
+    if not f.exists():
+        raise FileNotFoundError(
+            f"No brief for {pericope_id}; run Stage 1 (build_brief_prompt) and "
+            f"commit {f} first.")
+    return f.read_text(encoding="utf-8")
 
-```python
+
+def build(pericope_id, book="MAT", brief=None):
+    if brief is None:
+        brief = _load_brief(pericope_id)
+    peris = {p["id"]: p for p in corpus_bridge.pericopes(book)}
+    if pericope_id not in peris:
+        raise ValueError(f"{pericope_id} is not a {book} pericope")
+    p = peris[pericope_id]
+    name = corpus_bridge.book_name(book, "en")
+    parts = [f"# Drafting pack — {pericope_id}: {p['title_en']}\n",
+             f"Passage: {name} ({p['range']})\n",
+             "## THE PASSAGE — this is your SUBJECT; draft about THIS\n",
+             corpus_bridge.passage_text(p["range"]) + "\n",
+             "## Theological base (reviewed brief — consult; do not draft about it)\n",
+             brief + "\n",
+             "## Confessional guardrail\n",
+             _WCF1_GUARDRAIL + "\n",
+             "## Fluency dimensions to cover\n"]
+    for d, desc in dimensions.TEMPLATES.items():
+        parts.append(f"- {d}: {desc}")
+    parts.append("")
     parts.append(_RULES_BLOCK)
     parts.append("")
     parts.append(_TYPE_BLOCK)
     parts.append("")
-    parts.append(_lamppost_block(p["range"], book))
-    parts.append("")
     parts.append("## Quality rubric (every item must pass all seven axes)\n")
     parts.append(rubric.build())
     parts.append("")
+    parts.append("## Output schema\n")
+    parts.append(_SCHEMA_BLOCK.format(
+        dimensions=", ".join(sorted(schema.DIMENSIONS)),
+        types=", ".join(sorted(schema.TYPES)),
+        tiers=", ".join(sorted(schema.AGE_TIERS))))
+    parts.append("")
+    parts.append("Return a JSON array of draft items for this pericope.")
+    return "\n".join(parts)
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser()
+    ap.add_argument("pericope_id")
+    ap.add_argument("--book", default="MAT")
+    ap.add_argument("--out")
+    args = ap.parse_args(argv)
+    text = build(args.pericope_id, args.book)
+    if args.out:
+        with open(args.out, "w", encoding="utf-8") as f:
+            f.write(text)
+    else:
+        print(text)
+
+
+if __name__ == "__main__":
+    main()
 ```
 
 - [ ] **Step 4: Run test to verify it passes**
@@ -624,151 +872,145 @@ Expected: PASS (all classes)
 
 ```bash
 git add content_bank/author/build_draft_prompt.py content_bank/tests/test_author.py
-git commit -m "content_bank: drafting pack adds rules, rubric, and lamppost grounding"
+git commit -m "content_bank: Stage-2 draft pack (passage-first, brief-grounded, compact WCF)"
 ```
 
 ---
 
-### Task 6: Generate + adversarially review MAT-009 (pilot)
+### Task 7: MAT-009 — brief + items (pilot for both stages)
 
-The first content task and the pilot for the tuning loop. Gate = adversarial review + `schema.validate_item`.
+The pilot: tunes both the brief-builder and the draft pack. Gates = fidelity review (brief) and quality review + `schema.validate_item` (items).
 
-**Files:**
-- Create (scratchpad): `<scratchpad>/gen/reviewed_MAT-009.json`
-- Create/append: `docs/superpowers/notes/2026-07-18-content-tuning-log.md` (`TUNING_LOG`)
-- Possibly modify (only if the pilot reveals a systemic gap): `content_bank/author/*`, `content_bank/lib/corpus_bridge.py`
+**Files:** Create `content_bank/author/briefs/mat-009.md`; scratchpad `<scratchpad>/gen/reviewed_MAT-009.json`; append `TUNING_LOG`; possibly modify `content_bank/author/*` or `corpus_bridge.py`.
 
-**Interfaces:**
-- Consumes: `build_draft_prompt.build("MAT-009")`, `REVIEWER_PROMPT`.
-- Produces: a JSON array of `review_status: "reviewed"` items for MAT-009 at `<scratchpad>/gen/reviewed_MAT-009.json`, each structurally valid per `schema.validate_item`.
+**Interfaces:** Consumes Tasks 4-6 + `BRIEF_FIDELITY_REVIEWER`, `ITEM_QUALITY_REVIEWER`. Produces the committed brief + `<scratchpad>/gen/reviewed_MAT-009.json` (items structurally valid, `review_status:"reviewed"`).
 
-- [ ] **Step 1: Build the drafting pack**
+**Stage 1 — brief**
 
-Run: `python3 -m content_bank.author.build_draft_prompt MAT-009 --out <scratchpad>/gen/pack_MAT-009.md`
-Expected: a self-contained pack — passage 4:1-11, WCF-1, dimension guidance, rules, types, **commentary (MHC/JFB 4:1-11) + cross-references**, rubric, schema.
+- [ ] **Step 1: Build the brief pack** — `python3 -m content_bank.author.build_brief_prompt MAT-009 --out <scratchpad>/gen/brief_pack_MAT-009.md` (passage 4:1-11 + full WCF-1 + MHC/JFB + crossrefs + WCF 1.1/5.3/21.1-2 + WLC hits).
+- [ ] **Step 2: Distill the brief** — write a ~250-word brief in the four-part shape; observe the safeguard (the Temptation's confessional hits include worship WCF 21 — anchor it as *supporting*, keep the pericope's own emphasis, Christ's obedience/victory, primary). Save `<scratchpad>/gen/brief_MAT-009.md`.
+- [ ] **Step 3: Fidelity review** — dispatch ≥2 `BRIEF_FIDELITY_REVIEWER` agents concurrently with the pack's lampposts + the brief. Fix any unfaithful/novel/over-reaching claims; if a defect is systemic (the brief-builder never told the drafter something), append `TUNING_LOG` and edit `build_brief_prompt.py` (re-run `python3 -m unittest content_bank.tests.test_author -v`).
+- [ ] **Step 4: Commit the brief** — copy to `content_bank/author/briefs/mat-009.md`:
+```bash
+git add content_bank/author/briefs/mat-009.md docs/superpowers/notes/2026-07-18-content-tuning-log.md content_bank/
+git commit -m "content_bank: MAT-009 theological brief (fidelity-reviewed)"
+```
 
-- [ ] **Step 2: Draft items to the coverage target**
+**Stage 2 — items**
 
-Draft a JSON array covering the dimensions MAT-009 supports (D1 people/places, D2 the three temptations in order, D3 "It is written" and key terms, D4 recall of Jesus answering with Scripture, D5 the OT sources — grounded in the pack's cross-references, D6 a learner question, D7 why Jesus answered with Scripture, D8 an observable application), spread across tiers, plus 1 child/youth `activity` + 1 `pre_reader` variant, `pre_reading_quest` at child/youth/adult, one `memory_verse` from this passage, one `narration_prompt`. Every item: `passage:"MAT-009"`, `review_status:"draft"`, `text:{"en":...}`, `version:1`, difficulty 1-3, `category` only on quests. Write `<scratchpad>/gen/draft_MAT-009.json`.
-
-- [ ] **Step 3: Validate structure before review**
-
-Run:
+- [ ] **Step 5: Build the draft pack** — `python3 -m content_bank.author.build_draft_prompt MAT-009 --out <scratchpad>/gen/pack_MAT-009.md` (now loads the committed brief; passage foregrounded; compact WCF-1).
+- [ ] **Step 6: Draft items** to the coverage the passage supports (D1 people/places, D2 the three temptations in order, D3 "It is written", D4 recall Jesus answered with Scripture, D5 the OT sources from the brief, D6 a learner question, D7 why Jesus answered with Scripture, D8 an observable application), across tiers, + 1 child/youth `activity` + 1 `pre_reader`, `pre_reading_quest` at child/youth/adult, one `memory_verse`, one `narration_prompt`. Each: `passage:"MAT-009"`, `review_status:"draft"`, `text:{"en":...}`, `version:1`. Write `<scratchpad>/gen/draft_MAT-009.json`.
+- [ ] **Step 7: Validate structure** —
 ```bash
 python3 -c "import json,sys; sys.path.insert(0,'.'); from content_bank.lib import schema; \
 d=json.load(open('<scratchpad>/gen/draft_MAT-009.json')); \
 [print(i['id'], schema.validate_item(i)) for i in d]"
 ```
-Expected: every line ends `[]`. Fix any that don't.
-
-- [ ] **Step 4: Adversarially review**
-
-Dispatch ≥2 adversarial reviewer agents concurrently (one message, multiple Agent calls, `subagent_type: general-purpose`) with `REVIEWER_PROMPT`, substituting the MAT-009 passage text, the commentary blocks and cross-references (all from the pack), and `draft_MAT-009.json`. Union their defects.
-
-- [ ] **Step 5: Triage every confirmed defect**
-
-For each defect: if `fix="item"`, correct the item. If `fix="machinery"` (recurs, or the drafter/reviewer was never given what it needed — including a lamppost gap), append a `TUNING_LOG` entry (pericope + item + axis + the change), edit the relevant `author/` or `corpus_bridge.py` file, re-run its test (`python3 -m unittest content_bank.tests.test_author content_bank.tests.test_corpus_bridge -v` → PASS), and re-draft affected items.
-
-- [ ] **Step 6: Re-review until clean**
-
-Repeat Steps 4-5 until every item passes all seven axes. Then set each item's `review_status` to `"reviewed"` and add `"provenance": {"drafted_by":"claude","reviewed_by":"claude-adversarial","reviewed_date":"2026-07-18","guardrail":"WCF-1"}`. Write the final array to `<scratchpad>/gen/reviewed_MAT-009.json`.
-
-- [ ] **Step 7: Commit the machinery/log changes**
-
+Expected: every line `[]`.
+- [ ] **Step 8: Quality review** — dispatch ≥2 `ITEM_QUALITY_REVIEWER` agents concurrently with passage + committed brief + `draft_MAT-009.json`. Union defects.
+- [ ] **Step 9: Triage** — `fix="item"` → correct the item; `fix="machinery"` → append `TUNING_LOG` and edit the relevant file (`build_brief_prompt.py` / `build_draft_prompt.py` / `dimensions.py` / `review_checklist.py`), re-run `python3 -m unittest content_bank.tests.test_author content_bank.tests.test_corpus_bridge -v`, and regenerate. If a brief-builder fix changes the brief, re-run Stage 1 for MAT-009.
+- [ ] **Step 10: Re-review until clean; stamp** each item `review_status:"reviewed"`, `provenance:{"drafted_by":"claude","reviewed_by":"claude-adversarial","reviewed_date":"2026-07-18","guardrail":"WCF-1","brief":"author/briefs/mat-009.md"}`. Write `<scratchpad>/gen/reviewed_MAT-009.json`.
+- [ ] **Step 11: Commit** machinery/log:
 ```bash
 git add docs/superpowers/notes/2026-07-18-content-tuning-log.md content_bank/
-git commit -m "content_bank: MAT-009 generated + reviewed; tuning-log pilot findings"
-```
-(If no machinery changed, commit only the tuning log.)
-
----
-
-### Task 7: Generate + adversarially review MAT-013 (thin-passage restraint check)
-
-Same loop as Task 6 for `MAT-013` (5:1-2). Validates the coverage-restraint principle: supports D1 (crowds, disciples, mountain), D2 (saw crowds → went up → sat → disciples came → opened his mouth → taught), D6 — but **not** D5/D7/D8 answerably. Under-covering is correct. Commentary is available (MHC `5.1-2` + JFB `5.2`), so grounding is present even though coverage is deliberately thin.
-
-**Files:**
-- Create (scratchpad): `<scratchpad>/gen/reviewed_MAT-013.json`; Append `TUNING_LOG`; possibly modify `content_bank/*`.
-
-**Interfaces:** Consumes same as Task 6, for `MAT-013`. Produces `<scratchpad>/gen/reviewed_MAT-013.json`.
-
-- [ ] **Step 1: Build pack** — `python3 -m content_bank.author.build_draft_prompt MAT-013 --out <scratchpad>/gen/pack_MAT-013.md`
-- [ ] **Step 2: Draft** — cover only D1/D2/D6 (plus a `narration_prompt` if the two verses support it); include a D1 `pre_reading_quest` ("who is on the mountain?") at child/adult and a D1/D2 `question`. Do NOT force D5/D7/D8. Write `<scratchpad>/gen/draft_MAT-013.json`.
-- [ ] **Step 3: Validate structure** — the Task 6 Step 3 one-liner on `draft_MAT-013.json`; expect every line `[]`.
-- [ ] **Step 4: Adversarially review** — `REVIEWER_PROMPT` with MAT-013 text + lampposts + drafts; ≥2 concurrent reviewers. A reviewer flagging "missing D7/D8" is NOT a defect here — record that restraint held.
-- [ ] **Step 5: Triage** — item vs machinery, as Task 6 Step 5.
-- [ ] **Step 6: Re-review until clean; stamp `reviewed` + provenance**; write `<scratchpad>/gen/reviewed_MAT-013.json`.
-- [ ] **Step 7: Commit**:
-```bash
-git add docs/superpowers/notes/2026-07-18-content-tuning-log.md content_bank/
-git commit -m "content_bank: MAT-013 generated + reviewed; coverage-restraint holds"
+git commit -m "content_bank: MAT-009 items generated + reviewed; pilot tuning findings"
 ```
 
 ---
 
-### Task 8: Generate + adversarially review MAT-014 (Beatitudes, flagship)
+### Task 8: MAT-013 — brief + items (thin-passage restraint)
 
-Same loop for `MAT-014` (5:3-12) — the richest passage, fullest supported coverage (D1 blessed-are groups, D2 the eight + the "they/you" shift in 11-12, D3 "blessed"/"kingdom of heaven", D4 a Beatitude memory verse, D5 OT echoes from the cross-references, D6, D7 who Jesus calls blessed vs the world, D8). Multiple questions, `activity` + `pre_reader` variant, quests at child/youth/adult.
+Same two-stage loop as Task 7 for `MAT-013` (5:1-2). Confessional hits: **none** — the brief omits the doctrinal anchor (no invention). Coverage: D1 (crowds/disciples/mountain), D2, D6 only; not D5/D7/D8. Commentary is present (MHC 5:1-2, JFB 5:2), so the brief still has exegetical grounding.
 
-**Files:**
-- Create (scratchpad): `<scratchpad>/gen/reviewed_MAT-014.json`; Append `TUNING_LOG`; possibly modify `content_bank/*`.
+**Files:** Create `content_bank/author/briefs/mat-013.md`; scratchpad `reviewed_MAT-013.json`; append `TUNING_LOG`; possibly modify machinery.
 
-**Interfaces:** Consumes same as Task 6, for `MAT-014`. Produces `<scratchpad>/gen/reviewed_MAT-014.json`.
-
-- [ ] **Step 1: Build pack** — `python3 -m content_bank.author.build_draft_prompt MAT-014 --out <scratchpad>/gen/pack_MAT-014.md`
-- [ ] **Step 2: Draft** the full supported coverage across tiers/difficulties. D5 items must name a cross-reference from the pack (e.g. Ps 37:11 for "inherit the earth"). Write `<scratchpad>/gen/draft_MAT-014.json`.
-- [ ] **Step 3: Validate structure** — one-liner on `draft_MAT-014.json`; expect `[]`.
-- [ ] **Step 4: Adversarially review** — `REVIEWER_PROMPT` with MAT-014 text + lampposts + drafts; ≥2 concurrent reviewers.
-- [ ] **Step 5: Triage** — item vs machinery.
-- [ ] **Step 6: Re-review until clean; stamp `reviewed` + provenance**; write `<scratchpad>/gen/reviewed_MAT-014.json`.
-- [ ] **Step 7: Commit**:
+- [ ] **Step 1: Brief pack** — `python3 -m content_bank.author.build_brief_prompt MAT-013 --out <scratchpad>/gen/brief_pack_MAT-013.md` (confessional section reads "No confessional proof-text…").
+- [ ] **Step 2: Distill brief** — four-part shape; doctrinal-anchor part notes reliance on WCF-1 method only (no proof-text doctrine). Save `<scratchpad>/gen/brief_MAT-013.md`.
+- [ ] **Step 3: Fidelity review** — ≥2 `BRIEF_FIDELITY_REVIEWER`; a reviewer demanding invented doctrine is wrong here — record restraint held.
+- [ ] **Step 4: Commit brief** → `content_bank/author/briefs/mat-013.md`:
+```bash
+git add content_bank/author/briefs/mat-013.md docs/superpowers/notes/2026-07-18-content-tuning-log.md content_bank/
+git commit -m "content_bank: MAT-013 theological brief (no proof-text doctrine; restraint)"
+```
+- [ ] **Step 5: Draft pack** — `python3 -m content_bank.author.build_draft_prompt MAT-013 --out <scratchpad>/gen/pack_MAT-013.md`.
+- [ ] **Step 6: Draft** D1/D2/D6 only (+ `narration_prompt` if supported); a D1 `pre_reading_quest` ("who is on the mountain?") at child/adult, a D1/D2 `question`. No D5/D7/D8. Write `<scratchpad>/gen/draft_MAT-013.json`.
+- [ ] **Step 7: Validate structure** — the Task 7 Step 7 one-liner on `draft_MAT-013.json`; expect `[]`.
+- [ ] **Step 8: Quality review** — ≥2 `ITEM_QUALITY_REVIEWER`; "missing D7/D8" is not a defect here.
+- [ ] **Step 9: Triage** — item vs machinery (Task 7 Step 9).
+- [ ] **Step 10: Re-review, stamp `reviewed` + provenance** (`brief":"author/briefs/mat-013.md"`); write `reviewed_MAT-013.json`.
+- [ ] **Step 11: Commit**:
 ```bash
 git add docs/superpowers/notes/2026-07-18-content-tuning-log.md content_bank/
-git commit -m "content_bank: MAT-014 Beatitudes generated + reviewed"
+git commit -m "content_bank: MAT-013 items generated + reviewed"
 ```
 
 ---
 
-### Task 9: Generate + adversarially review MAT-015 (Salt & Light)
+### Task 9: MAT-014 — brief + items (Beatitudes, flagship)
 
-Same loop for `MAT-015` (5:13-16): D3 salt/light imagery, D7 what the light is for (v16), D4 the v16 memory verse, D8 observable "let your light shine", D6, D1/D2 as supported.
+Same two-stage loop for `MAT-014` (5:3-12). Confessional hits: WCF 19.6 (law's promises), WLC Q172 (**safeguard case** — use only its reading of poor-in-spirit/mourn; drop the Lord's-Supper topic). A reference brief already drafted in design discussion may seed Step 2. Richest coverage (D1-D8 as the text supports).
 
-**Files:**
-- Create (scratchpad): `<scratchpad>/gen/reviewed_MAT-015.json`; Append `TUNING_LOG`; possibly modify `content_bank/*`.
+**Files:** Create `content_bank/author/briefs/mat-014.md`; scratchpad `reviewed_MAT-014.json`; append `TUNING_LOG`; possibly modify machinery.
 
-**Interfaces:** Consumes same as Task 6, for `MAT-015`. Produces `<scratchpad>/gen/reviewed_MAT-015.json`.
-
-- [ ] **Step 1: Build pack** — `python3 -m content_bank.author.build_draft_prompt MAT-015 --out <scratchpad>/gen/pack_MAT-015.md`
-- [ ] **Step 2: Draft** the supported coverage across tiers; write `<scratchpad>/gen/draft_MAT-015.json`.
-- [ ] **Step 3: Validate structure** — one-liner on `draft_MAT-015.json`; expect `[]`.
-- [ ] **Step 4: Adversarially review** — `REVIEWER_PROMPT` with MAT-015 text + lampposts + drafts; ≥2 concurrent reviewers.
-- [ ] **Step 5: Triage** — item vs machinery.
-- [ ] **Step 6: Re-review until clean; stamp `reviewed` + provenance**; write `<scratchpad>/gen/reviewed_MAT-015.json`.
-- [ ] **Step 7: Commit**:
+- [ ] **Step 1: Brief pack** — `python3 -m content_bank.author.build_brief_prompt MAT-014 --out <scratchpad>/gen/brief_pack_MAT-014.md`.
+- [ ] **Step 2: Distill brief** — four-part shape; explicitly apply the WLC Q172 safeguard and end with the off-agenda note. Save `<scratchpad>/gen/brief_MAT-014.md`.
+- [ ] **Step 3: Fidelity review** — ≥2 `BRIEF_FIDELITY_REVIEWER`; confirm the sacramentology is excluded and no novelty added.
+- [ ] **Step 4: Commit brief** → `content_bank/author/briefs/mat-014.md`:
+```bash
+git add content_bank/author/briefs/mat-014.md docs/superpowers/notes/2026-07-18-content-tuning-log.md content_bank/
+git commit -m "content_bank: MAT-014 Beatitudes brief (proof-text safeguard applied)"
+```
+- [ ] **Step 5: Draft pack** — `python3 -m content_bank.author.build_draft_prompt MAT-014 --out <scratchpad>/gen/pack_MAT-014.md`.
+- [ ] **Step 6: Draft** the full supported coverage across tiers; D5 items name a brief cross-reference (e.g. Ps 37:11 → v.5). Write `<scratchpad>/gen/draft_MAT-014.json`.
+- [ ] **Step 7: Validate structure** — one-liner; expect `[]`.
+- [ ] **Step 8: Quality review** — ≥2 `ITEM_QUALITY_REVIEWER` with passage + brief.
+- [ ] **Step 9: Triage** — item vs machinery.
+- [ ] **Step 10: Re-review, stamp `reviewed` + provenance** (`brief":"author/briefs/mat-014.md"`); write `reviewed_MAT-014.json`.
+- [ ] **Step 11: Commit**:
 ```bash
 git add docs/superpowers/notes/2026-07-18-content-tuning-log.md content_bank/
-git commit -m "content_bank: MAT-015 Salt and Light generated + reviewed"
+git commit -m "content_bank: MAT-014 Beatitudes items generated + reviewed"
 ```
 
 ---
 
-### Task 10: Assemble the store; validate; prove the gate
+### Task 10: MAT-015 — brief + items (Salt & Light)
 
-**Files:**
-- Modify: `content_bank/store/mat.json` (replace the 25 seed items with the assembled reviewed items)
-- Test: `content_bank/tests/test_store_matthew.py`, `content_bank/tests/test_prototype_bank.py`
+Same two-stage loop for `MAT-015` (5:13-16). Confessional hit: WCF 16.2 (good works glorify God, via v.16 — on point). Coverage: D3 salt/light, D7 what the light is for (v16), D4 the v16 memory verse, D8 observable "let your light shine", D6, D1/D2 as supported.
 
-**Interfaces:**
-- Consumes: `reviewed_MAT-009/013/014/015.json`; `validate.validate_store`, `content.get_content`.
-- Produces: a store whose only items are the four pericopes' reviewed items; `validate_store("MAT")["errors"] == []`.
+**Files:** Create `content_bank/author/briefs/mat-015.md`; scratchpad `reviewed_MAT-015.json`; append `TUNING_LOG`; possibly modify machinery.
 
-- [ ] **Step 1: Assemble the store**
+- [ ] **Step 1: Brief pack** — `python3 -m content_bank.author.build_brief_prompt MAT-015 --out <scratchpad>/gen/brief_pack_MAT-015.md`.
+- [ ] **Step 2: Distill brief** — four-part shape; anchor WCF 16.2 to v.16. Save `<scratchpad>/gen/brief_MAT-015.md`.
+- [ ] **Step 3: Fidelity review** — ≥2 `BRIEF_FIDELITY_REVIEWER`.
+- [ ] **Step 4: Commit brief** → `content_bank/author/briefs/mat-015.md`:
+```bash
+git add content_bank/author/briefs/mat-015.md docs/superpowers/notes/2026-07-18-content-tuning-log.md content_bank/
+git commit -m "content_bank: MAT-015 Salt and Light brief"
+```
+- [ ] **Step 5: Draft pack** — `python3 -m content_bank.author.build_draft_prompt MAT-015 --out <scratchpad>/gen/pack_MAT-015.md`.
+- [ ] **Step 6: Draft** the supported coverage across tiers; write `<scratchpad>/gen/draft_MAT-015.json`.
+- [ ] **Step 7: Validate structure** — one-liner; expect `[]`.
+- [ ] **Step 8: Quality review** — ≥2 `ITEM_QUALITY_REVIEWER` with passage + brief.
+- [ ] **Step 9: Triage** — item vs machinery.
+- [ ] **Step 10: Re-review, stamp `reviewed` + provenance** (`brief":"author/briefs/mat-015.md"`); write `reviewed_MAT-015.json`.
+- [ ] **Step 11: Commit**:
+```bash
+git add docs/superpowers/notes/2026-07-18-content-tuning-log.md content_bank/
+git commit -m "content_bank: MAT-015 Salt and Light items generated + reviewed"
+```
 
-Concatenate the four scratchpad arrays into `{"book":"MAT","items":[...]}` and write `content_bank/store/mat.json`. Every item currently `review_status:"reviewed"` (Task 12 flips to published). Verify ids are globally unique.
+---
 
-- [ ] **Step 2: Rewrite the seed-dependent store tests**
+### Task 11: Assemble the store; validate; prove the gate
 
-`content_bank/tests/test_store_matthew.py` is entirely seed-specific (all five methods assert the 25 seed items / deleted ids; `test_expected_counts` asserts 25/24/1). Replace the whole `TestMatthewStore` body with:
+**Files:** Modify `content_bank/store/mat.json`; Test `content_bank/tests/test_store_matthew.py`, `content_bank/tests/test_prototype_bank.py`.
+
+**Interfaces:** Consumes `reviewed_MAT-009/013/014/015.json`; `validate.validate_store`, `content.get_content`. Produces a store of the four pericopes' reviewed items; `validate_store("MAT")["errors"] == []`.
+
+- [ ] **Step 1: Assemble** — concatenate the four scratchpad arrays into `{"book":"MAT","items":[...]}`, write `content_bank/store/mat.json`. All `review_status:"reviewed"` (Task 13 publishes). Verify id uniqueness.
+
+- [ ] **Step 2: Rewrite the seed-dependent store tests** — replace `TestMatthewStore` in `content_bank/tests/test_store_matthew.py`:
 
 ```python
 class TestMatthewStore(unittest.TestCase):
@@ -777,19 +1019,16 @@ class TestMatthewStore(unittest.TestCase):
 
     def test_only_scoped_pericopes_present(self):
         store = content.load_book_store("MAT")
-        passages = {i["passage"] for i in store["items"]}
-        self.assertEqual(passages, {"MAT-009", "MAT-013", "MAT-014", "MAT-015"})
+        self.assertEqual({i["passage"] for i in store["items"]},
+                         {"MAT-009", "MAT-013", "MAT-014", "MAT-015"})
 
     def test_every_item_reviewed_before_confirmation(self):
-        # after assembly nothing is published yet -> product serves nothing
         self.assertEqual(content.get_content("MAT", mode="product"), [])
         self.assertTrue(content.get_content("MAT", mode="author"))
 ```
-(`validate` and `content` are already imported at the top of the file.)
+(`validate`, `content` already imported.)
 
-- [ ] **Step 3: Fix `test_prototype_bank.py` (seed ids + the zh test)**
-
-`TestLoadBank` references deleted seed ids and `test_zh_bank_uses_translation` requires a `zh` item — impossible under English-only. `TestDisplayRef` is store-independent; leave it. Rewrite `TestLoadBank` to assert shape, not ids:
+- [ ] **Step 3: Fix `test_prototype_bank.py`** — `TestLoadBank` references deleted seed ids and a `zh` test; `TestDisplayRef` is fine. Replace `TestLoadBank`:
 
 ```python
 class TestLoadBank(unittest.TestCase):
@@ -802,21 +1041,17 @@ class TestLoadBank(unittest.TestCase):
         self.assertEqual(by_id["MAT-014"]["title"], "The Beatitudes")
 
     def test_items_flattened_to_body_and_product_gated(self):
-        # after publish (Task 12) product mode serves items with a flat 'body'
-        self.assertTrue(self.bank["items"])
+        self.assertTrue(self.bank["items"])                 # green after Task 13
         item = self.bank["items"][0]
         self.assertIsInstance(item["body"], str)
         self.assertNotIn("text", item)
         self.assertNotIn("draft", {i["review_status"] for i in self.bank["items"]})
 ```
-Delete `test_quest_category_flattened` and `test_zh_bank_uses_translation`. `test_content.py` uses temp fixtures and needs no change.
+Delete `test_quest_category_flattened`, `test_zh_bank_uses_translation`. `test_content.py` (temp fixtures) needs no change.
 
-- [ ] **Step 4: Run the tests for state**
-
-Run: `python3 -m unittest content_bank.tests.test_store_matthew -v`
-Expected: the three `TestMatthewStore` tests PASS.
-Run: `python3 -m unittest discover -s content_bank/tests -v`
-Expected: PASS **except** `test_items_flattened_to_body_and_product_gated`, which asserts a non-empty product bank and only goes green after Task 12 publishes (flagged in the ordering dependency below).
+- [ ] **Step 4: Run tests** —
+Run: `python3 -m unittest content_bank.tests.test_store_matthew -v` → the three PASS.
+Run: `python3 -m unittest discover -s content_bank/tests -v` → PASS **except** `test_items_flattened_to_body_and_product_gated` (needs a non-empty product bank; green after Task 13).
 
 - [ ] **Step 5: Commit**
 
@@ -827,19 +1062,13 @@ git commit -m "content_bank: assemble MAT store (reviewed), replace seed; gate p
 
 ---
 
-### Task 11: Wire MAT-013 into the sequence; resolve the demo passage
+### Task 12: Wire MAT-013 into the sequence; resolve the demo passage
 
-**Files:**
-- Modify: `prototype/family.json`
-- Test: `prototype/test_selector.py` (extend); manual `generate_kit.py` run
+**Files:** Modify `prototype/family.json`; Test `prototype/test_selector.py`; manual `generate_kit.py`.
 
-**Interfaces:**
-- Consumes: the published store (after Task 12), `selector.build_kit`.
-- Produces: `reading_sequence == ["MAT-009","MAT-013","MAT-014","MAT-015"]`; a coherent demo kit that still features the Beatitudes.
+**Interfaces:** Consumes the published store (after Task 13), `selector.build_kit`. Produces `reading_sequence == ["MAT-009","MAT-013","MAT-014","MAT-015"]` with the demo still on the Beatitudes.
 
-- [ ] **Step 1: Update the reading sequence and preserve the demo passage**
-
-Edit `prototype/family.json`: set `"reading_sequence": ["MAT-009", "MAT-013", "MAT-014", "MAT-015"]`. Because `next_passage` returns the first *unstudied* pericope and only MAT-009 is studied, the demo kit would otherwise feature the thin MAT-013 setup. To keep the flagship demo on the Beatitudes, append a second studied session for MAT-013 so `next_passage` returns MAT-014:
+- [ ] **Step 1: Update sequence + preserve demo** — set `"reading_sequence": ["MAT-009","MAT-013","MAT-014","MAT-015"]`. Append a studied MAT-013 session so `next_passage` returns MAT-014:
 
 ```json
     {
@@ -851,11 +1080,8 @@ Edit `prototype/family.json`: set `"reading_sequence": ["MAT-009", "MAT-013", "M
       ]
     }
 ```
-(Append to `sessions`, after the MAT-009 session.)
 
-- [ ] **Step 2: Write the failing test**
-
-Add to `prototype/test_selector.py`:
+- [ ] **Step 2: Write the failing test** — add to `prototype/test_selector.py`:
 
 ```python
     def test_reading_sequence_includes_mat013_before_beatitudes(self):
@@ -866,15 +1092,9 @@ Add to `prototype/test_selector.py`:
                          fam["reading_sequence"].index("MAT-014") - 1)
 ```
 
-- [ ] **Step 3: Run the selector suite**
+- [ ] **Step 3: Run the selector suite** — `cd prototype && python3 -m unittest test_selector -v`. The new test PASSES; the existing next-passage tests still hold via the added session. **These read the live store and go fully green only after Task 13 publishes.**
 
-Run: `cd prototype && python3 -m unittest test_selector -v`
-Expected: the new test PASSES. The existing `test_next_passage_follows_reading_sequence` (expects MAT-014) and `test_after_studying_beatitudes_next_is_salt_and_light` (expects MAT-015) still hold because of the added MAT-013 session. **These selector tests read the live store and only pass once Task 12 has published** — run this step green after Task 12.
-
-- [ ] **Step 4: Verify the kit end-to-end** (after Task 12)
-
-Run: `cd prototype && python3 generate_kit.py -o <scratchpad>/gen/kit_demo.md`
-Expected: a kit for MAT-014 (Beatitudes) — review questions drawn from MAT-009/013, discussion questions across dimensions, an activity + younger variant, quests per member, a memory verse, a narration prompt. Read it; confirm coherence and that every referenced item exists.
+- [ ] **Step 4: Verify the kit end-to-end** (after Task 13) — `cd prototype && python3 generate_kit.py -o <scratchpad>/gen/kit_demo.md`. Expect a coherent MAT-014 kit (review from 009/013, discussion across dimensions, activity + younger variant, quests per member, memory verse, narration). Read it; confirm every referenced item exists.
 
 - [ ] **Step 5: Commit**
 
@@ -885,46 +1105,27 @@ git commit -m "prototype: add MAT-013 to reading sequence; keep Beatitudes as de
 
 ---
 
-### Task 12: Human confirmation digest → publish
+### Task 13: Human confirmation digest → publish
 
-**Files:**
-- Create: `<scratchpad>/gen/confirmation_digest.md`
-- Modify: `content_bank/store/mat.json` (flip `reviewed` → `published`; add `confirmed_by`)
+**Files:** Create `<scratchpad>/gen/confirmation_digest.md`; Modify `content_bank/store/mat.json`.
 
-**Interfaces:**
-- Consumes: the assembled store (Task 10).
-- Produces: a published store; `get_content("MAT", mode="product")` non-empty.
+**Interfaces:** Consumes the assembled store (Task 11). Produces a published store.
 
-- [ ] **Step 1: Build the confirmation digest**
-
-Generate `<scratchpad>/gen/confirmation_digest.md`: one line per item — `id · passage · dimension · type · age_tier · difficulty · the en text` — grouped by pericope, with per-pericope dimension coverage and counts. This is what the human skims.
-
-- [ ] **Step 2: Present the digest and STOP for human approval**
-
-Present the digest to the user. Ask for approval to publish, or a list of items to hold/edit. **Do not proceed without an explicit answer.** Apply any edits requested (re-review edited items via the relevant generation task's Step 4 if substance changed).
-
-- [ ] **Step 3: Stamp published**
-
-For every approved item in `content_bank/store/mat.json`: set `review_status:"published"` and add `"confirmed_by":"kyhhdm"` to `provenance`. Leave any held item as `reviewed`.
-
-- [ ] **Step 4: Prove the gate serves published content**
-
-Run:
+- [ ] **Step 1: Build the digest** — `<scratchpad>/gen/confirmation_digest.md`: one line per item (`id · passage · dimension · type · age_tier · difficulty · en text`), grouped by pericope, with per-pericope dimension coverage and counts, and a link to each brief.
+- [ ] **Step 2: Present the digest and STOP for human approval** — present to the user; ask to approve, or list items to hold/edit. **Do not proceed without an explicit answer.** Apply requested edits (re-review edited items via the relevant Stage-2 quality step if substance changed).
+- [ ] **Step 3: Stamp published** — for each approved item: `review_status:"published"`, add `provenance.confirmed_by:"kyhhdm"`. Held items stay `reviewed`.
+- [ ] **Step 4: Prove the gate** —
 ```bash
 python3 -c "import sys; sys.path.insert(0,'.'); from content_bank.lib import content; \
 print('published:', len(content.get_content('MAT', mode='product')))"
 ```
-Expected: a positive count equal to the approved items.
-
-- [ ] **Step 5: Update the gate test; run everything gated on publish**
-
-Update `content_bank/tests/test_store_matthew.py::test_every_item_reviewed_before_confirmation` to reflect the published state (rename to `test_gate_serves_published` asserting `content.get_content("MAT", mode="product")` is non-empty and holds no `reviewed`/`draft`). Then:
+Expected: positive count = approved items.
+- [ ] **Step 5: Update the gate test; run all gated suites** — rename `test_every_item_reviewed_before_confirmation` → `test_gate_serves_published` (product non-empty, holds no `reviewed`/`draft`). Then:
 ```
-python3 -m unittest discover -s content_bank/tests -v      # incl. test_prototype_bank now green
+python3 -m unittest discover -s content_bank/tests -v      # incl. test_prototype_bank green
 cd prototype && python3 -m unittest test_selector -v && cd ..
 ```
-Expected: all PASS (this satisfies the Task 10 / Task 11 items that were gated on publish).
-
+Expected: all PASS (satisfies the Task 11 / Task 12 items gated on publish).
 - [ ] **Step 6: Commit**
 
 ```bash
@@ -934,38 +1135,20 @@ git commit -m "content_bank: publish confirmed MAT items (human gate)"
 
 ---
 
-### Task 13: Provenance, tuning writeup, final verification
+### Task 14: Provenance, tuning writeup, final verification
 
-**Files:**
-- Modify: `content_bank/PROVENANCE.md`
-- Finalize: `docs/superpowers/notes/2026-07-18-content-tuning-log.md`
+**Files:** Modify `content_bank/PROVENANCE.md`; Finalize `docs/superpowers/notes/2026-07-18-content-tuning-log.md`.
 
-**Interfaces:**
-- Consumes: everything above.
-- Produces: recorded provenance + a quality/tuning writeup; all three suites green.
-
-- [ ] **Step 1: Record provenance**
-
-Append to `content_bank/PROVENANCE.md`: this authoring cycle — pericopes MAT-009/013/014/015, drafted_by claude, grounded in BSB + WCF-1 + JFB/MHC commentary + cross-references, adversarially reviewed, human-confirmed by kyhhdm on 2026-07-18, English-only, seed replaced.
-
-- [ ] **Step 2: Finalize the tuning writeup**
-
-Complete `docs/superpowers/notes/2026-07-18-content-tuning-log.md`: (a) defects found by axis, (b) the machinery change each recurring defect motivated (file + what changed + why — including any lamppost-wiring adjustment), (c) residual known limitations (English-only; zh-conformity deferred; catechisms + lexicon not wired; thin-passage coverage; any axis the agents were weak at).
-
-- [ ] **Step 3: Run every suite**
-
-Run:
-```bash
+- [ ] **Step 1: Record provenance** — append to `content_bank/PROVENANCE.md`: this cycle — MAT-009/013/014/015, drafted_by claude, each item grounded in a committed brief distilled from BSB + WCF-1 + JFB/MHC + cross-references + WCF/WLC/WSC proof-texts, adversarially reviewed (fidelity + quality), human-confirmed by kyhhdm 2026-07-18, English-only, seed replaced. List the four briefs.
+- [ ] **Step 2: Finalize the writeup** — complete the tuning log: (a) fidelity defects (Stage 1) and quality defects (Stage 2) by axis; (b) each machinery change + the defect that motivated it (brief-builder, draft pack, dimensions, checklist); (c) residual limits (English-only; zh deferred; lexicon absent; thin-passage coverage; the WLC-Q172-style proof-text discipline; any axis the agents were weak at).
+- [ ] **Step 3: Run every suite** —
+```
 python3 -m unittest discover -s content_bank/tests -v
 cd prototype && python3 -m unittest test_selector -v && cd ..
 python3 -m unittest discover -s corpus/tests -v
 ```
 Expected: all PASS, no regressions.
-
-- [ ] **Step 4: Final kit smoke test**
-
-Run: `cd prototype && python3 generate_kit.py` — confirm it prints a coherent Beatitudes kit with no missing items.
-
+- [ ] **Step 4: Final kit smoke test** — `cd prototype && python3 generate_kit.py` — a coherent Beatitudes kit, no missing items.
 - [ ] **Step 5: Commit**
 
 ```bash
@@ -978,17 +1161,19 @@ git commit -m "content_bank: provenance + quality/tuning writeup for prototype c
 ## Self-Review
 
 **Spec coverage:**
-- Rubric (7 axes) → Task 1. Checklist mirrors it → Task 2. Dimension guidance → Task 3.
-- Lamppost wiring: `corpus_bridge` commentary + crossref accessors → Task 4; injected into the drafting pack → Task 5; handed to reviewers as ground truth → `REVIEWER_PROMPT` (used in Tasks 6-9).
-- Drafting-pack tuning (answerability, coverage, per-type, evidence, rubric) → Task 5.
-- Generate + adversarial review per pericope, with triage/tuning → Tasks 6-9 (009/013/014/015); coverage-restraint exercised in Task 7.
-- Regenerate-all-replace-seed + store validation + gate proof → Task 10.
-- MAT-013 into sequence + demo-passage resolution → Task 11.
-- `reviewed` → confirmation digest → `published` human gate → Task 12.
-- Provenance + tuning writeup + full verification → Task 13. English-only, stdlib-only, scope limits, lampposts-not-shipped → Global Constraints.
+- Rubric → Task 1; checklist mirrors it → Task 2; dimension guidance → Task 3.
+- `corpus_bridge` commentary + crossrefs + **confessional_refs** → Task 4.
+- **Stage-1 brief pack** (`build_brief_prompt`, full lampposts, ~250-word shape, safeguard) → Task 5.
+- **Stage-2 draft pack** (passage-first, brief-grounded, compact WCF-1) → Task 6.
+- Per-pericope two-stage generate + fidelity/quality review + triage → Tasks 7-10; thin-passage restraint (Task 8), safeguard case (Task 9).
+- Committed briefs → Tasks 7-10 (`author/briefs/*.md`).
+- Store assembly + gate → Task 11; MAT-013 sequence + demo → Task 12; human gate → Task 13; provenance + writeup + verification → Task 14.
+- Two-stage, passage-first proportion, WLC/WSC in scope, lampposts-not-shipped → Global Constraints.
 
-**Placeholder scan:** No TBD/TODO. Generation tasks (6-9) are inherently generative, not code-TDD; each still has a concrete gate (structural `validate_item` + adversarial pass) and concrete commands. `<scratchpad>` is a real path supplied at execution time.
+**Placeholder scan:** No TBD/TODO. Generation tasks (7-10) are generative, not code-TDD; each has concrete gates (fidelity review; `validate_item`; quality review) and concrete commands. `<scratchpad>` is a real path supplied at execution.
 
-**Type consistency:** `rubric.build()`/`rubric.AXES` (Task 1) consumed in Tasks 2, 5. `dimensions.TEMPLATES` keys == `schema.DIMENSIONS` preserved (Task 3), invariant test kept green. `corpus_bridge.commentary(range_str, book, works)` / `corpus_bridge.crossrefs(range_str, limit)` defined in Task 4, consumed in Task 5's `_lamppost_block` and in the reviewer prompt. `build_draft_prompt.build(pericope_id, book)` signature unchanged (Task 5). Provenance keys (`drafted_by`, `reviewed_by`, `reviewed_date`, `guardrail`, `confirmed_by`) consistent across Tasks 6-9, 12, and satisfy `schema.validate_item`.
+**Type consistency:** `rubric.build()`/`AXES` (Task 1) → Tasks 2, 6. `dimensions.TEMPLATES` keys == `schema.DIMENSIONS` (Task 3), invariant kept. `corpus_bridge.commentary/crossrefs/confessional_refs` (Task 4) → Task 5's brief pack (and Task 6 does not re-inject them). `build_brief_prompt.build(pericope_id, book)` (Task 5) → Tasks 7-10 Stage 1. `build_draft_prompt.build(pericope_id, book, brief=None)` loads `author/briefs/<lower>.md` (Task 6) → Tasks 7-10 Stage 2, which commit those briefs first. Provenance keys (`drafted_by`, `reviewed_by`, `reviewed_date`, `guardrail`, `brief`, `confirmed_by`) consistent across Tasks 7-10, 13; satisfy `schema.validate_item`.
 
-**Ordering dependency (flagged in-plan):** the live-store checks — Task 10 Step 4's `test_items_flattened_to_body_and_product_gated`, Task 11 Step 3's selector tests, and Task 11 Step 4's kit run — depend on Task 12 having published. Task 12 Step 5 is the point at which the full suites are expected green. This ordering is intentional: MAT-013 must be in the sequence (Task 11) and content assembled (Task 10) before a coherent demo can be judged, but nothing is published until the human confirms (Task 12).
+**Ordering dependencies (flagged in-plan):**
+1. Per pericope, the **brief must be committed (Stage 1) before Stage 2** — `build_draft_prompt` raises `FileNotFoundError` otherwise. Tasks 7-10 order their steps accordingly.
+2. The live-store checks — Task 11 Step 4's `test_items_flattened...`, Task 12 Step 3's selector tests, Task 12 Step 4's kit run — depend on **Task 13 having published**. Task 13 Step 5 is where the full suites are expected green. Intentional: content assembled (11) and MAT-013 sequenced (12) before a coherent demo can be judged, but nothing publishes until the human confirms (13).

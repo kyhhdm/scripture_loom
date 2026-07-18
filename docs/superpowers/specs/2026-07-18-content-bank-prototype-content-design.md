@@ -26,10 +26,20 @@ replacing the 25 hand-migrated seed items:
 - `MAT-014` The Beatitudes (5:3-12)
 - `MAT-015` Salt and Light (5:13-16)
 
-Also in scope — **wire the corpus lampposts into authoring** so accuracy against
-them is real, not merely asserted: extend `corpus_bridge` to serve commentary
-(JFB, MHC) and cross-references, inject both into the drafting pack, and give them
-to the adversarial reviewers as ground truth (see "Corpus assets in authoring").
+Also in scope — **wire the corpus lampposts into authoring as a two-stage,
+passage-first process** so accuracy against them is real, not merely asserted, and
+the passage is never buried under reference:
+
+- Extend `corpus_bridge` to serve commentary (JFB, MHC), cross-references, and
+  **confessional references** (WCF + WLC + WSC selected by proof-text lookup).
+- **Stage 1 — distill a theological brief.** From passage + WCF-1 + commentary +
+  cross-references + confessional references, produce a compact (~250-word),
+  reviewed, committed per-pericope brief that is the theological base.
+- **Stage 2 — draft from passage + brief.** The drafting pack carries the
+  foregrounded passage + the short brief (+ a compact WCF-1 guardrail + the
+  cross-reference targets), never the raw ~11k words of lampposts.
+- Give the adversarial reviewers the brief (and, at Stage 1, the raw lampposts)
+  as ground truth (see "Corpus assets in authoring" and "Two-stage authoring").
 
 **Out of scope** (explicit, so the plan does not drift):
 
@@ -41,6 +51,9 @@ to the adversarial reviewers as ground truth (see "Corpus assets in authoring").
 - Any other Matthew pericope. 149 of the 153 stay empty.
 - Changing the corpus, the store schema/vocabularies (`schema.py`), the gate
   (`content.py`), or the selector logic (`selector.py`).
+
+(Note: the catechisms WLC/WSC, previously deferred, are **now in scope** — the
+proof-text lookup makes their relevant Q&As cheap and precise to include.)
 
 ## Locked decisions
 
@@ -106,10 +119,17 @@ and cross-references.
 |---|---|---|
 | **Bible text** (BSB/KJV/WEB/CUV) | `canon/bibles/` via `corpus/lib/passage.py` gate | The pericope's verses — the text every non-D5 item must be answerable from. *Already wired* (`passage_text`, BSB). |
 | **Confession** (WCF ch.1) | `canon/lampposts/wcf.json` | The hard doctrinal guardrail injected into every pack. *Already wired* (`wcf_chapter1_text`). |
-| **Commentary** (JFB, MHC) | `canon/lampposts/{jfb,mhc}/<book>.json` | Authoring-time grounding for accuracy and interpretation (axes 1, 2, 5, 7). **Wired this cycle.** |
-| **Cross-references** | `canon/structure/crossrefs.json` | Ground truth for D5 (Connections) and "Scripture interprets Scripture"; the drafter names real links, not remembered ones. **Wired this cycle.** |
-| Catechisms (WLC/WSC) | `canon/lampposts/{wlc,wsc}.json` | Not wired this cycle (WCF ch.1 carries the guardrail). Noted as a later option. |
+| **Commentary** (JFB, MHC) | `canon/lampposts/{jfb,mhc}/<book>.json` | **Exegesis** — what the text says. Grounds the brief (axes 1, 2, 5, 7). **Wired this cycle (Stage 1).** |
+| **Cross-references** | `canon/structure/crossrefs.json` | **Scripture interprets Scripture** — the vetted, real targets for D5. Grounds the brief; the top refs also carry into the draft pack. **Wired this cycle.** |
+| **Confession** (WCF 2-33) + **Catechisms** (WLC/WSC) | `canon/lampposts/{wcf,wlc,wsc}.json` | **Doctrine** — what the church confesses this passage teaches. Selected per pericope by **proof-text reverse-lookup**; grounds the brief. **Wired this cycle (Stage 1).** |
 | Dictionary / lexicon | — | **Does not exist.** D3 (Vocabulary) leans on the commentary; a lexicon is a possible future corpus asset, out of scope here. |
+
+**The two roles of the confessional material.** WCF **chapter 1** is the *method*
+guardrail — how any content must treat Scripture (inspired, inerrant, sufficient,
+Scripture-interprets-Scripture). It is *standing*: it applies to every item on
+every passage, so a **compact** form of it rides in every draft pack, and its full
+text grounds the brief stage. The **rest of WCF plus WLC/WSC** is the *doctrinal
+map* — passage-specific, selected by proof-text lookup, and folded into the brief.
 
 **Data shapes (verified):**
 
@@ -124,32 +144,86 @@ and cross-references.
   sources}]}`, ~344k entries. The per-pericope reader returns refs whose `from`
   falls within the pericope's verse span, ranked by `weight` (descending), capped
   (e.g. top 15) to keep the pack bounded.
+- Confessional standards: `wcf.json` = `{chapters: [{n, title, sections: [{n,
+  text, proof_texts: [...]}]}]}`; `wlc.json` / `wsc.json` = `{questions: [{n, q,
+  a, proof_texts: [...]}]}`. Each `proof_texts` entry is a Scripture ref
+  (`ROM.11.36`, `MAT.5.5`, …). The per-pericope reader returns the WCF sections
+  and WLC/WSC Q&As whose proof-texts overlap the pericope, each carrying its text
+  and the citing verse. Output is naturally small (0-11 hits/pericope, verified);
+  MAT-013 has zero — coverage restraint applies (omit, don't force).
 
-**License note:** JFB and MHC are public domain; both are used as *authoring-time
-grounding only* — they inform the drafter and reviewers but are never copied into
-shipped items (verbatim quotations come from the gated Bible text). No new license
-surface enters the store. Cross-references are CC-BY (openbible.info); if any
-shipped product later surfaces them, attribution is required — not triggered by
-this cycle, which uses them only during authoring.
+**License note:** JFB, MHC, and the Westminster standards (WCF/WLC/WSC) are public
+domain; all are used as *authoring-time grounding only* — they inform the drafter,
+the brief, and the reviewers but are never copied into shipped items (verbatim
+quotations come from the gated Bible text). No new license surface enters the
+store. Cross-references are CC-BY (openbible.info); if any shipped product later
+surfaces them, attribution is required — not triggered by this cycle, which uses
+them only during authoring.
+
+## Two-stage authoring
+
+The problem this solves: for the Beatitudes the lampposts run ~10,900 words
+(WCF-1 977 + MHC 5,973 + JFB 3,957) against a ~130-word passage — roughly **80×**.
+Injected raw, the passage drowns and the drafter is tempted to write *about the
+commentary*. So authoring splits into distill → draft.
+
+**Stage 1 — the theological brief.** `build_brief_prompt.py` assembles a
+distillation pack (the passage + full WCF-1 + commentary + top cross-references +
+the confessional proof-text hits). Here length is fine — the task is synthesis,
+not generation. The drafter produces a compact **~250-word brief** with a fixed
+shape: the passage's own emphasis (primary); key terms grounded in the commentary;
+the doctrinal anchors (which WCF/WLC/WSC statements bear, and the method from
+WCF-1); the vetted cross-references, each with a one-phrase note. The brief is
+**adversarially reviewed for fidelity** — faithfully represents the lampposts,
+adds no private novelty, keeps the passage's emphasis primary — then **committed**
+as `content_bank/author/briefs/<pericope>.md`. It *is* the theological base.
+
+**The proof-text safeguard (load-bearing, not theoretical).** A proof-text link
+means "the divines grounded doctrine X partly here," *not* "this passage is a
+treatise on X." Verified example: the Beatitudes hit **WLC Q172**, whose subject
+is the Lord's Supper; the brief must extract only Q172's reading of "poor in
+spirit / mourn" as the humble, needy heart and drop the sacramentology as
+off-agenda. The fidelity review enforces exactly this discernment.
+
+**Stage 2 — drafting items.** `build_draft_prompt.py` carries the **foregrounded
+passage + the committed brief + a compact WCF-1 guardrail + the cross-reference
+targets** (+ the rules/types/rubric). Passage-to-base is now ~1:2, not 1:80. The
+quality reviewers get the brief + passage as ground truth, with the full lampposts
+available only if a reviewer wants to dig.
 
 ## Workflow (per pericope)
 
 ```
-passage text + WCF-1 + commentary(JFB/MHC) + crossrefs
+STAGE 1 — brief
+passage + full WCF-1 + commentary(JFB/MHC) + crossrefs + confessional_refs
+                    │
+                    ▼
+build_brief_prompt.py ──▶ drafter ──▶ ~250-word brief
+                                          │
+                                          ▼
+                  adversarial FIDELITY review (faithful? no novelty?
+                  passage-emphasis primary? loose proof-texts handled?)
+                                          │ clean
+                                          ▼
+                  commit  content_bank/author/briefs/<pericope>.md
+
+STAGE 2 — items
+passage (foregrounded) + brief + compact WCF-1 + crossref targets
                     │
                     ▼
 build_draft_prompt.py ──▶ drafter ──▶ draft items
                                           │
                           ┌───────────────┘
                           ▼
-        adversarial reviewers (one lens per rubric axis)
-        (handed the same commentary + crossrefs as ground truth)
+        adversarial QUALITY reviewers (seven rubric axes;
+        handed the brief + passage as ground truth)
                           │  verdicts + defects
                           ▼
                     triage each defect
                     ├── fix the item ──────────────┐
                     └── fix the machinery           │
-                         (recurring / systemic)     │
+                         (brief-builder, draft pack,│
+                          dimensions, or checklist)  │
                           │                          │
               apply machinery fix, regenerate/repair │
                           └───────────► re-review ◀──┘
@@ -174,35 +248,45 @@ machinery change is recorded with the defect that motivated it.
   `content_bank/author/rubric.py` (a `build()` returning the text, matching the
   existing `review_checklist.py` / `dimensions.py` shape), so it is single-sourced
   and importable by both the checklist and the drafting pack.
-- **`lib/corpus_bridge.py`** — add two read-only accessors: `commentary(book,
-  range_str, works=("mhc","jfb"))` returning the overlapping commentary blocks per
-  work, and `crossrefs(range_str, limit=15)` returning the top-weighted
-  cross-references whose `from` falls in the range. Read directly from the corpus
-  JSON canon like the existing accessors; no corpus dependency on `sys.path`.
+- **`lib/corpus_bridge.py`** — add three read-only accessors: `commentary(range_str,
+  book="MAT", works=("mhc","jfb"))` returning the overlapping commentary blocks per
+  work; `crossrefs(range_str, limit=15)` returning the top-weighted cross-references
+  whose `from` falls in the range; and `confessional_refs(range_str)` returning the
+  WCF sections and WLC/WSC Q&As whose proof-texts overlap the range (each with its
+  text and citing verse). Read directly from the corpus JSON canon like the
+  existing accessors; no corpus dependency on `sys.path`.
+- **New — `author/build_brief_prompt.py`.** Assembles the Stage-1 distillation
+  pack (passage + full WCF-1 + commentary + crossrefs + confessional_refs) and the
+  instruction to produce the fixed-shape ~250-word brief, including the proof-text
+  safeguard. Offline, stdlib-only, no API.
+- **New — `author/briefs/<pericope>.md`.** The committed, fidelity-reviewed
+  theological briefs — the durable theological base and part of provenance.
 - **`author/dimensions.py`** — expand each one-line template into drafting
   guidance rich enough to prevent the recurring dimension-fit and answerability
   defects the review surfaces. Meaning still sourced from
   `docs/design-kit_generator.md` Part 1.
-- **`author/build_draft_prompt.py`** — fold in what the review teaches: the
-  answerable-from-this-pericope rule, coverage-per-supported-dimension guidance,
-  per-type expectations, tier/difficulty calibration, an explicit
-  evidence-not-judgment constraint. **Also inject the pericope's commentary
-  (JFB/MHC) and top cross-references** from the new `corpus_bridge` accessors, so
-  the drafter works from the lampposts, not memory. Keep it offline, stdlib-only,
-  no API.
-- **The adversarial reviewer prompt** — receives the same commentary +
-  cross-references as ground truth, so axis-2 accuracy is checked against sources,
-  not asserted.
+- **`author/build_draft_prompt.py`** — becomes the Stage-2 pack: **foreground the
+  passage**, then carry the committed **brief**, a **compact WCF-1 guardrail** (not
+  the full 977-word chapter — that lives in the brief stage), and the
+  **cross-reference targets** for D5; plus the answerable-from-this-pericope rule,
+  coverage-per-supported-dimension guidance, per-type expectations,
+  tier/difficulty calibration, and the evidence-not-judgment constraint. Keep it
+  offline, stdlib-only, no API.
+- **The adversarial reviewer prompts** — two flavors: a Stage-1 **fidelity**
+  reviewer (brief faithful to lampposts, no novelty, passage-emphasis primary,
+  loose proof-texts handled) and the Stage-2 **quality** reviewer (seven rubric
+  axes), the latter handed the brief + passage as ground truth.
 - **`author/review_checklist.py`** — realign to the seven rubric axes (adds
   dimension-fit, answerability, pedagogical-strength; today it has conformity /
   accuracy / age-fitness / evidence).
 - **`content_bank/store/mat.json`** — regenerated: seed replaced by
   harness-produced, adversarially-reviewed items for the four pericopes.
-- **`content_bank/PROVENANCE.md`** — record this authoring cycle.
+- **`content_bank/PROVENANCE.md`** — record this authoring cycle (incl. the briefs
+  and the lampposts each was distilled from).
 - **`prototype/family.json`** — `reading_sequence` gains `MAT-013`.
 
 Not changed: `schema.py`, `content.py`, `validate.py`, `prototype_bank.py`,
-`selector.py`, the corpus itself (read-only). `corpus_bridge.py` gains two
+`selector.py`, the corpus itself (read-only). `corpus_bridge.py` gains three
 read-only accessors but its existing surface is untouched.
 
 ## Provenance model
@@ -234,10 +318,13 @@ read-only accessors but its existing surface is untouched.
 ## Deliverables
 
 1. Regenerated, adversarially-reviewed `store/mat.json` (four pericopes).
-2. Tuned authoring harness (`dimensions.py`, `build_draft_prompt.py`,
-   `review_checklist.py`) + new `rubric.py`; `corpus_bridge.py` commentary +
-   cross-reference accessors wired into the pack and the reviewers.
-3. Updated `family.json`, `PROVENANCE.md`.
-4. A quality/tuning writeup: the defects found, the machinery changes each
-   motivated, and the residual known limitations.
-5. All suites green; kit verified end-to-end.
+2. Four committed, fidelity-reviewed theological briefs
+   (`author/briefs/mat-009,013,014,015.md`) — the theological base.
+3. Tuned authoring harness: new `rubric.py` and `build_brief_prompt.py`; tuned
+   `dimensions.py`, `build_draft_prompt.py` (Stage 2, passage-first + brief +
+   compact WCF-1), `review_checklist.py`; `corpus_bridge.py` commentary +
+   cross-reference + confessional-reference accessors.
+4. Updated `family.json`, `PROVENANCE.md`.
+5. A quality/tuning writeup: the defects found (both stages), the machinery
+   changes each motivated, and the residual known limitations.
+6. All suites green; kit verified end-to-end.
