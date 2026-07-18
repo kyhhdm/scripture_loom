@@ -38,7 +38,7 @@ content_bank/
     build_draft_prompt.py      per-pericope prompt pack -> stdout/file  [Task 7]
     review_checklist.py        draft->reviewed->published checklist     [Task 7]
   store/
-    matthew.json               migrated content, corpus-keyed           [Task 5]
+    mat.json               migrated content, corpus-keyed           [Task 5]
   tests/
     test_schema.py             [Task 1]
     test_content.py            [Task 2]
@@ -314,7 +314,7 @@ class TestGetContent(unittest.TestCase):
             item(id="p13", passage="MAT-013"),
             item(id="zhonly", text={"zh": "你好"}),
         ]}
-        (self.dir / "matthew.json").write_text(json.dumps(store), encoding="utf-8")
+        (self.dir / "mat.json").write_text(json.dumps(store), encoding="utf-8")
 
     def ids(self, **kw):
         return {i["id"] for i in content.get_content("MAT", store_dir=self.dir, **kw)}
@@ -586,7 +586,7 @@ def item(**over):
 class TestValidateStore(unittest.TestCase):
     def _write(self, items):
         d = pathlib.Path(tempfile.mkdtemp())
-        (d / "matthew.json").write_text(
+        (d / "mat.json").write_text(
             json.dumps({"book": "MAT", "items": items}), encoding="utf-8")
         return d
 
@@ -686,13 +686,13 @@ git commit -m "content_bank: store validator (referential integrity + coverage c
 ### Task 5: Migrate prototype content into the store
 
 **Files:**
-- Create: `content_bank/store/matthew.json`
+- Create: `content_bank/store/mat.json`
 - Create: `content_bank/PROVENANCE.md`
 - Test: `content_bank/tests/test_store_matthew.py`
 
 **Interfaces:**
 - Consumes: `validate.validate_store` (Task 4).
-- Produces: `content_bank/store/matthew.json` — the migrated content, corpus-keyed, `body` → `text.en`, one seeded `zh` string.
+- Produces: `content_bank/store/mat.json` — the migrated content, corpus-keyed, `body` → `text.en`, one seeded `zh` string.
 
 **Migration rules** (apply to every item in `prototype/content_bank.json`):
 - Keep the item `id` unchanged.
@@ -749,11 +749,11 @@ if __name__ == "__main__":
 - [ ] **Step 2: Run test to verify it fails**
 
 Run: `python3 -m unittest content_bank.tests.test_store_matthew -v`
-Expected: FAIL — `FileNotFoundError` (no `store/matthew.json`).
+Expected: FAIL — `FileNotFoundError` (no `store/mat.json`).
 
 - [ ] **Step 3: Build the store file and provenance**
 
-Create `content_bank/store/matthew.json` by transcribing all 25 items from `prototype/content_bank.json` under the migration rules above. The full item list and their target passages (from the mapping table):
+Create `content_bank/store/mat.json` by transcribing all 25 items from `prototype/content_bank.json` under the migration rules above. The full item list and their target passages (from the mapping table):
 
 - MAT-009: `mt4-q-who-tempted` (D1), `mt4-q-how-answered` (D4), `mt4-q-order` (D2), `mt4-q-which-book` (D3)
 - MAT-013: `mt5a-q-mountain` (D2), `mt5a-quest-who-listens` (D1, pre_reading_quest, has category)
@@ -832,7 +832,7 @@ Create `content_bank/PROVENANCE.md`:
 
 ## Seed content (2026-07-18)
 
-The initial `store/matthew.json` items were migrated from the kit-generator
+The initial `store/mat.json` items were migrated from the kit-generator
 prototype's hand-authored `prototype/content_bank.json` (25 items across three
 prototype pericopes). Content is human-authored; `provenance.drafted_by` is
 `hand` and each published item is recorded as reviewed against `WCF-1`
@@ -872,7 +872,7 @@ Expected: PASS. If `test_expected_counts` fails, recount the transcribed items a
 - [ ] **Step 5: Commit**
 
 ```bash
-git add content_bank/store/matthew.json content_bank/PROVENANCE.md content_bank/tests/test_store_matthew.py
+git add content_bank/store/mat.json content_bank/PROVENANCE.md content_bank/tests/test_store_matthew.py
 git commit -m "content_bank: migrate prototype content to corpus-keyed store"
 ```
 
