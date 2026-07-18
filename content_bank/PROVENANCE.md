@@ -31,6 +31,49 @@ the human confirmation gate `confirmed_by: kyhhdm` (human of record) with
 **English-only this cycle** (`text: {en}`); `zh` and a distinct zh-conformity
 review are a later cycle.
 
+## Leader references — augmentation cycle (2026-07-19)
+
+The 62 published items were augmented with an optional **leader-only**
+`leader_reference` (issue #2). 57 references were authored across the four
+pericopes: **39 answer keys** (closed dimensions D1–D5 — expected response +
+verse) and **18 leader notes** (open dimensions D6–D8 — where the text leads and
+common misreadings, kept open). Every `question` and `pre_reading_quest` is
+covered; `activity`/`narration_prompt` items carry a reference only where it aids
+facilitation; `memory_verse` items carry none. The reference is leader-only data;
+keeping it off any printed page is the heart-prep-gate feature's concern, not this
+cycle's.
+
+**How each reference was produced (per pericope):**
+
+1. **Drafting.** `build_reference_prompt.py` assembled a pack — the foregrounded
+   passage + the committed brief (`author/briefs/<pericope>.md`, the same
+   theological base as the item cycle) + the eligible items tagged by kind + the
+   reference criteria. Each reference is a per-question distillation of that brief,
+   not a new content source.
+2. **Adversarial accuracy review.** An independent reviewer tried to break each
+   reference against the passage as ground truth: answer keys correct,
+   answerable-from-this-passage, and cited-verse-actually-contains-the-answer;
+   leader notes kept open (no canned answer). D5 connection answers must name their
+   cross-reference. 0 defects on the first pass.
+3. **Doctrinal-balance re-sweep.** A defect the owner surfaced — the MAT-009 D3
+   "It is written" answer key read flatly as though Jesus lacked authority over
+   Scripture — drove a **machinery fix**: a "reduce confusion, doctrinally
+   balanced" principle added to the single-sourced `rubric.reference_criteria()`
+   (inherited by the drafter pack, the adversarial reviewers, and the human
+   checklist). Re-sweeping all 57 under the new lens flagged 2 items
+   (`mt4-d3-it-is-written-q`, `mt4-d7-why-scripture-q`); both were sharpened to
+   affirm Christ as Scripture's divine Author (WCF-1) while keeping the point.
+4. **Human confirmation gate.** kyhhdm reviewed the full digest and approved all
+   57 before any reference entered the store.
+
+**Provenance stamps (on `leader_reference.provenance`):** `drafted_by: claude`,
+`reviewed_by: claude-adversarial`, `reviewed_date: 2026-07-19`,
+`guardrail: WCF-1`, `confirmed_by: kyhhdm`. The item's own `review_status`
+(`published`) and provenance are untouched.
+
+**English-only this cycle** (`text: {en}`, `verse: {en}`); a `zh` reference pass
+is a later cycle.
+
 The quality defects the review caught and the machinery changes each drove are
 recorded in `docs/superpowers/notes/2026-07-18-content-tuning-log.md`; a
 human-readable per-pericope review of the published set is at

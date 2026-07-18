@@ -22,6 +22,32 @@ class TestMatthewStore(unittest.TestCase):
         self.assertTrue(pub)
         self.assertEqual({i["review_status"] for i in pub}, {"published"})
 
+    def test_references_validate_and_cover_eligible(self):
+        result = validate.validate_store("MAT")
+        self.assertEqual(result["errors"], [])                    # refs valid
+        refs = result["counts"]["references"]
+        self.assertEqual(refs["missing_reference"], 0)            # all q/quest covered
+        self.assertGreater(refs["answer_key"], 0)
+        self.assertGreater(refs["leader_note"], 0)
+
+    def test_no_reference_on_memory_verse(self):
+        store = content.load_book_store("MAT")
+        for it in store["items"]:
+            if it["type"] == "memory_verse":
+                self.assertNotIn("leader_reference", it)
+
+    def test_reference_kind_matches_dimension(self):
+        from content_bank.lib import schema
+        store = content.load_book_store("MAT")
+        for it in store["items"]:
+            ref = it.get("leader_reference")
+            if not ref:
+                continue
+            if ref["kind"] == "answer_key":
+                self.assertIn(it["dimension"], schema.CLOSED_DIMENSIONS)
+            else:
+                self.assertIn(it["dimension"], schema.OPEN_DIMENSIONS)
+
 
 if __name__ == "__main__":
     unittest.main()
