@@ -49,6 +49,9 @@ _SCHEMA_BLOCK = """Each item MUST be a JSON object with these fields:
   category {{ "en": "..." }} ONLY for pre_reading_quest.
 No provenance; the reviewer stamps it."""
 
+_READING_MOVES_PTR = (" -> consult the brief's *Reading moves* note for this "
+                      "passage's genre-specific emphasis (if present).")
+
 
 def _load_brief(pericope_id):
     f = _BRIEFS / f"{pericope_id.lower()}.md"
@@ -77,7 +80,10 @@ def build(pericope_id, book="MAT", brief=None):
              _WCF1_GUARDRAIL + "\n",
              "## Dimensions to cover\n"]
     for d, desc in dimensions.TEMPLATES.items():
-        parts.append(f"- {d}: {desc}")
+        line = f"- {d}: {desc}"
+        if d in ("D3", "D7"):
+            line += _READING_MOVES_PTR
+        parts.append(line)
     parts.append("")
     parts.append(_RULES_BLOCK)
     parts.append("")

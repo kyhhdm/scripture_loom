@@ -3,7 +3,7 @@ import sys
 import unittest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))
-from content_bank.author import build_draft_prompt, review_checklist, dimensions, rubric, build_reference_prompt
+from content_bank.author import build_draft_prompt, review_checklist, dimensions, rubric, build_reference_prompt, build_brief_prompt
 
 
 class TestBuildDraftPrompt(unittest.TestCase):
@@ -44,6 +44,10 @@ class TestBuildDraftPrompt(unittest.TestCase):
     def test_missing_brief_raises(self):
         with self.assertRaises(FileNotFoundError):
             build_draft_prompt.build("MAT-999-nobrief", book="MAT", brief=None)
+
+    def test_d3_d7_point_to_reading_moves(self):
+        # The pointer appears exactly twice — once on D3, once on D7.
+        self.assertEqual(self.prompt.count("consult the brief's *Reading moves*"), 2)
 
 
 class TestReviewChecklist(unittest.TestCase):
@@ -109,6 +113,12 @@ class TestBuildBriefPrompt(unittest.TestCase):
         from content_bank.author import build_brief_prompt
         pack = build_brief_prompt.build("MAT-013", book="MAT")
         self.assertIn("No confessional", pack)
+
+    def test_asks_for_reading_moves_part(self):
+        self.assertIn("Reading moves", self.pack)
+
+    def test_brief_now_has_five_parts(self):
+        self.assertIn("five parts", self.pack)
 
 
 class TestReferenceCriteria(unittest.TestCase):

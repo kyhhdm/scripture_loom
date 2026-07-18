@@ -9,7 +9,7 @@ from ..lib import corpus_bridge
 
 _SHAPE = """## Produce the THEOLOGICAL BRIEF
 
-~250 words (hard max 300), in exactly these four parts:
+~250 words (hard max 300, excluding the Reading-moves note below), in exactly these five parts:
 
 **Passage's own emphasis (primary).** What THIS passage says and stresses, in the
 text's own terms. This governs everything else.
@@ -21,6 +21,13 @@ commentary itself supplies them. Ground, don't speculate.
 Scripture-interpreting-Scripture. Doctrine: what the cited confessional/catechism
 statements say this passage teaches.
 **Cross-references.** The vetted links above, each with a one-phrase note.
+
+**Reading moves (per dimension — especially D3/D7).** One or two sentences naming
+this passage's genre-specific emphases for Vocabulary (D3) and Interpretation (D7),
+and any shift within the passage. Examples — poetry: "D7 = image -> referent; note
+the metaphor shift at v5"; epistle: "D7 = trace the therefore; D3 on the argument's
+key terms." For a straightforward narrative passage where D3/D7 are already well
+served, write "standard" or omit. (Excluded from the word count above.)
 
 SAFEGUARD — a proof-text link means "the divines grounded a doctrine partly
 here," NOT "this passage is a treatise on that doctrine." Use only the part of a
