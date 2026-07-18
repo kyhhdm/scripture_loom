@@ -105,7 +105,7 @@ Understanding what the text means — first observing what it actually says, the
 - **Observable evidence:** accurately narrates the passage's point in own words; answers a "why" question from the text rather than guessing; corrects a misreading; distinguishes what the text says from what they assumed.
 - **Question templates:** What is the main thing this passage says? Why did ___ do/say that? What in the text tells you so? What surprised you?
 - **Paper activities:** narration (retell, then the family checks against the text); sort statements into "the text says / the text doesn't say"; choose the best summary.
-- **Progression:** accurate observation of what is written → explains meaning within the passage → explains the passage within the book's argument.
+- **Progression:** accurate observation of what is written → explains meaning within the passage → explains the passage within its larger context — the book's argument, the psalm's movement, or the proverb's contrast, according to the passage's kind.
 
 #### D8. Application
 

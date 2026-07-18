@@ -37,6 +37,11 @@ def _published(bank, passage=None, type_=None):
         yield item
 
 
+def available_dimensions(bank, passage_id):
+    """Dimensions with >= 1 published item for this passage (any type)."""
+    return {item["dimension"] for item in _published(bank, passage=passage_id)}
+
+
 def _recent_evidence(family):
     for session in family["sessions"][-RECENT_SESSIONS:]:
         for ev in session["evidence"]:
@@ -98,9 +103,10 @@ def select_review_questions(bank, family, limit=3):
     return sorted(candidates, key=rank)[:limit]
 
 
-def select_observation_targets(family, limit=3):
+def select_observation_targets(family, available_dims, limit=3):
     """(member, dimension) pairs: weakness first, then staleness; never the leader;
-    at most two targets per member."""
+    at most two targets per member. Only dimensions in `available_dims` (those the
+    upcoming passage publishes content for) are eligible."""
     members = [m for m in family["members"] if not m["leader"]]
     weakness, last_observed = {}, {}
     for idx, session in enumerate(family["sessions"]):
@@ -114,6 +120,8 @@ def select_observation_targets(family, limit=3):
     scored = []
     for m in members:
         for dim in DIMENSIONS:
+            if dim not in available_dims:
+                continue
             key = (m["id"], dim)
             staleness = n_sessions - 1 - last_observed.get(key, -1)
             score = weakness.get(key, 0) * 10 + staleness
@@ -231,7 +239,8 @@ def assign_roles(family):
 
 def build_kit(bank, family):
     passage = next_passage(bank, family)
-    targets = select_observation_targets(family)
+    available = available_dimensions(bank, passage["id"])
+    targets = select_observation_targets(family, available)
     review = select_review_questions(bank, family)
     discussion = select_discussion_questions(bank, family, passage["id"], targets)
     main_act, young_act = select_activity(bank, family, passage["id"])
