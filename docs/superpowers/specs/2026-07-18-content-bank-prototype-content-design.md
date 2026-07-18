@@ -328,3 +328,28 @@ read-only accessors but its existing surface is untouched.
 5. A quality/tuning writeup: the defects found (both stages), the machinery
    changes each motivated, and the residual known limitations.
 6. All suites green; kit verified end-to-end.
+
+## Follow-up (next cycle): leader-facing references
+
+Decided 2026-07-19 (owner): add leader-only reference material to items, as its own
+brainstorm → spec → plan increment after this cycle publishes.
+
+- **Typed, not blanket.** Closed/factual items (D1, D2, D3, D4, and D5's "which
+  text") get a concise **answer key** (expected response + verse). Open/formative
+  items (D6, D7, D8) get a **leader note** that points to where the text leads and
+  flags common misreadings, but explicitly says *keep this open* — never a canned
+  answer. Rationale: preserves the open, think-for-yourself environment for open
+  questions (the con) while giving a solid lamppost that resolves confusion for
+  factual ones (the pro).
+- **Leader-only, Prepare-phase only.** Renders on Page 1 (Leader Guide), never on
+  participant quest slips / exit cards. Framed *after* the heart-preparation as
+  "if it comes up / the text points here," not a script — guards "worship, not
+  academy" (the leader's own wrestling is the unautomatable factor).
+- **Grounded in the briefs.** A note is a per-question distillation of the same
+  lamppost (brief + commentary + cross-refs) already wired this cycle — not a new
+  content source.
+- **Scope:** schema addition (`answer` / `leader_note`, leader-only), kit-generator
+  rendering change (Page 1 only), authoring-machinery change (pack requests the
+  typed note), and a regeneration/augmentation pass over the items. **A wrong
+  answer key is worse than none** — notes/answers must pass the same adversarial
+  accuracy review as items.
