@@ -136,6 +136,19 @@ class TestValidateItem(unittest.TestCase):
         item = valid_item(dimension="D1", leader_reference=self._ref(text={}))
         self.assertTrue(any("leader_reference.text" in e for e in schema.validate_item(item)))
 
+    def test_non_dict_reference_rejected(self):
+        item = valid_item(dimension="D1", leader_reference="oops")
+        errs = schema.validate_item(item)
+        self.assertTrue(any("leader_reference: must be an object" in e for e in errs))
+
+    def test_reference_wrong_guardrail_rejected(self):
+        bad = self._ref(provenance={"reviewed_by": "claude-adversarial",
+                                    "reviewed_date": "2026-07-19",
+                                    "guardrail": "WCF-25"})
+        item = valid_item(dimension="D1", leader_reference=bad)
+        errs = schema.validate_item(item)
+        self.assertTrue(any("leader_reference.provenance.guardrail" in e for e in errs))
+
 
 if __name__ == "__main__":
     unittest.main()
