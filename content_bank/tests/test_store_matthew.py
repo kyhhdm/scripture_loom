@@ -15,11 +15,12 @@ class TestMatthewStore(unittest.TestCase):
         passages = {i["passage"] for i in store["items"]}
         self.assertEqual(passages, {"MAT-009", "MAT-013", "MAT-014", "MAT-015"})
 
-    def test_every_item_reviewed_before_confirmation(self):
-        # Before the human confirmation gate, nothing is published, so product
-        # mode serves nothing while author mode sees the full reviewed set.
-        self.assertEqual(content.get_content("MAT", mode="product"), [])
-        self.assertTrue(content.get_content("MAT", mode="author"))
+    def test_gate_serves_published(self):
+        # After the human confirmation gate, product mode serves the published
+        # items and never a reviewed/draft one.
+        pub = content.get_content("MAT", mode="product")
+        self.assertTrue(pub)
+        self.assertEqual({i["review_status"] for i in pub}, {"published"})
 
 
 if __name__ == "__main__":

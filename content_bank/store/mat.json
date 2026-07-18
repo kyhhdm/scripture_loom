@@ -8,7 +8,7 @@
       "type": "question",
       "age_tier": "pre_reader",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Who led Jesus into the wilderness?"
       },
@@ -18,7 +18,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -28,7 +29,7 @@
       "type": "question",
       "age_tier": "child",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "What did the devil ask Jesus to do first: turn stones into bread, jump from the temple, or worship him for the kingdoms of the world?"
       },
@@ -38,7 +39,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -48,7 +50,7 @@
       "type": "question",
       "age_tier": "youth",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "This passage names three places: the wilderness, where the Spirit led Jesus (v.1), and two more places the devil took him afterward. Name all three, in the order they happen."
       },
@@ -58,7 +60,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -68,7 +71,7 @@
       "type": "question",
       "age_tier": "youth",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Each time Jesus answers the devil, he appeals to Scripture: \"It is written\" (v.4), \"It is also written\" (v.7), \"For it is written\" (v.10). What do all three openings point to every time before Jesus gives his answer?"
       },
@@ -78,7 +81,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -88,7 +92,7 @@
       "type": "question",
       "age_tier": "youth",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Jesus ends with \"serve Him only\" (v.10), right after the devil's offer in verse 9. What work does the little word \"only\" do here — what does it include, and what does it rule out?"
       },
@@ -98,7 +102,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -108,7 +113,7 @@
       "type": "question",
       "age_tier": "child",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Without looking back at the passage, try to say back one of the lines Jesus quoted from Scripture when the devil tempted him (for example, his answer about bread in verse 4)."
       },
@@ -118,7 +123,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -128,7 +134,7 @@
       "type": "question",
       "age_tier": "youth",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Jesus's answer in verse 4, \"Man shall not live on bread alone, but on every word that comes from the mouth of God,\" is a quotation from Deuteronomy 8:3. Read that cross-reference: what was Israel's own experience in the wilderness that this line was first spoken about?"
       },
@@ -138,7 +144,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -148,7 +155,7 @@
       "type": "question",
       "age_tier": "adult",
       "difficulty": 3,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "In verse 6 the devil quotes a promise about angels protecting the Son of God — this is Psalm 91:11-12. Jesus replies in verse 7 with \"Do not put the Lord your God to the test,\" a quotation from Deuteronomy 6:16. Read both cross-references: how does Jesus use one Scripture (a command) to answer the devil's misuse of another (a promise)?"
       },
@@ -158,7 +165,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -168,7 +176,7 @@
       "type": "question",
       "age_tier": "child",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "After reading this passage, what is a question you have about the wilderness, or about the devil, or about the angels at the end?"
       },
@@ -178,7 +186,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -188,7 +197,7 @@
       "type": "question",
       "age_tier": "youth",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "What do you wonder about why the devil waited until Jesus had fasted forty days before tempting him with bread?"
       },
@@ -198,7 +207,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -208,7 +218,7 @@
       "type": "question",
       "age_tier": "youth",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Jesus answers all three temptations by quoting Scripture. Based on what the passage shows him doing, why do you think he chose to answer this way?"
       },
@@ -218,7 +228,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -228,7 +239,7 @@
       "type": "question",
       "age_tier": "adult",
       "difficulty": 3,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "The devil offers Jesus \"all the kingdoms of the world and their glory\" in exchange for worship (vv.8-9). What does Jesus's refusal in verse 10 say about what he considers to belong to God alone?"
       },
@@ -238,7 +249,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -248,7 +260,7 @@
       "type": "question",
       "age_tier": "all",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Jesus met temptation by speaking God's Word out loud. Which line from this passage (v.4, v.7, or v.10) will you keep ready for the next time you are tempted — and where could you write it down so you will see it?"
       },
@@ -258,7 +270,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -268,7 +281,7 @@
       "type": "activity",
       "age_tier": "child",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Fold a paper into three panels. In each panel draw one of the three places from this passage: the wilderness (where the Spirit led Jesus), the temple, and the mountain (where the devil took him). Under each panel, write just one or two words for what happened there."
       },
@@ -278,7 +291,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -288,7 +302,7 @@
       "type": "activity",
       "age_tier": "pre_reader",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Draw Jesus in the wilderness. Draw the devil next to him. At the end of your drawing, add angels, because the passage says angels came to Jesus after the devil left."
       },
@@ -298,7 +312,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -308,7 +323,7 @@
       "type": "pre_reading_quest",
       "age_tier": "child",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Listen for what happens right after Jesus finishes fasting forty days and forty nights."
       },
@@ -321,7 +336,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -331,7 +347,7 @@
       "type": "pre_reading_quest",
       "age_tier": "youth",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Listen for the short words Jesus uses each time to point to Scripture before he answers the devil."
       },
@@ -344,7 +360,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -354,7 +371,7 @@
       "type": "pre_reading_quest",
       "age_tier": "adult",
       "difficulty": 3,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Listen for what the devil offers Jesus in the third temptation, and for the reason Jesus gives when he refuses."
       },
@@ -367,7 +384,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -377,7 +395,7 @@
       "type": "memory_verse",
       "age_tier": "all",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "But Jesus answered, “It is written: ‘Man shall not live on bread alone, but on every word that comes from the mouth of God.’” (Matthew 4:4)"
       },
@@ -387,7 +405,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -397,7 +416,7 @@
       "type": "narration_prompt",
       "age_tier": "all",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "In your own words, retell what happened when Jesus was tempted in the wilderness: where he was, what the devil asked him to do each of the three times, how Jesus answered, and how the encounter ends."
       },
@@ -407,7 +426,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-009.md"
+        "brief": "author/briefs/mat-009.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -417,7 +437,7 @@
       "type": "question",
       "age_tier": "child",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Who came to Jesus after he sat down on the mountain?"
       },
@@ -427,7 +447,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-013.md"
+        "brief": "author/briefs/mat-013.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -437,7 +458,7 @@
       "type": "question",
       "age_tier": "all",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Where did Jesus go before he began to teach?"
       },
@@ -447,7 +468,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-013.md"
+        "brief": "author/briefs/mat-013.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -457,7 +479,7 @@
       "type": "question",
       "age_tier": "youth",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Put these in the order they happen: Jesus opens his mouth to teach; Jesus sees the crowds; the disciples come to him; Jesus sits down."
       },
@@ -467,7 +489,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-013.md"
+        "brief": "author/briefs/mat-013.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -477,7 +500,7 @@
       "type": "pre_reading_quest",
       "age_tier": "child",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "As we read, listen for who comes close to Jesus once he sits down on the mountain."
       },
@@ -490,7 +513,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-013.md"
+        "brief": "author/briefs/mat-013.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -500,7 +524,7 @@
       "type": "activity",
       "age_tier": "child",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "These four moments are printed out of order: 'sits down,' 'disciples come to him,' 'sees the crowds,' 'goes up the mountain.' Write the number 1 to 4 next to each to show the order they really happen in."
       },
@@ -510,7 +534,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-013.md"
+        "brief": "author/briefs/mat-013.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -520,7 +545,7 @@
       "type": "activity",
       "age_tier": "pre_reader",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Draw Jesus sitting on the mountain, with his disciples coming to him."
       },
@@ -530,7 +555,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-013.md"
+        "brief": "author/briefs/mat-013.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -540,7 +566,7 @@
       "type": "narration_prompt",
       "age_tier": "all",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "In your own words, retell what happens right before Jesus begins to teach: what he sees, where he goes, and who comes to him."
       },
@@ -550,7 +576,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-013.md"
+        "brief": "author/briefs/mat-013.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -560,7 +587,7 @@
       "type": "question",
       "age_tier": "all",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Picture Jesus going up the mountain, sitting down, and his disciples coming to him just before he begins to teach. What question would you want to ask about this moment?"
       },
@@ -570,7 +597,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-013.md"
+        "brief": "author/briefs/mat-013.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -580,7 +608,7 @@
       "type": "question",
       "age_tier": "child",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Without looking, name at least three of the kinds of people Jesus calls \"blessed\" in this passage (for example, \"those who mourn\" or \"the merciful\")."
       },
@@ -590,7 +618,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-014.md"
+        "brief": "author/briefs/mat-014.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -600,7 +629,7 @@
       "type": "question",
       "age_tier": "child",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Reading verses 3-12, which \"Blessed are...\" saying does Jesus give first, and which \"Blessed are...\" saying is the last one?"
       },
@@ -610,7 +639,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-014.md"
+        "brief": "author/briefs/mat-014.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -620,7 +650,7 @@
       "type": "question",
       "age_tier": "youth",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Through verse 10, Jesus speaks about 'they' and 'those.' In verses 11-12, who is He speaking to instead, and what word marks the change?"
       },
@@ -630,7 +660,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-014.md"
+        "brief": "author/briefs/mat-014.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -640,7 +671,7 @@
       "type": "question",
       "age_tier": "adult",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Jesus pairs each kind of person with a promise. For \"poor in spirit\" (v.3), \"meek\" (v.5), and \"pure in heart\" (v.8), what promise does Jesus attach to each — and what does that promise suggest the phrase means?"
       },
@@ -650,7 +681,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-014.md"
+        "brief": "author/briefs/mat-014.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -660,7 +692,7 @@
       "type": "memory_verse",
       "age_tier": "all",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "\"Blessed are the peacemakers, for they will be called sons of God.\" — Matthew 5:9"
       },
@@ -670,7 +702,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-014.md"
+        "brief": "author/briefs/mat-014.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -680,7 +713,7 @@
       "type": "question",
       "age_tier": "youth",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Psalm 37:11 also says the meek will inherit the land. How does that verse match what Jesus promises the meek in Matthew 5:5?"
       },
@@ -690,7 +723,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-014.md"
+        "brief": "author/briefs/mat-014.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -700,7 +734,7 @@
       "type": "question",
       "age_tier": "adult",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Psalm 34:18 says the LORD is near the brokenhearted and saves those crushed in spirit. How does that psalm connect to Jesus' first blessing on the 'poor in spirit' in Matthew 5:3?"
       },
@@ -710,7 +744,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-014.md"
+        "brief": "author/briefs/mat-014.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -720,7 +755,7 @@
       "type": "question",
       "age_tier": "adult",
       "difficulty": 3,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Revelation 21:4 says God will wipe away every tear and there will be no more mourning. How does that promise connect to Jesus' words to those who mourn in Matthew 5:4?"
       },
@@ -730,7 +765,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-014.md"
+        "brief": "author/briefs/mat-014.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -740,7 +776,7 @@
       "type": "question",
       "age_tier": "child",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Which one of these eight blessings do you wonder about most? Write down a question you have about it."
       },
@@ -750,7 +786,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-014.md"
+        "brief": "author/briefs/mat-014.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -760,7 +797,7 @@
       "type": "question",
       "age_tier": "youth",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "The people Jesus calls 'blessed' — those who mourn, the meek, the persecuted — are not usually the people the world calls fortunate. From what the passage itself promises each of them, why does Jesus call them blessed anyway?"
       },
@@ -770,7 +807,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-014.md"
+        "brief": "author/briefs/mat-014.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -780,7 +818,7 @@
       "type": "question",
       "age_tier": "adult",
       "difficulty": 3,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Verses 3 and 10 both say \"theirs is the kingdom of heaven.\" Look at how Jesus states it — \"Blessed are... for theirs is...\": does the wording present the kingdom as something these people earn by their qualities, or as the promise He attaches to them? Point to the words that guide your answer."
       },
@@ -790,7 +828,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-014.md"
+        "brief": "author/briefs/mat-014.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -800,7 +839,7 @@
       "type": "activity",
       "age_tier": "youth",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "This week, do one specific act of peacemaking — help settle a disagreement, or say a kind word to someone you've been at odds with. Write down what you did and what happened."
       },
@@ -810,7 +849,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-014.md"
+        "brief": "author/briefs/mat-014.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -820,7 +860,7 @@
       "type": "activity",
       "age_tier": "child",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Choose one act of mercy to do this week — something kind for someone who needs help. Write or draw what you did."
       },
@@ -830,7 +870,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-014.md"
+        "brief": "author/briefs/mat-014.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -840,7 +881,7 @@
       "type": "activity",
       "age_tier": "pre_reader",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Listen as the verses are read aloud. Every time you hear the word 'blessed,' hold up one finger. Count how many fingers you have at the end!"
       },
@@ -850,7 +891,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-014.md"
+        "brief": "author/briefs/mat-014.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -860,7 +902,7 @@
       "type": "pre_reading_quest",
       "age_tier": "child",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "category": {
         "en": "Listen for the list"
       },
@@ -873,7 +915,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-014.md"
+        "brief": "author/briefs/mat-014.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -883,7 +926,7 @@
       "type": "pre_reading_quest",
       "age_tier": "youth",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "category": {
         "en": "Listen for the phrase"
       },
@@ -896,7 +939,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-014.md"
+        "brief": "author/briefs/mat-014.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -906,7 +950,7 @@
       "type": "pre_reading_quest",
       "age_tier": "adult",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "category": {
         "en": "Listen for the turn"
       },
@@ -919,7 +963,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-014.md"
+        "brief": "author/briefs/mat-014.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -929,7 +974,7 @@
       "type": "narration_prompt",
       "age_tier": "all",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "In your own words, retell the blessings Jesus gives in this passage, in order, and what each one promises."
       },
@@ -939,7 +984,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-014.md"
+        "brief": "author/briefs/mat-014.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -949,7 +995,7 @@
       "type": "question",
       "age_tier": "youth",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Jesus calls his followers \"the salt of the earth,\" and warns that salt which \"loses its savor\" becomes useless and cannot be made salty again. Since salt is only useful while it stays salty, what might Jesus be saying his followers must keep, to be useful as his \"salt\"?"
       },
@@ -959,7 +1005,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-015.md"
+        "brief": "author/briefs/mat-015.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -969,7 +1016,7 @@
       "type": "question",
       "age_tier": "youth",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Trace, in order, what verse 13 says happens to salt that has lost its taste (what it is good for, then what is done with it)."
       },
@@ -979,7 +1026,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-015.md"
+        "brief": "author/briefs/mat-015.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -989,7 +1037,7 @@
       "type": "question",
       "age_tier": "youth",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Jesus says, \"You are the light of the world. A city on a hill cannot be hidden.\" What does the picture of a city on a hill show about light — is it meant to be seen or hidden? How does the lamp in verse 15 make the same point?"
       },
@@ -999,7 +1047,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-015.md"
+        "brief": "author/briefs/mat-015.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -1009,7 +1058,7 @@
       "type": "question",
       "age_tier": "all",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Put these in the order the passage gives them: (a) the salt statement, (b) the light and lamp statements, (c) the purpose — letting your light shine so others see your good deeds and glorify the Father. Which one does Jesus place last?"
       },
@@ -1019,7 +1068,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-015.md"
+        "brief": "author/briefs/mat-015.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -1029,7 +1079,7 @@
       "type": "question",
       "age_tier": "youth",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Verse 15 says people do not light a lamp and put it under a basket, but set it on a stand instead. According to the passage, what does putting it on the stand accomplish that the basket would prevent?"
       },
@@ -1039,7 +1089,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-015.md"
+        "brief": "author/briefs/mat-015.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -1049,7 +1100,7 @@
       "type": "question",
       "age_tier": "adult",
       "difficulty": 3,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Verse 16 says 'let your light shine before men, that they may see your good deeds and glorify your Father in heaven.' According to this verse, who is meant to receive the glory when good deeds are seen? Why does that matter for how a good deed should be done?"
       },
@@ -1059,7 +1110,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-015.md"
+        "brief": "author/briefs/mat-015.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -1069,7 +1121,7 @@
       "type": "question",
       "age_tier": "child",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Name one specific, doable thing you could do this week that others could see — a good deed like those in verse 16 — done not so people admire you, but so that those who see it would praise God."
       },
@@ -1079,7 +1131,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-015.md"
+        "brief": "author/briefs/mat-015.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -1089,7 +1142,7 @@
       "type": "activity",
       "age_tier": "youth",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "On an index card, write one observable good deed you will do before the next family study (a specific chore, kind word, or help offered). Note who might see it — and, beside it, write that it is meant to point them to God, not to you (verse 16). Afterward, write what happened."
       },
@@ -1099,7 +1152,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-015.md"
+        "brief": "author/briefs/mat-015.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -1109,7 +1163,7 @@
       "type": "memory_verse",
       "age_tier": "all",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "\"In the same way, let your light shine before men, that they may see your good deeds and glorify your Father in heaven.\" (Matthew 5:16)"
       },
@@ -1119,7 +1173,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-015.md"
+        "brief": "author/briefs/mat-015.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -1129,7 +1184,7 @@
       "type": "question",
       "age_tier": "child",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Finish the line from memory: 'Let your ___ shine before men, that they may see your ___ and glorify your Father in heaven.'"
       },
@@ -1139,7 +1194,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-015.md"
+        "brief": "author/briefs/mat-015.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -1149,7 +1205,7 @@
       "type": "question",
       "age_tier": "adult",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "1 Peter 2:12 tells believers to keep their conduct honorable among outsiders so that, seeing their good deeds, they glorify God. How does this connect to what Matthew 5:16 says should happen when others see your good deeds?"
       },
@@ -1159,7 +1215,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-015.md"
+        "brief": "author/briefs/mat-015.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -1169,7 +1226,7 @@
       "type": "question",
       "age_tier": "youth",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Philippians 2:15 tells believers to 'shine as lights' in the world. How does this compare with Jesus calling his hearers 'the light of the world' in Matthew 5:14?"
       },
@@ -1179,7 +1236,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-015.md"
+        "brief": "author/briefs/mat-015.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -1189,7 +1247,7 @@
       "type": "question",
       "age_tier": "child",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "What is one question you have about being 'salt' or 'light' after hearing this passage? Write it down to ask during family time."
       },
@@ -1199,7 +1257,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-015.md"
+        "brief": "author/briefs/mat-015.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -1209,7 +1268,7 @@
       "type": "activity",
       "age_tier": "pre_reader",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "Draw two pictures: one of a lamp hidden under a basket (dark), and one of a lamp set up on a stand (bright, lighting the room). Ask a grown-up to read v.15 again and point to which picture matches what Jesus says people actually do."
       },
@@ -1219,7 +1278,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-015.md"
+        "brief": "author/briefs/mat-015.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -1229,7 +1289,7 @@
       "type": "pre_reading_quest",
       "age_tier": "child",
       "difficulty": 1,
-      "review_status": "reviewed",
+      "review_status": "published",
       "category": {
         "en": "Listen for the names Jesus gives"
       },
@@ -1242,7 +1302,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-015.md"
+        "brief": "author/briefs/mat-015.md",
+        "confirmed_by": "kyhhdm"
       }
     },
     {
@@ -1252,7 +1313,7 @@
       "type": "narration_prompt",
       "age_tier": "all",
       "difficulty": 2,
-      "review_status": "reviewed",
+      "review_status": "published",
       "text": {
         "en": "In your own words, retell Matthew 5:13-16: what Jesus says about salt, what he says about light, and what he says the point of it all is."
       },
@@ -1262,7 +1323,8 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-18",
         "guardrail": "WCF-1",
-        "brief": "author/briefs/mat-015.md"
+        "brief": "author/briefs/mat-015.md",
+        "confirmed_by": "kyhhdm"
       }
     }
   ]

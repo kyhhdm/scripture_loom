@@ -26,11 +26,16 @@ class TestLoadBank(unittest.TestCase):
         self.assertEqual(by_id["MAT-014"]["ref"], "Matthew 5:3–12")
         self.assertEqual(by_id["MAT-014"]["title"], "The Beatitudes")
 
-    def test_product_bank_empty_before_publish(self):
-        # load_bank serves product mode (published only). Before the human
-        # confirmation gate nothing is published, so the bank has no items yet.
-        # (Task 13 flips this to assert the flattened 'body' shape on published items.)
-        self.assertEqual(self.bank["items"], [])
+    def test_items_flattened_to_body_and_product_gated(self):
+        # load_bank serves product mode (published only), flattening text/category
+        # for the requested language to a 'body' string; no reviewed/draft leaks.
+        self.assertTrue(self.bank["items"])
+        item = self.bank["items"][0]
+        self.assertIsInstance(item["body"], str)
+        self.assertNotIn("text", item)
+        statuses = {i.get("review_status") for i in self.bank["items"]}
+        self.assertNotIn("draft", statuses)
+        self.assertNotIn("reviewed", statuses)
 
 
 if __name__ == "__main__":

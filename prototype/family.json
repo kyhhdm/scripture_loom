@@ -36,12 +36,16 @@
       ]
     },
     {
-      "date": "2026-07-15",
+      "date": "2026-07-19",
       "passage": "MAT-013",
       "evidence": [
         {
-          "member": "liberty", "dimension": "D1", "code": "R", "quality": "✓", "prompted": true,
-          "note": "Named the crowds and the disciples on the mountain."
+          "member": "grace", "dimension": "D6", "code": "Q", "quality": "★", "prompted": true,
+          "note": "Why did Jesus sit down to teach instead of standing before the crowds?"
+        },
+        {
+          "member": "liberty", "dimension": "D2", "code": "R", "quality": "?", "prompted": true,
+          "note": "Still unsure whether Jesus sat down before or after the disciples came."
         }
       ]
     }
