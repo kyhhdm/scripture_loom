@@ -329,27 +329,58 @@ read-only accessors but its existing surface is untouched.
    changes each motivated, and the residual known limitations.
 6. All suites green; kit verified end-to-end.
 
-## Follow-up (next cycle): leader-facing references
+## Follow-up (next cycle): leader references behind a heart-prep gate
 
-Decided 2026-07-19 (owner): add leader-only reference material to items, as its own
-brainstorm → spec → plan increment after this cycle publishes.
+Decided 2026-07-19 (owner). This is a **Prepare-phase product-flow feature**
+(belongs in `docs/unplug_assitant.md`, not just the content schema): the content
+bank supplies typed reference text; the app adds a formation gate in front of it.
+Its own brainstorm → spec → plan increment.
 
-- **Typed, not blanket.** Closed/factual items (D1, D2, D3, D4, and D5's "which
-  text") get a concise **answer key** (expected response + verse). Open/formative
-  items (D6, D7, D8) get a **leader note** that points to where the text leads and
-  flags common misreadings, but explicitly says *keep this open* — never a canned
-  answer. Rationale: preserves the open, think-for-yourself environment for open
-  questions (the con) while giving a solid lamppost that resolves confusion for
-  factual ones (the pro).
-- **Leader-only, Prepare-phase only.** Renders on Page 1 (Leader Guide), never on
-  participant quest slips / exit cards. Framed *after* the heart-preparation as
-  "if it comes up / the text points here," not a script — guards "worship, not
-  academy" (the leader's own wrestling is the unautomatable factor).
-- **Grounded in the briefs.** A note is a per-question distillation of the same
-  lamppost (brief + commentary + cross-refs) already wired this cycle — not a new
-  content source.
-- **Scope:** schema addition (`answer` / `leader_note`, leader-only), kit-generator
-  rendering change (Page 1 only), authoring-machinery change (pack requests the
-  typed note), and a regeneration/augmentation pass over the items. **A wrong
-  answer key is worse than none** — notes/answers must pass the same adversarial
-  accuracy review as items.
+**The reference content (typed, not blanket).** Closed/factual items (D1, D2, D3,
+D4, and D5's "which text") get a concise **answer key** (expected response +
+verse). Open/formative items (D6, D7, D8) get a **leader note** that points where
+the text leads and flags misreadings but explicitly says *keep this open* — never
+a canned answer. Grounded in the briefs (a per-question distillation of the same
+lampposts wired this cycle). **A wrong answer key is worse than none** — answers
+and notes must pass the same adversarial accuracy review as items (verifies
+correctness/text-grounding; for notes, that they don't close an open question).
+
+**The heart-prep gate (the core of this feature).**
+
+- **Never printed on the kit.** Neither answers nor notes appear on any printed
+  page. The reference is *formation, not a crutch*: the leader internalizes it and
+  leads from memory, training their own fluency rather than reading off a sheet
+  during worship. (Accepted trade-off: no paper backup mid-gathering — "let's look
+  it up together" models honest inquiry and is on-thesis.)
+- **Gated, not merely suggested.** The full Leader Reference (answers *and* notes)
+  unlocks only after the leader passes a gate — accessed **before** the gathering
+  (Prepare) or **after** it (Reflect), **never during** Gather (screens absent).
+  Because paper can't be gated, what is gated is *generating/viewing the reference*
+  in the app; the participant kit prints freely, answer-free.
+- **Two distinct disciplines, sequenced — do not fuse them:**
+  1. *Spiritual* — read the passage as a hearer + pray. This is a **conviction**
+     (default-on, dignified, not casually disabled — like theology in v1).
+  2. *Competence/engagement* — **attempt the questions first.** The leader submits
+     a **light phrase per selected question** (only this session's ~8-12 kit
+     questions, not the whole book), then the reference unlocks so they can compare
+     and self-correct.
+- **Verifies attempt, never correctness.** The app cannot judge an answer (same
+  reason it does not lint doctrine); it reveals the reference *after* the attempt.
+  It must **never grade, and never withhold on a wrong answer** — that would be
+  legalistic and un-verifiable. The gate proves the step was *taken*, not that the
+  heart was sincere or the answer right.
+- **Attempt-gate applies to closed items only** (open questions have no "answer" to
+  submit); for open items the leader simply reads the note to prepare facilitation.
+
+**Guardrails / risks to honor.** Keep the attempt-step *light* — friction is the
+chief threat to a paper-first family tool (esp. busy mainland-China parents); a
+heavy per-question form turns prep into homework and suppresses use. Do not conflate
+"did you pray" with "did you get it right." The gate is a dignified speed-bump that
+*orders* the sequence, not a lock that polices piety.
+
+**Scope:** content-bank — optional leader-only reference field(s) in `schema.py` +
+`validate.py`, an authoring pack that drafts the typed reference from each item +
+its brief, and an adversarial accuracy-review + human-confirmation pass over the
+references. Product-flow — the Prepare-phase heart-prep gate + attempt-submit UX
+and the reveal, and ensuring the reference never reaches any printed page (the
+kit generator / `prototype_bank` must keep it out of print). Selector unchanged.
