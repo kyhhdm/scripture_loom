@@ -144,9 +144,12 @@ class TestBuildReferencePrompt(unittest.TestCase):
         self.assertIn("pronounces blessing", self.prompt)   # brief injected
 
     def test_lists_eligible_items_with_kind(self):
-        # MAT-014 has questions across closed and open dims; both kinds appear.
-        self.assertIn("answer_key", self.prompt)
-        self.assertIn("leader_note", self.prompt)
+        # MAT-014 has questions across closed and open dims; both kinds appear
+        # with the correct dimension-derived kind tags on actual eligible items.
+        # Closed dim (D4) → answer_key:
+        self.assertIn("mt5-beat-d1-blessed-groups [D4 / question / answer_key]", self.prompt)
+        # Open dim (D6) → leader_note:
+        self.assertIn("mt5-beat-d6-own-question [D6 / question / leader_note]", self.prompt)
 
     def test_carries_keep_open_instruction(self):
         self.assertIn("keep it open", self.prompt.lower())
@@ -160,8 +163,11 @@ class TestBuildReferencePrompt(unittest.TestCase):
             self.assertNotIn(mid, self.prompt)
 
     def test_output_schema_present(self):
+        # Output schema section must be present with field names:
         self.assertIn("item_id", self.prompt)
         self.assertIn("leader_reference", self.prompt)
+        # And substantively, at least one eligible answer_key item's id must appear:
+        self.assertIn("mt5-beat-d1-blessed-groups", self.prompt)
 
 
 if __name__ == "__main__":
