@@ -31,5 +31,53 @@ class TestCorpusBridge(unittest.TestCase):
         self.assertIn("salt", text.lower())
 
 
+class TestCommentary(unittest.TestCase):
+    def test_exact_block_returned(self):
+        from content_bank.lib import corpus_bridge
+        c = corpus_bridge.commentary("MAT.4.1-11")
+        self.assertTrue(c["mhc"] and "range" in c["mhc"][0] and "text" in c["mhc"][0])
+
+    def test_per_verse_jfb_overlaps_pericope(self):
+        from content_bank.lib import corpus_bridge
+        self.assertTrue(corpus_bridge.commentary("MAT.5.1-2")["jfb"])  # e.g. MAT.5.2
+
+    def test_no_overlap_is_graceful_empty(self):
+        from content_bank.lib import corpus_bridge
+        c = corpus_bridge.commentary("MAT.28.99-99")
+        self.assertEqual(c["mhc"], [])
+        self.assertEqual(c["jfb"], [])
+
+
+class TestCrossrefs(unittest.TestCase):
+    def test_refs_in_range_ranked_and_capped(self):
+        from content_bank.lib import corpus_bridge
+        refs = corpus_bridge.crossrefs("MAT.5.3-12", limit=5)
+        self.assertTrue(refs and len(refs) <= 5)
+        weights = [r["weight"] for r in refs]
+        self.assertEqual(weights, sorted(weights, reverse=True))
+        self.assertTrue(all(r["from"].startswith("MAT.5.") for r in refs))
+
+    def test_empty_range_is_graceful(self):
+        from content_bank.lib import corpus_bridge
+        self.assertEqual(corpus_bridge.crossrefs("MAT.999.1-2"), [])
+
+
+class TestConfessionalRefs(unittest.TestCase):
+    def test_beatitudes_hits_wcf_and_wlc(self):
+        from content_bank.lib import corpus_bridge
+        c = corpus_bridge.confessional_refs("MAT.5.3-12")
+        refs = [h["ref"] for h in c["wcf"]] + [h["ref"] for h in c["wlc"]]
+        self.assertIn("WCF 19.6", refs)
+        self.assertIn("WLC Q172", refs)
+        wcf = next(h for h in c["wcf"] if h["ref"] == "WCF 19.6")
+        self.assertIn("text", wcf)
+        self.assertIn("via", wcf)
+
+    def test_setup_pericope_has_no_hits(self):
+        from content_bank.lib import corpus_bridge
+        c = corpus_bridge.confessional_refs("MAT.5.1-2")
+        self.assertEqual(c["wcf"] + c["wlc"] + c["wsc"], [])
+
+
 if __name__ == "__main__":
     unittest.main()

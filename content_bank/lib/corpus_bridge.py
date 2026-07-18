@@ -48,3 +48,67 @@ def passage_text(range_str, version="BSB"):
     from lib import passage  # corpus/lib/passage.py
     p = passage.get_passage(version, range_str, mode="product")
     return "\n".join(f"{ref}  {text}" for ref, text in p.verses.items())
+
+
+def _parse_range(range_str):
+    """'MAT.5.3-12' or 'MAT.5.3' -> ('MAT', 5, 3, 12)."""
+    book, chapter, verses = range_str.split(".", 2)
+    v1, v2 = (verses.split("-", 1) if "-" in verses else (verses, verses))
+    return book, int(chapter), int(v1), int(v2)
+
+
+def _overlaps(a, b):
+    return a[0] == b[0] and a[1] == b[1] and a[2] <= b[3] and b[2] <= a[3]
+
+
+def _safe_overlaps(target, ref):
+    try:
+        return _overlaps(target, _parse_range(ref))
+    except (ValueError, AttributeError):
+        return False
+
+
+def commentary(range_str, book="MAT", works=("mhc", "jfb")):
+    target = _parse_range(range_str)
+    out = {}
+    for work in works:
+        data = _load(f"canon/lampposts/{work}/{book.lower()}.json")
+        blocks = data.get("blocks", []) if isinstance(data, dict) else []
+        out[work] = [b for b in blocks if _safe_overlaps(target, b["range"])]
+    return out
+
+
+def crossrefs(range_str, limit=15):
+    target = _parse_range(range_str)
+    data = _load("canon/structure/crossrefs.json")
+    refs = data.get("refs", []) if isinstance(data, dict) else data
+    hits = [r for r in refs if _safe_overlaps(target, r["from"])]
+    hits.sort(key=lambda r: (-r.get("weight", 0), r.get("to", "")))
+    return hits[:limit]
+
+
+def confessional_refs(range_str):
+    target = _parse_range(range_str)
+
+    def _via(proof_texts):
+        for pt in proof_texts:
+            if _safe_overlaps(target, pt):
+                return pt
+        return None
+
+    out = {"wcf": [], "wlc": [], "wsc": []}
+    wcf = _load("canon/lampposts/wcf.json")
+    for ch in wcf["chapters"]:
+        for s in ch["sections"]:
+            via = _via(s.get("proof_texts", []))
+            if via:
+                out["wcf"].append({"ref": f"WCF {ch['n']}.{s['n']}",
+                                   "title": ch["title"], "text": s["text"], "via": via})
+    for key, fname in (("wlc", "wlc.json"), ("wsc", "wsc.json")):
+        cat = _load(f"canon/lampposts/{fname}")
+        for q in cat["questions"]:
+            via = _via(q.get("proof_texts", []))
+            if via:
+                out[key].append({"ref": f"{key.upper()} Q{q['n']}",
+                                 "q": q["q"], "a": q["a"], "via": via})
+    return out
