@@ -3,7 +3,7 @@ import sys
 import unittest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))
-from content_bank.author import build_draft_prompt, review_checklist, dimensions
+from content_bank.author import build_draft_prompt, review_checklist, dimensions, rubric
 
 
 class TestBuildDraftPrompt(unittest.TestCase):
@@ -109,6 +109,20 @@ class TestBuildBriefPrompt(unittest.TestCase):
         from content_bank.author import build_brief_prompt
         pack = build_brief_prompt.build("MAT-013", book="MAT")
         self.assertIn("No confessional", pack)
+
+
+class TestReferenceCriteria(unittest.TestCase):
+    def test_rubric_exposes_reference_criteria(self):
+        text = rubric.reference_criteria()
+        low = text.lower()
+        self.assertIn("answer key", low)
+        self.assertIn("keep", low)          # notes kept open
+        self.assertIn("open", low)
+
+    def test_checklist_has_reference_section(self):
+        text = review_checklist.build()
+        self.assertIn("Leader references", text)
+        self.assertIn("keep", text.lower())
 
 
 if __name__ == "__main__":

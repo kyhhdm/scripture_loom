@@ -38,6 +38,27 @@ axis.
    not leading, not trivially yes/no unless a deliberate warm-up.
 """
 
+REFERENCE_AXES = (
+    "Answer-key accuracy",
+    "Note stays open",
+)
+
+_REFERENCE_BODY = """# Leader-reference review criteria
+
+A leader reference is leader-only, judged separately from the item it rides on.
+
+- Answer keys (closed dimensions D1-D5). The expected response is correct and
+  grounded in THIS passage and the brief; the cited verse actually contains it.
+  A wrong answer key is worse than none.
+- Leader notes (open dimensions D6-D8). Point where the text leads and flag
+  common misreadings, but keep the question open -- never a canned answer the
+  leader would read out, never leading toward a reading the text does not compel.
+"""
+
 
 def build():
     return _BODY
+
+
+def reference_criteria():
+    return _REFERENCE_BODY
