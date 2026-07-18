@@ -28,6 +28,11 @@ _RULES = """## How to write each reference (hard rules)
 - OPEN dimensions (D6-D8) -> a LEADER NOTE: point where the text leads and flag
   common misreadings, but KEEP IT OPEN -- never a canned answer the leader would
   read out, never leading toward a reading the text does not compel.
+- REDUCE CONFUSION, DON'T TRADE IT: a reference shines light and removes a
+  confusion -- it must not create a new one. In guarding one truth, do not word it
+  so that, read flatly, it denies another the church confesses (e.g. Jesus
+  submitting to Scripture must not imply he lacks authority over it -- he is its
+  divine Author). Keep the doctrinal ground balanced.
 - question + pre_reading_quest ALWAYS get a reference. activity + narration_prompt
   get a reference only where it genuinely aids facilitation; otherwise omit it.
 - memory_verse items get NO reference (the answer is the printed verse)."""

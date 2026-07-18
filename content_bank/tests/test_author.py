@@ -119,6 +119,16 @@ class TestReferenceCriteria(unittest.TestCase):
         self.assertIn("keep", low)          # notes kept open
         self.assertIn("open", low)
 
+    def test_reference_criteria_guards_against_new_confusion(self):
+        # A reference must reduce confusion, not trade one truth for another
+        # (doctrinal balance). This principle is single-sourced so drafter pack,
+        # adversarial reviewers, and human checklist all inherit it.
+        low = rubric.reference_criteria().lower()
+        self.assertIn("confusion", low)
+        self.assertIn("divine author", low)
+        # And it must reach the human checklist via single-sourcing:
+        self.assertIn("confusion", review_checklist.build().lower())
+
     def test_checklist_has_reference_section(self):
         text = review_checklist.build()
         self.assertIn("Leader references", text)
