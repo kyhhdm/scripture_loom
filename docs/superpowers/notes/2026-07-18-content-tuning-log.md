@@ -54,3 +54,14 @@ D4 binary (not recall); false "rather than commanding the devil" alternative;
 D8 item that was memorization mechanics (dup of memory_verse); child-tier activity
 with too-heavy writing load; memory_verse dropped nested quotation marks;
 D2 multiple-choice with options in passage order (position gives it away).
+
+## Stage 1+2 — MAT-013 (thin setup, restraint check)
+
+Brief: both fidelity reviewers PASS; only low-severity cross-ref polish (a
+mis-grouped parallel scene; added the JFB "opened his mouth" Acts parallels).
+Restraint held — empty confessional section reported, no doctrine invented,
+D5/D7/D8 explicitly not forced. 8 items, D1/D2/D6 only.
+Item defects (fixed, no machinery): a D2 ordering activity printed its options in
+passage order (scrambled it); two items asserted the crowd's position ("nearby"/
+"farther away") — a spatial detail not in 5:1-2 (removed). No machinery change —
+these were content slips already covered by the answerable-from-passage rule.
