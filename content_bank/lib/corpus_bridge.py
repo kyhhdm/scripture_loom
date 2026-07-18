@@ -47,7 +47,10 @@ def passage_text(range_str, version="BSB"):
         sys.path.insert(0, corpus_dir)
     from lib import passage  # corpus/lib/passage.py
     p = passage.get_passage(version, range_str, mode="product")
-    return "\n".join(f"{ref}  {text}" for ref, text in p.verses.items())
+    # Serve verses in canonical (chapter, verse) order — get_passage's dict is
+    # string-keyed, so "MAT.4.10" sorts before "MAT.4.2" unless we sort numerically.
+    verses = sorted(p.verses.items(), key=lambda kv: _parse_range(kv[0])[1:3])
+    return "\n".join(f"{ref}  {text}" for ref, text in verses)
 
 
 def _parse_range(range_str):

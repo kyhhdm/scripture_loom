@@ -29,3 +29,28 @@ Two independent fidelity reviewers, both found real theological drift:
     supplies them" added to `build_brief_prompt._SHAPE`.
 
 Machinery file changed: `content_bank/author/build_brief_prompt.py` (`_SHAPE`).
+
+## Stage 2 — MAT-009 items (pilot), first quality pass
+
+Two adversarial quality reviewers, 20 items. Axes 1/3/6 clean across all items.
+Machinery defects (fixed, benefit all pericopes):
+
+- **MAJOR (machinery)** — `passage_text` served verses in STRING order (4.1, 4.10,
+  4.11, 4.2, …) not numeric, misleading the drafter about agency (two items wrongly
+  said the devil led Jesus to the wilderness — the Spirit did, v.1). Root-caused by
+  a reviewer. → `corpus_bridge.passage_text` now sorts by (chapter, verse);
+  regression test `TestPassageOrdering` added.
+- **MAJOR (machinery)** — `pre_reading_quest` "listen-for" prompts are inherently
+  fact-noticing but were tagged D2/D7 they can't carry. → `build_draft_prompt`
+  `_TYPE_BLOCK` now steers quests to D1-D4 and requires a why/connection/question
+  clause for any D5/D6/D7 quest.
+- **process (machinery)** — the `build_draft_prompt` pack `<6000`-char test bound
+  (flagged fragile in Task 6) broke when the type guidance grew; relaxed to `<9000`
+  with the full-WCF-absent assertion documented as the real leanness gate.
+
+Item-level defects (fixed in the repair pass): false devil-agency (2 items);
+"same phrase" overstatement (wording varies); D3-tagged interpretive item; trivial
+D4 binary (not recall); false "rather than commanding the devil" alternative;
+D8 item that was memorization mechanics (dup of memory_verse); child-tier activity
+with too-heavy writing load; memory_verse dropped nested quotation marks;
+D2 multiple-choice with options in passage order (position gives it away).

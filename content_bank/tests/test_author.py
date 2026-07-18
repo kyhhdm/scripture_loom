@@ -23,8 +23,11 @@ class TestBuildDraftPrompt(unittest.TestCase):
     def test_compact_wcf_guardrail_not_full_chapter(self):
         p = self.prompt.lower()
         self.assertIn("westminster", p)
+        # The real leanness gate: the full WCF ch.1 (~977 words) is absent — a raw
+        # lamppost dump would be 60k+ chars. The char bound is a loose sanity check
+        # with headroom for guidance text (fixture brief is tiny; real packs ~8k).
         self.assertNotIn("1.10", self.prompt)                  # full ch.1 absent
-        self.assertLess(len(self.prompt), 6000)                # pack stays lean
+        self.assertLess(len(self.prompt), 9000)                # pack stays lean, not a dump
 
     def test_states_rules_types_and_rubric(self):
         p = self.prompt.lower()

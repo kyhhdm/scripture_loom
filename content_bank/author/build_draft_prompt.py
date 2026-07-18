@@ -34,7 +34,9 @@ _TYPE_BLOCK = """## What each type should be
 - activity: doable on paper with ordinary materials; add a pre_reader variant
   when the passage allows.
 - pre_reading_quest: "listen for X" prompt with a short `category` label, at
-  child/youth/adult tiers.
+  child/youth/adult tiers. Its "listen-for" form is fact-noticing — tag it
+  D1/D2/D3/D4. Only tag it D5/D6/D7 if the prompt itself asks the listener to
+  hunt for a connection, form a question, or notice a *why* (not just spot a fact).
 - memory_verse: one or two verses from THIS passage, verbatim, with reference.
 - narration_prompt: "retell in your own words" for the passage as a whole."""
 

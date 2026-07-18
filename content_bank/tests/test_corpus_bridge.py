@@ -81,3 +81,12 @@ class TestConfessionalRefs(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestPassageOrdering(unittest.TestCase):
+    def test_verses_served_in_canonical_order(self):
+        from content_bank.lib import corpus_bridge
+        text = corpus_bridge.passage_text("MAT.4.1-11")
+        verses = [line.split()[0] for line in text.splitlines() if line.strip()]
+        nums = [int(v.split(".")[2]) for v in verses]
+        self.assertEqual(nums, sorted(nums))  # 4.1,4.2,...,4.11 not 4.1,4.10,4.11,4.2
