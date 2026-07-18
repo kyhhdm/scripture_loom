@@ -30,6 +30,8 @@ _RULES_BLOCK = """## How to draft (hard rules)
 
 _TYPE_BLOCK = """## What each type should be
 
+Use ONLY these five types this cycle — not vocab_list or key_facts (the prototype
+selector does not render them):
 - question: one clear question; tag the dimension it exercises.
 - activity: doable on paper with ordinary materials; add a pre_reader variant
   when the passage allows.

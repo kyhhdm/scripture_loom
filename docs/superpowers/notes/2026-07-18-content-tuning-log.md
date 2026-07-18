@@ -79,3 +79,15 @@ dropped — the exact guard against reading the Beatitudes as works-righteousnes
   and keep its qualifying clauses; never quote only the half that suits the point."
 The WLC Q172 safeguard was applied correctly by the drafter (poor/mourning-heart
 reading only; Lord's-Supper subject off-agenda) — the flagship safeguard case held.
+
+## Stage 2 — MAT-014 items (Beatitudes)
+
+18 items. Axes 1/3/6 clean. Machinery: the draft pack's schema block offered all
+seven schema types, so the drafter emitted an out-of-scope `vocab_list` item; added
+an in-scope-types line to build_draft_prompt._TYPE_BLOCK (bars vocab_list/key_facts).
+Item fixes: D1 "blessed groups" mislabel → retagged D4 (character-groups aren't
+people/places; D1 correctly = 0 for 5:3-12, the setting being in MAT-013);
+vocab_list → question anchored to each term's stated promise; first/last saying
+disambiguated; D7 kingdom item made text-anchored (declarative "for theirs is..."
+grammar, no works-righteousness, no leader-only reference); child quest made
+unambiguous (count all 8 third-person sayings, not the literal word "those").
