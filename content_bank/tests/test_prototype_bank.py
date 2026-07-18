@@ -26,22 +26,11 @@ class TestLoadBank(unittest.TestCase):
         self.assertEqual(by_id["MAT-014"]["ref"], "Matthew 5:3–12")
         self.assertEqual(by_id["MAT-014"]["title"], "The Beatitudes")
 
-    def test_items_are_product_mode_with_flattened_body(self):
-        ids = {i["id"] for i in self.bank["items"]}
-        self.assertIn("mt5a-q-who-blessed", ids)
-        self.assertNotIn("mt5a-q-draft-kingdom", ids)  # draft gated out
-        item = next(i for i in self.bank["items"] if i["id"] == "mt5a-q-who-blessed")
-        self.assertIsInstance(item["body"], str)
-        self.assertNotIn("text", item)
-
-    def test_quest_category_flattened(self):
-        q = next(i for i in self.bank["items"] if i["id"] == "mt5a-quest-tally")
-        self.assertIsInstance(q["category"], str)
-
-    def test_zh_bank_uses_translation(self):
-        zh = pb.load_bank("MAT", lang="zh")
-        mv = next(i for i in zh["items"] if i["id"] == "mt5a-mv-peacemakers")
-        self.assertIn("马太福音", mv["body"])
+    def test_product_bank_empty_before_publish(self):
+        # load_bank serves product mode (published only). Before the human
+        # confirmation gate nothing is published, so the bank has no items yet.
+        # (Task 13 flips this to assert the flattened 'body' shape on published items.)
+        self.assertEqual(self.bank["items"], [])
 
 
 if __name__ == "__main__":
