@@ -1,47 +1,86 @@
-"""Assemble an offline drafting prompt pack for one pericope.
+"""Assemble the Stage-2 drafting pack for one pericope.
 
-No network, no API call: this prints a self-contained prompt a human (or Claude)
-runs by hand to produce draft ContentItems, which content_bank.lib.validate then
-checks before they enter the store.
-"""
+Passage-first: the pericope's verses are the subject; the theological base is the
+committed brief (author/briefs/<pericope>.md, produced by Stage 1). The full
+lampposts are NOT here — only a compact WCF-1 guardrail. Offline, no API."""
 import argparse
+import pathlib
 
 from ..lib import corpus_bridge, schema
-from . import dimensions
+from . import dimensions, rubric
+
+_BRIEFS = pathlib.Path(__file__).parent / "briefs"
+
+_WCF1_GUARDRAIL = """Draft WITHIN the Westminster Confession's doctrine of Scripture
+(WCF ch.1): God-inspired, infallible, inerrant, sufficient, clear; Scripture
+interprets Scripture. Hedging on this fails review. (Full chapter and this
+passage's doctrinal anchors are distilled in the brief above.)"""
+
+_RULES_BLOCK = """## How to draft (hard rules)
+
+- ANSWERABLE FROM THIS PASSAGE: every item except a D5 (Connections) item must be
+  answerable from the verses above alone. D5 may reach only a cross-reference
+  named in the brief, and must name it.
+- ONLY THE DIMENSIONS THIS PASSAGE GENUINELY SUPPORTS: a short setup passage may
+  support D1/D2/D6 and not D7/D8 — that's correct, not a gap. Do not pad.
+- EVIDENCE, NEVER JUDGMENT: prompts elicit observable behavior; never assess
+  faith, character, or spiritual state.
+- STAY ON THE PASSAGE: the brief is your base; items are about the PASSAGE.
+- TIERS: spread across age_tiers (pre_reader/child/youth/adult/all), 1-3."""
+
+_TYPE_BLOCK = """## What each type should be
+
+- question: one clear question; tag the dimension it exercises.
+- activity: doable on paper with ordinary materials; add a pre_reader variant
+  when the passage allows.
+- pre_reading_quest: "listen for X" prompt with a short `category` label, at
+  child/youth/adult tiers.
+- memory_verse: one or two verses from THIS passage, verbatim, with reference.
+- narration_prompt: "retell in your own words" for the passage as a whole."""
 
 _SCHEMA_BLOCK = """Each item MUST be a JSON object with these fields:
-  id             globally unique, stable, kebab-case
-  passage        the pericope id below
-  dimension      one of: {dimensions}
-  type           one of: {types}
-  age_tier       one of: {tiers}
-  difficulty     one of: 1, 2, 3
-  review_status  "draft"   (all newly drafted items start as draft)
-  text           {{ "en": "...", "zh": "..." }}  (>= 1 language; en required for now)
-  category       {{ "en": "..." }}  (ONLY for pre_reading_quest items)
-  version        1
-Do not add provenance; the human reviewer stamps it at publish time."""
+  id, passage (pericope id), dimension ({dimensions}),
+  type ({types}), age_tier ({tiers}), difficulty (1|2|3),
+  review_status "draft", text {{ "en": "..." }}, version 1,
+  category {{ "en": "..." }} ONLY for pre_reading_quest.
+No provenance; the reviewer stamps it."""
 
 
-def build(pericope_id, book="MAT"):
+def _load_brief(pericope_id):
+    f = _BRIEFS / f"{pericope_id.lower()}.md"
+    if not f.exists():
+        raise FileNotFoundError(
+            f"No brief for {pericope_id}; run Stage 1 (build_brief_prompt) and "
+            f"commit {f} first.")
+    return f.read_text(encoding="utf-8")
+
+
+def build(pericope_id, book="MAT", brief=None):
+    if brief is None:
+        brief = _load_brief(pericope_id)
     peris = {p["id"]: p for p in corpus_bridge.pericopes(book)}
     if pericope_id not in peris:
         raise ValueError(f"{pericope_id} is not a {book} pericope")
     p = peris[pericope_id]
     name = corpus_bridge.book_name(book, "en")
-    parts = []
-    parts.append(f"# Drafting pack — {pericope_id}: {p['title_en']}\n")
-    parts.append(f"Passage: {name} ({p['range']})\n")
-    parts.append("## The passage (public-domain text)\n")
-    parts.append(corpus_bridge.passage_text(p["range"]) + "\n")
-    parts.append("## Confessional guardrail (a hard constraint on every item)\n")
-    parts.append("Draft WITHIN the Westminster Confession of Faith. Content that "
-                 "hedges on Scripture's reliability, inspiration, or sufficiency "
-                 "fails review.\n")
-    parts.append(corpus_bridge.wcf_chapter1_text() + "\n")
-    parts.append("## Fluency dimensions to cover\n")
+    parts = [f"# Draft pack — {pericope_id}: {p['title_en']}\n",
+             f"Passage: {name} ({p['range']})\n",
+             "## THE PASSAGE — your SUBJECT\n",
+             corpus_bridge.passage_text(p["range"]) + "\n",
+             "## Theological base (brief — consult, do not draft about)\n",
+             brief + "\n",
+             "## Confessional guardrail\n",
+             _WCF1_GUARDRAIL + "\n",
+             "## Dimensions to cover\n"]
     for d, desc in dimensions.TEMPLATES.items():
         parts.append(f"- {d}: {desc}")
+    parts.append("")
+    parts.append(_RULES_BLOCK)
+    parts.append("")
+    parts.append(_TYPE_BLOCK)
+    parts.append("")
+    parts.append("## Quality rubric (all seven axes)\n")
+    parts.append(rubric.build())
     parts.append("")
     parts.append("## Output schema\n")
     parts.append(_SCHEMA_BLOCK.format(
@@ -49,7 +88,7 @@ def build(pericope_id, book="MAT"):
         types=", ".join(sorted(schema.TYPES)),
         tiers=", ".join(sorted(schema.AGE_TIERS))))
     parts.append("")
-    parts.append("Return a JSON array of draft items for this pericope.")
+    parts.append("Return a JSON array of draft items.")
     return "\n".join(parts)
 
 

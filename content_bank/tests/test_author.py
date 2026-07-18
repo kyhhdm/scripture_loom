@@ -8,28 +8,39 @@ from content_bank.author import build_draft_prompt, review_checklist, dimensions
 
 class TestBuildDraftPrompt(unittest.TestCase):
     def setUp(self):
-        self.prompt = build_draft_prompt.build("MAT-014", book="MAT")
+        self.brief = ("**Passage's own emphasis.** Jesus pronounces blessing...\n"
+                      "**Cross-references.** Ps 37:11 — the meek inherit.\n")
+        self.prompt = build_draft_prompt.build("MAT-014", book="MAT", brief=self.brief)
 
-    def test_includes_passage_reference_and_text(self):
+    def test_foregrounds_passage_text(self):
         self.assertIn("MAT-014", self.prompt)
-        self.assertIn("Beatitudes", self.prompt)
-        self.assertIn("blessed", self.prompt.lower())  # passage text present
+        self.assertIn("blessed", self.prompt.lower())          # passage present
+        self.assertIn("subject", self.prompt.lower())          # foregrounded label
 
-    def test_includes_westminster_guardrail(self):
-        self.assertIn("Westminster", self.prompt)
-        self.assertIn("1.1", self.prompt)  # WCF chapter 1 sections
+    def test_carries_the_brief(self):
+        self.assertIn("pronounces blessing", self.prompt)      # brief injected
 
-    def test_includes_all_dimension_templates(self):
+    def test_compact_wcf_guardrail_not_full_chapter(self):
+        p = self.prompt.lower()
+        self.assertIn("westminster", p)
+        self.assertNotIn("1.10", self.prompt)                  # full ch.1 absent
+        self.assertLess(len(self.prompt), 6000)                # pack stays lean
+
+    def test_states_rules_types_and_rubric(self):
+        p = self.prompt.lower()
+        self.assertIn("answerable", p)
+        self.assertTrue("genuinely support" in p or "only the dimensions" in p)
+        self.assertIn("observable behavior", p)
+        self.assertIn("memory_verse", p)
+        self.assertIn("pedagog", p)                            # rubric embedded
+
+    def test_all_dimension_templates_present(self):
         for d in dimensions.TEMPLATES:
             self.assertIn(d, self.prompt)
 
-    def test_includes_schema_vocabularies(self):
-        self.assertIn("pre_reading_quest", self.prompt)  # a type
-        self.assertIn("review_status", self.prompt)
-
-    def test_dimension_templates_match_schema_vocab(self):
-        from content_bank.lib import schema
-        self.assertEqual(set(dimensions.TEMPLATES), schema.DIMENSIONS)
+    def test_missing_brief_raises(self):
+        with self.assertRaises(FileNotFoundError):
+            build_draft_prompt.build("MAT-999-nobrief", book="MAT", brief=None)
 
 
 class TestReviewChecklist(unittest.TestCase):
