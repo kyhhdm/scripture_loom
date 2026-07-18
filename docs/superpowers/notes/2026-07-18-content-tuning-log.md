@@ -104,3 +104,43 @@ Also: three D3-tag/answerability slips (a "why did Jesus pick this image" questi
 not answerable from the text; consequence-facts mis-tagged D3) retagged/reworded;
 a compound D2 item split to a clean ordering task; a pre_reader activity retagged
 D3. No new machinery (all item-level).
+
+## Summary — machinery changes and residual limits
+
+**Machinery changes the review drove (the durable outcome):**
+- `corpus_bridge.passage_text` now serves verses in canonical (chapter, verse)
+  order — a real bug that had misled the drafter about narrative agency
+  (regression test `TestPassageOrdering`).
+- `build_brief_prompt._SHAPE` gained two guards: *preserve the commentary's
+  nuance* (do not sharpen/overstate; keep qualifications), and *cite confessional
+  statements faithfully* (attach to the proof-text verse; keep qualifying clauses;
+  never quote half a statement). Also: Key terms use only words the passage/
+  commentary supply — no invented original-language glosses.
+- `build_draft_prompt._TYPE_BLOCK` steers `pre_reading_quest` dimensions
+  (noticing = D1-D4; D5/D6/D7 only with a why/connection/question clause) and
+  restricts item types to the five in scope (bars `vocab_list`/`key_facts`).
+- The pack leanness test bound relaxed to `<9000` chars, with the full-WCF-absent
+  assertion documented as the real "no lamppost dump" gate.
+
+**Recurring defect classes (what to watch when authoring more books):**
+- Theological over-reach: sharpening a commentary claim, or mis-attaching a
+  confessional proof-text to the wrong verse / dropping its qualifier — the
+  works-righteousness and Christology risks. Caught by fidelity review.
+- Answerability drift: asking "why did the author choose X" or requiring an
+  adjacent pericope's content; the crowds/mountain setting belongs to MAT-013,
+  not MAT-014.
+- Dimension mislabeling: character-groups tagged D1; consequence-facts tagged D3;
+  interpretive prompts tagged D3; quests tagged with dimensions their listen-for
+  form can't carry.
+- Self-display in application (D8): good deeds framed around being seen without
+  the God-glory purpose (Matt 5:16).
+
+**Residual known limitations:**
+- English-only; `zh` text and a distinct Chinese-conformity review are deferred.
+- No lexicon exists in the corpus; D3 vocabulary leans on commentary.
+- Coverage is intentionally thin where the text is thin (MAT-013: D1/D2/D6 only;
+  MAT-014/015: D1 = 0, the setting living in MAT-013). This is correct, not a gap.
+- Leader-facing answer keys / notes are a decided next-cycle increment (see the
+  spec's follow-up), not part of this content.
+- `corpus_bridge._overlaps` uses full-interval overlap; a plan-prose note said
+  "start-verse" for range-valued refs — no effect on these four pericopes.
