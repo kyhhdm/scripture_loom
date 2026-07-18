@@ -40,5 +40,19 @@ class TestReviewChecklist(unittest.TestCase):
         self.assertIn("age", text)
 
 
+class TestRubric(unittest.TestCase):
+    def test_axes_are_seven_ordered_titles(self):
+        from content_bank.author import rubric
+        self.assertEqual(len(rubric.AXES), 7)
+        self.assertEqual(rubric.AXES[0].lower()[:11], "confessiona")
+
+    def test_build_names_every_axis_and_key_rules(self):
+        from content_bank.author import rubric
+        text = rubric.build().lower()
+        for token in ("wcf-1", "answerable", "judgment", "age", "dimension",
+                      "worship", "pedagog"):
+            self.assertIn(token, text)
+
+
 if __name__ == "__main__":
     unittest.main()
