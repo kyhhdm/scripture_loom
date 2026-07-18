@@ -42,7 +42,9 @@ def wcf_chapter1_text():
 
 def passage_text(range_str, version="BSB"):
     import sys
-    sys.path.insert(0, str(_CORPUS))
+    corpus_dir = str(_CORPUS)
+    if corpus_dir not in sys.path:
+        sys.path.insert(0, corpus_dir)
     from lib import passage  # corpus/lib/passage.py
     p = passage.get_passage(version, range_str, mode="product")
     return "\n".join(f"{ref}  {text}" for ref, text in p.verses.items())

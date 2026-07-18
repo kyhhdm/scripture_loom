@@ -27,6 +27,10 @@ class TestBuildDraftPrompt(unittest.TestCase):
         self.assertIn("pre_reading_quest", self.prompt)  # a type
         self.assertIn("review_status", self.prompt)
 
+    def test_dimension_templates_match_schema_vocab(self):
+        from content_bank.lib import schema
+        self.assertEqual(set(dimensions.TEMPLATES), schema.DIMENSIONS)
+
 
 class TestReviewChecklist(unittest.TestCase):
     def test_checklist_covers_conformity_accuracy_age_fit(self):
