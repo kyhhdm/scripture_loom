@@ -26,6 +26,11 @@ replacing the 25 hand-migrated seed items:
 - `MAT-014` The Beatitudes (5:3-12)
 - `MAT-015` Salt and Light (5:13-16)
 
+Also in scope — **wire the corpus lampposts into authoring** so accuracy against
+them is real, not merely asserted: extend `corpus_bridge` to serve commentary
+(JFB, MHC) and cross-references, inject both into the drafting pack, and give them
+to the adversarial reviewers as ground truth (see "Corpus assets in authoring").
+
 **Out of scope** (explicit, so the plan does not drift):
 
 - Chinese text. English-only this cycle; a `zh` pass and a distinct
@@ -91,14 +96,54 @@ the supported dimensions at mixed tiers/difficulties (~8-10), one child-or-youth
 activity + one `pre_reader` variant, pre-reading quests at child/youth/adult, one
 `memory_verse`, one `narration_prompt`.
 
+## Corpus assets in authoring
+
+What the corpus holds, and how each asset is used when drafting a pericope. Today
+(before this cycle) only the first two are wired in; this cycle adds commentary
+and cross-references.
+
+| Asset | Corpus location | Role in authoring |
+|---|---|---|
+| **Bible text** (BSB/KJV/WEB/CUV) | `canon/bibles/` via `corpus/lib/passage.py` gate | The pericope's verses — the text every non-D5 item must be answerable from. *Already wired* (`passage_text`, BSB). |
+| **Confession** (WCF ch.1) | `canon/lampposts/wcf.json` | The hard doctrinal guardrail injected into every pack. *Already wired* (`wcf_chapter1_text`). |
+| **Commentary** (JFB, MHC) | `canon/lampposts/{jfb,mhc}/<book>.json` | Authoring-time grounding for accuracy and interpretation (axes 1, 2, 5, 7). **Wired this cycle.** |
+| **Cross-references** | `canon/structure/crossrefs.json` | Ground truth for D5 (Connections) and "Scripture interprets Scripture"; the drafter names real links, not remembered ones. **Wired this cycle.** |
+| Catechisms (WLC/WSC) | `canon/lampposts/{wlc,wsc}.json` | Not wired this cycle (WCF ch.1 carries the guardrail). Noted as a later option. |
+| Dictionary / lexicon | — | **Does not exist.** D3 (Vocabulary) leans on the commentary; a lexicon is a possible future corpus asset, out of scope here. |
+
+**Data shapes (verified):**
+
+- Commentary: `{work, book, license, role, blocks: [{range: "MAT.4.1-11", text}]}`,
+  keyed by `BOOK.CH.V-V`. Keying differs by work: **MHC is per-pericope**
+  (`MAT.5.1-2`, `MAT.5.3-12`), **JFB is per-verse** (`MAT.5.3`, `MAT.5.4`, …), and
+  neither always aligns to pericope boundaries. The reader returns blocks whose
+  range **overlaps** the pericope range (not only exact matches) and gracefully
+  returns an empty list when nothing overlaps. All four in-scope pericopes have
+  commentary in both works.
+- Cross-references: `{role, refs: [{from: "MAT.5.3", to: "PSA.37.11", weight,
+  sources}]}`, ~344k entries. The per-pericope reader returns refs whose `from`
+  falls within the pericope's verse span, ranked by `weight` (descending), capped
+  (e.g. top 15) to keep the pack bounded.
+
+**License note:** JFB and MHC are public domain; both are used as *authoring-time
+grounding only* — they inform the drafter and reviewers but are never copied into
+shipped items (verbatim quotations come from the gated Bible text). No new license
+surface enters the store. Cross-references are CC-BY (openbible.info); if any
+shipped product later surfaces them, attribution is required — not triggered by
+this cycle, which uses them only during authoring.
+
 ## Workflow (per pericope)
 
 ```
+passage text + WCF-1 + commentary(JFB/MHC) + crossrefs
+                    │
+                    ▼
 build_draft_prompt.py ──▶ drafter ──▶ draft items
                                           │
                           ┌───────────────┘
                           ▼
         adversarial reviewers (one lens per rubric axis)
+        (handed the same commentary + crossrefs as ground truth)
                           │  verdicts + defects
                           ▼
                     triage each defect
@@ -129,6 +174,11 @@ machinery change is recorded with the defect that motivated it.
   `content_bank/author/rubric.py` (a `build()` returning the text, matching the
   existing `review_checklist.py` / `dimensions.py` shape), so it is single-sourced
   and importable by both the checklist and the drafting pack.
+- **`lib/corpus_bridge.py`** — add two read-only accessors: `commentary(book,
+  range_str, works=("mhc","jfb"))` returning the overlapping commentary blocks per
+  work, and `crossrefs(range_str, limit=15)` returning the top-weighted
+  cross-references whose `from` falls in the range. Read directly from the corpus
+  JSON canon like the existing accessors; no corpus dependency on `sys.path`.
 - **`author/dimensions.py`** — expand each one-line template into drafting
   guidance rich enough to prevent the recurring dimension-fit and answerability
   defects the review surfaces. Meaning still sourced from
@@ -136,7 +186,13 @@ machinery change is recorded with the defect that motivated it.
 - **`author/build_draft_prompt.py`** — fold in what the review teaches: the
   answerable-from-this-pericope rule, coverage-per-supported-dimension guidance,
   per-type expectations, tier/difficulty calibration, an explicit
-  evidence-not-judgment constraint. Keep it offline, stdlib-only, no API.
+  evidence-not-judgment constraint. **Also inject the pericope's commentary
+  (JFB/MHC) and top cross-references** from the new `corpus_bridge` accessors, so
+  the drafter works from the lampposts, not memory. Keep it offline, stdlib-only,
+  no API.
+- **The adversarial reviewer prompt** — receives the same commentary +
+  cross-references as ground truth, so axis-2 accuracy is checked against sources,
+  not asserted.
 - **`author/review_checklist.py`** — realign to the seven rubric axes (adds
   dimension-fit, answerability, pedagogical-strength; today it has conformity /
   accuracy / age-fitness / evidence).
@@ -145,8 +201,9 @@ machinery change is recorded with the defect that motivated it.
 - **`content_bank/PROVENANCE.md`** — record this authoring cycle.
 - **`prototype/family.json`** — `reading_sequence` gains `MAT-013`.
 
-Not changed: `schema.py`, `content.py`, `validate.py`, `corpus_bridge.py`,
-`prototype_bank.py`, `selector.py`, the corpus.
+Not changed: `schema.py`, `content.py`, `validate.py`, `prototype_bank.py`,
+`selector.py`, the corpus itself (read-only). `corpus_bridge.py` gains two
+read-only accessors but its existing surface is untouched.
 
 ## Provenance model
 
@@ -178,7 +235,8 @@ Not changed: `schema.py`, `content.py`, `validate.py`, `corpus_bridge.py`,
 
 1. Regenerated, adversarially-reviewed `store/mat.json` (four pericopes).
 2. Tuned authoring harness (`dimensions.py`, `build_draft_prompt.py`,
-   `review_checklist.py`) + new `rubric.py`.
+   `review_checklist.py`) + new `rubric.py`; `corpus_bridge.py` commentary +
+   cross-reference accessors wired into the pack and the reviewers.
 3. Updated `family.json`, `PROVENANCE.md`.
 4. A quality/tuning writeup: the defects found, the machinery changes each
    motivated, and the residual known limitations.
