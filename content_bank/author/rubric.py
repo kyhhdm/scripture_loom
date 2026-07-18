@@ -38,6 +38,36 @@ axis.
    not leading, not trivially yes/no unless a deliberate warm-up.
 """
 
+REFERENCE_AXES = (
+    "Answer-key accuracy",
+    "Note stays open",
+    "Reduces confusion, doctrinally balanced",
+)
+
+_REFERENCE_BODY = """# Leader-reference review criteria
+
+A leader reference is leader-only, judged separately from the item it rides on.
+
+- Answer keys (closed dimensions D1-D5). The expected response is correct and
+  grounded in THIS passage and the brief; the cited verse actually contains it.
+  A wrong answer key is worse than none.
+- Leader notes (open dimensions D6-D8). Point where the text leads and flag
+  common misreadings, but keep the question open -- never a canned answer the
+  leader would read out, never leading toward a reading the text does not compel.
+- Reduces confusion, doctrinally balanced. A reference exists to shine light and
+  remove a potential confusion -- never to create a new one. In guarding one
+  truth, do not word it so that, read flatly, it denies or obscures another the
+  church confesses. (E.g. showing Jesus submit to Scripture in the temptation
+  must not read as though he lacks authority over it -- he is its divine Author;
+  WCF-1.) Affirm what the passage shows without phrasing that cuts against the
+  wider confession.
+- Memory verse items receive no reference (the text is the reference).
+"""
+
 
 def build():
     return _BODY
+
+
+def reference_criteria():
+    return _REFERENCE_BODY

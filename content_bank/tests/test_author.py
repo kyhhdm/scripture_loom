@@ -3,7 +3,7 @@ import sys
 import unittest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))
-from content_bank.author import build_draft_prompt, review_checklist, dimensions
+from content_bank.author import build_draft_prompt, review_checklist, dimensions, rubric, build_reference_prompt
 
 
 class TestBuildDraftPrompt(unittest.TestCase):
@@ -109,6 +109,75 @@ class TestBuildBriefPrompt(unittest.TestCase):
         from content_bank.author import build_brief_prompt
         pack = build_brief_prompt.build("MAT-013", book="MAT")
         self.assertIn("No confessional", pack)
+
+
+class TestReferenceCriteria(unittest.TestCase):
+    def test_rubric_exposes_reference_criteria(self):
+        text = rubric.reference_criteria()
+        low = text.lower()
+        self.assertIn("answer key", low)
+        self.assertIn("keep", low)          # notes kept open
+        self.assertIn("open", low)
+
+    def test_reference_criteria_guards_against_new_confusion(self):
+        # A reference must reduce confusion, not trade one truth for another
+        # (doctrinal balance). This principle is single-sourced so drafter pack,
+        # adversarial reviewers, and human checklist all inherit it.
+        low = rubric.reference_criteria().lower()
+        self.assertIn("confusion", low)
+        self.assertIn("divine author", low)
+        # And it must reach the human checklist via single-sourcing:
+        self.assertIn("confusion", review_checklist.build().lower())
+
+    def test_checklist_has_reference_section(self):
+        text = review_checklist.build()
+        self.assertIn("Leader references", text)
+        self.assertIn("keep", text.lower())
+
+    def test_reference_criteria_single_sourced(self):
+        """Verify rubric.reference_criteria() prose is included in checklist output."""
+        rubric_prose = rubric.reference_criteria()
+        checklist_output = review_checklist.build()
+        # Assert a distinctive phrase from the rubric appears in the checklist
+        self.assertIn("A wrong answer key is worse than none", checklist_output)
+
+
+class TestBuildReferencePrompt(unittest.TestCase):
+    def setUp(self):
+        self.prompt = build_reference_prompt.build(
+            "MAT-014", book="MAT",
+            brief="**Passage's own emphasis.** Jesus pronounces blessing...\n")
+
+    def test_foregrounds_passage_and_brief(self):
+        low = self.prompt.lower()
+        self.assertIn("blessed", low)               # passage present
+        self.assertIn("pronounces blessing", self.prompt)   # brief injected
+
+    def test_lists_eligible_items_with_kind(self):
+        # MAT-014 has questions across closed and open dims; both kinds appear
+        # with the correct dimension-derived kind tags on actual eligible items.
+        # Closed dim (D4) → answer_key:
+        self.assertIn("mt5-beat-d1-blessed-groups [D4 / question / answer_key]", self.prompt)
+        # Open dim (D6) → leader_note:
+        self.assertIn("mt5-beat-d6-own-question [D6 / question / leader_note]", self.prompt)
+
+    def test_carries_keep_open_instruction(self):
+        self.assertIn("keep it open", self.prompt.lower())
+
+    def test_excludes_memory_verse_items(self):
+        # Every listed item id belongs to a non-memory_verse item.
+        from content_bank.lib import content
+        mv_ids = {i["id"] for i in content.load_book_store("MAT")["items"]
+                  if i["type"] == "memory_verse" and i["passage"] == "MAT-014"}
+        for mid in mv_ids:
+            self.assertNotIn(mid, self.prompt)
+
+    def test_output_schema_present(self):
+        # Output schema section must be present with field names:
+        self.assertIn("item_id", self.prompt)
+        self.assertIn("leader_reference", self.prompt)
+        # And substantively, at least one eligible answer_key item's id must appear:
+        self.assertIn("mt5-beat-d1-blessed-groups", self.prompt)
 
 
 if __name__ == "__main__":

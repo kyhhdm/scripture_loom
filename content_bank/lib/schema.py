@@ -14,6 +14,10 @@ LANGS = {"en", "zh"}
 GUARDRAILS = {"WCF-1"}
 DIFFICULTIES = {1, 2, 3}
 
+REFERENCE_KINDS = {"answer_key", "leader_note"}
+CLOSED_DIMENSIONS = {"D1", "D2", "D3", "D4", "D5"}
+OPEN_DIMENSIONS = {"D6", "D7", "D8"}
+
 _REQUIRED = ("id", "passage", "dimension", "type", "age_tier",
              "difficulty", "review_status", "text", "version")
 
@@ -27,6 +31,43 @@ def _check_text(field, value, errors):
             errors.append(f"{field}: unknown language '{lang}'")
         if not isinstance(s, str) or not s.strip():
             errors.append(f"{field}: language '{lang}' text is empty")
+
+
+def _check_reference(item, errors):
+    ref = item["leader_reference"]
+    if not isinstance(ref, dict):
+        errors.append("leader_reference: must be an object")
+        return
+    kind = ref.get("kind")
+    if kind not in REFERENCE_KINDS:
+        errors.append(f"leader_reference.kind: invalid '{kind}'")
+    if item.get("type") == "memory_verse":
+        errors.append("leader_reference: not allowed on memory_verse items")
+    _check_text("leader_reference.text", ref.get("text"), errors)
+
+    dim = item.get("dimension")
+    if kind == "answer_key" and dim not in CLOSED_DIMENSIONS:
+        errors.append(
+            f"leader_reference: answer_key only on closed dimensions "
+            f"{sorted(CLOSED_DIMENSIONS)}, not '{dim}'")
+    if kind == "leader_note" and dim not in OPEN_DIMENSIONS:
+        errors.append(
+            f"leader_reference: leader_note only on open dimensions "
+            f"{sorted(OPEN_DIMENSIONS)}, not '{dim}'")
+
+    if "verse" in ref:
+        if kind != "answer_key":
+            errors.append("leader_reference.verse: only allowed on answer_key")
+        else:
+            _check_text("leader_reference.verse", ref.get("verse"), errors)
+
+    prov = ref.get("provenance") or {}
+    if not prov.get("reviewed_by"):
+        errors.append("leader_reference.provenance.reviewed_by: required")
+    if not prov.get("reviewed_date"):
+        errors.append("leader_reference.provenance.reviewed_date: required")
+    if prov.get("guardrail") not in GUARDRAILS:
+        errors.append("leader_reference.provenance.guardrail: must be 'WCF-1'")
 
 
 def validate_item(item):
@@ -65,5 +106,8 @@ def validate_item(item):
             errors.append("provenance.reviewed_date: required once not draft")
         if prov.get("guardrail") not in GUARDRAILS:
             errors.append("provenance.guardrail: must be 'WCF-1' once not draft")
+
+    if "leader_reference" in item:
+        _check_reference(item, errors)
 
     return errors

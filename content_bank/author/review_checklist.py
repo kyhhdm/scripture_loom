@@ -37,13 +37,19 @@ _BOXES = """
 ## Pedagogical strength
 - [ ] A good prompt: open where it should be, not leading, not trivially yes/no.
 
+## Leader references (leader-only; never printed)
+- [ ] Answer keys (D1-D5): expected response correct and grounded in the passage
+      + brief; the cited verse actually contains it.
+- [ ] Leader notes (D6-D8): keep the question open; no canned answer, not leading.
+- [ ] No reference on a memory_verse item.
+
 On pass, stamp provenance:
   reviewed_by, reviewed_date, guardrail={guardrail}, and set review_status.
 """
 
 
 def build(guardrail="WCF-1"):
-    return _HEAD + rubric.build() + _BOXES.format(guardrail=guardrail)
+    return _HEAD + rubric.build() + rubric.reference_criteria() + _BOXES.format(guardrail=guardrail)
 
 
 def main(argv=None):

@@ -29,6 +29,16 @@ def validate_store(book, store_dir=None):
             "zh": sum(1 for i in items if "zh" in (i.get("text") or {})),
         },
     }
+    refs = [i["leader_reference"] for i in items if i.get("leader_reference")]
+    counts["references"] = {
+        "total": len(refs),
+        "answer_key": sum(1 for r in refs if r.get("kind") == "answer_key"),
+        "leader_note": sum(1 for r in refs if r.get("kind") == "leader_note"),
+        "missing_reference": sum(
+            1 for i in items
+            if i.get("type") in ("question", "pre_reading_quest")
+            and not i.get("leader_reference")),
+    }
     counts["missing_zh"] = counts["items"] - counts["by_lang"]["zh"]
     counts["missing_en"] = counts["items"] - counts["by_lang"]["en"]
     return {"errors": errors, "counts": counts}
