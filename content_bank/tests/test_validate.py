@@ -54,5 +54,43 @@ class TestValidateStore(unittest.TestCase):
         self.assertEqual(counts["missing_zh"], 1)
 
 
+class TestReferenceCounts(unittest.TestCase):
+    def _write_store(self, items):
+        d = tempfile.mkdtemp()
+        with open(pathlib.Path(d) / "mat.json", "w", encoding="utf-8") as f:
+            json.dump({"items": items}, f)
+        return d
+
+    def _item(self, iid, dim, typ, ref=None):
+        it = {"id": iid, "passage": "MAT-014", "dimension": dim, "type": typ,
+              "age_tier": "youth", "difficulty": 1, "review_status": "published",
+              "text": {"en": "x"}, "version": 1,
+              "provenance": {"drafted_by": "claude", "reviewed_by": "claude",
+                             "reviewed_date": "2026-07-19", "guardrail": "WCF-1"}}
+        if ref is not None:
+            it["leader_reference"] = ref
+        return it
+
+    def test_reference_counts(self):
+        ak = {"kind": "answer_key", "text": {"en": "a"},
+              "provenance": {"reviewed_by": "claude", "reviewed_date": "2026-07-19",
+                             "guardrail": "WCF-1"}}
+        note = {"kind": "leader_note", "text": {"en": "n"},
+                "provenance": {"reviewed_by": "claude", "reviewed_date": "2026-07-19",
+                               "guardrail": "WCF-1"}}
+        items = [
+            self._item("q1", "D1", "question", ak),
+            self._item("q2", "D7", "question", note),
+            self._item("q3", "D2", "question"),            # eligible, missing
+            self._item("a1", "D8", "activity"),            # not counted as missing
+        ]
+        d = self._write_store(items)
+        counts = validate.validate_store("MAT", store_dir=d)["counts"]
+        self.assertEqual(counts["references"]["total"], 2)
+        self.assertEqual(counts["references"]["answer_key"], 1)
+        self.assertEqual(counts["references"]["leader_note"], 1)
+        self.assertEqual(counts["references"]["missing_reference"], 1)
+
+
 if __name__ == "__main__":
     unittest.main()
