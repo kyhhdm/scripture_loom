@@ -1,0 +1,40 @@
+import pathlib
+import sys
+import unittest
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))
+from content_bank.author import build_draft_prompt, review_checklist, dimensions
+
+
+class TestBuildDraftPrompt(unittest.TestCase):
+    def setUp(self):
+        self.prompt = build_draft_prompt.build("MAT-014", book="MAT")
+
+    def test_includes_passage_reference_and_text(self):
+        self.assertIn("MAT-014", self.prompt)
+        self.assertIn("Beatitudes", self.prompt)
+        self.assertIn("blessed", self.prompt.lower())  # passage text present
+
+    def test_includes_westminster_guardrail(self):
+        self.assertIn("Westminster", self.prompt)
+        self.assertIn("1.1", self.prompt)  # WCF chapter 1 sections
+
+    def test_includes_all_dimension_templates(self):
+        for d in dimensions.TEMPLATES:
+            self.assertIn(d, self.prompt)
+
+    def test_includes_schema_vocabularies(self):
+        self.assertIn("pre_reading_quest", self.prompt)  # a type
+        self.assertIn("review_status", self.prompt)
+
+
+class TestReviewChecklist(unittest.TestCase):
+    def test_checklist_covers_conformity_accuracy_age_fit(self):
+        text = review_checklist.build().lower()
+        self.assertIn("westminster", text)
+        self.assertIn("accura", text)
+        self.assertIn("age", text)
+
+
+if __name__ == "__main__":
+    unittest.main()
