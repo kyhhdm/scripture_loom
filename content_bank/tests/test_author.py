@@ -33,11 +33,14 @@ class TestBuildDraftPrompt(unittest.TestCase):
 
 
 class TestReviewChecklist(unittest.TestCase):
-    def test_checklist_covers_conformity_accuracy_age_fit(self):
+    def test_checklist_covers_all_seven_rubric_axes(self):
         text = review_checklist.build().lower()
-        self.assertIn("westminster", text)
-        self.assertIn("accura", text)
-        self.assertIn("age", text)
+        for token in ("westminster", "answerab", "judgment", "age",
+                      "dimension", "worship", "pedagog"):
+            self.assertIn(token, text)
+
+    def test_checklist_still_takes_guardrail(self):
+        self.assertIn("WCF-1", review_checklist.build(guardrail="WCF-1"))
 
 
 class TestRubric(unittest.TestCase):
