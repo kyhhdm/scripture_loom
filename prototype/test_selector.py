@@ -21,6 +21,10 @@ def load():
     return bank, family
 
 
+def kit_passage_dims(bank, passage_id):
+    return selector.available_dimensions(bank, passage_id)
+
+
 class TestPassageSelection(unittest.TestCase):
     def test_next_passage_follows_reading_sequence(self):
         bank, family = load()
@@ -122,6 +126,16 @@ class TestObservationTargets(unittest.TestCase):
         bank, family = load()
         kit = selector.build_kit(bank, family)
         self.assertNotIn("aquila", {t["member"] for t in kit["observation_targets"]})
+
+    def test_no_target_on_dimension_absent_from_passage(self):
+        """The Beatitudes (MAT-014, the fixture's next passage) publish no D1
+        content, so no member may be given a D1 observation target there."""
+        bank, family = load()
+        self.assertEqual(kit_passage_dims(bank, "MAT-014") & {"D1"}, set())  # precondition
+        kit = selector.build_kit(bank, family)
+        self.assertEqual(kit["passage"]["id"], "MAT-014")
+        target_dims = {t["dimension"] for t in kit["observation_targets"]}
+        self.assertNotIn("D1", target_dims)
 
 
 class TestContentSelection(unittest.TestCase):
