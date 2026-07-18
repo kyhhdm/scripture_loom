@@ -1,3 +1,6 @@
 __pycache__/
 *.pyc
 corpus/sources/private/
+
+# editor swap files
+*.swp
