@@ -79,10 +79,6 @@ class TestConfessionalRefs(unittest.TestCase):
         self.assertEqual(c["wcf"] + c["wlc"] + c["wsc"], [])
 
 
-if __name__ == "__main__":
-    unittest.main()
-
-
 class TestPassageOrdering(unittest.TestCase):
     def test_verses_served_in_canonical_order(self):
         from content_bank.lib import corpus_bridge
@@ -90,3 +86,7 @@ class TestPassageOrdering(unittest.TestCase):
         verses = [line.split()[0] for line in text.splitlines() if line.strip()]
         nums = [int(v.split(".")[2]) for v in verses]
         self.assertEqual(nums, sorted(nums))  # 4.1,4.2,...,4.11 not 4.1,4.10,4.11,4.2
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -42,8 +42,6 @@ human-readable per-pericope review of the published set is at
 generated cycle above. Retained for provenance history.)*
 
 The initial `store/mat.json` items were migrated from the kit-generator
-
-The initial `store/mat.json` items were migrated from the kit-generator
 prototype's hand-authored `prototype/content_bank.json` (25 items across three
 prototype pericopes). Content is human-authored; `provenance.drafted_by` is
 `hand` and each published item is recorded as reviewed against `WCF-1`
