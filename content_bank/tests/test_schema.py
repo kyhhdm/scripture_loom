@@ -25,6 +25,16 @@ def valid_item(**over):
 
 
 class TestValidateItem(unittest.TestCase):
+    def _ref(self, **over):
+        ref = {
+            "kind": "answer_key",
+            "text": {"en": "The Spirit led Jesus; the devil tempted him."},
+            "provenance": {"reviewed_by": "claude-adversarial",
+                           "reviewed_date": "2026-07-19", "guardrail": "WCF-1"},
+        }
+        ref.update(over)
+        return ref
+
     def test_valid_item_has_no_errors(self):
         self.assertEqual(schema.validate_item(valid_item()), [])
 
@@ -77,6 +87,54 @@ class TestValidateItem(unittest.TestCase):
         item = valid_item()
         del item["dimension"]
         self.assertTrue(schema.validate_item(item))
+
+    def test_valid_answer_key_reference(self):
+        item = valid_item(dimension="D1", leader_reference=self._ref())
+        self.assertEqual(schema.validate_item(item), [])
+
+    def test_valid_leader_note_reference(self):
+        note = self._ref(kind="leader_note",
+                         text={"en": "Point where the text leads; keep it open."})
+        item = valid_item(dimension="D7", leader_reference=note)
+        self.assertEqual(schema.validate_item(item), [])
+
+    def test_answer_key_rejected_on_open_dimension(self):
+        item = valid_item(dimension="D7", leader_reference=self._ref())
+        self.assertTrue(any("answer_key" in e for e in schema.validate_item(item)))
+
+    def test_leader_note_rejected_on_closed_dimension(self):
+        note = self._ref(kind="leader_note")
+        item = valid_item(dimension="D2", leader_reference=note)
+        self.assertTrue(any("leader_note" in e for e in schema.validate_item(item)))
+
+    def test_bad_reference_kind_rejected(self):
+        item = valid_item(dimension="D1", leader_reference=self._ref(kind="hint"))
+        self.assertTrue(any("kind" in e for e in schema.validate_item(item)))
+
+    def test_verse_rejected_on_leader_note(self):
+        note = self._ref(kind="leader_note", verse={"en": "Matthew 5:7"})
+        item = valid_item(dimension="D7", leader_reference=note)
+        self.assertTrue(any("verse" in e for e in schema.validate_item(item)))
+
+    def test_verse_allowed_on_answer_key(self):
+        item = valid_item(dimension="D1",
+                          leader_reference=self._ref(verse={"en": "Matthew 4:1"}))
+        self.assertEqual(schema.validate_item(item), [])
+
+    def test_reference_rejected_on_memory_verse(self):
+        item = valid_item(type="memory_verse", dimension="D4",
+                          leader_reference=self._ref(verse={"en": "Matthew 4:4"}))
+        self.assertTrue(any("memory_verse" in e for e in schema.validate_item(item)))
+
+    def test_reference_provenance_required(self):
+        item = valid_item(dimension="D1",
+                          leader_reference=self._ref(provenance={}))
+        errs = schema.validate_item(item)
+        self.assertTrue(any("leader_reference.provenance" in e for e in errs))
+
+    def test_reference_text_must_be_lang_map(self):
+        item = valid_item(dimension="D1", leader_reference=self._ref(text={}))
+        self.assertTrue(any("leader_reference.text" in e for e in schema.validate_item(item)))
 
 
 if __name__ == "__main__":
