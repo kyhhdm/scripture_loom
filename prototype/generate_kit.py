@@ -5,10 +5,13 @@ Usage:  python3 generate_kit.py [-o kit.md]
 import argparse
 import json
 import pathlib
+import sys
 
 import selector
 
 HERE = pathlib.Path(__file__).parent
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))  # repo root
+from content_bank.lib import prototype_bank
 
 HEART_PREPARATION = """\
 > **Before you plan anything** — you are about to lead worship, not deliver a
@@ -96,12 +99,11 @@ def compose(kit, names):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--bank", default=HERE / "content_bank.json", type=pathlib.Path)
     parser.add_argument("--family", default=HERE / "family.json", type=pathlib.Path)
     parser.add_argument("-o", "--out", type=pathlib.Path)
     args = parser.parse_args()
 
-    bank = json.loads(args.bank.read_text())
+    bank = prototype_bank.load_bank("MAT", lang="en")
     family = json.loads(args.family.read_text())
     kit = selector.build_kit(bank, family)
     names = {m["id"]: m["name"] for m in family["members"]}

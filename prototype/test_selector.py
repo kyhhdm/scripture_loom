@@ -5,15 +5,18 @@ The central acceptance test: changing the member record changes the kit.
 import copy
 import json
 import pathlib
+import sys
 import unittest
 
 import selector
 
 HERE = pathlib.Path(__file__).parent
+sys.path.insert(0, str(HERE.parent))          # repo root, for content_bank
+from content_bank.lib import prototype_bank
 
 
 def load():
-    bank = json.loads((HERE / "content_bank.json").read_text())
+    bank = prototype_bank.load_bank("MAT", lang="en")
     family = json.loads((HERE / "family.json").read_text())
     return bank, family
 
@@ -22,13 +25,13 @@ class TestPassageSelection(unittest.TestCase):
     def test_next_passage_follows_reading_sequence(self):
         bank, family = load()
         kit = selector.build_kit(bank, family)
-        self.assertEqual(kit["passage"]["id"], "mt-5-1-12")
+        self.assertEqual(kit["passage"]["id"], "MAT-014")
 
     def test_after_studying_beatitudes_next_is_salt_and_light(self):
         bank, family = load()
-        family["sessions"].append({"date": "2026-07-19", "passage": "mt-5-1-12", "evidence": []})
+        family["sessions"].append({"date": "2026-07-19", "passage": "MAT-014", "evidence": []})
         kit = selector.build_kit(bank, family)
-        self.assertEqual(kit["passage"]["id"], "mt-5-13-16")
+        self.assertEqual(kit["passage"]["id"], "MAT-015")
 
 
 class TestActivationStages(unittest.TestCase):
@@ -89,7 +92,7 @@ class TestReviewQuestions(unittest.TestCase):
         bank, family = load()
         kit = selector.build_kit(bank, family)
         for q in kit["review_questions"]:
-            self.assertEqual(q["passage"], "mt-4-1-11")
+            self.assertEqual(q["passage"], "MAT-009")
 
     def test_at_most_three_review_questions(self):
         bank, family = load()

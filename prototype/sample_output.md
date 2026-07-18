@@ -1,4 +1,4 @@
-# Session Kit — Matthew 5:1–12 (The Beatitudes)
+# Session Kit — Matthew 5:3–12 (The Beatitudes)
 
 *Generated for Aquila & Priscilla's family from the content bank and member records.*
 
@@ -9,7 +9,7 @@
 > lesson. God will speak to your family in his Word; your preparation serves
 > that, it cannot produce it.
 >
-> **First:** read Matthew 5:1–12 once, slowly, as a hearer — not yet as a teacher.
+> **First:** read Matthew 5:3–12 once, slowly, as a hearer — not yet as a teacher.
 > **Then pray** — for yourself, and for each member by name.
 > Only then, review the plan below.
 
@@ -38,10 +38,10 @@
 
 ### Key questions — after the second reading
 
-1. What did Jesus do when he saw the crowds, before he began to speak? Who came to him?  `[D2]`
-2. What words or phrases repeat? How many Beatitudes did you count?  `[D3]`
-3. Which saying is hardest to understand? (collect on question cards)  `[D6]`
-4. Which Beatitude can you remember without looking?  `[D4]`
+1. What words or phrases repeat? How many Beatitudes did you count?  `[D3]`
+2. Which saying is hardest to understand? (collect on question cards)  `[D6]`
+3. Which Beatitude can you remember without looking?  `[D4]`
+4. Who does Jesus call blessed? Are these the people the world calls blessed?  `[D7]`
 
 **Narration:** Retell what happened on the mountain and what kind of people Jesus called blessed — in your own words.
 
@@ -103,4 +103,4 @@
 
 
 ---
-*Selected item ids (mark used after the session): `mt4-q-order`, `mt4-q-which-book`, `mt4-q-how-answered`, `mt5a-q-mountain`, `mt5a-q-repeats`, `mt5a-q-hardest`, `mt5a-q-remember`, `mt5a-act-match`, `mt5a-act-match-young`, `mt5a-mv-peacemakers`, `mt5a-narr`, `mt5a-quest-ot-hunt`, `mt5a-quest-they-you`, `mt5a-quest-kind-of-list`, `mt5a-quest-tally`*
+*Selected item ids (mark used after the session): `mt4-q-order`, `mt4-q-which-book`, `mt4-q-how-answered`, `mt5a-q-repeats`, `mt5a-q-hardest`, `mt5a-q-remember`, `mt5a-q-who-blessed`, `mt5a-act-match`, `mt5a-act-match-young`, `mt5a-mv-peacemakers`, `mt5a-narr`, `mt5a-quest-ot-hunt`, `mt5a-quest-they-you`, `mt5a-quest-kind-of-list`, `mt5a-quest-tally`*
