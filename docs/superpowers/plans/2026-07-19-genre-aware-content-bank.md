@@ -190,7 +190,7 @@ git commit -m "$(printf 'selector: observation targets only on dimensions the pa
 
 **Interfaces:**
 - Consumes: `build_brief_prompt.build(pericope_id, book="MAT") -> str` and `build_draft_prompt.build(pericope_id, book="MAT", brief=None) -> str` (existing signatures, unchanged).
-- Produces: draft-prompt output where the D3 and D7 dimension lines each end with the exact substring `consult the brief's *Reading moves*`; brief-prompt output containing the substrings `Reading moves` and `five parts`.
+- Produces: draft-prompt output where the D3 and D7 dimension lines each contain the exact substring `consult the brief's *Reading moves*` (once each — twice total; the pointer continues with explanatory text after that phrase); brief-prompt output containing the substrings `Reading moves` and `five parts`.
 
 - [ ] **Step 1: Write the failing tests**
 
