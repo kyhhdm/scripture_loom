@@ -57,5 +57,15 @@ class TestRubric(unittest.TestCase):
             self.assertIn(token, text)
 
 
+class TestDimensions(unittest.TestCase):
+    def test_keys_still_match_schema(self):
+        from content_bank.lib import schema
+        self.assertEqual(set(dimensions.TEMPLATES), schema.DIMENSIONS)
+
+    def test_guidance_is_expanded_not_one_liners(self):
+        for d, text in dimensions.TEMPLATES.items():
+            self.assertGreater(len(text), 60, f"{d} guidance too thin")
+
+
 if __name__ == "__main__":
     unittest.main()
