@@ -159,5 +159,13 @@ class TestPersonalizedLines(unittest.TestCase):
         self.assertIn("worship", lines)
 
 
+class TestReadingSequence(unittest.TestCase):
+    def test_reading_sequence_includes_mat013_before_beatitudes(self):
+        fam = json.loads((HERE / "family.json").read_text())
+        self.assertIn("MAT-013", fam["reading_sequence"])
+        self.assertEqual(fam["reading_sequence"].index("MAT-013"),
+                         fam["reading_sequence"].index("MAT-014") - 1)
+
+
 if __name__ == "__main__":
     unittest.main()
