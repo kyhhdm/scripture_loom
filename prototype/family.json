@@ -6,12 +6,12 @@
     { "id": "grace", "name": "Grace", "age_tier": "youth", "leader": false },
     { "id": "liberty", "name": "Liberty", "age_tier": "child", "leader": false }
   ],
-  "reading_sequence": ["mt-4-1-11", "mt-5-1-12", "mt-5-13-16"],
-  "used_item_ids": ["mt4-q-who-tempted", "mt4-q-how-answered"],
+  "reading_sequence": ["MAT-009", "MAT-013", "MAT-014", "MAT-015"],
+  "used_item_ids": ["mt4-d1-who-led-q", "mt4-d2-first-temptation-q"],
   "sessions": [
     {
       "date": "2026-07-12",
-      "passage": "mt-4-1-11",
+      "passage": "MAT-009",
       "evidence": [
         {
           "member": "grace", "dimension": "D6", "code": "Q", "quality": "★", "prompted": false,
@@ -32,6 +32,20 @@
         {
           "member": "priscilla", "dimension": "D5", "code": "C", "quality": "✓", "prompted": true,
           "note": "Connected 'man shall not live by bread alone' to the manna in Deuteronomy 8."
+        }
+      ]
+    },
+    {
+      "date": "2026-07-19",
+      "passage": "MAT-013",
+      "evidence": [
+        {
+          "member": "grace", "dimension": "D6", "code": "Q", "quality": "★", "prompted": true,
+          "note": "Why did Jesus sit down to teach instead of standing before the crowds?"
+        },
+        {
+          "member": "liberty", "dimension": "D2", "code": "R", "quality": "?", "prompted": true,
+          "note": "Still unsure whether Jesus sat down before or after the disciples came."
         }
       ]
     }
