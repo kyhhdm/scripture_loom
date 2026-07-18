@@ -14,7 +14,9 @@ _SHAPE = """## Produce the THEOLOGICAL BRIEF
 **Passage's own emphasis (primary).** What THIS passage says and stresses, in the
 text's own terms. This governs everything else.
 **Key terms (from commentary).** A few words/phrases the passage uses, with the
-sense the commentary gives them. Ground, don't speculate.
+sense the commentary gives them. Use only words that appear in the passage or the
+commentary; do NOT introduce original-language (Greek/Hebrew) glosses unless the
+commentary itself supplies them. Ground, don't speculate.
 **Doctrinal anchors.** Method: WCF ch.1 — treat the text as inspired, sufficient,
 Scripture-interpreting-Scripture. Doctrine: what the cited confessional/catechism
 statements say this passage teaches.
@@ -25,7 +27,14 @@ here," NOT "this passage is a treatise on that doctrine." Use only the part of a
 confessional citation that fits THIS passage's emphasis; set aside off-agenda
 topics (e.g. a Lord's-Supper Q&A cited for a phrase about the humble heart
 contributes only its reading of that phrase). Add NO doctrine the lampposts do
-not support. End with a one-line note of anything set aside as off-agenda."""
+not support.
+
+PRESERVE THE COMMENTARY'S NUANCE — do not sharpen, flatten, or overstate a claim
+beyond what the lamppost says. If the commentary qualifies a point (e.g. Christ
+as the eternal Word who *voluntarily* honors Scripture, or one text *governing
+the application of* another rather than *correcting* it), keep that qualification.
+
+End with a one-line note of anything set aside as off-agenda."""
 
 
 def build(pericope_id, book="MAT"):
