@@ -351,7 +351,7 @@ def build_zoom_out_kit(bank, family, sections, section):
     cards = [{"id": pid, "title": by_id[pid]["title"], "ref": by_id[pid]["ref"]}
              for pid in section_ids]
     memory_recall = [i for i in _published(bank, type_="memory_verse")
-                     if i["passage"] in section_ids and i["passage"] in studied]
+                     if i.get("passage") in section_ids and i.get("passage") in studied]
 
     sid = section["id"]
     throughline_item = next(iter(_published_section(bank, sid, "throughline")), None)
