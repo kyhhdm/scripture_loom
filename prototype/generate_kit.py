@@ -46,7 +46,26 @@ def compose(kit, names):
             add("\n\n## Memory verses from this section\n")
             for m in kit["memory_recall"]:
                 add(f"- {m['body']}")
-        add(f"\n\n## Throughline\n\n{kit['throughline_prompt']}\n")
+        add("\n\n## Throughline\n")
+        if kit.get("throughline_item"):
+            add(kit["throughline_item"]["body"])
+            lr = kit["throughline_item"].get("leader_reference")
+            if lr:
+                add(f"\n> *Leader:* {lr['text']['en']}")
+        else:
+            add(kit["throughline_prompt"])
+        if kit.get("threads"):
+            add("\n\n## Threads across the section\n")
+            for t in kit["threads"]:
+                refs = ", ".join(t.get("refs", []))
+                add(f"- {t['body']}  (see {refs})")
+                lr = t.get("leader_reference")
+                if lr:
+                    add(f"  \n  > *Leader:* {lr['text']['en']}")
+        if kit.get("section_questions"):
+            add("\n\n## Section questions\n")
+            for q in kit["section_questions"]:
+                add(f"- {q['body']}  `[{q['dimension']}]`")
         add("\n---\n")
         for r in kit["roles"]:
             add(f"- **{r['role']}** — {r['member']}")

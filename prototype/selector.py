@@ -26,6 +26,17 @@ RECENT_SESSIONS = 6  # window for activation and weakness signals
 
 # ---------- helpers ----------
 
+def _published_section(bank, section_id, type_=None):
+    for item in bank["items"]:
+        if item.get("review_status") != "published":
+            continue
+        if item.get("section") != section_id:
+            continue
+        if type_ and item.get("type") != type_:
+            continue
+        yield item
+
+
 def _published(bank, passage=None, type_=None):
     for item in bank["items"]:
         if item["review_status"] != "published":
@@ -342,6 +353,11 @@ def build_zoom_out_kit(bank, family, sections, section):
     memory_recall = [i for i in _published(bank, type_="memory_verse")
                      if i["passage"] in section_ids and i["passage"] in studied]
 
+    sid = section["id"]
+    throughline_item = next(iter(_published_section(bank, sid, "throughline")), None)
+    threads = list(_published_section(bank, sid, "thread"))
+    section_questions = list(_published_section(bank, sid, "question"))
+
     return {
         "family": family["name"],
         "kind": "zoom_out",
@@ -352,5 +368,10 @@ def build_zoom_out_kit(bank, family, sections, section):
         "memory_recall": memory_recall,
         "throughline_prompt": f"In one sentence, what was “{section['title']}” about?",
         "roles": assign_roles(family),
-        "selected_item_ids": [i["id"] for i in memory_recall],
+        "throughline_item": throughline_item,
+        "threads": threads,
+        "section_questions": section_questions,
+        "selected_item_ids": [i["id"] for i in memory_recall]
+        + ([throughline_item["id"]] if throughline_item else [])
+        + [t["id"] for t in threads] + [q["id"] for q in section_questions],
     }

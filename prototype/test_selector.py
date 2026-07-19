@@ -329,5 +329,44 @@ class TestZoomOutKit(unittest.TestCase):
         self.assertIn("Prologue: The Infancy", kit["throughline_prompt"])
 
 
+def _section_item(id, type, dim, **over):
+    item = {"id": id, "section": "MAT-S1", "type": type, "dimension": dim,
+            "age_tier": "all", "difficulty": 2, "review_status": "published",
+            "body": id + " text"}
+    item.update(over)
+    return item
+
+
+class TestZoomOutArcContent(unittest.TestCase):
+    def _completed_s1(self, bank, family):
+        order = [p["id"] for p in bank["pericopes"]]
+        family["reading_sequence"] = order
+        family["sessions"] = [{"date": "d", "passage": pid, "evidence": []}
+                              for pid in order[:6]]
+        return family
+
+    def test_authored_content_appears_in_zoom_out(self):
+        bank, family = load()
+        bank = {**bank, "items": bank["items"] + [
+            _section_item("tl", "throughline", "D7"),
+            _section_item("th", "thread", "D7", refs=["MAT.1.22", "MAT.2.15"]),
+            _section_item("q", "question", "D7"),
+        ]}
+        self._completed_s1(bank, family)
+        kit = selector.build_zoom_out_kit(bank, family, SECTIONS, SECTIONS[0])
+        self.assertEqual(kit["throughline_item"]["id"], "tl")
+        self.assertEqual([t["id"] for t in kit["threads"]], ["th"])
+        self.assertEqual([q["id"] for q in kit["section_questions"]], ["q"])
+
+    def test_no_authored_content_degrades_to_mvp(self):
+        bank, family = load()
+        self._completed_s1(bank, family)
+        kit = selector.build_zoom_out_kit(bank, family, SECTIONS, SECTIONS[0])
+        self.assertIsNone(kit["throughline_item"])
+        self.assertEqual(kit["threads"], [])
+        self.assertEqual(kit["section_questions"], [])
+        self.assertIn("throughline_prompt", kit)   # MVP generic prompt still present
+
+
 if __name__ == "__main__":
     unittest.main()
