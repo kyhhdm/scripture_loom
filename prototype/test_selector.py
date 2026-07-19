@@ -261,6 +261,32 @@ class TestZoomOutTrigger(unittest.TestCase):
         self.assertEqual(selector.next_passage(bank, family)["id"], "MAT-002")
 
 
+class TestBuildKitIntegration(unittest.TestCase):
+    def test_normal_kit_includes_arc_recap_when_sections_given(self):
+        bank, family = load()  # family has studied MAT-009, MAT-013; next is MAT-014
+        kit = selector.build_kit(bank, family, SECTIONS)
+        self.assertIn("arc_recap", kit)
+        self.assertIsNotNone(kit["arc_recap"])
+        self.assertNotEqual(kit.get("kind"), "zoom_out")
+
+    def test_zoom_out_replaces_session_at_boundary(self):
+        bank, family = load()
+        order = [p["id"] for p in bank["pericopes"]]
+        family["reading_sequence"] = order
+        family["sessions"] = [{"date": "d", "passage": pid, "evidence": []}
+                              for pid in order[:6]]  # completed MAT-S1
+        kit = selector.build_kit(bank, family, SECTIONS)
+        self.assertEqual(kit["kind"], "zoom_out")
+        self.assertEqual(kit["section_id"], "MAT-S1")
+        self.assertNotIn("passage", kit)  # no new pericope advanced
+
+    def test_back_compat_without_sections(self):
+        bank, family = load()
+        kit = selector.build_kit(bank, family)  # no sections arg
+        self.assertEqual(kit["passage"]["id"], "MAT-014")
+        self.assertNotIn("arc_recap", kit)
+
+
 class TestZoomOutKit(unittest.TestCase):
     def test_zoom_out_kit_contents(self):
         bank, family = load()

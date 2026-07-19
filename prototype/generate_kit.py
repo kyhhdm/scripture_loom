@@ -30,10 +30,29 @@ SESSION_ORDER = ("opening prayer → opening recall → first reading (cold) →
 
 
 def compose(kit, names):
-    p = kit["passage"]
     out = []
     add = out.append
 
+    if kit.get("kind") == "zoom_out":
+        add(f"# Zoom-out Session — {kit['section']}")
+        add(f"\n*Consolidation for {kit['family']}. No new passage this session.*\n")
+        add("\n## Put the story in order\n")
+        add("Shuffle these cards, then place them back in reading order:\n")
+        for c in kit["sequence_cards"]:
+            add(f"- {c['title']}  ({c['ref']})")
+        add("\n*Leader's reference (correct order):* "
+            + " → ".join(c["title"] for c in kit["sequence_cards"]))
+        if kit["memory_recall"]:
+            add("\n\n## Memory verses from this section\n")
+            for m in kit["memory_recall"]:
+                add(f"- {m['body']}")
+        add(f"\n\n## Throughline\n\n{kit['throughline_prompt']}\n")
+        add("\n---\n")
+        for r in kit["roles"]:
+            add(f"- **{r['role']}** — {r['member']}")
+        return "\n".join(out)
+
+    p = kit["passage"]
     add(f"# Session Kit — {p['ref']} ({p['title']})")
     add(f"\n*Generated for {kit['family']} from the content bank and member records.*\n")
 
@@ -46,6 +65,11 @@ def compose(kit, names):
         add(f"- {q['body']}  `[{q['dimension']} {selector.DIMENSIONS[q['dimension']]}]`")
     for line in kit["personalized_lines"]:
         add(f"\n> *{line}*")
+
+    if kit.get("arc_recap"):
+        r = kit["arc_recap"]
+        trail = " → ".join(r["studied"]) if r["studied"] else "(beginning this section)"
+        add(f"\n> **The story so far — {r['section']} ({r['position']}):** {trail}\n")
 
     add("\n\n### Listen for — this session's observation targets\n")
     for i, t in enumerate(kit["observation_targets"], 1):
@@ -104,8 +128,9 @@ def main():
     args = parser.parse_args()
 
     bank = prototype_bank.load_bank("MAT", lang="en")
+    sections = prototype_bank.load_sections("MAT", lang="en")
     family = json.loads(args.family.read_text())
-    kit = selector.build_kit(bank, family)
+    kit = selector.build_kit(bank, family, sections)
     names = {m["id"]: m["name"] for m in family["members"]}
     text = compose(kit, names)
     if args.out:

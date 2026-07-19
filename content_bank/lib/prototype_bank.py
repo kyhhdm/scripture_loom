@@ -36,3 +36,18 @@ def load_bank(book, lang="en", store_dir=None):
             flat["category"] = it["category"][lang]
         items.append(flat)
     return {"pericopes": pericopes, "items": items}
+
+
+def load_sections(book, lang="en"):
+    """Flattened section list for the selector: title[lang] -> 'title'."""
+    from corpus.lib import sections as sections_lib
+    out = []
+    for s in sections_lib.load(book)["sections"]:
+        title = s.get("title_zh") if lang == "zh" and s.get("title_zh") else s["title_en"]
+        out.append({
+            "id": s["id"], "title": title,
+            "first_pericope": s["first_pericope"],
+            "last_pericope": s["last_pericope"],
+            "marker": s.get("marker"),
+        })
+    return out

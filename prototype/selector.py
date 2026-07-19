@@ -237,7 +237,12 @@ def assign_roles(family):
 
 # ---------- the kit ----------
 
-def build_kit(bank, family):
+def build_kit(bank, family, sections=None):
+    if sections:
+        section = due_zoom_out(sections, family)
+        if section:
+            return build_zoom_out_kit(bank, family, sections, section)
+
     passage = next_passage(bank, family)
     available = available_dimensions(bank, passage["id"])
     targets = select_observation_targets(family, available)
@@ -252,7 +257,7 @@ def build_kit(bank, family):
     selected += [a["id"] for a in (main_act, young_act, verse, narration) if a]
     selected += [q["item_id"] for q in quests if q["item_id"]]
 
-    return {
+    kit = {
         "family": family["name"],
         "passage": passage,
         "review_questions": review,
@@ -267,6 +272,9 @@ def build_kit(bank, family):
         "roles": assign_roles(family),
         "selected_item_ids": selected,
     }
+    if sections:
+        kit["arc_recap"] = arc_recap(sections, bank, family)
+    return kit
 
 
 def _normal_sessions(family):
