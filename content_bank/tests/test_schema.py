@@ -150,5 +150,55 @@ class TestValidateItem(unittest.TestCase):
         self.assertTrue(any("leader_reference.provenance.guardrail" in e for e in errs))
 
 
+def _throughline(**over):
+    item = {
+        "id": "mat-s1-tl", "section": "MAT-S1", "type": "throughline",
+        "dimension": "D7", "age_tier": "all", "difficulty": 2,
+        "review_status": "draft", "text": {"en": "x"}, "version": 1,
+    }
+    item.update(over)
+    return item
+
+
+class TestSectionScope(unittest.TestCase):
+    def test_valid_throughline(self):
+        self.assertEqual(schema.validate_item(_throughline()), [])
+
+    def test_passage_and_section_mutually_exclusive(self):
+        self.assertTrue(any("exactly one" in e
+                            for e in schema.validate_item(_throughline(passage="MAT-001"))))
+
+    def test_neither_passage_nor_section(self):
+        item = _throughline()
+        del item["section"]
+        self.assertTrue(any("exactly one" in e for e in schema.validate_item(item)))
+
+    def test_throughline_must_be_d7(self):
+        self.assertTrue(any("D7" in e for e in schema.validate_item(_throughline(dimension="D6"))))
+
+    def test_thread_requires_refs(self):
+        item = _throughline(id="t", type="thread", dimension="D7")
+        errs = schema.validate_item(item)
+        self.assertTrue(any("refs" in e for e in errs))
+
+    def test_thread_valid_with_refs(self):
+        item = _throughline(id="t", type="thread", dimension="D7",
+                            refs=["MAT.1.22", "MAT.2.15"])
+        self.assertEqual(schema.validate_item(item), [])
+
+    def test_thread_malformed_ref(self):
+        item = _throughline(id="t", type="thread", dimension="D7", refs=["Matt 1"])
+        self.assertTrue(any("malformed ref" in e for e in schema.validate_item(item)))
+
+    def test_refs_forbidden_on_non_thread(self):
+        self.assertTrue(any("refs" in e for e in schema.validate_item(_throughline(refs=["MAT.1.1"]))))
+
+    def test_existing_passage_item_still_valid(self):
+        item = {"id": "q1", "passage": "MAT-009", "dimension": "D1", "type": "question",
+                "age_tier": "all", "difficulty": 1, "review_status": "draft",
+                "text": {"en": "x"}, "version": 1}
+        self.assertEqual(schema.validate_item(item), [])
+
+
 if __name__ == "__main__":
     unittest.main()
