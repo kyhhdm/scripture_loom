@@ -384,6 +384,5160 @@
         "guardrail": "WCF-1",
         "confirmed_by": "kyhhdm"
       }
+    },
+    {
+      "id": "php-2-d1-guard",
+      "passage": "PHP-002",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "According to verse 13, to whom has it become clear that Paul is \"in chains for Christ\"?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "To \"the whole palace guard and to everyone else\" (v13)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-2-d1-preachers",
+      "passage": "PHP-002",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verses 15-17 describe two kinds of people who preach Christ. What motive does Paul give for each group?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "One group preaches \"out of envy and rivalry\" / \"out of selfish ambition, not sincerely\" (v15, v17); the other preaches \"out of goodwill\" and \"in love\" (v15-16). Both are named as preaching Christ; the difference the passage states is motive."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-2-d1-quest-guard",
+      "passage": "PHP-002",
+      "dimension": "D1",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "As the passage is read aloud, listen for the group of soldiers who now know that Paul is in chains for Christ. Raise your hand when you hear who they are."
+      },
+      "category": {
+        "en": "Listen for: who hears"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"The whole palace guard\" (v13) — the soldiers guarding Paul, along with \"everyone else.\""
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-2-d2-chains-effect",
+      "passage": "PHP-002",
+      "dimension": "D2",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In verse 14, what happens to \"most of the brothers\" as a result of Paul's chains?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Made \"confident in the Lord by my chains,\" they \"now dare more greatly to speak the word without fear\" (v14). The cause is Paul's chains; the effect is the brothers speaking more boldly."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-2-d3-chains",
+      "passage": "PHP-002",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "What single word does Paul repeat in verses 13, 14, and 17 to name his imprisonment?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"chains\" — \"in chains for Christ\" (v13), \"my chains\" (v14), and \"the distress of my chains\" (v17). Paul names his imprisonment openly and repeatedly as chains borne for Christ."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-2-d3-gain",
+      "passage": "PHP-002",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul writes \"to die is gain\" (v21). Using verse 23, what does the passage say makes death \"gain\" for Paul?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "To \"depart and be with Christ, which is far better indeed\" (v23). Within this passage, the \"gain\" of dying is being with Christ; keep the answer to what verses 21 and 23 state and do not import speculation about the afterlife beyond \"far better.\""
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-2-d3-exalted",
+      "passage": "PHP-002",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In verse 20 Paul says Christ \"will be exalted\" in his body (older translations render the word \"magnified\"). What does it mean here for Christ to be \"exalted\" — is Paul saying Christ is made greater, or that Christ is shown to be great?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "To \"exalt\" (or \"magnify\") Christ here means to show him to be great — to display his greatness — not to add to a greatness he already fully has. Paul writes that \"Christ will be exalted in my body, whether by life or by death\" (v20): whether Paul lives or dies, his body becomes the place where Christ is shown to be great. The one shown great is Christ, not Paul."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-2-d4-verse21",
+      "passage": "PHP-002",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "\"For to me, to live is Christ, and to die is gain.\" (Philippians 1:21)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-2-d4-verse20",
+      "passage": "PHP-002",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "\"now as always Christ will be exalted in my body, whether by life or by death.\" (Philippians 1:20)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-2-d5-gal220",
+      "passage": "PHP-002",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Paul says \"to live is Christ\" (v21). Turn to Galatians 2:20 — how does that verse describe the same reality of Christ and Paul's life?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Galatians 2:20 (named cross-reference): Paul says there that he has been crucified with Christ and no longer lives himself, but Christ lives in him; the life he now lives in the body he lives by faith in the Son of God, who loved him and gave Himself for him. It unfolds \"to live is Christ\" (v21) as Christ himself living in Paul, so that Paul's life in the body is lived by faith in Christ."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-2-d5-2co58",
+      "passage": "PHP-002",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul desires \"to depart and be with Christ\" (v23). Turn to 2 Corinthians 5:8 — what does Paul say there about being away from the body?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "2 Corinthians 5:8 (named cross-reference): Paul says there that believers are confident and would prefer to be away from the body and at home with the Lord. It matches Philippians 1:23: to be away from the body is to be at home with the Lord — the same \"with Christ\" hope named in v23."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-2-d5-rom828",
+      "passage": "PHP-002",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Paul says his circumstances \"have actually served to advance the gospel\" (v12). Turn to Romans 8:28 — what broader truth does Paul state there about how God works through circumstances?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Romans 8:28 (named cross-reference): Paul states there that God works all things together for the good of those who love Him, who are called according to His purpose. It states the general truth behind Philippians 1:12 — God brings good even out of adverse circumstances such as Paul's imprisonment."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-2-d6-torn",
+      "passage": "PHP-002",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul writes, \"I am torn between the two\" (v23) — between staying alive and departing to be with Christ. What is one question you would want to ask Paul about being \"torn\" like that?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Keep this open — the aim is the learner forming their own question, not receiving a model answer. Let the questions stand; do not resolve them on the spot or steer toward a preferred one."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-2-d7-argument",
+      "passage": "PHP-002",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Trace Paul's reasoning across verses 12-18: he begins with his \"circumstances,\" then asks \"What then is the issue?\" (v18). What conclusion about Christ does that reasoning arrive at, and why does Paul say he rejoices?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Follow the passage's own logic: Paul's circumstances \"have actually served to advance the gospel\" (v12); even preaching from wrong motives still results in \"Christ is preached\" (v18); therefore the outcome Paul cares about is reached either way, and he rejoices \"in this\" — that Christ is preached (v18). Keep open to how learners phrase it; anchor to what verses 12-18 state and don't add doctrine the text doesn't."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-2-d7-strait",
+      "passage": "PHP-002",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In verses 22-25 Paul is torn between two options, yet reaches a settled conclusion. What does he conclude he will do, and for whose sake does he say it is more necessary?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Point to the text: though departing to be with Christ is \"far better\" for Paul (v23), \"it is more necessary for you that I remain in the body\" (v24), so he is \"convinced\" he \"will remain\" for the Philippians' \"progress and joy in the faith\" (v25). The conclusion is to remain, for the church's sake. Keep open to the learner's wording; stay within verses 22-25."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-2-d7-narration",
+      "passage": "PHP-002",
+      "dimension": "D7",
+      "type": "narration_prompt",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In your own words, retell verses 12-26: what has happened to Paul, what it has done for the gospel and the brothers, how he responds to those who preach Christ, and what he says about living or dying."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Keep this open — check the retelling against the text rather than grading it against a fixed script. Together, look back and see whether the retelling touched: Paul's chains advancing the gospel and reaching the palace guard (v12-13); the brothers speaking more boldly (v14); the two kinds of preachers and Paul's rejoicing that Christ is preached (v15-18); and \"to live is Christ, and to die is gain,\" ending in his decision to remain for them (v21-26). If something was missing, have the family re-read that part and add it; don't supply a model retelling."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-2-d8-circumstance-card",
+      "passage": "PHP-002",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "all",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Paul spoke about Christ even while in chains (v13). On an index card, write one hard or ordinary situation in your week; beside it, write one true thing about Christ you could tell someone who is in that situation."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Observable action only: did they name a situation and write one true thing about Christ beside it? Do not evaluate the person's faith, sincerity, or spiritual state — only whether the concrete step was taken."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-2-d8-draw",
+      "passage": "PHP-002",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Paul was glad even in a hard place. Draw one good thing that happens where you live, and tell a grown-up one thing about Jesus you would want to say to a friend."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Observable action only: did the child draw one thing and say one thing about Jesus to a grown-up? Note what was drawn and said; do not assess the child's faith or spiritual state."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-3-d1-opponents",
+      "passage": "PHP-003",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "In verse 28, Paul tells the Philippians not to be afraid of a certain group of people. Who are they?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"those who oppose you\" (v28) — the people who stand against them."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-3-d1-comeorhear",
+      "passage": "PHP-003",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In verse 30, Paul says the Philippians are going through the same struggle they once saw a certain person go through, and now hear that he is still in it. Who is that person?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Paul himself. Verse 30 says they are \"encountering the same struggle you saw I had, and now hear that I still have\" — the struggle is Paul's own, which they once witnessed and now hear continues."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-3-d3-worthy",
+      "passage": "PHP-003",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 27 tells the Philippians to \"conduct yourselves in a manner worthy of the gospel of Christ.\" In your own words, what does it mean for their conduct to be \"worthy of the gospel\"?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "That the whole walk of life fits, or becomes, the gospel they profess — conduct that matches and adorns the gospel (the brief's key-term note: a walk befitting the heavenly citizenship). Keep the answer to how they live matching what they believe; don't drift into listing specific rules the verse doesn't give."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-3-d3-onespirit",
+      "passage": "PHP-003",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Paul wants them to \"stand firm in one spirit, contending side by side for the faith of the gospel\" (v27). What does \"one spirit\" point to here — and against whom is the contending directed?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "United, unanimous striving together — oneness of heart and purpose (the brief: the fruit of the one Holy Spirit) — and the contending is directed against the opponents of the gospel (v28), not against one another. Anchor to the text's \"side by side\" and \"those who oppose you\"; the point is shared standing against a common adversary."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-3-d3-granted",
+      "passage": "PHP-003",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 29 says it has been \"granted\" to them both to believe in Christ and to suffer for Him. Is something that is \"granted\" earned, or given? What does that tell us about their believing and their suffering?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Granted means given as a gift, not earned. The verse says both believing in Christ and suffering for Him are given \"on behalf of Christ\" (v29) — gifts of grace rather than achievements. Keep it to what the verse states; don't extend to what the passage doesn't say."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-3-pre-quest-standfirm",
+      "passage": "PHP-003",
+      "dimension": "D3",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "As the passage is read aloud, listen for the words \"stand firm.\" Raise your hand when you hear them, and remember what Paul says they are to stand firm in."
+      },
+      "category": {
+        "en": "Listen for: stand firm"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"stand firm\" appears in v27 — \"you stand firm in one spirit.\" They are to stand firm in one spirit (v27)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-3-d4-v27",
+      "passage": "PHP-003",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "\"Nevertheless, conduct yourselves in a manner worthy of the gospel of Christ. Then, whether I come and see you or only hear about you in my absence, I will know that you stand firm in one spirit, contending side by side for the faith of the gospel,\" (Philippians 1:27)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-3-d4-v29",
+      "passage": "PHP-003",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "\"For it has been granted to you on behalf of Christ not only to believe in Him, but also to suffer for Him,\" (Philippians 1:29)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-3-d5-worthy-eph41",
+      "passage": "PHP-003",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Philippians 1:27 calls believers to conduct themselves \"worthy of the gospel of Christ.\" Turn to Ephesians 4:1 — how does Paul there describe the same kind of worthy walk?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Ephesians 4:1 (named cross-reference): Paul there urges believers to walk in a manner worthy of the calling they have received. Both texts frame the Christian life as a walk that answers to — is worthy of — what God has given: the gospel in Php 1:27, the calling in Eph 4:1."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-3-d5-onemind-php212",
+      "passage": "PHP-003",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Philippians 1:27 calls the church to \"stand firm in one spirit.\" Read Philippians 2:1-2 — what does Paul there ask them to share so that his joy would be complete?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Philippians 2:1-2 (named cross-reference): Paul asks them to be \"like-minded, having the same love, being united in spirit and purpose.\" It echoes the \"one spirit\" of 1:27 — the same call to unity and shared mind among believers."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-3-d6-suffering-gift",
+      "passage": "PHP-003",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 29 says it was \"granted\" to them not only to believe in Christ but also to suffer for Him. What question would you want to ask about suffering being spoken of as something given, like a gift?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Keep this open — the aim is the learner forming their own question, not receiving a model answer. Let the question stand; don't resolve it on the spot or supply the 'right' way to feel about suffering."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-3-d7-for-ground",
+      "passage": "PHP-003",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 28 calls the believers' fearlessness \"a clear sign of their destruction but of your salvation, and it is from God.\" Verse 29 then begins with \"For.\" How does verse 29 give the ground for the sign described in verse 28?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Guide toward the passage's own logic: the \"For\" of v29 explains why their fearless standing is a God-given sign — because both their believing and their suffering for Christ have been granted to them by God (v29). Since the faith and endurance are God's gift, their fearlessness is evidence that salvation is theirs and 'from God' (v28). Keep open to how learners phrase the link; don't add doctrine beyond what v28-29 state."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-3-d7-token",
+      "passage": "PHP-003",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In verse 28, the very same fearlessness is called a sign of \"their destruction\" and of \"your salvation.\" Why would one thing point in two opposite directions for the two groups?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor first to what v28 states: the believers' not being frightened is a single 'clear sign' that means destruction for the opponents and salvation for the believers, and it is 'from God.' Then let learners reason from the text: the same steadfastness that exposes the opponents' opposition to God marks the believers as God's own. Keep it to what the verse says; don't press beyond the text into speculation about individuals."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-3-d7-narration",
+      "passage": "PHP-003",
+      "dimension": "D7",
+      "type": "narration_prompt",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In your own words, retell verses 27-30: what Paul urges the Philippians to do, how they are to face those who oppose them, and what he says has been granted to them."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Keep this open — check the retelling against the text rather than grading it against a fixed script. Look back together and see whether it touched: conducting themselves worthy of the gospel (v27); standing firm in one spirit, contending side by side (v27); not being frightened by opponents, which is a sign from God (v28); that believing and suffering for Christ are granted to them (v29); and that they share the same struggle they saw and hear in Paul (v30). If a part was missing, have the family re-read it and add it — don't supply a model retelling."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-3-d8-encourage-standfirm",
+      "passage": "PHP-003",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul urges believers to \"stand firm in one spirit, contending side by side\" (v27). On an index card, write one specific thing your family could do this week to help another believer keep standing firm. Name the action and when you will do it."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Observable action only: did they write one specific, doable step and a when? Do not evaluate faith, motive, or spiritual depth — only whether the concrete step was named. Follow up next session on whether the step was taken."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-3-d8-sidebyside-draw",
+      "passage": "PHP-003",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 27 pictures believers standing \"side by side.\" Draw a picture of people standing together, side by side. Then point to one person in your own life you can stand next to and help this week."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Observable action only: did the child draw people standing together and name one real person to help? Do not assess the child's character or feelings — only whether the drawing and the naming were done."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d1-three-realms",
+      "passage": "PHP-004",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 10 says every knee should bow in three places. What are the three places named?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The three realms named are 'in heaven and on earth and under the earth' (v.10)."
+        },
+        "verse": {
+          "en": "that at the name of Jesus every knee should bow, in heaven and on earth and under the earth,"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d1-titles-of-christ",
+      "passage": "PHP-004",
+      "dimension": "D1",
+      "type": "pre_reading_quest",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "category": {
+        "en": "Names & titles"
+      },
+      "text": {
+        "en": "As the passage is read, listen for every name or title the text gives to Christ."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The passage names Him 'Christ Jesus' (v.5), one 'in the form of God' (v.6), one who took 'the form of a servant' (v.7), a 'man' (v.8), and confesses that 'Jesus Christ is Lord' (v.11)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d2-descent-order",
+      "passage": "PHP-004",
+      "dimension": "D2",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verses 6-8 describe Christ's downward path. Put these steps in the order the text gives them: He humbled Himself to death on a cross; He was in the form of God; He emptied Himself and took the form of a servant."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Order: (1) existing in 'the form of God' (v.6); (2) 'emptied Himself, taking the form of a servant' (v.7); (3) 'He humbled Himself and became obedient to death— even death on a cross' (v.8)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d2-listen-for-turn",
+      "passage": "PHP-004",
+      "dimension": "D2",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "category": {
+        "en": "What happens next"
+      },
+      "text": {
+        "en": "Listen for the moment the passage turns from Jesus going low to God lifting Him high. What word marks that turn?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The turn comes at v.9 with the word 'Therefore': after Jesus 'humbled Himself' (v.8), 'Therefore God exalted Him to the highest place' (v.9)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d3-form-of-god-form-of-servant",
+      "passage": "PHP-004",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The passage sets 'the form of God' (v.6) beside 'the form of a servant' (v.7). What does this deliberate contrast show about the one person, Christ Jesus?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The same 'form' word frames both: He who was 'in the form of God' willingly took 'the form of a servant' (vv.6-7). The one person did not cease to be God but took the true condition of a servant — the descent that grounds the whole exhortation to lowly-mindedness."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d3-emptied-himself",
+      "passage": "PHP-004",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 7 says Christ 'emptied Himself.' According to the words that follow in verses 7-8, what did that emptying look like in action?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The text explains it by the actions that follow: 'taking the form of a servant, being made in human likeness' (v.7), and 'He humbled Himself and became obedient to death— even death on a cross' (v.8). The emptying is His self-lowering, not a loss of who He is."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d4-mv-humility",
+      "passage": "PHP-004",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Do nothing out of selfish ambition or empty pride, but in humility consider others more important than yourselves. (Philippians 2:3, BSB)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d4-mv-mind-of-christ",
+      "passage": "PHP-004",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Who, existing in the form of God, did not consider equality with God something to be grasped, but emptied Himself, taking the form of a servant, being made in human likeness. (Philippians 2:6-7, BSB)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d4-complete-the-line",
+      "passage": "PHP-004",
+      "dimension": "D4",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Finish the line from verse 3 from memory: 'Do nothing out of selfish ambition or empty pride, but in humility ___.'"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "'...consider others more important than yourselves' (v.3)."
+        },
+        "verse": {
+          "en": "Do nothing out of selfish ambition or empty pride, but in humility consider others more important than yourselves."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d4-narrate-passage",
+      "passage": "PHP-004",
+      "dimension": "D4",
+      "type": "narration_prompt",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Retell the whole passage in your own words, from Paul's call to be like-minded all the way to every tongue confessing Christ as Lord."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A full retelling covers: Paul's appeal for like-mindedness and humility, counting others more important and looking to their interests (vv.1-4); the call to have the mind of Christ (v.5); Christ's descent — form of God, emptying, servant's form, humble obedience to death on a cross (vv.6-8); and God's exaltation of Him with the name above all names, so every knee bows and every tongue confesses Him Lord to the Father's glory (vv.9-11)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d5-humility-rom12",
+      "passage": "PHP-004",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 3 calls believers to 'consider others more important than yourselves.' How does Romans 12:10, on outdoing one another in showing honor, echo this same command?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Both press the same humility outward toward others: Philippians 2:3 counts others more important than self, and Romans 12:10 (named in the brief) urges believers to outdo one another in honor. Scripture interprets Scripture — the two texts reinforce one duty of lowly-mindedness."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d5-every-knee-isa45",
+      "passage": "PHP-004",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verses 10-11 say every knee will bow and every tongue confess. Isaiah 45:23-25 says every knee bows to the LORD. What does it show that Paul applies these words to Jesus?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Isaiah 45:23-25 (named in the brief) declares every knee bows and every tongue swears to the LORD. Paul applies these very words to Jesus in vv.10-11, so the universal homage owed to the LORD is given to Christ 'to the glory of God the Father.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d5-servant-form-2co8",
+      "passage": "PHP-004",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 7 says Christ 'emptied Himself, taking the form of a servant.' How does 2 Corinthians 8:9 restate this same movement in terms of riches and poverty?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "2 Corinthians 8:9 (named in the brief) says that though He was rich, for our sake He became poor. This restates the self-emptying of v.7 — the one 'in the form of God' taking 'the form of a servant' — in the language of wealth given up for others."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d6-wonder-emptied",
+      "passage": "PHP-004",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "When you hear that Jesus, who was in the form of God, made Himself low like a servant, what is one thing you want to ask about it?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Receive the child's own question; do not supply an answer. Good wonderings might touch why He was willing, what a servant's form meant, or how God could become a man. Write the question down so it can be carried into the reading."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d6-wonder-therefore",
+      "passage": "PHP-004",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The passage moves from a command about humility (vv.1-5) into the story of Christ and back again. What question does that movement raise for you that you would want to explore?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Invite the learner's own question; resist answering it for them. The aim is to surface genuine wondering about how Christ's example bears on their own attitude, not to test recall."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d7-therefore-exalted",
+      "passage": "PHP-004",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 9 begins 'Therefore God exalted Him.' What did Christ do just before (vv.7-8), and why does the text tie His exaltation to that with 'Therefore'?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "First anchor to the text: just before, Christ 'emptied Himself' and 'humbled Himself and became obedient to death— even death on a cross' (vv.7-8). The 'Therefore' of v.9 grounds the exaltation in that obedient descent — the way down is the way up, God honoring the self-humbling of His Son. Meaning drawn from the text's own hinge, not speculation."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d7-even-death-cross",
+      "passage": "PHP-004",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 8 does not simply say Christ died; it adds 'even death on a cross.' What does the passage stress by adding those words?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The added phrase marks the depth of the descent: not merely death, but 'even death on a cross' (v.8) — the lowest, most shameful form. It shows how far the humbling of v.8 reached, sharpening the contrast with the exaltation of v.9. Keep the point to what the text states."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d8-interests-of-others",
+      "passage": "PHP-004",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 4 says to look 'to the interests of others.' Name one specific person whose interest you can attend to this week, and one concrete thing you will do for them."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Look for a concrete, doable action tied to a real person and a real need (v.4). Record only the observable plan or deed, never a verdict on the learner's character or heart."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d8-consider-others-activity",
+      "passage": "PHP-004",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "On an index card, write one way you tend to put your own interests first, and beside it write one specific action from verse 4 — looking 'to the interests of others' — you will do instead this week. Keep the card where you will see it."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Doable on paper with an index card and pencil. The response should be concrete and specific (v.4). Note the planned action as observable evidence; do not record any judgment about the learner's selfishness or spiritual state."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-4-d8-helping-picture",
+      "passage": "PHP-004",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Draw a picture of yourself helping someone in your family with something they need. Point to your picture and tell who you drew and what you are doing for them."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Ties verse 4's looking to others' interests into a doable drawing with paper and crayons. Affirm the concrete act the child names; record what they drew as observable evidence, never a judgment about the child."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-5-d1-godworks",
+      "passage": "PHP-005",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "In verse 13, who does Paul say works in you?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "God — \"it is God who works in you to will and to act\" (v13)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-5-d1-generation",
+      "passage": "PHP-005",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In verse 15 Paul says the believers live in a \"crooked and perverse generation.\" In your own words, what is Paul saying that generation is like?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Paul calls the surrounding world a \"crooked and perverse generation\" (v15) — a society bent and turned away from what is right. In the passage it stands in contrast to the believers, who are to be \"blameless and pure\" (v15). Keep the answer to how the passage itself uses the phrase; do not import outside definitions."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-5-d3-workout",
+      "passage": "PHP-005",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul tells the believers to \"work out your salvation with fear and trembling\" (v12). Using verses 12-13, what does \"work out\" call them to do, and what keeps it from being their own effort alone?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"Work out\" calls for diligent, careful effort that perseveres and takes real pains (v12) — yet not on their own strength, \"for it is God who works in you to will and to act on behalf of His good purpose\" (v13). Keep the answer to the passage's own balance of human diligence grounded in God's working; do not import outside definitions."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-5-d3-feartrembling",
+      "passage": "PHP-005",
+      "dimension": "D3",
+      "type": "activity",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Underline \"fear and trembling\" in verse 12 on your printed passage. Then, using verse 13, write one sentence saying what Paul places right beside that phrase to show it is not hopeless dread."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Verse 13 — \"For it is God who works in you to will and to act on behalf of His good purpose.\" The reverent care of \"fear and trembling\" (v12) rests on God's own working within them, not on their strength alone."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-5-pre-quest-rejoice",
+      "passage": "PHP-005",
+      "dimension": "D3",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "As the passage is read aloud, listen for the word \"rejoice\" — raise your hand each time you hear it."
+      },
+      "category": {
+        "en": "Listen for: rejoice"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"Rejoice\" appears twice — \"I am glad and rejoice with all of you\" (v17) and \"you too should be glad and rejoice with me\" (v18)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-5-d4-verse13",
+      "passage": "PHP-005",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "\"For it is God who works in you to will and to act on behalf of His good purpose.\" (Philippians 2:13)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-5-d4-verse14",
+      "passage": "PHP-005",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "\"Do everything without complaining or arguing,\" (Philippians 2:14)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-5-d5-heb1321",
+      "passage": "PHP-005",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Philippians 2:13 says it is God who works in you to will and to act on behalf of His good purpose. Turn to Hebrews 13:21 — how does that verse describe the same God-at-work in believers?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Hebrews 13:21 (named cross-reference): God equips believers to do His will and works in them what is pleasing in His sight, through Jesus Christ. Like Philippians 2:13, it names God as the one working in believers what pleases Him."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-5-d5-1pe211",
+      "passage": "PHP-005",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In verse 15 the believers are to be blameless \"in a crooked and perverse generation.\" Turn to 1 Peter 2:11 — how does Peter describe the believers' relation to the world around them?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "1 Peter 2:11 (named cross-reference): Peter urges believers, as foreigners and exiles, to abstain from the desires of the flesh, which war against the soul. Both passages set the believers' distinct conduct against a surrounding world — Philippians as lights in a crooked generation, 1 Peter as exiles who abstain from fleshly desires."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-5-d6-effort-and-god",
+      "passage": "PHP-005",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 12 tells the believers to work out their salvation, and verse 13 says God is the one working in them. What question would you want to ask about how both of those can be true at once?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Keep this open — the point is the learner forming their own question, not receiving a model answer. Let the question stand; do not resolve it on the spot or supply a doctrinal settlement of the two verses."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-5-d7-therefore-for",
+      "passage": "PHP-005",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 12 begins \"Therefore\" and verse 13 begins \"For.\" Following those two connective words, how does the reason given in verse 13 support the command in verse 12?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Guide toward the passage's own logic: the command to \"work out your salvation with fear and trembling\" (v12) is grounded by the \"For\" of v13 — they can work because God is already at work in them, willing and acting for His good purpose. Human diligence rests on God's prior working. Keep open to how learners phrase the link; do not add doctrine beyond what v12-13 states."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-5-d7-outward-conduct",
+      "passage": "PHP-005",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verses 14-16 turn from what happens inside the believers to how they live in front of others. According to these verses, what are the believers to become, and what do they do as \"lights in the world\"?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor to the text: doing everything \"without complaining or arguing\" (v14), they become \"blameless and pure, children of God without fault\" in a crooked generation (v15), where they \"shine as lights in the world\" (v15) as they \"hold forth the word of life\" (v16). Keep open to the learner's wording; the note is the passage's own statement, not a lecture to deliver."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-5-d7-narration",
+      "passage": "PHP-005",
+      "dimension": "D7",
+      "type": "narration_prompt",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In your own words, retell verses 12-18: what Paul tells the believers to do, why he says they can do it, how they are to live among others, and how he feels about them."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Keep this open — the family checks the retelling against the text rather than grading it. Look back and see whether the retelling touched: the call to work out their salvation with fear and trembling (v12); that God works in them to will and to act (v13); doing everything without complaining or arguing so as to shine as lights holding forth the word of life (v14-16); and Paul's gladness and rejoicing, even if poured out like a drink offering (v17-18). If something was missing, re-read that part and add it — don't supply a model retelling."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-5-d8-without-complaining",
+      "passage": "PHP-005",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "all",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 14 says, \"Do everything without complaining or arguing.\" On an index card, name one task you will do today and do it without complaining or arguing. Mark the card once it is done."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Observable action only: did they name a task on the card and mark it done? Do not evaluate attitude, sincerity, or spiritual state — only whether the concrete step was taken."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-5-d8-shine-lights",
+      "passage": "PHP-005",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 15 says the believers \"shine as lights in the world.\" Draw a small light or lamp on a card, and next to it write or draw one kind thing you will do for someone today. (Pre-reader variant: just draw the light and the kind thing, then tell a grown-up what you drew.)"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Observable action only: did the child draw the light and name/draw one concrete kind deed (and, for the pre-reader, describe it aloud)? Note whether the step was done, not whether the child is loving or good."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d1-two-men",
+      "passage": "PHP-006",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In this passage Paul says he is sending two men to the church at Philippi. What are their names?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Timothy (v.19) and Epaphroditus (v.25)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d1-epaphroditus-roles",
+      "passage": "PHP-006",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In verse 25 Paul gives Epaphroditus several titles. List the words Paul uses to describe who Epaphroditus is to him and to the Philippians."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Paul calls him \"my brother, fellow worker, and fellow soldier, who is also your messenger and minister to my needs\" (v.25): brother, fellow worker, fellow soldier, messenger, minister."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d1-listen-men",
+      "passage": "PHP-006",
+      "dimension": "D1",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "category": {
+        "en": "People"
+      },
+      "text": {
+        "en": "Listen for the two men Paul says he is sending to the Philippians, and be ready to name them."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Timothy (v.19) and Epaphroditus (v.25)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d1-draw-two-men",
+      "passage": "PHP-006",
+      "dimension": "D1",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Draw two people on a sheet of paper. As the passage is read aloud, an older helper tells you these are the two men Paul is sending, Timothy and Epaphroditus. Point to each one when you hear his name."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The two men named in the passage are Timothy (v.19) and Epaphroditus (v.25)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d2-epaphroditus-order",
+      "passage": "PHP-006",
+      "dimension": "D2",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Put these three events about Epaphroditus in the order the passage gives them: God had mercy and spared his life; he was sick, nearly unto death; Paul sends him back so the Philippians may rejoice."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "1) He was \"sick indeed, nearly unto death\" (v.27); 2) \"But God had mercy on him\" (v.27); 3) Paul sends him back \"so that when you see him again you may rejoice\" (v.28)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d2-eager-results",
+      "passage": "PHP-006",
+      "dimension": "D2",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In verse 28 Paul is \"all the more eager to send\" Epaphroditus. What two results does Paul say his sending will bring about?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"So that when you see him again you may rejoice, and I may be less anxious\" (v.28): the Philippians rejoice, and Paul is less anxious."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d3-genuinely-care",
+      "passage": "PHP-006",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In verse 20 Paul says Timothy will \"genuinely care\" for the Philippians' needs. Using the contrast in verse 21, what does Paul mean by caring \"genuinely\"?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "To care sincerely and from the heart, truly seeking their good, in contrast to \"all the others\" who \"look after their own interests, not those of Jesus Christ\" (v.21). The commentary glosses it as caring sincerely, not in pretence."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d3-fellow-soldier",
+      "passage": "PHP-006",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Paul calls Epaphroditus his \"fellow soldier\" (v.25). What does this word picture say about how Paul sees Epaphroditus's work?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "It pictures Epaphroditus as a comrade sharing the same struggle and effort as Paul in the cause of the gospel, alongside \"fellow worker\"; the commentary reads it as a partner in the good fight of faith. The passage grounds this in his risking his life \"for the work of Christ\" (v.30)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d3-proven-worth",
+      "passage": "PHP-006",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Paul points to Timothy's \"proven worth\" (v.22). How does the passage itself say that worth was proven?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "By tested service: \"as a child with his father he has served with me to advance the gospel\" (v.22). His worth was shown over time in real work for the gospel, not merely claimed."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d3-listen-keywords",
+      "passage": "PHP-006",
+      "dimension": "D3",
+      "type": "pre_reading_quest",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "category": {
+        "en": "Key words"
+      },
+      "text": {
+        "en": "Listen for the words Paul uses to describe Timothy's kind of caring and his track record, and for the words that describe the others' focus."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Timothy will \"genuinely care\" (v.20) and has \"proven worth\" (v.22); the others \"look after their own interests, not those of Jesus Christ\" (v.21)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d4-memory-verse-21",
+      "passage": "PHP-006",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "For all the others look after their own interests, not those of Jesus Christ. (Philippians 2:21)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d4-memory-verse-29",
+      "passage": "PHP-006",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Welcome him in the Lord with great joy, and honor men like him, (Philippians 2:29)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d4-recall-names",
+      "passage": "PHP-006",
+      "dimension": "D4",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Without looking, who nearly died \"for the work of Christ\" and must be welcomed with great joy?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Epaphroditus (vv.29-30)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d4-narrate-passage",
+      "passage": "PHP-006",
+      "dimension": "D4",
+      "type": "narration_prompt",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Retell this whole passage in your own words: who Paul plans to send to Philippi, and what he says about each man."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A good retelling includes: Paul hopes to send Timothy, who unlike the others genuinely cares and has proven worth in gospel service (vv.19-23); Paul trusts he will come himself soon (v.24); he is sending back Epaphroditus, who was sick nearly to death but was spared by God's mercy, and whom the church should welcome with joy and honor because he risked his life for the work of Christ (vv.25-30)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d5-php-2-4",
+      "passage": "PHP-006",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Earlier in this same letter Paul wrote, \"Each of you should look not only to your own interests, but also to the interests of others\" (Philippians 2:4). How does that instruction connect to Paul's complaint in verse 21 that the others \"look after their own interests\"?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Philippians 2:4 commands the very self-forgetful concern that verse 21 finds missing in the others and present in Timothy. Timothy embodies the 2:4 command; the others fail it by looking after their own interests rather than those of Jesus Christ."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d5-1co-10-24",
+      "passage": "PHP-006",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In 1 Corinthians 10:24 Paul teaches that no one should seek his own good, but the good of others. How does Paul's description of those who \"look after their own interests\" in verse 21 line up with that teaching?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "1 Corinthians 10:24 states the rule Paul is measuring by: seek the other's good, not your own. The others in verse 21 break that rule by seeking their own interests, while Timothy keeps it by genuinely caring for the Philippians' needs (v.20)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d6-wonder-others",
+      "passage": "PHP-006",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "all",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Paul says he has \"nobody else like\" Timothy (v.20). What questions does that make you want to ask about Timothy, or about the others Paul mentions in verse 21?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Invite the learner's own wondering; do not supply a settled answer. Keep questions anchored to the text (Timothy's genuine care and proven worth; the others seeking their own interests). Note observable curiosity, not any judgment of the learner."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d6-wonder-epaphroditus",
+      "passage": "PHP-006",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Epaphroditus was very sick and almost died, and then got better. What is one thing you wonder about him from this passage?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Let the child raise the question; receive it without correcting toward a lesson. The passage supplies facts to notice (he was near death, God had mercy, he longed for the Philippians), not a required answer. Record the wondering as evidence, never a character judgment."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d7-why-timothy-above",
+      "passage": "PHP-006",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The passage says Paul had \"nobody else\" who would genuinely care for the Philippians (v.20). According to verse 21, why were the others not like Timothy?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor first in what the text states, then the why: the others fall short because \"all the others look after their own interests, not those of Jesus Christ\" (v.21). Timothy stands apart by seeking Christ's interests and the Philippians' good rather than his own. Read the sweeping \"all the others\" as Paul's contrast, per the commentary, not a claim about every minister everywhere."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d7-why-honor",
+      "passage": "PHP-006",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Paul tells the church to \"honor men like him\" (v.29). According to verse 30, what reason does Paul give for honoring Epaphroditus?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Start with the text: \"because he nearly died for the work of Christ, risking his life to make up for your deficit of service to me\" (v.30). The passage ties honor to tested, self-forgetful, costly service for Christ, not to office or status."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d8-honor-card",
+      "passage": "PHP-006",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Paul told the Philippians to honor workers like Epaphroditus. Think of one person in your family or church who quietly serves others. Write or draw a short thank-you card for them, and give it to them this week."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Look for a concrete, doable action: a card made and delivered. The passage models honoring self-forgetful servants (vv.29-30). Record whether the action was done, not any verdict on the child's heart."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-6-d8-others-interests",
+      "passage": "PHP-006",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The passage praises those who seek the interests of Jesus Christ and of others rather than their own (vv.20-21). Name one specific, doable way you could put someone else's interest before your own this week."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Aim for one concrete, observable action the person can actually do, drawn from the passage's contrast between self-seeking (v.21) and genuine care (v.20). Note the action they name and whether it was carried out; do not assess motive or spiritual state."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d1-tribe",
+      "passage": "PHP-007",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "From which tribe of Israel does Paul say he comes?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The tribe of Benjamin (v5): \"of the tribe of Benjamin.\""
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d1-persecuted",
+      "passage": "PHP-007",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Paul lists his old credentials. According to verse 6, what group had he once persecuted, and what had he been \"as to the law\"?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "He persecuted the church (v6, \"as to zeal, persecuting the church\"), and as to the law he was a Pharisee (v5)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d2-runner",
+      "passage": "PHP-007",
+      "dimension": "D2",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In verses 13-14 Paul describes himself like a runner. Put these three actions in the order the passage gives them: pressing on toward the goal, forgetting what is behind, straining toward what is ahead."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The order in vv13-14: (1) \"Forgetting what is behind,\" (2) \"straining toward what is ahead,\" (3) \"I press on toward the goal to win the prize.\""
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d3-gain-loss",
+      "passage": "PHP-007",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Paul says that whatever was \"gain\" to him he now counts as what?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "He counts it as \"loss\" (v7: \"whatever was gain to me I count as loss for the sake of Christ\"). Gain and loss are the load-bearing contrast terms here."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d3-rubbish",
+      "passage": "PHP-007",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In verse 8, what single word does Paul use for all the things he once valued, compared to the excellence of knowing Christ?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"Rubbish\" (v8: \"I consider them rubbish, that I may gain Christ\"). The term pictures refuse or dung, cast out as contemptible beside Christ."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d3-two-righteousness",
+      "passage": "PHP-007",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 9 sets two kinds of righteousness side by side with a \"not... but.\" What are the two, in Paul's own words?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Not \"my own righteousness from the law,\" but \"that which is through faith in Christ, the righteousness from God on the basis of faith\" (v9)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d4-found",
+      "passage": "PHP-007",
+      "dimension": "D4",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In verse 9 Paul writes that he wants to be ______ in Him, not having his own righteousness from the law. What one word fills the blank?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"found\" — v9 reads \"and be found in Him, not having my own righteousness from the law.\""
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d4-verse1",
+      "passage": "PHP-007",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "“Finally, my brothers, rejoice in the Lord.” (Philippians 3:1)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d4-verse14",
+      "passage": "PHP-007",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "“I press on toward the goal to win the prize of God’s heavenly calling in Christ Jesus.” (Philippians 3:14)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d4-verse8-9",
+      "passage": "PHP-007",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "“and be found in Him, not having my own righteousness from the law, but that which is through faith in Christ, the righteousness from God on the basis of faith.” (Philippians 3:9)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d5-race-prize",
+      "passage": "PHP-007",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Paul pictures himself pressing on \"to win the prize\" (v14). Where else does Paul use a runner racing to win a prize as a picture of the Christian life?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "1 Corinthians 9:24 — there Paul urges believers to run the race so as to win the prize, the same single-minded effort he describes in Philippians 3:14."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d5-no-looking-back",
+      "passage": "PHP-007",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul says he is \"forgetting what is behind\" and does not dwell on his past (v13). What did Jesus say about looking back once you have put your hand to the plow?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Luke 9:62 — Jesus said no one who puts his hand to the plow and looks back is fit for the kingdom of God. Both texts call for pressing forward without turning back."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d6-count-loss",
+      "passage": "PHP-007",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "all",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Paul counted everything he was once proud of as loss for the sake of Christ. What is one thing you wonder about when you read that?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Keep this open — the goal is the learner's own genuine question, not a target answer. Welcome whatever they raise (Why give up good things? What does he gain instead?) and let the passage, especially vv7-9, be re-read to explore it. Do not supply a conclusion for them."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d6-not-yet-perfect",
+      "passage": "PHP-007",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In verse 12 Paul says he has \"not already\" obtained all this or been made perfect, yet he presses on. What question does that raise for you?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Keep this open. The verse pairs a real \"not yet\" with genuine pressing-on; let the learner's own question surface rather than resolving it for them. If helpful, re-read vv12-14 together to see how Paul holds both. Do not grade the question."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d7-why-loss",
+      "passage": "PHP-007",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul lists impressive credentials in verses 5-6, then counts them all as loss. According to verse 8, why does he do this?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor to the text first: v8 gives the reason — \"the surpassing excellence of knowing Christ Jesus my Lord\" and \"that I may gain Christ.\" The credentials are not counted evil but of no worth beside Christ. Let the family point to the exact words before discussing why knowing Christ outweighs everything."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d7-argument-pivot",
+      "passage": "PHP-007",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "At verse 7 Paul's argument turns on the word \"But.\" What changes between the list in verses 5-6 and what he says in verses 7-8?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Trace the argument from the text: vv5-6 pile up grounds for \"confidence in the flesh\"; at v7 the \"But\" flips every one of them from the gain column to the loss column \"for the sake of Christ.\" The very things Paul once counted as assets he now counts as loss. Follow the \"gain… loss\" reversal in his own words rather than adding outside ideas."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d7-righteousness-source",
+      "passage": "PHP-007",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "In verse 9 Paul does not want \"my own righteousness from the law.\" What righteousness does he want instead, and where does the passage say it comes from?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Stay with v9's own words: the righteousness Paul wants is \"through faith in Christ, the righteousness from God on the basis of faith.\" Its source is God, not the law or Paul's own effort; it is received by faith. Reading Scripture by Scripture, this is the justification Paul teaches elsewhere — God accepts the sinner as righteous on the ground of Christ, received by faith. Keep the family in the text before drawing the doctrine out of it."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d8-two-columns",
+      "passage": "PHP-007",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "On paper, make two columns. In the left column write things people commonly count as \"gains\" to be proud of. In the right column write only \"knowing Christ.\" Then, as Paul does in verse 7, draw an arrow moving one item from the left column into a box you label \"loss for the sake of Christ,\" and be ready to say why you chose it. Pre-reader variant: fold a paper in half; on one side draw something you like a lot, and on the other side ask a grown-up to write \"Jesus\" for you (or draw a cross); then tell a grown-up which side Paul said was worth more."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "This is a doable paper exercise, not a heart test — note only what the learner writes and the reason they give, never a verdict about their faith. Tie it back to vv7-8: Paul moves real gains into the loss column because of the surpassing worth of knowing Christ. Any sincere example belongs; the point is seeing the gain/loss reversal on paper."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d8-press-on",
+      "passage": "PHP-007",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul says he presses on toward the goal instead of giving up (v14). Name one concrete thing you could do this week to keep pressing on rather than looking back."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Look for a specific, observable action the learner names (a habit to keep up, a hard thing to finish, a wrong to leave behind), not a promise about attitude. Record the action they choose, never a judgment of their commitment. The image is Paul's runner: forgetting what is behind, straining ahead (vv13-14)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d1-prq-credentials",
+      "passage": "PHP-007",
+      "dimension": "D1",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "As the passage is read aloud, listen for the list Paul gives of things about himself in verses 5-6. See how many you can count on your fingers."
+      },
+      "category": {
+        "en": "Listen for: Paul's list about himself"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "In vv5-6 Paul names, among others: circumcised on the eighth day; of the people of Israel; of the tribe of Benjamin; a Hebrew of Hebrews; a Pharisee; zealous, persecuting the church; \"as to righteousness in the law, faultless.\" Any reasonable count of these credentials is fine."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d3-prq-rubbish",
+      "passage": "PHP-007",
+      "dimension": "D3",
+      "type": "pre_reading_quest",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "As the passage is read aloud, listen for the one word Paul uses in verse 8 for everything he once valued, now that he knows Christ."
+      },
+      "category": {
+        "en": "Listen for: one striking word"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"Rubbish\" (v8: \"I consider them rubbish, that I may gain Christ\")."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d6-prq-goal",
+      "passage": "PHP-007",
+      "dimension": "D6",
+      "type": "pre_reading_quest",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "As the passage is read aloud, listen for what Paul is straining and pressing toward — and form one question of your own you want to ask about it afterward."
+      },
+      "category": {
+        "en": "Listen for: form your own question"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The aim is that the listener arrives with a genuine question of their own about Paul's \"goal\" and \"prize\" (vv13-14), not a set answer. Welcome whatever they bring and let vv12-14 be re-read to explore it; do not steer them to a predetermined conclusion."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-7-d7-narration",
+      "passage": "PHP-007",
+      "dimension": "D7",
+      "type": "narration_prompt",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In your own words, retell Philippians 3:1-14: what Paul once counted as gain, what he counts it as now that he knows Christ, and what he presses on toward."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Keep this open — check the retelling against the text rather than grading it against a script. Together see whether it touched: Paul's credentials (vv5-6); the turn at v7 where he counts them loss; his aim to be found in Christ with a righteousness from God through faith (vv8-9); and his pressing on toward the goal, not yet perfect (vv12-14). If a part was missing, let the family re-read it and add it; do not supply a model retelling."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-8-d1-example",
+      "passage": "PHP-008",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Whose example does Paul tell the brothers to follow?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Paul's own example: \"Join one another in following my example\" (v17). He also points to those who walk according to the pattern he and his companions set."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-8-d1-citizenship-savior",
+      "passage": "PHP-008",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "According to verse 20, where is our citizenship, and whom do we eagerly await from there?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Our citizenship is \"in heaven,\" and from there we await \"a Savior from there, the Lord Jesus Christ\" (v20)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-8-d1-listen-citizenship",
+      "passage": "PHP-008",
+      "dimension": "D1",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "category": {
+        "en": "Where we belong"
+      },
+      "text": {
+        "en": "As the passage is read, listen for the one place Paul says our citizenship is."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"Our citizenship is in heaven\" (v20)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-8-d3-citizenship",
+      "passage": "PHP-008",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 20 says \"our citizenship is in heaven.\" What does it mean, here, to have your citizenship in heaven?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "To be a citizen belonging to another country: our home, our loyalty, and our belonging are in heaven, not on earth. The passage itself shows the force of it by contrast — the \"many\" whose \"minds are set on earthly things\" (v19), while heaven's citizens \"eagerly await a Savior from there\" (v20). (Commentary: politeuma — we are citizens of the heavenly city, keeping correspondence with the home our life belongs to.)"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-8-d3-enemies-cross",
+      "passage": "PHP-008",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Paul weeps over \"enemies of the cross of Christ\" (v18). From verses 18-19, how does the passage show that these people are enemies of the cross?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor first in what the text states before drawing meaning: the passage marks them by how they live, not by a stated denial. They \"live as enemies\" (v18), and verse 19 catalogs it — \"their end is destruction,\" \"their god is their belly,\" and \"their glory is in their shame,\" for \"their minds are set on earthly things.\" Let the family read the meaning off the walk the text describes, not off a judgment of any person's profession. Keep it to what verses 18-19 say; do not import reasons the text does not give."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-8-d3-two-bodies",
+      "passage": "PHP-008",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 21 uses two describing words for two bodies. What word describes our body now, and what word describes the body it will be made like?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Our \"lowly\" bodies will be transformed \"to be like His glorious body\" (v21): lowly now, glorious then."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-8-d4-memory-citizenship",
+      "passage": "PHP-008",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "But our citizenship is in heaven, and we eagerly await a Savior from there, the Lord Jesus Christ, who, by the power that enables Him to subject all things to Himself, will transform our lowly bodies to be like His glorious body. (Philippians 3:20-21)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-8-d4-recall-many",
+      "passage": "PHP-008",
+      "dimension": "D4",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Fill in the three blanks from verse 19: Their end is ____, their god is their ____, and their glory is in their ____."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"Their end is destruction, their god is their belly, and their glory is in their shame\" (v19)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-8-d5-fellow-citizens",
+      "passage": "PHP-008",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul says our citizenship is in heaven (v20). Ephesians 2:19 speaks of this same citizenship. What does Ephesians 2:19 call believers?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Ephesians 2:19 calls believers fellow citizens with the saints and members of God's household — no longer strangers and foreigners."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-8-d5-be-like-him",
+      "passage": "PHP-008",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 21 promises our bodies will be transformed to be like Christ's glorious body. According to 1 John 3:2, what will we be when Christ appears?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "1 John 3:2 says that when Christ appears, we will be like Him, for we will see Him as He is."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-8-d6-tears-question",
+      "passage": "PHP-008",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul says he speaks about the \"many\" even with tears (v18). Write down one question you would want to ask Paul about this part of the passage."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Keep this open — the goal is the learner's own wondering, not a set answer. Receive whatever question is written and, if it can be, follow it back into the passage together (vv17-19). Do not supply Paul's reasons for them; let the question stand and be explored from the text."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-8-d7-but-contrast",
+      "passage": "PHP-008",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 20 opens with \"But our citizenship is in heaven.\" What is Paul setting this against in verses 18-19, and why does that word \"But\" matter for how you read the passage?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "First anchor in what the text states: vv18-19 describe the \"many\" whose \"minds are set on earthly things\" and whose \"end is destruction\"; v20's \"But\" turns from that warning to the opposite hope — a people whose citizenship is in heaven, awaiting the Savior (v20), whose bodies will be transformed (v21). The contrast is the point: earthly-minded and perishing, versus heaven-citizened and awaiting glory. Let the family locate the two sides in the verses before drawing the meaning; the significance is what the text itself sets in opposition, not added speculation."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-8-d7-narration",
+      "passage": "PHP-008",
+      "dimension": "D7",
+      "type": "narration_prompt",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In your own words, retell verses 15-21: what Paul urges the mature to do, the two kinds of people he describes, and the hope he ends with."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Keep this open — check the retelling against the text rather than grading it against a script. Look back together and see whether it touched: holding this mind and living up to what we've attained (vv15-16); following Paul's example and those who walk by the pattern (v17); the \"many\" who are enemies of the cross, minding earthly things, ending in destruction (vv18-19); and the closing hope — citizenship in heaven, awaiting the Savior, bodies transformed (vv20-21). If a part was missed, have them re-read that verse and add it; don't supply a model retelling."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-8-d8-imitate",
+      "passage": "PHP-008",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul says to follow his example and to \"carefully observe those who walk according to the pattern\" (v17). Name one person you can watch this week who walks worth imitating, and one specific thing you will try to do like them."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Look for a concrete, observable answer: a named person and one doable action to imitate this week. Keep it to observable behavior — what the person does and what the learner will try to do — not a verdict on anyone's faith or character. Follow up next session by asking what they actually watched for and tried."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-8-d8-contrast-chart",
+      "passage": "PHP-008",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "On a sheet of paper make two columns. In the left column, copy what verses 18-19 say about the \"many\" (their god, their glory, their minds, their end). In the right column, copy what verses 20-21 say about us (where our citizenship is, whom we await, what happens to our bodies). Then circle the one line in the right column you most want to remember this week, and write one small thing you will do that fits being a citizen of heaven. Pre-reader variant: draw two pictures side by side — one of things down on the earth, one of things up in heaven — and point to the picture the passage says is our home."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Filling the columns is straight from the text (vv18-21) and should match the passage. The response step is the application: accept any concrete, doable action that fits heavenly citizenship (e.g., a specific way to set the mind on things above this week). Keep it to observable action; do not turn it into an assessment of anyone's faith or standing."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-d1-women",
+      "passage": "PHP-009",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 2 names two women Paul urges to agree with each other in the Lord. Who are they?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Euodia and Syntyche (v2)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-d1-bookoflife",
+      "passage": "PHP-009",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In verse 3 Paul names one of his fellow workers and says that the names of these workers are written in a certain place. Name the fellow worker he mentions and the place their names are written."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The fellow worker named is Clement; their names are in the Book of Life (v3). Paul also mentions his 'true yokefellow' and 'the rest of my fellow workers.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-pre-quest-names",
+      "passage": "PHP-009",
+      "dimension": "D1",
+      "type": "pre_reading_quest",
+      "age_tier": "youth",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "As the passage is read aloud, listen for the names of the people Paul mentions and write down each one you hear."
+      },
+      "category": {
+        "en": "Listen for: people's names"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The people named or pointed to are Euodia and Syntyche (v2), the 'true yokefellow,' and Clement (v3)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-d3-gentleness",
+      "passage": "PHP-009",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 5 says, \"Let your gentleness be apparent to all.\" In your own words, what kind of attitude toward other people does \"gentleness\" point to here?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A yielding, considerate temper — one that does not press its own rights to the uttermost but bends toward others (JFB). Keep the answer to that sense of the term; the passage sets it right beside 'The Lord is near' (v5), which grounds such gentleness."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-d3-anxious",
+      "passage": "PHP-009",
+      "dimension": "D4",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 6 gives a command that begins \"Be anxious for\" and finishes with one short word. What is that missing word?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"nothing\" — \"Be anxious for nothing\" (v6)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-d3-guard",
+      "passage": "PHP-009",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 7 says the peace of God \"will guard your hearts and your minds in Christ Jesus.\" What picture does the word \"guard\" bring to the sentence?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "'Guard' pictures keeping watch over a place like a well-garrisoned stronghold (JFB): the peace of God stands sentry over the heart and mind. Keep the answer to that guarding image the verse gives; the peace is located 'in Christ Jesus' (v7)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-d4-verse4",
+      "passage": "PHP-009",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "\"Rejoice in the Lord always. I will say it again: Rejoice!\" (Philippians 4:4)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-d4-verse6-7",
+      "passage": "PHP-009",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "\"Be anxious for nothing, but in everything, by prayer and petition, with thanksgiving, present your requests to God.\" \"And the peace of God, which surpasses all understanding, will guard your hearts and your minds in Christ Jesus.\" (Philippians 4:6-7)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-d4-rejoice-recall",
+      "passage": "PHP-009",
+      "dimension": "D4",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "In verse 4 Paul gives one short command, then says he will say it again and repeats it. What is that one repeated command?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"Rejoice!\" — \"Rejoice in the Lord always. I will say it again: Rejoice!\" (v4)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-pre-quest-rejoice",
+      "passage": "PHP-009",
+      "dimension": "D4",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "As the passage is read aloud, listen for the word \"Rejoice\" and clap each time you hear it."
+      },
+      "category": {
+        "en": "Listen for: Rejoice"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"Rejoice\" is said twice in verse 4 (\"Rejoice in the Lord always. I will say it again: Rejoice!\") — two claps."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-d5-anxious-1pe",
+      "passage": "PHP-009",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Philippians 4:6 says, \"Be anxious for nothing,\" but to bring everything to God in prayer. Turn to 1 Peter 5:7 — how does that verse describe what to do with your anxiety, and why?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "1 Peter 5:7 (named cross-reference) is Peter's call to cast all your anxiety on God, because He cares for you. Like Philippians 4:6, it moves anxiety off the believer and onto God, adding the reason God gives for doing so: His care for His people. Have the leader read 1 Peter 5:7 aloud from the Bible."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-d5-peace-jhn",
+      "passage": "PHP-009",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Philippians 4:7 speaks of \"the peace of God, which surpasses all understanding.\" Turn to John 14:27 — what does Jesus say about the peace He gives, and how is it unlike the world's?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "John 14:27 (named cross-reference) is Jesus' word that He leaves His peace with His disciples and gives His own peace, not the kind the world gives, so their hearts need not be troubled or afraid. Jesus gives His own peace, unlike the world's, and ties it to hearts that are not troubled or afraid — matching the peace that guards heart and mind in Philippians 4:7. Have the leader read John 14:27 aloud from the Bible."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-d5-think-jas",
+      "passage": "PHP-009",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Philippians 4:8 tells the readers to think on whatever is \"true\" and \"pure.\" Turn to James 3:17 — how does that verse describe the wisdom from above, and which words overlap with Paul's list?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "James 3:17 (named cross-reference) describes the wisdom from above as first of all pure, then peace-loving, gentle, accommodating, full of mercy and good fruit, impartial, and sincere. It calls that wisdom pure first — the same quality Paul says to think on in Philippians 4:8 — tying the good things James commends to the things Paul tells the readers to think on. Have the leader read James 3:17 aloud from the Bible."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-d6-wonder",
+      "passage": "PHP-009",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In verse 8 Paul lists things to \"think on\": whatever is true, honorable, right, pure, lovely, and admirable. What is one question you would want to ask about how a person actually fills their thoughts with these things day to day?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Keep this open — the aim is the learner forming their own question, not receiving a model answer. Let the question stand; do not resolve it on the spot or steer toward a preferred answer."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-d7-therefore-chain",
+      "passage": "PHP-009",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 1 opens with \"Therefore\" and calls the church to \"stand firm in the Lord.\" Following verses 4-9 in order, what does Paul then command the church to do, and how do the reminders \"The Lord is near\" (v5) and \"the God of peace will be with you\" (v9) frame the whole chain?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Trace the passage's own imperative chain: stand firm (v1) -> rejoice (v4) -> let gentleness be apparent (v5) -> do not be anxious but pray with thanksgiving (v6) -> think on what is good (v8) -> put it into practice (v9). The nearness of the Lord (v5) and the promise that the God of peace will be with them (v9) bracket the commands, grounding them in God's presence rather than the church's own strength. Keep open to how learners phrase the flow; don't add doctrine the verses don't state."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-d7-anxiety-peace",
+      "passage": "PHP-009",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "According to verses 6-7, what does Paul tell the readers to do instead of being anxious, and what does the passage say will result from doing it?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor in the text: instead of anxiety, they are to bring everything to God 'by prayer and petition, with thanksgiving' (v6); the stated result is that 'the peace of God, which surpasses all understanding, will guard your hearts and your minds in Christ Jesus' (v7). Let learners see prayer-with-thanksgiving as the appointed replacement for anxious care, and the guarding peace as what follows; keep open rather than supplying more than v6-7 says."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-d7-narration",
+      "passage": "PHP-009",
+      "dimension": "D7",
+      "type": "narration_prompt",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In your own words, retell verses 1-9: how Paul opens, the things he urges the church to do, and how the section ends."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Keep this open — check the retelling against the text rather than grading it against a fixed script. Together, look back and see whether it touched: standing firm and the plea to the two women (v1-3); rejoice always (v4); gentleness and 'The Lord is near' (v5); not anxious but praying with thanksgiving, and the peace that guards (v6-7); thinking on what is good (v8); and putting into practice what they learned, with the God of peace with them (v9). If a part was missing, let the family re-read it and add it — don't supply a model retelling."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-d8-gentleness",
+      "passage": "PHP-009",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul says, \"Let your gentleness be apparent to all\" (v5). On a card, write one specific situation this week where you can yield to someone rather than insist on your own way. Do it, and note afterward what you did."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Observable action only: did they name a specific situation, take the yielding step, and note what they did? Do not evaluate motive, sincerity, or spiritual maturity — only whether the concrete step was carried out."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-d8-prayer-card",
+      "passage": "PHP-009",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "child",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 6 says to bring everything to God \"with thanksgiving.\" On an index card, write one thing to ask God for and one thing to thank Him for, then pray it aloud today."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Observable action only: did the child write one request and one thanksgiving and pray it aloud? Note whether the step was done, not the quality of feeling or faith behind it."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-9-d8-think-draw",
+      "passage": "PHP-009",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 8 says to think on things that are true and lovely. Draw one true and lovely thing you can think about, and tell a grown-up what you drew."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Observable action only: did the child draw something and name it aloud? Affirm the doing; do not assess the child's thoughts or spiritual state."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d1-gift-messenger",
+      "passage": "PHP-010",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "From whom did Paul receive the Philippians' gifts?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Epaphroditus. Verse 18: Paul says he received the Philippians' gifts 'from Epaphroditus.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d1-travel-cities",
+      "passage": "PHP-010",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Paul recalls two places from his early travels that are tied to the Philippians' giving. Name both."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Macedonia and Thessalonica. Verse 15: 'when I left Macedonia'; verse 16 recalls that 'while I was in Thessalonica' they provided for him again and again."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d1-closing-greetings",
+      "passage": "PHP-010",
+      "dimension": "D1",
+      "type": "pre_reading_quest",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "As the letter closes, listen for who sends greetings and which household is singled out."
+      },
+      "category": {
+        "en": "People & Places"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Verse 21: 'The brothers who are with me send you greetings'; verse 22: all the saints greet them, 'especially those from the household of Caesar.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d2-giving-timeline",
+      "passage": "PHP-010",
+      "dimension": "D2",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Paul recalls the history of the Philippians' giving. Put these in the order he tells them: he leaves Macedonia in the early days of the gospel; they provide for him in Thessalonica; he now receives their gift through Epaphroditus."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Order: (1) the early days of the gospel, when Paul left Macedonia and the Philippians alone partnered with him (v15); (2) while he was in Thessalonica they provided for his needs again and again (v16); (3) now he has received their present gift from Epaphroditus (v18)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d3-content-meaning",
+      "passage": "PHP-010",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Paul says he has 'learned to be content regardless of my circumstances.' What does 'content' mean here?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "To be content here is to be satisfied and sufficient in every circumstance. Paul's sufficiency rests not in himself but in God: v13 grounds it 'through Christ who gives me strength.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d3-abased-abound",
+      "passage": "PHP-010",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In verse 12 Paul says he knows how to 'live humbly' and how to 'abound.' What two kinds of situations do these words describe?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "'Live humbly' means being brought low, having little; 'abound' means having plenty. Verse 12 pairs the opposites: 'being filled and being hungry, to having plenty and having need.' Paul is accustomed to each."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d3-sacrifice",
+      "passage": "PHP-010",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Paul calls the Philippians' gift 'a fragrant offering, an acceptable sacrifice, well-pleasing to God.' In what sense is their gift a 'sacrifice'?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "It is a sacrifice of thanksgiving and acknowledgment offered to God, an act of worship, not a sacrifice that atones for sin. The passage itself names it 'a fragrant offering, an acceptable sacrifice, well-pleasing to God' (v18)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d3-content-listen",
+      "passage": "PHP-010",
+      "dimension": "D3",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Listen for the one word Paul uses for being satisfied no matter how much or how little he has."
+      },
+      "category": {
+        "en": "Key Words"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The word is 'content' (v11): 'I have learned to be content regardless of my circumstances.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d4-mv-strength",
+      "passage": "PHP-010",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "I can do all things through Christ who gives me strength. (Philippians 4:13)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d4-mv-supply",
+      "passage": "PHP-010",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "And my God will supply all your needs according to His glorious riches in Christ Jesus. (Philippians 4:19)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d4-recall-strength",
+      "passage": "PHP-010",
+      "dimension": "D4",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Fill in the missing words: 'I can do all things through Christ who ______.'"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "'gives me strength.' The full verse: 'I can do all things through Christ who gives me strength' (Philippians 4:13)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d4-narration",
+      "passage": "PHP-010",
+      "dimension": "D4",
+      "type": "narration_prompt",
+      "age_tier": "child",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Retell this passage in your own words, from Paul's thanks for the Philippians' gift to his closing blessing."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A good retelling touches these beats: Paul rejoices that their care for him has revived; he has learned to be content in every circumstance, low or abounding, through Christ who strengthens him; he thanks them for sharing in his affliction and recalls their past giving; he seeks the fruit credited to their account; God will supply their needs; the letter closes with praise to God, greetings, and a blessing."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d5-strength-isaiah",
+      "passage": "PHP-010",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Paul says Christ gives him strength (v13). Read Isaiah 40:29-31 — where does it say strength comes from for those who are faint or weak?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "ISA.40.29-31 — 'He gives power to the faint,' and those who wait on the LORD renew their strength. As in v13, strength comes from God, not from oneself."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d5-weakness-strength",
+      "passage": "PHP-010",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Paul's strength is Christ's, not his own (v13). According to 2 Corinthians 12:9-10, in what condition is God's power shown to be strongest?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "2CO.12.9-10 — God's power is perfected in weakness, so Paul is strong precisely when he is weak. This matches v13: Paul's ability is Christ's strength, not his own."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d5-supply-grace",
+      "passage": "PHP-010",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Paul promises that God 'will supply all your needs' (v19). What does 2 Corinthians 9:8-11 add about how God supplies those who give?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "2CO.9.8-11 — 'God is able to make all grace abound' to the giver, supplying and multiplying their resources so they can be generous. It expands v19's promise that God 'will supply all your needs.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d6-learn-content",
+      "passage": "PHP-010",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Paul says he learned to be content. What is one question you would like to ask Paul about how a person learns to be content?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "This invites the child's own wondering; there is no single right question. Note what the child is curious about (how Paul learned, what contentment feels like) as evidence of engagement. Do not supply an answer."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d6-own-question",
+      "passage": "PHP-010",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "all",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "After reading Paul's thanks and his words about contentment, write down one question you have about this passage."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Record the learner's own question as evidence of engagement; do not steer it toward a preferred answer. Questions may probe how contentment is learned or why Paul reframes their gift."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d7-not-that-but",
+      "passage": "PHP-010",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Twice Paul corrects himself: 'I am not saying this out of need' (v11) and 'Not that I am seeking a gift, but...' (v17). What is Paul trying to help the Philippians understand about their gift?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor to the stated words first: 'I am not saying this out of need' (v11) and 'Not that I am seeking a gift, but I am looking for the fruit that may be credited to your account' (v17). Each correction turns attention away from Paul's own need toward what the giving gains for them spiritually. The gift is 'an acceptable sacrifice, well-pleasing to God' (v18); Paul values it chiefly as fruit credited to their account."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d7-fruit-account",
+      "passage": "PHP-010",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Paul says he is looking for 'the fruit that may be credited to your account,' not the gift itself (v17). Why might their giving matter even more for them than it does for Paul?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor to v17: Paul seeks 'the fruit that may be credited to your account,' not the gift. The passage frames their giving as gain credited to them and as 'an acceptable sacrifice, well-pleasing to God' (v18), so their generosity benefits their own account before it meets Paul's need. Let the learner reason from these stated words."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d8-contentment-list",
+      "passage": "PHP-010",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Make a contentment list: on paper, write one thing you have plenty of this week and one thing you are lacking or in need of. Beside each, write one sentence thanking God."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Look for a concrete, observable list, a real 'plenty' and a real need this week, each with a written thanksgiving, modeling the contentment of v11-12. Assess only that the task was done, never the learner's faith or character."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d8-share-need",
+      "passage": "PHP-010",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The Philippians 'partnered' with Paul by meeting his needs. Name one specific way this week you could share in someone else's need — write who it is and what you will do."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Look for one specific, doable action naming a person and a deed, mirroring how the Philippians 'partnered with me in the matter of giving and receiving' (v15). Record the stated action, not a judgment about the learner's generosity."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-10-d8-draw-gift",
+      "passage": "PHP-010",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Draw a picture of the Philippians sending their gift to Paul. Then draw one thing you can share with someone this week."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Accept any drawing that shows the Philippians' gift going to Paul and one thing the child can share. Evidence is that the child engaged and named a concrete thing to share; do not evaluate character."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
     }
   ]
 }
