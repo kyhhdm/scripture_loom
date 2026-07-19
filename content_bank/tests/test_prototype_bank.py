@@ -37,6 +37,14 @@ class TestLoadBank(unittest.TestCase):
         self.assertNotIn("draft", statuses)
         self.assertNotIn("reviewed", statuses)
 
+    def test_load_sections_flattens_titles(self):
+        from content_bank.lib import prototype_bank
+        secs = prototype_bank.load_sections("MAT", lang="en")
+        self.assertEqual(len(secs), 7)
+        self.assertEqual(secs[0]["id"], "MAT-S1")
+        self.assertEqual(secs[0]["title"], "Prologue: The Infancy")
+        self.assertEqual(secs[0]["first_pericope"], "MAT-001")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -191,5 +191,143 @@ class TestReadingSequence(unittest.TestCase):
                          fam["reading_sequence"].index("MAT-014") - 1)
 
 
+SECTIONS = [
+    {"id": "MAT-S1", "title": "Prologue: The Infancy",
+     "first_pericope": "MAT-001", "last_pericope": "MAT-006", "marker": None},
+    {"id": "MAT-S2", "title": "Book One: The Sermon on the Mount",
+     "first_pericope": "MAT-007", "last_pericope": "MAT-033", "marker": "MAT.7.28"},
+]
+
+
+class TestArcRecap(unittest.TestCase):
+    def test_recap_names_section_and_lists_studied_titles_in_order(self):
+        bank, family = load()
+        # Study the first two infancy pericopes; next_passage will be MAT-003.
+        family["reading_sequence"] = [p["id"] for p in bank["pericopes"]]
+        family["sessions"] = [
+            {"date": "d", "passage": "MAT-001", "evidence": []},
+            {"date": "d", "passage": "MAT-002", "evidence": []},
+        ]
+        recap = selector.arc_recap(SECTIONS, bank, family)
+        self.assertEqual(recap["section"], "Prologue: The Infancy")
+        self.assertEqual(recap["studied"],
+                         ["The Genealogy of Jesus", "The Birth of Jesus"])
+        self.assertEqual(recap["position"], "2 of 6")
+
+    def test_recap_before_any_study_names_section_only(self):
+        bank, family = load()
+        family["reading_sequence"] = [p["id"] for p in bank["pericopes"]]
+        family["sessions"] = []
+        recap = selector.arc_recap(SECTIONS, bank, family)
+        self.assertEqual(recap["section"], "Prologue: The Infancy")
+        self.assertEqual(recap["studied"], [])
+
+
+class TestZoomOutTrigger(unittest.TestCase):
+    def _study_through(self, bank, family, last_id):
+        order = [p["id"] for p in bank["pericopes"]]
+        family["reading_sequence"] = order
+        upto = order[: order.index(last_id) + 1]
+        family["sessions"] = [{"date": "d", "passage": pid, "evidence": []} for pid in upto]
+        return family
+
+    def test_fires_at_section_last_pericope(self):
+        bank, family = load()
+        self._study_through(bank, family, "MAT-006")  # end of MAT-S1
+        section = selector.due_zoom_out(SECTIONS, family)
+        self.assertIsNotNone(section)
+        self.assertEqual(section["id"], "MAT-S1")
+
+    def test_does_not_fire_mid_section(self):
+        bank, family = load()
+        self._study_through(bank, family, "MAT-004")  # inside MAT-S1
+        self.assertIsNone(selector.due_zoom_out(SECTIONS, family))
+
+    def test_does_not_fire_twice_for_same_section(self):
+        bank, family = load()
+        self._study_through(bank, family, "MAT-006")
+        family["sessions"].append({"date": "d", "kind": "zoom_out", "section": "MAT-S1", "evidence": []})
+        self.assertIsNone(selector.due_zoom_out(SECTIONS, family))
+
+    def test_next_passage_ignores_zoom_out_sessions(self):
+        bank, family = load()
+        order = [p["id"] for p in bank["pericopes"]]
+        family["reading_sequence"] = order
+        family["sessions"] = [
+            {"date": "d", "passage": "MAT-001", "evidence": []},
+            {"date": "d", "kind": "zoom_out", "section": "MAT-S1", "evidence": []},
+        ]
+        # The zoom-out session must not count as "studied MAT-002"; next is MAT-002.
+        self.assertEqual(selector.next_passage(bank, family)["id"], "MAT-002")
+
+
+class TestBuildKitIntegration(unittest.TestCase):
+    def test_normal_kit_includes_arc_recap_when_sections_given(self):
+        bank, family = load()  # family has studied MAT-009, MAT-013; next is MAT-014
+        kit = selector.build_kit(bank, family, SECTIONS)
+        self.assertIn("arc_recap", kit)
+        self.assertIsNotNone(kit["arc_recap"])
+        self.assertNotEqual(kit.get("kind"), "zoom_out")
+
+    def test_zoom_out_replaces_session_at_boundary(self):
+        bank, family = load()
+        order = [p["id"] for p in bank["pericopes"]]
+        family["reading_sequence"] = order
+        family["sessions"] = [{"date": "d", "passage": pid, "evidence": []}
+                              for pid in order[:6]]  # completed MAT-S1
+        kit = selector.build_kit(bank, family, SECTIONS)
+        self.assertEqual(kit["kind"], "zoom_out")
+        self.assertEqual(kit["section_id"], "MAT-S1")
+        self.assertNotIn("passage", kit)  # no new pericope advanced
+
+    def test_back_compat_without_sections(self):
+        bank, family = load()
+        kit = selector.build_kit(bank, family)  # no sections arg
+        self.assertEqual(kit["passage"]["id"], "MAT-014")
+        self.assertNotIn("arc_recap", kit)
+
+    def test_normal_kit_after_recorded_zoom_out_session_does_not_crash(self):
+        """Regression: after a zoom_out session is recorded, the next normal
+        build_kit call must not crash deriving spaced-review candidates from
+        session history (select_review_questions previously dereferenced
+        s["passage"] on every session, including zoom_out sessions)."""
+        bank, family = load()
+        order = [p["id"] for p in bank["pericopes"]]
+        family["reading_sequence"] = order
+        family["sessions"] = [{"date": "d", "passage": pid, "evidence": []}
+                              for pid in order[:6]]  # studied all of MAT-S1
+        family["sessions"].append(
+            {"date": "d", "kind": "zoom_out", "section": "MAT-S1", "evidence": []})
+        kit = selector.build_kit(bank, family, SECTIONS)
+        self.assertEqual(kit["passage"]["id"], "MAT-007")
+        self.assertNotEqual(kit.get("kind"), "zoom_out")
+        self.assertEqual(kit["arc_recap"]["section"], "Book One: The Sermon on the Mount")
+
+
+class TestZoomOutKit(unittest.TestCase):
+    def test_zoom_out_kit_contents(self):
+        bank, family = load()
+        order = [p["id"] for p in bank["pericopes"]]
+        family["reading_sequence"] = order
+        family["sessions"] = [{"date": "d", "passage": pid, "evidence": []}
+                              for pid in order[:6]]  # studied all of MAT-S1
+        section = SECTIONS[0]
+        kit = selector.build_zoom_out_kit(bank, family, SECTIONS, section)
+
+        self.assertEqual(kit["kind"], "zoom_out")
+        self.assertEqual(kit["section_id"], "MAT-S1")
+        # sequence cards are exactly the section's pericopes, in reading order
+        self.assertEqual([c["id"] for c in kit["sequence_cards"]],
+                         ["MAT-001", "MAT-002", "MAT-003", "MAT-004", "MAT-005", "MAT-006"])
+        self.assertEqual(kit["correct_order"],
+                         ["MAT-001", "MAT-002", "MAT-003", "MAT-004", "MAT-005", "MAT-006"])
+        # memory_recall only contains memory verses whose passage is a studied MAT-S1 pericope
+        for item in kit["memory_recall"]:
+            self.assertEqual(item["type"], "memory_verse")
+            self.assertIn(item["passage"], set([c["id"] for c in kit["sequence_cards"]]))
+        # open throughline prompt, no answer key
+        self.assertIn("Prologue: The Infancy", kit["throughline_prompt"])
+
+
 if __name__ == "__main__":
     unittest.main()

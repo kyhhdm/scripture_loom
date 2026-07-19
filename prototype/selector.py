@@ -56,7 +56,7 @@ def _tier_fits(item, member_tier):
 
 def next_passage(bank, family):
     """Next unstudied pericope in the family's reading sequence."""
-    studied = {s["passage"] for s in family["sessions"]}
+    studied = {s["passage"] for s in _normal_sessions(family)}
     for pid in family["reading_sequence"]:
         if pid not in studied:
             return next(p for p in bank["pericopes"] if p["id"] == pid)
@@ -91,7 +91,7 @@ def weak_dimensions(family):
 
 def select_review_questions(bank, family, limit=3):
     """Spaced review from studied passages, weak dimensions first."""
-    studied = [s["passage"] for s in family["sessions"]]
+    studied = [s["passage"] for s in _normal_sessions(family)]
     weak = weak_dimensions(family)
     candidates = [i for p in studied for i in _published(bank, passage=p, type_="question")]
 
@@ -237,7 +237,12 @@ def assign_roles(family):
 
 # ---------- the kit ----------
 
-def build_kit(bank, family):
+def build_kit(bank, family, sections=None):
+    if sections:
+        section = due_zoom_out(sections, family)
+        if section:
+            return build_zoom_out_kit(bank, family, sections, section)
+
     passage = next_passage(bank, family)
     available = available_dimensions(bank, passage["id"])
     targets = select_observation_targets(family, available)
@@ -252,7 +257,7 @@ def build_kit(bank, family):
     selected += [a["id"] for a in (main_act, young_act, verse, narration) if a]
     selected += [q["item_id"] for q in quests if q["item_id"]]
 
-    return {
+    kit = {
         "family": family["name"],
         "passage": passage,
         "review_questions": review,
@@ -266,4 +271,86 @@ def build_kit(bank, family):
         "personalized_lines": personalized_lines(family),
         "roles": assign_roles(family),
         "selected_item_ids": selected,
+    }
+    if sections:
+        kit["arc_recap"] = arc_recap(sections, bank, family)
+    return kit
+
+
+def _normal_sessions(family):
+    return [s for s in family["sessions"] if s.get("kind", "normal") == "normal"]
+
+
+def due_zoom_out(sections, family):
+    """The Section to zoom out on, or None. Fires when the most-recently-studied
+    pericope is a section's last_pericope and no zoom_out session exists for it."""
+    normal = _normal_sessions(family)
+    if not normal:
+        return None
+    last_pid = normal[-1]["passage"]
+    zoomed = {s["section"] for s in family["sessions"] if s.get("kind") == "zoom_out"}
+    for section in sections:
+        if section["last_pericope"] == last_pid and section["id"] not in zoomed:
+            return section
+    return None
+
+
+def _section_pericope_ids(section, order):
+    """Pericope ids in a section, in reading order (order = bank pericope ids)."""
+    i, j = order.index(section["first_pericope"]), order.index(section["last_pericope"])
+    return order[i:j + 1]
+
+
+def _section_of(sections, bank, pericope_id):
+    order = [p["id"] for p in bank["pericopes"]]
+    for section in sections:
+        if pericope_id in _section_pericope_ids(section, order):
+            return section
+    return None
+
+
+def arc_recap(sections, bank, family):
+    """'The story so far' within the current section: its title and the ordered
+    titles of its pericopes the family has already studied. Pure derived."""
+    passage = next_passage(bank, family)
+    section = _section_of(sections, bank, passage["id"])
+    if not section:
+        return None
+    order = [p["id"] for p in bank["pericopes"]]
+    title_by = {p["id"]: p["title"] for p in bank["pericopes"]}
+    section_ids = _section_pericope_ids(section, order)
+    studied = {s["passage"] for s in _normal_sessions(family)}
+    studied_ids = [pid for pid in section_ids if pid in studied]
+    return {
+        "section": section["title"],
+        "studied": [title_by[pid] for pid in studied_ids],
+        "position": f"{len(studied_ids)} of {len(section_ids)}",
+    }
+
+
+def build_zoom_out_kit(bank, family, sections, section):
+    """A derived consolidation session over a completed section. No new passage.
+    The family physically shuffles the printed cards and reorders them; the kit
+    carries the cards in reading order plus the correct order for the leader."""
+    order = [p["id"] for p in bank["pericopes"]]
+    by_id = {p["id"]: p for p in bank["pericopes"]}
+    section_ids = _section_pericope_ids(section, order)
+    studied = {s["passage"] for s in _normal_sessions(family)}
+
+    cards = [{"id": pid, "title": by_id[pid]["title"], "ref": by_id[pid]["ref"]}
+             for pid in section_ids]
+    memory_recall = [i for i in _published(bank, type_="memory_verse")
+                     if i["passage"] in section_ids and i["passage"] in studied]
+
+    return {
+        "family": family["name"],
+        "kind": "zoom_out",
+        "section": section["title"],
+        "section_id": section["id"],
+        "sequence_cards": cards,
+        "correct_order": [c["id"] for c in cards],
+        "memory_recall": memory_recall,
+        "throughline_prompt": f"In one sentence, what was “{section['title']}” about?",
+        "roles": assign_roles(family),
+        "selected_item_ids": [i["id"] for i in memory_recall],
     }
