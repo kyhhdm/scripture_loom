@@ -1,10 +1,12 @@
 import pathlib
 import sys
+import tempfile
 import unittest
+from pathlib import Path
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))
 from content_bank.author import publish
-from content_bank.lib import schema
+from content_bank.lib import content, schema
 
 
 def _q(iid="php1-q1"):
@@ -12,6 +14,12 @@ def _q(iid="php1-q1"):
             "age_tier": "all", "difficulty": 1, "review_status": "draft",
             "text": {"en": "Who wrote to the Philippians?"}, "version": 1,
             "leader_reference": {"kind": "answer_key", "text": {"en": "Paul"}}}
+
+
+def _mat_item(iid, passage="MAT-009"):
+    return {"id": iid, "passage": passage, "dimension": "D1", "type": "question",
+            "age_tier": "all", "difficulty": 1, "review_status": "draft",
+            "text": {"en": "Who was tempted?"}, "version": 1}
 
 
 class TestStamp(unittest.TestCase):
@@ -38,6 +46,32 @@ class TestStamp(unittest.TestCase):
         item = _q()
         publish.stamp([item], reviewed_date="2026-07-19", confirmed_by="kyhhdm")
         self.assertEqual(item["review_status"], "draft")
+
+
+class TestPublishRollback(unittest.TestCase):
+    def test_absent_store_removed_on_invalid(self):
+        with tempfile.TemporaryDirectory() as d:
+            with self.assertRaises(ValueError):
+                publish.publish("MAT", [_mat_item("bad", passage="MAT-999")],
+                                reviewed_date="2026-07-19", confirmed_by="k", store_dir=d)
+            self.assertFalse(content.store_path("MAT", d).exists())
+
+    def test_prior_store_restored_on_invalid(self):
+        with tempfile.TemporaryDirectory() as d:
+            publish.publish("MAT", [_mat_item("good")], reviewed_date="2026-07-19",
+                            confirmed_by="k", store_dir=d)
+            before = content.store_path("MAT", d).read_text()
+            with self.assertRaises(ValueError):
+                publish.publish("MAT", [_mat_item("bad", passage="MAT-999")],
+                                reviewed_date="2026-07-19", confirmed_by="k", store_dir=d)
+            self.assertEqual(content.store_path("MAT", d).read_text(), before)
+
+    def test_valid_publish_writes_store(self):
+        with tempfile.TemporaryDirectory() as d:
+            report = publish.publish("MAT", [_mat_item("good")], reviewed_date="2026-07-19",
+                                     confirmed_by="k", store_dir=d)
+            self.assertEqual(report["errors"], [])
+            self.assertTrue(content.store_path("MAT", d).exists())
 
 
 if __name__ == "__main__":
