@@ -2984,6 +2984,3178 @@
         "guardrail": "WCF-1",
         "confirmed_by": "kyhhdm"
       }
+    },
+    {
+      "id": "ecc-6-d1-place-of-wickedness",
+      "passage": "ECC-006",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "When Solomon looked under the sun, in what two places did he see wickedness?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "In \"the place of judgment\" and in \"the place of righteousness\" (3:16) — the very courts that should have held righteousness held wickedness instead."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d1-who-judges-who-tested",
+      "passage": "ECC-006",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "The passage names who will do the judging and who is being tested. Who is each?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "God is the judge — \"God will judge the righteous and the wicked\" (3:17). The \"sons of men\" are the ones God tests, \"so that they may see for themselves that they are but beasts\" (3:18)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d1-pre-reading",
+      "passage": "ECC-006",
+      "dimension": "D1",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "As the passage is read, listen for the one place the passage says everyone goes, and the one thing everyone comes from and returns to."
+      },
+      "version": 1,
+      "category": {
+        "en": "People & Places"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"All go to one place; all come from dust, and all return to dust\" (3:20)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d2-dust-cycle",
+      "passage": "ECC-006",
+      "dimension": "D2",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 20 traces where all people and animals come from and where they end up. In order, what does it say — where do all come from, and where do all return?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The order is: all \"come from dust,\" and all \"return to dust\"; and all \"go to one place\" (3:20). Origin in dust, then return to dust."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d3-under-the-sun",
+      "passage": "ECC-006",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Solomon says he \"saw under the sun\" what was happening. In this passage, what vantage point does the phrase \"under the sun\" describe?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The phrase \"under the sun\" names the view of life on earth taken by itself — what can be seen in this world apart from looking above it. From that vantage alone, wickedness sits in the courts and death seems to level man and beast (3:16, 3:19)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d3-god-tests",
+      "passage": "ECC-006",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "In verse 18 Solomon says \"God tests them so that they may see for themselves that they are but beasts.\" What does this testing show the sons of men about themselves?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor first to the text: v18 says the testing is \"so that they may see for themselves that they are but beasts,\" and v19 explains the likeness — the same breath and the same death. The interpretation to draw out: the testing brings men to see their own frailty and mortality, that in their bodily life, subject to death, they are like the beasts (3:18-19). Per the brief, the beast-comparison holds as regards liability to death only, not the soul; note what the learner reasons from the text before adding this."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d3-same-breath",
+      "passage": "ECC-006",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 19 says men and animals \"all have the same breath.\" What is the one thing this verse says men and animals share?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The \"same breath\" — the same bodily life, and so the same death: \"As one dies, so dies the other\" (3:19)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d3-lot",
+      "passage": "ECC-006",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 22 says that to enjoy his work is a man's \"lot.\" What does the word \"lot\" mean here?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A person's portion or allotted share in this life — the good God gives him to enjoy in his work: \"there is nothing better for a man than to enjoy his work, because that is his lot\" (3:22). The brief frames it as thankful, cheerful enjoyment of God's gifts, founded on the fear of God."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d3-pre-reading",
+      "passage": "ECC-006",
+      "dimension": "D3",
+      "type": "pre_reading_quest",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "As the passage is read, listen for the one word repeated in verse 20 for what all creatures are made from and return to."
+      },
+      "version": 1,
+      "category": {
+        "en": "Key Words"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The word is \"dust\" — \"all come from dust, and all return to dust\" (3:20)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d4-memverse-dust",
+      "passage": "ECC-006",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "All go to one place; all come from dust, and all return to dust. (Ecclesiastes 3:20)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d4-memverse-judge",
+      "passage": "ECC-006",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "I said in my heart, “God will judge the righteous and the wicked, since there is a time for every activity and every deed.” (Ecclesiastes 3:17)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d4-recall-dust",
+      "passage": "ECC-006",
+      "dimension": "D4",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Fill in the words from verse 20 — All come from ____, and all return to ____."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"dust\" both times: \"all come from dust, and all return to dust\" (3:20)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d5-spirit-returns",
+      "passage": "ECC-006",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "In verse 21 the skeptic shrugs, \"Who knows if the spirit of man rises upward and the spirit of the animal descends into the earth?\" Later in Ecclesiastes, which verse answers this by telling where the spirit of man goes?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Ecclesiastes 12:7 answers it: \"the dust returns to the ground from which it came and the spirit returns to God who gave it.\" Scripture interprets Scripture (WCF 1.9): the unanswered \"Who knows\" of 3:21 is settled within the same book — man's spirit returns to God."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d5-dust-to-dust",
+      "passage": "ECC-006",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 20 says all \"return to dust.\" Which earlier verse in Genesis first spoke these words to Adam?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Genesis 3:19, where God tells Adam that for dust he is, and to dust he shall return. Solomon's \"return to dust\" (3:20) echoes God's word to Adam at the fall."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d5-judgment",
+      "passage": "ECC-006",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 17 says \"God will judge the righteous and the wicked\" (3:17). Name one other verse the brief points to that also declares this coming judgment."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Ecclesiastes 12:14 — \"For God will bring every deed into judgment, along with every hidden thing, whether good or evil.\" (2 Corinthians 5:10 likewise declares that we must all appear before the judgment seat of Christ.) Either confirms the coming judgment 3:17 names."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d6-who-knows",
+      "passage": "ECC-006",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 21 asks, \"Who knows if the spirit of man rises upward and the spirit of the animal descends into the earth?\" What is one question this verse makes you want to ask? Write it down."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Invite the learner's own wondering; do not supply an answer here. Good questions might touch what happens after death, how man differs from the animals, or why Solomon phrases it as a question. If a learner wants the answer, note that 3:17 and 12:7 speak to it — but let the question stand first."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d6-child-question",
+      "passage": "ECC-006",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "The passage talks about people and animals, dust, and God as judge. What is one thing here you would like to ask God about? Draw or say your question."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Welcome any genuine question the child raises; the aim is that they practice asking, not that they land on a set answer. Record the question they ask as evidence of their wondering; do not evaluate it as right or wrong."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d7-whose-voice",
+      "passage": "ECC-006",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "In verses 19-21 Solomon says man \"has no advantage over the animals\" and asks \"Who knows\" where the spirit goes. Does the passage itself leave man level with the beasts? Point to the verse that keeps them apart."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The beast-comparison holds only as regards liability to death — the body shares dust and breath (3:19-20). But the passage does not stop there: 3:17 already declares \"God will judge the righteous and the wicked,\" which no beast faces, and the \"Who knows\" of 3:21 is a lament over how few consider the difference, not a denial of it (brief, JFB). Read with 12:7, the spirit of man returns to God. Anchor learners to what the text states (3:17) before asking why."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d7-nothing-better",
+      "passage": "ECC-006",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "After looking at injustice and death, verse 22 says \"there is nothing better for a man than to enjoy his work\" (3:22). Why does Solomon land on enjoying one's work as the conclusion?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor first to the text: 3:22 grounds it in \"because that is his lot\" and \"who can bring him to see what will come after him?\" Since the future is hidden and toil is his allotted portion, thankful enjoyment of God's gifts in the present is the fitting response (brief: founded on the fear of God, not sensualism), rather than despair over what \"under the sun\" cannot answer."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d7-narration",
+      "passage": "ECC-006",
+      "dimension": "D7",
+      "type": "narration_prompt",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Retell this passage (Ecclesiastes 3:16-22) in your own words: what Solomon saw wrong, what he says God will do, how he compares men and beasts, and what he concludes is best."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Listen for the movement of thought: injustice in the courts (v16) answered by coming judgment (v17); the testing that shows men their mortal frailty like beasts (v18-21, true as to death); and the conclusion that nothing is better than to enjoy one's work as one's lot (v22). Note which parts the learner recovers; gaps show where to review, not a verdict on the learner."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d8-enjoy-work-activity",
+      "passage": "ECC-006",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 22 says it is good to enjoy your work. On paper, draw or list one kind of work you do this week (a chore, schoolwork, helping at home), and next to it write one thing you can thank God for in that work."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Observable output: a drawing or short list plus a thanksgiving. Record what the child produced (e.g., 'listed sweeping and named being able to help'), not a judgment about gratitude. Pre-reader variant: let them draw the work and say the thank-you aloud for a helper to write."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d8-pre-reader-work",
+      "passage": "ECC-006",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Draw a picture of one job you get to do (feeding a pet, picking up toys, helping cook). Then say one word for how it feels to help. A grown-up can write your word by the picture."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Observable output: a drawing and a spoken word captured by the helper. This connects to 3:22's 'enjoy his work.' Record what was drawn and said; do not assess the child's attitude or heart."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-6-d8-judgment-response",
+      "passage": "ECC-006",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 17 says \"God will judge the righteous and the wicked, since there is a time for every activity and every deed.\" Name one ordinary action this week you could do differently in light of God's coming judgment. What is the concrete step?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Aim for one concrete, observable step (e.g., 'correct an error I let a customer overpay for,' 'finish a task I was cutting corners on'). Record the action the person names; the point is a doable response to the coming judgment 3:17 names, not an evaluation of their spiritual state. (Ecclesiastes 12:14 states the scope directly: God brings every deed into judgment.)"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d1-no-comforter",
+      "passage": "ECC-007",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "In verse 1 the writer looks at people who are being treated cruelly. What does the passage say twice about whether these oppressed people had anyone to comfort them, and in whose hands was the power?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "They had no one to comfort them: the passage says twice \"they had no comforter\" and \"there was no comforter\" (4:1). And \"the power lay in the hands of their oppressors\" (4:1)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d1-solitary-man",
+      "passage": "ECC-007",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verses 7-8 describe one particular man the Preacher sees. What does the passage say about his family, and about how he feels toward his wealth?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "He is \"a man all alone, without even a son or brother\" (4:8). Though \"there is no end to his labor,\" his \"eyes are still not content with his wealth,\" and he asks, \"For whom do I toil and bereave my soul of enjoyment?\" (4:8)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d1-youth-and-king",
+      "passage": "ECC-007",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In verses 13-16 the Preacher contrasts two people. Who are they, and what does the passage say about each one's wisdom and station?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A \"poor but wise youth\" is set against \"an old but foolish king who no longer knows how to take a warning\" (4:13). The youth \"has come from the prison to the kingship, though he was born poor in his own kingdom\" (4:14), and became \"the youth who succeeded the king\" (4:15)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d2-youth-rise",
+      "passage": "ECC-007",
+      "dimension": "D2",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verses 13-16 trace the rise and end of the wise youth. Put these stages in the order they happened in his life: crowds follow him, born poor, comes to the kingship, comes from prison, is not celebrated by those who come later."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The sequence of his life (the order events happened, not the clause order of v.14, which names prison and kingship before the parenthetical \"born poor\"): (1) \"born poor in his own kingdom\" (4:14); (2) \"come from the prison\" (4:14); (3) \"to the kingship,\" succeeding the king (4:14-15); (4) \"all who lived and walked under the sun followed this second one\" (4:15); (5) \"the successor will not be celebrated by those who come even later\" (4:16). Even this rise ends in \"futile and a pursuit of the wind\" (4:16)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d3-under-the-sun",
+      "passage": "ECC-007",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "The passage repeats the phrase \"under the sun\" (4:1, 4:3, 4:7, 4:15). In the sense this passage gives it, what realm or vantage point does \"under the sun\" name?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"Under the sun\" names the whole scene of human life on this earth as the Preacher observes it: the sphere of toil, oppression, wealth, and ambition where everything he sees runs out into what is \"futile\" and \"a pursuit of the wind.\" It is the earthly, this-world vantage from which he looks and sees (4:1, 4:7) the evil \"that is done under the sun\" (4:3) and the crowds who \"lived and walked under the sun\" (4:15). Meaning drawn from the passage's own repeated use, not imported speculation."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d3-comforter",
+      "passage": "ECC-007",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 1 says the oppressed \"had no comforter.\" In the sense the passage gives it, what does it mean that they had \"no comforter\"?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "To have \"no comforter\" means the oppressed were left utterly alone in their grief: no one to relieve them, take their side, or console their tears. The passage underscores their aloneness by saying it twice, \"they had no comforter\" and \"there was no comforter\" (4:1), while \"the power lay in the hands of their oppressors.\" It describes their friendless, unhelped condition, not their inner character."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d7-cord-three-strands",
+      "passage": "ECC-007",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 12 ends, \"a cord of three strands is not quickly broken.\" Within verses 9-12, what point is this picture making, and why \"three\" rather than one?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor in the text's own image: the picture teaches the strength of joined lives over the weakness of the solitary. A single thread snaps easily; strands twisted together hold. It caps the reasons of 4:9-12: \"two are better than one\" for their labor (4:9), for lifting one who falls (4:10), for warmth (4:11), and for resisting an attacker (4:12). \"Three\" heightens the point beyond even two, picturing companionship bound so firmly it \"is not quickly broken.\" Keep to the text's own image of union against isolation, not allegory it does not state. Record what the learner sees in the picture, not a judgment of them."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d3-listen-pursuit-wind",
+      "passage": "ECC-007",
+      "dimension": "D3",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Listen for the phrase the Preacher says again and again after he looks at something that does not last. He calls it a pursuit of the ____. What word fills the blank?"
+      },
+      "category": {
+        "en": "Repeated phrase"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"the wind\" - the Preacher repeats \"a pursuit of the wind\" (4:4, 4:6, 4:16), each time paired with calling the thing \"futile.\" It is the passage's key repeated verdict on things that do not last."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d4-mv-two-better",
+      "passage": "ECC-007",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Two are better than one, because they have a good return for their labor. (Ecclesiastes 4:9)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d4-mv-cord",
+      "passage": "ECC-007",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "And though one may be overpowered, two can resist. Moreover, a cord of three strands is not quickly broken. (Ecclesiastes 4:12)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d4-recall-handful",
+      "passage": "ECC-007",
+      "dimension": "D4",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Finish the line from verse 6: 'Better one handful with ____ than two handfuls with toil and pursuit of the wind.'"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"tranquility\" - \"Better one handful with tranquility than two handfuls with toil and pursuit of the wind\" (4:6)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d5-gen-2-18-not-alone",
+      "passage": "ECC-007",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verses 9-12 praise companionship over being alone. Genesis 2:18 gives the reason God said this from the beginning at creation. What does Genesis 2:18 say?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Genesis 2:18 says, \"The LORD God also said, 'It is not good for the man to be alone. I will make for him a suitable helper.'\" This grounds Ecclesiastes 4:9-12: the goodness of two over one traces back to God's own word at creation that solitude is \"not good\" - Scripture interpreting Scripture (WCF 1.9)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d5-pro-27-17-sharpen",
+      "passage": "ECC-007",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 12 says two joined together are strong. Proverbs 27:17 names another good that comes from companions. What does Proverbs 27:17 say?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Proverbs 27:17 says, \"As iron sharpens iron, so one man sharpens another.\" It adds to Ecclesiastes 4:9-12 another benefit of companionship: friends do not only lift and strengthen one another (4:10, 4:12), they also sharpen one another. Both passages commend joined lives over the solitary."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d5-psa-37-16-little",
+      "passage": "ECC-007",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 6 prefers \"one handful with tranquility\" to \"two handfuls with toil.\" Psalm 37:16 makes a similar comparison about a small amount versus a large one. What does Psalm 37:16 say is better?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Psalm 37:16 says, \"Better is the little of the righteous than the abundance of many who are wicked.\" Like Ecclesiastes 4:6, which prefers \"one handful with tranquility\" to \"two handfuls with toil and pursuit of the wind,\" the psalm counts a quiet little better than a troubled abundance - the same weighing of contentment over anxious gain."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d6-no-comforter-wonder",
+      "passage": "ECC-007",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "The passage says the hurting people \"had no comforter\" (4:1). What is one thing you would want to ask about people who are sad or mistreated and have no one to comfort them?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Open item - the child's own question is the goal; do not answer it for them. It arises from the oppressed who \"had no comforter\" (4:1). Welcome wonderings such as why people are left without comfort, who could comfort them, or what God thinks of it. Write down the question the child asks; record wonder, never a judgment of the child."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d6-for-whom-toil",
+      "passage": "ECC-007",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "The solitary man asks, \"For whom do I toil and bereave my soul of enjoyment?\" (4:8). What questions does his own question stir up in you about work and what it is for?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Open item - invite the learner's own wondering; do not supply a settled answer. It is prompted by the miser's cry, \"For whom do I toil and bereave my soul of enjoyment?\" (4:8). Good directions to welcome: who our labor is really for, why endless gaining can leave the soul empty, what it means that his \"eyes are still not content with his wealth.\" Keep the response the learner's own; record what they ask, not a verdict on their heart."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d7-two-better-reasons",
+      "passage": "ECC-007",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Verses 9-12 give several reasons \"two are better than one.\" List the reasons the passage states, then say what one truth about companionship they are meant to teach."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor first in what the text states. The reasons: \"they have a good return for their labor\" (4:9); if one falls, \"his companion can lift him up\" (4:10); \"if two lie down together, they will keep warm\" (4:11); \"though one may be overpowered, two can resist,\" and \"a cord of three strands is not quickly broken\" (4:12). The one truth: God made companionship a real good and strength, so that the solitary life the Preacher has just lamented (4:7-8) is poorer and weaker than a shared one. This is the passage's positive center against the surrounding vanities. Keep to what the text states (WCF 1.9); do not moralize beyond it."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d7-handful-middle-way",
+      "passage": "ECC-007",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 6 sits between the worker driven by envy (v.4) and the idle fool who folds his hands (v.5). What middle way does verse 6 commend, and why does it call that way \"better\"?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor in the text: \"Better one handful with tranquility than two handfuls with toil and pursuit of the wind\" (4:6). The middle way is quiet, contented labor - a \"handful with tranquility\" - set between two errors the passage has just named: the envious striving that makes \"all labor and success spring from a man's envy of his neighbor\" (4:4), and the idle fool who \"folds his hands and consumes his own flesh\" (4:5). It is \"better\" because the peace of the smaller portion outweighs the anxious \"toil and pursuit of the wind\" of grasping for more. Meaning drawn from the verse in its setting, not speculation."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d7-narrate-passage",
+      "passage": "ECC-007",
+      "dimension": "D7",
+      "type": "narration_prompt",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Retell this passage in your own words: the oppressed with no comforter, the striving worker and the idle fool with the better handful between them, the lonely man who toils for no one, the strength of two together, and the wise youth whose rise is soon forgotten."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "A faithful retelling should include: the oppressed who \"had no comforter\" while power sits with oppressors (4:1-3); labor springing from \"envy of his neighbor\" (4:4), the idle fool (4:5), and the \"better\" handful with tranquility (4:6); the solitary man who toils endlessly yet asks \"for whom do I toil\" (4:7-8); the good of companionship - \"two are better than one,\" lifting, warming, resisting, \"a cord of three strands\" (4:9-12); and the poor wise youth who rises from prison to kingship yet is soon forgotten (4:13-16), the whole strung on the refrain \"futile\" and \"a pursuit of the wind.\" Do not require exact wording; listen for these movements. Record what the learner recalls, not a judgment of them."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d8-lift-up-someone",
+      "passage": "ECC-007",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 10 says a companion \"can lift him up\" when he falls. Name one specific person you could help this week, and one concrete thing you could do to lift them up."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Application - look for a concrete, doable action, not a feeling or self-assessment. Anchor: \"if one falls down, his companion can lift him up; but pity the one who falls without another to help him up\" (4:10). Good answers name a specific person and a specific deed (help a younger sibling who is stuck, sit with a lonely classmate, carry something for a parent). Record the observable plan; do not grade the child's heart."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d8-companion-card",
+      "passage": "ECC-007",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "On an index card, draw a cord of three strands like verse 12. On each strand write the name of one person who helps you stand (family, friend, church). On the back, write one concrete way you will help lift up one of them this week."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Paper activity - an index card and pencil are enough. It moves \"a cord of three strands is not quickly broken\" and \"two are better than one\" (4:9-12) into the learner's real relationships and pairs it with a concrete act of helping (\"his companion can lift him up,\" 4:10). Look for a specific, doable action tied to a named person. Keep the record to what was written and planned; observe action, never assess character."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-7-d8-draw-two-helping",
+      "passage": "ECC-007",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Draw a picture of two people, where one has fallen down and the other is helping them stand up again, like verse 10. Then show your family and tell who you could help."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Paper-and-crayon activity for pre-readers; the drawing and telling are the observable response. It fixes \"if one falls down, his companion can lift him up\" (4:10) in memory. No reading required - an adult can say the line aloud. Record whom the child says they could help; do not assess the child."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d1-house-of-god",
+      "passage": "ECC-008",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "The Preacher tells the reader to guard his steps when he goes to one particular place. What place does verse 1 name?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"the house of God\" — \"Guard your steps when you go to the house of God\" (5:1). It is the place of worship, where one is to \"Draw near to listen\" (5:1)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d1-heaven-earth",
+      "passage": "ECC-008",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "When the passage tells us to let our words be few, it names where God is and where we are. According to verse 2, where is each?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"God is in heaven and you are on earth\" (5:2). This contrast is the passage's reason for reverent, few words: \"After all, God is in heaven and you are on earth. So let your words be few\" (5:2)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d1-place-prq",
+      "passage": "ECC-008",
+      "dimension": "D1",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Listen for the place the Preacher says to guard your steps when you go to it. What place is it?"
+      },
+      "category": {
+        "en": "Places"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"the house of God\" (5:1) — the place of worship. The child should also hear that we go there to \"Draw near to listen\" (5:1)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d3-guard-your-steps",
+      "passage": "ECC-008",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 1 says, \"Guard your steps when you go to the house of God.\" In this passage, what does \"guard your steps\" call for as we come to worship?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "It calls for careful, reverent, composed approach to worship — watching how one comes, with thoughts and affections gathered, rather than careless or hasty. The passage itself defines it by contrast: \"Draw near to listen rather than to offer the sacrifice of fools, who do not know that they do wrong\" (5:1). So to \"guard your steps\" is to come attentively to hear and obey, not to rest in mere outward performance."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d3-words-be-few",
+      "passage": "ECC-008",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "The passage commands, \"So let your words be few\" (5:2). What kind of speech before God is it commending, and what is it warning against?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "It commends reverent, deliberate, thoughtful speech before God — not many hasty or careless words. It warns against the fool's babbling: \"Do not be quick to speak, and do not be hasty in your heart to utter a word before God\" (5:2), and \"As a dream comes through many cares, so the speech of a fool comes with many words\" (5:3), summed up again in \"so do many words. Therefore, fear God\" (5:7). \"Few\" here means measured and reverent, weighed before the God who \"is in heaven\" (5:2) — not mere brevity for its own sake."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d3-fear-god",
+      "passage": "ECC-008",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "The passage ends its instruction, \"Therefore, fear God\" (5:7). Judging from the whole passage, what does it mean to \"fear God\" here?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "To \"fear God\" here is to hold Him in reverent awe as the God who \"is in heaven\" while \"you are on earth\" (5:2), and so to worship, speak, and vow accordingly. It is the root command the whole passage drives toward: guard your steps and draw near to listen (5:1), let your words be few (5:2), and pay your vows in full (5:4-6) — all \"because\" one fears God (5:7). It is not fright but reverence that governs both empty worship and hasty words."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d4-mv-words-few",
+      "passage": "ECC-008",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Do not be quick to speak, and do not be hasty in your heart to utter a word before God. After all, God is in heaven and you are on earth. So let your words be few. (Ecclesiastes 5:2)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d4-mv-fear-god",
+      "passage": "ECC-008",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "For as many dreams bring futility, so do many words. Therefore, fear God. (Ecclesiastes 5:7)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d4-mv-better-not-vow",
+      "passage": "ECC-008",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "It is better not to vow than to make a vow and not fulfill it. (Ecclesiastes 5:5)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d4-recall-listen",
+      "passage": "ECC-008",
+      "dimension": "D4",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Fill in the blank from verse 1: Draw near to ____ rather than to offer the sacrifice of fools."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "\"listen\" — \"Draw near to listen rather than to offer the sacrifice of fools, who do not know that they do wrong\" (5:1)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d5-mat-6-7",
+      "passage": "ECC-008",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 2 warns against hasty, many words before God and says, \"let your words be few.\" Jesus gives a like warning about prayer in Matthew 6:7. What does Matthew 6:7 tell us not to do, and why?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Matthew 6:7 warns against praying by babbling on like pagans, who think that by their many words they will be heard. It matches Ecclesiastes 5:2-3: God is not moved by a flood of words, and \"the speech of a fool comes with many words\" (5:3). Both texts teach reverent, deliberate prayer over mere quantity of words — Scripture interpreting Scripture (WCF 1.9)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d5-jas-1-19",
+      "passage": "ECC-008",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 1 says, \"Draw near to listen,\" and verse 2, \"Do not be quick to speak.\" James 1:19 gives a similar order for how we should be. What three things does James 1:19 say we should be?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "James 1:19 says everyone should be quick to listen, slow to speak, and slow to anger. This echoes Ecclesiastes 5:1-2: \"Draw near to listen\" and \"Do not be quick to speak.\" Both put hearing before speaking as the mark of reverence and wisdom — Scripture agreeing with Scripture."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d5-num-30-2",
+      "passage": "ECC-008",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Verses 4-5 command that a vow made to God be fulfilled and not delayed. Numbers 30:2 states the same law about vows. What does Numbers 30:2 require of the one who makes a vow?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Numbers 30:2 says that if a man makes a vow to the LORD or swears an oath to obligate himself by a pledge, he must not break his word; he must do everything he has promised. This is the law standing behind Ecclesiastes 5:4-5: \"When you make a vow to God, do not delay in fulfilling it\"... \"Fulfill your vow\" and \"It is better not to vow than to make a vow and not fulfill it.\" A vow is a binding obligation to be paid in full — the two texts teach one doctrine."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d6-words-before-god",
+      "passage": "ECC-008",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "The passage says, \"God is in heaven and you are on earth. So let your words be few\" (5:2). What questions does this raise for you about how you speak to God when you pray?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Open item — the learner's own question is the goal; do not supply a settled answer. It touches 5:2-3, where reverence for the God who \"is in heaven\" leads to few, weighed words rather than a fool's many words. Welcome wonderings about what reverent prayer looks like, why fewer careful words can matter more than many, or how to listen before speaking (5:1). Record the question the learner asks, not a judgment of their prayers."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d6-vows",
+      "passage": "ECC-008",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "The Preacher says, \"It is better not to vow than to make a vow and not fulfill it\" (5:5). What do you find yourself wanting to ask about making and keeping promises to God?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Open item — invite the learner's own wondering; do not answer it for them. It arises from 5:4-6: pay a vow promptly and in full, and do not excuse a broken one before \"the messenger\" (5:6). Good directions to welcome: what counts as a vow to God, why an unfulfilled vow is treated so seriously, or how the fear of God (5:7) frees us from rash promises. Write down the question the learner asks; observe, do not assess their faith."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d7-root-fear-god",
+      "passage": "ECC-008",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "The passage gives many commands — guard your steps, draw near to listen, let your words be few, fulfill your vow. It then closes, \"Therefore, fear God\" (5:7). What does the text show is the single root these many commands grow from, and how do the worship section (vv1-3) and the vow section (vv4-6) both trace back to it?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor first in the text: \"Therefore, fear God\" (5:7) is the passage's own conclusion, marked by \"Therefore.\" The single root is the fear of God — reverent awe of the One who \"is in heaven\" while \"you are on earth\" (5:2). From it grow both halves: the worship commands (guard your steps, draw near to listen, few words, vv1-3) and the vow commands (do not delay, fulfill your vow, do not call it a mistake, vv4-6). Reading move: read every imperative as an outworking of fearing God, not as separate rules; the proverb-figures at v3 and v7 (dreams and many words) press the same point about the fool's careless speech. Keep to what the text states (WCF 1.9); this fear is reverence, the remedy for both empty worship and rash words."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d7-dream-proverb",
+      "passage": "ECC-008",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 3 says, \"As a dream comes through many cares, so the speech of a fool comes with many words,\" and verse 7 says, \"as many dreams bring futility, so do many words.\" What point about a fool's speech is this comparison to dreams making?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor in the text: the image sets dreams beside a fool's many words (5:3, 5:7). The point: just as a dream is the empty, restless overflow of a mind full of \"many cares,\" so a fool's flood of \"many words\" is empty and comes to \"futility.\" Both are unsubstantial noise. The comparison serves the argument of the whole passage — that reverent, few words fit the God who \"is in heaven\" (5:2), so \"fear God\" (5:7). Reading move: treat the dream-image as illustration serving the argument, not a standalone metaphor to mine. Stay with what the text states (WCF 1.9)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d7-narrate-passage",
+      "passage": "ECC-008",
+      "dimension": "D7",
+      "type": "narration_prompt",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Retell this passage in your own words: how the Preacher says to come to the house of God, what he says about our words before God, what he says about making and keeping vows, and the one command he ends with."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "A faithful retelling should include: guard your steps and draw near to listen rather than offer the sacrifice of fools (5:1); do not be quick or hasty to speak, for God is in heaven and you are on earth, so let your words be few (5:2), since a fool's speech comes with many words (5:3); when you vow to God, do not delay but fulfill it — better not to vow than to vow and not fulfill it (5:4-5) — and do not let your mouth cause you to sin or call your vow a mistake before the messenger (5:6); and the closing command, \"fear God\" (5:7). The oppression note (5:8) may or may not appear. Do not require exact wording; listen for these movements. Record what the learner recalls, not a judgment of them."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d8-draw-near-listen",
+      "passage": "ECC-008",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Verse 1 says to \"Draw near to listen\" and verse 2 says, \"Do not be quick to speak.\" This week when your family reads the Bible or prays together, what is one specific thing you could do to listen carefully instead of speaking too quickly?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Application — look for a concrete, doable action, not a feeling or self-assessment. Anchor: \"Draw near to listen\" (5:1) and \"Do not be quick to speak\" (5:2). Good answers name a specific, observable step (sit still and quiet during the reading, wait until the reader finishes before asking a question, write down one thing heard). Record the observable plan; do not grade the child's heart or attention."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d8-promise-card",
+      "passage": "ECC-008",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "On an index card, write one promise you have made (to God, a parent, or a friend) that you have not yet kept. On the back, write the specific day and step by which you will \"Fulfill your vow\" (5:4) this week."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Paper activity — an index card and pencil are enough. It moves 5:4-5 (\"do not delay in fulfilling it\"... \"Fulfill your vow\"; \"better not to vow than to make a vow and not fulfill it\") into a concrete, doable step. Look for a specific promise and a specific day/action to keep it, not a general resolve. Keep the record to what was written and planned; observe action, never assess character or spiritual state."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-8-d8-quiet-listen-draw",
+      "passage": "ECC-008",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Draw a picture of yourself sitting quietly with your Bible, listening. Then practice folding your hands and being still and quiet, the way we \"draw near to listen\" when God's Word is read."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Paper-and-crayon activity for pre-readers; the drawing and the practice of sitting still are the observable response. It fixes 5:1 (\"Draw near to listen\") in a doable form. No reading required — an adult names the action aloud. Record that the child drew the picture and practiced listening quietly; do not assess the child's heart or reverence."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-d1-king-fields",
+      "passage": "ECC-009",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In verse 9 the passage says the produce of the earth is taken by all, but it names one person in particular who also profits from the fields. Who is it?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The king. Verse 9 says 'the king himself profits from the fields' — even the ruler depends on the common produce of the land."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-d1-sleep-contrast",
+      "passage": "ECC-009",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 12 contrasts two people by how they sleep. Whose sleep does the passage call sweet, and whose wealth lets him get no sleep?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The worker's — 'The sleep of the worker is sweet' — while 'the abundance of the rich man permits him no sleep' (v.12)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-d2-naked-in-out",
+      "passage": "ECC-009",
+      "dimension": "D2",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "According to verse 15, in what condition does a man arrive in the world, in what condition does he depart, and what does he carry away with him?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "He comes 'naked' from his mother’s womb and departs 'naked as he arrived'; the passage adds, 'He takes nothing for his labor to carry in his hands' — nothing goes with him (v.15)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-d3-never-satisfied",
+      "passage": "ECC-009",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 10 says the person who loves money is 'never satisfied.' What does 'never satisfied' tell us about someone who loves money?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "That no amount is ever enough: 'He who loves money is never satisfied by money.' The craving for more has no resting point, unlike a natural hunger a meal can fill; the passage calls this 'futile' (v.10)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-d3-toils-for-wind",
+      "passage": "ECC-009",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In verse 16 the Preacher asks what a man gains as he 'toils for the wind.' What does the picture of toiling 'for the wind' say about such labor?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "That it grasps nothing solid — wind cannot be caught or kept. 'Toils for the wind' pictures effort spent for what is insubstantial and cannot be carried away, matching v.15's 'He takes nothing for his labor to carry in his hands.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-d3-gift-from-god",
+      "passage": "ECC-009",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 19 ends, 'This is a gift from God.' Reading verses 18-19 together, what exactly does the passage call God's gift?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Not merely the riches themselves, but the power to enjoy them. God 'has given riches and wealth to every man, and He has enabled him to enjoy them, to accept his lot, and to rejoice in his labor.' The gift is the God-given ability to eat, drink, and find satisfaction in one's lot (vv.18-19)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-d4-mv-love-money",
+      "passage": "ECC-009",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "He who loves money is never satisfied by money, and he who loves wealth is never satisfied by income. This too is futile. (Ecclesiastes 5:10)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-d4-mv-gift",
+      "passage": "ECC-009",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Furthermore, God has given riches and wealth to every man, and He has enabled him to enjoy them, to accept his lot, and to rejoice in his labor. This is a gift from God. (Ecclesiastes 5:19)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-d4-recall-depart",
+      "passage": "ECC-009",
+      "dimension": "D4",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Fill in the missing word from verse 15: 'As a man came from his mother’s womb, so he will ______ again, naked as he arrived.'"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "depart. The full line reads, 'As a man came from his mother’s womb, so he will depart again, naked as he arrived' (v.15)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-d5-love-money-1ti",
+      "passage": "ECC-009",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 10 warns that the one who loves money is never satisfied. The brief points to 1 Timothy 6:10. How does 1 Timothy 6:10 describe the love of money?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "1 Timothy 6:10 says the love of money is the root of all kinds of evil, and that by craving it some have wandered from the faith and pierced themselves with many sorrows — the same restless craving the Preacher exposes here as never satisfied (v.10)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-d5-naked-job",
+      "passage": "ECC-009",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 15 says a man departs 'naked as he arrived' and 'takes nothing' with him. The brief connects this to Job 1:21. What does Job say there about coming and going with nothing?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Job 1:21 says, 'Naked I came from my mother’s womb, and naked I will return. The LORD gave, and the LORD has taken away.' Job voices the same truth the Preacher observes — we arrive and depart empty-handed — and, like Ecclesiastes 5:19, traces both having and losing to God's hand (v.15)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-d6-rich-no-sleep",
+      "passage": "ECC-009",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 12 says the rich man's wealth keeps him from sleeping. What is one question you would like to ask about why having more can bring less rest?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Let the learner voice their own wondering; do not supply the answer. The passage states the fact plainly (v.12) — the rich man's abundance 'permits him no sleep' — without over-explaining. Fruitful wonderings may touch worry, the burden of keeping wealth, or never having enough (cf. v.10). Record the question the learner actually asks; do not judge the child's contentment."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-d6-hoarded-harm",
+      "passage": "ECC-009",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 13 calls it a 'grievous evil' when wealth is 'hoarded to the harm of its owner.' What questions does this raise for you about how riches could end up harming the very person who owns them?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Invite the learner's own questions; do not resolve the tension for them. Anchor in the text: v.13 names the fact (wealth 'hoarded to the harm of its owner'), and vv.14-17 show shapes it can take — a failed venture, nothing to pass on, days of sorrow. Good questions probe how a good thing turns harmful when clung to. Record their wondering; do not assess character."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-d7-the-turn",
+      "passage": "ECC-009",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "For several verses the Preacher stacks up 'grievous evil' observations about riches; then verse 18 says, 'Here is what I have seen to be good and fitting.' What changes at that turn, and why does he now call eating, drinking, and finding satisfaction in one's labor 'good'?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Read the two poles together, not the lament alone. The accumulating 'grievous evil' observations (vv.10-17) pivot at v.18 into the resolution: the same riches that are futile when loved and hoarded become good when received as one's God-given lot and enjoyed. The 'why' is stated in vv.18-19 — this is a man's 'lot,' and the power to enjoy it is 'a gift from God.' Meaning is drawn from the text itself, not speculation."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-d7-vanity-and-gift",
+      "passage": "ECC-009",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The same thing — riches — is called 'futile' when a man loves and hoards it (vv.10-13) yet 'a gift from God' when he enjoys it (v.19). According to the passage, what makes the difference between riches as vanity and riches as gift?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor to the text before drawing the point. The difference is not the object but its reception: loving and hoarding money never satisfies (v.10) and can harm (v.13), while receiving riches as one's God-given lot — with the God-given power to enjoy them — makes them a gift (vv.18-19). Letting Scripture interpret Scripture, the same possession is vanity or blessing depending on whether it is grasped or received from God's hand."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-d8-thankful-card",
+      "passage": "ECC-009",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "On an index card, draw one thing you already have that you can thank God for and enjoy today — a meal, a warm bed, someone who loves you. (Pre-reader variant: draw it, and a helper writes the word beside your picture.)"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Observable action only: the child produces a card naming or drawing one present good to enjoy with thanks, echoing vv.18-19 (enjoying one's lot as God's gift). Note that a card was made and what it shows; do not assess the child's gratitude or heart."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-d8-enjoy-labor",
+      "passage": "ECC-009",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 18 calls it good to 'find satisfaction in all the labor one does.' Name one specific chore, task, or bit of schoolwork you will do this week, and one concrete way you could do it with contentment rather than wishing you were doing something else."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Looks for a concrete, doable response tied to v.18 — a named task plus one specific way to receive it as one's lot rather than resent it. Accept any real, observable plan; record what the learner names. Do not grade attitude or measure sincerity — only note the action they commit to."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-d8-content-week",
+      "passage": "ECC-009",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The passage sets contentment with one's God-given lot against the restless love of more. Name one concrete practice this week — a purchase declined, a gift given, a meal enjoyed without hurry — by which you would receive what you have as a gift rather than chase more."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Looks for one specific, doable practice tied to the passage's contrast between hoarding (vv.10-13) and enjoying one's lot as gift (vv.18-19). Accept any concrete action; record it. Evidence, not judgment — do not evaluate the person's faith or generosity, only note the step they choose."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-prq-satisfied",
+      "passage": "ECC-009",
+      "dimension": "D3",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "category": {
+        "en": "Key Word"
+      },
+      "text": {
+        "en": "Listen for the word 'satisfied.' Who does the Preacher say is never satisfied?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The one who loves money and wealth: 'He who loves money is never satisfied by money, and he who loves wealth is never satisfied by income' (v.10)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-prq-good-fitting",
+      "passage": "ECC-009",
+      "dimension": "D3",
+      "type": "pre_reading_quest",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "category": {
+        "en": "Key Phrase"
+      },
+      "text": {
+        "en": "Listen for the moment the Preacher stops describing trouble and says something is 'good and fitting.' What does he say is good?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "To eat, drink, and find satisfaction in one's labor as God's given lot: 'Here is what I have seen to be good and fitting: to eat and drink, and to find satisfaction in all the labor one does' (v.18)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-prq-who-gives",
+      "passage": "ECC-009",
+      "dimension": "D1",
+      "type": "pre_reading_quest",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "category": {
+        "en": "Who Gives"
+      },
+      "text": {
+        "en": "Listen through the passage for who gives riches, wealth, and even the power to enjoy them. Who is named?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "God. Verse 19 says God 'has given riches and wealth to every man, and He has enabled him to enjoy them'; the ability to enjoy is itself 'a gift from God.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-9-narr-retell",
+      "passage": "ECC-009",
+      "dimension": "D4",
+      "type": "narration_prompt",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In your own words, retell what the Preacher observed about riches in this passage — from the person who is never satisfied, through the man who arrives and departs with nothing, to the turn where he calls eating, drinking, and enjoying one's labor a gift from God."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A faithful retelling touches the main beats: the lover of money is never satisfied (v.10); more goods bring more consumers and lost sleep (vv.11-12); wealth can harm, be lost, or leave nothing behind (vv.13-14); a man comes and departs naked, carrying nothing (vv.15-16); and the closing turn — to eat, drink, and find satisfaction in one's labor is good, for the power to enjoy riches is a gift from God (vv.18-20). Note which beats the learner recalls; do not grade wording."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-10-d1-who-gives-riches",
+      "passage": "ECC-010",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In this passage, who is it that gives a man riches, wealth, and honor?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "God. Verse 2 says God gives a man 'riches, wealth, and honor, so that he lacks nothing his heart desires.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-10-d1-who-enjoys-instead",
+      "passage": "ECC-010",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "According to verse 2, the man is not allowed to enjoy his wealth. Who does the passage say will enjoy it instead?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A stranger. Verse 2: 'Instead, a stranger will enjoy them.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-10-d3-futile-meaning",
+      "passage": "ECC-010",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In verse 2 the Preacher calls the wealthy man's situation 'futile and a grievous affliction.' Using only what the passage says, why is this wealth called futile — what happens to it?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The wealth is futile because it goes unused by its owner: God gives the man riches yet 'does not allow him to enjoy them,' and 'a stranger will enjoy them' instead (v2). It is vain not because it is worthless but because he never has the good of it."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-10-d3-enjoy-them",
+      "passage": "ECC-010",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 2 says God does not allow the man to 'enjoy' his riches. In your own words, what does it mean to 'enjoy' something?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "To enjoy something is to take real pleasure or delight in it — to get gladness and good from it, not merely to own or keep it. That word carries the weight of verse 2: the man has riches but 'God does not allow him to enjoy them,' so the passage treats enjoyment itself as a God-given ability, not something wealth produces on its own."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-10-d3-under-the-sun",
+      "passage": "ECC-010",
+      "dimension": "D3",
+      "type": "pre_reading_quest",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "category": {
+        "en": "Repeated phrase"
+      },
+      "text": {
+        "en": "Listen for the phrase 'under the sun.' In which verses do you hear it, and what does it seem to point to?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "It appears in verse 1 and verse 12. The phrase marks the horizon of life as observed here below, in this fleeting earthly life apart from what lies beyond it."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-10-d4-memory-verse-6-9",
+      "passage": "ECC-010",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Better what the eye can see than the wandering of desire. This too is futile and a pursuit of the wind. (Ecclesiastes 6:9)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-10-d4-appetite-recall",
+      "passage": "ECC-010",
+      "dimension": "D4",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "category": {
+        "en": "Key line"
+      },
+      "text": {
+        "en": "Listen for what verse 7 says about a man's appetite. Finish the line you hear: 'yet his appetite is never ___.'"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Satisfied. Verse 7: 'All a man’s labor is for his mouth, yet his appetite is never satisfied.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-10-d4-narration",
+      "passage": "ECC-010",
+      "dimension": "D4",
+      "type": "narration_prompt",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Retell Ecclesiastes 6:1-12 in your own words, as if explaining to a friend the evil the Preacher saw and why he says a man's riches can be futile."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A faithful retelling should touch: God gives a man riches, wealth, and honor but does not let him enjoy them, so a stranger enjoys them instead (vv1-2); such a man, however long-lived and full of children, is worse off than a stillborn child, since both go to the same place but the man knows restless, unsatisfied toil (vv3-7); wealth without enjoyment gives no advantage, so better the sight of the eyes than the wandering of desire (vv8-9); and man cannot contend with One stronger, his fleeting shadow-life keeping its future hidden (vv10-12)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-10-d5-enjoyment-eccl-5-19",
+      "passage": "ECC-010",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 2 says God withheld from this man the power to enjoy his wealth. Ecclesiastes 5:19 speaks of that same power. What does Ecclesiastes 5:19 say God does there that 6:2 says was withheld here?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Cross-reference: Ecclesiastes 5:19. There God gives a man riches and wealth AND grants him the power to enjoy them and to accept his lot — calling that ability God's gift. Ecclesiastes 6:2 shows the same God-given power to enjoy being withheld, which is why the wealth becomes futile."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-10-d5-shadow-james-4-14",
+      "passage": "ECC-010",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 12 compares a man's life to 'a shadow' whose future no one can tell. James 4:14 pictures life in a similar way. What image does James 4:14 use for life?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Cross-reference: James 4:14. James calls life a mist (vapor) that appears for a little while and then vanishes. It matches Ecclesiastes 6:12's 'fleeting life like a shadow' whose 'what will come after' is hidden from man."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-10-d6-your-question-child",
+      "passage": "ECC-010",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The Preacher saw a man who had everything but could not enjoy any of it. What is one question you would like to ask about this man or this passage?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Open item — receive the child's own question without supplying an answer. Note what they wonder about (why God would withhold enjoyment, who the stranger is, what a stillborn child is). Record the question as evidence of their engagement; do not evaluate it as right or wrong."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-10-d6-your-question-youth",
+      "passage": "ECC-010",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The Preacher himself asks several questions in verses 8, 11, and 12. Which of his questions most makes you stop and think — and what question of your own does this passage raise for you?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Open item — let the learner name their own question; do not resolve it for them. The passage's own questions (the wise man's advantage over the fool, the profit of many words, who knows what is good) are meant to unsettle easy answers. Record which question they raise as evidence, without judging the state behind it."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-10-d7-stillborn-better",
+      "passage": "ECC-010",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The Preacher says a stillborn child is 'better off' than the wealthy man (vv3-6). According to the passage, what does the wealthy man have that the stillborn does not — and why does the Preacher still call the stillborn better off?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor in the text first: the man has long life, a hundred children, and prosperity (vv3, 6); the stillborn has none of these. Yet the passage calls the stillborn better off because the child 'has more rest' (v5) while the man 'fails to enjoy his prosperity' (v6) and lives a restless, unsatisfied life (v7); and 'Do not all go to the same place?' (v6) — both reach the same end, but only the miser knows the torment of wealth he cannot enjoy. The point is the emptiness of possessing without enjoying, not a verdict on either person's worth."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-10-d7-observation-to-verdict",
+      "passage": "ECC-010",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 2 first describes something the Preacher observes, then gives his verdict on it. What is the thing he observes, and what verdict does he pronounce on it?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Observation (v2): God gives a man riches, wealth, and honor so he lacks nothing, yet does not let him enjoy them and a stranger enjoys them instead. Verdict (v2): 'This is futile and a grievous affliction.' This 'I see... this is futile' pattern runs through the book; naming it helps the learner read the passage's argument, not just its facts."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-10-d8-enjoy-what-you-have-child",
+      "passage": "ECC-010",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "On a card, draw two pictures: one of something you already have that you can enjoy today, and one of something you keep wishing for. The passage says, 'Better what the eye can see than the wandering of desire.' Under your pictures, write one way you could thank God today for what you already have."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Looks for a concrete, doable response, not a spiritual self-assessment. Record what the child chose to enjoy and thank God for as observable evidence. The activity applies v9 — the sight of the eyes (what one has) over the wandering of desire (what one lacks). Avoid drawing conclusions about the child's contentment or heart."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-10-d8-enjoy-what-you-have-prereader",
+      "passage": "ECC-010",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Point to one thing in the room you can enjoy right now. Then say out loud, 'Thank You, God, for this.'"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Pre-reader variant of the contentment activity. Record which object the child pointed to as observable evidence of participation. It enacts v9 in the simplest form — noticing and thanking God for what is in sight. Do not assess the child's inner state."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "ecc-10-d8-enjoy-a-gift-adult",
+      "passage": "ECC-010",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The passage treats the enjoyment of what God gives as itself God's gift (v2). Name one thing God has already provided that you have not been taking time to enjoy — and one concrete way you could actually enjoy it, with thanks, this week."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Looks for a specific, observable action, not a feeling report. Record the named provision and the planned action as evidence. The item applies vv2, 9: enjoyment is a gift to be received with thanksgiving rather than a yield wealth guarantees. Keep the record behavioral — do not infer the person's contentment or spiritual condition."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
     }
   ]
 }
