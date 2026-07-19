@@ -223,5 +223,43 @@ class TestArcRecap(unittest.TestCase):
         self.assertEqual(recap["studied"], [])
 
 
+class TestZoomOutTrigger(unittest.TestCase):
+    def _study_through(self, bank, family, last_id):
+        order = [p["id"] for p in bank["pericopes"]]
+        family["reading_sequence"] = order
+        upto = order[: order.index(last_id) + 1]
+        family["sessions"] = [{"date": "d", "passage": pid, "evidence": []} for pid in upto]
+        return family
+
+    def test_fires_at_section_last_pericope(self):
+        bank, family = load()
+        self._study_through(bank, family, "MAT-006")  # end of MAT-S1
+        section = selector.due_zoom_out(SECTIONS, family)
+        self.assertIsNotNone(section)
+        self.assertEqual(section["id"], "MAT-S1")
+
+    def test_does_not_fire_mid_section(self):
+        bank, family = load()
+        self._study_through(bank, family, "MAT-004")  # inside MAT-S1
+        self.assertIsNone(selector.due_zoom_out(SECTIONS, family))
+
+    def test_does_not_fire_twice_for_same_section(self):
+        bank, family = load()
+        self._study_through(bank, family, "MAT-006")
+        family["sessions"].append({"date": "d", "kind": "zoom_out", "section": "MAT-S1", "evidence": []})
+        self.assertIsNone(selector.due_zoom_out(SECTIONS, family))
+
+    def test_next_passage_ignores_zoom_out_sessions(self):
+        bank, family = load()
+        order = [p["id"] for p in bank["pericopes"]]
+        family["reading_sequence"] = order
+        family["sessions"] = [
+            {"date": "d", "passage": "MAT-001", "evidence": []},
+            {"date": "d", "kind": "zoom_out", "section": "MAT-S1", "evidence": []},
+        ]
+        # The zoom-out session must not count as "studied MAT-002"; next is MAT-002.
+        self.assertEqual(selector.next_passage(bank, family)["id"], "MAT-002")
+
+
 if __name__ == "__main__":
     unittest.main()

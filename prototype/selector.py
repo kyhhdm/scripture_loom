@@ -56,7 +56,7 @@ def _tier_fits(item, member_tier):
 
 def next_passage(bank, family):
     """Next unstudied pericope in the family's reading sequence."""
-    studied = {s["passage"] for s in family["sessions"]}
+    studied = {s["passage"] for s in _normal_sessions(family)}
     for pid in family["reading_sequence"]:
         if pid not in studied:
             return next(p for p in bank["pericopes"] if p["id"] == pid)
@@ -271,6 +271,20 @@ def build_kit(bank, family):
 
 def _normal_sessions(family):
     return [s for s in family["sessions"] if s.get("kind", "normal") == "normal"]
+
+
+def due_zoom_out(sections, family):
+    """The Section to zoom out on, or None. Fires when the most-recently-studied
+    pericope is a section's last_pericope and no zoom_out session exists for it."""
+    normal = _normal_sessions(family)
+    if not normal:
+        return None
+    last_pid = normal[-1]["passage"]
+    zoomed = {s["section"] for s in family["sessions"] if s.get("kind") == "zoom_out"}
+    for section in sections:
+        if section["last_pericope"] == last_pid and section["id"] not in zoomed:
+            return section
+    return None
 
 
 def _section_pericope_ids(section, order):
