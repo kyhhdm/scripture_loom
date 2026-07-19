@@ -1,0 +1,645 @@
+{
+  "book": "MAT",
+  "units": {
+    "MAT-001": {
+      "kind": "pericope",
+      "stage": "reviewed"
+    },
+    "MAT-002": {
+      "kind": "pericope",
+      "stage": "reviewed"
+    },
+    "MAT-003": {
+      "kind": "pericope",
+      "stage": "reviewed"
+    },
+    "MAT-004": {
+      "kind": "pericope",
+      "stage": "reviewed"
+    },
+    "MAT-005": {
+      "kind": "pericope",
+      "stage": "reviewed"
+    },
+    "MAT-006": {
+      "kind": "pericope",
+      "stage": "reviewed"
+    },
+    "MAT-007": {
+      "kind": "pericope",
+      "stage": "reviewed"
+    },
+    "MAT-008": {
+      "kind": "pericope",
+      "stage": "reviewed"
+    },
+    "MAT-009": {
+      "kind": "pericope",
+      "stage": "published"
+    },
+    "MAT-010": {
+      "kind": "pericope",
+      "stage": "reviewed"
+    },
+    "MAT-011": {
+      "kind": "pericope",
+      "stage": "reviewed"
+    },
+    "MAT-012": {
+      "kind": "pericope",
+      "stage": "reviewed"
+    },
+    "MAT-013": {
+      "kind": "pericope",
+      "stage": "published"
+    },
+    "MAT-014": {
+      "kind": "pericope",
+      "stage": "published"
+    },
+    "MAT-015": {
+      "kind": "pericope",
+      "stage": "published"
+    },
+    "MAT-016": {
+      "kind": "pericope",
+      "stage": "reviewed"
+    },
+    "MAT-017": {
+      "kind": "pericope",
+      "stage": "reviewed"
+    },
+    "MAT-018": {
+      "kind": "pericope",
+      "stage": "reviewed"
+    },
+    "MAT-019": {
+      "kind": "pericope",
+      "stage": "reviewed"
+    },
+    "MAT-020": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-021": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-022": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-023": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-024": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-025": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-026": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-027": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-028": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-029": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-030": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-031": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-032": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-033": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-034": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-035": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-036": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-037": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-038": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-039": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-040": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-041": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-042": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-043": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-044": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-045": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-046": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-047": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-048": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-049": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-050": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-051": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-052": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-053": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-054": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-055": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-056": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-057": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-058": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-059": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-060": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-061": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-062": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-063": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-064": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-065": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-066": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-067": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-068": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-069": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-070": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-071": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-072": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-073": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-074": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-075": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-076": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-077": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-078": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-079": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-080": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-081": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-082": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-083": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-084": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-085": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-086": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-087": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-088": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-089": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-090": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-091": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-092": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-093": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-094": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-095": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-096": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-097": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-098": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-099": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-100": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-101": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-102": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-103": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-104": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-105": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-106": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-107": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-108": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-109": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-110": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-111": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-112": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-113": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-114": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-115": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-116": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-117": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-118": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-119": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-120": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-121": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-122": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-123": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-124": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-125": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-126": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-127": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-128": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-129": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-130": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-131": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-132": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-133": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-134": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-135": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-136": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-137": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-138": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-139": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-140": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-141": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-142": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-143": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-144": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-145": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-146": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-147": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-148": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-149": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-150": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-151": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-152": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-153": {
+      "kind": "pericope",
+      "stage": "pending"
+    },
+    "MAT-S1": {
+      "kind": "section",
+      "stage": "pending"
+    },
+    "MAT-S2": {
+      "kind": "section",
+      "stage": "pending"
+    },
+    "MAT-S3": {
+      "kind": "section",
+      "stage": "pending"
+    },
+    "MAT-S4": {
+      "kind": "section",
+      "stage": "pending"
+    },
+    "MAT-S5": {
+      "kind": "section",
+      "stage": "pending"
+    },
+    "MAT-S6": {
+      "kind": "section",
+      "stage": "pending"
+    },
+    "MAT-S7": {
+      "kind": "section",
+      "stage": "pending"
+    }
+  }
+}
