@@ -29,7 +29,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -60,7 +62,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -91,7 +95,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -122,7 +128,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -153,7 +161,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -184,7 +194,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -204,7 +216,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -224,7 +238,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -255,7 +271,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -289,7 +307,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -323,7 +343,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -354,7 +376,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -385,7 +409,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -416,7 +442,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -447,7 +475,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -478,7 +508,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -509,7 +541,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -540,7 +574,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -571,7 +607,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -602,7 +640,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -636,7 +676,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -667,7 +709,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -698,7 +742,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -732,7 +778,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -752,7 +800,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -783,7 +833,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -814,7 +866,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -845,7 +899,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -876,7 +932,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -910,7 +968,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -941,7 +1001,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -972,7 +1034,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1003,7 +1067,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1034,7 +1100,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1065,7 +1133,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1096,7 +1166,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1127,7 +1199,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1158,7 +1232,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1189,7 +1265,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1220,7 +1298,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1251,7 +1331,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1271,7 +1353,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1291,7 +1375,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1322,7 +1408,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1353,7 +1441,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1384,7 +1474,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1415,7 +1507,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1446,7 +1540,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1477,7 +1573,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1508,7 +1606,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1539,7 +1639,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1570,7 +1672,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1601,7 +1705,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1635,7 +1741,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1669,7 +1777,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1703,7 +1813,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1737,7 +1849,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1771,7 +1885,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1805,7 +1921,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1836,7 +1954,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1867,7 +1987,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1901,7 +2023,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1932,7 +2056,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1966,7 +2092,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -1986,7 +2114,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2006,7 +2136,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2040,7 +2172,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2071,7 +2205,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2102,7 +2238,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2133,7 +2271,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2164,7 +2304,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2195,7 +2337,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2226,7 +2370,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2257,7 +2403,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2288,7 +2436,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2319,7 +2469,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2350,7 +2502,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2381,7 +2535,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2412,7 +2568,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2443,7 +2601,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2474,7 +2634,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2505,7 +2667,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2536,7 +2700,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2567,7 +2733,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2601,7 +2769,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2621,7 +2791,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2641,7 +2813,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2672,7 +2846,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2703,7 +2879,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2734,7 +2912,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2765,7 +2945,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2796,7 +2978,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2827,7 +3011,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2858,7 +3044,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2889,7 +3077,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2920,7 +3110,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2951,7 +3143,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -2982,7 +3176,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3013,7 +3209,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3044,7 +3242,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3078,7 +3278,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3109,7 +3311,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3140,7 +3344,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3171,7 +3377,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3202,7 +3410,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3233,7 +3443,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3267,7 +3479,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3287,7 +3501,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3307,7 +3523,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3338,7 +3556,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3369,7 +3589,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3400,7 +3622,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3431,7 +3655,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3462,7 +3688,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3493,7 +3721,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3524,7 +3754,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3555,7 +3787,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3586,7 +3820,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3617,7 +3853,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3648,7 +3886,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3679,7 +3919,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3710,7 +3952,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3741,7 +3985,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3772,7 +4018,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3803,7 +4051,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3834,7 +4084,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3865,7 +4117,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3896,7 +4150,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3930,7 +4186,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3950,7 +4208,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -3970,7 +4230,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4001,7 +4263,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4032,7 +4296,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4063,7 +4329,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4094,7 +4362,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4125,7 +4395,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4156,7 +4428,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4187,7 +4461,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4218,7 +4494,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4249,7 +4527,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4280,7 +4560,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4311,7 +4593,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4342,7 +4626,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4373,7 +4659,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4404,7 +4692,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4438,7 +4728,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4469,7 +4761,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4500,7 +4794,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4531,7 +4827,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4551,7 +4849,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4571,7 +4871,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4591,7 +4893,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4622,7 +4926,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4653,7 +4959,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4684,7 +4992,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4715,7 +5025,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4746,7 +5058,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4777,7 +5091,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4808,7 +5124,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4839,7 +5157,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4870,7 +5190,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4901,7 +5223,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4932,7 +5256,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4963,7 +5289,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -4994,7 +5322,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5025,7 +5355,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5056,7 +5388,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5087,7 +5421,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5118,7 +5454,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5149,7 +5487,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5169,7 +5509,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5189,7 +5531,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5220,7 +5564,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5251,7 +5597,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5282,7 +5630,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5313,7 +5663,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5344,7 +5696,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5375,7 +5729,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5406,7 +5762,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5437,7 +5795,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5468,7 +5828,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5499,7 +5861,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5533,7 +5897,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5567,7 +5933,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5601,7 +5969,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5632,7 +6002,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5663,7 +6035,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5694,7 +6068,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5725,7 +6101,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5756,7 +6134,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5790,7 +6170,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5810,7 +6192,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5844,7 +6228,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5875,7 +6261,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5906,7 +6294,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5937,7 +6327,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5968,7 +6360,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -5999,7 +6393,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -6030,7 +6426,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -6061,7 +6459,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -6092,7 +6492,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -6123,7 +6525,9 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     },
     {
@@ -6154,7 +6558,3353 @@
         "reviewed_by": "claude-adversarial",
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1",
-        "confirmed_by": "kyhhdm"
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-11-d1-better-than-perfume",
+      "passage": "ECC-011",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In verse 1, the Preacher says one thing is better than fine perfume. What is it?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A good name. Verse 1: 'A good name is better than fine perfume.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-11-d1-which-house",
+      "passage": "ECC-011",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "According to verse 2, which is better to enter — a house of mourning or a house of feasting?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A house of mourning. Verse 2: 'It is better to enter a house of mourning than a house of feasting,' because death is the end of every man, 'and the living should take this to heart.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-11-d3-patient-spirit",
+      "passage": "ECC-011",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 8 says a patient spirit is better than a proud one. Using only verses 8 and 9, what does the passage show a patient spirit to be — how does it act?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The passage ties a patient spirit to not being 'quickly provoked in your spirit' (v9), since 'anger settles in the lap of a fool.' It is set over against a proud spirit (v8) and pairs with v8's 'The end of a matter is better than the beginning' — patience waits out a matter for its end rather than grasping or flaring at its start."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-11-d3-good-name-meaning",
+      "passage": "ECC-011",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 1 says a good name is a valuable thing. In your own words, what is a 'good name'?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A good name is the reputation a person earns for wisdom and goodness — being known as honest, kind, and trustworthy. The passage prizes it above costly perfume: 'A good name is better than fine perfume' (v1), something that outlasts what money can buy."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-11-d3-better-than-pattern",
+      "passage": "ECC-011",
+      "dimension": "D3",
+      "type": "pre_reading_quest",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "category": {
+        "en": "Repeated pattern"
+      },
+      "text": {
+        "en": "Listen for the word 'better' in this passage. Which things does the Preacher call 'better than' others? Name as many pairs as you can."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The 'better than' pairs: a good name over fine perfume, and the day of death over the day of birth (v1); a house of mourning over a house of feasting (v2); sorrow over laughter (v3); a wise man's rebuke over the song of fools (v5); and the end of a matter over its beginning, a patient spirit over a proud one (v8). Each pair overturns the world's ordinary reckoning."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-11-d4-memory-verse-8",
+      "passage": "ECC-011",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The end of a matter is better than the beginning, and a patient spirit is better than a proud one. (Ecclesiastes 7:8)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-11-d4-sorrow-recall",
+      "passage": "ECC-011",
+      "dimension": "D4",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "category": {
+        "en": "Key line"
+      },
+      "text": {
+        "en": "Listen for verse 3. Finish the line you hear: 'Sorrow is better than ___.'"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Laughter. Verse 3: 'Sorrow is better than laughter, for a sad countenance is good for the heart.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-11-d4-narration",
+      "passage": "ECC-011",
+      "dimension": "D4",
+      "type": "narration_prompt",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Retell Ecclesiastes 7:1-10 in your own words, as if explaining to a friend the 'better than' sayings the Preacher gathers and what he says wisdom looks like."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A faithful retelling should touch: a good name outweighs fine perfume, and the day of death the day of birth (v1); a house of mourning is better than a house of feasting, since death is every man's end and the living should take it to heart (v2); sorrow beats laughter, being good for the heart, and the wise are found in the house of mourning while fools are in the house of pleasure (vv3-4); a wise man's rebuke is better than the fools' song, whose laughter is like crackling thorns under the pot and 'is futile' (vv5-6); the end of a matter is better than its beginning, and a patient spirit than a proud one (v8); do not be quickly provoked, for anger rests in the fool's lap (v9); and do not idealize 'the old days,' which it is unwise to ask about (v10)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-11-d5-anger-james-1-19",
+      "passage": "ECC-011",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 9 warns, 'Do not be quickly provoked in your spirit.' James 1:19 gives the same counsel in three parts. What three things does James 1:19 say everyone should be?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Cross-reference: James 1:19. Everyone should be 'quick to listen, slow to speak, and slow to anger.' The 'slow to anger' matches Ecclesiastes 7:9, where being quickly provoked is the mark of a fool, since 'anger settles in the lap of a fool.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-11-d5-good-name-prov-22-1",
+      "passage": "ECC-011",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 1 says 'A good name is better than fine perfume.' Proverbs 22:1 makes a similar comparison. In Proverbs 22:1, a good name is more desirable than what?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Cross-reference: Proverbs 22:1. There 'A good name is more desirable than great riches,' and favor is 'better than silver and gold.' It matches Ecclesiastes 7:1, where a good name outweighs even fine perfume — a name for goodness outlasts what wealth can buy."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-11-d6-your-question-child",
+      "passage": "ECC-011",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The Preacher says surprising things — that the day of death is better than the day of birth, and mourning better than feasting. What is one question you would like to ask about this passage?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Open item — receive the child's own question without supplying an answer. Note what they wonder about (why a death day could be better, why mourning helps the heart, what a house of mourning is). Record the question as evidence of their engagement; do not evaluate it as right or wrong."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-11-d6-your-question-youth",
+      "passage": "ECC-011",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 10 warns against asking, 'Why were the old days better than these?' Setting that one aside, what question of your own does this passage raise for you?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Open item — let the learner name their own question; do not resolve it for them. The passage itself unsettles easy answers by ranking mourning, sorrow, and rebuke above feasting, laughter, and flattery. Record which question they raise as evidence, without judging the state behind it."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-11-d7-thorns-image",
+      "passage": "ECC-011",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 6 pictures 'the laughter of the fool' as 'the crackling of thorns under the pot.' What does that image suggest about the fool's laughter — how is it like burning thorns?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Move from image to referent. Dry thorns under a pot flare up loud and bright, then burn out fast, leaving little heat and nothing behind. So the fool's laughter is noisy and showy but empty and short-lived — which is why the verse ends, 'This too is futile' (v6). Keep the reading anchored in the image the text gives; do not turn it into a verdict on any particular person."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-11-d7-house-of-mourning-inversion",
+      "passage": "ECC-011",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 2 says it is better to enter 'a house of mourning' than 'a house of feasting.' The world would say the opposite. According to the passage, why is the house of mourning better?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Read this as one of the passage's value-inversions and stay with the reason the text gives. Verse 2: mourning is better 'since death is the end of every man, and the living should take this to heart' — a funeral teaches mortality where a feast distracts from it. Verse 4 adds that 'The heart of the wise is in the house of mourning.' Note the inversion and its stated reason; avoid moralizing about people who feast."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-11-d8-patience-card-child",
+      "passage": "ECC-011",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "On a card, write or draw one way you could be patient this week instead of getting angry quickly. Verse 9 says, 'Do not be quickly provoked in your spirit.' Under your drawing, name one moment when patience is hard for you."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Looks for a concrete, doable response, not a self-assessment. Record what the child drew and the moment they named as observable evidence. The activity applies v9 — not being quickly provoked. Do not draw conclusions about the child's temper or heart."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-11-d8-slow-breath-prereader",
+      "passage": "ECC-011",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "When someone makes you wait today, try taking one slow breath before you speak. Then say out loud, 'I can wait.'"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Pre-reader variant of the patience activity. Record whether the child tried the slow breath as evidence of participation. It enacts v9 in the simplest form — a small pause instead of being quickly provoked. Do not assess the child's inner state."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-11-d8-quickly-provoked-adult",
+      "passage": "ECC-011",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 8 says 'a patient spirit is better than a proud one,' and verse 9 warns against being quickly provoked. Name one specific situation this week where you tend to be quickly provoked — and one concrete thing you will do to respond with patience instead."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Looks for a specific, observable action, not a feeling report. Record the named situation and the planned response as evidence. The item applies vv8-9: a patient spirit over a proud one, not flaring quickly. Keep the record behavioral — do not infer the person's spiritual condition or maturity."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d1-the-teacher",
+      "passage": "ECC-012",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In verse 27 the words 'I have discovered this by adding one thing to another' are spoken by someone the passage names. Who is it?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The Teacher (v.27: '\"Behold,\" says the Teacher'). This is the speaker's title throughout the passage."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d1-ten-rulers",
+      "passage": "ECC-012",
+      "dimension": "D4",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "According to verse 19, wisdom makes the wise man stronger than whom in a city?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "'Ten rulers in a city' (v.19: 'Wisdom makes the wise man stronger than ten rulers in a city')."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d1-listen-teacher",
+      "passage": "ECC-012",
+      "dimension": "D1",
+      "type": "pre_reading_quest",
+      "age_tier": "youth",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "As the passage is read, listen for the name the writer gives himself when he says he 'discovered this by adding one thing to another' (verse 27)."
+      },
+      "category": {
+        "en": "Who is speaking"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The Teacher (v.27). Traditionally Solomon; the passage's own label is 'the Teacher.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d2-search-order",
+      "passage": "ECC-012",
+      "dimension": "D2",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The Teacher reports his search for wisdom in order. Put these three lines in the order the passage gives them: 'Only this have I found'; 'I resolve to be wise'; 'I directed my mind to understand, to explore.'"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Order as stated: (1) 'I resolve to be wise' (v.23), (2) 'I directed my mind to understand, to explore' (v.25), (3) 'Only this have I found' (v.29). His resolve came first, his searching next, his final conclusion last."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d3-fear-of-god",
+      "passage": "ECC-012",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 18 says, 'he who fears God will follow both warnings.' Looking at verses 16-17, what are the two warnings that the one who fears God holds together?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The two warnings are: against being 'overly righteous' and 'too wise' (v.16), and against being 'excessively wicked' and 'a fool' (v.17). The fear of God is what holds both together (v.18). Keep the learner on observing what the text actually names; a right answer lists both warnings from vv.16-17."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d3-overly-righteous",
+      "passage": "ECC-012",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 16 warns, 'Do not be overly righteous, and do not make yourself too wise.' Since verse 18 sets the fear of God against this and Scripture elsewhere calls us to real righteousness, what kind of 'righteousness' is verse 16 warning against?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Against a self-made, self-important righteousness separated from God, not against true piety (the fear of God, v.18, is set against it, not identified with it). Scripture interprets Scripture: this cannot contradict God's call to real righteousness, so 'overly righteous' names a false, pharisaical form. (WCF 1.9)"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d3-shelter",
+      "passage": "ECC-012",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In verse 12, wisdom is compared to money as what kind of thing: a sword, a shelter, or a road?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A shelter (v.12: 'wisdom, like money, is a shelter'). It guards and preserves the life of its owner."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d3-upright-schemes",
+      "passage": "ECC-012",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 29 sets two words against each other about mankind. Fill both blanks: 'God made men ____, but they have sought out many ____.'"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "'upright' and 'schemes' (v.29). 'Upright' is man as first made, wholly turned to God; 'schemes' is man turning from God to his own devices."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d3-listen-upright-schemes",
+      "passage": "ECC-012",
+      "dimension": "D3",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "As the passage is read, listen for the one thing the Teacher says he finally found about how God made people and what people did instead (verse 29)."
+      },
+      "category": {
+        "en": "Key words"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "'God made men upright, but they have sought out many schemes' (v.29). Listen for the words 'upright' and 'schemes.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d3-upright-schemes-card",
+      "passage": "ECC-012",
+      "dimension": "D3",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Make a two-column card. Title one column 'upright' and the other 'schemes' (verse 29). Under 'upright' write or draw: God made people good and straight. Under 'schemes' write or draw: people made up their own crooked plans. Pre-reader variant: draw one straight line for 'upright' and one tangled scribble for 'schemes.'"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Card should reflect v.29: God made men upright (straight, turned to God), but they sought out many schemes (their own devices). Watch that 'upright' is shown as God's good making, not the child's own goodness."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d4-mv-720",
+      "passage": "ECC-012",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Ecclesiastes 7:20 - Surely there is no righteous man on earth who does good and never sins."
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d4-mv-713",
+      "passage": "ECC-012",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Ecclesiastes 7:13 - Consider the work of God: Who can straighten what He has bent?"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d4-never-sins",
+      "passage": "ECC-012",
+      "dimension": "D4",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Finish the verse from memory: 'Surely there is no righteous man on earth who does good and never ____.'"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "'sins' (v.20: 'Surely there is no righteous man on earth who does good and never sins')."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d4-narrate",
+      "passage": "ECC-012",
+      "dimension": "D4",
+      "type": "narration_prompt",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Retell verses 11-29 in your own words: how the Teacher praised wisdom, admitted its limit, and finally concluded about people."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A full retelling should touch: wisdom is good, like an inheritance and like money, a shelter (11-12); no one can straighten what God bent, and God makes both prosperity and adversity (13-14); the fear of God holds the paired warnings (16-18); wisdom is strong, yet no one on earth does good and never sins (19-20); the Teacher searched but wisdom was beyond him (23-24); his conclusion: God made men upright, but they sought many schemes (29)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d5-rom-323",
+      "passage": "ECC-012",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 20 states that no one on earth does good and never sins. Which passage named in the study teaches the same truth, that all have sinned and fall short of God's glory?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Romans 3:23 (ROM.3.23) - 'all have sinned and fall short.' It confirms Ecclesiastes 7:20 that sin is universal. Scripture interprets Scripture (WCF 1.9)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d5-rom-1203",
+      "passage": "ECC-012",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 16 warns against making yourself 'too wise.' Which passage named in the study tells us not to think of ourselves more highly than we ought?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Romans 12:3 (ROM.12.3) - do not think of yourself more highly than you ought. It echoes the warning of v.16 against being 'too wise' in one's own eyes."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d5-ecc-304",
+      "passage": "ECC-012",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 14 says God made the day of prosperity and the day of adversity together. Which nearby verse in Ecclesiastes lists 'a time to weep and a time to laugh' as part of God's ordering?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Ecclesiastes 3:4 (ECC.3.4) - 'a time to weep and a time to laugh.' Both the glad day and the hard day are within God's appointing, as in v.14."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d6-bent",
+      "passage": "ECC-012",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 13 asks, 'Who can straighten what He has bent?' What is one question you would want to ask about the things in your own life you cannot change?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Invite the learner's own question; do not supply an answer. Good wondering may touch God's sovereignty over what we cannot alter (v.13) and how prosperity and adversity are both from Him (v.14). Receive the question as evidence of engagement, not as a test."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d6-wonder",
+      "passage": "ECC-012",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The Teacher searched hard for wisdom, but verse 23 says it was 'beyond' him. What is one thing you wonder about wisdom?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Let the child voice their own wonder; there is no wrong question here. The point of v.23-24 is that full wisdom is out of reach for us and belongs to God. Record the question, not a judgment about the child."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d7-no-righteous",
+      "passage": "ECC-012",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 20 says, 'there is no righteous man on earth who does good and never sins,' set right after praising wisdom's strength (v.19). What does the passage teach by turning from wisdom's power to everyone's sin?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The text itself makes the turn: even the wise are sinners; wisdom shelters but does not make anyone sinless. This grounds that corruption remains even in the regenerate (WCF 6.5) and that no one perfectly keeps God's commandments but daily breaks them in thought, word, and deed (WLC Q149). Keep the discussion on what the verse states, not on ranking anyone's righteousness."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d7-fear-hinge",
+      "passage": "ECC-012",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verses 16-18 give two warnings and say the one who fears God follows both. Why does the passage make the fear of God, and not mere cleverness, the thing that holds the two warnings together?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The passage names the fear of God as the hinge (v.18): it is what keeps a person from both a self-made righteousness (v.16) and from wickedness and folly (v.17). Cleverness alone cannot do this; only reverence for God rightly orders both. Steer away from reading v.16-17 as license for mediocrity; the fear of God, not lukewarmness, is the point."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d7-upright-fall",
+      "passage": "ECC-012",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 29 says, 'God made men upright, but they have sought out many schemes.' What does the passage say about how mankind began and what went wrong?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The verse states both: God's making was good and upright (WCF 4.2; WLC Q17 - man made in knowledge, righteousness, and holiness), and the fault is man's own turning to his 'schemes.' Man, though made upright, was mutably able to fall (WCF 9.2), and by seeking his own inventions fell from original righteousness into sin (WCF 6.2). Keep to what the verse asserts; do not extend to covenant-of-works detail the passage does not raise."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d8-every-word",
+      "passage": "ECC-012",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 21 says, 'Do not pay attention to every word that is spoken.' Name one specific situation this week where you could choose not to take to heart every word you hear about yourself."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Look for a concrete, observable plan (a specific moment, person, or setting), not a feeling or a resolution about character. The passage's own reasoning is v.22: you yourself have also spoken carelessly of others, so extend the same allowance. Record the named situation as evidence."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-12-d8-prosperity-adversity",
+      "passage": "ECC-012",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Fold a card in two. On one side draw 'the day of prosperity' (verse 14) and one thing you can thank God for; on the other side draw 'the day of adversity' and one hard thing, remembering that God made both together. Pre-reader variant: draw a happy day and a hard day, then draw a small cross in the middle to show God is over both."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The doable response is naming one glad thing and one hard thing and placing both under God, as v.14 does ('God has made one of these along with the other'). Affirm the concrete drawing; do not turn it into a judgment about how the child feels or how much faith they have."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d1-whose-command",
+      "passage": "ECC-013",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In this passage, whose command does the Preacher say to keep?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The king. Verse 2: 'Keep the king’s command, I say, because of your oath before God.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d1-goes-well-with-whom",
+      "passage": "ECC-013",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "According to verse 12, with which group of people does the Preacher say it will go well?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Those who fear God. Verse 12: 'it will go well with those who fear God, who are reverent in His presence.' Verse 13 gives the contrast: 'because the wicked do not fear God, it will not go well with them.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d1-where-wicked-buried",
+      "passage": "ECC-013",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In verse 10, where does the Preacher say the wicked used to go in and out, and where were they praised?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "They 'used to go in and out of the holy place, and they were praised in the city where they had done so' (v10). The two locations named are the holy place and the city. The Preacher calls the honor given them at their burial 'futile.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d3-under-the-sun",
+      "passage": "ECC-013",
+      "dimension": "D3",
+      "type": "pre_reading_quest",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "category": {
+        "en": "Repeated phrase"
+      },
+      "text": {
+        "en": "Listen for the phrase 'under the sun.' Count how many times you hear it, and notice what it seems to point to."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "It sounds in verses 9, 15 (twice), and 17. The phrase marks the horizon of life as it can be observed here below, in this present earthly life — the very vantage point from which the deferred-justice tension looks 'futile' (vv10-14) and God's full work stays hidden (v17)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d3-futile-meaning",
+      "passage": "ECC-013",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The Preacher says several times that something is 'futile' (verses 10 and 14). In your own words, what do you think 'futile' means here?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Futile means empty, in vain, without lasting sense — something that does not add up or come out right. In verse 14 what is called futile is that 'There are righteous men who get what the actions of the wicked deserve, and there are wicked men who get what the actions of the righteous deserve.' The reward and the person do not match, and viewed 'under the sun' that mismatch looks like vapor."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d3-fear-god-sense",
+      "passage": "ECC-013",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verses 12-13 hang everything on whether a person does or does not 'fear God.' Using verse 12's own words, what does the passage pair with fearing God to show what it means?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Verse 12 pairs 'those who fear God' with those 'who are reverent in His presence' — the fear of God here is reverent awe lived out before Him, not mere dread. The passage sets it as the dividing line: it goes well with those who fear God (v12), and not well with the wicked because they 'do not fear God' (v13). The sense is drawn from the text itself, which is the ground it names for things going well."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d3-time-and-procedure",
+      "passage": "ECC-013",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verses 5 and 6 twice use the phrase 'the right time and procedure.' From what the passage says a 'wise heart' does with it, what does this phrase point to?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "It points to the fitting season and the fitting way of acting. Verse 5: 'a wise heart knows the right time and procedure'; verse 6: 'there is a right time and procedure to every purpose.' Wisdom is discerning not only what to do but when and how — which is why the wise heart 'will come to no harm' (v5)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d4-memory-verse-2",
+      "passage": "ECC-013",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Keep the king’s command, I say, because of your oath before God. (Ecclesiastes 8:2)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d4-kings-word-line",
+      "passage": "ECC-013",
+      "dimension": "D4",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "category": {
+        "en": "Key line"
+      },
+      "text": {
+        "en": "Listen for what verse 4 says about the king's word. Finish the line you hear: 'For the king’s word is ___.'"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Supreme. Verse 4: 'For the king’s word is supreme, and who can say to him, “What are you doing?”'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d4-narration",
+      "passage": "ECC-013",
+      "dimension": "D4",
+      "type": "narration_prompt",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Retell Ecclesiastes 8 in your own words, as if explaining to a friend how the chapter moves from advice about obeying the king, to the puzzle of wicked people who seem to get away with evil, to what the Preacher still commends."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A faithful retelling should touch: wisdom brightens a man’s face (v1); keep the king’s command because of your oath before God, and do not persist in a bad cause, since the king’s word is supreme (vv2-4); a wise heart knows the right time and procedure, yet no one knows the future or controls the wind or the day of death (vv5-8); the Preacher sees the wicked honored at burial and judgment delayed, so hearts grow bold in evil, yet he still knows it will go well with those who fear God and not with the wicked (vv9-13); the mismatch of deserts is futile, so he commends thankful enjoyment of God’s gifts and confesses that man cannot comprehend God’s work (vv14-17)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d5-delay-2pe-3",
+      "passage": "ECC-013",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 11 says that when 'the sentence for a crime is not speedily executed, the hearts of men become fully set on doing evil.' 2 Peter 3:3-10 addresses that same delay of judgment. How does 2 Peter 3:3-10 explain why the Lord's judgment is delayed?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Cross-reference: 2 Peter 3:3-10. Peter answers the scoffers who take the delay as proof judgment will never come: the Lord 'is not slow in keeping His promise' but patient, 'not wanting anyone to perish but everyone to come to repentance,' and the day will come suddenly 'like a thief.' It resolves Ecclesiastes 8:11's tension without adding to that verse — the delay is God's forbearance, not His indifference."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d5-forbearance-rom-2",
+      "passage": "ECC-013",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In verse 11 a delayed sentence tempts people to do more evil. Romans 2:4-5 speaks about the purpose of God's patience with wrongdoers. What does Romans 2:4-5 say God's kindness and forbearance are meant to lead a person toward?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Cross-reference: Romans 2:4-5. Paul says God’s 'kindness, tolerance, and patience' should not be disregarded, for 'God’s kindness leads you to repentance,' and warns that a hard, unrepentant heart is 'storing up wrath' for the day of judgment. Where Ecclesiastes 8:11 shows delay being misread as license to sin, Romans 2:4-5 names its true aim — repentance — and its danger when spurned."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d5-day-of-death-job-14",
+      "passage": "ECC-013",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 8 says 'no one has authority over his day of death.' Job 14:5 makes a similar point about the span of a person's life. What does Job 14:5 say about a person's days and limits?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Cross-reference: Job 14:5. Job says a person’s days are determined and the number of his months is with God, who has set limits he cannot pass. It matches Ecclesiastes 8:8: no one holds power over the wind or over his own day of death — the boundary of life belongs to God, not to us."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d6-your-question-child",
+      "passage": "ECC-013",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The Preacher noticed people who did wrong but were not punished right away. What is one question you would like to ask about this passage?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Open item — receive the child’s own question without supplying an answer. Record what they wonder about (why bad people are not stopped, what 'fear God' means, why it is called futile). Note the question as evidence of engagement; do not evaluate it as right or wrong or draw conclusions about the child."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d6-your-question-youth",
+      "passage": "ECC-013",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 14 calls it 'futile' that righteous people sometimes get what the wicked deserve, and the wicked get what the righteous deserve. What question does this raise for you that you would want to bring to the passage or to God?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Open item — let the learner name their own question; do not resolve it for them. This is the passage’s own scandal of deferred justice (vv10-14), and it is meant to unsettle easy answers. Record which question they raise as evidence, without judging the state of heart behind it. If they ask for resolution, you may later point to the named cross-references (2 Peter 3, Romans 2) — but first honor their question."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d7-observe-verdict",
+      "passage": "ECC-013",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In verses 9-10 the Preacher first tells what he saw, then pronounces a verdict on it. What is the thing he observes, and what verdict does he give?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor in the text: the observation is that he saw the wicked buried with honor, who 'used to go in and out of the holy place, and they were praised in the city' (v10); the verdict is 'This too is futile' (v10). Naming this 'I saw... this too is futile' pattern (repeated at v14) helps the learner follow the passage’s argument, not just its facts. The verdict is the Preacher’s, drawn from the text, not our added judgment on the people."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d7-still-know-goes-well",
+      "passage": "ECC-013",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verses 11-13 admit that a sinner may do evil a hundred times and still live long. Yet the Preacher says he 'also know[s]' something. According to the passage, what does he still know despite what he sees, and how does he state the contrast?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor in the text: though delay emboldens evil (v11) and a sinner may 'do evil a hundred times and still live long' (v12), the Preacher says 'yet I also know that it will go well with those who fear God, who are reverent in His presence' (v12), and contrasts it: 'because the wicked do not fear God, it will not go well with them, and their days will not lengthen like a shadow' (v13). His settled knowledge holds against the appearance; the fear of God is the dividing line. This is knowledge affirmed from the text, resolved more fully by clearer Scripture on final judgment — not a novelty added here."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d7-cannot-comprehend",
+      "passage": "ECC-013",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 17 ends the chapter with a limit on human wisdom. What does the passage say a man 'is unable' to do, and what does it say even 'the wise man' cannot do?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Anchor in the text: 'a man is unable to comprehend the work that is done under the sun. Despite his efforts to search it out, he cannot find its meaning; even if the wise man claims to know, he is unable to comprehend' (v17). Even wisdom, which brightened the man’s face at the chapter’s start (v1), cannot exhaust God’s work. This is the passage’s own confession of creaturely limit, not a denial of Scripture’s sufficiency: God has revealed all we need, while His full working remains beyond our searching out."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d8-honor-authority-child",
+      "passage": "ECC-013",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 2 says to keep the king’s command 'because of your oath before God.' On a card, write or draw one instruction from a person God has placed over you (a parent or teacher) that you could obey this week — and one thing you will actually do to keep it."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Looks for a concrete, doable action, not a report on the child’s obedience or heart. Record the instruction named and the step planned as observable evidence. The activity applies verse 2 — submission to lawful authority as service rendered before God. Keep the record behavioral; do not rate the child’s character or attitude."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d8-honor-authority-prereader",
+      "passage": "ECC-013",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Name one grown-up God has given to take care of you. Say out loud one thing they ask you to do that you can do today."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Pre-reader variant of the authority activity. Record whom the child named and the task they said, as observable evidence of participation. It enacts verse 2 in the simplest form — obeying those God has placed over us. Do not assess the child’s inner state or willingness."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-13-d8-thankful-enjoyment-adult",
+      "passage": "ECC-013",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In verse 15 the Preacher commends enjoying the good gifts of daily life — to 'eat and drink and be merry' in one's labor as a gift God gives. Name one ordinary gift from God this week that you tend to rush past, and one concrete way you could stop and enjoy it with thanks."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Looks for a specific, observable action, not a feeling report. Record the named gift and the planned step as evidence. The item applies verse 15: thankful enjoyment of God’s daily gifts is itself commended, even amid the unresolved tensions of vv10-14. Keep the record behavioral — do not infer the person’s level of contentment or spiritual condition."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d1-king-and-wise-man",
+      "passage": "ECC-014",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In the little story about the small city (verses 14-15), two people are set against each other. Who came against the city, and who saved it?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "'A mighty king came against it' (v.14), and 'a poor wise man' saved the city 'by his wisdom' (v.15)."
+        },
+        "verse": {
+          "en": "There was a small city with few men. A mighty king came against it, surrounded it, and built large siege ramps against it. Now a poor wise man was found in the city, and he saved the city by his wisdom. Yet no one remembered that poor man."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d1-listen-for-figures",
+      "passage": "ECC-014",
+      "dimension": "D1",
+      "type": "pre_reading_quest",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "category": {
+        "en": "People in the story"
+      },
+      "text": {
+        "en": "As the closing story is read, listen for the people named in the small city. Who are they, and which one is remembered?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The passage names 'a mighty king' (v.14) and 'a poor wise man' (v.15); the text says the king is opposed and the wise man delivers the city, yet 'no one remembered that poor man' (v.15)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d2-city-sequence",
+      "passage": "ECC-014",
+      "dimension": "D2",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Put the events of the small-city story (verses 14-15) in the order the text gives them: the wise man saved the city; the king surrounded it and built siege ramps; a mighty king came against it; no one remembered the poor man."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Order: (1) 'A mighty king came against it' (v.14); (2) he 'surrounded it, and built large siege ramps against it' (v.14); (3) 'a poor wise man... saved the city by his wisdom' (v.15); (4) 'no one remembered that poor man' (v.15)."
+        },
+        "verse": {
+          "en": "A mighty king came against it, surrounded it, and built large siege ramps against it. Now a poor wise man was found in the city, and he saved the city by his wisdom. Yet no one remembered that poor man."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d2-listen-for-turn",
+      "passage": "ECC-014",
+      "dimension": "D2",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "category": {
+        "en": "What happens next"
+      },
+      "text": {
+        "en": "Listen for the place where the passage stops describing death for everyone and turns to a command about how to live. What is the first word of that command?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The turn comes at v.7, which begins 'Go, eat your bread with joy' after vv.2-6 describe the common fate of death."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d3-under-the-sun",
+      "passage": "ECC-014",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The phrase 'under the sun' recurs through this passage (vv.6, 9, 11). Judging from how it is used here, what does 'under the sun' point to?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "It marks the sphere of earthly life 'under the sun'—this present world of labor and observation, the realm the dead 'will never again have a share in' (v.6) and where 'time and chance happen to all' (v.11). It names the horizon of life below, not the final state beyond it."
+        },
+        "verse": {
+          "en": "Their love, their hate, and their envy have already vanished, and they will never again have a share in all that is done under the sun."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d3-portion",
+      "passage": "ECC-014",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 9 calls the enjoyment of life and labor 'your portion'. What does the word 'portion' mean here?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "'Portion' is the share God gives a person to receive and enjoy in this life—'this is your portion in life and in your labor under the sun' (v.9): food, drink, marriage, and work received as God's approved gift (v.7)."
+        },
+        "verse": {
+          "en": "Enjoy life with your beloved wife all the days of the fleeting life that God has given you under the sun—all your fleeting days. For this is your portion in life and in your labor under the sun."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d3-time-and-chance",
+      "passage": "ECC-014",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 11 concludes, 'For time and chance happen to all.' What does the passage mean by 'time and chance'?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "It names the unforeseen turns of events that no human strength or skill can command: 'The race is not to the swift, nor the battle to the strong' (v.11), and 'no man knows his time' (v.12). Read with the rest of Scripture, what looks like mere chance is in truth Providence—the outcomes rest with God (cf. v.1, deeds 'in God's hands'); the duties are ours."
+        },
+        "verse": {
+          "en": "The race is not to the swift, nor the battle to the strong; neither is the bread to the wise, nor the wealth to the intelligent, nor the favor to the skillful. For time and chance happen to all."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d4-verse-10",
+      "passage": "ECC-014",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Whatever you find to do with your hands, do it with all your might, for in Sheol, where you are going, there is no work or planning or knowledge or wisdom. (Ecclesiastes 9:10)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d4-verse-11",
+      "passage": "ECC-014",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "youth",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The race is not to the swift, nor the battle to the strong; neither is the bread to the wise, nor the wealth to the intelligent, nor the favor to the skillful. For time and chance happen to all. (Ecclesiastes 9:11)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d4-live-dog-cue",
+      "passage": "ECC-014",
+      "dimension": "D4",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 4 gives a surprising picture about hope. Finish the line: 'even a live dog is better than a ___.'"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "'a dead lion' — 'even a live dog is better than a dead lion' (v.4)."
+        },
+        "verse": {
+          "en": "There is hope, however, for anyone who is among the living; for even a live dog is better than a dead lion."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d5-might-col-3-23",
+      "passage": "ECC-014",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 10 urges, 'Whatever you find to do with your hands, do it with all your might.' Read Colossians 3:23. How does Paul give this same diligence a direction Ecclesiastes leaves open?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Colossians 3:23 ('Whatever you do, work at it with your whole being, for the Lord and not for men') takes up the same wholehearted labor and names its aim: work done for the Lord. Ecclesiastes commands the might (v.10); Colossians names the One it is rendered to."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d5-chance-jer-9-23",
+      "passage": "ECC-014",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 11 says the race, the battle, the bread, and the wealth do not simply go to the swift, strong, wise, or intelligent. Read Jeremiah 9:23. What does Jeremiah tell people not to boast in, and how does it echo verse 11?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Jeremiah 9:23 warns the wise not to boast in wisdom, the strong not in strength, and the rich not in riches—the very advantages Ecclesiastes 9:11 says cannot secure the outcome. Both texts deny that human wisdom, might, or wealth guarantees success; God governs the result."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d6-own-question",
+      "passage": "ECC-014",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The passage says one fate comes to the righteous and the wicked alike (vv.2-3), yet also that 'there is hope' for the living (v.4). What is one honest question this raises for you that you would want to ask about it?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Invite the learner's own wondering; do not supply an answer. Good questions may probe how death being common squares with God holding the righteous 'in His hands' (v.1), or what hope the living have that the dead do not (vv.4-6). Receive the question; the passage's own answers can wait for D7."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d6-listen-and-wonder",
+      "passage": "ECC-014",
+      "dimension": "D6",
+      "type": "pre_reading_quest",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "category": {
+        "en": "Your own question"
+      },
+      "text": {
+        "en": "As the passage is read, listen for one line you do not fully understand or that surprises you. Write it down as a question you would like to ask."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The aim is the learner forming a question, not landing a right answer. Lines that often prompt wonder: 'the dead know nothing' (v.5), 'time and chance happen to all' (v.11), or the forgotten wise man (v.15). Welcome the question as offered."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d7-turn-to-joy",
+      "passage": "ECC-014",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "At verse 7 the passage turns from lament over the common fate (vv.2-6) to the command, 'Go, eat your bread with joy.' What reason does the text give for this joy, and why does that reason change how the earlier verses are heard?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The stated reason is 'for God has already approved your works' (v.7); the enjoyment of food, drink, marriage, and labor is 'your portion' (v.9), God's given gift. So the counsel is not resignation to death but reception of daily life as God-approved gift while there is life—'there is hope... for anyone who is among the living' (v.4). Draw the 'why' from these verses, not from speculation."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d7-wisdom-vignette",
+      "passage": "ECC-014",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "The story of the poor wise man ends with the verdict, 'Wisdom is better than strength' (v.16), even though 'no one remembered that poor man' (v.15). What is the passage teaching about wisdom through a story where the wise man is forgotten?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Start from what the text states: the wise man 'saved the city by his wisdom' (v.15), yet was despised and forgotten (vv.15-16). The passage's point (vv.16-18) is that wisdom is genuinely 'better than strength' and 'better than weapons of war' even when the world overlooks it—its worth is not measured by whether people honor it. Keep to what vv.13-18 say."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d7-narrate-passage",
+      "passage": "ECC-014",
+      "dimension": "D7",
+      "type": "narration_prompt",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Retell this passage in your own words: how it moves from the one fate that comes to all, to the call to receive life with joy, to what it observes about time, chance, and wisdom."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Listen for the passage's flow, not polish: one common fate for all (vv.2-3), hope for the living (vv.4-6), the call to enjoy food, drink, marriage, and work as God's gift and to labor with all one's might (vv.7-10), then the observation that 'time and chance happen to all' (v.11) closing with the forgotten wise man (vv.13-18). A retelling that keeps this order and gist is strong."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d8-with-all-your-might",
+      "passage": "ECC-014",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 10 says, 'Whatever you find to do with your hands, do it with all your might.' Name one task in front of you this week and one concrete way you will do it wholeheartedly rather than half-heartedly."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Look for a specific, doable action tied to a named task (a chore, schoolwork, a job, caring for someone), not a general resolve. Record the observable plan the learner states; do not assess their diligence or character."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-14-d8-joyful-gift-activity",
+      "passage": "ECC-014",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verses 7-9 name good gifts to receive with a cheerful heart—bread, drink, and daily life. On an index card, draw or list three ordinary gifts from your day you can thank God for. Pre-reader variant: draw one thing from today you are glad God gave you."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The passage grounds the activity: 'Go, eat your bread with joy... for God has already approved your works' (v.7). Look for concrete, everyday gifts named or drawn; keep it to observable gratitude, not judgments about the child's heart."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d1-two-surprising-sights",
+      "passage": "ECC-015",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In verse 7 the Preacher says he has seen two surprising sights. Who does he see on horseback, and who does he see going on foot?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "He sees the roles reversed: “I have seen slaves on horseback, while princes go on foot like slaves” (v.7) — slaves ride, princes walk."
+        },
+        "verse": {
+          "en": "I have seen slaves on horseback, while princes go on foot like slaves."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d1-figures-listen",
+      "passage": "ECC-015",
+      "dimension": "D1",
+      "type": "pre_reading_quest",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "category": {
+        "en": "Figures in the passage"
+      },
+      "text": {
+        "en": "As the passage is read, listen for every kind of person or role it names."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The passage names the perfumer (v.1), the wise man and the fool (vv.2-3), the ruler (v.4), the rich (v.6), slaves and princes (v.7), and the charmer (v.11). It uses roles, not personal names."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d1-high-low-motions",
+      "passage": "ECC-015",
+      "dimension": "D1",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Have a grown-up read verse 7 aloud. Reach your hands up high when you hear “horseback,” and crouch down low when you hear “on foot.”"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Verse 7 reads, “I have seen slaves on horseback, while princes go on foot like slaves.” The child should reach high at “horseback” and crouch low at “on foot,” picturing the surprising reversal."
+        },
+        "verse": {
+          "en": "I have seen slaves on horseback, while princes go on foot like slaves."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d3-under-the-sun",
+      "passage": "ECC-015",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In verse 5 the Preacher names “an evil I have seen under the sun.” What does the recurring phrase “under the sun” point to here?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "“Under the sun” is Ecclesiastes’ standing phrase for life and affairs in this present, earthly world — the ordinary run of things a person observes below heaven. Here it marks the reversal of vv.6-7 as something seen in this world’s order, not a verdict on God’s."
+        },
+        "verse": {
+          "en": "There is an evil I have seen under the sun— an error that proceeds from the ruler:"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d3-right-left-hand",
+      "passage": "ECC-015",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 2 says “A wise man’s heart inclines to the right, but the heart of a fool to the left.” What does the right-hand image say about the wise man?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The right hand is the ready, skilled, dexterous hand; so the wise man’s heart is prompt and capable in what is right, while the fool’s (the left) is inept and always fumbling for its bearings. The image contrasts skillful readiness with fumbling."
+        },
+        "verse": {
+          "en": "A wise man’s heart inclines to the right, but the heart of a fool to the left."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d3-folly-wisdom-words",
+      "passage": "ECC-015",
+      "dimension": "D3",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "category": {
+        "en": "Key words"
+      },
+      "text": {
+        "en": "As the passage is read, listen for the words “folly” and “wisdom” (and “fool” and “wise”). Raise a finger each time you hear one."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "“Wisdom” appears in v.1 (“wisdom and honor”) and “wise” in v.2 (“a wise man’s heart”). “Folly” appears in v.1 (“a little folly”) and v.6 (“Folly is appointed to great heights”), and “fool” in vv.2-3. The two ideas are set against each other throughout."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d4-mv-v1",
+      "passage": "ECC-015",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "As dead flies bring a stench to the perfumer’s oil, so a little folly outweighs wisdom and honor. (Ecclesiastes 10:1, BSB)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d4-mv-v4",
+      "passage": "ECC-015",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "If the ruler’s temper flares against you, do not abandon your post, for calmness lays great offenses to rest. (Ecclesiastes 10:4, BSB)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d4-skill-cue",
+      "passage": "ECC-015",
+      "dimension": "D4",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 10 ends with a short saying about the axe. Fill in the missing word — more strength must be exerted, but ____ produces success."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The missing word is “skill”: “more strength must be exerted, but skill produces success” (v.10)."
+        },
+        "verse": {
+          "en": "If the axe is dull and the blade unsharpened, more strength must be exerted, but skill produces success."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d4-narrate-passage",
+      "passage": "ECC-015",
+      "dimension": "D4",
+      "type": "narration_prompt",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Retell the whole passage in your own words, from the dead flies that spoil the perfume, through the counsel about the angry ruler and the world turned upside down, to the proverbs about the pit, the axe, and the snake."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A full retelling covers: a little folly ruins wisdom and honor like dead flies spoiling perfume (v.1); the wise heart is ready, the fool’s is not, and the fool exposes himself (vv.2-3); under an angry ruler, keep your post, for calmness settles offenses (v.4); an evil seen under the sun — folly set high while the worthy sit low, slaves riding and princes walking (vv.5-7); and proverbs where violent or careless work recoils on the doer (pit, wall, quarry, logs — vv.8-9), while skill beats brute strength (v.10) and timing matters with the snake (v.11)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d5-calm-ruler-pro2515",
+      "passage": "ECC-015",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 4 counsels calm before an angry ruler: “calmness lays great offenses to rest.” Proverbs 25:15 makes the same point another way. What does that proverb add about how a ruler is won over?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Proverbs 25:15 (named in the brief) teaches that “Through patience a ruler can be persuaded, and a gentle tongue can break a bone” — long forbearing and soft speech, not force, prevail with those in power, just as Ecclesiastes 10:4 says calmness rather than abandoning one’s post settles great offenses."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d5-pit-pro2627",
+      "passage": "ECC-015",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 8 says, “He who digs a pit may fall into it.” Which proverb in the book of Proverbs states almost the same thing?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Proverbs 26:27 (named in the brief): “He who digs a pit will fall into it, and he who rolls a stone will have it roll back on him.” Both say that harm plotted for others recoils on the one who plots it."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d5-skill-jas15",
+      "passage": "ECC-015",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 10 says “skill produces success” — wisdom that directs is better than brute strength. James 1:5 tells the believer where such directing wisdom is found. What does it say to do?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "James 1:5 (named in the brief) says that if anyone lacks wisdom, he should ask God, who gives generously to all without finding fault, and it will be given him. The prudence Ecclesiastes 10:10 commends is ultimately sought from God in prayer."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d6-upside-down-world",
+      "passage": "ECC-015",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "In verses 5-7 the Preacher sees folly set in high places while the worthy sit low. Write down one question you would want to ask him about what he saw."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Let learners frame their own questions; do not supply an answer. Good wonderings often circle why the Preacher calls this an “evil” and “error,” whether it lasts, or how one lives faithfully when things are out of order. Receive the question; you need not resolve it here."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d6-dead-flies-wonder",
+      "passage": "ECC-015",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 1 pictures dead flies spoiling sweet-smelling oil. What is one thing you wonder about when you hear that picture?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Invite the child’s own wondering without steering it. Children may ask why something so small can spoil something so good, or how flies got into the oil. Welcome the question rather than closing it with the “lesson.”"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d7-dead-flies-meaning",
+      "passage": "ECC-015",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 1 says “a little folly outweighs wisdom and honor,” likened to dead flies in the perfumer’s oil. Read the image to its point: what does the comparison teach about how folly relates to a good reputation?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The text first states the image (dead flies spoiling sweet oil) and then its referent: a small folly can ruin a large store of wisdom and honor, just as a few flies taint the whole perfume. The point is that reputation is disproportionately vulnerable — a little fault outweighs much good. Anchor discussion to what v.1 says before drawing the lesson."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d7-recoil-proverbs",
+      "passage": "ECC-015",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verses 8-9 list four workers: one digs a pit, one breaches a wall, one quarries stones, one splits logs. What do all four have in common in what happens to them, and what does that teach?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "In each case the action turns back on the doer: the digger may fall in, the wall-breacher may be bitten, the quarrier may be injured, the log-splitter endangers himself (vv.8-9). Read together, the images teach that violent or careless dealing carries its own risk and recoils on the one who does it. Anchor to the four stated outcomes before drawing the point."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d7-image-match",
+      "passage": "ECC-015",
+      "dimension": "D7",
+      "type": "activity",
+      "age_tier": "child",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "On paper, draw three pictures from the passage — dead flies in oil (v.1), a dull axe (v.10), and a snake (v.11). Next to each, write in one sentence what the Preacher is teaching with that picture."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Each emblem carries a point: dead flies in oil — a little folly spoils much good (v.1); the dull axe — skill beats brute strength, “skill produces success” (v.10); the snake — timing matters, charm it “before it is charmed” or there is no profit (v.11). Accept any sentence that reads the image to its stated point; the aim is image-to-meaning, not a single wording."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d8-stay-calm",
+      "passage": "ECC-015",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 4 counsels, when an authority’s “temper flares,” to “not abandon your post” but stay calm. Name one specific situation you expect this week where you could practice this, and what staying calm would look like there."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Look for a concrete, observable plan (a named setting — work, home, a hard conversation — and a describable action such as staying, lowering one’s voice, waiting to respond). Keep it to doable behavior; do not assess the person’s temperament or spiritual maturity."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d8-skilled-work-card",
+      "passage": "ECC-015",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 10 says a sharp, skillful way is better than pushing harder. On an index card, draw one job you can do this week the careful, skillful way instead of the rushing way."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Verse 10 commends skill over brute strength (“skill produces success”). Help the child pick a real, doable task (setting the table, tidying toys) and picture doing it carefully. Affirm the observable plan; do not turn it into a judgment about the child."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
+      }
+    },
+    {
+      "id": "ecc-15-d8-small-folly-habit",
+      "passage": "ECC-015",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "version": 1,
+      "text": {
+        "en": "Verse 1 warns that “a little folly outweighs wisdom and honor.” Name one small habit you could change this week so that it does not spoil good work you are known for."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Look for a specific, observable habit and a doable change (a named small action, e.g., checking work before sending, arriving on time). Keep the focus on the concrete behavior; do not draw conclusions about the learner’s character or standing."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "claude-delegated",
+        "delegated_by": "kyhhdm",
+        "delegation_date": "2026-07-19"
       }
     }
   ]
