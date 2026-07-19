@@ -267,3 +267,40 @@ def build_kit(bank, family):
         "roles": assign_roles(family),
         "selected_item_ids": selected,
     }
+
+
+def _normal_sessions(family):
+    return [s for s in family["sessions"] if s.get("kind", "normal") == "normal"]
+
+
+def _section_pericope_ids(section, order):
+    """Pericope ids in a section, in reading order (order = bank pericope ids)."""
+    i, j = order.index(section["first_pericope"]), order.index(section["last_pericope"])
+    return order[i:j + 1]
+
+
+def _section_of(sections, bank, pericope_id):
+    order = [p["id"] for p in bank["pericopes"]]
+    for section in sections:
+        if pericope_id in _section_pericope_ids(section, order):
+            return section
+    return None
+
+
+def arc_recap(sections, bank, family):
+    """'The story so far' within the current section: its title and the ordered
+    titles of its pericopes the family has already studied. Pure derived."""
+    passage = next_passage(bank, family)
+    section = _section_of(sections, bank, passage["id"])
+    if not section:
+        return None
+    order = [p["id"] for p in bank["pericopes"]]
+    title_by = {p["id"]: p["title"] for p in bank["pericopes"]}
+    section_ids = _section_pericope_ids(section, order)
+    studied = {s["passage"] for s in _normal_sessions(family)}
+    studied_ids = [pid for pid in section_ids if pid in studied]
+    return {
+        "section": section["title"],
+        "studied": [title_by[pid] for pid in studied_ids],
+        "position": f"{len(studied_ids)} of {len(section_ids)}",
+    }

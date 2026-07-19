@@ -191,5 +191,37 @@ class TestReadingSequence(unittest.TestCase):
                          fam["reading_sequence"].index("MAT-014") - 1)
 
 
+SECTIONS = [
+    {"id": "MAT-S1", "title": "Prologue: The Infancy",
+     "first_pericope": "MAT-001", "last_pericope": "MAT-006", "marker": None},
+    {"id": "MAT-S2", "title": "Book One: The Sermon on the Mount",
+     "first_pericope": "MAT-007", "last_pericope": "MAT-033", "marker": "MAT.7.28"},
+]
+
+
+class TestArcRecap(unittest.TestCase):
+    def test_recap_names_section_and_lists_studied_titles_in_order(self):
+        bank, family = load()
+        # Study the first two infancy pericopes; next_passage will be MAT-003.
+        family["reading_sequence"] = [p["id"] for p in bank["pericopes"]]
+        family["sessions"] = [
+            {"date": "d", "passage": "MAT-001", "evidence": []},
+            {"date": "d", "passage": "MAT-002", "evidence": []},
+        ]
+        recap = selector.arc_recap(SECTIONS, bank, family)
+        self.assertEqual(recap["section"], "Prologue: The Infancy")
+        self.assertEqual(recap["studied"],
+                         ["The Genealogy of Jesus", "The Birth of Jesus"])
+        self.assertEqual(recap["position"], "2 of 6")
+
+    def test_recap_before_any_study_names_section_only(self):
+        bank, family = load()
+        family["reading_sequence"] = [p["id"] for p in bank["pericopes"]]
+        family["sessions"] = []
+        recap = selector.arc_recap(SECTIONS, bank, family)
+        self.assertEqual(recap["section"], "Prologue: The Infancy")
+        self.assertEqual(recap["studied"], [])
+
+
 if __name__ == "__main__":
     unittest.main()
