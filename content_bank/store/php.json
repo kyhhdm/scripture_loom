@@ -1,0 +1,389 @@
+{
+  "book": "PHP",
+  "items": [
+    {
+      "id": "php1-d1-writers",
+      "passage": "PHP-001",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Who are the two people who wrote this letter?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Paul and Timothy (v1)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php1-d1-roles",
+      "passage": "PHP-001",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Besides “all the saints,” verse 1 names two groups of church leaders Paul greets by title. What are they?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Overseers and deacons (v1)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php1-d1-narration",
+      "passage": "PHP-001",
+      "dimension": "D7",
+      "type": "narration_prompt",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In your own words, retell verses 1-11: who is writing, who he is writing to, what he thanks God for, and what he prays."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Keep this open — the family checks the retelling against the text rather than grading it against a fixed script. Together, look back at verses 1-11 and see whether the retelling touched: who wrote and to whom (v1-2); what Paul thanks God for (v3-5); his confidence about v6; his affection for them (v7-8); and what he prays (v9-11). If something was missing, let the family re-read that part and add it — don't supply a model retelling."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php1-d3-partnership",
+      "passage": "PHP-001",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul thanks God for the Philippians’ “partnership in the gospel” (v5) and calls them “partners in grace” with him (v7). In your own words, what does it mean to be “partners” in the gospel?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Shared participation in the gospel — actively taking part in it together, not just approving of it from a distance — from the first day until now (v5). Ground the answer in that ongoing, shared involvement; don’t invite the learner to invent specific deeds the text doesn’t name."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php1-d3-goodwork",
+      "passage": "PHP-001",
+      "dimension": "D3",
+      "type": "activity",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Underline the phrase “good work” in verse 6 on your printed passage. Then, using verses 1-6, write one sentence saying who begins this work and what happens to it."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "He who began a good work in you (God) will carry it on to completion until the day of Christ Jesus (v6)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php1-pre-quest-partnership",
+      "passage": "PHP-001",
+      "dimension": "D3",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "As the passage is read aloud, listen for the word “partnership” or the phrase “partners in grace” — raise your hand each time you hear it."
+      },
+      "category": {
+        "en": "Listen for: partnership"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "“Partnership” appears in v5 (“partnership in the gospel”) and “partners in grace” in v7 — two occurrences."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php1-d4-verse6",
+      "passage": "PHP-001",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "“being confident of this, that He who began a good work in you will carry it on to completion until the day of Christ Jesus.” (Philippians 1:6)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php1-d4-verse2",
+      "passage": "PHP-001",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "“Grace and peace to you from God our Father and the Lord Jesus Christ.” (Philippians 1:2)"
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php1-d5-goodwork-213",
+      "passage": "PHP-001",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Philippians 1:6 says God who began a good work in you will carry it on to completion. Turn to Philippians 2:13 — how does that verse describe God’s part in that same ongoing work?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Philippians 2:13 (named cross-reference): “For it is God who works in you to will and to act on behalf of His good purpose.” It describes the same ongoing work named in 1:6 as God actively working in believers, both their willing and their doing."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php1-d6-wonder",
+      "passage": "PHP-001",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul prays that the Philippians’ love would “abound more and more in knowledge and depth of insight” (v9). What question would you want to ask Paul about what that kind of love looks like day to day?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Keep this open — the point is the learner forming their own question, not receiving a model answer. Let questions stand; do not resolve them on the spot."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php1-d7-argument",
+      "passage": "PHP-001",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "Trace Paul’s train of thought from verse 3 to verse 6: what does his thanksgiving in verses 3-5 lead him to become confident of in verse 6?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Guide toward the passage’s own logic: Paul’s joyful thanksgiving for their gospel partnership ‘from the first day until now’ (v3-5) becomes the ground for his confidence that the God who started that work will finish it (v6) — thanksgiving over what has happened feeds confidence about what will happen. Keep open to how learners phrase the link; don’t supply doctrine beyond what v3-6 states."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php1-d7-purpose",
+      "passage": "PHP-001",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "According to verses 9-10, why does Paul pray for the Philippians’ love to grow “in knowledge and depth of insight” rather than just to grow bigger?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Point toward v10: so that they ‘may be able to test and prove what is best.’ The passage frames love that grows in knowledge and insight as discerning, not merely warm feeling — keep open rather than supplying a finished doctrinal statement."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php1-d8-thanks-note",
+      "passage": "PHP-001",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "all",
+      "difficulty": 1,
+      "review_status": "published",
+      "text": {
+        "en": "Following Paul’s example in verses 3-4, write or draw one specific reason you thank God for someone in your family or church. Give them the paper today."
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Observable action only: did they write/draw one specific reason and hand it over? Do not evaluate sincerity, feeling, or spiritual depth — only whether the concrete step was taken."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    }
+  ]
+}
