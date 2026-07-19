@@ -316,6 +316,23 @@ class TestBuildKitIntegration(unittest.TestCase):
         kit = selector.build_kit(bank, family, SECTIONS)  # normal path, not a section boundary
         self.assertEqual(kit["passage"]["id"], "MAT-014")
 
+    def test_zoom_out_survives_section_scoped_memory_verse(self):
+        """Safety sweep: a section-scoped memory_verse is schema-legal (memory_verse
+        is not a section-only type). The zoom-out's memory_recall derivation pulls
+        every published memory_verse (no passage filter) and subscripted i["passage"],
+        which KeyErrors for a section-scoped one. It must be skipped, not crash."""
+        bank, family = load()
+        bank = {**bank, "items": bank["items"] + [
+            {"id": "sv", "section": "MAT-S1", "type": "memory_verse",
+             "dimension": "D4", "age_tier": "all", "difficulty": 1,
+             "review_status": "published", "body": "x"}]}
+        order = [p["id"] for p in bank["pericopes"]]
+        family["reading_sequence"] = order
+        family["sessions"] = [{"date": "d", "passage": pid, "evidence": []}
+                              for pid in order[:6]]  # completed MAT-S1
+        kit = selector.build_zoom_out_kit(bank, family, SECTIONS, SECTIONS[0])  # must not raise
+        self.assertNotIn("sv", [i["id"] for i in kit["memory_recall"]])
+
 
 class TestZoomOutKit(unittest.TestCase):
     def test_zoom_out_kit_contents(self):
