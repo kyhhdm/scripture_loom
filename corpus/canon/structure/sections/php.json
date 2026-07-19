@@ -2,8 +2,8 @@
  "book": "PHP",
  "sections": [
   {"id": "PHP-S1", "title_en": "Opening: Greeting and Thanksgiving", "title_zh": "", "first_pericope": "PHP-001", "last_pericope": "PHP-001", "marker": null},
-  {"id": "PHP-S2", "title_en": "Paul's Circumstances and the Call to Worthy, Humble Unity", "title_zh": "", "first_pericope": "PHP-002", "last_pericope": "PHP-006", "marker": null},
-  {"id": "PHP-S3", "title_en": "Warning Against Confidence in the Flesh, Pressing Toward the Goal", "title_zh": "", "first_pericope": "PHP-007", "last_pericope": "PHP-008", "marker": null},
+  {"id": "PHP-S2", "title_en": "The Gospel Life: Paul's Circumstances and the Call to Humble Unity", "title_zh": "", "first_pericope": "PHP-002", "last_pericope": "PHP-006", "marker": null},
+  {"id": "PHP-S3", "title_en": "Righteousness in Christ: A Warning Against the Flesh and the Upward Call", "title_zh": "", "first_pericope": "PHP-007", "last_pericope": "PHP-008", "marker": null},
   {"id": "PHP-S4", "title_en": "Closing: Final Exhortations, Joy, and Provision", "title_zh": "", "first_pericope": "PHP-009", "last_pericope": "PHP-010", "marker": null}
  ]
 }
