@@ -8991,6 +8991,2156 @@
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1"
       }
+    },
+    {
+      "id": "ecc-16-d1-two-kinds-of-land",
+      "passage": "ECC-016",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verses 16 and 17 describe two kinds of land. What sort of king brings woe on a land, and what sort of king brings blessing?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Woe comes to the land whose king is “a youth” and whose princes “feast in the morning” (v.16); blessing comes to the land whose king is “a son of nobles” and whose princes “feast at the proper time— for strength and not for drunkenness” (v.17). A childish, self-indulgent ruler brings woe; a noble, self-controlled one brings blessing."
+        },
+        "verse": {
+          "en": "Woe to you, O land whose king is a youth, and whose princes feast in the morning."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d1-roles-listen",
+      "passage": "ECC-016",
+      "dimension": "D1",
+      "type": "pre_reading_quest",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "category": {
+        "en": "People and roles"
+      },
+      "text": {
+        "en": "As the passage is read, listen for every kind of person or role it names."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The passage names the wise man (v.12), the fool (vv.12-15), the king (vv.16-17, 20), the princes (vv.16-17), and the rich (v.20). It speaks in roles, not personal names."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d1-two-kings-motions",
+      "passage": "ECC-016",
+      "dimension": "D1",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Have a grown-up read verses 16 and 17 aloud. Give a thumbs-down for the land that hears “Woe,” and a thumbs-up for the land that hears “Blessed.”"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Verse 16 begins “Woe to you, O land” (the childish king) and verse 17 begins “Blessed are you, O land” (the noble king). The child should point thumbs-down at “Woe” and thumbs-up at “Blessed,” hearing the two lands set against each other."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d2-fool-talk-begin-end",
+      "passage": "ECC-016",
+      "dimension": "D2",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 13 traces the fool's talk from its start to its finish. What does his talk begin as, and what does it end as?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "“The beginning of his talk is folly, and the end of his speech is evil madness” (v.13): it starts as folly and ends as evil madness — the fool's speech grows worse as it goes on."
+        },
+        "verse": {
+          "en": "The beginning of his talk is folly, and the end of his speech is evil madness."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d3-gracious",
+      "passage": "ECC-016",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 12 says “The words of a wise man's mouth are gracious.” What does “gracious” mean about the wise man's words here?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "“Gracious” words are words that manifest and minister grace — they do good to those who hear them, winning and helping rather than harming. This is set against the fool: “the lips of a fool consume him” (v.12) — the wise man's speech benefits others, the fool's destroys himself."
+        },
+        "verse": {
+          "en": "The words of a wise man’s mouth are gracious, but the lips of a fool consume him."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d3-king-is-a-youth",
+      "passage": "ECC-016",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 16 says, “Woe to you, O land whose king is a youth.” Does calling the king “a youth” mean only that he is young in years? What does it point to here?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The word points to being childish in understanding rather than merely young in age — a ruler who lacks maturity and self-command, as the next line shows (“whose princes feast in the morning,” v.16). The contrast in v.17 is not an older king but a noble, disciplined one; so the fault named is childishness of character, not youth itself."
+        },
+        "verse": {
+          "en": "Woe to you, O land whose king is a youth, and whose princes feast in the morning."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d3-money-answers-everything",
+      "passage": "ECC-016",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 19 ends, “but money is the answer for everything.” In what sense does money “answer for everything” in this verse about feasting and wine?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "In this earthly frame money is the instrument of commerce that meets every occasion of present life — it pays for the feast and the wine just mentioned (v.19), so in the affairs of “this life” it seems to answer everything. Read in the book's larger vein it is an observation about money's reach in the world “under the sun,” not a claim that money answers the deeper needs of the soul."
+        },
+        "verse": {
+          "en": "A feast is prepared for laughter, and wine makes life merry, but money is the answer for everything."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d3-wise-fool-listen",
+      "passage": "ECC-016",
+      "dimension": "D3",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "category": {
+        "en": "Key words"
+      },
+      "text": {
+        "en": "As the passage is read, listen for the words “wise” and “fool.” Raise a finger each time you hear one."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "“Wise” appears in v.12 (“a wise man's mouth”), and “fool” appears in v.12 (“the lips of a fool”), v.14 (“the fool multiplies words”), and v.15 (“the toil of a fool”). The passage opens by setting the wise man against the fool."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d4-mv-v12",
+      "passage": "ECC-016",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "The words of a wise man’s mouth are gracious, but the lips of a fool consume him. (Ecclesiastes 10:12, BSB)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d4-mv-v20",
+      "passage": "ECC-016",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Do not curse the king even in your thoughts, or curse the rich even in your bedroom, for a bird of the air may carry your words, and a winged creature may report your speech. (Ecclesiastes 10:20, BSB)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d4-roof-fill-in",
+      "passage": "ECC-016",
+      "dimension": "D4",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 18 gives a short saying about a lazy house. Fill in the missing words — through laziness the roof ____, and in the hands of the idle, the house ____."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The missing words are “caves in” and “leaks”: “Through laziness the roof caves in, and in the hands of the idle, the house leaks” (v.18)."
+        },
+        "verse": {
+          "en": "Through laziness the roof caves in, and in the hands of the idle, the house leaks."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d4-narrate-passage",
+      "passage": "ECC-016",
+      "dimension": "D4",
+      "type": "narration_prompt",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Retell the whole passage in your own words, from the wise man's gracious words and the fool who wears himself out, through the land under a childish king and the land under a noble one, to the leaking house, the feast, and the warning about cursing the king."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A full retelling covers: the wise man's words are gracious but the fool's lips consume him, his talk running from folly to evil madness even as he multiplies words (vv.12-14); the fool's toil wearies him, not even knowing the way to the city (v.15); woe to a land under a childish king with princes feasting in the morning, but blessing to a land under a noble king with princes who feast at the proper time for strength, not drunkenness (vv.16-17); laziness lets the roof cave in and the house leak (v.18); a feast and wine make life merry and money answers everything (v.19); and even a private curse against the king or the rich may be carried by a bird (v.20)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d5-gracious-col46",
+      "passage": "ECC-016",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 12 says a wise man's words are “gracious.” Colossians 4:6 gives the same counsel to the believer. What does Paul there tell us our speech should be?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Colossians 4:6 (named in the brief) says, “Let your speech always be gracious, seasoned with salt, so that you may know how to answer everyone.” It commends the very grace of speech Ecclesiastes 10:12 praises in the wise man — words that do good to those who hear."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d5-bird-luk12",
+      "passage": "ECC-016",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 20 warns that a bird may carry even words spoken in secret. Luke 12:2-3 makes a similar point about hidden words. What does Jesus say there about what is spoken in the dark?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Luke 12:2-3 (named in the brief) says that nothing concealed will fail to be disclosed, and: “What you have spoken in the dark will be heard in the daylight, and what you have whispered in the inner rooms will be proclaimed from the housetops.” Both texts teach that secret speech does not stay secret; Ecclesiastes counsels earthly discretion, and Jesus presses it further to the final bringing-to-light."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d5-curse-king-exo22",
+      "passage": "ECC-016",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 20 says, “Do not curse the king even in your thoughts.” Exodus 22:28 states this as a command in the Law. How does that verse put it?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Exodus 22:28 (named in the brief) commands, “You must not blaspheme God or curse the ruler of your people.” The prudential counsel of Ecclesiastes 10:20 rests on a standing command of the Law — the ruler of the people is not to be cursed."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d6-bird-words-wonder",
+      "passage": "ECC-016",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "In verse 20 a bird of the air may carry your words to the king. Write down one question you would want to ask about this warning."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Let learners frame their own questions; do not supply an answer. Wonderings often circle why the writer pictures a bird, whether it means our words are never truly private, or how this shapes what we say about people in power. Receive the question rather than closing it with the lesson."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d6-leaking-house-wonder",
+      "passage": "ECC-016",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 18 pictures a house where the roof caves in and the ceiling leaks because no one takes care of it. What is one thing you wonder about when you hear that picture?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Invite the child's own wondering without steering it. Children may ask why the roof falls in, how long it took, or who was supposed to fix it. Welcome the question rather than jumping straight to the point about laziness."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d7-wise-fool-words-meaning",
+      "passage": "ECC-016",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 12 says the wise man's words are “gracious, but the lips of a fool consume him.” Read the contrast to its point: what does it teach about where a person's own speech leads?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The verse first states the contrast — the wise man's words benefit those who hear (gracious), while “the lips of a fool consume him.” Read to its point (with vv.13-14), it teaches that speech turns back on the speaker: wise words win and help others, but foolish talk destroys the one who pours it out, running from folly to “evil madness.” Anchor the discussion to what v.12 states before drawing the lesson."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d7-laziness-house-meaning",
+      "passage": "ECC-016",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 18 says, “Through laziness the roof caves in, and in the hands of the idle, the house leaks.” What does this picture of a decaying house teach about neglect?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The image is concrete: where no one keeps up the work, the roof sinks and the house lets in the rain (v.18). Read to its point, it teaches that laziness and neglect do their damage quietly and by degrees — not through one disaster but through undone small duties, until the whole structure fails. Anchor to the stated image before drawing the point."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d7-image-draw",
+      "passage": "ECC-016",
+      "dimension": "D7",
+      "type": "activity",
+      "age_tier": "child",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "On paper, draw two pictures from the passage — the leaking house (v.18) and the bird that carries your words (v.20). Next to each, write in one sentence what the Preacher is teaching with that picture."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Each picture carries a point: the leaking house (v.18) — neglect and laziness let things fall apart little by little; the bird carrying your words (v.20) — even secret words can be found out, so speak with care. Accept any sentence that reads the image to its stated point; the aim is image-to-meaning, not one required wording."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d8-gracious-words",
+      "passage": "ECC-016",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 12 commends the wise man whose words are “gracious.” Name one specific conversation you expect this week where you could speak more graciously, and what that would sound like there."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Look for a concrete, observable plan — a named setting (a hard talk at work, a moment with a child) and a describable action (a gentler word, listening before answering, dropping a cutting remark). Keep it to doable behavior; do not assess the person's character or spiritual state."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d8-discretion-week",
+      "passage": "ECC-016",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 20 counsels care even with words spoken in private. Name one specific place this week — a group chat, a lunch table, a car ride — where you could practice this, and what practicing it would look like."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Look for a concrete, observable plan: a named setting and a describable action (not passing on a rumor, not writing something you would not say aloud, choosing silence). Keep the focus on the doable behavior; do not draw conclusions about the learner's character."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-16-d8-diligence-card",
+      "passage": "ECC-016",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 18 says a house falls apart when no one keeps it up. On an index card, draw one job you can do this week to help keep your home in good order instead of leaving it undone."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Verse 18 pictures neglect letting a house decay. Help the child pick a real, doable task (putting toys away, wiping a spill, making the bed) and picture doing it. Affirm the observable plan; do not turn it into a judgment about whether the child is lazy."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d1-young-man-addressed",
+      "passage": "ECC-017",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "In verse 9 the Preacher speaks directly to one kind of person. Who is told to rejoice and be glad?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "He addresses the young man: “Rejoice, O young man, while you are young, and let your heart be glad in the days of your youth” (v.9). The one spoken to is the young person, in the days of youth."
+        },
+        "verse": {
+          "en": "Rejoice, O young man, while you are young, and let your heart be glad in the days of your youth."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d1-places-listen",
+      "passage": "ECC-017",
+      "dimension": "D1",
+      "type": "pre_reading_quest",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "category": {
+        "en": "Places and directions"
+      },
+      "text": {
+        "en": "As the passage is read, listen for every place or direction it names."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The passage names the waters (v.1), the land (v.2), the earth with the directions south and north (v.3), and a mother’s womb (v.5). It works with settings and directions rather than named cities."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d1-directions-motion",
+      "passage": "ECC-017",
+      "dimension": "D1",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Have a grown-up read verse 3 aloud. Point one way when you hear “south,” and the other way when you hear “north.”"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Verse 3 says, “whether a tree falls to the south or to the north, in the place where it falls, there it will lie.” The child points one direction at “south” and the other at “north,” picturing the two ways the tree could fall."
+        },
+        "verse": {
+          "en": "whether a tree falls to the south or to the north, in the place where it falls, there it will lie."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d2-watcher-outcome",
+      "passage": "ECC-017",
+      "dimension": "D2",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "According to verse 4, what happens to the person who keeps watching the wind and observing the clouds instead of getting to work?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "“He who watches the wind will fail to sow, and he who observes the clouds will fail to reap” (v.4). Waiting for perfect conditions leads to never sowing and so never reaping — the watching causes the failure."
+        },
+        "verse": {
+          "en": "He who watches the wind will fail to sow, and he who observes the clouds will fail to reap."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d3-cast-bread",
+      "passage": "ECC-017",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 1 opens, “Cast your bread upon the waters, for after many days you will find it again.” Read with verse 2, what kind of action is this image urging?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The image urges liberal, open-handed giving — bread sown out like seed onto the waters, released without an immediate return. Verse 2 spells it out: “Divide your portion among seven, or even eight,” giving widely because “you do not know what disaster may befall the land.” The sense here is generous, persistent charity trusted to yield a delayed but sure return."
+        },
+        "verse": {
+          "en": "Cast your bread upon the waters, for after many days you will find it again."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d3-days-of-darkness",
+      "passage": "ECC-017",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 8 tells the one who lives many years to “remember the days of darkness, for they will be many.” Set against the sweet light of verse 7, what do “the days of darkness” point to?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Verse 7 calls light sweet; against it, “the days of darkness” are the coming days of death and the grave, and the troubles that shadow a long life. The Preacher says they “will be many,” so even in years of rejoicing one should soberly remember them."
+        },
+        "verse": {
+          "en": "But let him remember the days of darkness, for they will be many."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d3-work-of-god",
+      "passage": "ECC-017",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "In verse 5 the Preacher says you cannot understand “the work of God, the Maker of all things.” From the two examples given in the same verse, what does “the work of God” mean here?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Verse 5 pairs it with “the path of the wind” and “how the bones are formed in a mother’s womb” — hidden, untraceable workings. So “the work of God, the Maker of all things” means His unsearchable providence and creating work, as beyond our tracing as the wind’s course or the forming of a child."
+        },
+        "verse": {
+          "en": "As you do not know the path of the wind, or how the bones are formed in a mother’s womb, so you cannot understand the work of God, the Maker of all things."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d3-you-do-not-know-listen",
+      "passage": "ECC-017",
+      "dimension": "D3",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "category": {
+        "en": "Repeated phrase"
+      },
+      "text": {
+        "en": "As the passage is read, listen for the words “you do not know.” Raise a finger each time you hear them."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The phrase “you do not know” recurs: v.2 (“you do not know what disaster may befall the land”), v.5 (“As you do not know the path of the wind”), and v.6 (“you do not know which will succeed”). The repeated phrase keeps sounding the passage’s theme of human ignorance before God."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d4-mv-v1",
+      "passage": "ECC-017",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Cast your bread upon the waters, for after many days you will find it again. (Ecclesiastes 11:1, BSB)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d4-mv-v6",
+      "passage": "ECC-017",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Sow your seed in the morning, and do not rest your hands in the evening, for you do not know which will succeed, whether this or that, or if both will equally prosper. (Ecclesiastes 11:6, BSB)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d4-mv-v9",
+      "passage": "ECC-017",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Rejoice, O young man, while you are young, and let your heart be glad in the days of your youth. Walk in the ways of your heart and in the sight of your eyes, but know that for all these things God will bring you to judgment. (Ecclesiastes 11:9, BSB)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d4-recall-morning-evening",
+      "passage": "ECC-017",
+      "dimension": "D4",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Fill in the two missing words from verse 6: Sow your seed in the ____, and do not rest your hands in the ____."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The missing words are “morning” and “evening”: “Sow your seed in the morning, and do not rest your hands in the evening” (v.6) — keep working from early to late."
+        },
+        "verse": {
+          "en": "Sow your seed in the morning, and do not rest your hands in the evening, for you do not know which will succeed, whether this or that, or if both will equally prosper."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d4-narrate-passage",
+      "passage": "ECC-017",
+      "dimension": "D4",
+      "type": "narration_prompt",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Retell the whole passage in your own words — from casting bread on the waters and dividing your portion, through the wind and clouds and the work of God no one can trace, to sowing morning and evening, and the call to the young to rejoice yet remember that God will bring them to judgment."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A full retelling covers: give generously and widely, for you cannot know what disaster may come (vv.1-2); clouds pour rain and a fallen tree lies where it falls (v.3); the one who only watches the wind and clouds never sows or reaps (v.4); as you cannot trace the wind or the forming of bones, so you cannot understand God’s work (v.5); so sow morning and evening, not knowing which will prosper (v.6); light is sweet, yet remember the many days of darkness (vv.7-8); and let the young rejoice, walking as they wish, but knowing God will bring them to judgment, for youth is fleeting (vv.9-10)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d5-sow-2co96",
+      "passage": "ECC-017",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 6 urges diligent, generous sowing when the outcome is unknown. Second Corinthians 9:6 uses the same sowing-and-reaping picture. What does it add about how the measure of one’s sowing relates to the harvest?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "2 Corinthians 9:6 (named in the brief) says, “Whoever sows sparingly will also reap sparingly, and whoever sows generously will also reap generously.” It confirms Ecclesiastes 11’s call to sow liberally: the openhanded sower, not the sparing one, receives the fuller harvest from God."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d5-judgment-ecc1214",
+      "passage": "ECC-017",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 9 warns the young man that “God will bring you to judgment.” Later, Ecclesiastes 12:14 says the same thing more fully. What does that verse add about the reach of God’s judgment?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Ecclesiastes 12:14 (named in the brief) says, “For God will bring every deed into judgment, along with every hidden thing, whether good or evil.” It widens 11:9: not only the young man’s choices but every deed, even hidden ones, good or evil, will come before God."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d5-increase-mrk426",
+      "passage": "ECC-017",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 6 says to sow though “you do not know which will succeed.” In Jesus’ parable in Mark 4:26-29, how does the sower relate to the growth of what he plants?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Mark 4:26-29 (named in the brief) pictures a man who “scatters seed on the ground,” then sleeps and rises while “the seed sprouts and grows, though he knows not how.” Like Ecclesiastes 11:6, the sower does his part not knowing the outcome; the increase is God’s to give, hidden from the one who plants."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d6-work-of-god-wonder",
+      "passage": "ECC-017",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 5 says we cannot understand “the work of God, the Maker of all things.” Write down one question this raises for you about God and the things we cannot know."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Let learners frame their own questions; do not supply an answer. Wonderings may circle why God leaves so much hidden, how we can act when we cannot see the outcome, or what it means to trust a Maker we cannot trace. Receive the question; you need not resolve it here."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d6-bones-womb-wonder",
+      "passage": "ECC-017",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 5 says no one knows “how the bones are formed in a mother’s womb.” What is one thing you wonder about when you hear that?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Invite the child’s own wondering without steering it. Children may ask how a baby grows, or how God makes something no one can see. Welcome the question rather than closing it with the lesson; the verse’s point is simply that this is God’s hidden work."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d7-watcher-paralysis",
+      "passage": "ECC-017",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 4 says the one who watches the wind “will fail to sow,” and the one who observes the clouds “will fail to reap.” Read the farming image to its point: what does it teach about waiting for perfect conditions before acting?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The image is the farmer who keeps studying the weather instead of sowing and reaping. Its point: endless caution — insisting on perfect, certain conditions — ends in never acting at all, and so in no harvest. Set beside v.6, it presses diligent, timely work despite uncertainty. Anchor to what v.4 states before drawing the lesson."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d7-cast-bread-principle",
+      "passage": "ECC-017",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verses 1-2 tell you to cast bread on the waters and divide your portion “among seven, or even eight,” because “you do not know what disaster may befall the land.” What life-principle do these pictures teach about how to act when the future is uncertain?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The bread cast on waters and the portion divided many ways are pictures of generous, widely-spread action. Because the future is unknown (v.2), the counsel is to give and invest liberally and in many directions rather than hoard or wait. The principle: uncertainty is a reason for open-handed, diligent generosity now, trusting the return to God. Anchor to what vv.1-2 say before drawing it out."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d7-rejoice-judgment",
+      "passage": "ECC-017",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 9 first says, “Rejoice, O young man,” and then, in the same verse, “but know that for all these things God will bring you to judgment.” Why does the Preacher join these two together, and what does the pairing teach?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The verse holds glad enjoyment of youth and accountability to God together in one breath. The call to rejoice is real, but it is bounded: because God will bring every choice to judgment, the young are to enjoy life soberly and responsibly, not as license. The pairing teaches joy lived under the awareness of judgment. Keep discussion anchored to the two clauses of v.9."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d7-sower-draw",
+      "passage": "ECC-017",
+      "dimension": "D7",
+      "type": "activity",
+      "age_tier": "child",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "On paper, draw a farmer sowing seed in the morning and still working in the evening (verse 6). Underneath, write in one sentence what the picture teaches about how we should work."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Verse 6 says, “Sow your seed in the morning, and do not rest your hands in the evening.” The picture teaches steady, diligent work from early to late even though we cannot know which effort will succeed. Accept any sentence that reads the image to that point about diligence; the aim is image-to-meaning, not one exact wording."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d8-sow-diligence",
+      "passage": "ECC-017",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 6 urges, “Sow your seed in the morning, and do not rest your hands in the evening.” Name one specific task this week where you tend to hold back until conditions feel certain, and describe the diligent step you will take instead."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Look for a concrete, observable plan — a named task (an errand, a piece of work, a conversation) and a describable action taken now rather than deferred. Keep it to doable behavior; do not assess the person’s diligence or spiritual state, only the specific step they name."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d8-cast-bread-give",
+      "passage": "ECC-017",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 1 says to “cast your bread upon the waters” — to give generously without knowing the return. Name one specific way you could give or share this week, and who it would be for."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Look for a specific, observable act of giving — a named recipient and a describable action (sharing food, giving time, helping a neighbor). Keep the focus on the concrete deed the learner plans; do not evaluate their generosity or character."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-17-d8-give-card",
+      "passage": "ECC-017",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 1 tells us to give freely, like casting bread on the water. On an index card, draw one thing you could share with someone this week."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Verse 1 pictures open-handed giving (“Cast your bread upon the waters”). Help the child pick one real, doable way to share (a toy, a snack, helping someone). Affirm the concrete plan they draw; do not turn it into a judgment about the child."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d1-remember-whom",
+      "passage": "ECC-018",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "In verse 1 the Teacher tells you to remember Someone in the days of your youth. Who is it?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "It is our Creator — the God who made us. Verse 1 opens, “Remember your Creator in the days of your youth.”"
+        },
+        "verse": {
+          "en": "Remember your Creator in the days of your youth, before the days of adversity come and the years approach of which you will say, “I find no pleasure in them,”"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d1-single-shepherd",
+      "passage": "ECC-018",
+      "dimension": "D1",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 11 says the words of the wise are like nails driven by whom?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "They are driven “by a single Shepherd” (v.11) — one divine source stands behind the true words of the wise. The verse reads, “The words of the wise are like goads, and the anthologies of the masters are like firmly embedded nails driven by a single Shepherd.”"
+        },
+        "verse": {
+          "en": "The words of the wise are like goads, and the anthologies of the masters are like firmly embedded nails driven by a single Shepherd."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d1-who-named-listen",
+      "passage": "ECC-018",
+      "dimension": "D1",
+      "type": "pre_reading_quest",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "category": {
+        "en": "Who is named"
+      },
+      "text": {
+        "en": "As the passage is read, listen for each person or role it names — the One to be remembered, the one who speaks, the one he addresses, and the one behind the words of the wise."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The passage names the Creator (v.1), God (vv.7, 13, 14), the Teacher who speaks (vv.8-10), “my son” whom he addresses (v.12), and “a single Shepherd” behind the words of the wise (v.11). It uses roles, not personal names."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d2-dust-and-spirit",
+      "passage": "ECC-018",
+      "dimension": "D2",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "According to verse 7, at death two things return to where they came from. What returns to the ground, and what returns to God?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Verse 7 says the dust returns to the ground, and the spirit returns to God: “before the dust returns to the ground from which it came and the spirit returns to God who gave it.” The body goes back to the earth; the spirit goes back to the God who gave it."
+        },
+        "verse": {
+          "en": "before the dust returns to the ground from which it came and the spirit returns to God who gave it."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d2-remember-before",
+      "passage": "ECC-018",
+      "dimension": "D2",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 1 says to remember your Creator now, while you are young — and it keeps saying to do it \"before\" something comes. Does the Teacher say to remember God before, or after, the hard days arrive?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Before. Verse 1 says, “Remember your Creator in the days of your youth, before the days of adversity come.” The Teacher urges remembering God early, ahead of the failing days he goes on to describe (vv.2-7)."
+        },
+        "verse": {
+          "en": "Remember your Creator in the days of your youth, before the days of adversity come and the years approach of which you will say, “I find no pleasure in them,”"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d3-remember-sense",
+      "passage": "ECC-018",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "The command “Remember your Creator” frames the whole passage (vv.1, 6). Given how the passage uses it — paired with fearing God and keeping His commandments (v.13) — does “remember” mean merely to recall a fact, or something more? What more?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "More than recalling a fact. Set beside “Fear God and keep His commandments” (v.13), “remember” here means to give the Creator the honor and obedience owed the rightful Lord — to keep Him in mind so as to reverence and serve Him — and to do so early, in “the days of your youth” (v.1). It is a call to worship and duty, not just recollection."
+        },
+        "verse": {
+          "en": "Remember your Creator in the days of your youth, before the days of adversity come and the years approach of which you will say, “I find no pleasure in them,”"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d3-whole-duty",
+      "passage": "ECC-018",
+      "dimension": "D3",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 13 calls fearing God and keeping His commandments “the whole duty of man.” What does the word “whole” add — is this one duty among many, or the sum of them?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "It is the sum, not one item on a list. Verse 13 says, “Fear God and keep His commandments, because this is the whole duty of man.” “Whole” marks this as the entire, all-encompassing obligation a person has — the conclusion the Teacher reaches “when all has been heard.”"
+        },
+        "verse": {
+          "en": "When all has been heard, the conclusion of the matter is this: Fear God and keep His commandments, because this is the whole duty of man."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d3-key-words-listen",
+      "passage": "ECC-018",
+      "dimension": "D3",
+      "type": "pre_reading_quest",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "category": {
+        "en": "Key words"
+      },
+      "text": {
+        "en": "As the passage is read, listen for the word “remember” and the word “God.” Raise a finger each time you hear one."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "“Remember” appears in v.1 (“Remember your Creator”) and v.6 (“Remember Him”). “God” appears in v.7 (“the spirit returns to God”), v.13 (“Fear God”), and v.14 (“God will bring every deed into judgment”). These repeated words carry the passage's charge: remember and fear God."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d4-mv-v1",
+      "passage": "ECC-018",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "all",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Remember your Creator in the days of your youth, before the days of adversity come and the years approach of which you will say, “I find no pleasure in them,” (Ecclesiastes 12:1, BSB)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d4-mv-v13",
+      "passage": "ECC-018",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "When all has been heard, the conclusion of the matter is this: Fear God and keep His commandments, because this is the whole duty of man. (Ecclesiastes 12:13, BSB)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d4-mv-v13-14",
+      "passage": "ECC-018",
+      "dimension": "D4",
+      "type": "memory_verse",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "When all has been heard, the conclusion of the matter is this: Fear God and keep His commandments, because this is the whole duty of man. For God will bring every deed into judgment, along with every hidden thing, whether good or evil. (Ecclesiastes 12:13-14, BSB)"
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d4-conclusion-cue",
+      "passage": "ECC-018",
+      "dimension": "D4",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 13 gives the conclusion of the whole book in two commands. Fill in the missing words — ____ God and keep His ____."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The missing words are “Fear” and “commandments”: “Fear God and keep His commandments” (v.13)."
+        },
+        "verse": {
+          "en": "When all has been heard, the conclusion of the matter is this: Fear God and keep His commandments, because this is the whole duty of man."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d4-narrate-passage",
+      "passage": "ECC-018",
+      "dimension": "D4",
+      "type": "narration_prompt",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Retell the whole passage in your own words — from the call to remember your Creator while young, through the pictures of the failing body and death, to the Teacher's final conclusion to fear God and keep His commandments because God will judge every deed."
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "A full retelling covers: the charge to remember your Creator in youth, before the hard days come (v.1); figurative pictures of aging — darkened lights, trembling keepers, stooping strong men, faded sounds (vv.2-5); the turn to death — the snapped silver cord and shattered pitcher, the dust returning to the ground and the spirit to God (vv.6-7); the refrain that everything is futile (v.8); the Teacher's care to record true and delightful words, like goads and nails from a single Shepherd (vv.9-11); and the conclusion — fear God and keep His commandments, for God will bring every deed into judgment (vv.13-14)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d5-judgment-2co510",
+      "passage": "ECC-018",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 14 says “God will bring every deed into judgment.” In the New Testament, 2 Corinthians 5:10 says the same thing and names before whom this judgment happens. What does it add?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "2 Corinthians 5:10 (named in the brief) says, “For we must all appear before the judgment seat of Christ, that each one may receive his due for the things done in the body, whether good or bad.” It locates the judgment Ecclesiastes 12:14 promises before Christ's tribunal, echoing even the phrase “whether good or” bad/evil."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d5-fear-god-deu1012",
+      "passage": "ECC-018",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 13 sums up all duty as “Fear God and keep His commandments.” Deuteronomy 10:12 asks almost the same question of Israel. What does the LORD there ask of His people?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Deuteronomy 10:12 (named in the brief) asks Israel “to fear the LORD your God by walking in all His ways, to love Him, to serve the LORD your God with all your heart and with all your soul.” Like Ecclesiastes 12:13, it reduces true duty to fearing and obeying God."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d5-youth-lam327",
+      "passage": "ECC-018",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 1 urges remembering the Creator “in the days of your youth.” Lamentations 3:27 also commends something done young. What does it say is good for a man while he is young?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Lamentations 3:27 (named in the brief) says, “It is good for a man to bear the yoke while he is still young.” It agrees with Ecclesiastes 12:1 that youth is the right time to take up submission to God, not a season to postpone it."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d6-aging-images-wonder",
+      "passage": "ECC-018",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "child",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verses 3-5 paint strange pictures — trembling keepers, grinders that stop, a bird's song, an almond tree in blossom. What is one thing you wonder about when you hear these pictures?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Invite the child's own wondering without steering it. Children may ask what the pictures mean, why the tree blossoms white, or why the Teacher does not just say “growing old.” Welcome the question rather than closing it with the explanation; the interpretation items are where the images are unpacked."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d6-remember-young-wonder",
+      "passage": "ECC-018",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "The Teacher presses you to remember your Creator now, in youth, rather than later (vv.1, 6). Write down one question this urgency raises for you."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Let learners frame their own questions; do not supply the answer. Good wonderings often circle why youth in particular is named, what makes the later days harder for remembering, or what remembering God looks like day to day. Receive the question; you need not resolve it here."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d7-keepers-strong-men",
+      "passage": "ECC-018",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 3 says “the keepers of the house tremble and the strong men stoop,” and the grinders “cease because they are few.” Read the image to its referent: these are figures for one thing the whole section is describing — what is it?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The section (vv.2-5) is a figurative portrait of old age and the failing body: trembling hands and arms (“keepers of the house”), a bent frame (“strong men stoop”), and lost teeth (“those grinding cease because they are few”). Anchor discussion to what v.3 states as image before naming the referent — aging — which vv.6-7 then carry into death itself. The point is to read the poetry as figures, not literal scenes."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d7-silver-cord-death",
+      "passage": "ECC-018",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "In verse 6 the “silver cord is snapped,” the “golden bowl is crushed,” and the pitcher is “shattered at the spring.” Verse 7 states plainly what these broken things picture. What is it?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "They picture death — the body giving out and life ending. Verse 6's broken cord, bowl, pitcher, and wheel are figures of the dissolving body, and verse 7 says it plainly: “the dust returns to the ground from which it came and the spirit returns to God who gave it.” Anchor to what v.6 shows and v.7 states before drawing the meaning."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d7-draw-images",
+      "passage": "ECC-018",
+      "dimension": "D7",
+      "type": "activity",
+      "age_tier": "child",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "On paper, draw two pictures from the passage — the almond tree in blossom (v.5) and the broken pitcher at the spring (v.6). Next to each, write in one sentence what the Teacher is teaching with that picture."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Each image points beyond itself: the white almond blossom stands for the whitening hair of old age (v.5), and the broken pitcher at the spring stands for the body failing at death (v.6, made plain in v.7). Accept any sentence that reads the picture to its stated point — aging and death — rather than a single wording; the aim is image-to-meaning."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d8-keep-one-command",
+      "passage": "ECC-018",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 13 calls you to “keep His commandments.” Name one specific commandment of God you will act on this week, and what obeying it will concretely look like for you."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Look for a concrete, observable plan — a named command and a describable action in a named setting (home, work, a relationship). Keep it to doable behavior; do not assess the person's faith or spiritual maturity, only the action they name."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d8-remember-this-week",
+      "passage": "ECC-018",
+      "dimension": "D8",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 1 says to “Remember your Creator in the days of your youth.” Name one concrete thing you can do this week that would put remembering God into a real, doable action."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Look for a specific, observable action tied to a time or place (e.g., reading a set portion of Scripture each morning, praying before a named daily task, joining a gathering). Affirm the doable plan; keep the focus on the behavior, not a verdict about the learner's heart or standing."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-18-d8-remember-card",
+      "passage": "ECC-018",
+      "dimension": "D8",
+      "type": "activity",
+      "age_tier": "pre_reader",
+      "difficulty": 1,
+      "review_status": "reviewed",
+      "version": 1,
+      "text": {
+        "en": "Verse 1 says to remember your Creator. On an index card, draw one thing you can do this week to help you remember God — like folding your hands to pray or opening a Bible."
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Verse 1 charges us to remember our Creator. Help the child pick one real, doable act (praying at bedtime, singing a Bible song, looking at a Bible picture) and draw it. Affirm the observable plan; do not turn it into a judgment about the child."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
     }
   ]
 }
