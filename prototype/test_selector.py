@@ -286,6 +286,23 @@ class TestBuildKitIntegration(unittest.TestCase):
         self.assertEqual(kit["passage"]["id"], "MAT-014")
         self.assertNotIn("arc_recap", kit)
 
+    def test_normal_kit_after_recorded_zoom_out_session_does_not_crash(self):
+        """Regression: after a zoom_out session is recorded, the next normal
+        build_kit call must not crash deriving spaced-review candidates from
+        session history (select_review_questions previously dereferenced
+        s["passage"] on every session, including zoom_out sessions)."""
+        bank, family = load()
+        order = [p["id"] for p in bank["pericopes"]]
+        family["reading_sequence"] = order
+        family["sessions"] = [{"date": "d", "passage": pid, "evidence": []}
+                              for pid in order[:6]]  # studied all of MAT-S1
+        family["sessions"].append(
+            {"date": "d", "kind": "zoom_out", "section": "MAT-S1", "evidence": []})
+        kit = selector.build_kit(bank, family, SECTIONS)
+        self.assertEqual(kit["passage"]["id"], "MAT-007")
+        self.assertNotEqual(kit.get("kind"), "zoom_out")
+        self.assertEqual(kit["arc_recap"]["section"], "Book One: The Sermon on the Mount")
+
 
 class TestZoomOutKit(unittest.TestCase):
     def test_zoom_out_kit_contents(self):

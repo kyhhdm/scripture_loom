@@ -91,7 +91,7 @@ def weak_dimensions(family):
 
 def select_review_questions(bank, family, limit=3):
     """Spaced review from studied passages, weak dimensions first."""
-    studied = [s["passage"] for s in family["sessions"]]
+    studied = [s["passage"] for s in _normal_sessions(family)]
     weak = weak_dimensions(family)
     candidates = [i for p in studied for i in _published(bank, passage=p, type_="question")]
 
