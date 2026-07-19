@@ -303,6 +303,19 @@ class TestBuildKitIntegration(unittest.TestCase):
         self.assertNotEqual(kit.get("kind"), "zoom_out")
         self.assertEqual(kit["arc_recap"]["section"], "Book One: The Sermon on the Mount")
 
+    def test_normal_kit_coexists_with_published_section_item(self):
+        """Regression: a published section-scoped item (e.g. a throughline)
+        sitting in the bank must not crash the normal (passage) kit path.
+        _published() subscripted item["passage"], which KeyErrors for
+        section-scoped items that only have "section"."""
+        bank, family = load()  # family is mid-book; next passage is MAT-014
+        bank = {**bank, "items": bank["items"] + [
+            {"id": "tl", "section": "MAT-S1", "type": "throughline",
+             "dimension": "D7", "age_tier": "all", "difficulty": 2,
+             "review_status": "published", "body": "x"}]}
+        kit = selector.build_kit(bank, family, SECTIONS)  # normal path, not a section boundary
+        self.assertEqual(kit["passage"]["id"], "MAT-014")
+
 
 class TestZoomOutKit(unittest.TestCase):
     def test_zoom_out_kit_contents(self):

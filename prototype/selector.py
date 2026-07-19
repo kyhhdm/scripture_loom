@@ -41,7 +41,7 @@ def _published(bank, passage=None, type_=None):
     for item in bank["items"]:
         if item["review_status"] != "published":
             continue
-        if passage and item["passage"] != passage:
+        if passage and item.get("passage") != passage:
             continue
         if type_ and item["type"] != type_:
             continue
