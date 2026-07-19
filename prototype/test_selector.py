@@ -261,5 +261,30 @@ class TestZoomOutTrigger(unittest.TestCase):
         self.assertEqual(selector.next_passage(bank, family)["id"], "MAT-002")
 
 
+class TestZoomOutKit(unittest.TestCase):
+    def test_zoom_out_kit_contents(self):
+        bank, family = load()
+        order = [p["id"] for p in bank["pericopes"]]
+        family["reading_sequence"] = order
+        family["sessions"] = [{"date": "d", "passage": pid, "evidence": []}
+                              for pid in order[:6]]  # studied all of MAT-S1
+        section = SECTIONS[0]
+        kit = selector.build_zoom_out_kit(bank, family, SECTIONS, section)
+
+        self.assertEqual(kit["kind"], "zoom_out")
+        self.assertEqual(kit["section_id"], "MAT-S1")
+        # sequence cards are exactly the section's pericopes, in reading order
+        self.assertEqual([c["id"] for c in kit["sequence_cards"]],
+                         ["MAT-001", "MAT-002", "MAT-003", "MAT-004", "MAT-005", "MAT-006"])
+        self.assertEqual(kit["correct_order"],
+                         ["MAT-001", "MAT-002", "MAT-003", "MAT-004", "MAT-005", "MAT-006"])
+        # memory_recall only contains memory verses whose passage is a studied MAT-S1 pericope
+        for item in kit["memory_recall"]:
+            self.assertEqual(item["type"], "memory_verse")
+            self.assertIn(item["passage"], set([c["id"] for c in kit["sequence_cards"]]))
+        # open throughline prompt, no answer key
+        self.assertIn("Prologue: The Infancy", kit["throughline_prompt"])
+
+
 if __name__ == "__main__":
     unittest.main()

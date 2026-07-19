@@ -318,3 +318,31 @@ def arc_recap(sections, bank, family):
         "studied": [title_by[pid] for pid in studied_ids],
         "position": f"{len(studied_ids)} of {len(section_ids)}",
     }
+
+
+def build_zoom_out_kit(bank, family, sections, section):
+    """A derived consolidation session over a completed section. No new passage.
+    The family physically shuffles the printed cards and reorders them; the kit
+    carries the cards in reading order plus the correct order for the leader."""
+    order = [p["id"] for p in bank["pericopes"]]
+    by_id = {p["id"]: p for p in bank["pericopes"]}
+    section_ids = _section_pericope_ids(section, order)
+    studied = {s["passage"] for s in _normal_sessions(family)}
+
+    cards = [{"id": pid, "title": by_id[pid]["title"], "ref": by_id[pid]["ref"]}
+             for pid in section_ids]
+    memory_recall = [i for i in _published(bank, type_="memory_verse")
+                     if i["passage"] in section_ids and i["passage"] in studied]
+
+    return {
+        "family": family["name"],
+        "kind": "zoom_out",
+        "section": section["title"],
+        "section_id": section["id"],
+        "sequence_cards": cards,
+        "correct_order": [c["id"] for c in cards],
+        "memory_recall": memory_recall,
+        "throughline_prompt": f"In one sentence, what was “{section['title']}” about?",
+        "roles": assign_roles(family),
+        "selected_item_ids": [i["id"] for i in memory_recall],
+    }
