@@ -1,0 +1,11 @@
+{
+ "book": "ECC",
+ "sections": [
+  {"id": "ECC-S1", "title_en": "The Vanity of All Things", "title_zh": "", "first_pericope": "ECC-001", "last_pericope": "ECC-001", "marker": "ECC.1.2"},
+  {"id": "ECC-S2", "title_en": "Solomon's Investigation of Pleasure, Toil, and Wisdom", "title_zh": "", "first_pericope": "ECC-002", "last_pericope": "ECC-004", "marker": "ECC.1.12"},
+  {"id": "ECC-S3", "title_en": "Times, Seasons, and the Fear of God", "title_zh": "", "first_pericope": "ECC-005", "last_pericope": "ECC-007", "marker": "ECC.3.1"},
+  {"id": "ECC-S4", "title_en": "Wealth, Oppression, and the Limits of Wisdom", "title_zh": "", "first_pericope": "ECC-008", "last_pericope": "ECC-014", "marker": null},
+  {"id": "ECC-S5", "title_en": "Wisdom and Folly in an Uncertain Life", "title_zh": "", "first_pericope": "ECC-015", "last_pericope": "ECC-017", "marker": null},
+  {"id": "ECC-S6", "title_en": "Remembering the Creator", "title_zh": "", "first_pericope": "ECC-018", "last_pericope": "ECC-018", "marker": "ECC.12.1"}
+ ]
+}
