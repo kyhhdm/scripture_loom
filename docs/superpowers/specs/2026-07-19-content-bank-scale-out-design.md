@@ -81,8 +81,9 @@ retrospective is done.
 
 1. **Phase 0 — Corpus structure (PHP + ECC).** Author `pericopes/php.json`,
    `pericopes/ecc.json`, then `sections/php.json`, `sections/ecc.json`. Human editorial
-   boundary work informed by JFB/MHC outlines; the partition validator
-   (`corpus/lib/sections.py`) requires the pericope layer first.
+   boundary work; the partition validator (`corpus/lib/sections.py`) requires the pericope
+   layer first. **MHC (Matthew Henry) is the primary authority for pericope and section
+   boundaries**; JFB and the passage text inform but do not override it where they disagree.
 2. **Phase 1 — Philippians proof.** Run the entire pipeline on Philippians end-to-end,
    including the arc tier. This is where throughput and review ergonomics are shaken out at
    small scale before volume.
@@ -103,7 +104,8 @@ Mirrors the existing Matthew artifacts exactly:
   (`first_pericope`/`last_pericope`/`marker`), validated by `corpus/lib/sections.py`.
 
 PHP → a handful of pericopes, 2–4 sections. ECC → larger, sections along its structural
-movements. No fan-out; this is human editorial work assisted by commentary outlines.
+movements. No fan-out; this is human editorial work. **MHC is the primary boundary
+authority**; JFB and the text inform but do not override it on disagreement.
 
 ### 2. Per-pericope fan-out (Tier 1 — the batching core)
 
