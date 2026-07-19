@@ -92,5 +92,43 @@ class TestReferenceCounts(unittest.TestCase):
         self.assertEqual(counts["references"]["missing_reference"], 1)
 
 
+class TestSectionValidation(unittest.TestCase):
+    def _store(self, tmpdir, items):
+        p = pathlib.Path(tmpdir) / "mat.json"
+        p.write_text(json.dumps({"items": items}), encoding="utf-8")
+        return tmpdir
+
+    def _tl(self, **over):
+        item = {"id": "tl1", "section": "MAT-S1", "type": "throughline",
+                "dimension": "D7", "age_tier": "all", "difficulty": 2,
+                "review_status": "published", "text": {"en": "x"}, "version": 1,
+                "provenance": {"reviewed_by": "a", "reviewed_date": "2026-07-19", "guardrail": "WCF-1"}}
+        item.update(over)
+        return item
+
+    def test_valid_section_item_passes(self):
+        with tempfile.TemporaryDirectory() as d:
+            self._store(d, [self._tl()])
+            self.assertEqual(validate.validate_store("MAT", store_dir=d)["errors"], [])
+
+    def test_unresolved_section_reported(self):
+        with tempfile.TemporaryDirectory() as d:
+            self._store(d, [self._tl(section="MAT-S99")])
+            errs = validate.validate_store("MAT", store_dir=d)["errors"]
+            self.assertTrue(any("is not a MAT section" in e for e in errs))
+
+    def test_thread_ref_outside_book_reported(self):
+        with tempfile.TemporaryDirectory() as d:
+            self._store(d, [self._tl(id="t", type="thread", dimension="D7", refs=["PHP.1.7"])])
+            errs = validate.validate_store("MAT", store_dir=d)["errors"]
+            self.assertTrue(any("outside book MAT" in e for e in errs))
+
+    def test_two_published_throughlines_reported(self):
+        with tempfile.TemporaryDirectory() as d:
+            self._store(d, [self._tl(id="a"), self._tl(id="b")])
+            errs = validate.validate_store("MAT", store_dir=d)["errors"]
+            self.assertTrue(any("throughline" in e and "MAT-S1" in e for e in errs))
+
+
 if __name__ == "__main__":
     unittest.main()

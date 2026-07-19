@@ -90,6 +90,15 @@ def crossrefs(range_str, limit=15):
     return hits[:limit]
 
 
+def section_ids(book):
+    """Section ids declared in the corpus section map, or empty if none."""
+    try:
+        from corpus.lib import sections as _sections
+        return {s["id"] for s in _sections.load(book)["sections"]}
+    except FileNotFoundError:
+        return set()
+
+
 def confessional_refs(range_str):
     target = _parse_range(range_str)
 
