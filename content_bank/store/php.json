@@ -5538,6 +5538,714 @@
         "guardrail": "WCF-1",
         "confirmed_by": "kyhhdm"
       }
+    },
+    {
+      "id": "php-s1-throughline",
+      "section": "PHP-S1",
+      "dimension": "D7",
+      "type": "throughline",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul opens by greeting the saints at Philippi with grace and peace, then thanks God with joy for their partnership in the gospel, being confident that He who began a good work in them will carry it on to completion until the day of Christ, and he prays that their love may abound more and more in knowledge and depth of insight."
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s1-q-grounds-of-joy",
+      "section": "PHP-S1",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "As Paul remembers the Philippians in this opening, from his greeting through his thanksgiving, what reasons does he give for his joy and confidence when he thinks of them?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Their \"partnership in the gospel\" \"from the first day until now\" (1:5); his confidence that He who began \"a good work\" in them will \"carry it on to completion\" until the day of Christ Jesus (1:6); and that they are \"partners in grace\" with him, sharing even in his chains and his defense and confirmation of the gospel (1:7)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s1-q-thanks-shapes-prayer",
+      "section": "PHP-S1",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "This opening moves from what Paul thanks God for (verses 3-8) to what he then asks God for the Philippians (verses 9-11). How does the thing he gives thanks for connect to the thing he goes on to pray for?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Paul thanks God for a work already begun and certain to be completed—their partnership in the gospel and God's own \"good work\" that He will \"carry it on to completion\" (1:5-6)—and then prays for the growth of that same work: that their love \"may abound more and more in knowledge and depth of insight,\" so that they may be \"pure and blameless for the day of Christ,\" \"filled with the fruit of righteousness\" (1:9-11). Both the thanksgiving and the prayer point to the same day of Christ; keep the discussion to this observable movement from what God has begun to what Paul asks God to increase, without adding conclusions the text does not state."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s2-throughline",
+      "section": "PHP-S2",
+      "dimension": "D7",
+      "type": "throughline",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Because Paul's chains have actually served to advance the gospel, he calls the Philippians to a manner of life worthy of it: standing firm in one spirit and, doing nothing out of selfish ambition, letting the mind of Christ Jesus be in them—who emptied Himself and became obedient to death, and whom God exalted to the highest place."
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s2-thread-selfish-ambition",
+      "section": "PHP-S2",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Selfish ambition versus the interests of others: the section repeatedly sets those who seek their own interests over against those who look to others'. The pattern reaches its measure in Christ, who did not grasp His equality with God but emptied Himself, and its living examples in Timothy and Epaphroditus."
+      },
+      "refs": [
+        "PHP.1.17",
+        "PHP.2.3",
+        "PHP.2.4",
+        "PHP.2.21"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s2-thread-one-spirit",
+      "section": "PHP-S2",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Standing firm in one spirit: Paul first asks the church to stand firm in one spirit, contending side by side, then names what such unity looks like—being like-minded and united in spirit and purpose. The section presses toward a single, shared mind in the church."
+      },
+      "refs": [
+        "PHP.1.27",
+        "PHP.2.2"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s2-thread-rejoice",
+      "section": "PHP-S2",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Rejoicing while suffering: from his chains Paul rejoices that Christ is preached, is glad even if poured out like a drink offering, and calls the church to rejoice with him and over the returning Epaphroditus. Joy in this section is grounded not in circumstances but in Christ and the gospel's progress."
+      },
+      "refs": [
+        "PHP.1.18",
+        "PHP.2.17",
+        "PHP.2.18",
+        "PHP.2.28"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s2-q-examples-of-others-interests",
+      "section": "PHP-S2",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Across this whole section, whom does Paul hold up as examples of looking not to their own interests but to the interests of others?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Christ Jesus, who did not grasp equality with God but emptied Himself and became obedient to death (2:5-8); Paul himself, who chooses to remain in the body because it is more necessary for them (1:24-26); Timothy, who will genuinely care for their needs while the others look after their own interests (2:20-22); and Epaphroditus, who nearly died for the work of Christ, risking his life to serve (2:25-30)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s2-q-pattern-across-section",
+      "section": "PHP-S2",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "The section moves from Paul in chains, to Christ humbling Himself to death on a cross, to Timothy and Epaphroditus spending themselves for others. What single pattern runs through all of these examples?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Each account shows self given up for the sake of others and the gospel: Paul's chains serve to advance the gospel (1:12); Christ emptied Himself and became obedient to death (2:7-8); Epaphroditus nearly died for the work of Christ (2:30). The pattern is self-lowering that God turns to fruitfulness and, in Christ's case, to exaltation (2:9). Keep to what the text observably shows—suffering that serves others and the gospel—without moving beyond it."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s2-q-mind-of-christ-grounds-commands",
+      "section": "PHP-S2",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "How does the mind of Christ described in 2:5-11 give the reason for the very things Paul asks the church to do elsewhere in this section—standing firm in one spirit, doing nothing out of selfish ambition, and working out their salvation?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Paul commands like-mindedness and humility (2:2-4), then grounds it: 'Let this mind be in you which was also in Christ Jesus' (2:5), who emptied Himself and was obedient (2:7-8). The unity of 1:27 and the working out of salvation in 2:12-13 flow from having Christ's own mind. Note the text's own logic—Christ's self-humbling is the pattern and reason for the church's conduct—without adding claims the passage does not state."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s2-q-ground-of-joy",
+      "section": "PHP-S2",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul rejoices from prison and even in the face of death. Gathering the places he speaks of joy across this section, what does the text say his joy rests on?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Paul rejoices that Christ is preached, whatever the motive (1:18); but the joy references spread across the section and repeatedly land on others, not himself: he is glad and rejoices even if poured out like a drink offering on the sacrifice and service of their faith, and calls them to be glad and rejoice with him (2:17-18); he sends Epaphroditus back so that they may rejoice at seeing him (2:28). Gathered together—1:18, 2:17-18, 2:28—his joy rests on Christ being magnified and on the church's faith and progress, not on his circumstances. Stay with what the text states as the ground of his joy."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s3-throughline",
+      "section": "PHP-S3",
+      "dimension": "D7",
+      "type": "throughline",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul counts every ground for confidence in the flesh as loss in order to gain Christ and be found in Him with a righteousness that comes through faith rather than the law, and he presses on toward God's heavenly calling. Against those who set their minds on earthly things he sets the church's citizenship in heaven, from which we await the Savior who will transform our lowly bodies to be like His glorious body."
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s3-thread-conformed-to-christ",
+      "section": "PHP-S3",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Conformed to Christ: Paul wants to know \"the power of His resurrection\" now, \"being conformed to Him in His death\" (v10), and the section ends with the Savior who \"will transform our lowly bodies to be like His glorious body\" (v21). The conforming Paul reaches for in the present is completed in the resurrection Christ will work at the end."
+      },
+      "refs": [
+        "PHP.3.10",
+        "PHP.3.21"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s3-thread-earthly-vs-heaven",
+      "section": "PHP-S3",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Earthly things versus heaven: Paul presses toward \"the prize of God's heavenly calling\" (v14), warns of enemies whose \"minds are set on earthly things\" (v19), and grounds the church in \"our citizenship is in heaven\" (v20). The section's whole argument runs along this upward/downward axis."
+      },
+      "refs": [
+        "PHP.3.14",
+        "PHP.3.19",
+        "PHP.3.20"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s3-thread-not-yet-attained",
+      "section": "PHP-S3",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Not yet attained, so press on: Paul has not \"already obtained\" or been \"made perfect\" but presses on (v12), then tells the mature they \"must live up to what we have already attained\" (v16). The section holds together striving forward and living out what is already possessed."
+      },
+      "refs": [
+        "PHP.3.12",
+        "PHP.3.16"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s3-q-two-righteousnesses-two-ends",
+      "section": "PHP-S3",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "This section sets two righteousnesses and two destinies side by side. According to verse 9, which righteousness does Paul refuse and which does he receive; and according to verses 19-20, what is the \"end\" of the cross's enemies compared with where our citizenship is?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Paul refuses \"my own righteousness from the law\" and receives the righteousness \"through faith in Christ, the righteousness from God on the basis of faith\" (v9). The enemies' \"end is destruction\" and \"their minds are set on earthly things\" (v19), while \"our citizenship is in heaven\" from which we await the Savior (v20)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s3-q-confidence-flesh-vs-faith",
+      "section": "PHP-S3",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "all",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "In the first half Paul lists his own credentials and counts them \"loss\" and \"rubbish\" for the sake of Christ; in the second he weeps over those whose \"god is their belly\" and whose glory is \"in their shame.\" Reading the whole section together, what is the difference between confidence in the flesh and being \"found in Him\"?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Keep this open and stay with what the text says. On one side Paul had every ground for confidence in the flesh (v4-6) yet counted it loss \"for the sake of Christ\" so that he might \"gain Christ\" and \"be found in Him\" with a righteousness that is not his own but \"from God on the basis of faith\" (v7-9). On the other side stand those who live \"as enemies of the cross,\" whose \"god is their belly\" and whose minds are \"set on earthly things\" (v18-19). Let the family notice that the contrast the text draws is where a person's confidence and glory rest — in the flesh and earthly things, or in Christ and the heavenly calling (v14, v20). Do not push beyond the section into judgments about particular people; keep to the pattern Paul names."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s3-q-posture-toward-future",
+      "section": "PHP-S3",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Across this section Paul is always leaning forward — \"straining toward what is ahead\" and pressing \"toward the goal\" (v13-14), and \"eagerly await a Savior\" (v20) who will transform our bodies (v21). What does the whole section teach about how the Christian looks toward the future?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Let the family gather the section's forward-looking language rather than settle on one verse. Paul admits he has not \"already obtained\" it or been \"made perfect\" (v12), yet he keeps \"forgetting what is behind and straining toward what is ahead\" (v13) toward \"the prize of God's heavenly calling\" (v14); and the section ends not with his effort but with the Savior we \"eagerly await\" who \"will transform our lowly bodies to be like His glorious body\" (v20-21). The text holds present pressing-on together with a future that Christ Himself brings. Guard against turning this into mere self-improvement — the goal and the transformation are God's heavenly calling and Christ's work (WCF 1: keep to what Scripture states)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s3-q-two-kinds-of-examples",
+      "section": "PHP-S3",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In the first half of this section Paul holds up his own life — counting his gains \"loss\" for the sake of Christ and saying \"I press on toward the goal\" (v7-8, v14). In the second half he calls the church to join in \"following my example\" (v17) while warning that \"Many live as enemies of the cross of Christ\" (v18). Reading the whole section together, how do these two kinds of examples — the pattern to follow and the pattern to avoid — work together?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Help the family see both examples in the text. The pattern to follow is Paul himself and those who \"walk according to the pattern we set for you\" (v17) — the very man who counted his gains loss for Christ and presses on (v7-8, v12-14). The pattern to avoid is those who \"live as enemies of the cross,\" whose end, god, glory, and mind are described in v19. The section sets a life aimed at the heavenly calling next to a life set on earthly things, and calls the readers to imitate the first. Keep the discussion on what the two walks look like in the text, not on labeling people in the room."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s4-throughline",
+      "section": "PHP-S4",
+      "dimension": "D7",
+      "type": "throughline",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul closes the letter by pressing the church to rejoice in the Lord always, to be anxious for nothing but bring everything to God with thanksgiving, and to think on and practice what is good—then bears witness that he himself has learned to be content in every circumstance through Christ who strengthens him, and that his God will supply all their needs."
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s4-thread-rejoice-in-the-lord",
+      "section": "PHP-S4",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Rejoice in the Lord: Paul first commands the church to rejoice in the Lord always, then shows himself doing it, rejoicing greatly in the Lord over their renewed concern for him. The joy he commands he also models, and both times it is joy 'in the Lord.'"
+      },
+      "refs": [
+        "PHP.4.4",
+        "PHP.4.10"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s4-thread-in-the-lord",
+      "section": "PHP-S4",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "In the Lord / in Christ Jesus: standing firm, agreeing with one another, rejoicing, the peace that guards hearts and minds, and God's supply of every need are all located by Paul 'in the Lord' or 'in Christ Jesus.' The recurring phrase marks the one sphere in which everything he urges and promises holds."
+      },
+      "refs": [
+        "PHP.4.1",
+        "PHP.4.2",
+        "PHP.4.4",
+        "PHP.4.7",
+        "PHP.4.19",
+        "PHP.4.21"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s4-thread-need-and-supply",
+      "section": "PHP-S4",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Need brought to God and supplied by God: the church is told to be anxious for nothing but to present their requests to God, and the section ends with the assurance that Paul's God will supply all their needs according to His riches in Christ Jesus. What is carried to God in prayer is what God is said to provide."
+      },
+      "refs": [
+        "PHP.4.6",
+        "PHP.4.19"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s4-q-in-the-lord-sphere",
+      "section": "PHP-S4",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Across this whole section, gather the places where Paul says something is 'in the Lord' or 'in Christ Jesus.' What does he locate there?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "Standing firm is 'in the Lord' (4:1); Euodia and Syntyche are to agree 'in the Lord' (4:2); the church is to 'Rejoice in the Lord always' (4:4); the peace of God guards hearts and minds 'in Christ Jesus' (4:7); Paul himself rejoices greatly 'in the Lord' (4:10); God supplies every need 'in Christ Jesus' (4:19); and the greetings are to the saints 'in Christ Jesus' (4:21). The repeated phrase names the one sphere in which all of it holds."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s4-q-rejoice-command-and-example",
+      "section": "PHP-S4",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "published",
+      "text": {
+        "en": "Paul commands the church to 'Rejoice in the Lord always' (4:4), and then he himself rejoices greatly in the Lord over their gift (4:10). How does his own joy show the kind of rejoicing he is asking of them?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Paul does not merely command joy; he practices it. He tells them to 'Rejoice in the Lord always' (4:4), and his own rejoicing is likewise 'in the Lord' (4:10)—glad over their revived concern, yet he immediately adds that he does not say this out of need, for he has learned to be content (4:11). So the joy he models is not fixed on getting the gift but rooted in the Lord, matching the always-in-the-Lord rejoicing he commands. Keep to what the text shows: the command and Paul's own example are joined by the same phrase, 'in the Lord.'"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
+    },
+    {
+      "id": "php-s4-q-anxiety-and-contentment",
+      "section": "PHP-S4",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "published",
+      "text": {
+        "en": "The first pericope tells the church to be anxious for nothing but to bring everything to God with thanksgiving (4:6-7); the second shows Paul content whether filled or hungry, in plenty or in need (4:11-13), and ends with God supplying every need (4:19). Putting these together, what does the whole section teach about facing need?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The section pairs a command with a lived example and a promise. The church is to be anxious for nothing but present their requests to God, and the peace of God will guard them (4:6-7); Paul then testifies that he has learned to be content in any and every situation, doing all things through Christ who gives him strength (4:11-13); and it closes with 'my God will supply all your needs' in Christ Jesus (4:19). The observable teaching: need is met not by circumstances changing but by bringing it to God and being sustained by Him—command, example, and promise all point the same way. Stay with what the text states and avoid adding claims beyond it."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1",
+        "confirmed_by": "kyhhdm"
+      }
     }
   ]
 }
