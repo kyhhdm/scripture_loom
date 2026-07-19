@@ -303,6 +303,19 @@ class TestBuildKitIntegration(unittest.TestCase):
         self.assertNotEqual(kit.get("kind"), "zoom_out")
         self.assertEqual(kit["arc_recap"]["section"], "Book One: The Sermon on the Mount")
 
+    def test_normal_kit_coexists_with_published_section_item(self):
+        """Regression: a published section-scoped item (e.g. a throughline)
+        sitting in the bank must not crash the normal (passage) kit path.
+        _published() subscripted item["passage"], which KeyErrors for
+        section-scoped items that only have "section"."""
+        bank, family = load()  # family is mid-book; next passage is MAT-014
+        bank = {**bank, "items": bank["items"] + [
+            {"id": "tl", "section": "MAT-S1", "type": "throughline",
+             "dimension": "D7", "age_tier": "all", "difficulty": 2,
+             "review_status": "published", "body": "x"}]}
+        kit = selector.build_kit(bank, family, SECTIONS)  # normal path, not a section boundary
+        self.assertEqual(kit["passage"]["id"], "MAT-014")
+
 
 class TestZoomOutKit(unittest.TestCase):
     def test_zoom_out_kit_contents(self):
@@ -327,6 +340,45 @@ class TestZoomOutKit(unittest.TestCase):
             self.assertIn(item["passage"], set([c["id"] for c in kit["sequence_cards"]]))
         # open throughline prompt, no answer key
         self.assertIn("Prologue: The Infancy", kit["throughline_prompt"])
+
+
+def _section_item(id, type, dim, **over):
+    item = {"id": id, "section": "MAT-S1", "type": type, "dimension": dim,
+            "age_tier": "all", "difficulty": 2, "review_status": "published",
+            "body": id + " text"}
+    item.update(over)
+    return item
+
+
+class TestZoomOutArcContent(unittest.TestCase):
+    def _completed_s1(self, bank, family):
+        order = [p["id"] for p in bank["pericopes"]]
+        family["reading_sequence"] = order
+        family["sessions"] = [{"date": "d", "passage": pid, "evidence": []}
+                              for pid in order[:6]]
+        return family
+
+    def test_authored_content_appears_in_zoom_out(self):
+        bank, family = load()
+        bank = {**bank, "items": bank["items"] + [
+            _section_item("tl", "throughline", "D7"),
+            _section_item("th", "thread", "D7", refs=["MAT.1.22", "MAT.2.15"]),
+            _section_item("q", "question", "D7"),
+        ]}
+        self._completed_s1(bank, family)
+        kit = selector.build_zoom_out_kit(bank, family, SECTIONS, SECTIONS[0])
+        self.assertEqual(kit["throughline_item"]["id"], "tl")
+        self.assertEqual([t["id"] for t in kit["threads"]], ["th"])
+        self.assertEqual([q["id"] for q in kit["section_questions"]], ["q"])
+
+    def test_no_authored_content_degrades_to_mvp(self):
+        bank, family = load()
+        self._completed_s1(bank, family)
+        kit = selector.build_zoom_out_kit(bank, family, SECTIONS, SECTIONS[0])
+        self.assertIsNone(kit["throughline_item"])
+        self.assertEqual(kit["threads"], [])
+        self.assertEqual(kit["section_questions"], [])
+        self.assertIn("throughline_prompt", kit)   # MVP generic prompt still present
 
 
 if __name__ == "__main__":

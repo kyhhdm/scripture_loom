@@ -5,9 +5,12 @@ only; referential integrity (passage resolves to a corpus pericope) and ID
 uniqueness are store-level concerns (see validate.py).
 """
 
+import re
+
 DIMENSIONS = {f"D{i}" for i in range(1, 9)}
 TYPES = {"question", "activity", "vocab_list", "memory_verse",
-         "key_facts", "narration_prompt", "pre_reading_quest"}
+         "key_facts", "narration_prompt", "pre_reading_quest",
+         "throughline", "thread"}
 AGE_TIERS = {"pre_reader", "child", "youth", "adult", "all"}
 REVIEW_STATUSES = {"draft", "reviewed", "published"}
 LANGS = {"en", "zh"}
@@ -18,7 +21,11 @@ REFERENCE_KINDS = {"answer_key", "leader_note"}
 CLOSED_DIMENSIONS = {"D1", "D2", "D3", "D4", "D5"}
 OPEN_DIMENSIONS = {"D6", "D7", "D8"}
 
-_REQUIRED = ("id", "passage", "dimension", "type", "age_tier",
+SECTION_ONLY_TYPES = {"throughline", "thread"}
+SECTION_RE = re.compile(r"^[A-Z0-9]{3}-S\d+$")
+REF_RE = re.compile(r"^[A-Z0-9]{3}\.\d+\.\d+$")
+
+_REQUIRED = ("id", "dimension", "type", "age_tier",
              "difficulty", "review_status", "text", "version")
 
 
@@ -70,6 +77,31 @@ def _check_reference(item, errors):
         errors.append("leader_reference.provenance.guardrail: must be 'WCF-1'")
 
 
+def _check_scope(item, errors):
+    has_p, has_s = "passage" in item, "section" in item
+    if has_p == has_s:
+        errors.append("scope: exactly one of 'passage' / 'section' is required")
+    if has_s and not SECTION_RE.match(str(item.get("section"))):
+        errors.append(f"section: malformed id '{item.get('section')}'")
+    t = item.get("type")
+    if t in SECTION_ONLY_TYPES and not has_s:
+        errors.append(f"{t}: must be section-scoped (needs 'section')")
+    if t == "thread":
+        refs = item.get("refs")
+        if not isinstance(refs, list) or not refs:
+            errors.append("thread: 'refs' must be a non-empty list")
+        else:
+            for r in refs:
+                if not isinstance(r, str) or not REF_RE.match(r):
+                    errors.append(f"refs: malformed ref '{r}'")
+    elif "refs" in item:
+        errors.append("refs: only allowed on 'thread' items")
+    if t == "throughline" and item.get("dimension") != "D7":
+        errors.append("throughline: dimension must be D7")
+    if t == "thread" and item.get("dimension") not in ("D3", "D7"):
+        errors.append("thread: dimension must be D3 or D7")
+
+
 def validate_item(item):
     """Return a list of error strings; empty means the item is structurally valid."""
     errors = []
@@ -89,6 +121,8 @@ def validate_item(item):
         errors.append(f"review_status: invalid '{item['review_status']}'")
     if item["difficulty"] not in DIFFICULTIES:
         errors.append(f"difficulty: must be one of {sorted(DIFFICULTIES)}")
+
+    _check_scope(item, errors)
 
     _check_text("text", item["text"], errors)
 

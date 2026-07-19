@@ -190,5 +190,21 @@ class TestBuildReferencePrompt(unittest.TestCase):
         self.assertIn("mt5-beat-d1-blessed-groups", self.prompt)
 
 
+class TestSectionBrief(unittest.TestCase):
+    def test_section_brief_renders_span_and_asks_for_arc_content(self):
+        from content_bank.author import build_section_brief_prompt
+        text = build_section_brief_prompt.build("MAT-S1", "MAT")
+        self.assertIn("Prologue: The Infancy", text)
+        self.assertIn("The Genealogy of Jesus", text)      # a pericope title in the span
+        self.assertIn("The Return to Nazareth", text)       # the last pericope in MAT-S1
+        for token in ("THROUGHLINE", "THREAD", "refs", "QUESTION"):
+            self.assertIn(token, text)
+
+    def test_section_brief_rejects_unknown_section(self):
+        from content_bank.author import build_section_brief_prompt
+        with self.assertRaises(ValueError):
+            build_section_brief_prompt.build("MAT-S99", "MAT")
+
+
 if __name__ == "__main__":
     unittest.main()

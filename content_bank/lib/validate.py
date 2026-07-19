@@ -6,6 +6,7 @@ from . import schema, content, corpus_bridge
 def validate_store(book, store_dir=None):
     items = content.load_book_store(book, store_dir).get("items", [])
     valid_ids = corpus_bridge.pericope_ids(book)
+    valid_sections = corpus_bridge.section_ids(book)
     errors = []
     seen = set()
 
@@ -16,8 +17,25 @@ def validate_store(book, store_dir=None):
         if iid in seen:
             errors.append(f"{iid}: duplicate id")
         seen.add(iid)
-        if it.get("passage") not in valid_ids:
-            errors.append(f"{iid}: passage '{it.get('passage')}' is not a {book} pericope")
+        p = it.get("passage")
+        if p is not None and p not in valid_ids:
+            errors.append(f"{iid}: passage '{p}' is not a {book} pericope")
+        s = it.get("section")
+        if s is not None and s not in valid_sections:
+            errors.append(f"{iid}: section '{s}' is not a {book} section")
+        if it.get("type") == "thread":
+            for r in it.get("refs", []):
+                if isinstance(r, str) and r.split(".", 1)[0] != book:
+                    errors.append(f"{iid}: ref '{r}' outside book {book}")
+
+    published_tl = {}
+    for it in items:
+        if it.get("type") == "throughline" and it.get("review_status") == "published":
+            sec = it.get("section")
+            published_tl[sec] = published_tl.get(sec, 0) + 1
+    for sec, n in published_tl.items():
+        if n > 1:
+            errors.append(f"section {sec}: {n} published throughlines (max 1)")
 
     counts = {
         "items": len(items),
