@@ -1,0 +1,12 @@
+{
+ "book": "MAT",
+ "sections": [
+  {"id": "MAT-S1", "title_en": "Prologue: The Infancy", "title_zh": "", "first_pericope": "MAT-001", "last_pericope": "MAT-006", "marker": null},
+  {"id": "MAT-S2", "title_en": "Book One: The Sermon on the Mount", "title_zh": "", "first_pericope": "MAT-007", "last_pericope": "MAT-033", "marker": "MAT.7.28"},
+  {"id": "MAT-S3", "title_en": "Book Two: The Mission Discourse", "title_zh": "", "first_pericope": "MAT-034", "last_pericope": "MAT-053", "marker": "MAT.11.1"},
+  {"id": "MAT-S4", "title_en": "Book Three: The Parables of the Kingdom", "title_zh": "", "first_pericope": "MAT-054", "last_pericope": "MAT-077", "marker": "MAT.13.53"},
+  {"id": "MAT-S5", "title_en": "Book Four: The Community Discourse", "title_zh": "", "first_pericope": "MAT-078", "last_pericope": "MAT-101", "marker": "MAT.19.1"},
+  {"id": "MAT-S6", "title_en": "Book Five: The Olivet Discourse", "title_zh": "", "first_pericope": "MAT-102", "last_pericope": "MAT-130", "marker": "MAT.26.1"},
+  {"id": "MAT-S7", "title_en": "Epilogue: Passion and Resurrection", "title_zh": "", "first_pericope": "MAT-131", "last_pericope": "MAT-153", "marker": null}
+ ]
+}
