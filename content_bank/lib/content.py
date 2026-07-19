@@ -9,9 +9,13 @@ import pathlib
 _STORE_DIR = pathlib.Path(__file__).resolve().parents[1] / "store"
 
 
-def _store_path(book, store_dir):
+def store_path(book, store_dir=None):
     base = pathlib.Path(store_dir) if store_dir is not None else _STORE_DIR
     return base / f"{book.lower()}.json"
+
+
+def _store_path(book, store_dir):
+    return store_path(book, store_dir)
 
 
 def load_book_store(book, store_dir=None):

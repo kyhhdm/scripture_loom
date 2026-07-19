@@ -74,34 +74,34 @@ from content_bank.author import manifest
 
 class TestManifest(unittest.TestCase):
     def test_init_marks_all_units_pending(self):
-        m = manifest.init_manifest("PHP", ["PHP-p1", "PHP-p2"], ["PHP-S1"])
+        m = manifest.init_manifest("PHP", ["PHP-001", "PHP-002"], ["PHP-S1"])
         self.assertEqual(m["book"], "PHP")
-        self.assertEqual(m["units"]["PHP-p1"], {"kind": "pericope", "stage": "pending"})
+        self.assertEqual(m["units"]["PHP-001"], {"kind": "pericope", "stage": "pending"})
         self.assertEqual(m["units"]["PHP-S1"], {"kind": "section", "stage": "pending"})
 
     def test_set_stage_advances_one_unit(self):
-        m = manifest.init_manifest("PHP", ["PHP-p1"])
-        manifest.set_stage(m, "PHP-p1", "drafted")
-        self.assertEqual(m["units"]["PHP-p1"]["stage"], "drafted")
+        m = manifest.init_manifest("PHP", ["PHP-001"])
+        manifest.set_stage(m, "PHP-001", "drafted")
+        self.assertEqual(m["units"]["PHP-001"]["stage"], "drafted")
 
     def test_set_stage_rejects_unknown_stage(self):
-        m = manifest.init_manifest("PHP", ["PHP-p1"])
+        m = manifest.init_manifest("PHP", ["PHP-001"])
         with self.assertRaises(ValueError):
-            manifest.set_stage(m, "PHP-p1", "bogus")
+            manifest.set_stage(m, "PHP-001", "bogus")
 
     def test_set_stage_rejects_unknown_unit(self):
-        m = manifest.init_manifest("PHP", ["PHP-p1"])
+        m = manifest.init_manifest("PHP", ["PHP-001"])
         with self.assertRaises(KeyError):
-            manifest.set_stage(m, "PHP-p9", "drafted")
+            manifest.set_stage(m, "PHP-009", "drafted")
 
     def test_units_at_returns_sorted(self):
-        m = manifest.init_manifest("PHP", ["PHP-p2", "PHP-p1", "PHP-p3"])
-        manifest.set_stage(m, "PHP-p2", "drafted")
-        self.assertEqual(manifest.units_at(m, "pending"), ["PHP-p1", "PHP-p3"])
-        self.assertEqual(manifest.units_at(m, "drafted"), ["PHP-p2"])
+        m = manifest.init_manifest("PHP", ["PHP-002", "PHP-001", "PHP-003"])
+        manifest.set_stage(m, "PHP-002", "drafted")
+        self.assertEqual(manifest.units_at(m, "pending"), ["PHP-001", "PHP-003"])
+        self.assertEqual(manifest.units_at(m, "drafted"), ["PHP-002"])
 
     def test_save_then_load_roundtrips(self):
-        m = manifest.init_manifest("PHP", ["PHP-p1"])
+        m = manifest.init_manifest("PHP", ["PHP-001"])
         with tempfile.TemporaryDirectory() as d:
             p = Path(d) / "sub" / "manifest.json"
             manifest.save(p, m)
@@ -210,7 +210,7 @@ from content_bank.author import store_writer
 
 
 def _item(iid, text="hi"):
-    return {"id": iid, "passage": "PHP-p1", "dimension": "D1", "type": "question",
+    return {"id": iid, "passage": "PHP-001", "dimension": "D1", "type": "question",
             "age_tier": "all", "difficulty": 1, "review_status": "draft",
             "text": {"en": text}, "version": 1}
 
@@ -341,7 +341,7 @@ from content_bank.lib import schema
 
 
 def _q(iid="php1-q1"):
-    return {"id": iid, "passage": "PHP-p1", "dimension": "D1", "type": "question",
+    return {"id": iid, "passage": "PHP-001", "dimension": "D1", "type": "question",
             "age_tier": "all", "difficulty": 1, "review_status": "draft",
             "text": {"en": "Who wrote to the Philippians?"}, "version": 1,
             "leader_reference": {"kind": "answer_key", "text": {"en": "Paul"}}}
@@ -473,7 +473,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))
 from content_bank.author import digest
 
 
-def _item(iid, dim, typ="question", scope=("passage", "PHP-p1")):
+def _item(iid, dim, typ="question", scope=("passage", "PHP-001")):
     it = {"id": iid, "dimension": dim, "type": typ, "age_tier": "all",
           "difficulty": 1, "review_status": "draft", "text": {"en": iid}, "version": 1}
     it[scope[0]] = scope[1]
@@ -495,7 +495,7 @@ class TestTierOf(unittest.TestCase):
 class TestBuildDigest(unittest.TestCase):
     def test_splits_by_tier(self):
         items = [_item("a", "D1"), _item("b", "D7")]
-        d = digest.build_digest("PHP-p1", items, {})
+        d = digest.build_digest("PHP-001", items, {})
         self.assertEqual([i["id"] for i in d["batch"]], ["a"])
         self.assertEqual([i["id"] for i in d["item_tier"]], ["b"])
 
@@ -504,8 +504,8 @@ class TestRenderDigest(unittest.TestCase):
     def test_render_has_both_sections_and_verdicts(self):
         items = [_item("a", "D1"), _item("b", "D7")]
         verdicts = {"b": [{"reviewer": "r1", "verdict": "pass", "notes": "ok"}]}
-        text = digest.render_digest(digest.build_digest("PHP-p1", items, verdicts))
-        self.assertIn("PHP-p1", text)
+        text = digest.render_digest(digest.build_digest("PHP-001", items, verdicts))
+        self.assertIn("PHP-001", text)
         self.assertIn("Batch review (D1-D5)", text)
         self.assertIn("Item-by-item review", text)
         self.assertIn("r1", text)
@@ -603,14 +603,14 @@ git commit -m "author: tiered-by-risk review digest builder + renderer"
 
 This task wires the four modules into a Claude Code workflow and proves the pipeline end-to-end on **one real Philippians pericope**. It is verified by observation (manifest advances, a digest file appears), not by `unittest` — it dispatches subagents and reads the corpus, so it is scaffolding in untracked `work/`, never committed as importable code.
 
-**Prerequisite (Phase 0, minimal slice):** `corpus/canon/structure/pericopes/php.json` must exist with at least the first pericope (`PHP-p1`, a `range`, `title_en`). Author it MHC-first (MHC is the primary boundary authority). Validate the file loads: `python3 -c "from content_bank.lib import corpus_bridge; print(corpus_bridge.pericope_ids('PHP'))"`.
+**Prerequisite (Phase 0, minimal slice):** `corpus/canon/structure/pericopes/php.json` must exist with at least the first pericope (`PHP-001`, a `range`, `title_en`). Author it MHC-first (MHC is the primary boundary authority). Validate the file loads: `python3 -c "from content_bank.lib import corpus_bridge; print(corpus_bridge.pericope_ids('PHP'))"`.
 
 **Files:**
 - Create (untracked): `work/content_bank_build/build_book.workflow.js`
 
 **Interfaces:**
 - Consumes (via a finalize agent running Bash): `content_bank.author.build_brief_prompt`, `build_draft_prompt` (existing CLIs), and the Task 1–4 modules.
-- Produces: `work/content_bank_build/PHP/manifest.json`, `.../drafts/PHP-p1.json`, `.../verdicts/PHP-p1.json`, `.../queue/PHP-p1.md`.
+- Produces: `work/content_bank_build/PHP/manifest.json`, `.../drafts/PHP-001.json`, `.../verdicts/PHP-001.json`, `.../queue/PHP-001.md`.
 
 - [ ] **Step 1: Write the orchestration script**
 
@@ -690,7 +690,7 @@ Expected: prints the unit count (≥1).
 
 - [ ] **Step 3: Run the workflow on one pericope**
 
-Invoke the Workflow tool with `scriptPath: "work/content_bank_build/build_book.workflow.js"` and `args: {"book": "PHP", "pericopes": ["PHP-p1"]}`.
+Invoke the Workflow tool with `scriptPath: "work/content_bank_build/build_book.workflow.js"` and `args: {"book": "PHP", "pericopes": ["PHP-001"]}`.
 
 Expected on completion: `{ queued: 1 }`.
 
@@ -698,24 +698,24 @@ Expected on completion: `{ queued: 1 }`.
 
 Run:
 ```bash
-cat work/content_bank_build/PHP/queue/PHP-p1.md
-python3 -c "from content_bank.author import manifest; m=manifest.load('work/content_bank_build/PHP/manifest.json'); print(m['units']['PHP-p1']['stage'])"
+cat work/content_bank_build/PHP/queue/PHP-001.md
+python3 -c "from content_bank.author import manifest; m=manifest.load('work/content_bank_build/PHP/manifest.json'); print(m['units']['PHP-001']['stage'])"
 ```
 Expected: the digest shows a **Batch review (D1-D5)** section and an **Item-by-item review** section with reviewer verdicts; the manifest stage prints `in_queue`.
 
 - [ ] **Step 5: Verify the human confirm → publish path on the drafted items**
 
-Simulate confirmation of the batch tier for `PHP-p1` (spot-edit first in a real run), then publish:
+Simulate confirmation of the batch tier for `PHP-001` (spot-edit first in a real run), then publish:
 ```bash
 python3 - <<'PY'
 import json, pathlib
 from content_bank.author import publish, manifest
-items = json.loads(pathlib.Path("work/content_bank_build/PHP/drafts/PHP-p1.json").read_text())
+items = json.loads(pathlib.Path("work/content_bank_build/PHP/drafts/PHP-001.json").read_text())
 report = publish.publish("PHP", items, reviewed_date="2026-07-19", confirmed_by="kyhhdm")
 print("errors:", report["errors"])
 print("published:", report["counts"]["published"])
 mp = "work/content_bank_build/PHP/manifest.json"
-m = manifest.load(mp); manifest.set_stage(m, "PHP-p1", "published"); manifest.save(mp, m)
+m = manifest.load(mp); manifest.set_stage(m, "PHP-001", "published"); manifest.save(mp, m)
 PY
 ```
 Expected: `errors: []`, `published:` > 0, and `content_bank/store/php.json` now exists with published items. (In a real run this happens only after the human clears the tiered digest.)
