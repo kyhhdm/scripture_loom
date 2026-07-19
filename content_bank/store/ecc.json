@@ -11141,6 +11141,1186 @@
         "reviewed_date": "2026-07-19",
         "guardrail": "WCF-1"
       }
+    },
+    {
+      "id": "ecc-s1-throughline",
+      "section": "ECC-S1",
+      "dimension": "D7",
+      "type": "throughline",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "The prologue announces the book's verdict before its arguments begin: measured only \"under the sun,\" everything is \"futile,\" and a man's endless labor yields no lasting gain. Generations, sun, wind, and rivers all cycle on without progress, so that \"there is nothing new under the sun\" and no one is finally remembered."
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s1-q-cycles-answer-gain",
+      "section": "ECC-S1",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "The Teacher opens by asking, \"What does a man gain from all his labor?\" and then, instead of answering directly, describes generations, the sun, the wind, and the rivers. How do these four pictures together stand as his answer to that question?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Let the group notice that each picture moves constantly yet arrives nowhere new: generations come and go while the earth stays, the sun hurries back to where it rises, the wind swirls \"round and round,\" the rivers run to a sea that is \"never full\" and return to flow again. Read across all four (not one at a time), the labor of nature mirrors the labor of the man in v3: much motion, no accumulation. The Teacher's implied answer is that such labor, taken by itself \"under the sun,\" adds up to nothing lasting. Keep to what the text observes about the world; the prologue states the problem and does not yet resolve it (WCF 1.9, Scripture interprets Scripture across the whole book)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s1-q-remembrance-tone",
+      "section": "ECC-S1",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Across the prologue the Teacher repeats that nothing is new and that no one is remembered, tying together labor, weariness, and forgotten generations. Reading verses 1-11 as one whole, what mood and claim about life \"under the sun\" is he setting up before the rest of the book begins?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Aim for what the section as a whole establishes, not a single verse: the framing verdict \"futility of futilities,\" the tiredness of v8 (\"all things are wearisome,\" the eye \"not satisfied\"), the sameness of v9-10 (\"there is nothing new under the sun\"), and the forgetting of v11 (\"no remembrance of those who came before\"). Together they set a sober, restless tone and a claim that effort measured only under the sun leaves no durable trace. Guardrail: describe the mood the text creates; do not import comfort or conclusions the prologue itself has not yet stated (WCF 1.6, add nothing to the text's claims)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s1-q-repeated-frame",
+      "section": "ECC-S1",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "In the prologue, what one phrase does the Teacher repeat to sum up everything, and what recurring phrase names the place where all this labor and observation happens?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The summing-up phrase is \"Futility of futilities\" (v2), which the Teacher repeats and applies to \"everything.\" The place-phrase is \"under the sun,\" which recurs (vv3, 9) and marks the vantage point of the whole prologue: a man's labor is \"under the sun\" (v3), and \"there is nothing new under the sun\" (v9)."
+        },
+        "verse": {
+          "en": "\"under the sun\""
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s2-throughline",
+      "section": "ECC-S2",
+      "dimension": "D7",
+      "type": "throughline",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Solomon, king in Jerusalem, sets his mind to test everything done \"under the sun\"—wisdom, pleasure, and toil—and finds each one \"futile, a pursuit of the wind,\" concluding that nothing better remains for a man than to eat and drink and enjoy his work, which is \"from the hand of God.\""
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s2-thread-pursuit-of-the-wind",
+      "section": "ECC-S2",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "\"A pursuit of the wind\": the same verdict falls on each thing Solomon tests—on wisdom, on his great works and pleasures, and on all his toil. The refrain is how the section registers its finding, that everything examined proves \"futile, a pursuit of the wind.\""
+      },
+      "refs": [
+        "ECC.1.14",
+        "ECC.1.17",
+        "ECC.2.11",
+        "ECC.2.17",
+        "ECC.2.26"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s2-thread-under-the-sun",
+      "section": "ECC-S2",
+      "dimension": "D3",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "\"Under the sun\": the phrase names the arena of Solomon's whole search. Everything he sees, builds, and toils at is bounded by this world's horizon, and it is precisely there—\"under the sun\"—that he finds nothing to be gained."
+      },
+      "refs": [
+        "ECC.1.14",
+        "ECC.2.11",
+        "ECC.2.17",
+        "ECC.2.22"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s2-thread-wisdom-and-folly",
+      "section": "ECC-S2",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Testing \"wisdom and madness and folly\": Solomon first sets his mind to know them, then turns again to consider them. He grants that \"wisdom exceeds folly, just as light exceeds darkness,\" yet the same fate overtakes wise man and fool alike, so even his wisdom is judged futile."
+      },
+      "refs": [
+        "ECC.1.17",
+        "ECC.2.12",
+        "ECC.2.13"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s2-thread-toil-left-to-another",
+      "section": "ECC-S2",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Toil and the one who comes after: Solomon labors and accomplishes great works, then despairs because he must leave all of it to the man who comes after him, who may be wise or foolish. The recurring problem of labor is that its gains do not stay with the one who worked for them."
+      },
+      "refs": [
+        "ECC.2.11",
+        "ECC.2.18",
+        "ECC.2.19",
+        "ECC.2.21"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s2-q-three-pursuits-verdict",
+      "section": "ECC-S2",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Across this whole section Solomon tests several things and reaches a verdict on each. What does he set out to examine, and what does he conclude about it?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "He tests wisdom—setting his mind to seek and explore by wisdom, and to know wisdom and madness and folly (1:13,17); he tests pleasure and great works—wine, laughter, houses, vineyards, gardens, servants, silver and gold, and \"the delights of the sons of men\" (2:1-10); and he tests wisdom against folly together with all his toil (2:12-23). On each he reaches the same verdict: it is \"futile, a pursuit of the wind\" (1:14,17; 2:11,17,26), and \"there was nothing to be gained under the sun\" (2:11)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s2-q-why-wisdom-fails-him",
+      "section": "ECC-S2",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Solomon grants that \"wisdom exceeds folly, just as light exceeds darkness,\" yet still counts his own wisdom futile. Reading 1:16-18 together with 2:12-16, what reasons does the text give for why his wisdom does not satisfy him?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The text gives two observable reasons. First, wisdom itself brings pain: \"with much wisdom comes much sorrow, and as knowledge grows, grief increases\" (1:18). Second, wisdom's advantage does not last: though the wise man has eyes in his head while the fool walks in darkness (2:13-14), \"one fate overcomes them both\" (2:14), and \"the wise man will die just like the fool\" with no lasting remembrance (2:15-16). Keep the discussion to these stated reasons—sorrow and shared death—without importing conclusions the passage itself does not draw here."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s2-q-only-good-and-its-source",
+      "section": "ECC-S2",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "After calling wisdom, pleasure, and toil \"a pursuit of the wind,\" where does the section finally locate the one good it commends, and to whom does the text trace that good?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "At the close (2:24-26) Solomon says, \"Nothing is better for a man than to eat and drink and enjoy his work,\" and immediately adds that \"this is from the hand of God\" (2:24). The enjoyment is not self-produced: \"apart from Him, who can eat and who can find enjoyment?\" (2:25), and God \"gives wisdom and knowledge and joy\" to \"the man who is pleasing in His sight\" (2:26). Note that the text still calls the sinner's gathering \"futile\"; the good it commends is the God-given enjoyment of ordinary work and food, traced to God's own hand. Stay with what the passage states and do not build further doctrine on it."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s2-q-king-who-had-everything",
+      "section": "ECC-S2",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Solomon was king with more wisdom, works, and wealth than anyone before him in Jerusalem, and he denied himself no pleasure. Gathering what he had (2:4-10) with what he then concluded (2:11), what does the section show about having everything a person could want?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The text piles up the having: houses, vineyards, gardens, reservoirs, servants, herds, silver and gold, singers, and \"anything my eyes desired, I did not deny myself\" (2:4-10); he surpassed all before him in Jerusalem (2:9). Yet on considering it all he found \"everything to be futile, a pursuit of the wind; there was nothing to be gained under the sun\" (2:11). The observable point is that possessing everything under the sun did not, by itself, yield lasting gain. Let the children state what Solomon had and what he concluded; do not press beyond the text's own verdict."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s3-throughline",
+      "section": "ECC-S3",
+      "dimension": "D7",
+      "type": "throughline",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Everything under heaven has its appointed season, and God has made everything beautiful in its time and does all His work so that men should fear Him; yet under the sun the Preacher sees wickedness where there should be judgment, the one death shared by man and beast, and oppression and toil driven by envy, so he concludes there is nothing better than to enjoy one's own labor as the gift of God, since two are better than one."
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s3-thread-under-the-sun",
+      "section": "ECC-S3",
+      "dimension": "D3",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Under heaven / under the sun: the Preacher keeps naming his vantage point as life observed on the earth. What opens as every purpose under heaven becomes, again and again, what he sees under the sun—oppression, envy-driven labor, and the futility he surveys from this earthly view."
+      },
+      "refs": [
+        "ECC.3.1",
+        "ECC.3.16",
+        "ECC.4.1",
+        "ECC.4.3",
+        "ECC.4.7",
+        "ECC.4.15"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s3-thread-gift-of-god",
+      "section": "ECC-S3",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Nothing better than to enjoy your labor: twice the Preacher stops surveying and lands on the same counsel—that a man should eat and drink and find satisfaction in his work, which he calls \"the gift of God,\" and that there is nothing better than for a man to enjoy his work, because that is his lot."
+      },
+      "refs": [
+        "ECC.3.12",
+        "ECC.3.13",
+        "ECC.3.22"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s3-thread-pursuit-of-the-wind",
+      "section": "ECC-S3",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Futile, a pursuit of the wind: the verdict of futility falls first on the shared fate of man and beast, then repeatedly on oppression, on envy-driven success, on the lonely hoarder, and on the fleeting favor of the crowd—labor and success the Preacher calls \"a pursuit of the wind.\""
+      },
+      "refs": [
+        "ECC.3.19",
+        "ECC.4.4",
+        "ECC.4.6",
+        "ECC.4.16"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s3-thread-judgment-fear-of-god",
+      "section": "ECC-S3",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "God's judgment and the fear of God: God does His enduring work \"so that they should fear Him\" and \"will call to account what has passed\"; and where the Preacher sees wickedness in the place of judgment, he answers in his heart that \"God will judge the righteous and the wicked.\""
+      },
+      "refs": [
+        "ECC.3.14",
+        "ECC.3.15",
+        "ECC.3.17"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s3-q-nothing-better",
+      "section": "ECC-S3",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Across this whole section the Preacher more than once says what is best or better for a person to do. Gather those places—what does he keep returning to as the good thing for a person?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "In 3:12-13 there is nothing better than to rejoice and do good, and to eat and drink and find satisfaction in one's labor, which he calls the gift of God; in 3:22 there is nothing better for a man than to enjoy his work, because that is his lot; and in 4:6 better one handful with tranquility than two handfuls with toil. Each time he returns to contented enjoyment of one's own labor rather than restless gain."
+        },
+        "verse": {
+          "en": "ECC.3.12-13; ECC.3.22; ECC.4.6"
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s3-q-beauty-and-injustice",
+      "section": "ECC-S3",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "text": {
+        "en": "The Preacher says God has \"made everything beautiful in its time\" and that everything God does endures forever, yet in the very next pericopes he sees wickedness in the place of judgment and the same death for man and beast. How do these observations stand together across the section?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The section holds both together without dissolving either: God's work is timely and enduring and is done so that men should fear Him (3:11,14), while under the sun the Preacher still sees injustice and the shared return to dust (3:16-20). He does not deny either side; he answers the injustice by saying in his heart that God will judge (3:17) and counsels enjoyment of one's lot in the meantime (3:22). Keep to what the text observes—both the beauty of God's timing and the futility seen under the sun—without resolving the tension further than the Preacher himself does."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s3-q-alone-and-company",
+      "section": "ECC-S3",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Trace where the Preacher speaks of being alone and of having company across this section. What does he say is better, and what reasons does he give?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "After picturing the man all alone without son or brother, toiling endlessly yet never content (4:7-8), the Preacher declares two are better than one because they have a good return for their labor: one can lift the fallen, two keep warm, two can resist, and a cord of three strands is not quickly broken (4:9-12). Set against the solitary hoarder—and earlier the oppressed who had no comforter (4:1)—company is better because it yields help, warmth, and strength. Stay with the practical reasons the text gives, without adding more."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s3-q-what-is-called-futile",
+      "section": "ECC-S3",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "text": {
+        "en": "The verdict of futility and chasing the wind falls on the shared death of man and beast, on envy-driven success, on the lonely man who never has enough, and on the crowd's short-lived favor for a new king. Gathering these across the section, what kind of things does the Preacher label this way?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Gathering the verdicts—3:19 on man and beast sharing the same breath and returning to dust, 4:4 on labor and success springing from envy, 4:8 on the solitary man whose eyes are never content with his wealth, and 4:16 on the endless people who will not celebrate the successor—the Preacher applies futility to human striving and gain that cannot secure lasting advantage or remembrance under the sun. Name the common feature the text itself points to: effort whose fruit does not last, without pressing beyond the Preacher's own observation."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s4-throughline",
+      "section": "ECC-S4",
+      "dimension": "D7",
+      "type": "throughline",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Observing life \"under the sun,\" the Teacher finds that wealth never satisfies, that oppression and injustice go unremedied, and that even wisdom cannot discover what God has done or what will come after a man; so he calls the reader to fear God and to receive the eating, drinking, and enjoyment of one's labor as a gift from His hand."
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s4-thread-fear-god",
+      "section": "ECC-S4",
+      "dimension": "D3",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Fear God: the Teacher's repeated command runs through the section. After warning about rash words and vows he says, \"Therefore, fear God\" (5:7); wisdom's balance is kept because \"he who fears God will follow both warnings\" (7:18); and against the injustice he observes he still affirms \"it will go well with those who fear God\" (8:12), while the wicked \"do not fear God\" (8:13)."
+      },
+      "refs": [
+        "ECC.5.7",
+        "ECC.7.18",
+        "ECC.8.12",
+        "ECC.8.13"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s4-thread-eat-drink-enjoy",
+      "section": "ECC-S4",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Eat, drink, and enjoy—a gift from God: over and over the Teacher commends the enjoyment of one's labor and names God as its giver. It is God who \"has enabled him to enjoy\" his lot, so that enjoyment is \"a gift from God\" (5:19); there is nothing better \"than to eat and drink and be merry\" (8:15); and he urges, \"Go, eat your bread with joy, and drink your wine with a cheerful heart\" (9:7)."
+      },
+      "refs": [
+        "ECC.5.18",
+        "ECC.5.19",
+        "ECC.8.15",
+        "ECC.9.7"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s4-thread-cannot-find-out",
+      "section": "ECC-S4",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Man cannot find out what God has done or what comes after him: the Teacher returns again and again to the limits of knowing. \"Who can tell a man what will come after him under the sun?\" (6:12); wisdom itself is \"out of reach and very deep\" (7:24); a man \"is unable to comprehend the work that is done under the sun\" (8:17); and \"Man does not know what lies ahead\" (9:1)."
+      },
+      "refs": [
+        "ECC.6.12",
+        "ECC.7.24",
+        "ECC.8.17",
+        "ECC.9.1"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s4-thread-one-fate",
+      "section": "ECC-S4",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "One fate for all—the same place: whatever a man's wealth or wisdom, the section keeps returning to death as the common end. \"Do not all go to the same place?\" (6:6); \"death is the end of every man\" (7:2); and there is \"a common fate for the righteous and the wicked\" alike (9:2), \"one fate for everyone\" (9:3)."
+      },
+      "refs": [
+        "ECC.6.6",
+        "ECC.7.2",
+        "ECC.9.2",
+        "ECC.9.3"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s4-thread-this-too-is-futile",
+      "section": "ECC-S4",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "\"This too is futile\": the Teacher's verdict on things under the sun recurs like a refrain. He pronounces it over the love of money (5:10), over the wandering of desire (6:9), over the laughter of fools (7:6), and over the injustice by which the righteous and wicked each receive the other's due (8:14)."
+      },
+      "refs": [
+        "ECC.5.10",
+        "ECC.6.9",
+        "ECC.7.6",
+        "ECC.8.14"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s4-q-where-enjoyment-commended",
+      "section": "ECC-S4",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Across this whole section, in which places does the Teacher tell a person to eat, drink, and enjoy their labor, and what does he say makes such enjoyment possible?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The Teacher commends enjoyment at several points across the section: to \"eat and drink, and to find satisfaction in all the labor one does under the sun\" (5:18); that there is nothing better than \"to eat and drink and be merry\" (8:15); and \"Go, eat your bread with joy, and drink your wine with a cheerful heart\" (9:7). He says such enjoyment is possible because God gives it: God \"has enabled him to enjoy\" his lot, and this is \"a gift from God\" (5:19); the joy accompanies a man in his labor \"during the days of his life that God gives him\" (8:15); and one may go and enjoy because \"God has already approved your works\" (9:7)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s4-q-limits-of-knowing",
+      "section": "ECC-S4",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "text": {
+        "en": "The section says again and again that no one can find out what God has done or what will come after a man. Gathering these statements, what does the Teacher conclude a person cannot know, and in whose keeping does he say the righteous and the wise are held?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Trace the refrain: no one can tell a man \"what will come after him under the sun\" (6:12); wisdom is \"out of reach and very deep\" (7:24); a man \"is unable to comprehend the work that is done under the sun\" (8:17), even if the wise claim to know; and \"Man does not know what lies ahead, whether love or hate\" (9:1). The text then places what man cannot grasp in God's keeping: the righteous and the wise, and their deeds, \"are in God's hands\" (9:1). Keep to what the text states—the limit of human knowing under the sun and God's holding of these things—without turning it into a claim the passage does not make."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s4-q-wisdom-strength-and-limit",
+      "section": "ECC-S4",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "text": {
+        "en": "The section both praises wisdom and marks its limits. Gathering every place wisdom is spoken of across the section, what does the text say wisdom can do, and what does it say wisdom cannot do?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "What wisdom does: it is a shelter like money and \"preserves the life of its owner\" (7:12); it makes a wise man \"stronger than ten rulers in a city\" (7:19); it \"brightens his face\" (8:1); a poor wise man \"saved the city by his wisdom\" (9:15), so that \"Wisdom is better than weapons of war\" (9:18). What wisdom cannot do: the Teacher resolves, \"I resolve to be wise,\" yet \"it was beyond me\" (7:23); even the wise man \"is unable to comprehend the work that is done under the sun\" (8:17); and the poor man's saving wisdom is forgotten and \"despised\" (9:16). Hold both together as the text does—wisdom's real strength and its real limit—without adding more than it states."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s4-q-fear-god-and-enjoy",
+      "section": "ECC-S4",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Across the whole section the Teacher says both to fear God and to enjoy the life and labor God gives. Drawing these two calls together from the different places they appear, how does the text set them side by side?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The two run through the section together. He commands, \"Therefore, fear God\" (5:7), and says \"it will go well with those who fear God\" (8:12); in the same breath as observing life's futility he commends enjoyment—that there is nothing better than \"to eat and drink and be merry\" (8:15) as a portion God gives, and \"Go, eat your bread with joy\" because \"God has already approved your works\" (9:7). The text holds them together: reverence toward God and glad reception of one's daily lot as His gift stand side by side, not opposed. Stay with what the passage states and do not press it beyond the fear-of-God and enjoyment the Teacher names."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s5-throughline",
+      "section": "ECC-S5",
+      "dimension": "D7",
+      "type": "throughline",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "This section contrasts wisdom with folly and then presses the point home: because a person does not know what is coming or which effort will succeed, the Preacher urges diligent, varied labor rather than paralysis, and calls the young to rejoice while remembering that God will bring them to judgment."
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s5-thread-wisdom-and-folly",
+      "section": "ECC-S5",
+      "dimension": "D3",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Wisdom set against folly: the section repeatedly weighs the wise man over against the fool, warning that \"a little folly outweighs wisdom and honor\" and noting that \"The words of a wise man's mouth are gracious\" while the fool's lips consume him. The contrast runs from the opening images of the wise and foolish heart into the account of how each one speaks and toils."
+      },
+      "refs": [
+        "ECC.10.2",
+        "ECC.10.3",
+        "ECC.10.12",
+        "ECC.10.14"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s5-thread-you-do-not-know",
+      "section": "ECC-S5",
+      "dimension": "D7",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Not knowing what is coming: again and again the section states the limit of human knowledge—\"No one knows what is coming,\" \"you do not know what disaster may befall the land,\" \"you do not know the path of the wind,\" and \"you do not know which will succeed.\" This repeated ignorance is the ground on which the section's counsel to diversify and to keep working is built."
+      },
+      "refs": [
+        "ECC.10.14",
+        "ECC.11.2",
+        "ECC.11.5",
+        "ECC.11.6"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s5-thread-king-and-ruler",
+      "section": "ECC-S5",
+      "dimension": "D3",
+      "type": "thread",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Conduct before kings and rulers: the section keeps returning to those in power—counseling calm when \"the ruler's temper flares,\" observing \"an error that proceeds from the ruler,\" pronouncing woe or blessing on a land by its king, and warning \"Do not curse the king even in your thoughts.\" It teaches measured, careful conduct toward authority in an uncertain world."
+      },
+      "refs": [
+        "ECC.10.4",
+        "ECC.10.5",
+        "ECC.10.16",
+        "ECC.10.20"
+      ],
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s5-q-where-you-do-not-know",
+      "section": "ECC-S5",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Gathering the whole section, at what points does the Preacher say that a person does not know what is coming or which effort will succeed?"
+      },
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "The section states this limit repeatedly: of the fool, \"No one knows what is coming, and who can tell him what will come after him?\" (10:14); the reason to divide one's portion among many is that \"you do not know what disaster may befall the land\" (11:2); \"you do not know the path of the wind, or how the bones are formed in a mother's womb, so you cannot understand the work of God\" (11:5); and one is to sow morning and evening because \"you do not know which will succeed, whether this or that, or if both will equally prosper\" (11:6)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s5-q-not-knowing-grounds-diligence",
+      "section": "ECC-S5",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "text": {
+        "en": "The section says plainly that we do not know what is coming, yet it does not tell us to stop working. How does its repeated 'you do not know' lead into its call to sow and labor?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The text turns not-knowing into a reason for action, not inaction. Because \"you do not know what disaster may befall the land,\" one is to \"Divide your portion among seven, or even eight\" (11:2)—spreading the risk. Because one cannot read the outcome, \"He who watches the wind will fail to sow\" (11:4), and instead one should \"Sow your seed in the morning, and do not rest your hands in the evening, for you do not know which will succeed\" (11:6). The uncertainty that silences the fool (10:14) becomes, for the diligent, the very ground for varied and persistent work. Keep to what the text observably counsels—diligence under uncertainty—without adding promises the passage does not make."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s5-q-conduct-toward-rulers",
+      "section": "ECC-S5",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Kings and rulers come up again and again in this section. Gathering those places, what does the text observe about rulers, and how does it tell a person to act toward them?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The section both observes rulers and counsels conduct toward them. It observes disorder—\"an error that proceeds from the ruler\" that sets \"Folly is appointed to great heights\" (10:5-6)—and weighs a land by its king, pronouncing \"Woe to you, O land whose king is a youth\" against \"Blessed are you, O land whose king is a son of nobles\" (10:16-17). For conduct it counsels restraint: when \"the ruler's temper flares,\" \"do not abandon your post, for calmness lays great offenses to rest\" (10:4), and \"Do not curse the king even in your thoughts\" because \"a bird of the air may carry your words\" (10:20). Stay with what the text states—careful, calm conduct before power—without drawing conclusions it does not."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s5-q-wisdom-and-uncertainty-together",
+      "section": "ECC-S5",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "text": {
+        "en": "The section opens by exalting wisdom over folly and closes by urging diligent labor and joy under judgment. How do the earlier praise of wisdom and skill and the later call to work and rejoice belong together in one argument?"
+      },
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "The section moves from what wisdom is to how it lives under uncertainty. Early on wisdom shows itself in skill and speech—\"skill produces success\" (10:10) and \"The words of a wise man's mouth are gracious\" (10:12), against the fool who multiplies words yet \"No one knows what is coming\" (10:14). The later chapter puts that wisdom to work where outcomes are hidden: cast bread upon the waters, divide one's portion, sow morning and evening (11:1-6). It ends by holding joy and accountability together—\"Rejoice, O young man, while you are young\" yet \"know that for all these things God will bring you to judgment\" (11:9). Wise living, in the text's terms, is diligent, measured, and joyful action carried out in the awareness that God brings all to judgment. Keep to the text's stated terms and do not import doctrine beyond them."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s6-throughline",
+      "section": "ECC-S6",
+      "dimension": "D7",
+      "type": "throughline",
+      "age_tier": "all",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "Before old age and death come, when \"the dust returns to the ground\" and \"the spirit returns to God who gave it,\" the Teacher calls the young to \"Remember your Creator.\" When all has been heard, the conclusion of the whole matter is to \"Fear God and keep His commandments,\" because \"God will bring every deed into judgment.\""
+      },
+      "version": 1,
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s6-q-remember-to-fear-god",
+      "section": "ECC-S6",
+      "dimension": "D7",
+      "type": "question",
+      "age_tier": "all",
+      "difficulty": 3,
+      "review_status": "reviewed",
+      "text": {
+        "en": "The section opens by calling the young to \"Remember your Creator in the days of your youth\" (v1) and closes, \"When all has been heard,\" with \"Fear God and keep His commandments\" (v13). Reading the whole section together, how does remembering the Creator before old age and death lead to the conclusion the Teacher reaches at the end?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Let the family trace the section's movement rather than settle on one verse. It begins with a summons to \"Remember your Creator\" while one is still young, and then paints the slow failing of the body and the coming of death, when \"the dust returns to the ground\" and \"the spirit returns to God who gave it\" (v1-7). After the Teacher's work is described (v9-12), the section gathers to its point: \"the conclusion of the matter\" is to \"Fear God and keep His commandments, because this is the whole duty of man\" (v13), \"For God will bring every deed into judgment\" (v14). Help them see that the text ties remembering the Creator now to fearing Him and keeping His commandments in view of that judgment. Keep the discussion inside what the text states; do not add doctrine the passage does not name (WCF 1: Scripture is sufficient and interprets itself)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s6-q-what-returns-and-whole-duty",
+      "section": "ECC-S6",
+      "dimension": "D5",
+      "type": "question",
+      "age_tier": "adult",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "According to verse 7, what two things \"return,\" and to where does each return; and according to verse 13, what does the Teacher call \"the whole duty of man\"?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "answer_key",
+        "text": {
+          "en": "In verse 7 \"the dust returns to the ground from which it came\" and \"the spirit returns to God who gave it.\" In verse 13 the Teacher says, \"Fear God and keep His commandments, because this is the whole duty of man.\""
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
+    },
+    {
+      "id": "ecc-s6-q-books-versus-conclusion",
+      "section": "ECC-S6",
+      "dimension": "D6",
+      "type": "question",
+      "age_tier": "youth",
+      "difficulty": 2,
+      "review_status": "reviewed",
+      "text": {
+        "en": "The Teacher warns that \"There is no end to the making of many books, and much study wearies the body\" (v12), yet the very next words give a short, plain conclusion: \"Fear God and keep His commandments\" (v13). Across this section, what does the contrast between endless books and this one conclusion teach about where a person should place their attention?"
+      },
+      "version": 1,
+      "leader_reference": {
+        "kind": "leader_note",
+        "text": {
+          "en": "Stay with what the text says. The section values wisdom and careful words — \"The words of the wise are like goads\" and the Teacher \"searched to find delightful sayings and to record accurate words of truth\" (v10-11) — so the point is not that study is worthless. Rather, after warning that \"There is no end to the making of many books, and much study wearies the body\" (v12), the Teacher reduces everything to one plain conclusion once \"all has been heard\": \"Fear God and keep His commandments\" (v13). Help the family notice that the section moves from the endlessness of many books to a single, clear duty. Keep the focus on the contrast the text draws, without importing outside teaching about learning (WCF 1)."
+        },
+        "provenance": {
+          "reviewed_by": "claude-adversarial",
+          "reviewed_date": "2026-07-19",
+          "guardrail": "WCF-1"
+        }
+      },
+      "provenance": {
+        "drafted_by": "claude",
+        "reviewed_by": "claude-adversarial",
+        "reviewed_date": "2026-07-19",
+        "guardrail": "WCF-1"
+      }
     }
   ]
 }
