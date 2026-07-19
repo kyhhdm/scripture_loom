@@ -1,0 +1,75 @@
+{
+ "book": "PHP",
+ "pericopes": [
+  {
+   "id": "PHP-001",
+   "range": "PHP.1.1-11",
+   "title_en": "Greeting, Thanksgiving, and Prayer for the Philippians",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "PHP-002",
+   "range": "PHP.1.12-26",
+   "title_en": "Christ Magnified Through Paul's Imprisonment",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "PHP-003",
+   "range": "PHP.1.27-30",
+   "title_en": "A Call to Stand Firm in One Spirit",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "PHP-004",
+   "range": "PHP.2.1-11",
+   "title_en": "The Humility and Exaltation of Christ",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "PHP-005",
+   "range": "PHP.2.12-18",
+   "title_en": "Working Out Salvation as Lights in the World",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "PHP-006",
+   "range": "PHP.2.19-30",
+   "title_en": "Timothy and Epaphroditus Commended",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "PHP-007",
+   "range": "PHP.3.1-14",
+   "title_en": "True Righteousness Through Christ, Not the Law",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "PHP-008",
+   "range": "PHP.3.15-21",
+   "title_en": "Following Paul's Example, Citizenship in Heaven",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "PHP-009",
+   "range": "PHP.4.1-9",
+   "title_en": "Final Exhortations to Joy, Peace, and Right Thinking",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "PHP-010",
+   "range": "PHP.4.10-23",
+   "title_en": "Paul's Contentment and Closing Greetings",
+   "title_zh": "",
+   "status": "seeded"
+  }
+ ]
+}

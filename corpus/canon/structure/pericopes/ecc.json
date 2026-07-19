@@ -1,0 +1,131 @@
+{
+ "book": "ECC",
+ "pericopes": [
+  {
+   "id": "ECC-001",
+   "range": "ECC.1.1-11",
+   "title_en": "The Vanity of Life Under the Sun",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "ECC-002",
+   "range": "ECC.1.12-18",
+   "title_en": "Solomon's Quest for Wisdom",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "ECC-003",
+   "range": "ECC.2.1-11",
+   "title_en": "The Vanity of Pleasure",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "ECC-004",
+   "range": "ECC.2.12-26",
+   "title_en": "The Vanity of Wisdom and Toil",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "ECC-005",
+   "range": "ECC.3.1-15",
+   "title_en": "A Time for Everything",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "ECC-006",
+   "range": "ECC.3.16-22",
+   "title_en": "The Common Fate of Man and Beast",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "ECC-007",
+   "range": "ECC.4.1-16",
+   "title_en": "The Vanities of Oppression and Ambition",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "ECC-008",
+   "range": "ECC.5.1-8",
+   "title_en": "Reverence in Worship and Vows",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "ECC-009",
+   "range": "ECC.5.9-20",
+   "title_en": "The Vanity of Riches",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "ECC-010",
+   "range": "ECC.6.1-12",
+   "title_en": "The Vanity of Wealth Without Enjoyment",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "ECC-011",
+   "range": "ECC.7.1-10",
+   "title_en": "A Good Name and Sober Reflection",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "ECC-012",
+   "range": "ECC.7.11-29",
+   "title_en": "The Value and Scarcity of Wisdom",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "ECC-013",
+   "range": "ECC.8.1-17",
+   "title_en": "Wisdom in Obeying the King",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "ECC-014",
+   "range": "ECC.9.1-18",
+   "title_en": "Wisdom, Death, and Chance",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "ECC-015",
+   "range": "ECC.10.1-11",
+   "title_en": "Wisdom and Folly Contrasted",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "ECC-016",
+   "range": "ECC.10.12-20",
+   "title_en": "The Words of the Wise and the Fool",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "ECC-017",
+   "range": "ECC.11.1-10",
+   "title_en": "Diligence in an Uncertain Life",
+   "title_zh": "",
+   "status": "seeded"
+  },
+  {
+   "id": "ECC-018",
+   "range": "ECC.12.1-14",
+   "title_en": "Remember Your Creator",
+   "title_zh": "",
+   "status": "seeded"
+  }
+ ]
+}
