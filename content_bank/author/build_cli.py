@@ -7,9 +7,11 @@ review_status "draft"; staging into the store stays a separate human-gated step.
 """
 import argparse
 import json
+import os
 import pathlib
 import random
 import re
+import shutil
 import time
 
 from . import (build_brief_prompt, build_draft_prompt,
@@ -166,8 +168,15 @@ def _default_manifest_path(book):
 
 
 def run(book, *, units=None, kind="all", review_on=False, max_repair=2,
-        limit=None, manifest_path=None, drafts_dir=None, briefs_dir=None):
-    if not llm_configured():
+        limit=None, manifest_path=None, drafts_dir=None, briefs_dir=None,
+        backend="llm_core"):
+    os.environ["SCRIPTURE_LOOM_LLM_BACKEND"] = backend
+    if backend == "claude":
+        if shutil.which("claude") is None:
+            raise LLMUnavailable(
+                "backend=claude but the 'claude' CLI is not on PATH; install "
+                "Claude Code or use --backend llm_core")
+    elif not llm_configured():
         raise LLMUnavailable(
             "no LLM credential (set ARK_API_KEY or llm_api_key); see CLAUDE.md")
     manifest_path = pathlib.Path(manifest_path or _default_manifest_path(book))
@@ -213,10 +222,13 @@ def main(argv=None):
     ap.add_argument("--limit", type=int)
     ap.add_argument("--manifest")
     ap.add_argument("--drafts-dir")
+    ap.add_argument("--backend", choices=("llm_core", "claude"), default="llm_core",
+                    help="llm_core = deepseek via API credits (default); "
+                         "claude = Claude Code headless via subscription")
     a = ap.parse_args(argv)
     res = run(a.book, units=a.units, kind=a.kind, review_on=a.review,
               max_repair=a.max_repair, limit=a.limit, manifest_path=a.manifest,
-              drafts_dir=a.drafts_dir)
+              drafts_dir=a.drafts_dir, backend=a.backend)
     print(f"\nDone. ok={len(res['ok'])} failed={len(res['failed'])}")
     return 1 if res["failed"] else 0
 

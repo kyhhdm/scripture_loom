@@ -128,6 +128,33 @@ class OrchestratorTest(unittest.TestCase):
             with self.assertRaises(build_cli.LLMUnavailable):
                 build_cli.run("MAT", units=["MAT-035"])
 
+    def test_claude_backend_skips_llm_core_config_gate(self):
+        # backend=claude must NOT require ARK_API_KEY (subscription path);
+        # llm_configured() is llm_core-specific and returns False here. Empty
+        # work queue (unit already drafted) so no real build/LLM call happens.
+        import os
+        with tempfile.TemporaryDirectory() as d:
+            m = manifest_mod.init_manifest("MAT", ["MAT-035"])
+            manifest_mod.set_stage(m, "MAT-035", "drafted")
+            mpath = pathlib.Path(d) / "manifest.json"
+            manifest_mod.save(mpath, m)
+            with mock.patch("content_bank.author.build_cli.llm_configured",
+                            return_value=False), \
+                 mock.patch("content_bank.author.build_cli.shutil.which",
+                            return_value="/usr/bin/claude"):
+                res = build_cli.run("MAT", kind="pericope", manifest_path=mpath,
+                                    drafts_dir=pathlib.Path(d) / "drafts",
+                                    backend="claude")
+            self.assertEqual(res, {"ok": [], "failed": {}})
+            self.assertEqual(os.environ.get("SCRIPTURE_LOOM_LLM_BACKEND"), "claude")
+        os.environ.pop("SCRIPTURE_LOOM_LLM_BACKEND", None)
+
+    def test_claude_backend_requires_cli_on_path(self):
+        with mock.patch("content_bank.author.build_cli.shutil.which",
+                        return_value=None):
+            with self.assertRaises(build_cli.LLMUnavailable):
+                build_cli.run("MAT", units=["MAT-035"], backend="claude")
+
 
 class ReviewFlowTest(unittest.TestCase):
     def test_review_on_runs_review_then_regate_then_writes(self):
