@@ -131,3 +131,28 @@ deterministic pipeline **and** a strong model at subscription cost when quality 
 Recommended default for real library builds; keep `--backend llm_core` for cheap bulk
 drafts a human will heavily rewrite anyway. (Cost of the win: Opus is slower — one
 `claude` process per call, no `--bare` — and draws down subscription usage windows.)
+
+## Second follow-up: does `deepseek-v4-pro` close the gap? No.
+
+Ran the same PHP-002 unit with `--backend llm_core --model deepseek-v4-pro --review`
+(the `--model` flag added this session), to test whether a stronger *deepseek* buys the
+padding discipline without Opus. Four-way:
+
+| PHP-002 build | Items | D2 | Refs | Defects | Cost/unit |
+|---|---|---|---|---|---|
+| Claude workflow | 18 | 1 | 16/16 | 0 | subscription |
+| llm_core flash | 31 | 7 | 0/29\* | 0 | ~$0.03 |
+| llm_core **pro** | **31** | 4 | 30/30 | 0 | **$1.03** |
+| claude Opus (sub) | 16 | 2 | 0/14\* | 0 | subscription |
+
+\* flash/Opus PHP-002 predate the leader-reference fix; pro postdates it (30/30) — a
+timing artifact, not a model effect.
+
+**Finding:** pro does **not** solve over-generation. Still 31 items (~2× workflow/Opus);
+it merely *redistributes* the padding (D2 7→4, but D7→6 and D3→5). And it costs **$1.03
+and 6.7 min per pericope** (5 calls incl. a revise) — ~30× flash, in Opus's cost/latency
+territory but without Opus's discipline. References with pro are good (grounded, correct
+verses), confirming the reference fix is model-agnostic. **Verdict:** pro earns no slot
+between flash (cheap bulk) and Opus (quality). The over-generation is a model-judgment
+gap that only the strong model (Opus/workflow) closes; the deterministic anti-padding
+heuristic remains the way to move it into the gate layer.
