@@ -252,8 +252,9 @@ author tests dir, matching the repo's existing test discovery).
 - [x] Stdlib-only-vs-SDK decision recorded (resolved: use vendored `llm_core`).
 - [x] Optional `--review` adversarial step (two lenses + revise), single-sourced
       against `rubric.py`, never bypassing the mechanical gates.
-- [ ] PHP draft library built with `build_cli.py --review`, and a written quality
-      comparison against the existing Claude-Code-built PHP library.
+- [x] PHP draft library built with `build_cli.py --review`, and a written quality
+      comparison against the existing Claude-Code-built PHP library
+      (`docs/sessions/2026-07-20-php-python-vs-claude-comparison.md`).
 
 ## Out of scope
 
