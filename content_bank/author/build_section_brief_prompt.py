@@ -27,6 +27,25 @@ zoom-out — answerable only across the section, not from one pericope.
 
 SAFEGUARD — add no doctrine the text does not state; keep to observable meaning."""
 
+_OUTPUT_SCHEMA = """## Output — a JSON array of section-scoped ContentItems
+
+Return ONLY a JSON array (no prose). Produce exactly one throughline, zero or more
+threads, and 2-4 arc questions, using the section id <SID> (lower-case in ids) and
+book <BOOK>:
+
+- EXACTLY ONE throughline:
+  {"id":"<sid>-throughline","section":"<SID>","dimension":"D7","type":"throughline","age_tier":"all","difficulty":2,"review_status":"draft","text":{"en":"..."},"version":1}
+- ZERO OR MORE threads (only if the motif genuinely RECURS across 2+ pericopes):
+  {"id":"<sid>-thread-<slug>","section":"<SID>","dimension":"D7"|"D3","type":"thread","age_tier":"all","difficulty":2,"review_status":"draft","text":{"en":"<name + what the recurrence teaches>"},"refs":["<BOOK>.C.V","..."],"version":1}
+  (refs = >=2 member verses where the motif recurs)
+- 2-4 arc QUESTIONS answerable only ACROSS the section:
+  {"id":"<sid>-q-<slug>","section":"<SID>","dimension":"D5"|"D6"|"D7","type":"question","age_tier":"youth"|"adult"|"all","difficulty":2|3,"review_status":"draft","text":{"en":"..."},"version":1}
+  Give D6/D7 a leader_note and D5 an answer_key, each with a leader_reference and
+  provenance {"reviewed_by":"claude","reviewed_date":"2026-07-20","guardrail":"WCF-1"};
+  throughline/thread need no leader_reference.
+
+Keep exactly one throughline. Quoted words must be verbatim BSB."""
+
 
 def build(section_id, book="MAT"):
     secs = {s["id"]: s for s in _sections.load(book)["sections"]}
@@ -48,6 +67,10 @@ def build(section_id, book="MAT"):
     parts.append("## WCF Chapter 1 — the method guardrail (full)\n"
                  + corpus_bridge.wcf_chapter1_text() + "\n")
     parts.append(_SHAPE)
+    parts.append("\n" + _OUTPUT_SCHEMA
+                 .replace("<SID>", section_id)
+                 .replace("<sid>", section_id.lower())
+                 .replace("<BOOK>", book))
     return "\n".join(parts)
 
 
