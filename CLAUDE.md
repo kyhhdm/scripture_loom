@@ -4,15 +4,22 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository state
 
-Two code trees exist so far; the rest is still design docs in `docs/`. No dependency manifest — everything is **Python 3 standard library only**, no third-party packages.
+Dependencies are managed with **`uv`** (root `pyproject.toml` + `uv.lock`); run tools via `uv run …` or an activated `.venv`. The project historically was Python-3-stdlib-only; that constraint was **dropped** when `llm_core/` was added (it needs `litellm`/`langchain`). `corpus/`, `content_bank/`, and `prototype/` still happen to use only the standard library, but are no longer *required* to — new third-party deps go in `pyproject.toml`.
 
 - `corpus/` — the source-text and reference layer beneath the content bank (Bible versions, pericopes, cross-references, and Westminster/commentary "lamppost" documents, normalized into a diff-able JSON canon store). Built per `docs/superpowers/specs/2026-07-17-corpus-assets-design.md`. See `corpus/README.md` and `corpus/PROVENANCE.md`.
+- `content_bank/` — the human-reviewed content library (briefs, drafted items, store) and its authoring pipeline (`content_bank/author/`, prompt builders + gates + store writer).
 - `prototype/` — the kit-generator proof (`docs/design-kit_generator.md`): static content + records → selector → printable kit.
+- `llm_core/` — the in-process LLM capability (synchronous `run_sync_llm` / `run_batch_llm`, default model `deepseek-v4-flash` via LiteLLM). Vendored from the mxlens service; see `llm_core/PROVENANCE.md`. Preparation for issue #16's standalone content-bank builder; the seam is `content_bank/author/llm.py`.
 
-Commands:
-- Corpus tests: `python3 -m unittest discover -s corpus/tests -v`
-- Prototype tests: `cd prototype && python3 -m unittest test_selector -v`
+Commands (run under uv):
+- Install/sync deps: `uv sync`
+- Corpus tests: `uv run python -m unittest discover -s corpus/tests -v`
+- Content-bank tests: `uv run python -m unittest discover -s content_bank/tests -v`
+- Prototype tests: `cd prototype && uv run python -m unittest test_selector -v`
+- llm_core tests (network-free, LLM seam mocked): `uv run python -m unittest discover -s llm_core/tests -v`
 - Rebuild the corpus canon from committed sources: see the rebuild command in `corpus/README.md` (deterministic; ingest scripts read only committed `sources/`, no network).
+
+**LLM calls** (`llm_core`) require a provider credential in the environment — `ARK_API_KEY` for the default `deepseek-v4-flash` (Volcengine). `llm_core/config.py` loads it from this repo's `.env` (git-ignored; see `.env.example`), path overridable via `SCRIPTURE_LOOM_LLM_ENV`. No key configured ⇒ `llm_configured()` is false and the seam raises before any network call.
 
 Key invariant in `corpus/`: `corpus/lib/passage.py:get_passage()` is the single read path for Bible text and enforces the license gate — only `role: displayable` assets licensed `public-domain`/`CC-BY` are served in product mode; copyrighted texts live in git-ignored `corpus/sources/private/` and are never committed or shipped.
 

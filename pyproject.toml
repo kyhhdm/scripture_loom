@@ -1,0 +1,27 @@
+[project]
+name = "scripture-loom"
+version = "0.1.0"
+description = "Preparation and reflection system for unplugged family Bible study"
+requires-python = ">=3.11"
+# Runtime deps are for llm_core only (the vendored synchronous LLM path).
+# corpus/, content_bank/, and prototype/ remain pure-stdlib by nature, but the
+# project is no longer *required* to be stdlib-only.
+dependencies = [
+    "litellm>=1.81.13",
+    "langchain-core>=0.3",
+    "langchain-classic>=1.0.1",
+    "langchain-community>=0.4.1",
+    "structlog>=24.1",
+    "pydantic>=2.5",
+    "pydantic-settings>=2.1",
+    "python-dotenv>=1.0",
+]
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
+
+[tool.uv]
+# Virtual (non-packaged) project: uv manages the dependency venv but does not
+# build/install scripture_loom itself. Code is imported from the source tree
+# (run tools from the repo root, or via `uv run`).
+package = false
