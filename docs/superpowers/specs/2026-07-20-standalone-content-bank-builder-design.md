@@ -244,13 +244,13 @@ author tests dir, matching the repo's existing test discovery).
 
 ## Acceptance criteria (issue #16 + goal)
 
-- [ ] `build_cli.py` produces the same `draft` items the workflow does, gated on
+- [x] `build_cli.py` produces the same `draft` items the workflow does, gated on
       quote + schema **+ new ref-in-range** checks.
-- [ ] LLM access stays behind the single `llm()` seam (already done; mockable).
-- [ ] Rate-limit backoff + per-unit failure isolation.
-- [ ] Unit tests with the LLM seam mocked (no network).
-- [ ] Stdlib-only-vs-SDK decision recorded (resolved: use vendored `llm_core`).
-- [ ] Optional `--review` adversarial step (two lenses + revise), single-sourced
+- [x] LLM access stays behind the single `llm()` seam (already done; mockable).
+- [x] Rate-limit backoff + per-unit failure isolation.
+- [x] Unit tests with the LLM seam mocked (no network).
+- [x] Stdlib-only-vs-SDK decision recorded (resolved: use vendored `llm_core`).
+- [x] Optional `--review` adversarial step (two lenses + revise), single-sourced
       against `rubric.py`, never bypassing the mechanical gates.
 - [ ] PHP draft library built with `build_cli.py --review`, and a written quality
       comparison against the existing Claude-Code-built PHP library.
