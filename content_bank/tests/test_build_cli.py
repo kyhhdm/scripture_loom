@@ -243,6 +243,44 @@ class SectionBuildTest(unittest.TestCase):
                              ["r1", "r2"])
 
 
+class DraftStampTest(unittest.TestCase):
+    def test_stamps_model_run_onto_draft_items(self):
+        items = build_cli._stamp_draft_provenance(
+            [{"id": "a"}, {"id": "b", "provenance": {"note": "x"}}],
+            {"model": "opus", "backend": "claude", "run": "opus"})
+        self.assertEqual(items[0]["provenance"],
+                         {"model": "opus", "backend": "claude", "run": "opus"})
+        # merges into any existing provenance rather than clobbering it.
+        self.assertEqual(items[1]["provenance"]["note"], "x")
+        self.assertEqual(items[1]["provenance"]["model"], "opus")
+
+    def test_no_stamp_when_meta_absent(self):
+        items = build_cli._stamp_draft_provenance([{"id": "a"}], None)
+        self.assertNotIn("provenance", items[0])
+
+    def test_run_writes_draft_with_model_provenance(self):
+        with tempfile.TemporaryDirectory() as d:
+            drafts = pathlib.Path(d) / "drafts"
+            m = manifest_mod.init_manifest("MAT", ["MAT-035"])
+            mpath = pathlib.Path(d) / "manifest.json"
+            manifest_mod.save(mpath, m)
+            draft = json.dumps([dict(id="mat-035-d1-a", dimension="D1",
+                                     type="question", age_tier="child", difficulty=1,
+                                     review_status="draft", version=1, passage="MAT-035",
+                                     text={"en": "Who came to Jesus?"})])
+            with mock.patch("content_bank.author.build_cli._llm_with_backoff",
+                            side_effect=iter(["BRIEF", draft])), \
+                 mock.patch("content_bank.author.build_cli.llm_configured",
+                            return_value=True):
+                build_cli.run("MAT", units=["MAT-035"], kind="pericope",
+                              manifest_path=mpath, drafts_dir=drafts,
+                              briefs_dir=pathlib.Path(d) / "briefs", review_on=False,
+                              model="deepseek-v4-pro")
+            saved = json.loads((drafts / "MAT-035.json").read_text())
+            self.assertEqual(saved[0]["provenance"]["model"], "deepseek-v4-pro")
+            self.assertEqual(saved[0]["provenance"]["run"], "deepseek-v4-pro")
+
+
 class ReviewFlowTest(unittest.TestCase):
     def test_review_on_runs_review_then_regate_then_writes(self):
         with tempfile.TemporaryDirectory() as d:

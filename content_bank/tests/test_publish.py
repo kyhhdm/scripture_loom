@@ -47,6 +47,27 @@ class TestStamp(unittest.TestCase):
         publish.stamp([item], reviewed_date="2026-07-19", confirmed_by="kyhhdm")
         self.assertEqual(item["review_status"], "draft")
 
+    def test_draft_model_run_preserved_and_drives_drafted_by(self):
+        item = _q()
+        item["provenance"] = {"model": "deepseek-v4-pro", "backend": "llm_core",
+                              "run": "deepseek-v4-pro"}
+        out = publish.stamp([item], reviewed_date="2026-07-19", confirmed_by="kyhhdm")
+        prov = out[0]["provenance"]
+        self.assertEqual(prov["model"], "deepseek-v4-pro")
+        self.assertEqual(prov["backend"], "llm_core")
+        self.assertEqual(prov["run"], "deepseek-v4-pro")
+        # drafted_by defaults to the model when the draft recorded one.
+        self.assertEqual(prov["drafted_by"], "deepseek-v4-pro")
+        self.assertEqual(schema.validate_item(out[0]), [])
+
+    def test_explicit_drafted_by_overrides_model(self):
+        item = _q()
+        item["provenance"] = {"model": "opus", "backend": "claude", "run": "opus"}
+        out = publish.stamp([item], reviewed_date="2026-07-19", confirmed_by="k",
+                            drafted_by="human")
+        self.assertEqual(out[0]["provenance"]["drafted_by"], "human")
+        self.assertEqual(out[0]["provenance"]["model"], "opus")
+
 
 class TestPublishRollback(unittest.TestCase):
     def test_absent_store_removed_on_invalid(self):

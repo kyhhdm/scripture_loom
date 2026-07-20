@@ -170,6 +170,18 @@ def _save_verdicts(verdicts_dir, unit_id, review_out):
                 _verdicts_by_item(review_out))
 
 
+def _stamp_draft_provenance(items, stamp):
+    """Record which model/run drafted each item (survives publish → the store).
+    `stamp` is {model, backend, run} or None (no stamp — legacy/tests)."""
+    if not stamp:
+        return items
+    for it in items:
+        prov = dict(it.get("provenance") or {})
+        prov.update(stamp)
+        it["provenance"] = prov
+    return items
+
+
 def _regate(prompt, items, book, allowed, *, max_repair, dim_cap=gates.DEFAULT_DIM_CAP):
     return _repair_to_clean(prompt, items, book, allowed, max_repair=max_repair,
                             dim_cap=dim_cap, where="review+")
@@ -193,7 +205,7 @@ def _section_text(book, sid):
 
 def build_pericope(pid, book, *, drafts_dir, briefs_dir=None, verdicts_dir=None,
                    manifest_obj, manifest_path, review_on=False, max_repair=2,
-                   dim_cap=gates.DEFAULT_DIM_CAP):
+                   dim_cap=gates.DEFAULT_DIM_CAP, draft_stamp=None):
     briefs_dir = briefs_dir or _BRIEFS_DIR
     brief_path = pathlib.Path(briefs_dir) / f"{pid.lower()}.md"
     if manifest_obj["units"][pid]["stage"] == "pending" or not brief_path.exists():
@@ -221,6 +233,7 @@ def build_pericope(pid, book, *, drafts_dir, briefs_dir=None, verdicts_dir=None,
         items = _draft_with_repair(prompt, book, allowed, max_repair=max_repair,
                                    dim_cap=dim_cap)
 
+    _stamp_draft_provenance(items, draft_stamp)
     _write_json(pathlib.Path(drafts_dir) / f"{pid}.json", items)
     manifest_mod.set_stage(manifest_obj, pid, "drafted")
     manifest_mod.save(manifest_path, manifest_obj)
@@ -229,7 +242,7 @@ def build_pericope(pid, book, *, drafts_dir, briefs_dir=None, verdicts_dir=None,
 
 def build_section(sid, book, *, drafts_dir, briefs_dir=None, verdicts_dir=None,
                   manifest_obj, manifest_path, review_on=False, max_repair=2,
-                  dim_cap=gates.DEFAULT_DIM_CAP):
+                  dim_cap=gates.DEFAULT_DIM_CAP, draft_stamp=None):
     briefs_dir = briefs_dir or _BRIEFS_DIR
     brief_path = pathlib.Path(briefs_dir) / f"{sid.lower()}.md"
     if manifest_obj["units"][sid]["stage"] == "pending" or not brief_path.exists():
@@ -256,6 +269,7 @@ def build_section(sid, book, *, drafts_dir, briefs_dir=None, verdicts_dir=None,
     else:
         items = _draft_with_repair(prompt, book, allowed, max_repair=max_repair,
                                    dim_cap=dim_cap)
+    _stamp_draft_provenance(items, draft_stamp)
     _write_json(pathlib.Path(drafts_dir) / f"{sid}.json", items)
     manifest_mod.set_stage(manifest_obj, sid, "drafted")
     manifest_mod.save(manifest_path, manifest_obj)
@@ -314,6 +328,8 @@ def run(book, *, units=None, kind="all", review_on=False, max_repair=2,
     if limit:
         todo = todo[:limit]
 
+    draft_stamp = {"model": _effective_model(backend, model), "backend": backend,
+                   "run": slug}
     ok, failed = [], {}
     for uid in todo:
         meta = m["units"][uid]
@@ -322,12 +338,14 @@ def run(book, *, units=None, kind="all", review_on=False, max_repair=2,
                 build_pericope(uid, book, drafts_dir=drafts_dir, briefs_dir=briefs_dir,
                                verdicts_dir=verdicts_dir, manifest_obj=m,
                                manifest_path=manifest_path, review_on=review_on,
-                               max_repair=max_repair, dim_cap=dim_cap)
+                               max_repair=max_repair, dim_cap=dim_cap,
+                               draft_stamp=draft_stamp)
             else:
                 build_section(uid, book, drafts_dir=drafts_dir, briefs_dir=briefs_dir,
                               verdicts_dir=verdicts_dir, manifest_obj=m,
                               manifest_path=manifest_path, review_on=review_on,
-                              max_repair=max_repair, dim_cap=dim_cap)
+                              max_repair=max_repair, dim_cap=dim_cap,
+                              draft_stamp=draft_stamp)
             ok.append(uid)
             print(f"[ok] {uid}")
         except (GateError, RuntimeError, ValueError) as exc:

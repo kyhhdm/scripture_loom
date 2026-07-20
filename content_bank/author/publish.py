@@ -8,20 +8,25 @@ from . import store_writer
 from ..lib import content, validate
 
 
-def _provenance(reviewed_date, confirmed_by, drafted_by, reviewed_by, guardrail):
-    return {"drafted_by": drafted_by, "reviewed_by": reviewed_by,
-            "reviewed_date": reviewed_date, "guardrail": guardrail,
-            "confirmed_by": confirmed_by}
+# Provenance keys stamped onto the draft at build time (which model/run produced it);
+# preserved verbatim into the published record so model identity survives to the store.
+_DRAFT_KEYS = ("model", "backend", "run")
 
 
-def stamp(items, *, reviewed_date, confirmed_by, drafted_by="claude",
+def stamp(items, *, reviewed_date, confirmed_by, drafted_by=None,
           reviewed_by="claude-adversarial", guardrail="WCF-1"):
-    prov = _provenance(reviewed_date, confirmed_by, drafted_by, reviewed_by, guardrail)
     out = []
     for it in items:
         it = copy.deepcopy(it)
         it["review_status"] = "published"
-        it["provenance"] = dict(prov)
+        draft_prov = it.get("provenance") or {}
+        prov = {"drafted_by": drafted_by or draft_prov.get("model") or "claude",
+                "reviewed_by": reviewed_by, "reviewed_date": reviewed_date,
+                "guardrail": guardrail, "confirmed_by": confirmed_by}
+        for k in _DRAFT_KEYS:                    # carry model/backend/run forward
+            if draft_prov.get(k) is not None:
+                prov[k] = draft_prov[k]
+        it["provenance"] = prov
         ref = it.get("leader_reference")
         if ref is not None:
             ref["provenance"] = {"reviewed_by": reviewed_by,
