@@ -131,10 +131,43 @@ def refs_in_range(items, allowed):
     return flags
 
 
+DEFAULT_DIM_CAP = 3
+
+
+def thread_span_check(items, allowed):
+    """HARD: a `thread` item must recur across 2+ pericopes, so it is invalid on a
+    section that spans a single pericope. `allowed` is the per-pericope range list
+    (`section_allowed`), so len == 1 means a single-pericope section."""
+    if len(allowed) != 1:
+        return {}
+    return {it["id"]: ["thread on a single-pericope section (a thread must recur "
+                       "across 2+ pericopes)"]
+            for it in items if it.get("type") == "thread"}
+
+
+def dimension_cap_check(items, *, cap=DEFAULT_DIM_CAP):
+    """SOFT (anti-padding): flag every item in any dimension the unit emits > cap of.
+    Model-independent; fed into the repair loop to prune over-generation, then logged
+    (not hard-failed) if still over budget — a rich passage may legitimately exceed."""
+    counts = {}
+    for it in items:
+        counts[it.get("dimension")] = counts.get(it.get("dimension"), 0) + 1
+    over = {d for d, n in counts.items() if n > cap}
+    if not over:
+        return {}
+    return {it["id"]: [f"dimension {it.get('dimension')} over cap "
+                       f"({counts[it.get('dimension')]} > {cap}); keep the strongest "
+                       f"{cap}, drop the rest"]
+            for it in items if it.get("dimension") in over}
+
+
 def run_all(book, items, allowed):
+    """The HARD gate tier: quote + schema + ref-range + thread-span. Any flag here is
+    a defect the repair loop must clear or the unit fails. Soft anti-padding
+    (dimension_cap_check) is deliberately NOT included."""
     merged = {}
     for gate in (quote_check(book, items), schema_check(items),
-                 refs_in_range(items, allowed)):
+                 refs_in_range(items, allowed), thread_span_check(items, allowed)):
         for k, v in gate.items():
             merged.setdefault(k, []).extend(v)
     return merged

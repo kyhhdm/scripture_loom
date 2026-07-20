@@ -75,6 +75,46 @@ class RefsInRangeTest(unittest.TestCase):
         self.assertIn("php-s1-thread-x", flags)
 
 
+def _thread(iid, section="PHP-S1"):
+    return dict(id=iid, dimension="D7", type="thread", age_tier="all", difficulty=2,
+                review_status="draft", version=1, section=section,
+                text={"en": "joy motif"}, refs=["PHP.1.4", "PHP.1.18"])
+
+
+class ThreadSpanTest(unittest.TestCase):
+    def test_thread_on_single_pericope_section_flagged(self):
+        allowed = gates.section_allowed("PHP", "PHP-S1")  # spans 1 pericope
+        self.assertEqual(len(allowed), 1)
+        flags = gates.thread_span_check([_thread("php-s1-thread-x")], allowed)
+        self.assertIn("php-s1-thread-x", flags)
+
+    def test_thread_on_multi_pericope_section_ok(self):
+        allowed = gates.section_allowed("PHP", "PHP-S2")  # spans several pericopes
+        self.assertGreater(len(allowed), 1)
+        self.assertEqual(gates.thread_span_check([_thread("t", "PHP-S2")], allowed), {})
+
+    def test_non_thread_items_never_flagged(self):
+        allowed = gates.section_allowed("PHP", "PHP-S1")
+        q = _item(id="q", passage=None, section="PHP-S1", type="question")
+        q.pop("passage", None)
+        self.assertEqual(gates.thread_span_check([q], allowed), {})
+
+
+class DimensionCapTest(unittest.TestCase):
+    def test_over_cap_dimension_flags_its_items(self):
+        items = [_item(id=f"d2-{i}", dimension="D2") for i in range(4)]
+        flags = gates.dimension_cap_check(items, cap=3)
+        self.assertEqual(set(flags), {"d2-0", "d2-1", "d2-2", "d2-3"})
+
+    def test_at_cap_not_flagged(self):
+        items = [_item(id=f"d2-{i}", dimension="D2") for i in range(3)]
+        self.assertEqual(gates.dimension_cap_check(items, cap=3), {})
+
+    def test_cap_is_tunable(self):
+        items = [_item(id=f"d2-{i}", dimension="D2") for i in range(4)]
+        self.assertEqual(gates.dimension_cap_check(items, cap=5), {})
+
+
 class RunAllTest(unittest.TestCase):
     def test_merges_all_three_gates(self):
         allowed = gates.pericope_allowed("MAT", "MAT-035")
@@ -83,6 +123,17 @@ class RunAllTest(unittest.TestCase):
         flags = gates.run_all("MAT", [bad], allowed)
         self.assertIn("bad", flags)
         self.assertTrue(len(flags["bad"]) >= 2)  # schema + quote (+ ref)
+
+    def test_run_all_includes_thread_span_hard(self):
+        allowed = gates.section_allowed("PHP", "PHP-S1")
+        flags = gates.run_all("PHP", [_thread("php-s1-thread-y")], allowed)
+        self.assertIn("php-s1-thread-y", flags)
+
+    def test_run_all_excludes_soft_dimension_cap(self):
+        # dimension cap is SOFT — not part of run_all (the hard tier).
+        allowed = gates.pericope_allowed("MAT", "MAT-035")
+        items = [_item(id=f"d1-{i}", dimension="D1") for i in range(6)]
+        self.assertEqual(gates.run_all("MAT", items, allowed), {})
 
 
 if __name__ == "__main__":
