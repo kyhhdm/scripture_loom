@@ -75,6 +75,35 @@ class RepairLoopTest(unittest.TestCase):
                 build_cli._draft_with_repair("PROMPT", "MAT", self._allowed(),
                                              max_repair=1)
 
+    def _four_d2(self):
+        return json.dumps([dict(id=f"m-d2-{i}", dimension="D2", type="question",
+                                age_tier="child", difficulty=1, review_status="draft",
+                                version=1, passage="MAT-035",
+                                text={"en": "Then what happened next?"})
+                           for i in range(4)])
+
+    def test_soft_padding_only_logs_and_proceeds(self):
+        # 4 D2 items = over cap 3, but schema/quote/ref clean (soft flag only).
+        # After the repair budget the model still returns 4 -> must NOT raise.
+        with mock.patch("content_bank.author.build_cli._llm_with_backoff",
+                        return_value=self._four_d2()):
+            items = build_cli._draft_with_repair("PROMPT", "MAT", self._allowed(),
+                                                 max_repair=1, dim_cap=3)
+        self.assertEqual(len(items), 4)  # returned, not raised
+
+    def test_soft_padding_feeds_repair_then_clean(self):
+        over = self._four_d2()
+        clean = json.dumps([dict(id=f"m-d2-{i}", dimension="D2", type="question",
+                                 age_tier="child", difficulty=1, review_status="draft",
+                                 version=1, passage="MAT-035",
+                                 text={"en": "Then what happened next?"})
+                            for i in range(3)])
+        with mock.patch("content_bank.author.build_cli._llm_with_backoff",
+                        side_effect=[over, clean]):
+            items = build_cli._draft_with_repair("PROMPT", "MAT", self._allowed(),
+                                                 max_repair=2, dim_cap=3)
+        self.assertEqual(len(items), 3)  # pruned to cap
+
 
 import tempfile
 from content_bank.author import manifest as manifest_mod

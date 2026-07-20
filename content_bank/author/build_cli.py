@@ -64,17 +64,40 @@ def _repair_prompt(prompt, items, flags):
             + "\n\nReturn ONLY the corrected JSON array.")
 
 
-def _draft_with_repair(prompt, book, allowed, *, max_repair=2):
-    items = _parse_items(_llm_with_backoff(prompt))
-    flags = run_all(book, items, allowed)
+def _merge_flags(*dicts):
+    merged = {}
+    for d in dicts:
+        for k, v in d.items():
+            merged.setdefault(k, []).extend(v)
+    return merged
+
+
+def _repair_to_clean(prompt, items, book, allowed, *, max_repair, dim_cap, where):
+    """Drive HARD (run_all) + SOFT (dimension_cap) gates through the repair loop.
+    Both tiers are fed to the model each round so it fixes/prunes; after the budget,
+    remaining HARD flags fail the unit, remaining SOFT (anti-padding) flags only log
+    — a passage may legitimately exceed the cap, so padding never hard-blocks."""
+    hard = run_all(book, items, allowed)
+    soft = gates.dimension_cap_check(items, cap=dim_cap)
     rounds = 0
-    while flags and rounds < max_repair:
+    while (hard or soft) and rounds < max_repair:
         rounds += 1
-        items = _parse_items(_llm_with_backoff(_repair_prompt(prompt, items, flags)))
-        flags = run_all(book, items, allowed)
-    if flags:
-        raise GateError(f"gates unclean after {max_repair} repair(s): {flags}")
+        repair = _repair_prompt(prompt, items, _merge_flags(hard, soft))
+        items = _parse_items(_llm_with_backoff(repair))
+        hard = run_all(book, items, allowed)
+        soft = gates.dimension_cap_check(items, cap=dim_cap)
+    if hard:
+        raise GateError(f"hard gates unclean after {where}{max_repair} repair(s): {hard}")
+    if soft:
+        print(f"[warn] padding remains (advisory, not blocking): {soft}")
     return items
+
+
+def _draft_with_repair(prompt, book, allowed, *, max_repair=2,
+                       dim_cap=gates.DEFAULT_DIM_CAP):
+    items = _parse_items(_llm_with_backoff(prompt))
+    return _repair_to_clean(prompt, items, book, allowed, max_repair=max_repair,
+                            dim_cap=dim_cap, where="")
 
 
 def _write_json(path, obj):
@@ -83,16 +106,9 @@ def _write_json(path, obj):
                     encoding="utf-8")
 
 
-def _regate(prompt, items, book, allowed, *, max_repair):
-    flags = run_all(book, items, allowed)
-    rounds = 0
-    while flags and rounds < max_repair:
-        rounds += 1
-        items = _parse_items(_llm_with_backoff(_repair_prompt(prompt, items, flags)))
-        flags = run_all(book, items, allowed)
-    if flags:
-        raise GateError(f"gates unclean after review+{max_repair} repair(s): {flags}")
-    return items
+def _regate(prompt, items, book, allowed, *, max_repair, dim_cap=gates.DEFAULT_DIM_CAP):
+    return _repair_to_clean(prompt, items, book, allowed, max_repair=max_repair,
+                            dim_cap=dim_cap, where="review+")
 
 
 def _passage_text(book, pid):
@@ -112,7 +128,8 @@ def _section_text(book, sid):
 
 
 def build_pericope(pid, book, *, drafts_dir, briefs_dir=None, manifest_obj,
-                   manifest_path, review_on=False, max_repair=2):
+                   manifest_path, review_on=False, max_repair=2,
+                   dim_cap=gates.DEFAULT_DIM_CAP):
     briefs_dir = briefs_dir or _BRIEFS_DIR
     brief_path = pathlib.Path(briefs_dir) / f"{pid.lower()}.md"
     if manifest_obj["units"][pid]["stage"] == "pending":
@@ -133,9 +150,11 @@ def build_pericope(pid, book, *, drafts_dir, briefs_dir=None, manifest_obj,
         verdicts = review_mod.review(items, passage_text=passage, brief=brief,
                                      book=book, unit_id=pid)
         items = review_mod.revise(items, verdicts, passage_text=passage, brief=brief)
-        items = _regate(prompt, items, book, allowed, max_repair=max_repair)
+        items = _regate(prompt, items, book, allowed, max_repair=max_repair,
+                        dim_cap=dim_cap)
     else:
-        items = _draft_with_repair(prompt, book, allowed, max_repair=max_repair)
+        items = _draft_with_repair(prompt, book, allowed, max_repair=max_repair,
+                                   dim_cap=dim_cap)
 
     _write_json(pathlib.Path(drafts_dir) / f"{pid}.json", items)
     manifest_mod.set_stage(manifest_obj, pid, "drafted")
@@ -144,7 +163,7 @@ def build_pericope(pid, book, *, drafts_dir, briefs_dir=None, manifest_obj,
 
 
 def build_section(sid, book, *, drafts_dir, manifest_obj, manifest_path,
-                  review_on=False, max_repair=2):
+                  review_on=False, max_repair=2, dim_cap=gates.DEFAULT_DIM_CAP):
     allowed = gates.section_allowed(book, sid)
     prompt = build_section_brief_prompt.build(sid, book)
     if review_on:
@@ -154,9 +173,11 @@ def build_section(sid, book, *, drafts_dir, manifest_obj, manifest_path,
         verdicts = review_mod.review(items, passage_text=passage, brief="",
                                      book=book, unit_id=sid)
         items = review_mod.revise(items, verdicts, passage_text=passage, brief="")
-        items = _regate(prompt, items, book, allowed, max_repair=max_repair)
+        items = _regate(prompt, items, book, allowed, max_repair=max_repair,
+                        dim_cap=dim_cap)
     else:
-        items = _draft_with_repair(prompt, book, allowed, max_repair=max_repair)
+        items = _draft_with_repair(prompt, book, allowed, max_repair=max_repair,
+                                   dim_cap=dim_cap)
     _write_json(pathlib.Path(drafts_dir) / f"{sid}.json", items)
     manifest_mod.set_stage(manifest_obj, sid, "drafted")
     manifest_mod.save(manifest_path, manifest_obj)
@@ -169,7 +190,7 @@ def _default_manifest_path(book):
 
 def run(book, *, units=None, kind="all", review_on=False, max_repair=2,
         limit=None, manifest_path=None, drafts_dir=None, briefs_dir=None,
-        backend="llm_core", model=None):
+        backend="llm_core", model=None, dim_cap=gates.DEFAULT_DIM_CAP):
     os.environ["SCRIPTURE_LOOM_LLM_BACKEND"] = backend
     if model:
         os.environ["SCRIPTURE_LOOM_LLM_MODEL"] = model
@@ -203,11 +224,12 @@ def run(book, *, units=None, kind="all", review_on=False, max_repair=2,
             if meta["kind"] == "pericope":
                 build_pericope(uid, book, drafts_dir=drafts_dir, briefs_dir=briefs_dir,
                                manifest_obj=m, manifest_path=manifest_path,
-                               review_on=review_on, max_repair=max_repair)
+                               review_on=review_on, max_repair=max_repair,
+                               dim_cap=dim_cap)
             else:
                 build_section(uid, book, drafts_dir=drafts_dir, manifest_obj=m,
                               manifest_path=manifest_path, review_on=review_on,
-                              max_repair=max_repair)
+                              max_repair=max_repair, dim_cap=dim_cap)
             ok.append(uid)
             print(f"[ok] {uid}")
         except (GateError, RuntimeError, ValueError) as exc:
@@ -231,10 +253,15 @@ def main(argv=None):
                          "claude = Claude Code headless via subscription")
     ap.add_argument("--model", help="override the model (e.g. deepseek-v4-pro for "
                     "llm_core, or opus/sonnet for claude); default = backend's own")
+    ap.add_argument("--dim-cap", type=int, default=gates.DEFAULT_DIM_CAP,
+                    help="anti-padding: soft per-dimension item cap per unit "
+                         f"(default {gates.DEFAULT_DIM_CAP}); over-cap dimensions are "
+                         "fed to the repair loop, then logged (never hard-fail)")
     a = ap.parse_args(argv)
     res = run(a.book, units=a.units, kind=a.kind, review_on=a.review,
               max_repair=a.max_repair, limit=a.limit, manifest_path=a.manifest,
-              drafts_dir=a.drafts_dir, backend=a.backend, model=a.model)
+              drafts_dir=a.drafts_dir, backend=a.backend, model=a.model,
+              dim_cap=a.dim_cap)
     print(f"\nDone. ok={len(res['ok'])} failed={len(res['failed'])}")
     return 1 if res["failed"] else 0
 
