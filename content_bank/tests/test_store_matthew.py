@@ -11,9 +11,20 @@ class TestMatthewStore(unittest.TestCase):
         self.assertEqual(validate.validate_store("MAT")["errors"], [])
 
     def test_only_scoped_pericopes_present(self):
+        # Every passage in the store must be a real pericope defined in the
+        # corpus structure — no orphan/misnamed scopes. (The store now holds a
+        # growing reviewed draft library, so this checks membership rather than
+        # an exact pilot set.)
+        import json
+        pericope_ids = {
+            p["id"]
+            for p in json.load(
+                open("corpus/canon/structure/pericopes/mat.json")
+            )["pericopes"]
+        }
         store = content.load_book_store("MAT")
         passages = {i["passage"] for i in store["items"]}
-        self.assertEqual(passages, {"MAT-009", "MAT-013", "MAT-014", "MAT-015"})
+        self.assertTrue(passages <= pericope_ids, passages - pericope_ids)
 
     def test_gate_serves_published(self):
         # After the human confirmation gate, product mode serves the published
