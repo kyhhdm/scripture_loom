@@ -97,6 +97,12 @@ class BuildModelTests(unittest.TestCase):
         with self.assertRaises(FileNotFoundError):
             compare_html.build_model("PHP", ["runA", "nope"], base=self.base)
 
+    def test_rubric_and_brief_embedded(self):
+        model = self._model()
+        self.assertIn("seven axes", model["rubric"].lower())
+        # every unit carries a brief key (value may be None if no brief on file).
+        self.assertTrue(all("brief" in u for u in model["units"]))
+
 
 class RenderTests(unittest.TestCase):
     def test_single_self_contained_file(self):
@@ -106,6 +112,14 @@ class RenderTests(unittest.TestCase):
         self.assertNotIn("http://", html)
         self.assertNotIn("https://", html)
         self.assertIn("Export decisions", html)
+
+    def test_js_regex_backslashes_survive_templating(self):
+        # _PAGE must be a raw string, else Python turns \n in the md() JS regexes
+        # into real newlines and the page throws SyntaxError on load.
+        html = compare_html.render_html(
+            {"book": "PHP", "runs": [], "notes": [], "rubric": "", "units": []})
+        self.assertIn(r"/\n\n+/", html)
+        self.assertIn(r"\*\*", html)
 
 
 if __name__ == "__main__":

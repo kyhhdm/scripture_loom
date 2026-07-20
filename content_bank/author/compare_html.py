@@ -22,11 +22,18 @@ import argparse
 import json
 import pathlib
 
-from . import gates
+from . import gates, rubric
 
 _ROOT = pathlib.Path(__file__).resolve().parents[2]
 DEFAULT_BASE = _ROOT / "work" / "content_bank_build"
+BRIEFS = _ROOT / "content_bank" / "author" / "briefs"
 DIM_ORDER = ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8"]
+
+
+def _load_brief(unit):
+    """The unit's theological brief (markdown), or None. Briefs are lower-cased."""
+    p = BRIEFS / f"{unit.lower()}.md"
+    return p.read_text(encoding="utf-8") if p.is_file() else None
 
 
 def _allowed(book, unit):
@@ -145,18 +152,20 @@ def build_model(book, runs, base=None):
                                     verdicts.get(unit, {})) for it in items]
                 counts[run] = len(items)
             blocks.append({"dimension": dim, "counts": counts, "cells": cells})
-        units.append({"id": unit, "dimensions": blocks})
+        units.append({"id": unit, "brief": _load_brief(unit), "dimensions": blocks})
 
     seen = set()
     notes = [n for n in notes if not (n in seen or seen.add(n))]
-    return {"book": book, "runs": list(runs), "notes": notes, "units": units}
+    rubric_text = rubric.build() + "\n\n" + rubric.reference_criteria()
+    return {"book": book, "runs": list(runs), "notes": notes,
+            "rubric": rubric_text, "units": units}
 
 
 # --------------------------------------------------------------------------- #
 # Rendering
 # --------------------------------------------------------------------------- #
 
-_PAGE = """<meta charset="utf-8">
+_PAGE = r"""<meta charset="utf-8">
 <title>__TITLE__</title>
 <style>
 :root { color-scheme: light dark; }
@@ -196,6 +205,15 @@ summary .cnt { font-weight: 400; color: #888; font-size: 12px; }
 .chip.pass { background: #22c55e33; }
 .chip.fail { background: #ef444433; }
 .empty { color: #999; font-style: italic; font-size: 12px; padding: 4px 0; }
+details.ref { margin: 8px 16px; border: 1px solid #8886; border-radius: 8px; }
+details.ref > summary { padding: 8px 12px; cursor: pointer; font-weight: 600; }
+.refbody { padding: 4px 16px 12px; max-width: 70em; }
+.refbody h3 { font-size: 15px; margin: 12px 0 6px; }
+.refbody h4 { font-size: 13px; margin: 10px 0 4px; }
+.refbody p { margin: 6px 0; }
+details.brief { margin: 0 0 14px; border: 1px solid #3b82f677; border-radius: 8px;
+  background: #3b82f611; }
+details.brief > summary { padding: 8px 12px; cursor: pointer; font-weight: 600; }
 </style>
 <header>
   <h1>__TITLE__</h1>
@@ -204,6 +222,10 @@ summary .cnt { font-weight: 400; color: #888; font-size: 12px; }
   <span style="color:#888;font-size:12px">runs: __RUNS__</span>
 </header>
 <div id="note">__NOTE__</div>
+<details class="ref" id="rubric">
+  <summary>Rubric — the seven axes every item is judged against</summary>
+  <div class="refbody" id="rubric-body"></div>
+</details>
 <nav id="nav"></nav>
 <main id="main"></main>
 <script type="application/json" id="review-data">__DATA__</script>
@@ -221,6 +243,16 @@ function tally() {
   document.getElementById('tally').textContent = acc + ' accepted / ' + TOTAL + ' items';
 }
 function esc(s) { const d = document.createElement('div'); d.textContent = s == null ? '' : s; return d.innerHTML; }
+function md(src) {
+  if (!src) return '<em>no brief on file for this unit</em>';
+  return esc(src)
+    .replace(/^# (.*)$/gm, '<h3>$1</h3>')
+    .replace(/^## (.*)$/gm, '<h4>$1</h4>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .split(/\n\n+/)
+    .map(b => /^<h[34]>/.test(b.trim()) ? b : '<p>' + b.replace(/\n/g, ' ') + '</p>')
+    .join('');
+}
 
 function card(c) {
   const el = document.createElement('div');
@@ -249,6 +281,11 @@ function card(c) {
 function renderUnit(unit) {
   const main = document.getElementById('main');
   main.innerHTML = '';
+  const brief = document.createElement('details');
+  brief.className = 'brief';
+  brief.innerHTML = '<summary>Brief — ' + esc(unit.id) +
+    ' (what these items serve)</summary><div class="refbody">' + md(unit.brief) + '</div>';
+  main.appendChild(brief);
   for (const b of unit.dimensions) {
     const d = document.createElement('details');
     d.className = 'dim';
@@ -298,6 +335,7 @@ document.getElementById('export').onclick = () => {
   a.click();
 };
 
+document.getElementById('rubric-body').innerHTML = md(DATA.rubric);
 renderNav();
 if (DATA.units.length) renderUnit(DATA.units[0]);
 tally();
