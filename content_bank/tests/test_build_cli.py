@@ -129,5 +129,31 @@ class OrchestratorTest(unittest.TestCase):
                 build_cli.run("MAT", units=["MAT-035"])
 
 
+class ReviewFlowTest(unittest.TestCase):
+    def test_review_on_runs_review_then_regate_then_writes(self):
+        with tempfile.TemporaryDirectory() as d:
+            drafts = pathlib.Path(d) / "drafts"
+            briefs = pathlib.Path(d) / "briefs"
+            m = manifest_mod.init_manifest("MAT", ["MAT-035"])
+            mpath = pathlib.Path(d) / "manifest.json"
+            manifest_mod.save(mpath, m)
+            clean = json.dumps([dict(id="mat-035-d1-a", dimension="D1",
+                                     type="question", age_tier="child", difficulty=1,
+                                     review_status="draft", version=1, passage="MAT-035",
+                                     text={"en": "Who came to Jesus?"})])
+            r_pass = json.dumps({"mat-035-d1-a": {"verdict": "pass", "notes": ""}})
+            # _llm_with_backoff yields brief + draft; review.llm yields the two verdicts.
+            seq = iter(["BRIEF", clean])
+            with mock.patch("content_bank.author.build_cli._llm_with_backoff",
+                            side_effect=lambda *_a, **_k: next(seq)), \
+                 mock.patch("content_bank.author.review.llm",
+                            side_effect=[r_pass, r_pass]):
+                stage = build_cli.build_pericope(
+                    "MAT-035", "MAT", drafts_dir=drafts, briefs_dir=briefs,
+                    manifest_obj=m, manifest_path=mpath, review_on=True, max_repair=1)
+            self.assertEqual(stage, "drafted")
+            self.assertTrue((drafts / "MAT-035.json").exists())
+
+
 if __name__ == "__main__":
     unittest.main()
