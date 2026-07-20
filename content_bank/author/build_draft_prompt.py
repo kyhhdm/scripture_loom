@@ -46,8 +46,32 @@ _SCHEMA_BLOCK = """Each item MUST be a JSON object with these fields:
   id, passage (pericope id), dimension ({dimensions}),
   type ({types}), age_tier ({tiers}), difficulty (1|2|3),
   review_status "draft", text {{ "en": "..." }}, version 1,
-  category {{ "en": "..." }} ONLY for pre_reading_quest.
-No provenance; the reviewer stamps it."""
+  category {{ "en": "..." }} ONLY for pre_reading_quest,
+  leader_reference {{ ... }} per the "Leader references" section above
+  (on every item EXCEPT memory_verse)."""
+
+_REFERENCE_BLOCK = """## Leader references (leader-only; author them inline)
+
+Author a leader-only `leader_reference` on every item EXCEPT `memory_verse` (a
+memory_verse item gets NO leader_reference — the printed verse is the answer).
+CLOSED dimensions (D1-D5) -> kind "answer_key"; OPEN dimensions (D6-D8) -> kind
+"leader_note". Shape:
+
+  "leader_reference": {
+    "kind": "answer_key" | "leader_note",
+    "text": { "en": "..." },
+    "verse": { "en": "Philippians 1:6" },      // answer_key ONLY; omit for notes
+    "provenance": { "reviewed_by": "claude-draft",
+                    "reviewed_date": "2026-07-20", "guardrail": "WCF-1" }
+  }
+
+- answer_key (D1-D5): the concise, correct expected response plus the verse it comes
+  from, grounded in THIS passage + the brief. A wrong answer key is worse than none.
+- leader_note (D6-D8): point where the text leads and flag common misreadings, but
+  KEEP THE QUESTION OPEN — never a canned answer read aloud, never leading beyond the
+  text.
+- The `provenance` above is a draft stub (the human reviewer overwrites it on
+  confirmation); keep `guardrail` exactly "WCF-1"."""
 
 _READING_MOVES_PTR = (" -> consult the brief's *Reading moves* note for this "
                       "passage's genre-specific emphasis (if present).")
@@ -91,6 +115,11 @@ def build(pericope_id, book="MAT", brief=None):
     parts.append("")
     parts.append("## Quality rubric (all seven axes)\n")
     parts.append(rubric.build())
+    parts.append("")
+    parts.append(_REFERENCE_BLOCK)
+    parts.append("")
+    parts.append("## Leader-reference review criteria\n")
+    parts.append(rubric.reference_criteria())
     parts.append("")
     parts.append("## Output schema\n")
     parts.append(_SCHEMA_BLOCK.format(
