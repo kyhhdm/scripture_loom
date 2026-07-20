@@ -169,8 +169,12 @@ def _default_manifest_path(book):
 
 def run(book, *, units=None, kind="all", review_on=False, max_repair=2,
         limit=None, manifest_path=None, drafts_dir=None, briefs_dir=None,
-        backend="llm_core"):
+        backend="llm_core", model=None):
     os.environ["SCRIPTURE_LOOM_LLM_BACKEND"] = backend
+    if model:
+        os.environ["SCRIPTURE_LOOM_LLM_MODEL"] = model
+    else:
+        os.environ.pop("SCRIPTURE_LOOM_LLM_MODEL", None)
     if backend == "claude":
         if shutil.which("claude") is None:
             raise LLMUnavailable(
@@ -225,10 +229,12 @@ def main(argv=None):
     ap.add_argument("--backend", choices=("llm_core", "claude"), default="llm_core",
                     help="llm_core = deepseek via API credits (default); "
                          "claude = Claude Code headless via subscription")
+    ap.add_argument("--model", help="override the model (e.g. deepseek-v4-pro for "
+                    "llm_core, or opus/sonnet for claude); default = backend's own")
     a = ap.parse_args(argv)
     res = run(a.book, units=a.units, kind=a.kind, review_on=a.review,
               max_repair=a.max_repair, limit=a.limit, manifest_path=a.manifest,
-              drafts_dir=a.drafts_dir, backend=a.backend)
+              drafts_dir=a.drafts_dir, backend=a.backend, model=a.model)
     print(f"\nDone. ok={len(res['ok'])} failed={len(res['failed'])}")
     return 1 if res["failed"] else 0
 

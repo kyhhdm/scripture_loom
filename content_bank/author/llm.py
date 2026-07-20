@@ -34,8 +34,12 @@ def llm(prompt: str, model: str | None = None) -> str:
     """Send one fully-rendered prompt, return the completion text.
 
     Backend from ``SCRIPTURE_LOOM_LLM_BACKEND`` (``llm_core`` default, or
-    ``claude``). Raises ``RuntimeError`` on failure.
+    ``claude``). ``model`` defaults to ``SCRIPTURE_LOOM_LLM_MODEL`` if set, else
+    the backend's own default (deepseek-v4-flash / opus). Raises ``RuntimeError``
+    on failure.
     """
+    if model is None:
+        model = os.environ.get("SCRIPTURE_LOOM_LLM_MODEL") or None
     if os.environ.get("SCRIPTURE_LOOM_LLM_BACKEND") == "claude":
         return _claude_cli_llm(prompt, model)
     from llm_core import run_sync_llm

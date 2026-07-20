@@ -27,6 +27,22 @@ class LlmCoreBackendTest(unittest.TestCase):
         self.assertEqual(kwargs.get("caller"), "content_bank")
 
 
+class ModelOverrideTest(unittest.TestCase):
+    def test_env_model_passed_to_llm_core_when_caller_omits(self):
+        with mock.patch.dict("os.environ",
+                             {"SCRIPTURE_LOOM_LLM_MODEL": "deepseek-v4-pro"}), \
+             mock.patch("llm_core.run_sync_llm", return_value="ok") as m:
+            seam.llm("P")
+        self.assertEqual(m.call_args.kwargs.get("model"), "deepseek-v4-pro")
+
+    def test_explicit_model_arg_wins_over_env(self):
+        with mock.patch.dict("os.environ",
+                             {"SCRIPTURE_LOOM_LLM_MODEL": "deepseek-v4-pro"}), \
+             mock.patch("llm_core.run_sync_llm", return_value="ok") as m:
+            seam.llm("P", model="deepseek-v4-flash")
+        self.assertEqual(m.call_args.kwargs.get("model"), "deepseek-v4-flash")
+
+
 class ClaudeBackendTest(unittest.TestCase):
     def _fake_proc(self, returncode=0, stdout="OUT", stderr=""):
         p = mock.Mock()
