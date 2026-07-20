@@ -287,6 +287,32 @@ uv run python -m content_bank.author.build_cli --book PHP --review --backend cla
   --drafts-dir work/content_bank_build/PHP/drafts_claude
 ```
 
+## Addendum (2026-07-20): pipeline completeness — leader references
+
+Audit of the full content pipeline found four LLM generation stages; `build_cli`
+originally wired only three:
+
+| Stage | Builder | In build_cli |
+|---|---|---|
+| Pericope brief | `build_brief_prompt` | yes |
+| Pericope items (D1-D8) | `build_draft_prompt` | yes |
+| Section / arc content (throughline, cross-pericope threads, arc questions — this IS the book-arc layer; no separate unit above `section`) | `build_section_brief_prompt` | yes |
+| **Leader references** (answer_key D1-D5 / leader_note D6-D8) | inline in the draft prompt | **was missing → now fixed** |
+
+The old Workflow produced references because its `.workflow.js` prompt *layered* the
+reference instructions on top of the pack; the standalone builder used the pack as-is
+and so shipped items with **zero** leader references (measured: 0/31 deepseek, 0/16
+Opus, vs 16/18 workflow). `schema.validate_item` treats `leader_reference` as optional,
+so the gates did not catch the omission — a completeness gap, not a mechanical one.
+
+**Fix:** `build_draft_prompt` now requests an inline `leader_reference` on every
+non-`memory_verse` item (answer_key for D1-D5, leader_note for D6-D8, provenance stub,
+guardrail WCF-1), single-sourced from `rubric.reference_criteria()`. The section schema
+already requested them. Re-verified on PHP-003 (Opus): 13/15 items carry references
+(the 2 without are the memory_verse items), 0 gate defects, kind↔dimension mapping
+correct, and D5 answer keys correctly name brief cross-references. Pipeline is now at
+parity with the Workflow.
+
 ## Out of scope
 
 - Writing to / publishing the committed store (stays a separate, human-gated step).
