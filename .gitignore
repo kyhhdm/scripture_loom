@@ -2,6 +2,12 @@ __pycache__/
 *.pyc
 corpus/sources/private/
 
+# uv-managed virtualenv (uv.lock IS committed; the venv is not)
+.venv/
+
+# local secrets — provider API keys for llm_core (.env.example is tracked)
+.env
+
 # editor swap files
 *.swp
 .superpowers/
