@@ -185,6 +185,64 @@ class OrchestratorTest(unittest.TestCase):
                 build_cli.run("MAT", units=["MAT-035"], backend="claude")
 
 
+class RunSlugTest(unittest.TestCase):
+    def test_defaults_and_overrides(self):
+        self.assertEqual(build_cli._run_slug("llm_core", None), "deepseek-v4-flash")
+        self.assertEqual(build_cli._run_slug("llm_core", "deepseek-v4-pro"),
+                         "deepseek-v4-pro")
+        self.assertEqual(build_cli._run_slug("claude", None), "opus")
+        self.assertEqual(build_cli._run_slug("claude", "Sonnet"), "sonnet")
+
+    def test_slug_is_dir_safe(self):
+        self.assertEqual(build_cli._run_slug("llm_core", "Weird/Model v2"),
+                         "weird-model-v2")
+
+
+class VerdictsByItemTest(unittest.TestCase):
+    def test_reviewer_keyed_becomes_item_keyed(self):
+        review_out = [
+            {"reviewer": "r1", "verdicts": {"x": {"verdict": "pass", "notes": "ok"}}},
+            {"reviewer": "r2", "verdicts": {"x": {"verdict": "fail", "notes": "D7"}}},
+        ]
+        by_item = build_cli._verdicts_by_item(review_out)
+        self.assertEqual([v["reviewer"] for v in by_item["x"]], ["r1", "r2"])
+        self.assertEqual(by_item["x"][1]["verdict"], "fail")
+        self.assertEqual(by_item["x"][1]["notes"], "D7")
+
+
+class SectionBuildTest(unittest.TestCase):
+    def _throughline(self):
+        return json.dumps([dict(id="php-s1-throughline", section="PHP-S1",
+                                dimension="D7", type="throughline", age_tier="all",
+                                difficulty=2, review_status="draft", version=1,
+                                text={"en": "The section is about gospel partnership."})])
+
+    def test_section_briefs_then_drafts_and_saves_verdicts(self):
+        with tempfile.TemporaryDirectory() as d:
+            drafts = pathlib.Path(d) / "drafts"
+            briefs = pathlib.Path(d) / "briefs"
+            verdicts = pathlib.Path(d) / "verdicts"
+            m = manifest_mod.init_manifest("PHP", [], ["PHP-S1"])
+            mpath = pathlib.Path(d) / "manifest.json"
+            manifest_mod.save(mpath, m)
+            seq = iter(["SECTION BRIEF TEXT", self._throughline()])
+            r_pass = json.dumps({"php-s1-throughline": {"verdict": "pass", "notes": ""}})
+            with mock.patch("content_bank.author.build_cli._llm_with_backoff",
+                            side_effect=lambda *_a, **_k: next(seq)), \
+                 mock.patch("content_bank.author.review.llm",
+                            side_effect=[r_pass, r_pass]):
+                stage = build_cli.build_section(
+                    "PHP-S1", "PHP", drafts_dir=drafts, briefs_dir=briefs,
+                    verdicts_dir=verdicts, manifest_obj=m, manifest_path=mpath,
+                    review_on=True, max_repair=1)
+            self.assertEqual(stage, "drafted")
+            self.assertEqual((briefs / "php-s1.md").read_text(), "SECTION BRIEF TEXT")
+            self.assertTrue((drafts / "PHP-S1.json").exists())
+            saved = json.loads((verdicts / "PHP-S1.json").read_text())
+            self.assertEqual([v["reviewer"] for v in saved["php-s1-throughline"]],
+                             ["r1", "r2"])
+
+
 class ReviewFlowTest(unittest.TestCase):
     def test_review_on_runs_review_then_regate_then_writes(self):
         with tempfile.TemporaryDirectory() as d:

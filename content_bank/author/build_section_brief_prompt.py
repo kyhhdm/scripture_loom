@@ -1,50 +1,39 @@
-"""Assemble the Stage-1 distillation pack for one SECTION (book-arc content).
+"""Assemble the Stage-1 distillation pack for one SECTION (book-arc brief).
 
-Offline: prints a self-contained pack a human/Claude runs by hand to produce the
-section's authored arc content — one throughline, named cross-pericope threads,
-and arc questions — under the WCF-1 guardrail, reviewed before publish."""
+Offline: prints a self-contained pack a human/model runs to produce a compact arc
+brief for the section — the spine that runs across its pericopes, recurring motifs
+(candidate threads) with member refs, the cross-pericope connections, and doctrinal
+anchors. The section analogue of build_brief_prompt; its output is drafted FROM by
+build_section_draft_prompt (Stage 2)."""
 import argparse
 
 from corpus.lib import sections as _sections
 from ..lib import corpus_bridge
 
-_SHAPE = """## Produce the SECTION ARC CONTENT
+_SHAPE = """## Produce the SECTION ARC BRIEF
 
-Under WCF ch.1 (inspired, sufficient, Scripture-interprets-Scripture), and only
-from what the text above states, draft:
+~250 words (hard max 350), in exactly these four parts, drawn only from the passages
+above and their commentary — NOT from outside knowledge:
 
-**THROUGHLINE (exactly one, dimension D7).** One or two sentences: what this whole
-section is about, in the text's own terms. This is what the zoom-out session prints.
+**Arc spine (primary).** In the text's own terms, the single movement that runs
+across these pericopes: how the section opens, turns, and lands. This governs the
+section's throughline.
+**Recurring motifs (candidate threads).** Words, phrases, or images that RECUR
+across two or more of the section's pericopes and carry its argument. For each: the
+motif, its member verse refs (e.g. PHP.1.5, PHP.4.15), and one phrase on what the
+recurrence teaches. List only genuine cross-pericope recurrences; if there are none,
+write "none".
+**Cross-pericope connections.** How each pericope builds on the one before — the
+joints between stations that the zoom-out questions can probe. Name the moves, not a
+per-pericope summary.
+**Doctrinal anchors.** Method: WCF ch.1 (inspired, sufficient, Scripture-interprets-
+Scripture). Name only doctrine the section's own text bears; add none it does not
+state.
 
-**THREADS (zero or more, dimension D7 or D3).** A word, phrase, or motif that RECURS
-across two or more of the section's pericopes and carries the section's argument.
-For each: a name, its member verse `refs` (e.g. MAT.1.22, MAT.2.15), and a one- or
-two-sentence interpretive note (what the recurrence teaches). A thread may extend
-beyond this section — anchor it here if this section is its payoff.
-
-**QUESTIONS (2-4, dimension D5/D6/D7).** Cross-pericope discussion questions for the
-zoom-out — answerable only across the section, not from one pericope.
-
-SAFEGUARD — add no doctrine the text does not state; keep to observable meaning."""
-
-_OUTPUT_SCHEMA = """## Output — a JSON array of section-scoped ContentItems
-
-Return ONLY a JSON array (no prose). Produce exactly one throughline, zero or more
-threads, and 2-4 arc questions, using the section id <SID> (lower-case in ids) and
-book <BOOK>:
-
-- EXACTLY ONE throughline:
-  {"id":"<sid>-throughline","section":"<SID>","dimension":"D7","type":"throughline","age_tier":"all","difficulty":2,"review_status":"draft","text":{"en":"..."},"version":1}
-- ZERO OR MORE threads (only if the motif genuinely RECURS across 2+ pericopes):
-  {"id":"<sid>-thread-<slug>","section":"<SID>","dimension":"D7"|"D3","type":"thread","age_tier":"all","difficulty":2,"review_status":"draft","text":{"en":"<name + what the recurrence teaches>"},"refs":["<BOOK>.C.V","..."],"version":1}
-  (refs = >=2 member verses where the motif recurs)
-- 2-4 arc QUESTIONS answerable only ACROSS the section:
-  {"id":"<sid>-q-<slug>","section":"<SID>","dimension":"D5"|"D6"|"D7","type":"question","age_tier":"youth"|"adult"|"all","difficulty":2|3,"review_status":"draft","text":{"en":"..."},"version":1}
-  Give D6/D7 a leader_note and D5 an answer_key, each with a leader_reference and
-  provenance {"reviewed_by":"claude","reviewed_date":"2026-07-20","guardrail":"WCF-1"};
-  throughline/thread need no leader_reference.
-
-Keep exactly one throughline. Quoted words must be verbatim BSB."""
+SAFEGUARD — stay at the ARC level: motifs and moves that SPAN pericopes, not what a
+single pericope already covers on its own (that is the pericope briefs' job). Quote
+words verbatim from the passages. Add no doctrine the text does not state; keep to
+observable meaning. End with a one-line note of anything set aside as off-arc."""
 
 
 def build(section_id, book="MAT"):
@@ -59,18 +48,23 @@ def build(section_id, book="MAT"):
 
     parts = [f"# Section brief pack — {section_id}: {sec['title_en']}\n",
              f"Spans {sec['first_pericope']}..{sec['last_pericope']} "
-             f"({len(span)} pericopes)\n",
+             f"({len(span)} pericopes) — the stations of the arc:\n",
+             "\n".join(f"- {p['id']} — {p['title_en']} ({p['range']})" for p in span)
+             + "\n",
              "## The section's pericopes (public-domain text) — the SUBJECT\n"]
     for p in span:
         parts.append(f"### {p['id']} — {p['title_en']} ({p['range']})\n"
                      f"{corpus_bridge.passage_text(p['range'])}\n")
     parts.append("## WCF Chapter 1 — the method guardrail (full)\n"
                  + corpus_bridge.wcf_chapter1_text() + "\n")
-    parts.append(_SHAPE)
-    parts.append("\n" + _OUTPUT_SCHEMA
-                 .replace("<SID>", section_id)
-                 .replace("<sid>", section_id.lower())
-                 .replace("<BOOK>", book))
+    parts.append("## Cross-references across the span (Scripture interprets Scripture)"
+                 " — aids for spotting recurrences\n")
+    refs = []
+    for p in span:
+        refs.extend(corpus_bridge.crossrefs(p["range"]))
+    parts.append("\n".join(f"- {r['from']} -> {r['to']} (weight {r.get('weight')})"
+                           for r in refs) if refs else "(none)")
+    parts.append("\n\n" + _SHAPE)
     return "\n".join(parts)
 
 

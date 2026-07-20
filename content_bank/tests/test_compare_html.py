@@ -97,11 +97,28 @@ class BuildModelTests(unittest.TestCase):
         with self.assertRaises(FileNotFoundError):
             compare_html.build_model("PHP", ["runA", "nope"], base=self.base)
 
-    def test_rubric_and_brief_embedded(self):
+    def test_rubric_and_per_run_briefs_embedded(self):
         model = self._model()
         self.assertIn("seven axes", model["rubric"].lower())
-        # every unit carries a brief key (value may be None if no brief on file).
-        self.assertTrue(all("brief" in u for u in model["units"]))
+        # every unit carries a per-run briefs map (value may be None if none on file).
+        for u in model["units"]:
+            self.assertIn("briefs", u)
+            self.assertEqual(set(u["briefs"]), {"runA", "runB"})
+
+    def test_new_runs_layout_resolves(self):
+        # runs/<slug>/{drafts,briefs,verdicts} should be preferred over a flat dir.
+        newbase = pathlib.Path(self._tmp.name) / "nested"
+        rd = newbase / "PHP" / "runs" / "opus" / "drafts"
+        rd.mkdir(parents=True)
+        (rd / "PHP-001.json").write_text(json.dumps([_item("o-001-d1-001", "D1")]),
+                                         encoding="utf-8")
+        bd = newbase / "PHP" / "runs" / "opus" / "briefs"
+        bd.mkdir(parents=True)
+        (bd / "php-001.md").write_text("# opus brief", encoding="utf-8")
+        model = compare_html.build_model("PHP", ["opus"], base=newbase)
+        unit = model["units"][0]
+        self.assertEqual(unit["id"], "PHP-001")
+        self.assertEqual(unit["briefs"]["opus"], "# opus brief")
 
 
 class RenderTests(unittest.TestCase):

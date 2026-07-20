@@ -191,13 +191,20 @@ class TestBuildReferencePrompt(unittest.TestCase):
 
 
 class TestSectionBrief(unittest.TestCase):
-    def test_section_brief_renders_span_and_asks_for_arc_content(self):
+    def test_section_brief_renders_span_and_asks_for_arc_brief(self):
         from content_bank.author import build_section_brief_prompt
         text = build_section_brief_prompt.build("MAT-S1", "MAT")
         self.assertIn("Prologue: The Infancy", text)
         self.assertIn("The Genealogy of Jesus", text)      # a pericope title in the span
         self.assertIn("The Return to Nazareth", text)       # the last pericope in MAT-S1
-        for token in ("THROUGHLINE", "THREAD", "refs", "QUESTION"):
+        # Stage 1 distills an arc brief, not the JSON item array.
+        self.assertIn("SECTION ARC BRIEF", text)
+        self.assertNotIn("JSON array", text)
+
+    def test_section_draft_prompt_asks_for_arc_content_items(self):
+        from content_bank.author import build_section_draft_prompt
+        text = build_section_draft_prompt.build("MAT-S1", "MAT")
+        for token in ("throughline", "thread", "refs", "question"):
             self.assertIn(token, text)
 
     def test_section_brief_rejects_unknown_section(self):

@@ -30,10 +30,42 @@ BRIEFS = _ROOT / "content_bank" / "author" / "briefs"
 DIM_ORDER = ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8"]
 
 
-def _load_brief(unit):
-    """The unit's theological brief (markdown), or None. Briefs are lower-cased."""
-    p = BRIEFS / f"{unit.lower()}.md"
-    return p.read_text(encoding="utf-8") if p.is_file() else None
+def _resolve_run(book_dir, name):
+    """Locate a run's dirs. New layout: <book>/runs/<name>/{drafts,verdicts,briefs}.
+    Legacy: a flat <book>/<name>/ of draft json, shared <book>/verdicts, shared
+    author/briefs. Returns (draft_dir, verdicts_dir, briefs_dir|None)."""
+    run_dir = book_dir / "runs" / name
+    if not run_dir.is_dir():
+        run_dir = book_dir / name
+    if not run_dir.is_dir():
+        raise FileNotFoundError(f"run not found: {book_dir / 'runs' / name} "
+                                f"nor {book_dir / name}")
+    draft_dir = run_dir / "drafts" if (run_dir / "drafts").is_dir() else run_dir
+    verdicts_dir = (run_dir / "verdicts" if (run_dir / "verdicts").is_dir()
+                    else book_dir / "verdicts")
+    briefs_dir = run_dir / "briefs" if (run_dir / "briefs").is_dir() else None
+    return draft_dir, verdicts_dir, briefs_dir
+
+
+def _load_brief(unit, briefs_dir):
+    """The unit's brief (markdown) for a run, or None. Prefers the run's own briefs
+    dir; falls back to the shared author/briefs. Brief files are lower-cased."""
+    for base in (briefs_dir, BRIEFS):
+        if base is None:
+            continue
+        p = pathlib.Path(base) / f"{unit.lower()}.md"
+        if p.is_file():
+            return p.read_text(encoding="utf-8")
+    return None
+
+
+def _load_verdicts(verdicts_dir):
+    """{unit_id: {item_id: [{reviewer, verdict, notes}, ...]}} for one run's dir."""
+    out = {}
+    if verdicts_dir and pathlib.Path(verdicts_dir).is_dir():
+        for f in sorted(pathlib.Path(verdicts_dir).glob("*.json")):
+            out[f.stem] = json.loads(f.read_text(encoding="utf-8"))
+    return out
 
 
 def _allowed(book, unit):
@@ -84,16 +116,6 @@ def _run_gates(book, unit_items, notes):
     return flags
 
 
-def _load_verdicts(book_dir):
-    """{unit_id: {item_id: [{reviewer, verdict, notes}, ...]}}."""
-    out = {}
-    vdir = book_dir / "verdicts"
-    if vdir.is_dir():
-        for f in sorted(vdir.glob("*.json")):
-            out[f.stem] = json.loads(f.read_text(encoding="utf-8"))
-    return out
-
-
 def _card(item, run, gate_flags, unit_verdicts):
     iid = item.get("id")
     problems = gate_flags.get(iid, [])
@@ -122,18 +144,19 @@ def build_model(book, runs, base=None):
     book_dir = base / book
     notes = []
 
-    run_items = {}  # run -> {unit_id: [items]}
+    run_items = {}   # run -> {unit_id: [items]}
+    verdicts = {}    # run -> {unit_id: {item_id: [...]}}
+    briefs_dirs = {}  # run -> briefs dir or None
     for run in runs:
-        rdir = book_dir / run
-        if not rdir.is_dir():
-            raise FileNotFoundError(f"run directory not found: {rdir}")
+        draft_dir, verdicts_dir, briefs_dir = _resolve_run(book_dir, run)
         run_items[run] = {
             f.stem: json.loads(f.read_text(encoding="utf-8"))
-            for f in sorted(rdir.glob("*.json"))
+            for f in sorted(pathlib.Path(draft_dir).glob("*.json"))
         }
+        verdicts[run] = _load_verdicts(verdicts_dir)
+        briefs_dirs[run] = briefs_dir
 
     gate_flags = {run: _run_gates(book, run_items[run], notes) for run in runs}
-    verdicts = _load_verdicts(book_dir)
 
     all_units = sorted({u for run in runs for u in run_items[run]})
     units = []
@@ -149,10 +172,11 @@ def build_model(book, runs, base=None):
                 items = [it for it in run_items[run].get(unit, [])
                          if it.get("dimension") == dim]
                 cells[run] = [_card(it, run, gate_flags[run],
-                                    verdicts.get(unit, {})) for it in items]
+                                    verdicts[run].get(unit, {})) for it in items]
                 counts[run] = len(items)
             blocks.append({"dimension": dim, "counts": counts, "cells": cells})
-        units.append({"id": unit, "brief": _load_brief(unit), "dimensions": blocks})
+        unit_briefs = {run: _load_brief(unit, briefs_dirs[run]) for run in runs}
+        units.append({"id": unit, "briefs": unit_briefs, "dimensions": blocks})
 
     seen = set()
     notes = [n for n in notes if not (n in seen or seen.add(n))]
@@ -281,11 +305,29 @@ function card(c) {
 function renderUnit(unit) {
   const main = document.getElementById('main');
   main.innerHTML = '';
-  const brief = document.createElement('details');
-  brief.className = 'brief';
-  brief.innerHTML = '<summary>Brief — ' + esc(unit.id) +
-    ' (what these items serve)</summary><div class="refbody">' + md(unit.brief) + '</div>';
-  main.appendChild(brief);
+  const briefs = unit.briefs || {};
+  const uniq = [];
+  for (const r of DATA.runs) {
+    const t = briefs[r];
+    if (!t) continue;
+    const hit = uniq.find(u => u.text === t);
+    if (hit) hit.runs.push(r); else uniq.push({ text: t, runs: [r] });
+  }
+  function briefPanel(label, text) {
+    const el = document.createElement('details');
+    el.className = 'brief';
+    el.innerHTML = '<summary>Brief — ' + esc(unit.id) + ' (' + esc(label) +
+      ')</summary><div class="refbody">' + md(text) + '</div>';
+    main.appendChild(el);
+  }
+  if (!uniq.length) {
+    briefPanel('none on file', null);
+  } else if (uniq.length === 1) {
+    briefPanel(uniq[0].runs.length === DATA.runs.length ? 'shared across runs'
+               : uniq[0].runs.join(', '), uniq[0].text);
+  } else {
+    for (const u of uniq) briefPanel(u.runs.join(', '), u.text);
+  }
   for (const b of unit.dimensions) {
     const d = document.createElement('details');
     d.className = 'dim';
