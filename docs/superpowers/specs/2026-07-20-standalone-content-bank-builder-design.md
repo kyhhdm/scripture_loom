@@ -256,6 +256,37 @@ author tests dir, matching the repo's existing test discovery).
       comparison against the existing Claude-Code-built PHP library
       (`docs/sessions/2026-07-20-php-python-vs-claude-comparison.md`).
 
+## Addendum (2026-07-20): subscription backend for the `llm()` seam
+
+The PHP comparison showed the quality ceiling is the *drafting model*, not the
+pipeline (deepseek pads dimensions the passage doesn't support). Because the seam is
+the only LLM touchpoint, we added a second backend selected by
+`SCRIPTURE_LOOM_LLM_BACKEND` (or `build_cli --backend`):
+
+- `llm_core` (default) — deepseek-v4-flash via API credits. Cheap, fast.
+- `claude` — shells to Claude Code headless (`claude -p --model opus --output-format
+  text --disallowed-tools …`, prompt on **stdin**), billing against the logged-in
+  **subscription**. No `ANTHROPIC_API_KEY` in the env ⇒ the CLI uses the OAuth login.
+
+Verified mechanics (claude CLI 2.1.215): `claude -p` works headless and nested;
+**`--bare` must NOT be used** (it skips the credential source → "Not logged in"); the
+prompt goes on stdin to avoid colliding with the variadic tool flags. `run()` skips
+the `llm_configured()` (llm_core-specific) gate for `backend=claude` and instead
+requires the `claude` CLI on PATH. Tests mock `subprocess.run` — no real calls.
+
+Tradeoffs: `claude` backend spawns one process per call (slower, no `--bare` so full
+context loads each time) and draws down subscription usage windows, in exchange for a
+strong model that follows the "do not pad" instruction far better. Human review
+remains the true gate either way.
+
+Usage (run from a plain terminal, not nested inside an agent session):
+
+```
+uv run python -m content_bank.author.build_cli --book PHP --review --backend claude \
+  --manifest work/content_bank_build/PHP/manifest_claude.json \
+  --drafts-dir work/content_bank_build/PHP/drafts_claude
+```
+
 ## Out of scope
 
 - Writing to / publishing the committed store (stays a separate, human-gated step).
