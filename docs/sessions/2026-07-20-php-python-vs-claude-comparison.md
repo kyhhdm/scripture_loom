@@ -156,3 +156,33 @@ verses), confirming the reference fix is model-agnostic. **Verdict:** pro earns 
 between flash (cheap bulk) and Opus (quality). The over-generation is a model-judgment
 gap that only the strong model (Opus/workflow) closes; the deterministic anti-padding
 heuristic remains the way to move it into the gate layer.
+
+## Third follow-up (#19): deterministic anti-padding gate
+
+Before building the "brief-aware" signal (flag items in dimensions the *brief* marks
+unsupported), verified whether a cheap model can even judge dimension support. It can't
+reliably: flash on PHP-002, 5 samples, correctly rated D2 (sequence in an epistle) as
+`incidental`/`none` every time — but rated **D1, D5, D6 as `primary`** where Opus said
+`incidental`. The cheap model's dimension declaration inherits the same inflation that
+makes it pad the draft; the ceiling just moves from draft to brief. So **brief-aware was
+dropped** in favour of two model-independent signals:
+
+- **thread-span** (hard): a `thread` on a single-pericope section is invalid.
+- **dimension cap** (soft): flag any dimension a unit emits `> cap` of (default 3); fed
+  to the repair loop to prune, then *logged* if still over — never hard-fails, since a
+  rich passage may legitimately exceed.
+
+**Effectiveness — PHP-002 on flash, cap=3 vs uncapped:**
+
+| PHP-002 | Items | Max items in one dim |
+|---|---|---|
+| Claude workflow | 18 | 3 |
+| flash uncapped | 31 | 7 |
+| **flash cap=3** | **21** | **4** |
+| Opus (subscription) | 16 | 3 |
+
+The deterministic cap pulled flash **31→21 items** and **max/dim 7→4** — a large move
+toward workflow/Opus shape, on the cheap model, no brief change and no LLM judgment in
+the gate. (D2 landed at 4, 1 over cap after the repair budget — correctly logged as
+advisory, not blocked.) Not all the way to Opus's 16, but the deterministic lever does
+real work where the cheap model's self-judgment (brief-aware, pro) does not.
