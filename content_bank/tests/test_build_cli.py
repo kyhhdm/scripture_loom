@@ -76,5 +76,58 @@ class RepairLoopTest(unittest.TestCase):
                                              max_repair=1)
 
 
+import tempfile
+from content_bank.author import manifest as manifest_mod
+
+
+class OrchestratorTest(unittest.TestCase):
+    def _draft_json(self, pid):
+        return json.dumps([dict(id=f"{pid.lower()}-d1-a", dimension="D1",
+                                type="question", age_tier="child", difficulty=1,
+                                review_status="draft", version=1, passage=pid,
+                                text={"en": "Who came to Jesus?"})])
+
+    def test_pericope_writes_draft_and_bumps_stage(self):
+        with tempfile.TemporaryDirectory() as d:
+            drafts = pathlib.Path(d) / "drafts"
+            briefs = pathlib.Path(d) / "briefs"
+            m = manifest_mod.init_manifest("MAT", ["MAT-035"])
+            mpath = pathlib.Path(d) / "manifest.json"
+            manifest_mod.save(mpath, m)
+            outputs = iter(["BRIEF TEXT", self._draft_json("MAT-035")])
+            with mock.patch("content_bank.author.build_cli._llm_with_backoff",
+                            side_effect=lambda *_a, **_k: next(outputs)):
+                stage = build_cli.build_pericope(
+                    "MAT-035", "MAT", drafts_dir=drafts, briefs_dir=briefs,
+                    manifest_obj=m, manifest_path=mpath, review_on=False, max_repair=2)
+            self.assertEqual(stage, "drafted")
+            self.assertTrue((drafts / "MAT-035.json").exists())
+            self.assertEqual(m["units"]["MAT-035"]["stage"], "drafted")
+
+    def test_failure_isolated_stage_unchanged(self):
+        with tempfile.TemporaryDirectory() as d:
+            drafts = pathlib.Path(d) / "drafts"
+            m = manifest_mod.init_manifest("MAT", ["MAT-035", "MAT-036"])
+            mpath = pathlib.Path(d) / "manifest.json"
+            manifest_mod.save(mpath, m)
+
+            def boom(*_a, **_k):
+                raise RuntimeError("llm exploded")
+
+            with mock.patch("content_bank.author.build_cli._llm_with_backoff",
+                            side_effect=boom):
+                res = build_cli.run("MAT", units=["MAT-035"], kind="pericope",
+                                    manifest_path=mpath, drafts_dir=drafts,
+                                    briefs_dir=pathlib.Path(d) / "briefs")
+            self.assertIn("MAT-035", res["failed"])
+            self.assertEqual(m["units"]["MAT-035"]["stage"], "pending")
+
+    def test_run_fails_fast_when_unconfigured(self):
+        with mock.patch("content_bank.author.build_cli.llm_configured",
+                        return_value=False):
+            with self.assertRaises(build_cli.LLMUnavailable):
+                build_cli.run("MAT", units=["MAT-035"])
+
+
 if __name__ == "__main__":
     unittest.main()
