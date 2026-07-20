@@ -103,3 +103,31 @@ Keep two guardrails on top:
 
 For genre-sensitive, pedagogy-heavy books, a stronger drafting model (or keeping the
 Claude workflow for those) is worth it until such heuristics exist.
+
+## Follow-up (same day): the ceiling is the model — proven
+
+Because the `llm()` seam is the pipeline's only LLM touchpoint, we added a `claude`
+backend (`build_cli --backend claude`) that routes the *identical* Python pipeline to
+Claude Opus via the Claude Code **subscription** (`claude -p`, no API credits). Rebuilt
+PHP-002 with it and compared the same pericope across all three backends:
+
+| PHP-002 build | Items | D2 (Sequence) | Dimension spread | Gate defects |
+|---|---|---|---|---|
+| Claude workflow (subscription) | 18 | 1 | 3/1/3/2/3/1/3/2 | 0 |
+| Python + deepseek (API) | 31 | 7 | 4/7/4/4/3/3/3/3 | 0 |
+| **Python + Opus (subscription)** | **16** | **2** | **2/2/2/2/2/2/3/1** | **0** |
+
+**Finding:** swapping *only the model* (same gates, same repair loop, same prompts)
+collapsed the padding — 31→16 items, D2 7→2 — to essentially the Claude-workflow
+shape. The flat "3-per-dimension" deepseek signature disappeared; Opus honored *"only
+the dimensions the passage genuinely supports."* Spot-checking the items, the surviving
+D2 questions are real sequence work ("trace the chain of effects: Paul's chains → the
+gospel's advance"), quotes are verbatim and grounded, and tiers are spread. This is
+workflow-parity quality from the standalone program.
+
+**Conclusion:** the standalone Python builder was never the quality limiter — the cheap
+model was. `--backend claude` gives the best of both: the cheap/controllable/testable
+deterministic pipeline **and** a strong model at subscription cost when quality matters.
+Recommended default for real library builds; keep `--backend llm_core` for cheap bulk
+drafts a human will heavily rewrite anyway. (Cost of the win: Opus is slower — one
+`claude` process per call, no `--bare` — and draws down subscription usage windows.)
