@@ -41,3 +41,33 @@ class TestTranslateItem(unittest.TestCase):
         gloss = [{"en_term": "justification", "zh_term": "称义", "sources": ["z"]}]
         got = translate._applicable_glossary(item, gloss)
         self.assertEqual([e["en_term"] for e in got], ["justification"])
+
+
+GOOD = ('{"text": {"zh": "「基督耶稣的仆人」保罗和提摩太。"}, "terms": [], "uncertain": []}')
+BAD = ('{"text": {"zh": "「基督耶稣的门徒」保罗和提摩太。"}, "terms": [], "uncertain": []}')
+
+
+class TestTranslateWithGates(unittest.TestCase):
+    def _item(self):
+        return {"id": "PHP-001-D1-01", "passage": "PHP.1.1-11", "dimension": "D1",
+                "type": "question", "text": {"en": "servants of Christ Jesus?"}}
+
+    def test_clean_translation_passes_gate(self):
+        with mock.patch.object(translate, "llm", return_value=GOOD):
+            out = translate.translate_with_gates(self._item(), "PHP", glossary=[])
+        self.assertTrue(out["gate_ok"])
+        self.assertEqual(out["gate_flags"], [])
+
+    def test_bad_span_repaired_on_second_round(self):
+        # first call returns a non-CUV 「…」 span, repair returns a clean one
+        with mock.patch.object(translate, "llm", side_effect=[BAD, GOOD]):
+            out = translate.translate_with_gates(self._item(), "PHP", glossary=[],
+                                                 max_repair=2)
+        self.assertTrue(out["gate_ok"])
+
+    def test_unrepaired_bad_span_reported_not_raised(self):
+        with mock.patch.object(translate, "llm", side_effect=[BAD, BAD, BAD]):
+            out = translate.translate_with_gates(self._item(), "PHP", glossary=[],
+                                                 max_repair=2)
+        self.assertFalse(out["gate_ok"])
+        self.assertTrue(out["gate_flags"])

@@ -58,3 +58,40 @@ def translate_item(item, book, *, glossary=None, model=None):
             "terms": resp.get("terms", []),
             "uncertain": resp.get("uncertain", []),
             "cuv_refs": sorted({d["ref"] for d in detected})}
+
+
+def zh_gate_flags(item, glossary):
+    flags = []
+    for gate in (gates.cuv_quote_check([item]),
+                 gates.glossary_check([item], glossary)):
+        flags.extend(gate.get(item["id"], []))
+    return flags
+
+
+def _repair_prompt(item, flags):
+    return ("Your Chinese translation has these problems — fix ONLY them, keeping "
+            "everything else identical, and return the SAME strict JSON shape:\n"
+            + "\n".join(f"- {f}" for f in flags)
+            + "\n\n## Current item (with your zh)\n"
+            + json.dumps(item, ensure_ascii=False, indent=2)
+            + '\n\nReturn STRICT JSON ONLY: {"text": {"zh": ...}, '
+              '"leader_reference": {...}, "terms": [...], "uncertain": [...]}.')
+
+
+def translate_with_gates(item, book, *, glossary=None, model=None, max_repair=2):
+    glossary = _glossary.load_glossary() if glossary is None else glossary
+    out = translate_item(item, book, glossary=glossary, model=model)
+    flags = zh_gate_flags(out["item"], glossary)
+    rounds = 0
+    while flags and rounds < max_repair:
+        rounds += 1
+        resp = _extract_json(llm(_repair_prompt(out["item"], flags), model))
+        out["item"] = _merge_zh(out["item"], resp)
+        if "terms" in resp:
+            out["terms"] = resp["terms"]
+        if "uncertain" in resp:
+            out["uncertain"] = resp["uncertain"]
+        flags = zh_gate_flags(out["item"], glossary)
+    out["gate_ok"] = not flags
+    out["gate_flags"] = flags
+    return out
