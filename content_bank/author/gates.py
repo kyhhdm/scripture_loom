@@ -1,9 +1,15 @@
 """Deterministic content gates for the standalone builder (issue #16).
 
 Pure functions, each returning ``{item_id: [problems]}`` (empty dict = clean):
-- quote_check : quoted spans must be verbatim BSB (whole-Bible haystack)
+- quote_check : language-aware quoted-span verbatim check — English quotes
+  (straight/curly double or single) must match the BSB haystack; Chinese
+  「…」-quoted spans must match the CUV haystack (by Han-character length)
+- cuv_quote_check: standalone CUV-only variant of the quote check
 - schema_check: content_bank.lib.schema.validate_item, keyed by id
 - refs_in_range: stated verse references must fall in the unit's range
+- thread_span_check: cross-item throughline/thread span gate
+- dimension_cap_check: caps how many items may cover a given fluency dimension
+- glossary_check: flags approved-term glossary misses/violations
 
 Committed replacement for the untracked work/content_bank_build/quote_check.py.
 Stdlib + in-repo packages only; offline.
@@ -24,8 +30,7 @@ _HAYSTACK_CACHE = {}
 
 
 def _norm(s):
-    for char in ['"', "'", '"', '"', '\u2018', '\u2019']:
-        s = s.replace(char, "")
+    s = re.sub(r"[\"'\u201c\u201d\u2018\u2019]", "", s)
     return re.sub(r"\s+", " ", s).strip().lower()
 
 

@@ -52,3 +52,27 @@ class TestCuvQuoteCheck(unittest.TestCase):
         it = {"id": "Z-2", "passage": "PHP.1.1-11",
               "text": {"en": '"nonexistent phrase here now"'}}
         self.assertEqual(gates.cuv_quote_check([it]), {})
+
+
+class TestNormStripsAllQuoteGlyphs(unittest.TestCase):
+    def test_norm_strips_straight_and_curly_quotes(self):
+        result = gates._norm("“”‘’\"' abc")
+        for glyph in ['"', "'", "“", "”", "‘", "’"]:
+            self.assertNotIn(glyph, result)
+        self.assertEqual(result, "abc")
+
+    def test_en_span_straddling_curly_quote_passes(self):
+        # 1SA.31.4 BSB: Saul said to his armor-bearer,
+        # “Draw your sword and run it through me...”
+        # The span below straddles the opening curly double-quote marker
+        # that introduces Saul's command; a buggy _norm that fails to
+        # strip “/” would leave it in the haystack and the
+        # normalized span would not match, falsely flagging a verbatim quote.
+        it = {
+            "id": "N-1",
+            "passage": "1SA.31.4",
+            "text": {"en": 'Saul told his armor-bearer, '
+                            '"armor-bearer, Draw your sword and run it '
+                            'through me" in his final desperation.'},
+        }
+        self.assertEqual(gates.quote_check("1SA", [it]), {})
