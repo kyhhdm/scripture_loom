@@ -145,6 +145,14 @@ class RenderTests(unittest.TestCase):
         self.assertNotIn("https://", html)
         self.assertIn("Export decisions", html)
 
+    def test_tooltip_titles_use_attribute_safe_escaping(self):
+        # Verdict/gate notes contain double quotes; a title="..." must escape them
+        # (escAttr), else the tooltip is dropped. Guard against regressing to esc().
+        html = compare_html.render_html(
+            {"book": "PHP", "runs": [], "notes": [], "rubric": "", "units": []})
+        self.assertIn("escAttr(v.notes)", html)
+        self.assertIn("escAttr(c.gate_problems", html)
+
     def test_js_regex_backslashes_survive_templating(self):
         # _PAGE must be a raw string, else Python turns \n in the md() JS regexes
         # into real newlines and the page throws SyntaxError on load.

@@ -287,6 +287,9 @@ function tally() {
   document.getElementById('tally').textContent = acc + ' accepted / ' + TOTAL + ' items';
 }
 function esc(s) { const d = document.createElement('div'); d.textContent = s == null ? '' : s; return d.innerHTML; }
+// Attribute-safe: esc() does not escape quotes, so a note containing " would close
+// a title="..." attribute early and drop the tooltip. Escape quotes too.
+function escAttr(s) { return esc(s).replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
 function md(src) {
   if (!src) return '<em>no brief on file for this unit</em>';
   return esc(src)
@@ -303,10 +306,10 @@ function card(c) {
   el.className = 'card' + (state[c.id] === true ? ' acc' : '');
   const gate = c.gate_ok
     ? '<span class="chip ok">gate ok</span>'
-    : '<span class="chip flag" title="' + esc(c.gate_problems.join('; ')) + '">gate flag</span>';
+    : '<span class="chip flag" title="' + escAttr(c.gate_problems.join('; ')) + '">gate flag</span>';
   let verdict = '';
   if (c.verdict) for (const v of c.verdict)
-    verdict += '<span class="chip ' + esc(v.verdict) + '" title="' + esc(v.notes) + '">' +
+    verdict += '<span class="chip ' + esc(v.verdict) + '" title="' + escAttr(v.notes) + '">' +
       esc(v.reviewer) + ':' + esc(v.verdict) + '</span>';
   let lref = '';
   if (c.leader_ref && c.leader_ref.text_en) {
