@@ -48,41 +48,49 @@ The work is three parts, sequenced **A → B → C**:
 
 ---
 
-## Part A — Chinese Westminster Standards (parallel lampposts)
+## Part A — Chinese Standards as a glossary reference (NOT a shipped asset)
 
-The doctrinal-vocabulary source of record. The owner **provides vetted, clean-license**
-Chinese translations of WCF / WSC / WLC (the CUV principle applied to doctrine: match
-what Chinese Reformed believers already recognize).
+The Chinese Westminster Standards are the doctrinal-vocabulary reference for glossary
+extraction (Part B). They are **not** ingested as shippable corpus lampposts.
 
-**Sources.** Add `corpus/sources/westminster/{westminster_confession_of_faith,
-westminster_shorter_catechism,westminster_larger_catechism}_zh.json` (owner-provided)
-plus **`meta_zh.json`** declaring the translation's origin and license — mirroring the
-existing `meta.json` audit trail required by `corpus/PROVENANCE.md`.
+**Licensing reality (2026-07-21).** The chosen translation
+(zh.ligonier.org, WCF/WSC/WLC) is **© Ligonier Ministries, All Rights Reserved,
+personal-reference-use-only, redistribution prohibited** (`本資源僅供個人參考使用，請勿
+以任何形式或管道重製、散播或販賣`). Shipping it inside the product would violate its
+terms and the corpus license gate (which serves only `public-domain`/`CC-BY`). It is
+therefore used **only as a personal-reference source to extract term-level
+vocabulary** — a use the license permits and that does not reproduce the translation's
+copyrightable sentence-level expression.
 
-**Ingest.** Extend `corpus/ingest/ingest_westminster.py` with a `--lang zh` path that
-emits parallel canon lampposts **`wcf-zh.json` / `wsc-zh.json` / `wlc-zh.json`**,
-structured **identically** to the English so EN↔ZH align by structural key:
+**Guardrails (binding):**
 
-- WCF: `chapters[{n, title, sections[{n, text}]}]` — aligned by `(chapter.n, section.n)`.
-- WSC / WLC: `questions[{n, q, a}]` — aligned by `n`.
-- Each carries `lang: "zh"`, `license`, `role: "lamppost"`.
-- **`proof_texts` are NOT translated** — they are verse refs, shared from the English,
-  and resolve to CUV via `get_passage` at display time.
+1. **Never shipped.** The full ZH Standards text lives only in a **gitignored working
+   directory** (`work/glossary_build/standards_zh/`), never in `corpus/sources/` and
+   never as `wcf-zh`/`wsc-zh`/`wlc-zh` canon lampposts.
+2. **Term-level extraction only.** What leaves the working dir is the glossary's
+   `{en_term, zh_term, sources}` entries — standard theological vocabulary (single
+   words / short standard phrases), never verbatim answers or confession sections.
+3. **No parallel-lamppost ingest.** `ingest_westminster.py` is **not** extended for
+   `zh`; there is no shipped Chinese Standards asset.
 
-**Structural gate.** An ingest check asserts every English key has exactly one ZH
-counterpart (no missing / extra / renumbered chapters or questions). A ZH lamppost
-that does not structurally mirror its English original fails ingest.
+**Doctrinal-fidelity check uses the English WCF-1.** The back-translation review lens
+(Part C) compares the back-translated English against the **English** WCF-1 lamppost
+(public domain, already shipped) — no shipped Chinese Standards is required for it.
 
-**Read path.** Extend `corpus/lib/corpus_bridge.py` (`wcf_chapter1_text` and siblings)
-to serve the ZH lamppost by key, so downstream steps can pull aligned EN/ZH pairs.
+If a genuinely public-domain or licensed-for-distribution Chinese Standards translation
+is obtained later, the original parallel-lamppost design (shippable `wcf-zh` etc.,
+key-aligned to the English, `proof_texts` shared) can be added then — it is an additive
+change, not a redesign.
 
 ---
 
 ## Part B — Theological glossary (derived, not hand-seeded)
 
-A reviewed index over **CUV + the three Chinese Standards**, mapping each theological
-head-term to its **mandated** Chinese rendering, with every rendering traceable to a
-confessional and/or scriptural source.
+A reviewed index over **CUV (shipped, PD)** + the **Chinese Standards (reference only,
+per Part A)**, mapping each theological head-term to its **mandated** Chinese rendering,
+with every rendering traceable to a scriptural and/or confessional source. The glossary
+itself ships (standard vocabulary, not copyrightable expression); the Standards text
+behind the doctrinal entries does not.
 
 **Two authoritative sources, by term type:**
 
@@ -193,13 +201,14 @@ Output parity with the builder: `[ok]`/`[FAIL]` per item, `Done. ok=N failed=M`.
 
 ## Testing (network-free, LLM seam mocked like `llm_core/tests`)
 
-**Part A** — ingest produces key-aligned ZH lampposts; structural gate rejects a ZH
-file with a missing/extra chapter or question; `proof_texts` preserved untranslated;
-`corpus_bridge` serves ZH by key.
+**Part A** — no shipped ZH Standards asset; a guard asserts no copyrighted Standards
+text is written under `corpus/sources/` or the canon lampposts (the extraction
+reference stays in the gitignored working dir).
 
-**Part B** — glossary build extracts term pairs from CUV and Standards with correct
-`sources`; precedence rule picks CUV for a biblical term and Standards for a
-doctrinal-only term; divergences recorded as `variants`.
+**Part B** — glossary build extracts term pairs from CUV and the Standards reference
+with correct `sources`; precedence rule picks CUV for a biblical term and Standards for
+a doctrinal-only term; divergences recorded as `variants`; glossary entries are
+term-level (no verbatim section/answer passages).
 
 **Part C**
 - `cuv_quote_check`: verbatim CUV passes; back-translated / altered span fails;
@@ -213,8 +222,9 @@ doctrinal-only term; divergences recorded as `variants`.
 
 ## Invariants preserved
 
-- **License gate.** All ZH text (CUV, Standards) flows through the corpus with declared
-  license/provenance; no scraped or unaudited text enters `sources/`.
+- **License gate.** Only `public-domain`/`CC-BY` text ships (CUV, English Standards).
+  The copyrighted Ligonier Chinese Standards are reference-only: never entered into
+  `corpus/sources/`, never shipped; only extracted term-level vocabulary survives.
 - **Human is the gate.** Translations land only via confirm→promote; the tool proposes.
 - **Theology not agnostic.** WCF-1 anchoring and glossary enforcement carry the
   doctrinal standard into the Chinese layer, not just the English.
@@ -222,8 +232,9 @@ doctrinal-only term; divergences recorded as `variants`.
 
 ## Sequencing & dependencies
 
-- **A** is blocked on the owner's vetted ZH source files.
-- **B** is blocked on **A** (derives from the ZH Standards) + CUV (already present).
+- **A** (fetch the Ligonier ZH Standards into the gitignored working dir as an
+  extraction reference) is unblocked — no owner source files needed.
+- **B** is blocked on **A** (the reference) + CUV (already present).
 - **C**'s *code* can be built in parallel, but its *output quality* depends on **B**.
 
 ## Open items / deferred

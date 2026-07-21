@@ -11,3 +11,7 @@ corpus/sources/private/
 # editor swap files
 *.swp
 .superpowers/
+
+# copyrighted reference material — Ligonier ZH Westminster Standards, used
+# only for term-level glossary extraction, never redistributed/shipped
+work/glossary_build/standards_zh/
