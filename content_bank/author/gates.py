@@ -13,6 +13,7 @@ import pathlib
 import re
 
 from ..lib import corpus_bridge, schema
+from . import glossary as _glossary
 
 _ROOT = pathlib.Path(__file__).resolve().parents[2]
 MIN_WORDS = 3
@@ -59,6 +60,34 @@ def _lang_strings(item):
             for lang, s in m.items():
                 if isinstance(s, str):
                     yield lang, s
+
+
+def _has_en_term(text_en, term):
+    return re.search(r"\b" + re.escape(term) + r"\b",
+                     text_en, re.IGNORECASE) is not None
+
+
+def glossary_check(items, glossary=None):
+    entries = glossary if glossary is not None else _glossary.load_glossary()
+    flags = {}
+    for it in items:
+        en_text = " ".join(s for l, s in _lang_strings(it) if l == "en")
+        zh_text = " ".join(s for l, s in _lang_strings(it) if l == "zh")
+        if not zh_text:
+            continue  # nothing translated yet
+        problems = []
+        for e in entries:
+            if not _has_en_term(en_text, e["en_term"]):
+                continue
+            if e["zh_term"] not in zh_text:
+                problems.append(f"'{e['en_term']}' -> expected '{e['zh_term']}' "
+                                f"(source {', '.join(e.get('sources', []))})")
+            for wrong in e.get("avoid", []):
+                if wrong in zh_text:
+                    problems.append(f"'{e['en_term']}' uses forbidden '{wrong}'")
+        if problems:
+            flags[it["id"]] = problems
+    return flags
 
 
 def _quote_misses_for_lang(item, lang):
