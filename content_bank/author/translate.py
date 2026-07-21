@@ -9,9 +9,9 @@ import copy
 import json
 import re
 
-from . import build_translate_prompt, gates, glossary as _glossary, quote_detect
+from . import build_translate_prompt, gates, glossary as _glossary, quote_detect, store_writer
 from .llm import llm
-from ..lib import corpus_bridge
+from ..lib import content, corpus_bridge
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.DOTALL)
 
@@ -112,3 +112,36 @@ def back_translate_review(item, *, model=None):
         'Return STRICT JSON ONLY: {"drift": true|false, "notes": "concrete"}.')
     v = _extract_json(llm(prompt, model))
     return {"drift": bool(v.get("drift")), "notes": v.get("notes", "")}
+
+
+def _merge_zh_into_store_item(store_item, proposal_item):
+    """Copy ONLY zh text values from the proposal onto the store item."""
+    out = copy.deepcopy(store_item)
+    p_text = (proposal_item.get("text") or {})
+    if "zh" in p_text:
+        out.setdefault("text", {})["zh"] = p_text["zh"]
+    p_lr = proposal_item.get("leader_reference") or {}
+    o_lr = out.get("leader_reference")
+    if isinstance(o_lr, dict):
+        if "zh" in (p_lr.get("text") or {}):
+            o_lr.setdefault("text", {})["zh"] = p_lr["text"]["zh"]
+        if isinstance(o_lr.get("verse"), dict) and "zh" in (p_lr.get("verse") or {}):
+            o_lr["verse"]["zh"] = p_lr["verse"]["zh"]
+    return out
+
+
+def promote(book, proposals, accepted_ids, *, store_dir=None):
+    accepted = set(accepted_ids)
+    store = content.load_book_store(book, store_dir)
+    by_id = {it["id"]: it for it in store["items"]}
+    to_write, promoted = [], []
+    for p in proposals:
+        if p["id"] not in accepted:
+            continue
+        if p["id"] not in by_id:
+            raise KeyError(f"{p['id']} not in {book} store")
+        to_write.append(_merge_zh_into_store_item(by_id[p["id"]], p["item"]))
+        promoted.append(p["id"])
+    if to_write:
+        store_writer.upsert_items(book, to_write, store_dir)
+    return promoted
