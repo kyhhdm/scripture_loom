@@ -39,11 +39,15 @@ book <BOOK>:
 - ZERO OR MORE threads (only if the motif genuinely RECURS across 2+ pericopes):
   {"id":"<sid>-thread-<slug>","section":"<SID>","dimension":"D7"|"D3","type":"thread","age_tier":"all","difficulty":2,"review_status":"draft","text":{"en":"<name + what the recurrence teaches>"},"refs":["<BOOK>.C.V","..."],"version":1}
   (refs = >=2 member verses where the motif recurs)
-- 2-4 arc QUESTIONS answerable only ACROSS the section:
-  {"id":"<sid>-q-<slug>","section":"<SID>","dimension":"D5"|"D6"|"D7","type":"question","age_tier":"youth"|"adult"|"all","difficulty":2|3,"review_status":"draft","text":{"en":"..."},"version":1}
-  Give D6/D7 a leader_note and D5 an answer_key, each with a leader_reference and
-  provenance {"reviewed_by":"claude","reviewed_date":"2026-07-20","guardrail":"WCF-1"};
-  throughline/thread need no leader_reference.
+- 2-4 arc QUESTIONS answerable only ACROSS the section. EVERY question MUST carry a
+  leader-only `leader_reference`. `kind` is EXACTLY "answer_key" or "leader_note"
+  (no other value): a D5 question -> "answer_key" (with the verse it comes from);
+  a D6 or D7 question -> "leader_note" (no verse). Shapes:
+  D5 (answer_key):
+  {"id":"<sid>-q-<slug>","section":"<SID>","dimension":"D5","type":"question","age_tier":"youth"|"adult"|"all","difficulty":2|3,"review_status":"draft","text":{"en":"..."},"leader_reference":{"kind":"answer_key","text":{"en":"the concise correct answer, drawn across the section"},"verse":{"en":"Philippians 2:5-8"}},"version":1}
+  D6/D7 (leader_note):
+  {"id":"<sid>-q-<slug>","section":"<SID>","dimension":"D6"|"D7","type":"question","age_tier":"youth"|"adult"|"all","difficulty":2|3,"review_status":"draft","text":{"en":"..."},"leader_reference":{"kind":"leader_note","text":{"en":"point where the text leads; flag a common misreading; keep the question open"}},"version":1}
+  throughline and thread items need NO leader_reference.
 
 Keep exactly one throughline. Quoted words must be verbatim BSB."""
 

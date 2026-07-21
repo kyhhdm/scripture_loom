@@ -16,6 +16,13 @@ class SectionDraftPromptSelfContainedTest(unittest.TestCase):
                        "exactly one throughline", "JSON array"):
             self.assertIn(needle, text)
 
+    def test_prompt_inlines_leader_reference_for_questions(self):
+        text = bsd.build("PHP-S1", "PHP")
+        # The leader_reference shape must be in a JSON example (not just prose), so
+        # the model actually emits answer keys / leader notes on arc questions.
+        self.assertIn('"leader_reference":{"kind":"answer_key"', text)
+        self.assertIn('"leader_reference":{"kind":"leader_note"', text)
+
     def test_brief_is_embedded_when_supplied(self):
         text = bsd.build("PHP-S1", "PHP", brief="ARC SPINE: partnership in the gospel.")
         self.assertIn("ARC SPINE: partnership in the gospel.", text)
