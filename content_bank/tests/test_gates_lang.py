@@ -31,11 +31,16 @@ class TestLangAwareQuoteCheck(unittest.TestCase):
         self.assertNotIn("T-1", gates.quote_check("PHP", [good]))
         self.assertIn("T-1", gates.quote_check("PHP", [bad]))
 
-    def test_en_single_quote_detected_apostrophe_ignored(self):
-        # Single-quoted BSB phrase should be checked; Paul's apostrophe must not
-        # create a spurious span.
-        bad = self._item(en="They are 'friends of Rome forever' in Paul's words.")
-        self.assertIn("T-1", gates.quote_check("PHP", [bad]))
+    def test_en_single_quotes_not_treated_as_quotes(self):
+        # Deliberate decision: single quotes are used for fill-in-the-blank
+        # drills and event-ordering lists, and false-flagged that legitimate
+        # content. Single-quoted spans are no longer treated as quotes at all;
+        # only double quotes (straight or curly) trigger the check. An
+        # apostrophe (e.g. Paul's) must not create a spurious span either.
+        single_quoted = self._item(en="They are 'friends of Rome forever' in Paul's words.")
+        double_quoted = self._item(en='He calls them "friends of Rome forever" in Paul\'s words.')
+        self.assertNotIn("T-1", gates.quote_check("PHP", [single_quoted]))
+        self.assertIn("T-1", gates.quote_check("PHP", [double_quoted]))
 
 
 class TestCuvQuoteCheck(unittest.TestCase):

@@ -121,8 +121,7 @@ def _book_text(_book):
 
 def _quoted_spans(s):
     return (re.findall(r'"([^"]{3,300})"', s)
-            + re.findall("\u201c([^\u201d]{3,300})\u201d", s)
-            + re.findall(r"(?<!\w)'([^']{3,300})'(?!\w)", s))
+            + re.findall("\u201c([^\u201d]{3,300})\u201d", s))
 
 
 def quote_check(book, items):
