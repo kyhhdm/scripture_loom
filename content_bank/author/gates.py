@@ -1,9 +1,15 @@
 """Deterministic content gates for the standalone builder (issue #16).
 
 Pure functions, each returning ``{item_id: [problems]}`` (empty dict = clean):
-- quote_check : quoted spans must be verbatim BSB (whole-Bible haystack)
+- quote_check : language-aware quoted-span verbatim check — English quotes
+  (straight/curly double or single) must match the BSB haystack; Chinese
+  「…」-quoted spans must match the CUV haystack (by Han-character length)
+- cuv_quote_check: standalone CUV-only variant of the quote check
 - schema_check: content_bank.lib.schema.validate_item, keyed by id
 - refs_in_range: stated verse references must fall in the unit's range
+- thread_span_check: cross-item throughline/thread span gate
+- dimension_cap_check: caps how many items may cover a given fluency dimension
+- glossary_check: flags approved-term glossary misses/violations
 
 Committed replacement for the untracked work/content_bank_build/quote_check.py.
 Stdlib + in-repo packages only; offline.
@@ -13,53 +19,124 @@ import pathlib
 import re
 
 from ..lib import corpus_bridge, schema
+from . import glossary as _glossary
 
 _ROOT = pathlib.Path(__file__).resolve().parents[2]
 MIN_WORDS = 3
+MIN_HAN = 4
+_EN_VERSION, _ZH_VERSION = "BSB", "CUV"
+_VERSION_FILE = {"BSB": "bsb.json", "CUV": "cuv-simp.json"}
+_HAYSTACK_CACHE = {}
 
 
 def _norm(s):
-    s = re.sub(r"[\"'“”‘’]", "", s)
+    s = re.sub(r"[\"'\u201c\u201d\u2018\u2019]", "", s)
     return re.sub(r"\s+", " ", s).strip().lower()
 
 
+def _version_text(version):
+    if version not in _HAYSTACK_CACHE:
+        path = _ROOT / "corpus" / "canon" / "bibles" / _VERSION_FILE[version]
+        data = json.loads(path.read_text(encoding="utf-8"))
+        parts = []
+        for bk in data["books"].values():
+            for ch in bk.values():
+                for verse in ch.values():
+                    if isinstance(verse, str):
+                        parts.append(verse)
+        _HAYSTACK_CACHE[version] = _norm(" ".join(parts))
+    return _HAYSTACK_CACHE[version]
+
+
+def _zh_quoted_spans(s):
+    return (re.findall(r"「([^」]{2,300})」", s)
+            + re.findall(r'"([^"]{2,300})"', s)
+            + re.findall("\u201c([^\u201d]{2,300})\u201d", s))
+
+
+def _han_len(s):
+    return len(re.findall(r"[一-鿿]", s))
+
+
+def _lang_strings(item):
+    ref = item.get("leader_reference") or {}
+    for m in (item.get("text"), ref.get("text"), ref.get("verse")):
+        if isinstance(m, dict):
+            for lang, s in m.items():
+                if isinstance(s, str):
+                    yield lang, s
+
+
+def _has_en_term(text_en, term):
+    return re.search(r"\b" + re.escape(term) + r"\b",
+                     text_en, re.IGNORECASE) is not None
+
+
+def glossary_check(items, glossary=None):
+    entries = glossary if glossary is not None else _glossary.load_glossary()
+    flags = {}
+    for it in items:
+        en_text = " ".join(s for l, s in _lang_strings(it) if l == "en")
+        zh_text = " ".join(s for l, s in _lang_strings(it) if l == "zh")
+        if not zh_text:
+            continue  # nothing translated yet
+        problems = []
+        for e in entries:
+            if not _has_en_term(en_text, e["en_term"]):
+                continue
+            if e["zh_term"] not in zh_text:
+                problems.append(f"'{e['en_term']}' -> expected '{e['zh_term']}' "
+                                f"(source {', '.join(e.get('sources', []))})")
+            for wrong in e.get("avoid", []):
+                if wrong in zh_text:
+                    problems.append(f"'{e['en_term']}' uses forbidden '{wrong}'")
+        if problems:
+            flags[it["id"]] = problems
+    return flags
+
+
+def _quote_misses_for_lang(item, lang):
+    version = _ZH_VERSION if lang == "zh" else _EN_VERSION
+    hay = _version_text(version)
+    misses = []
+    for l, s in _lang_strings(item):
+        if l != lang:
+            continue
+        spans = _zh_quoted_spans(s) if lang == "zh" else _quoted_spans(s)
+        for span in spans:
+            core = span.strip(" \t\n,.;:!?\"'—-…")
+            if lang == "zh":
+                if _han_len(core) < MIN_HAN:
+                    continue
+            elif len(core.split()) < MIN_WORDS:
+                continue
+            if _norm(core) not in hay:
+                misses.append(span)
+    return misses
+
+
 def _book_text(_book):
-    # Haystack = the WHOLE BSB, so legitimate cross-reference quotes validate.
-    bsb = _ROOT / "corpus" / "canon" / "bibles" / "bsb.json"
-    data = json.loads(bsb.read_text(encoding="utf-8"))
-    parts = []
-    for bk in data["books"].values():
-        for ch in bk.values():
-            for verse in ch.values():
-                if isinstance(verse, str):
-                    parts.append(verse)
-    return _norm(" ".join(parts))
+    return _version_text("BSB")
 
 
 def _quoted_spans(s):
-    return re.findall(r'"([^"]{3,300})"', s) + re.findall(r"“([^”]{3,300})”", s)
-
-
-def _item_strings(item):
-    out = list((item.get("text") or {}).values())
-    ref = item.get("leader_reference") or {}
-    out += list((ref.get("text") or {}).values())
-    out += list((ref.get("verse") or {}).values())
-    return out
+    return (re.findall(r'"([^"]{3,300})"', s)
+            + re.findall("\u201c([^\u201d]{3,300})\u201d", s))
 
 
 def quote_check(book, items):
-    hay = _book_text(book)
     flags = {}
     for it in items:
-        misses = []
-        for s in _item_strings(it):
-            for span in _quoted_spans(s):
-                core = span.strip(" \t\n,.;:!?\"'—-…")
-                if len(core.split()) < MIN_WORDS:
-                    continue
-                if _norm(core) not in hay:
-                    misses.append(span)
+        misses = _quote_misses_for_lang(it, "en") + _quote_misses_for_lang(it, "zh")
+        if misses:
+            flags[it["id"]] = misses
+    return flags
+
+
+def cuv_quote_check(items):
+    flags = {}
+    for it in items:
+        misses = _quote_misses_for_lang(it, "zh")
         if misses:
             flags[it["id"]] = misses
     return flags

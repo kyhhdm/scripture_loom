@@ -1,0 +1,22 @@
+[
+  {"en_term": "justification", "zh_term": "称义", "sources": ["WSC.33", "WCF.11"], "avoid": ["合理化"]},
+  {"en_term": "sanctification", "zh_term": "成圣", "sources": ["WSC.35", "WCF.13"]},
+  {"en_term": "adoption", "zh_term": "得儿子的名分", "sources": ["WSC.34", "WLC.74"]},
+  {"en_term": "regeneration", "zh_term": "重生", "sources": ["WSC.95"]},
+  {"en_term": "repentance", "zh_term": "悔改", "sources": ["WSC.87", "WCF.15"]},
+  {"en_term": "redemption", "zh_term": "救赎", "sources": ["WSC.21", "WCF.8"]},
+  {"en_term": "predestination", "zh_term": "预定", "sources": ["WCF.3"]},
+  {"en_term": "election", "zh_term": "拣选", "sources": ["WCF.3"]},
+  {"en_term": "mediator", "zh_term": "中保", "sources": ["WSC.23", "WCF.8"]},
+  {"en_term": "covenant of grace", "zh_term": "恩典之约", "sources": ["WCF.7", "WLC.30"]},
+  {"en_term": "providence", "zh_term": "护理", "sources": ["WSC.11"]},
+  {"en_term": "infallible", "zh_term": "无谬", "sources": ["WCF.1"], "avoid": ["可靠"]},
+  {"en_term": "inerrant", "zh_term": "真确", "sources": ["WCF.1"]},
+  {"en_term": "inspiration", "zh_term": "默示", "sources": ["WCF.1"]},
+  {"en_term": "Scripture", "zh_term": "圣经", "sources": ["WSC.2", "CUV:2TI.3.16"]},
+  {"en_term": "grace", "zh_term": "恩典", "sources": ["CUV:JHN.1.16", "WSC.20"]},
+  {"en_term": "saints", "zh_term": "圣徒", "sources": ["CUV:PHP.1.1"]},
+  {"en_term": "overseers", "zh_term": "监督", "sources": ["CUV:PHP.1.1"]},
+  {"en_term": "deacons", "zh_term": "执事", "sources": ["CUV:PHP.1.1"]},
+  {"en_term": "faith", "zh_term": "信心", "sources": ["WSC.86", "CUV:HEB.11.1"]}
+]
