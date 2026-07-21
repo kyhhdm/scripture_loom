@@ -116,6 +116,20 @@ def _run_gates(book, unit_items, notes):
     return flags
 
 
+def _leader_ref(item):
+    """The leader-only reference (answer key for D1-D5, leader note for D6-D8), or
+    None. Shown to the reviewer — answer-key accuracy and note-openness are two of
+    the seven rubric axes."""
+    lr = item.get("leader_reference")
+    if not lr:
+        return None
+    return {
+        "kind": lr.get("kind"),
+        "text_en": (lr.get("text") or {}).get("en"),
+        "verse_en": (lr.get("verse") or {}).get("en"),
+    }
+
+
 def _card(item, run, gate_flags, unit_verdicts):
     iid = item.get("id")
     problems = gate_flags.get(iid, [])
@@ -127,6 +141,7 @@ def _card(item, run, gate_flags, unit_verdicts):
         "age_tier": item.get("age_tier"),
         "difficulty": item.get("difficulty"),
         "text_en": (item.get("text") or {}).get("en") or "(no en text)",
+        "leader_ref": _leader_ref(item),
         "gate_ok": not problems,
         "gate_problems": problems,
         "verdict": unit_verdicts.get(iid),
@@ -229,6 +244,11 @@ summary .cnt { font-weight: 400; color: #888; font-size: 12px; }
 .chip.pass { background: #22c55e33; }
 .chip.fail { background: #ef444433; }
 .empty { color: #999; font-style: italic; font-size: 12px; padding: 4px 0; }
+.lref { margin: 6px 0 0 24px; padding: 6px 8px; border-left: 3px solid #a855f7aa;
+  background: #a855f714; border-radius: 0 4px 4px 0; font-size: 13px; }
+.lref .lref-kind { font-weight: 600; font-size: 11px; text-transform: uppercase;
+  letter-spacing: .03em; color: #a855f7; }
+.lref .lref-verse { color: #888; font-size: 12px; margin-left: 6px; }
 details.ref { margin: 8px 16px; border: 1px solid #8886; border-radius: 8px; }
 details.ref > summary { padding: 8px 12px; cursor: pointer; font-weight: 600; }
 .refbody { padding: 4px 16px 12px; max-width: 70em; }
@@ -288,9 +308,18 @@ function card(c) {
   if (c.verdict) for (const v of c.verdict)
     verdict += '<span class="chip ' + esc(v.verdict) + '" title="' + esc(v.notes) + '">' +
       esc(v.reviewer) + ':' + esc(v.verdict) + '</span>';
+  let lref = '';
+  if (c.leader_ref && c.leader_ref.text_en) {
+    const lr = c.leader_ref;
+    const kind = (lr.kind === 'answer_key') ? 'Answer key'
+      : (lr.kind === 'leader_note') ? 'Leader note' : (lr.kind || 'Leader ref');
+    lref = '<div class="lref"><span class="lref-kind">' + esc(kind) + '</span>' +
+      (lr.verse_en ? '<span class="lref-verse">' + esc(lr.verse_en) + '</span>' : '') +
+      '<div>' + esc(lr.text_en) + '</div></div>';
+  }
   el.innerHTML =
     '<label><input type="checkbox" ' + (state[c.id] === true ? 'checked' : '') + '>' +
-    '<span class="txt">' + esc(c.text_en) + '</span></label>' +
+    '<span class="txt">' + esc(c.text_en) + '</span></label>' + lref +
     '<div class="chips"><span class="chip">' + esc(c.age_tier) + '</span>' +
     '<span class="chip">diff ' + esc(c.difficulty) + '</span>' +
     '<span class="chip">' + esc(c.type) + '</span>' + gate + verdict + '</div>';

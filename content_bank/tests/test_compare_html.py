@@ -121,6 +121,21 @@ class BuildModelTests(unittest.TestCase):
         self.assertEqual(unit["briefs"]["opus"], "# opus brief")
 
 
+class LeaderRefTest(unittest.TestCase):
+    def test_answer_key_extracted_onto_card(self):
+        item = _item("x", "D1")
+        item["leader_reference"] = {"kind": "answer_key",
+                                    "text": {"en": "Paul and Timothy"},
+                                    "verse": {"en": "Philippians 1:1"}}
+        lr = compare_html._leader_ref(item)
+        self.assertEqual(lr["kind"], "answer_key")
+        self.assertEqual(lr["text_en"], "Paul and Timothy")
+        self.assertEqual(lr["verse_en"], "Philippians 1:1")
+
+    def test_none_when_absent(self):
+        self.assertIsNone(compare_html._leader_ref(_item("x", "D1")))
+
+
 class RenderTests(unittest.TestCase):
     def test_single_self_contained_file(self):
         model = {"book": "PHP", "runs": ["runA"], "notes": [], "units": []}
