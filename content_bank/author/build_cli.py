@@ -14,14 +14,70 @@ import re
 import shutil
 import time
 
-from . import (build_brief_prompt, build_draft_prompt,
-               build_section_brief_prompt, gates, manifest as manifest_mod)
+from . import (build_brief_prompt, build_draft_prompt, build_section_brief_prompt,
+               build_section_draft_prompt, gates, manifest as manifest_mod)
 from .gates import run_all
 from .llm import llm
 from llm_core import llm_configured
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.DOTALL)
 _BRIEFS_DIR = pathlib.Path(__file__).parent / "briefs"
+_BUILD_ROOT = pathlib.Path("work/content_bank_build")
+
+
+def _effective_model(backend, model):
+    """The model that will actually run: the override, else the backend's default."""
+    if model:
+        return model
+    return "opus" if backend == "claude" else "deepseek-v4-flash"
+
+
+def _run_slug(backend, model):
+    """Directory-safe id for a run, from its effective model (full model id)."""
+    m = _effective_model(backend, model).lower()
+    return re.sub(r"[^a-z0-9.]+", "-", m).strip("-")
+
+
+def _run_layout(book, slug, *, root=None):
+    """The per-model run dir and its {manifest,briefs,drafts,verdicts} paths."""
+    run_dir = pathlib.Path(root or _BUILD_ROOT) / book / "runs" / slug
+    return {
+        "run_dir": run_dir,
+        "manifest": run_dir / "manifest.json",
+        "briefs": run_dir / "briefs",
+        "drafts": run_dir / "drafts",
+        "verdicts": run_dir / "verdicts",
+    }
+
+
+def _load_run_manifest(book, layout, *, root=None):
+    """Load the run's own stage ledger, seeding it from the canonical book manifest
+    (all units 'pending') on first use so each model tracks progress independently."""
+    if layout["manifest"].exists():
+        return manifest_mod.load(layout["manifest"])
+    canonical = manifest_mod.load(pathlib.Path(root or _BUILD_ROOT) / book /
+                                  "manifest.json")
+    pericopes = [u for u, meta in canonical["units"].items()
+                 if meta["kind"] == "pericope"]
+    sections = [u for u, meta in canonical["units"].items()
+                if meta["kind"] == "section"]
+    m = manifest_mod.init_manifest(book, pericopes, sections)
+    manifest_mod.save(layout["manifest"], m)
+    return m
+
+
+def _verdicts_by_item(review_out):
+    """Convert review()'s reviewer-keyed output into the item-keyed file format
+    ({id: [{reviewer, verdict, notes}]}) that compare_html and the stored files use."""
+    by_item = {}
+    for r in review_out:
+        for iid, v in (r.get("verdicts") or {}).items():
+            by_item.setdefault(iid, []).append({
+                "reviewer": r.get("reviewer"),
+                "verdict": v.get("verdict"),
+                "notes": v.get("notes"),
+            })
+    return by_item
 
 
 class GateError(Exception):
@@ -106,6 +162,26 @@ def _write_json(path, obj):
                     encoding="utf-8")
 
 
+def _save_verdicts(verdicts_dir, unit_id, review_out):
+    """Persist the adversarial review as item-keyed verdicts, if a dir is given."""
+    if verdicts_dir is None:
+        return
+    _write_json(pathlib.Path(verdicts_dir) / f"{unit_id}.json",
+                _verdicts_by_item(review_out))
+
+
+def _stamp_draft_provenance(items, stamp):
+    """Record which model/run drafted each item (survives publish → the store).
+    `stamp` is {model, backend, run} or None (no stamp — legacy/tests)."""
+    if not stamp:
+        return items
+    for it in items:
+        prov = dict(it.get("provenance") or {})
+        prov.update(stamp)
+        it["provenance"] = prov
+    return items
+
+
 def _regate(prompt, items, book, allowed, *, max_repair, dim_cap=gates.DEFAULT_DIM_CAP):
     return _repair_to_clean(prompt, items, book, allowed, max_repair=max_repair,
                             dim_cap=dim_cap, where="review+")
@@ -127,12 +203,12 @@ def _section_text(book, sid):
     return "\n\n".join(corpus_bridge.passage_text(p["range"]) for p in peris[i:j + 1])
 
 
-def build_pericope(pid, book, *, drafts_dir, briefs_dir=None, manifest_obj,
-                   manifest_path, review_on=False, max_repair=2,
-                   dim_cap=gates.DEFAULT_DIM_CAP):
+def build_pericope(pid, book, *, drafts_dir, briefs_dir=None, verdicts_dir=None,
+                   manifest_obj, manifest_path, review_on=False, max_repair=2,
+                   dim_cap=gates.DEFAULT_DIM_CAP, draft_stamp=None):
     briefs_dir = briefs_dir or _BRIEFS_DIR
     brief_path = pathlib.Path(briefs_dir) / f"{pid.lower()}.md"
-    if manifest_obj["units"][pid]["stage"] == "pending":
+    if manifest_obj["units"][pid]["stage"] == "pending" or not brief_path.exists():
         brief = _llm_with_backoff(build_brief_prompt.build(pid, book))
         brief_path.parent.mkdir(parents=True, exist_ok=True)
         brief_path.write_text(brief, encoding="utf-8")
@@ -149,6 +225,7 @@ def build_pericope(pid, book, *, drafts_dir, briefs_dir=None, manifest_obj,
         passage = _passage_text(book, pid)
         verdicts = review_mod.review(items, passage_text=passage, brief=brief,
                                      book=book, unit_id=pid)
+        _save_verdicts(verdicts_dir, pid, verdicts)
         items = review_mod.revise(items, verdicts, passage_text=passage, brief=brief)
         items = _regate(prompt, items, book, allowed, max_repair=max_repair,
                         dim_cap=dim_cap)
@@ -156,28 +233,43 @@ def build_pericope(pid, book, *, drafts_dir, briefs_dir=None, manifest_obj,
         items = _draft_with_repair(prompt, book, allowed, max_repair=max_repair,
                                    dim_cap=dim_cap)
 
+    _stamp_draft_provenance(items, draft_stamp)
     _write_json(pathlib.Path(drafts_dir) / f"{pid}.json", items)
     manifest_mod.set_stage(manifest_obj, pid, "drafted")
     manifest_mod.save(manifest_path, manifest_obj)
     return "drafted"
 
 
-def build_section(sid, book, *, drafts_dir, manifest_obj, manifest_path,
-                  review_on=False, max_repair=2, dim_cap=gates.DEFAULT_DIM_CAP):
+def build_section(sid, book, *, drafts_dir, briefs_dir=None, verdicts_dir=None,
+                  manifest_obj, manifest_path, review_on=False, max_repair=2,
+                  dim_cap=gates.DEFAULT_DIM_CAP, draft_stamp=None):
+    briefs_dir = briefs_dir or _BRIEFS_DIR
+    brief_path = pathlib.Path(briefs_dir) / f"{sid.lower()}.md"
+    if manifest_obj["units"][sid]["stage"] == "pending" or not brief_path.exists():
+        brief = _llm_with_backoff(build_section_brief_prompt.build(sid, book))
+        brief_path.parent.mkdir(parents=True, exist_ok=True)
+        brief_path.write_text(brief, encoding="utf-8")
+        manifest_mod.set_stage(manifest_obj, sid, "briefed")
+        manifest_mod.save(manifest_path, manifest_obj)
+    else:
+        brief = brief_path.read_text(encoding="utf-8")
+
     allowed = gates.section_allowed(book, sid)
-    prompt = build_section_brief_prompt.build(sid, book)
+    prompt = build_section_draft_prompt.build(sid, book, brief)
     if review_on:
         from . import review as review_mod
         passage = _section_text(book, sid)
         items = _parse_items(_llm_with_backoff(prompt))
-        verdicts = review_mod.review(items, passage_text=passage, brief="",
+        verdicts = review_mod.review(items, passage_text=passage, brief=brief,
                                      book=book, unit_id=sid)
-        items = review_mod.revise(items, verdicts, passage_text=passage, brief="")
+        _save_verdicts(verdicts_dir, sid, verdicts)
+        items = review_mod.revise(items, verdicts, passage_text=passage, brief=brief)
         items = _regate(prompt, items, book, allowed, max_repair=max_repair,
                         dim_cap=dim_cap)
     else:
         items = _draft_with_repair(prompt, book, allowed, max_repair=max_repair,
                                    dim_cap=dim_cap)
+    _stamp_draft_provenance(items, draft_stamp)
     _write_json(pathlib.Path(drafts_dir) / f"{sid}.json", items)
     manifest_mod.set_stage(manifest_obj, sid, "drafted")
     manifest_mod.save(manifest_path, manifest_obj)
@@ -190,7 +282,8 @@ def _default_manifest_path(book):
 
 def run(book, *, units=None, kind="all", review_on=False, max_repair=2,
         limit=None, manifest_path=None, drafts_dir=None, briefs_dir=None,
-        backend="llm_core", model=None, dim_cap=gates.DEFAULT_DIM_CAP):
+        verdicts_dir=None, run_root=None, backend="llm_core", model=None,
+        dim_cap=gates.DEFAULT_DIM_CAP):
     os.environ["SCRIPTURE_LOOM_LLM_BACKEND"] = backend
     if model:
         os.environ["SCRIPTURE_LOOM_LLM_MODEL"] = model
@@ -204,9 +297,27 @@ def run(book, *, units=None, kind="all", review_on=False, max_repair=2,
     elif not llm_configured():
         raise LLMUnavailable(
             "no LLM credential (set ARK_API_KEY or llm_api_key); see CLAUDE.md")
-    manifest_path = pathlib.Path(manifest_path or _default_manifest_path(book))
-    m = manifest_mod.load(manifest_path)
-    drafts_dir = pathlib.Path(drafts_dir or manifest_path.parent / "drafts")
+
+    slug = _run_slug(backend, model)
+    if manifest_path is not None or drafts_dir is not None:
+        # Legacy / explicit-dir mode (advanced use and existing tests).
+        manifest_path = pathlib.Path(manifest_path or _default_manifest_path(book))
+        m = manifest_mod.load(manifest_path)
+        drafts_dir = pathlib.Path(drafts_dir or manifest_path.parent / "drafts")
+        briefs_dir = pathlib.Path(briefs_dir) if briefs_dir else None
+        verdicts_dir = (pathlib.Path(verdicts_dir) if verdicts_dir
+                        else manifest_path.parent / "verdicts")
+    else:
+        # Per-model run layout: runs/<slug>/{manifest,briefs,drafts,verdicts}.
+        layout = _run_layout(book, slug, root=run_root)
+        m = _load_run_manifest(book, layout, root=run_root)
+        manifest_path = layout["manifest"]
+        drafts_dir = pathlib.Path(drafts_dir) if drafts_dir else layout["drafts"]
+        briefs_dir = pathlib.Path(briefs_dir) if briefs_dir else layout["briefs"]
+        verdicts_dir = (pathlib.Path(verdicts_dir) if verdicts_dir
+                        else layout["verdicts"])
+        print(f"[run] model={_effective_model(backend, model)} slug={slug} "
+              f"-> {layout['run_dir']}")
 
     if units:
         todo = list(units)
@@ -217,19 +328,24 @@ def run(book, *, units=None, kind="all", review_on=False, max_repair=2,
     if limit:
         todo = todo[:limit]
 
+    draft_stamp = {"model": _effective_model(backend, model), "backend": backend,
+                   "run": slug}
     ok, failed = [], {}
     for uid in todo:
         meta = m["units"][uid]
         try:
             if meta["kind"] == "pericope":
                 build_pericope(uid, book, drafts_dir=drafts_dir, briefs_dir=briefs_dir,
-                               manifest_obj=m, manifest_path=manifest_path,
-                               review_on=review_on, max_repair=max_repair,
-                               dim_cap=dim_cap)
+                               verdicts_dir=verdicts_dir, manifest_obj=m,
+                               manifest_path=manifest_path, review_on=review_on,
+                               max_repair=max_repair, dim_cap=dim_cap,
+                               draft_stamp=draft_stamp)
             else:
-                build_section(uid, book, drafts_dir=drafts_dir, manifest_obj=m,
+                build_section(uid, book, drafts_dir=drafts_dir, briefs_dir=briefs_dir,
+                              verdicts_dir=verdicts_dir, manifest_obj=m,
                               manifest_path=manifest_path, review_on=review_on,
-                              max_repair=max_repair, dim_cap=dim_cap)
+                              max_repair=max_repair, dim_cap=dim_cap,
+                              draft_stamp=draft_stamp)
             ok.append(uid)
             print(f"[ok] {uid}")
         except (GateError, RuntimeError, ValueError) as exc:
@@ -243,11 +359,18 @@ def main(argv=None):
     ap.add_argument("--book", required=True)
     ap.add_argument("--units", nargs="*")
     ap.add_argument("--kind", choices=("pericope", "section", "all"), default="all")
-    ap.add_argument("--review", action="store_true")
+    ap.add_argument("--review", dest="review", action="store_true", default=True,
+                    help="run the adversarial review + revise pass (default ON)")
+    ap.add_argument("--no-review", dest="review", action="store_false",
+                    help="skip the adversarial review pass")
     ap.add_argument("--max-repair", type=int, default=2)
     ap.add_argument("--limit", type=int)
     ap.add_argument("--manifest")
     ap.add_argument("--drafts-dir")
+    ap.add_argument("--briefs-dir")
+    ap.add_argument("--verdicts-dir")
+    ap.add_argument("--run-root", help="build root holding runs/<model>/ "
+                    "(default work/content_bank_build)")
     ap.add_argument("--backend", choices=("llm_core", "claude"), default="llm_core",
                     help="llm_core = deepseek via API credits (default); "
                          "claude = Claude Code headless via subscription")
@@ -260,8 +383,9 @@ def main(argv=None):
     a = ap.parse_args(argv)
     res = run(a.book, units=a.units, kind=a.kind, review_on=a.review,
               max_repair=a.max_repair, limit=a.limit, manifest_path=a.manifest,
-              drafts_dir=a.drafts_dir, backend=a.backend, model=a.model,
-              dim_cap=a.dim_cap)
+              drafts_dir=a.drafts_dir, briefs_dir=a.briefs_dir,
+              verdicts_dir=a.verdicts_dir, run_root=a.run_root,
+              backend=a.backend, model=a.model, dim_cap=a.dim_cap)
     print(f"\nDone. ok={len(res['ok'])} failed={len(res['failed'])}")
     return 1 if res["failed"] else 0
 
