@@ -5,10 +5,12 @@ translate.promote for the human-gated landing step.
 """
 import argparse
 import json
+import os
 import pathlib
 
 from ..lib import content
 from . import glossary as _glossary
+from .build_cli import _run_slug
 from .translate import translate_with_gates, back_translate_review
 
 
@@ -20,6 +22,22 @@ def select_items(book, *, item_ids=None, status=None, store_dir=None):
     if status:
         return [it for it in items if it.get("review_status") == status]
     return list(items)
+
+
+def load_drafts(drafts_dir):
+    """Load items from a build run's drafts dir (per-unit JSON arrays)."""
+    items = []
+    for path in sorted(pathlib.Path(drafts_dir).glob("*.json")):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if isinstance(data, list):
+            items.extend(data)
+    return items
+
+
+def out_dir_for(drafts_dir, backend, model):
+    """Default proposal dir for a drafts run: runs/<draft-model>/translations/<slug>."""
+    slug = _run_slug(backend, model)
+    return str(pathlib.Path(drafts_dir).parent / "translations" / slug)
 
 
 def proposal_for(item, book, *, glossary=None, model=None, max_repair=2):
@@ -47,13 +65,28 @@ def main(argv=None):
     ap.add_argument("--book", required=True)
     ap.add_argument("--items", nargs="*")
     ap.add_argument("--status")
+    ap.add_argument("--drafts-dir",
+                    help="translate a build run's drafts (runs/<model>/drafts) "
+                         "instead of the store")
+    ap.add_argument("--backend", choices=("llm_core", "claude"), default="llm_core")
     ap.add_argument("--model")
     ap.add_argument("--max-repair", type=int, default=2)
     ap.add_argument("--out")
     args = ap.parse_args(argv)
-    out_dir = args.out or f"work/content_bank_build/{args.book}/translations"
+
+    os.environ["SCRIPTURE_LOOM_LLM_BACKEND"] = args.backend
+
+    if args.drafts_dir:
+        items = load_drafts(args.drafts_dir)
+        if args.items:
+            want = set(args.items)
+            items = [it for it in items if it["id"] in want]
+        out_dir = args.out or out_dir_for(args.drafts_dir, args.backend, args.model)
+    else:
+        items = select_items(args.book, item_ids=args.items, status=args.status)
+        out_dir = args.out or f"work/content_bank_build/{args.book}/translations"
+
     glossary = _glossary.load_glossary()
-    items = select_items(args.book, item_ids=args.items, status=args.status)
     proposals, ok = [], 0
     for it in items:
         try:
