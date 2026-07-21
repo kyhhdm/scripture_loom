@@ -5,7 +5,6 @@ translate.promote for the human-gated landing step.
 """
 import argparse
 import json
-import os
 import pathlib
 
 from ..lib import content
@@ -52,8 +51,6 @@ def main(argv=None):
     ap.add_argument("--max-repair", type=int, default=2)
     ap.add_argument("--out")
     args = ap.parse_args(argv)
-    if args.model:
-        os.environ["SCRIPTURE_LOOM_LLM_MODEL"] = args.model
     out_dir = args.out or f"work/content_bank_build/{args.book}/translations"
     glossary = _glossary.load_glossary()
     items = select_items(args.book, item_ids=args.items, status=args.status)
