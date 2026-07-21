@@ -36,3 +36,19 @@ class TestLangAwareQuoteCheck(unittest.TestCase):
         # create a spurious span.
         bad = self._item(en="They are 'friends of Rome forever' in Paul's words.")
         self.assertIn("T-1", gates.quote_check("PHP", [bad]))
+
+
+class TestCuvQuoteCheck(unittest.TestCase):
+    def _item(self, zh):
+        return {"id": "Z-1", "passage": "PHP.1.1-11", "text": {"zh": zh}}
+
+    def test_verbatim_cuv_passes(self):
+        self.assertEqual(gates.cuv_quote_check([self._item("「基督耶稣的仆人」")]), {})
+
+    def test_altered_cuv_fails(self):
+        self.assertIn("Z-1", gates.cuv_quote_check([self._item("「基督耶稣的门徒」")]))
+
+    def test_ignores_en_only_item(self):
+        it = {"id": "Z-2", "passage": "PHP.1.1-11",
+              "text": {"en": '"nonexistent phrase here now"'}}
+        self.assertEqual(gates.cuv_quote_check([it]), {})

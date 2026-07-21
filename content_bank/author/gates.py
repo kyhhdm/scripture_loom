@@ -100,6 +100,15 @@ def quote_check(book, items):
     return flags
 
 
+def cuv_quote_check(items):
+    flags = {}
+    for it in items:
+        misses = _quote_misses_for_lang(it, "zh")
+        if misses:
+            flags[it["id"]] = misses
+    return flags
+
+
 def schema_check(items):
     flags = {}
     for it in items:
