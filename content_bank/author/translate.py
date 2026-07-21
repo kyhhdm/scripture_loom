@@ -11,6 +11,7 @@ import re
 
 from . import build_translate_prompt, gates, glossary as _glossary, quote_detect
 from .llm import llm
+from ..lib import corpus_bridge
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.DOTALL)
 
@@ -95,3 +96,19 @@ def translate_with_gates(item, book, *, glossary=None, model=None, max_repair=2)
     out["gate_ok"] = not flags
     out["gate_flags"] = flags
     return out
+
+
+def back_translate_review(item, *, model=None):
+    zh = " ".join(s for l, s in gates._lang_strings(item) if l == "zh")
+    en = " ".join(s for l, s in gates._lang_strings(item) if l == "en")
+    if not zh.strip():
+        return {"drift": False, "notes": "no zh"}
+    prompt = (
+        "Back-translate the Chinese below into English, then compare its DOCTRINAL "
+        "meaning to the original English and the Westminster frame. Flag any drift: "
+        "softened/strengthened/added/removed doctrine, or judgment stated as fact.\n\n"
+        f"## Original English\n{en}\n\n## Chinese to check\n{zh}\n\n"
+        f"## Westminster frame\n{corpus_bridge.wcf_chapter1_text()}\n\n"
+        'Return STRICT JSON ONLY: {"drift": true|false, "notes": "concrete"}.')
+    v = _extract_json(llm(prompt, model))
+    return {"drift": bool(v.get("drift")), "notes": v.get("notes", "")}
