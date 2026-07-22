@@ -30,6 +30,19 @@ class TestTranslateItem(unittest.TestCase):
         # original item object not mutated
         self.assertNotIn("zh", ITEM["text"])
 
+    def test_merges_category_zh(self):
+        item = {"id": "PHP-001-D1-03", "passage": "PHP.1.1-11", "dimension": "D1",
+                "type": "pre_reading_quest",
+                "text": {"en": "Who is named?"},
+                "category": {"en": "People & roles"}}
+        resp = ('{"text": {"zh": "谁被提名？"}, '
+                '"category": {"zh": "人物与角色"}, "terms": [], "uncertain": []}')
+        with mock.patch.object(translate, "llm", return_value=resp):
+            out = translate.translate_item(item, "PHP", glossary=[])
+        self.assertEqual(out["item"]["category"]["zh"], "人物与角色")
+        self.assertEqual(out["item"]["category"]["en"], "People & roles")  # kept
+        self.assertNotIn("zh", item["category"])  # original not mutated
+
     def test_applicable_glossary_filters_by_english(self):
         gloss = [{"en_term": "saints", "zh_term": "圣徒", "sources": ["x"]},
                  {"en_term": "predestination", "zh_term": "预定", "sources": ["y"]}]

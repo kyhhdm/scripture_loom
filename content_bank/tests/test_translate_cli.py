@@ -45,6 +45,25 @@ class TestTranslateCli(unittest.TestCase):
         self.assertEqual(p["item"]["text"]["zh"], "「基督耶稣的仆人」？")
         self.assertIn("drift", p)
 
+    def test_run_proposals_parallel_preserves_order_and_isolates_failures(self):
+        items = [{"id": f"PHP-001-D1-0{i}", "passage": "PHP.1.1-11",
+                  "dimension": "D1", "type": "question",
+                  "text": {"en": f"q{i}?"}} for i in range(1, 5)]
+
+        def fake_proposal(it, book, **kw):
+            if it["id"].endswith("03"):
+                raise RuntimeError("boom")
+            return {"id": it["id"], "gate_ok": True,
+                    "drift": {"drift": False}}
+
+        with mock.patch.object(translate_cli, "proposal_for",
+                               side_effect=fake_proposal):
+            got = translate_cli.run_proposals(items, "PHP", glossary=[],
+                                              concurrency=4)
+        # order preserved (input order), failed item dropped
+        self.assertEqual([p["id"] for p in got],
+                         ["PHP-001-D1-01", "PHP-001-D1-02", "PHP-001-D1-04"])
+
     def test_write_proposals(self):
         out = tempfile.mkdtemp()
         translate_cli.write_proposals([{"id": "A-1", "gate_ok": True}], out)

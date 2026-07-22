@@ -32,9 +32,11 @@ _RULES = """## Rules
 ## Output — STRICT JSON ONLY, no prose:
 {"text": {"zh": "..."},
  "leader_reference": {"text": {"zh": "..."}, "verse": {"zh": "..."}},
+ "category": {"zh": "..."},
  "terms": [{"en": "<term>", "zh": "<rendering used>"}],
  "uncertain": ["<anything you were unsure of>"]}
-Omit "leader_reference" if the item has none; omit "verse" if the reference has none."""
+Omit "leader_reference" if the item has none; omit "verse" if the reference has
+none; omit "category" if the item has none (only pre-reading items carry one)."""
 
 
 def _aligned_scripture(detected):
