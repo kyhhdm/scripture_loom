@@ -348,6 +348,42 @@ inner_menu = {
         },
         "clsType": "LiteLLM2Chat",
     },
+    # Same flash ARK endpoint, but reasoning_effort=medium — a distinct menu key
+    # so its run slug (deepseek-v4-flash-medium) is a separate comparison run.
+    "deepseek-v4-flash-medium": {
+        "id": "deepseek-v4-flash-260425",
+        "output_max_token": 32000,
+        "max_token": 1024000,
+        "input_price": 0.001 / 1000,
+        "output_price": 0.002 / 1000,
+        "currency_code": "CNY",
+        "provider": "volcengine",
+        "timeout": 300,
+        "async_limit": 30,
+        "completion_kwargs": {
+            "reasoning_effort": "medium",
+            "allowed_openai_params": ["reasoning_effort"],
+        },
+        "clsType": "LiteLLM2Chat",
+    },
+    # Same flash ARK endpoint, but reasoning_effort=high — distinct menu key so
+    # its run slug (deepseek-v4-flash-high) is a separate comparison run.
+    "deepseek-v4-flash-high": {
+        "id": "deepseek-v4-flash-260425",
+        "output_max_token": 32000,
+        "max_token": 1024000,
+        "input_price": 0.001 / 1000,
+        "output_price": 0.002 / 1000,
+        "currency_code": "CNY",
+        "provider": "volcengine",
+        "timeout": 300,
+        "async_limit": 30,
+        "completion_kwargs": {
+            "reasoning_effort": "high",
+            "allowed_openai_params": ["reasoning_effort"],
+        },
+        "clsType": "LiteLLM2Chat",
+    },
     # Migrated from mxconfig `/projects/mxsieve$chatmodel.inner_extra`.
     # Keep in sync manually when Volcengine endpoints rotate.
     #'BI-doubao-1.5pro-32k': {'id': 'ep-20250828103330-vgx8p',
