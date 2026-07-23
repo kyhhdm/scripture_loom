@@ -28,13 +28,19 @@ _RULES = """## Rules
    only text values.
 7. If you are unsure of a term's correct Chinese rendering, LIST it in
    "uncertain" — never fabricate a confident wrong term.
+8. PRESERVE every <verse ref=...>/<doctrine std=...> tag from the English. Translate the text
+   INSIDE a <verse> tag to the verbatim CUV wording for that ref (widen to the
+   smallest containing CUV span if needed); translate the paraphrase inside a
+   <doctrine> tag but copy its std/ref unchanged. Never invent a new tag.
 
 ## Output — STRICT JSON ONLY, no prose:
 {"text": {"zh": "..."},
  "leader_reference": {"text": {"zh": "..."}, "verse": {"zh": "..."}},
+ "category": {"zh": "..."},
  "terms": [{"en": "<term>", "zh": "<rendering used>"}],
  "uncertain": ["<anything you were unsure of>"]}
-Omit "leader_reference" if the item has none; omit "verse" if the reference has none."""
+Omit "leader_reference" if the item has none; omit "verse" if the reference has
+none; omit "category" if the item has none (only pre-reading items carry one)."""
 
 
 def _aligned_scripture(detected):

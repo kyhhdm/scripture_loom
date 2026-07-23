@@ -23,6 +23,7 @@ import json
 import pathlib
 
 from . import gates, rubric
+from ..lib import citation_tags
 
 _ROOT = pathlib.Path(__file__).resolve().parents[2]
 DEFAULT_BASE = _ROOT / "work" / "content_bank_build"
@@ -125,8 +126,8 @@ def _leader_ref(item):
         return None
     return {
         "kind": lr.get("kind"),
-        "text_en": (lr.get("text") or {}).get("en"),
-        "verse_en": (lr.get("verse") or {}).get("en"),
+        "text_en": citation_tags.strip_tags((lr.get("text") or {}).get("en")),
+        "verse_en": citation_tags.strip_tags((lr.get("verse") or {}).get("en")),
     }
 
 
@@ -140,7 +141,7 @@ def _card(item, run, gate_flags, unit_verdicts):
         "type": item.get("type"),
         "age_tier": item.get("age_tier"),
         "difficulty": item.get("difficulty"),
-        "text_en": (item.get("text") or {}).get("en") or "(no en text)",
+        "text_en": citation_tags.strip_tags((item.get("text") or {}).get("en")) or "(no en text)",
         "leader_ref": _leader_ref(item),
         "gate_ok": not problems,
         "gate_problems": problems,

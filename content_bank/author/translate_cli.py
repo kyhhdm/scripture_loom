@@ -4,6 +4,7 @@ emit a human-reviewable proposal per item. NEVER writes the store — see
 translate.promote for the human-gated landing step.
 """
 import argparse
+import concurrent.futures
 import json
 import os
 import pathlib
@@ -52,6 +53,37 @@ def proposal_for(item, book, *, glossary=None, model=None, max_repair=2):
             "drift": drift}
 
 
+def run_proposals(items, book, *, glossary=None, model=None, max_repair=2,
+                  concurrency=4):
+    """Translate every item and return proposals in input order.
+
+    Items are independent, so they run in a thread pool (each item's own
+    translate → repair → back-translate chain stays sequential internally, but
+    N items are in flight at once). The LLM seam is I/O-bound — the vendored
+    llm_core network call and the ``claude -p`` subprocess both release the GIL
+    while waiting — so threads give real speed-up. Per-item failures are logged
+    and skipped, matching the previous sequential behaviour.
+    """
+    results = [None] * len(items)
+    with concurrent.futures.ThreadPoolExecutor(
+            max_workers=max(1, concurrency)) as ex:
+        futs = {ex.submit(proposal_for, it, book, glossary=glossary,
+                          model=model, max_repair=max_repair): i
+                for i, it in enumerate(items)}
+        for fut in concurrent.futures.as_completed(futs):
+            i = futs[fut]
+            it = items[i]
+            try:
+                p = fut.result()
+            except Exception as exc:  # isolate per item
+                print(f"[FAIL] {it['id']}: {exc}")
+                continue
+            results[i] = p
+            print(f"[ok] {it['id']}" + ("" if p["gate_ok"] else " (gate flags)")
+                  + (" (drift)" if p["drift"]["drift"] else ""))
+    return [p for p in results if p is not None]
+
+
 def write_proposals(proposals, out_dir):
     d = pathlib.Path(out_dir)
     d.mkdir(parents=True, exist_ok=True)
@@ -71,6 +103,8 @@ def main(argv=None):
     ap.add_argument("--backend", choices=("llm_core", "claude"), default="llm_core")
     ap.add_argument("--model")
     ap.add_argument("--max-repair", type=int, default=2)
+    ap.add_argument("--concurrency", type=int, default=4,
+                    help="how many items to translate in parallel (default 4)")
     ap.add_argument("--out")
     args = ap.parse_args(argv)
 
@@ -87,20 +121,11 @@ def main(argv=None):
         out_dir = args.out or f"work/content_bank_build/{args.book}/translations"
 
     glossary = _glossary.load_glossary()
-    proposals, ok = [], 0
-    for it in items:
-        try:
-            p = proposal_for(it, args.book, glossary=glossary, model=args.model,
-                             max_repair=args.max_repair)
-        except Exception as exc:  # isolate per item
-            print(f"[FAIL] {it['id']}: {exc}")
-            continue
-        proposals.append(p)
-        ok += 1
-        print(f"[ok] {it['id']}" + ("" if p["gate_ok"] else " (gate flags)")
-              + (" (drift)" if p["drift"]["drift"] else ""))
+    proposals = run_proposals(items, args.book, glossary=glossary,
+                              model=args.model, max_repair=args.max_repair,
+                              concurrency=args.concurrency)
     write_proposals(proposals, out_dir)
-    print(f"Done. proposals={ok}/{len(items)} -> {out_dir}")
+    print(f"Done. proposals={len(proposals)}/{len(items)} -> {out_dir}")
     return 0
 
 

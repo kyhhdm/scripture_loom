@@ -30,6 +30,19 @@ class TestTranslateItem(unittest.TestCase):
         # original item object not mutated
         self.assertNotIn("zh", ITEM["text"])
 
+    def test_merges_category_zh(self):
+        item = {"id": "PHP-001-D1-03", "passage": "PHP.1.1-11", "dimension": "D1",
+                "type": "pre_reading_quest",
+                "text": {"en": "Who is named?"},
+                "category": {"en": "People & roles"}}
+        resp = ('{"text": {"zh": "谁被提名？"}, '
+                '"category": {"zh": "人物与角色"}, "terms": [], "uncertain": []}')
+        with mock.patch.object(translate, "llm", return_value=resp):
+            out = translate.translate_item(item, "PHP", glossary=[])
+        self.assertEqual(out["item"]["category"]["zh"], "人物与角色")
+        self.assertEqual(out["item"]["category"]["en"], "People & roles")  # kept
+        self.assertNotIn("zh", item["category"])  # original not mutated
+
     def test_applicable_glossary_filters_by_english(self):
         gloss = [{"en_term": "saints", "zh_term": "圣徒", "sources": ["x"]},
                  {"en_term": "predestination", "zh_term": "预定", "sources": ["y"]}]
@@ -71,3 +84,26 @@ class TestTranslateWithGates(unittest.TestCase):
                                                  max_repair=2)
         self.assertFalse(out["gate_ok"])
         self.assertTrue(out["gate_flags"])
+
+
+class TestZhCitationGate(unittest.TestCase):
+    def _item(self):
+        return {"id": "PHP-001-D1-01", "passage": "PHP.1.1-11", "dimension": "D1",
+                "type": "question", "text": {"en": "servants of Christ Jesus?"}}
+
+    def test_bad_zh_verse_tag_is_gate_flagged(self):
+        # zh <verse> whose inner text is NOT the CUV wording -> flagged
+        bad = ('{"text": {"zh": "谁是<verse ref=\\"PHP.1.1\\">错误的经文</verse>？"}, '
+               '"terms": [], "uncertain": []}')
+        with mock.patch.object(translate, "llm", side_effect=[bad, bad, bad]):
+            out = translate.translate_with_gates(self._item(), "PHP", glossary=[],
+                                                 max_repair=2)
+        self.assertFalse(out["gate_ok"])
+        self.assertTrue(any("citation" in f for f in out["gate_flags"]))
+
+    def test_good_zh_verse_tag_passes(self):
+        good = ('{"text": {"zh": "谁是<verse ref=\\"PHP.1.1\\">基督耶稣的仆人</verse>？"}, '
+                '"terms": [], "uncertain": []}')
+        with mock.patch.object(translate, "llm", return_value=good):
+            out = translate.translate_with_gates(self._item(), "PHP", glossary=[])
+        self.assertTrue(out["gate_ok"])

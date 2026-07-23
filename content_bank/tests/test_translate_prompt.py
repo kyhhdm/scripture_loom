@@ -25,10 +25,15 @@ class TestTranslatePrompt(unittest.TestCase):
         self.assertIn("「", p)
         # WCF-1 doctrinal anchor present
         self.assertIn("Holy Scripture", p)
-        # structured-output keys named
-        for key in ('"text"', '"terms"', '"uncertain"'):
+        # structured-output keys named (category included for pre-reading items)
+        for key in ('"text"', '"category"', '"terms"', '"uncertain"'):
             self.assertIn(key, p)
 
     def test_no_glossary_no_quotes_still_builds(self):
         p = btp.build(self._item(), "PHP", detected=[], glossary_entries=[])
         self.assertIn('"text"', p)
+
+    def test_prompt_instructs_tag_preservation(self):
+        p = btp.build(self._item(), "PHP", detected=[], glossary_entries=[])
+        self.assertIn("<verse ref=", p)
+        self.assertIn("<doctrine std=", p)

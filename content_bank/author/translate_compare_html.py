@@ -8,7 +8,7 @@ import html
 import json
 import pathlib
 
-from ..lib import corpus_bridge
+from ..lib import corpus_bridge, citation_tags
 
 _ROOT = "work/content_bank_build"
 
@@ -31,6 +31,25 @@ def _cuv_for(refs):
     return ""
 
 
+_KIND_LABEL = {"answer_key": "Answer", "leader_note": "Notes"}
+
+
+def _leader_ref(item, lang):
+    """(label, ref-text, verse-text) for one language, or ('', '', '') if none.
+
+    The leader_reference holds the answer key (closed dimensions) or the
+    leader note (open dimensions) — the reviewer needs its translation as much
+    as the main prompt text, so it gets its own line in every cell.
+    """
+    lr = item.get("leader_reference") or {}
+    if not lr:
+        return "", "", ""
+    label = _KIND_LABEL.get(lr.get("kind"), "Reference")
+    text = citation_tags.strip_tags((lr.get("text") or {}).get(lang, ""))
+    verse = citation_tags.strip_tags((lr.get("verse") or {}).get(lang, ""))
+    return label, text, verse
+
+
 def build_page(book, draft_run, translators, *, root=_ROOT):
     loaded = {t: _load_translator(book, draft_run, t, root) for t in translators}
     ids = []
@@ -41,19 +60,28 @@ def build_page(book, draft_run, translators, *, root=_ROOT):
     rows = []
     for iid in ids:
         first = next((loaded[t][iid] for t in translators if iid in loaded[t]), {})
+        ref_label, ref_en, verse_en = _leader_ref(first.get("item", {}), "en")
+        cat_en = citation_tags.strip_tags(
+            (first.get("item", {}).get("category") or {}).get("en", ""))
         cells = {}
         for t in translators:
             p = loaded[t].get(iid)
             if not p:
                 cells[t] = None
                 continue
-            cells[t] = {"zh": (p["item"].get("text") or {}).get("zh", ""),
+            _, ref_zh, verse_zh = _leader_ref(p["item"], "zh")
+            cells[t] = {"zh": citation_tags.strip_tags(
+                            (p["item"].get("text") or {}).get("zh", "")),
+                        "ref_zh": ref_zh, "verse_zh": verse_zh,
+                        "cat_zh": (p["item"].get("category") or {}).get("zh", ""),
                         "gate_ok": p.get("gate_ok", True),
                         "gate_flags": p.get("gate_flags", []),
                         "drift": p.get("drift", {}).get("drift", False),
                         "uncertain": p.get("uncertain", [])}
-        rows.append({"id": iid, "en": first.get("en", ""),
-                     "cuv": _cuv_for(first.get("cuv_refs")), "cells": cells})
+        rows.append({"id": iid, "en": citation_tags.strip_tags(first.get("en", "")),
+                     "cuv": _cuv_for(first.get("cuv_refs")),
+                     "ref_label": ref_label, "ref_en": ref_en,
+                     "verse_en": verse_en, "cat_en": cat_en, "cells": cells})
     return {"book": book, "draft_run": draft_run, "translators": translators,
             "rows": rows}
 
@@ -71,6 +99,26 @@ def _flag_badges(cell):
     return " ".join(bits) or '<span class="ok">ok</span>'
 
 
+def _ref_block(label, text, verse):
+    """A labelled answer/notes sub-block, or '' when the item has no reference."""
+    if not (text or verse):
+        return ""
+    esc = html.escape
+    parts = [f"<span class=reflabel>{esc(label)}:</span> {esc(text)}"]
+    if verse:
+        parts.append(f"<span class=reflabel>Verse:</span> {esc(verse)}")
+    inner = "<br>".join(parts)
+    return f"<div class=ref>{inner}</div>"
+
+
+def _cat_block(text):
+    """A labelled category sub-block, or '' when the item has no category."""
+    if not text:
+        return ""
+    return (f"<div class=ref><span class=reflabel>Category:</span> "
+            f"{html.escape(text)}</div>")
+
+
 def render_html(page):
     esc = html.escape
     cols = "".join(f"<th>{esc(t)}</th>" for t in page["translators"])
@@ -80,11 +128,15 @@ def render_html(page):
         for t in page["translators"]:
             c = r["cells"].get(t)
             zh = esc(c["zh"]) if c else "—"
-            cells.append(f"<td><div class=zh>{zh}</div>"
+            ref = _ref_block(r["ref_label"], c["ref_zh"], c["verse_zh"]) if c else ""
+            cat = _cat_block(c["cat_zh"]) if c else ""
+            cells.append(f"<td><div class=zh>{zh}</div>{ref}{cat}"
                          f"<div class=badges>{_flag_badges(c)}</div></td>")
+        en_ref = _ref_block(r["ref_label"], r["ref_en"], r["verse_en"])
+        en_cat = _cat_block(r["cat_en"])
         body.append(
             f"<tr><td class=id>{esc(r['id'])}</td>"
-            f"<td class=en>{esc(r['en'])}</td>"
+            f"<td class=en>{esc(r['en'])}{en_ref}{en_cat}</td>"
             f"<td class=cuv>{esc(r['cuv'])}</td>{''.join(cells)}</tr>")
     return f"""<!-- self-contained -->
 <meta charset="utf-8"><title>Translation comparison — {esc(page['book'])} \
@@ -95,6 +147,8 @@ def render_html(page):
  th,td{{border:1px solid #ccc;padding:6px 8px;vertical-align:top;text-align:left}}
  th{{background:#f4f4f4}} .id{{font-family:monospace;font-size:12px;white-space:nowrap}}
  .en{{max-width:22ch}} .cuv{{max-width:26ch;color:#333}} .zh{{max-width:30ch}}
+ .ref{{margin-top:5px;padding-top:4px;border-top:1px dotted #ccc;font-size:12px;color:#444}}
+ .reflabel{{color:#888;font-weight:600}}
  .badges{{margin-top:4px;font-size:11px}}
  .ok{{color:#2a7}}.bad{{color:#c22;font-weight:600}}.warn{{color:#b70}}
  .missing{{color:#999}}
