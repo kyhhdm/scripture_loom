@@ -124,10 +124,11 @@ leader_reference.verse):
      passage) allowed for a sub-verse phrase.
    - Mismatch → `citation.verse_mismatch`.
 
-3. **basis-mode (`<doctrine>`):** resolve the ref against the committed
-   Standards sources and require it to **exist**:
-   - `WCF`: `Data[Chapter==C].Sections[S-1]` exists (1-based section).
-   - `WLC` / `WSC`: `Data[Number==N]` exists for `ref="Q<N>"`.
+3. **basis-mode (`<doctrine>`):** resolve the ref against the committed canon
+   lampposts (`corpus/canon/lampposts/{wcf,wlc,wsc}.json`) and require it to
+   **exist**:
+   - `WCF` (`ref="C.S"`): `chapters[n==C].sections[n==S]` exists.
+   - `WLC` / `WSC` (`ref="Q<N>"`): `questions[n==N]` exists.
    - Unresolvable → `citation.basis_unresolved`.
    - Faithfulness of the paraphrase is **not** gated here — that is the human
      review gate's job ("AI proposes; leader confirms"). basis-mode
@@ -144,8 +145,8 @@ into the existing repair loops (`_repair_to_clean` in build, `translate_with_gat
 in translation) with no new machinery.
 
 **A new resolver module** `content_bank/lib/standards.py` provides
-`resolve(std, ref) -> bool` (or the section text, for future use), loading the
-three committed source JSONs via the same `corpus_bridge._load` path.
+`resolve(std, ref) -> str | None` (the section/answer text if the ref exists,
+else `None`), loading the three canon lamppost JSONs via `corpus_bridge._load`.
 
 ### 4. Authorship & cross-pipeline flow
 
@@ -187,6 +188,16 @@ three committed source JSONs via the same `corpus_bridge._load` path.
 - `store_writer` / schema validation: the tagged string is still a non-empty
   string, so no schema change is required for storage. Tag *well-formedness*
   is enforced by the gate, not by schema validation.
+- **Known migration edge (verified against the real stores, 2026-07-23):**
+  `citation_check` is registered in `run_all` (the hard tier), and a probe of
+  the committed stores found genuine untagged verbatim Scripture in ~11/210 PHP
+  and ~19/421 ECC items (0 in MAT) — all true positives (cross-references,
+  thread quotes). No current path re-gates stored content (builds author fresh;
+  translation runs the EN recall net only under `langs={"en"}`, which it never
+  does; render only strips), so backward compatibility holds for every existing
+  flow. But a future *rebuild* of PHP/ECC through `run_all` would hard-fail
+  those items until they are re-tagged — expected under lazy migration, called
+  out here so the rebuild isn't a surprise.
 
 ## Testing
 
@@ -200,7 +211,7 @@ and `test_standards.py`:
   (`malformed`, fail-closed);
 - `<doctrine std="WCF" ref="1.4">` resolves; `ref="1.99"` and `std="XYZ"`
   do not (`basis_unresolved`);
-- `WSC`/`WLC` `Q1` resolves; `Q999` does not;
+- `standards.resolve` returns text for `WSC`/`WLC` `Q1` and `None` for `Q999`;
 - an untagged verbatim BSB span is flagged `untagged_quote`;
 - `strip_tags` yields clean reader text for both elements and leaves untagged
   text unchanged;
