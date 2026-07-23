@@ -14,11 +14,12 @@ Pure functions, each returning ``{item_id: [problems]}`` (empty dict = clean):
 Committed replacement for the untracked work/content_bank_build/quote_check.py.
 Stdlib + in-repo packages only; offline.
 """
+import copy
 import json
 import pathlib
 import re
 
-from ..lib import corpus_bridge, schema
+from ..lib import corpus_bridge, schema, citation_tags, standards
 from . import glossary as _glossary
 
 _ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -151,6 +152,90 @@ def schema_check(items):
     return flags
 
 
+_VERSE_REF_RE = re.compile(r"^[A-Z0-9]{3}\.\d+\.\d+(?:-(?:\d+\.)?\d+)?$")
+
+
+def _passage_plain(ref, version):
+    """Verse text for `ref` with the leading 'MARKER  ' stripped from each line."""
+    raw = corpus_bridge.passage_text(ref, version=version)
+    out = []
+    for line in raw.splitlines():
+        parts = line.split("  ", 1)
+        out.append(parts[1] if len(parts) == 2 else line)
+    return " ".join(out)
+
+
+def _verse_problem(ref, inner, version, item_type):
+    """Return a flag string if the tagged verse fails, else None."""
+    if not _VERSE_REF_RE.match(ref):
+        return f"citation.malformed: bad verse ref '{ref}'"
+    try:
+        hay = _norm(_passage_plain(ref, version))
+    except Exception:
+        return f"citation.verse_mismatch: '{ref}' does not resolve in {version}"
+    core = _norm(inner)
+    if not core:
+        return f"citation.verse_mismatch: '{ref}' has empty quote"
+    ok = (core == hay) if item_type == "memory_verse" else (core in hay)
+    if not ok:
+        return (f"citation.verse_mismatch: '{ref}' inner text does not match "
+                f"{version}")
+    return None
+
+
+def _untagged_quote_flags(item, langs):
+    """EN recall net: verbatim BSB spans left outside a <verse> tag."""
+    if langs is not None and "en" not in langs:
+        return []
+    from . import quote_detect  # lazy: quote_detect imports gates
+    covered = []
+    stripped = copy.deepcopy(item)
+    for m in (stripped.get("text"), (stripped.get("leader_reference") or {}).get("text"),
+              (stripped.get("leader_reference") or {}).get("verse")):
+        if isinstance(m, dict) and isinstance(m.get("en"), str):
+            verses, _, _ = citation_tags.parse(m["en"])
+            covered.extend(_norm(v.text) for v in verses)
+            m["en"] = citation_tags.strip_tags(m["en"])
+    out = []
+    for hit in quote_detect.detect_quotes(stripped, None):
+        q = _norm(hit["quote"])
+        if any(q in c or c in q for c in covered):
+            continue
+        out.append(f"citation.untagged_quote: '{hit['quote']}' ({hit['ref']}) "
+                   f"not wrapped in a <verse> tag")
+    return out
+
+
+def citation_check(items, *, langs=None):
+    """Verify declared citations. quote-mode: <verse> inner text is verbatim in
+    the corpus version for its language (equality for memory_verse, containment
+    otherwise). basis-mode: <doctrine> ref resolves in WCF/WLC/WSC. Fail-closed
+    on malformed markup. quote_detect recall net flags untagged verbatim spans."""
+    flags = {}
+    for it in items:
+        problems = []
+        itype = it.get("type")
+        for lang, s in _lang_strings(it):
+            if langs is not None and lang not in langs:
+                continue
+            verses, doctrines, malformed = citation_tags.parse(s)
+            if malformed:
+                problems.append("citation.malformed: unbalanced or malformed "
+                                "<verse>/<doctrine> markup")
+            version = _ZH_VERSION if lang == "zh" else _EN_VERSION
+            for v in verses:
+                p = _verse_problem(v.ref, v.text, version, itype)
+                if p:
+                    problems.append(p)
+            for d in doctrines:
+                if standards.resolve(d.std, d.ref) is None:
+                    problems.append(f"citation.basis_unresolved: {d.std} {d.ref}")
+        problems.extend(_untagged_quote_flags(it, langs))
+        if problems:
+            flags[it["id"]] = problems
+    return flags
+
+
 _REF_TOKEN = re.compile(r"\b[A-Z0-9]{3}\.\d+\.\d+\b")
 
 
@@ -239,12 +324,13 @@ def dimension_cap_check(items, *, cap=DEFAULT_DIM_CAP):
 
 
 def run_all(book, items, allowed):
-    """The HARD gate tier: quote + schema + ref-range + thread-span. Any flag here is
-    a defect the repair loop must clear or the unit fails. Soft anti-padding
-    (dimension_cap_check) is deliberately NOT included."""
+    """The HARD gate tier: quote + schema + ref-range + thread-span + citation.
+    Any flag here is a defect the repair loop must clear or the unit fails. Soft
+    anti-padding (dimension_cap_check) is deliberately NOT included."""
     merged = {}
     for gate in (quote_check(book, items), schema_check(items),
-                 refs_in_range(items, allowed), thread_span_check(items, allowed)):
+                 refs_in_range(items, allowed), thread_span_check(items, allowed),
+                 citation_check(items)):
         for k, v in gate.items():
             merged.setdefault(k, []).extend(v)
     return merged
