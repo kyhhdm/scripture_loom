@@ -32,3 +32,8 @@ class TestTranslatePrompt(unittest.TestCase):
     def test_no_glossary_no_quotes_still_builds(self):
         p = btp.build(self._item(), "PHP", detected=[], glossary_entries=[])
         self.assertIn('"text"', p)
+
+    def test_prompt_instructs_tag_preservation(self):
+        p = btp.build(self._item(), "PHP", detected=[], glossary_entries=[])
+        self.assertIn("<verse ref=", p)
+        self.assertIn("<doctrine std=", p)
