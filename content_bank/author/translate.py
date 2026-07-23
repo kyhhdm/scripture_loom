@@ -67,7 +67,8 @@ def translate_item(item, book, *, glossary=None, model=None):
 def zh_gate_flags(item, glossary):
     flags = []
     for gate in (gates.cuv_quote_check([item]),
-                 gates.glossary_check([item], glossary)):
+                 gates.glossary_check([item], glossary),
+                 gates.citation_check([item], langs={"zh"})):
         flags.extend(gate.get(item["id"], []))
     return flags
 

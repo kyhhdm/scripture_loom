@@ -84,3 +84,26 @@ class TestTranslateWithGates(unittest.TestCase):
                                                  max_repair=2)
         self.assertFalse(out["gate_ok"])
         self.assertTrue(out["gate_flags"])
+
+
+class TestZhCitationGate(unittest.TestCase):
+    def _item(self):
+        return {"id": "PHP-001-D1-01", "passage": "PHP.1.1-11", "dimension": "D1",
+                "type": "question", "text": {"en": "servants of Christ Jesus?"}}
+
+    def test_bad_zh_verse_tag_is_gate_flagged(self):
+        # zh <verse> whose inner text is NOT the CUV wording -> flagged
+        bad = ('{"text": {"zh": "谁是<verse ref=\\"PHP.1.1\\">错误的经文</verse>？"}, '
+               '"terms": [], "uncertain": []}')
+        with mock.patch.object(translate, "llm", side_effect=[bad, bad, bad]):
+            out = translate.translate_with_gates(self._item(), "PHP", glossary=[],
+                                                 max_repair=2)
+        self.assertFalse(out["gate_ok"])
+        self.assertTrue(any("citation" in f for f in out["gate_flags"]))
+
+    def test_good_zh_verse_tag_passes(self):
+        good = ('{"text": {"zh": "谁是<verse ref=\\"PHP.1.1\\">基督耶稣的仆人</verse>？"}, '
+                '"terms": [], "uncertain": []}')
+        with mock.patch.object(translate, "llm", return_value=good):
+            out = translate.translate_with_gates(self._item(), "PHP", glossary=[])
+        self.assertTrue(out["gate_ok"])
