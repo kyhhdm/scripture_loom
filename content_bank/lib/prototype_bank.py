@@ -4,7 +4,9 @@ consumes, sourced from the gated store and corpus pericope metadata.
 Keeps the prototype selector logic unchanged: text[lang] is flattened to 'body'
 and category[lang] to 'category' for the requested language.
 """
-from . import content, corpus_bridge
+import copy
+
+from . import content, corpus_bridge, citation_tags
 
 
 def display_ref(range_str, lang="en"):
@@ -31,7 +33,15 @@ def load_bank(book, lang="en", store_dir=None):
     items = []
     for it in content.get_content(book, lang=lang, mode="product", store_dir=store_dir):
         flat = {k: v for k, v in it.items() if k not in ("text", "category")}
-        flat["body"] = it["text"][lang]
+        flat["body"] = citation_tags.strip_tags(it["text"][lang])
+        lr = flat.get("leader_reference")
+        if isinstance(lr, dict):
+            lr = copy.deepcopy(lr)
+            for key in ("text", "verse"):
+                m = lr.get(key)
+                if isinstance(m, dict) and isinstance(m.get(lang), str):
+                    m[lang] = citation_tags.strip_tags(m[lang])
+            flat["leader_reference"] = lr
         if "category" in it and lang in it["category"]:
             flat["category"] = it["category"][lang]
         items.append(flat)

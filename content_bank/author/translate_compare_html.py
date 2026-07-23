@@ -8,7 +8,7 @@ import html
 import json
 import pathlib
 
-from ..lib import corpus_bridge
+from ..lib import corpus_bridge, citation_tags
 
 _ROOT = "work/content_bank_build"
 
@@ -45,8 +45,8 @@ def _leader_ref(item, lang):
     if not lr:
         return "", "", ""
     label = _KIND_LABEL.get(lr.get("kind"), "Reference")
-    text = (lr.get("text") or {}).get(lang, "")
-    verse = (lr.get("verse") or {}).get(lang, "")
+    text = citation_tags.strip_tags((lr.get("text") or {}).get(lang, ""))
+    verse = citation_tags.strip_tags((lr.get("verse") or {}).get(lang, ""))
     return label, text, verse
 
 
@@ -61,7 +61,8 @@ def build_page(book, draft_run, translators, *, root=_ROOT):
     for iid in ids:
         first = next((loaded[t][iid] for t in translators if iid in loaded[t]), {})
         ref_label, ref_en, verse_en = _leader_ref(first.get("item", {}), "en")
-        cat_en = (first.get("item", {}).get("category") or {}).get("en", "")
+        cat_en = citation_tags.strip_tags(
+            (first.get("item", {}).get("category") or {}).get("en", ""))
         cells = {}
         for t in translators:
             p = loaded[t].get(iid)
@@ -69,14 +70,15 @@ def build_page(book, draft_run, translators, *, root=_ROOT):
                 cells[t] = None
                 continue
             _, ref_zh, verse_zh = _leader_ref(p["item"], "zh")
-            cells[t] = {"zh": (p["item"].get("text") or {}).get("zh", ""),
+            cells[t] = {"zh": citation_tags.strip_tags(
+                            (p["item"].get("text") or {}).get("zh", "")),
                         "ref_zh": ref_zh, "verse_zh": verse_zh,
                         "cat_zh": (p["item"].get("category") or {}).get("zh", ""),
                         "gate_ok": p.get("gate_ok", True),
                         "gate_flags": p.get("gate_flags", []),
                         "drift": p.get("drift", {}).get("drift", False),
                         "uncertain": p.get("uncertain", [])}
-        rows.append({"id": iid, "en": first.get("en", ""),
+        rows.append({"id": iid, "en": citation_tags.strip_tags(first.get("en", "")),
                      "cuv": _cuv_for(first.get("cuv_refs")),
                      "ref_label": ref_label, "ref_en": ref_en,
                      "verse_en": verse_en, "cat_en": cat_en, "cells": cells})

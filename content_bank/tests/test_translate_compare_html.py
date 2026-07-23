@@ -47,6 +47,19 @@ class TestTranslateComparePage(unittest.TestCase):
         self.assertNotIn("http://", html)                  # no external refs
         self.assertNotIn("https://", html)
 
+    def test_tags_stripped_from_display(self):
+        root = tempfile.mkdtemp()
+        d = pathlib.Path(root) / "PHP" / "runs" / "opus" / "translations" / "deepseek-v4-flash"
+        d.mkdir(parents=True)
+        p = _proposal("PHP-001-D1-01",
+                      '谁是<verse ref="PHP.1.1">基督耶稣的仆人</verse>？')
+        p["en"] = 'the <verse ref="PHP.1.1">servants of Christ Jesus</verse>'
+        (d / "PHP-001-D1-01.json").write_text(json.dumps(p), encoding="utf-8")
+        page = tch.build_page("PHP", "opus", ["deepseek-v4-flash"], root=root)
+        row = page["rows"][0]
+        self.assertNotIn("<verse", row["en"])
+        self.assertNotIn("<verse", row["cells"]["deepseek-v4-flash"]["zh"])
+
 
 class TestLeaderReferenceRendered(unittest.TestCase):
     """The answer/notes translation (leader_reference) must reach the page."""
