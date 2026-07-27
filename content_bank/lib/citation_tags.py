@@ -5,8 +5,10 @@ Two elements live inside content text fields:
   <doctrine std="WCF" ref="1.4">paraphrase of the doctrine</doctrine>
 
 This module parses and strips them. Pure/stdlib; shared by the deterministic
-gate (verification) and the reader-facing renderers (strip on display).
+gate (verification) and the reader-facing renderers (strip on display). Review
+instruments instead call ``highlight_html`` to SHOW the tags as styled spans.
 """
+import html as _html
 import re
 from collections import namedtuple
 
@@ -26,6 +28,36 @@ def strip_tags(s):
     if not isinstance(s, str):
         return s
     return _ANY_TAG_RE.sub("", s)
+
+
+# After html.escape (quote=True): <verse ref="X"> -> &lt;verse ref=&quot;X&quot;&gt;
+_HL_VERSE_RE = re.compile(
+    r"&lt;verse ref=&quot;(.*?)&quot;&gt;(.*?)&lt;/verse&gt;", re.DOTALL)
+_HL_DOCTRINE_RE = re.compile(
+    r"&lt;doctrine std=&quot;(.*?)&quot; ref=&quot;(.*?)&quot;&gt;(.*?)"
+    r"&lt;/doctrine&gt;", re.DOTALL)
+
+
+def highlight_html(s):
+    """HTML-escape ``s``, then render its <verse>/<doctrine> tags as styled
+    spans with the citation shown inline (a ``.cite``/``.citeref`` pair, styled
+    by the host page's CSS). Escaping runs FIRST, so item text is injection-safe
+    and only our own now-escaped tag syntax is turned into markup. For review
+    instruments only — the reader kit uses ``strip_tags``. Non-strings -> ''.
+    """
+    if not isinstance(s, str):
+        return ""
+    out = _html.escape(s)
+    out = _HL_VERSE_RE.sub(
+        lambda m: (f'<span class="cite cite-verse" title="verse {m.group(1)}">'
+                   f'{m.group(2)}<sup class="citeref">{m.group(1)}</sup></span>'),
+        out)
+    out = _HL_DOCTRINE_RE.sub(
+        lambda m: (f'<span class="cite cite-doctrine" title="doctrine '
+                   f'{m.group(1)} {m.group(2)}">{m.group(3)}'
+                   f'<sup class="citeref">{m.group(1)} {m.group(2)}</sup></span>'),
+        out)
+    return out
 
 
 def parse(s):

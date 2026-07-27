@@ -16,6 +16,30 @@ class TestStrip(unittest.TestCase):
         self.assertIsNone(ct.strip_tags(None))
 
 
+class TestHighlightHtml(unittest.TestCase):
+    def test_verse_becomes_span_with_ref_badge(self):
+        h = ct.highlight_html('a <verse ref="PHP.1.1">servants of Christ</verse> b')
+        self.assertIn('class="cite cite-verse"', h)
+        self.assertIn("servants of Christ", h)
+        self.assertIn(">PHP.1.1<", h)                 # inline ref badge
+        self.assertNotIn("<verse", h)                 # raw tag consumed
+
+    def test_doctrine_becomes_span_with_std_and_ref(self):
+        h = ct.highlight_html('rests on <doctrine std="WCF" ref="1.4">God</doctrine>.')
+        self.assertIn('class="cite cite-doctrine"', h)
+        self.assertIn(">WCF 1.4<", h)
+        self.assertNotIn("<doctrine", h)
+
+    def test_untrusted_text_is_escaped_first(self):
+        # a literal < in item text must be escaped, not treated as markup
+        h = ct.highlight_html("if x < y then <script>alert(1)</script>")
+        self.assertNotIn("<script>", h)
+        self.assertIn("&lt;script&gt;", h)
+
+    def test_nonstring_returns_empty(self):
+        self.assertEqual(ct.highlight_html(None), "")
+
+
 class TestParse(unittest.TestCase):
     def test_parses_verse_and_doctrine(self):
         s = ('<verse ref="PHP.1.1">servants of Christ Jesus</verse> and '

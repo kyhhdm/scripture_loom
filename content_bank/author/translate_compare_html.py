@@ -45,8 +45,11 @@ def _leader_ref(item, lang):
     if not lr:
         return "", "", ""
     label = _KIND_LABEL.get(lr.get("kind"), "Reference")
-    text = citation_tags.strip_tags((lr.get("text") or {}).get(lang, ""))
-    verse = citation_tags.strip_tags((lr.get("verse") or {}).get(lang, ""))
+    # Keep citation tags RAW here: this is a review instrument, and render_html
+    # highlights <verse>/<doctrine> spans so the reviewer can verify the ZH
+    # translation kept them. (The family-facing kit strips tags.)
+    text = (lr.get("text") or {}).get(lang, "")
+    verse = (lr.get("verse") or {}).get(lang, "")
     return label, text, verse
 
 
@@ -61,8 +64,7 @@ def build_page(book, draft_run, translators, *, root=_ROOT):
     for iid in ids:
         first = next((loaded[t][iid] for t in translators if iid in loaded[t]), {})
         ref_label, ref_en, verse_en = _leader_ref(first.get("item", {}), "en")
-        cat_en = citation_tags.strip_tags(
-            (first.get("item", {}).get("category") or {}).get("en", ""))
+        cat_en = (first.get("item", {}).get("category") or {}).get("en", "")
         cells = {}
         for t in translators:
             p = loaded[t].get(iid)
@@ -70,15 +72,14 @@ def build_page(book, draft_run, translators, *, root=_ROOT):
                 cells[t] = None
                 continue
             _, ref_zh, verse_zh = _leader_ref(p["item"], "zh")
-            cells[t] = {"zh": citation_tags.strip_tags(
-                            (p["item"].get("text") or {}).get("zh", "")),
+            cells[t] = {"zh": (p["item"].get("text") or {}).get("zh", ""),
                         "ref_zh": ref_zh, "verse_zh": verse_zh,
                         "cat_zh": (p["item"].get("category") or {}).get("zh", ""),
                         "gate_ok": p.get("gate_ok", True),
                         "gate_flags": p.get("gate_flags", []),
                         "drift": p.get("drift", {}).get("drift", False),
                         "uncertain": p.get("uncertain", [])}
-        rows.append({"id": iid, "en": citation_tags.strip_tags(first.get("en", "")),
+        rows.append({"id": iid, "en": first.get("en", ""),
                      "cuv": _cuv_for(first.get("cuv_refs")),
                      "ref_label": ref_label, "ref_en": ref_en,
                      "verse_en": verse_en, "cat_en": cat_en, "cells": cells})
@@ -103,10 +104,10 @@ def _ref_block(label, text, verse):
     """A labelled answer/notes sub-block, or '' when the item has no reference."""
     if not (text or verse):
         return ""
-    esc = html.escape
-    parts = [f"<span class=reflabel>{esc(label)}:</span> {esc(text)}"]
+    hl = citation_tags.highlight_html
+    parts = [f"<span class=reflabel>{html.escape(label)}:</span> {hl(text)}"]
     if verse:
-        parts.append(f"<span class=reflabel>Verse:</span> {esc(verse)}")
+        parts.append(f"<span class=reflabel>Verse:</span> {hl(verse)}")
     inner = "<br>".join(parts)
     return f"<div class=ref>{inner}</div>"
 
@@ -127,7 +128,7 @@ def render_html(page):
         cells = []
         for t in page["translators"]:
             c = r["cells"].get(t)
-            zh = esc(c["zh"]) if c else "—"
+            zh = citation_tags.highlight_html(c["zh"]) if c else "—"
             ref = _ref_block(r["ref_label"], c["ref_zh"], c["verse_zh"]) if c else ""
             cat = _cat_block(c["cat_zh"]) if c else ""
             cells.append(f"<td><div class=zh>{zh}</div>{ref}{cat}"
@@ -136,7 +137,7 @@ def render_html(page):
         en_cat = _cat_block(r["cat_en"])
         body.append(
             f"<tr><td class=id>{esc(r['id'])}</td>"
-            f"<td class=en>{esc(r['en'])}{en_ref}{en_cat}</td>"
+            f"<td class=en>{citation_tags.highlight_html(r['en'])}{en_ref}{en_cat}</td>"
             f"<td class=cuv>{esc(r['cuv'])}</td>{''.join(cells)}</tr>")
     return f"""<!-- self-contained -->
 <meta charset="utf-8"><title>Translation comparison — {esc(page['book'])} \
@@ -152,11 +153,21 @@ def render_html(page):
  .badges{{margin-top:4px;font-size:11px}}
  .ok{{color:#2a7}}.bad{{color:#c22;font-weight:600}}.warn{{color:#b70}}
  .missing{{color:#999}}
+ .cite{{border-radius:3px;padding:0 1px}}
+ .cite-verse{{background:#22c55e2e;box-shadow:inset 0 -2px 0 #22c55eaa}}
+ .cite-doctrine{{background:#f59e0b2e;box-shadow:inset 0 -2px 0 #f59e0baa}}
+ .citeref{{font-size:9px;font-weight:700;margin-left:2px;padding:0 3px;
+   border-radius:6px;vertical-align:super}}
+ .cite-verse .citeref{{background:#22c55e;color:#04310f}}
+ .cite-doctrine .citeref{{background:#f59e0b;color:#3a2600}}
 </style>
 <h1>Translation comparison — {esc(page['book'])} · draft run \
 <code>{esc(page['draft_run'])}</code></h1>
 <p>English ▸ CUV source ▸ one column per translator. Flags: gate (CUV/glossary \
-fail), drift (back-translation), uncertain (model-flagged).</p>
+fail), drift (back-translation), uncertain (model-flagged). Citations: \
+<span class="cite cite-verse">verse<sup class=citeref>REF</sup></span> \
+<span class="cite cite-doctrine">doctrine<sup class=citeref>STD</sup></span> \
+(a good ZH translation keeps every <verse> span, verbatim CUV).</p>
 <table><thead><tr><th>id</th><th>English</th><th>CUV source</th>{cols}</tr></thead>
 <tbody>{''.join(body)}</tbody></table>"""
 

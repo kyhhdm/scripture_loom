@@ -47,7 +47,10 @@ class TestTranslateComparePage(unittest.TestCase):
         self.assertNotIn("http://", html)                  # no external refs
         self.assertNotIn("https://", html)
 
-    def test_tags_stripped_from_display(self):
+    def test_tags_kept_raw_and_highlighted_on_render(self):
+        # Review instrument: the model keeps citation tags RAW, and render_html
+        # turns them into highlighted spans (never leaking raw markup, never
+        # stripping the citation from view).
         root = tempfile.mkdtemp()
         d = pathlib.Path(root) / "PHP" / "runs" / "opus" / "translations" / "deepseek-v4-flash"
         d.mkdir(parents=True)
@@ -57,8 +60,14 @@ class TestTranslateComparePage(unittest.TestCase):
         (d / "PHP-001-D1-01.json").write_text(json.dumps(p), encoding="utf-8")
         page = tch.build_page("PHP", "opus", ["deepseek-v4-flash"], root=root)
         row = page["rows"][0]
-        self.assertNotIn("<verse", row["en"])
-        self.assertNotIn("<verse", row["cells"]["deepseek-v4-flash"]["zh"])
+        # model carries the raw tag (so render can highlight it)
+        self.assertIn('<verse ref="PHP.1.1">', row["en"])
+        self.assertIn('<verse ref="PHP.1.1">', row["cells"]["deepseek-v4-flash"]["zh"])
+        html = tch.render_html(page)
+        # rendered page shows a highlighted span with the ref, not raw markup
+        self.assertIn("cite-verse", html)
+        self.assertIn(">PHP.1.1<", html)                 # ref badge
+        self.assertNotIn('<verse ref="PHP.1.1">', html)  # raw tag never leaks
 
 
 class TestLeaderReferenceRendered(unittest.TestCase):
