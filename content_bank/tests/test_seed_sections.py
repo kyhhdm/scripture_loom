@@ -31,3 +31,33 @@ class TestGatherInputs(unittest.TestCase):
                          [p["id"] for p in __import__(
                              "content_bank.lib.corpus_bridge",
                              fromlist=["pericopes"]).pericopes("PHP")])
+
+
+class TestBuildPrompt(unittest.TestCase):
+    def _inputs(self):
+        return {"book": "PHP", "book_name": "Philippians", "pericopes": [
+            {"id": "PHP-001", "range": "PHP.1.1-11", "title_en": "Greeting",
+             "grounding_work": "jfb", "grounding_text": "the inscription..."},
+            {"id": "PHP-002", "range": "PHP.1.12-26", "title_en": "Imprisonment",
+             "grounding_work": "jfb", "grounding_text": "his bonds..."},
+        ]}
+
+    def test_prompt_has_spine_rules_and_json(self):
+        p = ss.build_prompt(self._inputs())
+        self.assertIn("Philippians", p)
+        self.assertIn("PHP-001", p)
+        self.assertIn("PHP-002", p)
+        self.assertIn("the inscription...", p)          # grounding included
+        self.assertIn("Label: Description", p)           # dual-title convention
+        self.assertIn("marker", p.lower())               # marker rule present
+        self.assertIn("null", p)                         # marker may be null
+        self.assertIn("JSON", p)                         # strict-JSON instruction
+        self.assertNotIn('"id"', p)                      # model must NOT supply ids
+
+    def test_repair_prompt_carries_errors(self):
+        base = ss.build_prompt(self._inputs())
+        proposal = {"sections": [{"title_en": "X", "first_pericope": "PHP-001",
+                                  "last_pericope": "PHP-001", "marker": None}]}
+        rp = ss.build_repair_prompt(base, proposal, ["S?: gap/overlap ..."])
+        self.assertIn("gap/overlap", rp)
+        self.assertIn("PHP-001", rp)

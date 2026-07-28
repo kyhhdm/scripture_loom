@@ -39,3 +39,46 @@ def gather_inputs(book):
                       "grounding_work": work, "grounding_text": text})
     return {"book": book, "book_name": corpus_bridge.book_name(book),
             "pericopes": peris}
+
+
+_RANGE_HINT = "roughly 3-12, more for long narrative books"
+
+
+def build_prompt(inputs):
+    lines = [
+        f"You are partitioning the book of {inputs['book_name']} "
+        f"({inputs['book']}) into its major movements (\"sections\").",
+        "",
+        "You are given the book's pericopes IN ORDER, each with a short title "
+        "and a snippet of public-domain commentary (Jamieson-Fausset-Brown or "
+        "Matthew Henry) for grounding. Group these pericopes into contiguous "
+        f"named movements ({_RANGE_HINT}). Rules:",
+        "- Every pericope belongs to exactly ONE section; sections are "
+        "contiguous and in order (no gaps, no overlaps, full coverage).",
+        "- title_en uses the form \"Label: Description\" "
+        "(e.g. \"Book One: The Sermon on the Mount\").",
+        "- marker: a canonical verse ref BOOK.CH.V ONLY where a clear repeating "
+        "textual formula hinges the movement (e.g. Matthew's \"when Jesus had "
+        "finished\"); otherwise null. Do not invent markers.",
+        "- rationale: ONE line, grounded in the commentary, for the boundary.",
+        "- Do NOT include an id field; ids are assigned downstream.",
+        "",
+        "Pericopes:",
+    ]
+    for p in inputs["pericopes"]:
+        g = f"  [{p['grounding_work']}] {p['grounding_text']}" if p["grounding_text"] else ""
+        lines.append(f"- {p['id']} ({p['range']}): {p['title_en']}{g}")
+    lines += [
+        "",
+        "Respond with STRICT JSON only, no prose, no code fence:",
+        '{"sections": [{"title_en": "...", "first_pericope": "<id>", '
+        '"last_pericope": "<id>", "marker": null, "rationale": "..."}]}',
+    ]
+    return "\n".join(lines)
+
+
+def build_repair_prompt(base_prompt, proposal, errors):
+    return (base_prompt + "\n\nYour previous answer was:\n"
+            + json.dumps(proposal, ensure_ascii=False)
+            + "\n\nIt FAILED validation:\n- " + "\n- ".join(errors)
+            + "\n\nReturn corrected STRICT JSON only.")
