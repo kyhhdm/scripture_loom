@@ -30,12 +30,24 @@ _VERSION_FILE = {"BSB": "bsb.json", "CUV": "cuv-simp.json"}
 _HAYSTACK_CACHE = {}
 
 
+_CJK = "\u3000-\u303f\u3400-\u4dbf\u4e00-\u9fff\uff00-\uffef"
+_WS_AFTER_CJK = re.compile(rf"(?<=[{_CJK}])\s+")
+_WS_BEFORE_CJK = re.compile(rf"\s+(?=[{_CJK}])")
+
+
 def _norm(s):
     # Drop straight/curly quotes AND CUV corner brackets \u300c\u300d\u300e\u300f so a nested
     # <verse ref>\u300c\u2026CUV\u2026\u300d</verse> verifies against the bracket-free corpus text.
     # (cuv_quote_check extracts text from inside \u300c\u300d before norming, so stripping
     # brackets here is a no-op there; the CUV haystack has no brackets either.)
     s = re.sub(r"[\"'\u201c\u201d\u2018\u2019\u300c\u300d\u300e\u300f]", "", s)
+    # CUV poetry/psalms carry Hebrew-cola spacing (a space mid-line) that correct
+    # Chinese prose omits; drop whitespace touching any CJK char (Chinese has no
+    # inter-word spaces) so a verbatim quote still matches. Latin word-spacing is
+    # untouched \u2014 English strings have no CJK chars, so these two subs are no-ops
+    # there and BSB comparison behavior is unchanged.
+    s = _WS_AFTER_CJK.sub("", s)
+    s = _WS_BEFORE_CJK.sub("", s)
     return re.sub(r"\s+", " ", s).strip().lower()
 
 
