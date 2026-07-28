@@ -18,8 +18,11 @@ _RULES = """## Rules
    English — both together, e.g. <verse ref="PHP.1.6">「…CUV…」</verse>. Use the
    CUV text given below — do NOT translate the English quote yourself, and do
    NOT drop the tag in favour of bare 「…」.
-3. If an English phrase has no contiguous CUV span, WIDEN to the smallest
-   contiguous CUV span that contains it (a clause or the whole verse). Never
+3. Use the SHORTEST contiguous CUV span that matches the English quote. A short
+   woven quote stays short: "servants of Christ Jesus" -> 「基督耶稣的仆人」, NOT the
+   whole of PHP.1.1. Only widen when the English phrase has no exact contiguous
+   CUV match, and then only to the smallest containing CUV clause — NEVER pad a
+   partial quote with the rest of the verse (that breaks the sentence). Never
    invent a non-CUV rendering.
 4. Use the MANDATED glossary rendering for every listed theological term; do
    not substitute a synonym.
@@ -33,9 +36,10 @@ _RULES = """## Rules
 8. PRESERVE every <verse ref=...>/<doctrine std=...> tag from the English —
    keep the tag, never emit a bare 「…」 quote without its surrounding <verse>
    tag. Inside a <verse> tag put the verbatim CUV wording for that ref wrapped
-   in 「…」: <verse ref="PHP.1.6">「…CUV…」</verse> (widen to the smallest
-   containing CUV span if needed). Translate the paraphrase inside a <doctrine>
-   tag but copy its std/ref unchanged. Never invent or drop a tag.
+   in 「…」: <verse ref="PHP.1.6">「…CUV…」</verse> — the SHORTEST CUV span that
+   matches (rule 3), never the whole verse for a short quote. Translate the
+   paraphrase inside a <doctrine> tag but copy its std/ref unchanged. Never
+   invent or drop a tag.
 
 ## Output — STRICT JSON ONLY, no prose:
 {"text": {"zh": "..."},

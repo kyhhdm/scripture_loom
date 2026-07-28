@@ -44,3 +44,6 @@ class TestTranslatePrompt(unittest.TestCase):
         p = btp.build(self._item(), "PHP", detected=[], glossary_entries=[])
         self.assertIn('「…CUV…」</verse>', p)   # the nested-form example
         self.assertIn("drop the tag in favour of bare", p)
+        # shortest-span rule: a short woven quote must NOT widen to the whole verse
+        self.assertIn("SHORTEST contiguous CUV span", p)
+        self.assertIn("NEVER pad a", p)
