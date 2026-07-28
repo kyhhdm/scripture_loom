@@ -61,3 +61,24 @@ class TestBuildPrompt(unittest.TestCase):
         rp = ss.build_repair_prompt(base, proposal, ["S?: gap/overlap ..."])
         self.assertIn("gap/overlap", rp)
         self.assertIn("PHP-001", rp)
+
+
+class TestParseAndAssign(unittest.TestCase):
+    def test_parse_bare_json(self):
+        d = ss.parse_proposal('{"sections": [{"title_en": "A"}]}')
+        self.assertEqual(len(d["sections"]), 1)
+
+    def test_parse_fenced_json_with_prose(self):
+        raw = 'Here you go:\n```json\n{"sections": [{"title_en": "A"}]}\n```\n'
+        d = ss.parse_proposal(raw)
+        self.assertEqual(d["sections"][0]["title_en"], "A")
+
+    def test_parse_garbage_raises(self):
+        with self.assertRaises(ValueError):
+            ss.parse_proposal("no json here")
+
+    def test_assign_ids_sequential(self):
+        d = {"sections": [{"title_en": "A"}, {"title_en": "B"}]}
+        ss.assign_section_ids(d, "PHP")
+        self.assertEqual([s["id"] for s in d["sections"]],
+                         ["PHP-S1", "PHP-S2"])

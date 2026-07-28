@@ -82,3 +82,49 @@ def build_repair_prompt(base_prompt, proposal, errors):
             + json.dumps(proposal, ensure_ascii=False)
             + "\n\nIt FAILED validation:\n- " + "\n- ".join(errors)
             + "\n\nReturn corrected STRICT JSON only.")
+
+
+def parse_proposal(text):
+    """Extract JSON proposal from LLM completion, tolerating fences and prose.
+
+    Args:
+        text: LLM completion text, possibly with markdown code fence.
+
+    Returns:
+        dict with 'sections' list.
+
+    Raises:
+        ValueError: if no JSON object with 'sections' list found.
+    """
+    s = text.strip()
+    if "```" in s:                                  # strip a code fence if present
+        parts = s.split("```")
+        for part in parts:
+            part = part.strip()
+            if part.startswith("json"):
+                part = part[4:].strip()
+            if part.startswith("{"):
+                s = part
+                break
+    start, end = s.find("{"), s.rfind("}")
+    if start == -1 or end == -1 or end < start:
+        raise ValueError("no JSON object in completion")
+    obj = json.loads(s[start:end + 1])
+    if not isinstance(obj, dict) or not isinstance(obj.get("sections"), list):
+        raise ValueError("JSON has no 'sections' list")
+    return obj
+
+
+def assign_section_ids(proposal, book):
+    """Assign section IDs in the form <BOOK>-S<n> (1-based array order).
+
+    Args:
+        proposal: dict with 'sections' list.
+        book: 3-letter book code (e.g., "PHP").
+
+    Returns:
+        The same proposal dict with ids assigned.
+    """
+    for i, sec in enumerate(proposal["sections"], start=1):
+        sec["id"] = f"{book}-S{i}"
+    return proposal
