@@ -179,3 +179,76 @@ def verify_markers(sections, pericope_range_by_id):
             dropped.append({"id": sec["id"], "marker": mk, "reason": reason})
             sec["marker"] = None
     return sections, dropped
+
+
+def to_output(sections, book):
+    """Build the canon-shaped output map with rationale stripped.
+
+    Args:
+        sections: list of section dicts from LLM, with id, title_en,
+                  first_pericope, last_pericope, marker, and rationale.
+        book: 3-letter book code (e.g., "PHP").
+
+    Returns:
+        dict with canonical structure:
+        {"book": book, "sections": [...]}
+        Each section has fields: id, title_en, title_zh, first_pericope,
+        last_pericope, marker, status (status always "seeded"; rationale dropped).
+    """
+    # Canonical field order: id, title_en, title_zh, first, last, marker, status.
+    # rationale is intentionally dropped; title_zh/status are added.
+    out = [{"id": s["id"], "title_en": s["title_en"], "title_zh": "",
+            "first_pericope": s["first_pericope"],
+            "last_pericope": s["last_pericope"],
+            "marker": s.get("marker"), "status": "seeded"} for s in sections]
+    return {"book": book, "sections": out}
+
+
+def write_output(sections, book, out_path):
+    """Write the canonical section map to a JSON file.
+
+    Creates parent directories as needed. Output is formatted with indent=1,
+    ensure_ascii=False, and includes a trailing newline.
+
+    Args:
+        sections: list of section dicts.
+        book: 3-letter book code.
+        out_path: pathlib.Path or str for output JSON file.
+
+    Returns:
+        The pathlib.Path to the written file.
+    """
+    out_path = pathlib.Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(
+        json.dumps(to_output(sections, book), ensure_ascii=False, indent=1) + "\n",
+        encoding="utf-8")
+    return out_path
+
+
+def render_report(book, sections, dropped):
+    """Generate a human-readable text report of the section map.
+
+    Includes per-section details (id, pericope span, marker, title) with
+    rationale lines, and a dropped-markers section.
+
+    Args:
+        book: 3-letter book code.
+        sections: list of section dicts with rationale.
+        dropped: list of dropped markers, each with id, marker, and reason.
+
+    Returns:
+        Multi-line string formatted for stdout.
+    """
+    lines = [f"{book}: {len(sections)} sections (status: seeded)"]
+    for s in sections:
+        mk = s.get("marker") or "-"
+        lines.append(f"  {s['id']}  {s['first_pericope']}..{s['last_pericope']}"
+                     f"  [{mk}]  {s['title_en']}")
+        if s.get("rationale"):
+            lines.append(f"      → {s['rationale']}")
+    if dropped:
+        lines.append("  dropped markers:")
+        for d in dropped:
+            lines.append(f"    {d['id']}: {d['marker']} ({d['reason']})")
+    return "\n".join(lines)

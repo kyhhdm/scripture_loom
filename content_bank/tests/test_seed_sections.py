@@ -1,3 +1,6 @@
+import json as _json
+import pathlib as _pl
+import tempfile
 import unittest
 from content_bank.author import seed_sections as ss
 
@@ -119,3 +122,56 @@ class TestVerifyMarkers(unittest.TestCase):
                  "last_pericope": "PHP-001", "marker": None}]
         _, dropped = ss.verify_markers(secs, self._by_id())
         self.assertEqual(dropped, [])
+
+
+class TestOutputAndReport(unittest.TestCase):
+    def _secs(self):
+        return [
+            {"id": "PHP-S1", "title_en": "Opening: Greeting",
+             "first_pericope": "PHP-001", "last_pericope": "PHP-001",
+             "marker": None, "rationale": "sets the frame"},
+            {"id": "PHP-S2", "title_en": "Body: The Gospel Life",
+             "first_pericope": "PHP-002", "last_pericope": "PHP-002",
+             "marker": "PHP.1.12", "rationale": "turns to his circumstances"},
+        ]
+
+    def test_to_output_shape(self):
+        out = ss.to_output(self._secs(), "PHP")
+        s0 = out["sections"][0]
+        self.assertEqual(s0["title_zh"], "")
+        self.assertEqual(s0["status"], "seeded")
+        self.assertNotIn("rationale", s0)          # rationale never stored
+        self.assertEqual(set(s0), {"id", "title_en", "title_zh",
+                                   "first_pericope", "last_pericope",
+                                   "marker", "status"})
+
+    def test_written_map_validates(self):
+        # Build a 2-section partition over the real first two PHP pericopes...
+        # (PHP-001, PHP-002) and prove it passes the existing validator.
+        from corpus.lib import sections as csecs
+        from content_bank.lib import corpus_bridge as cb
+        order = [p["id"] for p in cb.pericopes("PHP")]
+        secs = [
+            {"id": "PHP-S1", "title_en": "A", "first_pericope": order[0],
+             "last_pericope": order[0], "marker": None, "rationale": "x"},
+            {"id": "PHP-S2", "title_en": "B", "first_pericope": order[1],
+             "last_pericope": order[-1], "marker": None, "rationale": "y"},
+        ]
+        out = ss.to_output(secs, "PHP")
+        self.assertEqual(csecs.validate_data(out, order), [])
+
+    def test_write_output_roundtrip(self):
+        d = _pl.Path(tempfile.mkdtemp()) / "sub" / "php.json"
+        ss.write_output(self._secs(), "PHP", d)
+        written = _json.loads(d.read_text(encoding="utf-8"))
+        self.assertEqual(written["book"], "PHP")
+        self.assertNotIn("rationale", written["sections"][0])
+
+    def test_report_has_rationale_and_dropped(self):
+        rpt = ss.render_report("PHP", self._secs(),
+                               [{"id": "PHP-S9", "marker": "PHP.9.9",
+                                 "reason": "marker outside section span"}])
+        self.assertIn("PHP-S1", rpt)
+        self.assertIn("sets the frame", rpt)          # rationale surfaced
+        self.assertIn("PHP.1.12", rpt)                # kept marker shown
+        self.assertIn("outside section span", rpt)    # dropped note surfaced
