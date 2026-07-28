@@ -82,3 +82,8 @@ class TestParseAndAssign(unittest.TestCase):
         ss.assign_section_ids(d, "PHP")
         self.assertEqual([s["id"] for s in d["sections"]],
                          ["PHP-S1", "PHP-S2"])
+
+    def test_parse_tolerates_stray_braces_in_prose(self):
+        raw = 'Note: total {5} items found. Here:\n{"sections": [{"title_en": "A"}]}'
+        d = ss.parse_proposal(raw)
+        self.assertEqual(d["sections"][0]["title_en"], "A")

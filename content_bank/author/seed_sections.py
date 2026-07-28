@@ -106,13 +106,21 @@ def parse_proposal(text):
             if part.startswith("{"):
                 s = part
                 break
-    start, end = s.find("{"), s.rfind("}")
-    if start == -1 or end == -1 or end < start:
-        raise ValueError("no JSON object in completion")
-    obj = json.loads(s[start:end + 1])
-    if not isinstance(obj, dict) or not isinstance(obj.get("sections"), list):
-        raise ValueError("JSON has no 'sections' list")
-    return obj
+    dec = json.JSONDecoder()
+    i = 0
+    while True:
+        start = s.find("{", i)
+        if start == -1:
+            break
+        try:
+            obj, _ = dec.raw_decode(s, start)
+        except ValueError:
+            i = start + 1
+            continue
+        if isinstance(obj, dict) and isinstance(obj.get("sections"), list):
+            return obj
+        i = start + 1
+    raise ValueError("no JSON object with a 'sections' list in completion")
 
 
 def assign_section_ids(proposal, book):
