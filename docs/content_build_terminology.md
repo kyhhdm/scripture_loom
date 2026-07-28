@@ -240,3 +240,14 @@ writes the store; promoting accepted items stays a separate human-gated step.
 
 **decisions.json** — the reviewer's export from the comparison page: which item ids
 were accepted / rejected. Consuming it to promote items is a future, human-gated step.
+
+---
+
+## Section seeder
+
+**seed_sections** (`content_bank/author/seed_sections.py`) — the LLM-based tool that
+proposes a book's section map: it groups the book's pericopes into a JFB/MHC-grounded,
+validator-guaranteed partition, verifies proposed boundary markers, and **stages** the
+result to `work/section_seeds/<book>.json` for human review and manual copy into
+`corpus/canon/structure/sections/<book>.json`. It is not part of the corpus
+deterministic rebuild. See `docs/content_section_seeder_usage.md`.

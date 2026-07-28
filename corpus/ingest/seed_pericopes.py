@@ -3,6 +3,10 @@
 Boundaries: each heading starts a new pericope at the NEXT verse after the
 heading's position; each pericope ends at the verse before the next one starts
 (or the book's last verse). Text before the first heading becomes pericope 001.
+
+For the section (book-arc) layer above pericopes, see the LLM-based sibling
+content_bank/author/seed_sections.py — no textual heading signal exists for
+sections, so that tool proposes rather than deterministically derives.
 """
 import json, sys, zipfile
 from pathlib import Path
