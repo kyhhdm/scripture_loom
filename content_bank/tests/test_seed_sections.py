@@ -87,3 +87,35 @@ class TestParseAndAssign(unittest.TestCase):
         raw = 'Note: total {5} items found. Here:\n{"sections": [{"title_en": "A"}]}'
         d = ss.parse_proposal(raw)
         self.assertEqual(d["sections"][0]["title_en"], "A")
+
+
+class TestVerifyMarkers(unittest.TestCase):
+    def _by_id(self):
+        return {"PHP-001": "PHP.1.1-11", "PHP-002": "PHP.1.12-26"}
+
+    def test_keeps_in_span_marker(self):
+        secs = [{"id": "PHP-S1", "first_pericope": "PHP-001",
+                 "last_pericope": "PHP-002", "marker": "PHP.1.6"}]
+        _, dropped = ss.verify_markers(secs, self._by_id())
+        self.assertEqual(secs[0]["marker"], "PHP.1.6")
+        self.assertEqual(dropped, [])
+
+    def test_drops_out_of_span_marker(self):
+        secs = [{"id": "PHP-S1", "first_pericope": "PHP-001",
+                 "last_pericope": "PHP-001", "marker": "PHP.4.1"}]
+        _, dropped = ss.verify_markers(secs, self._by_id())
+        self.assertIsNone(secs[0]["marker"])
+        self.assertEqual(dropped[0]["id"], "PHP-S1")
+
+    def test_drops_unparseable_marker(self):
+        secs = [{"id": "PHP-S1", "first_pericope": "PHP-001",
+                 "last_pericope": "PHP-001", "marker": "ZZZ.1.1"}]
+        _, dropped = ss.verify_markers(secs, self._by_id())
+        self.assertIsNone(secs[0]["marker"])
+        self.assertEqual(len(dropped), 1)
+
+    def test_null_marker_untouched(self):
+        secs = [{"id": "PHP-S1", "first_pericope": "PHP-001",
+                 "last_pericope": "PHP-001", "marker": None}]
+        _, dropped = ss.verify_markers(secs, self._by_id())
+        self.assertEqual(dropped, [])

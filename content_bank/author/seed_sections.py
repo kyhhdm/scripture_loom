@@ -15,6 +15,11 @@ import sys
 
 from content_bank.lib import corpus_bridge
 
+_CORPUS_LIB = str(pathlib.Path(corpus_bridge.__file__).resolve().parents[2] / "corpus")
+if _CORPUS_LIB not in sys.path:
+    sys.path.insert(0, _CORPUS_LIB)
+from lib import refs  # corpus/lib/refs.py  # noqa: E402
+
 _GROUNDING_WORKS = ("jfb", "mhc")   # JFB first (terser), Matthew Henry fallback
 
 
@@ -136,3 +141,41 @@ def assign_section_ids(proposal, book):
     for i, sec in enumerate(proposal["sections"], start=1):
         sec["id"] = f"{book}-S{i}"
     return proposal
+
+
+def verify_markers(sections, pericope_range_by_id):
+    """Verify that proposed markers parse and fall within section spans.
+
+    For each section with a non-null marker: keep it only if it refs.parse()s
+    AND falls within the section's span (first_pericope range start →
+    last_pericope range end via refs.in_range()); otherwise set marker=None
+    and append {"id", "marker", "reason"} to dropped.
+
+    Args:
+        sections: list of section dicts, each with id, first_pericope,
+                  last_pericope, and optional marker.
+        pericope_range_by_id: dict mapping pericope id to range string
+                              (e.g., {"PHP-001": "PHP.1.1-11"}).
+
+    Returns:
+        (sections, dropped) — sections mutated in place, dropped is a list
+        of {"id", "marker", "reason"} dicts.
+    """
+    dropped = []
+    for sec in sections:
+        mk = sec.get("marker")
+        if not mk:
+            continue
+        reason = None
+        try:
+            ref = refs.parse(mk)
+            span = (refs.parse_range(pericope_range_by_id[sec["first_pericope"]])[0],
+                    refs.parse_range(pericope_range_by_id[sec["last_pericope"]])[1])
+            if not refs.in_range(ref, span):
+                reason = "marker outside section span"
+        except (ValueError, KeyError) as e:
+            reason = f"marker unresolvable ({e})"
+        if reason:
+            dropped.append({"id": sec["id"], "marker": mk, "reason": reason})
+            sec["marker"] = None
+    return sections, dropped
