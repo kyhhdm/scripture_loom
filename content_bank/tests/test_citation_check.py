@@ -85,6 +85,35 @@ class TestRecallNetAndLangs(unittest.TestCase):
         self.assertEqual(gates.citation_check([it], langs={"zh"}), {})
 
 
+class TestZhNestedFormAndRecallNet(unittest.TestCase):
+    """ZH Scripture form is <verse ref>「…verbatim CUV…」</verse> (tag + brackets);
+    a bare 「…」 verbatim-CUV span (dropped tag) is flagged for repair."""
+    _CUV = "基督耶稣的仆人"  # verbatim CUV substring of PHP.1.1
+
+    def _zh(self, zh):
+        return {"id": "PHP-001-D1-01", "passage": "PHP.1.1-11", "dimension": "D1",
+                "type": "question", "text": {"en": "q", "zh": zh}}
+
+    def test_nested_tag_and_brackets_verifies_clean(self):
+        it = self._zh(f'谁是<verse ref="PHP.1.1">「{self._CUV}」</verse>？')
+        self.assertEqual(gates.citation_check([it]), {})
+
+    def test_tag_without_brackets_still_verifies(self):
+        it = self._zh(f'谁是<verse ref="PHP.1.1">{self._CUV}</verse>？')
+        self.assertEqual(gates.citation_check([it]), {})
+
+    def test_bare_cuv_brackets_without_tag_flagged(self):
+        it = self._zh(f'谁是「{self._CUV}」？')   # dropped tag
+        flags = gates.citation_check([it])["PHP-001-D1-01"]
+        self.assertTrue(any("untagged_quote" in f for f in flags))
+
+    def test_non_cuv_brackets_not_flagged_by_recall_net(self):
+        # a 「…」 span that is NOT verbatim CUV is cuv_quote_check's concern, not
+        # the citation recall net — the net only fires on real dropped Scripture.
+        it = self._zh("他说「今天天气很好」。")
+        self.assertEqual(gates.citation_check([it]), {})
+
+
 class TestRunAllIncludesCitation(unittest.TestCase):
     def test_run_all_surfaces_verse_mismatch(self):
         it = _item('<verse ref="PHP.1.1">servants of Jesus Christ</verse>',

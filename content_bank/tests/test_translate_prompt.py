@@ -37,3 +37,10 @@ class TestTranslatePrompt(unittest.TestCase):
         p = btp.build(self._item(), "PHP", detected=[], glossary_entries=[])
         self.assertIn("<verse ref=", p)
         self.assertIn("<doctrine std=", p)
+
+    def test_prompt_instructs_nested_zh_form(self):
+        # rules 2 & 8 must be reconciled: ZH Scripture is the tag AND 「…」 nested,
+        # never a bare 「…」 without the <verse> tag.
+        p = btp.build(self._item(), "PHP", detected=[], glossary_entries=[])
+        self.assertIn('「…CUV…」</verse>', p)   # the nested-form example
+        self.assertIn("drop the tag in favour of bare", p)

@@ -56,7 +56,10 @@ class TestTranslateItem(unittest.TestCase):
         self.assertEqual([e["en_term"] for e in got], ["justification"])
 
 
-GOOD = ('{"text": {"zh": "「基督耶稣的仆人」保罗和提摩太。"}, "terms": [], "uncertain": []}')
+# ZH Scripture form: <verse ref>「…verbatim CUV…」</verse> (tag + brackets nested).
+GOOD = ('{"text": {"zh": "<verse ref=\\"PHP.1.1\\">「基督耶稣的仆人」</verse>保罗和提摩太。"},'
+        ' "terms": [], "uncertain": []}')
+# BAD keeps a bare 「…」 whose wording is NOT verbatim CUV (门徒≠仆人) — fails the gate.
 BAD = ('{"text": {"zh": "「基督耶稣的门徒」保罗和提摩太。"}, "terms": [], "uncertain": []}')
 
 

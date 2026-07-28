@@ -14,8 +14,10 @@ from ..lib import corpus_bridge
 _RULES = """## Rules
 1. Translate the prose into natural simplified Chinese.
 2. Every Scripture excerpt MUST be the verbatim CUV wording for its verse,
-   wrapped in corner brackets 「…」. Use the CUV text given below — do NOT
-   translate the English quote yourself.
+   wrapped in corner brackets 「…」 AND kept inside its <verse> tag from the
+   English — both together, e.g. <verse ref="PHP.1.6">「…CUV…」</verse>. Use the
+   CUV text given below — do NOT translate the English quote yourself, and do
+   NOT drop the tag in favour of bare 「…」.
 3. If an English phrase has no contiguous CUV span, WIDEN to the smallest
    contiguous CUV span that contains it (a clause or the whole verse). Never
    invent a non-CUV rendering.
@@ -28,10 +30,12 @@ _RULES = """## Rules
    only text values.
 7. If you are unsure of a term's correct Chinese rendering, LIST it in
    "uncertain" — never fabricate a confident wrong term.
-8. PRESERVE every <verse ref=...>/<doctrine std=...> tag from the English. Translate the text
-   INSIDE a <verse> tag to the verbatim CUV wording for that ref (widen to the
-   smallest containing CUV span if needed); translate the paraphrase inside a
-   <doctrine> tag but copy its std/ref unchanged. Never invent a new tag.
+8. PRESERVE every <verse ref=...>/<doctrine std=...> tag from the English —
+   keep the tag, never emit a bare 「…」 quote without its surrounding <verse>
+   tag. Inside a <verse> tag put the verbatim CUV wording for that ref wrapped
+   in 「…」: <verse ref="PHP.1.6">「…CUV…」</verse> (widen to the smallest
+   containing CUV span if needed). Translate the paraphrase inside a <doctrine>
+   tag but copy its std/ref unchanged. Never invent or drop a tag.
 
 ## Output — STRICT JSON ONLY, no prose:
 {"text": {"zh": "..."},

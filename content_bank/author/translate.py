@@ -73,10 +73,22 @@ def zh_gate_flags(item, glossary):
     return flags
 
 
+_CITATION_HINT = (
+    "\n\n## Fixing citation.* flags\n"
+    "A Scripture quote in the zh must be the verbatim CUV wording wrapped in "
+    "「…」 AND kept inside its <verse> tag: <verse ref=\"PHP.1.6\">「…CUV…」</verse>. "
+    "'untagged_quote' means you emitted a bare 「…」 without the <verse> tag — wrap "
+    "it in the <verse ref=...> from the English. 'verse_mismatch' means the CUV "
+    "wording inside the tag is wrong — use the exact CUV text. Keep std/ref "
+    "unchanged on <doctrine> tags.")
+
+
 def _repair_prompt(item, flags):
+    hint = _CITATION_HINT if any("citation" in f for f in flags) else ""
     return ("Your Chinese translation has these problems — fix ONLY them, keeping "
             "everything else identical, and return the SAME strict JSON shape:\n"
             + "\n".join(f"- {f}" for f in flags)
+            + hint
             + "\n\n## Current item (with your zh)\n"
             + json.dumps(item, ensure_ascii=False, indent=2)
             + '\n\nReturn STRICT JSON ONLY: {"text": {"zh": ...}, '

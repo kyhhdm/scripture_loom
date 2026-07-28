@@ -14,7 +14,10 @@ STORE = {"book": "PHP", "items": [
      "type": "question", "review_status": "published",
      "text": {"en": "Who wrote the letter?"}},
 ]}
-GOOD = '{"text": {"zh": "「基督耶稣的仆人」？"}, "terms": [], "uncertain": []}'
+# ZH Scripture form: <verse ref>「…verbatim CUV…」</verse> (tag + brackets nested).
+GOOD = ('{"text": {"zh": "<verse ref=\\"PHP.1.1\\">「基督耶稣的仆人」</verse>？"},'
+        ' "terms": [], "uncertain": []}')
+GOOD_ZH = '<verse ref="PHP.1.1">「基督耶稣的仆人」</verse>？'
 
 
 class TestTranslateCli(unittest.TestCase):
@@ -42,7 +45,7 @@ class TestTranslateCli(unittest.TestCase):
         self.assertEqual(p["id"], "PHP-001-D1-01")
         self.assertEqual(p["en"], "servants of Christ Jesus?")
         self.assertTrue(p["gate_ok"])
-        self.assertEqual(p["item"]["text"]["zh"], "「基督耶稣的仆人」？")
+        self.assertEqual(p["item"]["text"]["zh"], GOOD_ZH)
         self.assertIn("drift", p)
 
     def test_run_proposals_parallel_preserves_order_and_isolates_failures(self):

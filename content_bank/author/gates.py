@@ -31,7 +31,11 @@ _HAYSTACK_CACHE = {}
 
 
 def _norm(s):
-    s = re.sub(r"[\"'\u201c\u201d\u2018\u2019]", "", s)
+    # Drop straight/curly quotes AND CUV corner brackets \u300c\u300d\u300e\u300f so a nested
+    # <verse ref>\u300c\u2026CUV\u2026\u300d</verse> verifies against the bracket-free corpus text.
+    # (cuv_quote_check extracts text from inside \u300c\u300d before norming, so stripping
+    # brackets here is a no-op there; the CUV haystack has no brackets either.)
+    s = re.sub(r"[\"'\u201c\u201d\u2018\u2019\u300c\u300d\u300e\u300f]", "", s)
     return re.sub(r"\s+", " ", s).strip().lower()
 
 
@@ -206,6 +210,29 @@ def _untagged_quote_flags(item, langs):
     return out
 
 
+def _untagged_zh_quote_flags(item, langs):
+    """ZH recall net: a verbatim-CUV 「…」 span left OUTSIDE a <verse> tag. In the
+    ZH form every Scripture quote is <verse ref>「…CUV…」</verse>, so a bare 「…」
+    that is verbatim CUV means the model dropped the tag — flag it for repair."""
+    if langs is not None and "zh" not in langs:
+        return []
+    hay = _version_text(_ZH_VERSION)
+    out = []
+    for lang, s in _lang_strings(item):
+        if lang != "zh":
+            continue
+        verses, _, _ = citation_tags.parse(s)
+        covered = {_norm(v.text) for v in verses}   # brackets stripped by _norm
+        for span in _zh_quoted_spans(s):
+            core = _norm(span.strip(" \t\n,.;:!?\"'—-…"))
+            if _han_len(core) < MIN_HAN:
+                continue
+            if core in hay and core not in covered:
+                out.append(f"citation.untagged_quote: '{span}' (verbatim CUV) "
+                           f"not wrapped in a <verse> tag")
+    return out
+
+
 def citation_check(items, *, langs=None):
     """Verify declared citations. quote-mode: <verse> inner text is verbatim in
     the corpus version for its language (equality for memory_verse, containment
@@ -231,6 +258,7 @@ def citation_check(items, *, langs=None):
                 if standards.resolve(d.std, d.ref) is None:
                     problems.append(f"citation.basis_unresolved: {d.std} {d.ref}")
         problems.extend(_untagged_quote_flags(it, langs))
+        problems.extend(_untagged_zh_quote_flags(it, langs))
         if problems:
             flags[it["id"]] = problems
     return flags
