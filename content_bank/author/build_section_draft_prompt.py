@@ -28,6 +28,24 @@ zoom-out — answerable only across the section, not from one pericope.
 
 SAFEGUARD — add no doctrine the text does not state; keep to observable meaning."""
 
+_TAGGING_BLOCK = """## Citation tagging (hard requirement)
+
+Every verbatim Scripture quote MUST be wrapped inline so the gate can verify it:
+- `<verse ref="PHP.1.6">exact BSB words</verse>` — `ref` in canonical corpus
+  format (`BOOK.CHAPTER.VERSE`, e.g. `PHP.1.6`, or a range `PHP.1.1-11`); the
+  inner text is the exact BSB wording.
+- A THREAD note typically strings several short quotes drawn from DIFFERENT
+  verses across the section — wrap EACH quoted span in its OWN `<verse>` with
+  its own `ref` (the same verses you list in the item's `refs`). Do not leave
+  any quoted phrase untagged.
+- A claim resting on the Westminster Standards: wrap the paraphrase in
+  `<doctrine std="WCF" ref="1.4">your paraphrase</doctrine>` — `std` is
+  WCF/WLC/WSC; `ref` is chapter.section for WCF (`1.4`) or `Q<n>` for WLC/WSC
+  (`Q1`). The inner text is your paraphrase, not a quote.
+- Tag marked quotations down to a 4-word floor; do NOT tag incidental
+  single-word overlap. Keep every tag well-formed — a matching close tag and
+  only the attributes shown — malformed markup fails the gate."""
+
 _OUTPUT_SCHEMA = """## Output — a JSON array of section-scoped ContentItems
 
 Return ONLY a JSON array (no prose). Produce exactly one throughline, zero or more
@@ -49,7 +67,8 @@ book <BOOK>:
   {"id":"<sid>-q-<slug>","section":"<SID>","dimension":"D6"|"D7","type":"question","age_tier":"youth"|"adult"|"all","difficulty":2|3,"review_status":"draft","text":{"en":"..."},"leader_reference":{"kind":"leader_note","text":{"en":"point where the text leads; flag a common misreading; keep the question open"}},"version":1}
   throughline and thread items need NO leader_reference.
 
-Keep exactly one throughline. Quoted words must be verbatim BSB."""
+Keep exactly one throughline. Quoted words must be verbatim BSB, and every
+quoted span must be wrapped per the Citation tagging section above."""
 
 
 def build(section_id, book="MAT", brief=""):
@@ -75,6 +94,7 @@ def build(section_id, book="MAT", brief=""):
         parts.append("## Section arc brief (Stage 1) — the distilled spine to draft "
                      "FROM\n" + brief.strip() + "\n")
     parts.append(_SHAPE)
+    parts.append("\n" + _TAGGING_BLOCK)
     parts.append("\n" + _OUTPUT_SCHEMA
                  .replace("<SID>", section_id)
                  .replace("<sid>", section_id.lower())

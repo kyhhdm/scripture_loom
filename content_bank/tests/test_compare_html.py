@@ -135,6 +135,32 @@ class LeaderRefTest(unittest.TestCase):
     def test_none_when_absent(self):
         self.assertIsNone(compare_html._leader_ref(_item("x", "D1")))
 
+    def test_citation_tags_kept_raw_for_highlighting(self):
+        # The review page highlights <verse>/<doctrine> spans client-side, so the
+        # server must pass the tagged text RAW (not stripped) to the browser.
+        item = _item("x", "D1",
+                     text='Who are the <verse ref="PHP.1.1">servants of Christ '
+                          'Jesus</verse>?')
+        item["leader_reference"] = {"kind": "answer_key",
+                                    "text": {"en": 'Rests on <doctrine std="WCF" '
+                                             'ref="1.4">God its author</doctrine>.'},
+                                    "verse": {"en": "Philippians 1:1"}}
+        card = compare_html._card(item, "runA", {}, {})
+        self.assertIn('<verse ref="PHP.1.1">', card["text_en"])
+        self.assertIn('<doctrine std="WCF" ref="1.4">',
+                      card["leader_ref"]["text_en"])
+
+
+class CitationHighlightTest(unittest.TestCase):
+    def test_page_carries_highlighter_and_styles(self):
+        html = compare_html.render_html(
+            {"book": "PHP", "runs": [], "notes": [], "rubric": "", "units": []})
+        # the client-side highlighter and its two tag styles must be present
+        self.assertIn("function hlCite(", html)
+        self.assertIn("hlCite(c.text_en)", html)      # item text highlighted
+        self.assertIn("cite-verse", html)
+        self.assertIn("cite-doctrine", html)
+
 
 class RenderTests(unittest.TestCase):
     def test_single_self_contained_file(self):

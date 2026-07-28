@@ -7,8 +7,21 @@ Everything a model produces lands under a per-model run directory as
 `review_status: "draft"`; the builder **never writes the store** and never
 self-publishes. Promotion to the store is a separate, human-gated step.
 
-For the vocabulary used below (pericope, section, brief, gate, r1/r2, provenance),
-see `docs/content_build_terminology.md`.
+For the vocabulary used below (pericope, section, brief, gate, r1/r2, provenance,
+citation tags), see `docs/content_build_terminology.md`.
+
+---
+
+## Recommended configuration (from this project's experiments)
+
+| Stage | Setting | Why |
+|-------|---------|-----|
+| **English generation** | `--backend claude --model opus` | Opus produces the strongest drafts and reliably emits well-formed `<verse>`/`<doctrine>` **citation tags**; cheaper models pad dimensions and mis-tag more, leaning harder on repair + human review. |
+| **Chinese translation** | `deepseek-v4-flash` (translator default) | Fast and cheap, and good enough for the *reviewed-draft* library — the CUV/citation gates + human review are the backstop. See `docs/content_translator_usage.md`. |
+| **Citation tags** | on by default | The drafting prompt emits `<verse>`/`<doctrine>` tags and the `citation_check` gate verifies them. No flag to toggle — tagging is part of the draft/section prompts. |
+
+This is the config the pipeline is tuned for; the flags below let you deviate (e.g. a
+cheap comparison build, or a section retried with a bigger repair budget).
 
 ---
 
@@ -113,12 +126,14 @@ uv run python -m content_bank.author.build_cli --book PHP --no-review
    the brief to `runs/<slug>/briefs/<unit>.md` and the stage advances to `briefed`.
    Otherwise the existing brief is reused. Pericopes use `build_brief_prompt`; sections
    use `build_section_brief_prompt` (arc distillation).
-2. **Draft.** The draft prompt (passage + brief + D1–D8 schema, anchored to WCF-1) is
-   sent; the JSON item array is parsed.
-3. **Gates + repair.** HARD gates (quote-fidelity, schema, ref-range, thread-span) and
-   the SOFT anti-padding cap run. Flags are fed back to the model for up to
-   `--max-repair` rounds. Remaining HARD flags **fail the unit**; remaining SOFT flags
-   only log `[warn] padding remains`.
+2. **Draft.** The draft prompt (passage + brief + D1–D8 schema, anchored to WCF-1, plus
+   the **citation-tagging** instructions) is sent; the JSON item array is parsed. The
+   model wraps each quoted verse in `<verse ref="…">…</verse>` and each Standards-based
+   claim in `<doctrine std="…" ref="…">…</doctrine>`.
+3. **Gates + repair.** HARD gates (quote-fidelity, schema, ref-range, thread-span, and
+   **citation_check** for the tags) and the SOFT anti-padding cap run. Flags are fed
+   back to the model for up to `--max-repair` rounds. Remaining HARD flags **fail the
+   unit**; remaining SOFT flags only log `[warn] padding remains`.
 4. **Review (if on).** The two lenses (r1 accuracy/WCF-1/answerability; r2 evidence/age/
    dimension/pedagogy) judge the draft; failed items are revised (or dropped) and
    re-gated. Verdicts are saved to `runs/<slug>/verdicts/<unit>.json`.
@@ -158,7 +173,14 @@ uv run python -m content_bank.author.compare_html PHP \
 
 The page shows the runs per unit × dimension with gate/verdict badges, the rubric,
 per-run briefs, and answer-key / leader-note blocks, and lets a human accept items and
-export `decisions.json`. See the comparison-page design spec for details.
+export `decisions.json`. **Citation tags are highlighted** on the page — `<verse>`
+spans in green with the ref, `<doctrine>` in amber — so a reviewer can see and verify
+each citation (the tags are stripped only on the family-facing kit, never here). See
+the comparison-page design spec for details.
+
+**To translate the drafts into Chinese**, see the companion guide
+`docs/content_translator_usage.md` (the `translate_cli` tool and its own highlighted
+review page).
 
 ---
 

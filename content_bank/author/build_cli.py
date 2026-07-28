@@ -111,12 +111,25 @@ def _llm_with_backoff(prompt, *, tries=4, base=2.0):
     raise last
 
 
+_CITATION_REPAIR_HINT = (
+    "\n\n## Fixing citation.* flags\n"
+    "- untagged_quote: wrap that verbatim quote in "
+    '<verse ref="BOOK.CH.V">exact BSB words</verse>, using the canonical ref '
+    "shown in the flag (a thread note tags EACH quoted span separately).\n"
+    "- malformed: fix the markup so every <verse>/<doctrine> has a matching "
+    "close tag and only the attributes shown (verse: ref; doctrine: std then "
+    "ref). Do not alter text inside a tag.")
+
+
 def _repair_prompt(prompt, items, flags):
+    hint = (_CITATION_REPAIR_HINT
+            if any("citation" in f for fl in flags.values() for f in fl) else "")
     return (prompt
             + "\n\n## Previous attempt (fix and RETURN THE FULL CORRECTED ARRAY)\n"
             + json.dumps(items, ensure_ascii=False)
             + "\n\n## Gate problems to fix (item id -> problems)\n"
             + json.dumps(flags, ensure_ascii=False)
+            + hint
             + "\n\nReturn ONLY the corrected JSON array.")
 
 

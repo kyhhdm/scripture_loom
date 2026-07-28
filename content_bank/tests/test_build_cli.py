@@ -21,6 +21,18 @@ class ParseItemsTest(unittest.TestCase):
             build_cli._parse_items("no json here")
 
 
+class RepairPromptCitationHintTest(unittest.TestCase):
+    def test_hint_added_only_for_citation_flags(self):
+        items = [{"id": "x"}]
+        with_cit = build_cli._repair_prompt(
+            "P", items, {"x": ["citation.untagged_quote: 'a b c d' (PHP.1.6) ..."]})
+        without = build_cli._repair_prompt(
+            "P", items, {"x": ["schema: missing field"]})
+        self.assertIn("Fixing citation.* flags", with_cit)
+        self.assertIn("<verse ref=", with_cit)
+        self.assertNotIn("Fixing citation.* flags", without)
+
+
 class BackoffTest(unittest.TestCase):
     def test_retries_then_succeeds(self):
         calls = {"n": 0}

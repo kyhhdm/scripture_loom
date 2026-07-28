@@ -23,5 +23,14 @@ class DraftPromptRequestsReferencesTest(unittest.TestCase):
         self.assertNotIn("No provenance", self.text)
 
 
+class TestDraftPromptTagging(unittest.TestCase):
+    def test_tagging_block_present(self):
+        # PHP-001 has a committed brief; build the real draft pack.
+        p = bdp.build("PHP-001", book="PHP")
+        self.assertIn("<verse ref=", p)
+        self.assertIn("<doctrine std=", p)
+        self.assertIn("PHP.1.6", p)  # canonical ref-format example
+
+
 if __name__ == "__main__":
     unittest.main()

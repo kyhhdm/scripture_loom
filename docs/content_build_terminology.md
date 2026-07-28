@@ -94,6 +94,22 @@ from the item it rides on. Two kinds:
 `throughline`, `thread`, and `memory_verse` items carry **no** leader reference (the
 first two are statements; a memory verse *is* its own reference).
 
+**citation tags** — inline markup the drafting model emits *inside* the text fields so
+the gate can verify each citation instead of rediscovering it (`content_bank/lib/citation_tags.py`):
+
+- `<verse ref="PHP.1.6">…verbatim Scripture…</verse>` — a quoted verse. `ref` is
+  canonical corpus format (`BOOK.CH.V`, or a range `PHP.1.1-11`); the inner text must be
+  verbatim BSB (`en`) / CUV (`zh`).
+- `<doctrine std="WCF" ref="1.4">…paraphrase…</doctrine>` — a claim resting on the
+  Westminster Standards. `std ∈ {WCF, WLC, WSC}`; `ref` is `chapter.section` (WCF) or
+  `Q<n>` (WLC/WSC). The inner text is the author's paraphrase, not a quote.
+
+The **tagged string is the stored source of truth**; reader-facing surfaces strip the
+tags (the family never sees markup), while review pages *highlight* them. In Chinese,
+Scripture nests both markers — `<verse ref="PHP.1.6">「…CUV…」</verse>` — so the machine
+ref and the CUV `「」` reading convention both survive. Verified by **citation_check**
+(below). Design: `docs/superpowers/specs/2026-07-23-citation-tags-foundation-design.md`.
+
 ---
 
 ## Pipeline stages (the manifest ledger)
@@ -146,6 +162,10 @@ budget):
   scope drift). D5 pericope items are exempt (they legitimately cross-reference).
 - **thread_span_check** — a `thread` must recur across 2+ pericopes, so it is invalid
   on a single-pericope section. (This is why `PHP-S1` has no threads.)
+- **citation_check** — verifies the inline **citation tags** (see below): a `<verse>`
+  tag's inner text must be verbatim corpus (BSB for `en`, CUV for `zh`); a `<doctrine>`
+  tag's ref must resolve in WCF/WLC/WSC; malformed markup fails closed. A recall net
+  flags a verbatim quote left *outside* a tag (`citation.untagged_quote`) for repair.
 
 **SOFT** (advisory only — logged, never blocks):
 

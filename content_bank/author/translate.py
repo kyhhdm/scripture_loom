@@ -45,6 +45,9 @@ def _merge_zh(item, resp):
         if isinstance(lr.get("verse"), dict) and "zh" in lr["verse"] \
                 and isinstance(out["leader_reference"].get("verse"), dict):
             out["leader_reference"]["verse"]["zh"] = lr["verse"]["zh"]
+    cat = resp.get("category")
+    if isinstance(cat, dict) and "zh" in cat and isinstance(out.get("category"), dict):
+        out["category"]["zh"] = cat["zh"]
     return out
 
 
@@ -64,15 +67,28 @@ def translate_item(item, book, *, glossary=None, model=None):
 def zh_gate_flags(item, glossary):
     flags = []
     for gate in (gates.cuv_quote_check([item]),
-                 gates.glossary_check([item], glossary)):
+                 gates.glossary_check([item], glossary),
+                 gates.citation_check([item], langs={"zh"})):
         flags.extend(gate.get(item["id"], []))
     return flags
 
 
+_CITATION_HINT = (
+    "\n\n## Fixing citation.* flags\n"
+    "A Scripture quote in the zh must be the verbatim CUV wording wrapped in "
+    "「…」 AND kept inside its <verse> tag: <verse ref=\"PHP.1.6\">「…CUV…」</verse>. "
+    "'untagged_quote' means you emitted a bare 「…」 without the <verse> tag — wrap "
+    "it in the <verse ref=...> from the English. 'verse_mismatch' means the CUV "
+    "wording inside the tag is wrong — use the exact CUV text. Keep std/ref "
+    "unchanged on <doctrine> tags.")
+
+
 def _repair_prompt(item, flags):
+    hint = _CITATION_HINT if any("citation" in f for f in flags) else ""
     return ("Your Chinese translation has these problems — fix ONLY them, keeping "
             "everything else identical, and return the SAME strict JSON shape:\n"
             + "\n".join(f"- {f}" for f in flags)
+            + hint
             + "\n\n## Current item (with your zh)\n"
             + json.dumps(item, ensure_ascii=False, indent=2)
             + '\n\nReturn STRICT JSON ONLY: {"text": {"zh": ...}, '
@@ -127,6 +143,8 @@ def _merge_zh_into_store_item(store_item, proposal_item):
             o_lr.setdefault("text", {})["zh"] = p_lr["text"]["zh"]
         if isinstance(o_lr.get("verse"), dict) and "zh" in (p_lr.get("verse") or {}):
             o_lr["verse"]["zh"] = p_lr["verse"]["zh"]
+    if isinstance(out.get("category"), dict) and "zh" in (proposal_item.get("category") or {}):
+        out["category"]["zh"] = proposal_item["category"]["zh"]
     return out
 
 

@@ -123,6 +123,9 @@ def _leader_ref(item):
     lr = item.get("leader_reference")
     if not lr:
         return None
+    # Keep citation tags RAW here: this is a review instrument, and the page
+    # highlights <verse>/<doctrine> spans client-side so the reviewer can see
+    # and verify what was cited. (The family-facing kit still strips tags.)
     return {
         "kind": lr.get("kind"),
         "text_en": (lr.get("text") or {}).get("en"),
@@ -140,7 +143,7 @@ def _card(item, run, gate_flags, unit_verdicts):
         "type": item.get("type"),
         "age_tier": item.get("age_tier"),
         "difficulty": item.get("difficulty"),
-        "text_en": (item.get("text") or {}).get("en") or "(no en text)",
+        "text_en": (item.get("text") or {}).get("en") or "(no en text)",  # raw tags; highlighted client-side
         "leader_ref": _leader_ref(item),
         "gate_ok": not problems,
         "gate_problems": problems,
@@ -258,12 +261,24 @@ details.ref > summary { padding: 8px 12px; cursor: pointer; font-weight: 600; }
 details.brief { margin: 0 0 14px; border: 1px solid #3b82f677; border-radius: 8px;
   background: #3b82f611; }
 details.brief > summary { padding: 8px 12px; cursor: pointer; font-weight: 600; }
+.cite { border-radius: 3px; padding: 0 1px; }
+.cite-verse { background: #22c55e2e; box-shadow: inset 0 -2px 0 #22c55eaa; }
+.cite-doctrine { background: #f59e0b2e; box-shadow: inset 0 -2px 0 #f59e0baa; }
+.citeref { font-size: 9px; font-weight: 700; margin-left: 2px; padding: 0 3px;
+  border-radius: 6px; vertical-align: super; letter-spacing: .02em; }
+.cite-verse .citeref { background: #22c55e; color: #04310f; }
+.cite-doctrine .citeref { background: #f59e0b; color: #3a2600; }
+.legend { font-size: 12px; color: #888; }
+.legend .cite { padding: 0 4px; }
 </style>
 <header>
   <h1>__TITLE__</h1>
   <span id="tally"></span>
   <button id="export">Export decisions</button>
   <span style="color:#888;font-size:12px">runs: __RUNS__</span>
+  <span class="legend">citations:
+    <span class="cite cite-verse">verse<sup class="citeref">REF</sup></span>
+    <span class="cite cite-doctrine">doctrine<sup class="citeref">STD</sup></span></span>
 </header>
 <div id="note">__NOTE__</div>
 <details class="ref" id="rubric">
@@ -290,6 +305,20 @@ function esc(s) { const d = document.createElement('div'); d.textContent = s == 
 // Attribute-safe: esc() does not escape quotes, so a note containing " would close
 // a title="..." attribute early and drop the tooltip. Escape quotes too.
 function escAttr(s) { return esc(s).replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+// Highlight citation tags for the reviewer. esc() runs FIRST (all item text is
+// escaped, so no injection), then the now-escaped <verse>/<doctrine> markup —
+// our own known syntax — is turned into styled spans with the ref shown inline.
+function hlCite(s) {
+  let h = esc(s == null ? '' : s);
+  h = h.replace(/&lt;verse ref="([^"]*)"&gt;([\s\S]*?)&lt;\/verse&gt;/g,
+    (_, ref, inner) => '<span class="cite cite-verse" title="verse ' + escAttr(ref) +
+      '">' + inner + '<sup class="citeref">' + esc(ref) + '</sup></span>');
+  h = h.replace(/&lt;doctrine std="([^"]*)" ref="([^"]*)"&gt;([\s\S]*?)&lt;\/doctrine&gt;/g,
+    (_, std, ref, inner) => '<span class="cite cite-doctrine" title="doctrine ' +
+      escAttr(std + ' ' + ref) + '">' + inner + '<sup class="citeref">' +
+      esc(std + ' ' + ref) + '</sup></span>');
+  return h;
+}
 function md(src) {
   if (!src) return '<em>no brief on file for this unit</em>';
   return esc(src)
@@ -317,12 +346,12 @@ function card(c) {
     const kind = (lr.kind === 'answer_key') ? 'Answer key'
       : (lr.kind === 'leader_note') ? 'Leader note' : (lr.kind || 'Leader ref');
     lref = '<div class="lref"><span class="lref-kind">' + esc(kind) + '</span>' +
-      (lr.verse_en ? '<span class="lref-verse">' + esc(lr.verse_en) + '</span>' : '') +
-      '<div>' + esc(lr.text_en) + '</div></div>';
+      (lr.verse_en ? '<span class="lref-verse">' + hlCite(lr.verse_en) + '</span>' : '') +
+      '<div>' + hlCite(lr.text_en) + '</div></div>';
   }
   el.innerHTML =
     '<label><input type="checkbox" ' + (state[c.id] === true ? 'checked' : '') + '>' +
-    '<span class="txt">' + esc(c.text_en) + '</span></label>' + lref +
+    '<span class="txt">' + hlCite(c.text_en) + '</span></label>' + lref +
     '<div class="chips"><span class="chip">' + esc(c.age_tier) + '</span>' +
     '<span class="chip">diff ' + esc(c.difficulty) + '</span>' +
     '<span class="chip">' + esc(c.type) + '</span>' + gate + verdict + '</div>';

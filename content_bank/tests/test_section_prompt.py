@@ -28,6 +28,16 @@ class SectionDraftPromptSelfContainedTest(unittest.TestCase):
         self.assertIn("ARC SPINE: partnership in the gospel.", text)
         self.assertIn("Section arc brief", text)
 
+    def test_prompt_instructs_citation_tagging(self):
+        # Section items (esp. quote-dense threads) are gated by citation_check, so
+        # the section draft prompt must tell the model to emit <verse>/<doctrine>
+        # tags — otherwise the gate rejects untagged quotes it never asked for.
+        text = bsd.build("PHP-S1", "PHP")
+        self.assertIn("<verse ref=", text)
+        self.assertIn("<doctrine std=", text)
+        self.assertIn("PHP.1.6", text)          # canonical ref example
+        self.assertIn("thread", text.lower())   # the per-quote thread guidance
+
 
 class SectionBriefPromptTest(unittest.TestCase):
     def test_brief_prompt_distills_the_arc_not_items(self):

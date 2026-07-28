@@ -36,6 +36,23 @@ class TestPromote(unittest.TestCase):
         it = content.load_book_store("PHP", d)["items"][0]
         self.assertNotIn("zh", it["text"])
 
+    def test_promote_merges_category_zh(self):
+        store = {"book": "PHP", "items": [
+            {"id": "PHP-001-D1-03", "dimension": "D1", "type": "pre_reading_quest",
+             "review_status": "reviewed", "text": {"en": "Who is named?"},
+             "category": {"en": "People & roles"}}]}
+        prop = {"id": "PHP-001-D1-03",
+                "item": {"id": "PHP-001-D1-03", "dimension": "D1",
+                          "type": "pre_reading_quest", "review_status": "reviewed",
+                          "text": {"en": "Who is named?", "zh": "谁被提名？"},
+                          "category": {"en": "People & roles", "zh": "人物与角色"}}}
+        d = tempfile.mkdtemp()
+        (pathlib.Path(d) / "php.json").write_text(json.dumps(store), encoding="utf-8")
+        translate.promote("PHP", [prop], ["PHP-001-D1-03"], store_dir=d)
+        it = content.load_book_store("PHP", d)["items"][0]
+        self.assertEqual(it["category"]["zh"], "人物与角色")
+        self.assertEqual(it["category"]["en"], "People & roles")  # preserved
+
     def test_promote_merges_zh_into_leader_reference(self):
         store = {"book": "PHP", "items": [
             {"id": "PHP-001-D1-02", "dimension": "D1", "type": "question",

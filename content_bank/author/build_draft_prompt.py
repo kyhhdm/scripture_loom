@@ -16,6 +16,21 @@ _WCF1_GUARDRAIL = """Draft WITHIN the Westminster Confession's doctrine of Scrip
 interprets Scripture. Hedging on this fails review. (Full chapter and this
 passage's doctrinal anchors are distilled in the brief above.)"""
 
+_TAGGING_BLOCK = """## Citation tagging (hard requirement)
+
+Declare every citation inline so the gate can verify it:
+- Quoted Scripture: wrap the verbatim words in
+  `<verse ref="PHP.1.6">...</verse>` — `ref` in canonical corpus format
+  (`BOOK.CHAPTER.VERSE`, e.g. `PHP.1.6`, or a range `PHP.1.1-11`). The inner
+  text MUST be the exact BSB wording (a `memory_verse` must tag the WHOLE verse).
+- A claim resting on the Westminster Standards: wrap the paraphrase in
+  `<doctrine std="WCF" ref="1.4">...</doctrine>` — `std` is WCF/WLC/WSC; `ref`
+  is chapter.section for WCF (`1.4`) or `Q<n>` for WLC/WSC (`Q1`). The inner
+  text is your paraphrase, not a quote.
+- Tag by function: tag marked quotations down to a 4-word floor; do NOT tag
+  incidental single-word overlap with the passage. Leave non-quoted prose
+  untagged."""
+
 _RULES_BLOCK = """## How to draft (hard rules)
 
 - ANSWERABLE FROM THIS PASSAGE: every item except a D5 (Connections) item must be
@@ -102,6 +117,8 @@ def build(pericope_id, book="MAT", brief=None):
              brief + "\n",
              "## Confessional guardrail\n",
              _WCF1_GUARDRAIL + "\n",
+             "## Citation tagging\n",
+             _TAGGING_BLOCK + "\n",
              "## Dimensions to cover\n"]
     for d, desc in dimensions.TEMPLATES.items():
         line = f"- {d}: {desc}"
