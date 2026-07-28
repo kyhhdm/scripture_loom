@@ -1,7 +1,9 @@
+import json
 import json as _json
 import pathlib as _pl
 import tempfile
 import unittest
+from unittest import mock
 from content_bank.author import seed_sections as ss
 
 
@@ -175,3 +177,56 @@ class TestOutputAndReport(unittest.TestCase):
         self.assertIn("sets the frame", rpt)          # rationale surfaced
         self.assertIn("PHP.1.12", rpt)                # kept marker shown
         self.assertIn("outside section span", rpt)    # dropped note surfaced
+
+
+def _valid_completion_php(order):
+    # One section per pericope? No — make 2 contiguous sections covering all.
+    secs = [{"title_en": "Opening: A", "first_pericope": order[0],
+             "last_pericope": order[0], "marker": None, "rationale": "r1"},
+            {"title_en": "Body: B", "first_pericope": order[1],
+             "last_pericope": order[-1], "marker": None, "rationale": "r2"}]
+    return json.dumps({"sections": secs})
+
+
+class TestSeedOrchestrator(unittest.TestCase):
+    def setUp(self):
+        from content_bank.lib import corpus_bridge as cb
+        self.order = [p["id"] for p in cb.pericopes("PHP")]
+        # Credential/PATH guard is orthogonal to orchestration — neutralize it so
+        # these tests never depend on ARK_API_KEY or a `claude` binary.
+        g = mock.patch.object(ss, "_require_backend")
+        g.start()
+        self.addCleanup(g.stop)
+
+    def test_happy_path_writes_staging(self):
+        out = _pl.Path(tempfile.mkdtemp()) / "php.json"
+        with mock.patch.object(ss, "llm",
+                               return_value=_valid_completion_php(self.order)):
+            res = ss.seed("PHP", backend="llm_core", out=out)
+        self.assertTrue(out.exists())
+        from corpus.lib import sections as csecs
+        written = _json.loads(out.read_text(encoding="utf-8"))
+        self.assertEqual(csecs.validate_data(written, self.order), [])
+        self.assertEqual(written["sections"][0]["id"], "PHP-S1")
+
+    def test_invalid_after_budget_writes_nothing(self):
+        bad = json.dumps({"sections": [{"title_en": "only one",
+                          "first_pericope": self.order[0],
+                          "last_pericope": self.order[0], "marker": None}]})
+        out = _pl.Path(tempfile.mkdtemp()) / "php.json"
+        with mock.patch.object(ss, "llm", return_value=bad):
+            with self.assertRaises(RuntimeError):
+                ss.seed("PHP", backend="llm_core", max_repair=1, out=out)
+        self.assertFalse(out.exists())          # nothing emitted
+
+    def test_refuses_overwrite_without_force(self):
+        out = _pl.Path(tempfile.mkdtemp()) / "php.json"
+        out.write_text("{}", encoding="utf-8")
+        with mock.patch.object(ss, "llm",
+                               return_value=_valid_completion_php(self.order)):
+            with self.assertRaises(FileExistsError):
+                ss.seed("PHP", backend="llm_core", out=out)
+
+    def test_default_out_is_staging(self):
+        self.assertTrue(str(ss.DEFAULT_OUT("PHP")).replace("\\", "/")
+                        .endswith("work/section_seeds/php.json"))
