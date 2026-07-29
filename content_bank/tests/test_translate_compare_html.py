@@ -15,6 +15,36 @@ def _proposal(iid, zh, gate_ok=True, leader_reference=None):
             "gate_ok": gate_ok, "gate_flags": [], "drift": {"drift": False, "notes": ""}}
 
 
+class TestFlagTooltips(unittest.TestCase):
+    def _cell(self, **over):
+        cell = {"gate_ok": True, "gate_flags": [], "drift": False,
+                "drift_notes": "", "uncertain": []}
+        cell.update(over)
+        return cell
+
+    def test_gate_badge_carries_flag_text_as_tooltip(self):
+        html = tch._flag_badges(self._cell(
+            gate_ok=False,
+            gate_flags=["citation.verse_mismatch: 'PSA.3.2'", "context span"]))
+        self.assertIn(">gate<", html)
+        self.assertIn("citation.verse_mismatch: &#x27;PSA.3.2&#x27;", html)  # escaped
+        self.assertIn("context span", html)
+
+    def test_drift_badge_carries_notes_as_tooltip(self):
+        html = tch._flag_badges(self._cell(drift=True, drift_notes="adds shield imagery"))
+        self.assertIn('title="adds shield imagery"', html)
+
+    def test_clean_cell_has_no_tooltip(self):
+        html = tch._flag_badges(self._cell())
+        self.assertIn(">ok<", html)
+        self.assertNotIn("title=", html)
+
+    def test_double_quotes_in_notes_are_escaped(self):
+        html = tch._flag_badges(self._cell(drift=True, drift_notes='he said "myriads"'))
+        self.assertNotIn('title="he said "', html)  # raw quote would break the attr
+        self.assertIn("&quot;myriads&quot;", html)
+
+
 class TestTranslateComparePage(unittest.TestCase):
     def _root(self):
         root = tempfile.mkdtemp()
