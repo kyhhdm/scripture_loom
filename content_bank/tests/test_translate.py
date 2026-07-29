@@ -110,3 +110,56 @@ class TestZhCitationGate(unittest.TestCase):
         with mock.patch.object(translate, "llm", return_value=good):
             out = translate.translate_with_gates(self._item(), "PHP", glossary=[])
         self.assertTrue(out["gate_ok"])
+
+
+class TestSuggestDriftFix(unittest.TestCase):
+    ITEM = {"id": "PSA-003-i14", "passage": "PSA.3.1-8", "dimension": "D7",
+            "type": "question", "text": {"en": "But You, O LORD.", "zh": "但你耶和华。"}}
+
+    def test_no_drift_returns_none_without_calling_llm(self):
+        m = mock.Mock()
+        with mock.patch.object(translate, "llm", m):
+            out = translate.suggest_drift_fix(self.ITEM, "PSA",
+                                              {"drift": False, "notes": ""}, glossary=[])
+        self.assertIsNone(out)
+        m.assert_not_called()
+
+    def test_changed_fix_is_regated_and_redrifted(self):
+        fix = ('{"changed": true, "reason": "removed added imagery",'
+               ' "text": {"zh": "但你耶和华。"}, "terms": [], "uncertain": []}')
+        redrift = '{"drift": false, "notes": "resolved"}'
+        with mock.patch.object(translate, "llm", side_effect=[fix, redrift]):
+            out = translate.suggest_drift_fix(
+                self.ITEM, "PSA", {"drift": True, "notes": "adds shield imagery"},
+                glossary=[])
+        self.assertTrue(out["changed"])
+        self.assertEqual(out["rationale"], "removed added imagery")
+        self.assertEqual(out["item"]["text"]["zh"], "但你耶和华。")
+        self.assertFalse(out["drift"]["drift"])       # re-drift ran
+        self.assertIn("gate_ok", out)                 # re-gate ran
+        self.assertNotIn("zh_mutated", self.ITEM)     # original untouched key-wise
+        self.assertEqual(self.ITEM["text"]["zh"], "但你耶和华。")  # original object intact
+
+    def test_declined_fix_returns_original_unchanged(self):
+        fix = ('{"changed": false, "reason": "CUV renders it this way",'
+               ' "text": {"zh": "但你耶和华。"}, "terms": [], "uncertain": []}')
+        with mock.patch.object(translate, "llm", side_effect=[fix]):
+            out = translate.suggest_drift_fix(
+                self.ITEM, "PSA", {"drift": True, "notes": "guards -> knows"},
+                glossary=[])
+        self.assertFalse(out["changed"])
+        self.assertEqual(out["rationale"], "CUV renders it this way")
+        self.assertEqual(out["item"], self.ITEM)      # original returned
+        self.assertEqual(out["drift"], {"drift": True, "notes": "guards -> knows"})
+
+    def test_bad_fix_recorded_gate_false_not_raised(self):
+        # A changed fix that emits a bare 「…」 with no <verse> tag -> citation flag.
+        bad = ('{"changed": true, "reason": "x",'
+               ' "text": {"zh": "「耶和华是我四围的盾牌」"}, "terms": [], "uncertain": []}')
+        redrift = '{"drift": false, "notes": ""}'
+        with mock.patch.object(translate, "llm", side_effect=[bad, redrift]):
+            out = translate.suggest_drift_fix(
+                self.ITEM, "PSA", {"drift": True, "notes": "n"}, glossary=[])
+        self.assertTrue(out["changed"])
+        self.assertFalse(out["gate_ok"])              # re-gate caught it
+        self.assertTrue(out["gate_flags"])            # recorded, not dropped

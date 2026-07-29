@@ -130,6 +130,51 @@ def back_translate_review(item, *, model=None):
     return {"drift": bool(v.get("drift")), "notes": v.get("notes", "")}
 
 
+_FIX_PROMPT_HEAD = (
+    "A back-translation drift review found a DOCTRINAL divergence between this "
+    "Chinese translation and the original English / Westminster frame. Propose a "
+    "revised zh that RESOLVES the drift, under these hard rules:\n"
+    "- Every Scripture quote must stay a verbatim CUV span in 「…」 inside its "
+    "<verse ...> tag; keep every <verse>/<doctrine> tag and its ref/std unchanged.\n"
+    "- Change ONLY what the drift note requires; keep everything else identical.\n"
+    "- If the drift exists ONLY because the CUV itself renders the wording this way, "
+    "you CANNOT fix it without leaving the CUV. In that case DO NOT change the text: "
+    "return changed=false and explain.")
+
+
+def _fix_prompt(item, notes):
+    return (_FIX_PROMPT_HEAD
+            + "\n\n## Drift note\n" + (notes or "")
+            + "\n\n## Current item (with its zh)\n"
+            + json.dumps(item, ensure_ascii=False, indent=2)
+            + '\n\nReturn STRICT JSON ONLY: {"changed": true|false, "reason": "...", '
+              '"text": {"zh": ...}, "leader_reference": {...}, "terms": [...], '
+              '"uncertain": [...]}.')
+
+
+def suggest_drift_fix(item, book, drift, *, glossary=None, model=None):
+    """Given a drift-flagged translated item, ask the model for a CUV-safe revision.
+
+    Returns a suggested_fix dict (see plan), or None when ``drift`` did not fire.
+    The original ``item`` is never mutated; on a declined fix it is returned as-is.
+    """
+    if not drift.get("drift"):
+        return None
+    glossary = _glossary.load_glossary() if glossary is None else glossary
+    resp = _extract_json(llm(_fix_prompt(item, drift.get("notes", "")), model))
+    rationale = resp.get("reason", "")
+    if not resp.get("changed"):
+        flags = zh_gate_flags(item, glossary)
+        return {"changed": False, "rationale": rationale, "item": item,
+                "gate_ok": not flags, "gate_flags": flags, "drift": drift}
+    revised = _merge_zh(item, resp)
+    flags = zh_gate_flags(revised, glossary)
+    new_drift = back_translate_review(revised, model=model)
+    return {"changed": True, "rationale": rationale, "item": revised,
+            "gate_ok": not flags, "gate_flags": flags, "drift": new_drift,
+            "terms": resp.get("terms", []), "uncertain": resp.get("uncertain", [])}
+
+
 def _merge_zh_into_store_item(store_item, proposal_item):
     """Copy ONLY zh text values from the proposal onto the store item."""
     out = copy.deepcopy(store_item)
