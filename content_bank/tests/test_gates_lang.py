@@ -59,6 +59,40 @@ class TestCuvQuoteCheck(unittest.TestCase):
         self.assertEqual(gates.cuv_quote_check([it]), {})
 
 
+class TestCuvQuoteOverlapScoped(unittest.TestCase):
+    """cuv_quote_check only checks 「」 spans that OVERLAP a declared ref (the item's
+    passage/section + its <verse> refs). 「」 is the Scripture convention; ordinary
+    quotes (activity examples, answer options) share no run with the cited passage
+    and must not be flagged."""
+
+    def _item(self, zh, passage="PHP.1.1-11"):
+        return {"id": "Z-1", "passage": passage, "text": {"zh": zh}}
+
+    def test_ordinary_zh_quote_not_flagged(self):
+        # An ordinary 「」 quote with no overlap with the cited passage (Philippians)
+        # must NOT be flagged as a bad CUV quote.
+        it = self._item("请做这个活动：「进门时把鞋子放到鞋架上」。")
+        self.assertEqual(gates.cuv_quote_check([it]), {})
+
+    def test_answer_option_quote_not_flagged(self):
+        it = self._item("选项：「已回答」或「未回答」。")
+        self.assertEqual(gates.cuv_quote_check([it]), {})
+
+    def test_verbatim_cuv_from_passage_passes(self):
+        it = self._item("「基督耶稣的仆人」")   # verbatim CUV of PHP.1.1
+        self.assertEqual(gates.cuv_quote_check([it]), {})
+
+    def test_misquote_of_cited_passage_flagged(self):
+        # Overlaps PHP.1.1 (基督耶稣的…) but not verbatim -> a real mis-quote, flagged.
+        it = self._item("「基督耶稣的门徒」")
+        self.assertIn("Z-1", gates.cuv_quote_check([it]))
+
+    def test_double_quotes_not_treated_as_scripture(self):
+        # Ordinary quotes use “ ”; only 「」 is the Scripture convention and checked.
+        it = self._item("他说“这不是经文”。")
+        self.assertEqual(gates.cuv_quote_check([it]), {})
+
+
 class TestNormStripsAllQuoteGlyphs(unittest.TestCase):
     def test_norm_strips_straight_and_curly_quotes(self):
         result = gates._norm("“”‘’\"' abc")
