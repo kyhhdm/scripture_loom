@@ -200,5 +200,33 @@ class TestSectionScope(unittest.TestCase):
         self.assertEqual(schema.validate_item(item), [])
 
 
+class TestSectionItemReveal(unittest.TestCase):
+    def _prov(self):
+        return {"reviewed_by": "kyhhdm", "reviewed_date": "2026-07-29",
+                "guardrail": "WCF-1"}
+
+    def test_throughline_with_leader_note_validates(self):
+        it = valid_item(id="php-s1-throughline", type="throughline", dimension="D7",
+                        review_status="draft")
+        it.pop("passage", None)
+        it["section"] = "PHP-S1"
+        it["leader_reference"] = {"kind": "leader_note",
+                                  "text": {"en": "the spine"}, "provenance": self._prov()}
+        it["provenance"] = {"drafted_by": "hand", **self._prov()}
+        self.assertEqual(schema.validate_item(it), [])
+
+    def test_d3_thread_with_answer_key_and_verse_validates(self):
+        it = valid_item(id="php-s1-thread-joy", type="thread", dimension="D3",
+                        review_status="draft")
+        it.pop("passage", None)
+        it["section"] = "PHP-S1"
+        it["refs"] = ["PHP.1.4", "PHP.4.4"]
+        it["leader_reference"] = {"kind": "answer_key", "text": {"en": "joy recurs"},
+                                  "verse": {"en": "Philippians 4:4"},
+                                  "provenance": self._prov()}
+        it["provenance"] = {"drafted_by": "hand", **self._prov()}
+        self.assertEqual(schema.validate_item(it), [])
+
+
 if __name__ == "__main__":
     unittest.main()
