@@ -49,7 +49,8 @@ def gather_inputs(book):
             "pericopes": peris}
 
 
-_RANGE_HINT = "roughly 3-12, more for long narrative books"
+_RANGE_HINT = ("as few, broad movements as the book's structure supports — "
+               "roughly 2-12, more only for long books")
 
 
 def build_prompt(inputs):
@@ -63,6 +64,11 @@ def build_prompt(inputs):
         f"named movements ({_RANGE_HINT}). Rules:",
         "- Every pericope belongs to exactly ONE section; sections are "
         "contiguous and in order (no gaps, no overlaps, full coverage).",
+        "- PREFER movements that span MULTIPLE pericopes. A section spanning a "
+        "single pericope carries no cross-pericope threads, so avoid "
+        "single-pericope sections unless the book's structure genuinely demands "
+        "a distinct standalone movement. For a short book, favour a few broad "
+        "movements over many narrow ones.",
         "- title_en uses the form \"Label: Description\" "
         "(e.g. \"Book One: The Sermon on the Mount\").",
         "- marker: a canonical verse ref BOOK.CH.V ONLY where a clear repeating "
