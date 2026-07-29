@@ -79,7 +79,8 @@ def build_page(book, draft_run, translators, *, root=_ROOT):
                         "gate_flags": p.get("gate_flags", []),
                         "drift": (p.get("drift") or {}).get("drift", False),
                         "drift_notes": (p.get("drift") or {}).get("notes", ""),
-                        "uncertain": p.get("uncertain", [])}
+                        "uncertain": p.get("uncertain", []),
+                        "suggested_fix": p.get("suggested_fix")}
         rows.append({"id": iid, "en": first.get("en", ""),
                      "cuv": _cuv_for(first.get("cuv_refs")),
                      "ref_label": ref_label, "ref_en": ref_en,
@@ -105,6 +106,28 @@ def _flag_badges(cell):
     if cell["uncertain"]:
         bits.append(_badge("warn", "uncertain", "\n".join(cell["uncertain"])))
     return " ".join(bits) or '<span class="ok">ok</span>'
+
+
+def _suggested_block(cell):
+    """Render the drift suggested-fix sub-block, or '' when there is none."""
+    fix = cell.get("suggested_fix") if cell else None
+    if not fix:
+        return ""
+    hl = citation_tags.highlight_html
+    badges = _flag_badges({"gate_ok": fix.get("gate_ok", True),
+                           "gate_flags": fix.get("gate_flags", []),
+                           "drift": (fix.get("drift") or {}).get("drift", False),
+                           "drift_notes": (fix.get("drift") or {}).get("notes", ""),
+                           "uncertain": []})
+    if fix.get("changed"):
+        zh = hl((fix.get("item") or {}).get("text", {}).get("zh", ""))
+        head = f"<div class=zh>{zh}</div>"
+    else:
+        head = "<div class=nofix>no fix — CUV wording</div>"
+    rationale = html.escape(fix.get("rationale", ""))
+    return (f"<div class=suggest><span class=reflabel>Suggested fix:</span> {head}"
+            f"<div class=srat>{rationale}</div>"
+            f"<div class=badges>{badges}</div></div>")
 
 
 def _ref_block(label, text, verse):
@@ -138,8 +161,9 @@ def render_html(page):
             zh = citation_tags.highlight_html(c["zh"]) if c else "—"
             ref = _ref_block(r["ref_label"], c["ref_zh"], c["verse_zh"]) if c else ""
             cat = _cat_block(c["cat_zh"]) if c else ""
+            sug = _suggested_block(c) if c else ""
             cells.append(f"<td><div class=zh>{zh}</div>{ref}{cat}"
-                         f"<div class=badges>{_flag_badges(c)}</div></td>")
+                         f"<div class=badges>{_flag_badges(c)}</div>{sug}</td>")
         en_ref = _ref_block(r["ref_label"], r["ref_en"], r["verse_en"])
         en_cat = _cat_block(r["cat_en"])
         body.append(
@@ -167,6 +191,9 @@ def render_html(page):
    border-radius:6px;vertical-align:super}}
  .cite-verse .citeref{{background:#22c55e;color:#04310f}}
  .cite-doctrine .citeref{{background:#f59e0b;color:#3a2600}}
+ .suggest{{margin-top:6px;padding:6px;border-left:3px solid #f59e0b;background:#fffbeb}}
+ .suggest .srat{{font-size:11px;color:#92400e;margin-top:2px}}
+ .nofix{{font-style:italic;color:#92400e}}
 </style>
 <h1>Translation comparison — {esc(page['book'])} · draft run \
 <code>{esc(page['draft_run'])}</code></h1>
