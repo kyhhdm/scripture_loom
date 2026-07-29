@@ -115,6 +115,64 @@ class DimensionCapTest(unittest.TestCase):
         self.assertEqual(gates.dimension_cap_check(items, cap=5), {})
 
 
+class TestSectionRevealCheck(unittest.TestCase):
+    def _tl(self, **over):
+        it = {"id": "PHP-S1-throughline", "section": "PHP-S1", "dimension": "D7",
+              "type": "throughline", "age_tier": "all", "difficulty": 2,
+              "review_status": "draft", "text": {"en": "Where is this movement driving?"},
+              "leader_reference": {"kind": "leader_note", "text": {"en": "the spine"}},
+              "version": 1}
+        it.update(over)
+        return it
+
+    def _thread(self, **over):
+        it = {"id": "PHP-S1-thread-x", "section": "PHP-S1", "dimension": "D3",
+              "type": "thread", "age_tier": "all", "difficulty": 2,
+              "review_status": "draft", "text": {"en": "Trace 'joy' — what does it reveal?"},
+              "refs": ["PHP.1.4", "PHP.4.4"],
+              "leader_reference": {"kind": "answer_key", "text": {"en": "joy recurs"},
+                                   "verse": {"en": "Philippians 4:4"}},
+              "version": 1}
+        it.update(over)
+        return it
+
+    def test_correct_pairing_passes(self):
+        self.assertEqual(gates.section_reveal_check([self._tl(), self._thread()]), {})
+
+    def test_missing_reveal_flagged(self):
+        bad = self._tl()
+        del bad["leader_reference"]
+        self.assertIn("PHP-S1-throughline", gates.section_reveal_check([bad]))
+
+    def test_wrong_kind_for_d7_flagged(self):
+        # D7 must be leader_note; answer_key is wrong.
+        bad = self._tl(leader_reference={"kind": "answer_key", "text": {"en": "x"}})
+        self.assertIn("PHP-S1-throughline", gates.section_reveal_check([bad]))
+
+    def test_wrong_kind_for_d3_thread_flagged(self):
+        # D3 must be answer_key; leader_note is wrong.
+        bad = self._thread(leader_reference={"kind": "leader_note", "text": {"en": "x"}})
+        self.assertIn("PHP-S1-thread-x", gates.section_reveal_check([bad]))
+
+    def test_d7_thread_uses_leader_note(self):
+        ok = self._thread(dimension="D7",
+                          leader_reference={"kind": "leader_note", "text": {"en": "x"}})
+        del ok["refs"]  # refs presence is thread_span's concern, not this gate's
+        ok["refs"] = ["PHP.1.6", "PHP.2.5"]
+        self.assertEqual(gates.section_reveal_check([ok]), {})
+
+    def test_non_section_types_ignored(self):
+        q = {"id": "PHP-S1-q-1", "type": "question", "dimension": "D5",
+             "text": {"en": "?"}}  # no leader_reference here -> must NOT be flagged
+        self.assertEqual(gates.section_reveal_check([q]), {})
+
+    def test_run_all_includes_reveal_gate(self):
+        bad = self._tl()
+        del bad["leader_reference"]
+        merged = gates.run_all("PHP", [bad], gates.section_allowed("PHP", "PHP-S1"))
+        self.assertIn("PHP-S1-throughline", merged)
+
+
 class RunAllTest(unittest.TestCase):
     def test_merges_all_three_gates(self):
         allowed = gates.pericope_allowed("MAT", "MAT-035")

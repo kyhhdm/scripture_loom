@@ -426,6 +426,29 @@ def thread_span_check(items, allowed):
             for it in items if it.get("type") == "thread"}
 
 
+_REVEAL_KIND_FOR_DIM = {"D3": "answer_key", "D7": "leader_note"}
+
+
+def section_reveal_check(items):
+    """HARD: every section-level `throughline`/`thread` is a discovery question and
+    MUST carry a leader_reference reveal whose kind matches its dimension
+    (D3 -> answer_key, D7 -> leader_note). Missing reveal or mismatched kind is a
+    defect. Non-section types are untouched (their reveal rules live elsewhere)."""
+    flags = {}
+    for it in items:
+        if it.get("type") not in ("throughline", "thread"):
+            continue
+        want = _REVEAL_KIND_FOR_DIM.get(it.get("dimension"))
+        lr = it.get("leader_reference")
+        if not lr:
+            flags[it["id"]] = [f"section item missing its leader_reference reveal "
+                               f"(expected kind '{want}')"]
+        elif lr.get("kind") != want:
+            flags[it["id"]] = [f"reveal kind '{lr.get('kind')}' does not match "
+                               f"dimension {it.get('dimension')} (expected '{want}')"]
+    return flags
+
+
 def dimension_cap_check(items, *, cap=DEFAULT_DIM_CAP):
     """SOFT (anti-padding): flag every item in any dimension the unit emits > cap of.
     Model-independent; fed into the repair loop to prune over-generation, then logged
@@ -443,13 +466,13 @@ def dimension_cap_check(items, *, cap=DEFAULT_DIM_CAP):
 
 
 def run_all(book, items, allowed):
-    """The HARD gate tier: quote + schema + ref-range + thread-span + citation.
-    Any flag here is a defect the repair loop must clear or the unit fails. Soft
-    anti-padding (dimension_cap_check) is deliberately NOT included."""
+    """The HARD gate tier: quote + schema + ref-range + thread-span + section-reveal
+    + citation. Any flag here is a defect the repair loop must clear or the unit
+    fails. Soft anti-padding (dimension_cap_check) is deliberately NOT included."""
     merged = {}
     for gate in (quote_check(book, items), schema_check(items),
                  refs_in_range(items, allowed), thread_span_check(items, allowed),
-                 citation_check(items)):
+                 section_reveal_check(items), citation_check(items)):
         for k, v in gate.items():
             merged.setdefault(k, []).extend(v)
     return merged
