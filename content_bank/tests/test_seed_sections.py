@@ -59,6 +59,13 @@ class TestBuildPrompt(unittest.TestCase):
         self.assertIn("JSON", p)                         # strict-JSON instruction
         self.assertNotIn('"id"', p)                      # model must NOT supply ids
 
+    def test_prompt_prefers_multi_pericope_movements(self):
+        # A single-pericope section carries no cross-pericope threads, so the
+        # seeder should steer toward movements spanning multiple pericopes.
+        p = ss.build_prompt(self._inputs()).lower()
+        self.assertIn("multiple", p)
+        self.assertIn("thread", p)
+
     def test_repair_prompt_carries_errors(self):
         base = ss.build_prompt(self._inputs())
         proposal = {"sections": [{"title_en": "X", "first_pericope": "PHP-001",
