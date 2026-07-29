@@ -38,6 +38,29 @@ class SectionDraftPromptSelfContainedTest(unittest.TestCase):
         self.assertIn("PHP.1.6", text)          # canonical ref example
         self.assertIn("thread", text.lower())   # the per-quote thread guidance
 
+    def test_throughline_and_thread_carry_leader_reference_in_json(self):
+        text = bsd.build("PHP-S1", "PHP")
+        # The throughline JSON example must now include a leader_note reveal...
+        self.assertIn('"type":"throughline"', text)
+        tl = text.split('"type":"throughline"', 1)[1].split("}\n", 1)[0]
+        self.assertIn("leader_reference", tl)
+        self.assertIn("leader_note", tl)
+        # ...and the old "need NO leader_reference" instruction must be gone.
+        self.assertNotIn("need NO leader_reference", text)
+
+    def test_prompt_frames_throughline_and_thread_as_questions(self):
+        text = bsd.build("PHP-S1", "PHP").lower()
+        # Discovery framing: the stem is a question leading to a reveal.
+        self.assertIn("discovery question", text)
+        self.assertIn("reveal", text)
+
+    def test_reveal_kind_rule_stated(self):
+        text = bsd.build("PHP-S1", "PHP")
+        # D3 -> answer_key, D7 -> leader_note must be spelled out for section items.
+        self.assertIn("D3", text)
+        self.assertIn("answer_key", text)
+        self.assertIn("leader_note", text)
+
 
 class SectionBriefPromptTest(unittest.TestCase):
     def test_brief_prompt_distills_the_arc_not_items(self):
