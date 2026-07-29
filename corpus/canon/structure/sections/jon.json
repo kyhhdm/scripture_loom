@@ -1,0 +1,41 @@
+{
+ "book": "JON",
+ "sections": [
+  {
+   "id": "JON-S1",
+   "title_en": "Part One: Jonah's Flight and the LORD's Pursuit",
+   "title_zh": "",
+   "first_pericope": "JON-001",
+   "last_pericope": "JON-003",
+   "marker": null,
+   "status": "seeded"
+  },
+  {
+   "id": "JON-S2",
+   "title_en": "Part Two: Prayer from the Depths and Deliverance",
+   "title_zh": "",
+   "first_pericope": "JON-004",
+   "last_pericope": "JON-004",
+   "marker": null,
+   "status": "seeded"
+  },
+  {
+   "id": "JON-S3",
+   "title_en": "Part Three: The Second Commission and Nineveh's Repentance",
+   "title_zh": "",
+   "first_pericope": "JON-005",
+   "last_pericope": "JON-005",
+   "marker": null,
+   "status": "seeded"
+  },
+  {
+   "id": "JON-S4",
+   "title_en": "Part Four: The Prophet's Anger and the LORD's Compassion",
+   "title_zh": "",
+   "first_pericope": "JON-006",
+   "last_pericope": "JON-006",
+   "marker": null,
+   "status": "seeded"
+  }
+ ]
+}
