@@ -100,8 +100,43 @@ uv run python -m content_bank.author.translate_cli \
 | `--backend {llm_core,claude}` | `llm_core` | `llm_core` = deepseek via credits; `claude` = subscription. |
 | `--model MODEL` | backend's default (`deepseek-v4-flash`) | Override the translator model. Sets the output slug. |
 | `--max-repair N` | `2` | Gate-repair rounds before a proposal is emitted with `gate_ok:false`. |
+| `--suggest-fixes` / `--no-suggest-fixes` | **on** | For a **drift-flagged** proposal, make one extra CUV-safe LLM call proposing a revised zh (see below). Off skips it. |
 | `--concurrency N` | `4` | How many items to translate in parallel (each item's translate→repair→back-translate chain stays sequential). |
 | `--out DIR` | derived | Output dir. Defaults to `<drafts-dir>/../translations/<translator-slug>`. |
+
+---
+
+## Drift suggested fixes (`--suggest-fixes`, default on)
+
+The back-translation review flags **drift** (softened/strengthened/added/removed
+doctrine) but does not act on it. When a proposal is drift-flagged, the translator
+makes **one** additional LLM call that proposes a **revised zh** resolving the drift,
+under a hard rule that it must keep every `「…」` a verbatim CUV span and every
+`<verse>`/`<doctrine>` tag intact — and if the drift exists only because the *CUV
+itself* renders the wording that way (unfixable without leaving the CUV), it returns
+the text unchanged and says so.
+
+This is **suggest-and-confirm**, not auto-fix: the revision rides on the proposal as a
+`suggested_fix` object and the original `item` is **never replaced**. The suggestion is
+re-gated and re-drift-checked, so its own `gate_ok` / `drift` / `uncertain` are recorded
+too. Shape:
+
+```jsonc
+"suggested_fix": {
+  "changed":   true,             // false = declined (CUV-inherent), text unchanged
+  "rationale": "removed shield imagery not in the English",
+  "item":      { …revised zh… },
+  "gate_ok":   true, "gate_flags": [],
+  "drift":     {"drift": false}, // re-checked — did the fix work?
+  "uncertain": []
+}
+```
+
+On the **review page** (`translate_compare_html`) a `suggested_fix` renders beneath the
+flagged cell — the revised zh (or a "no fix — CUV wording" note) with its own
+gate/drift/uncertain badges and the rationale — so a human can accept or reject it.
+Promoting a suggestion into the store is a manual edit for now (no
+`--use-suggested` on `translate.promote` yet).
 
 ---
 
