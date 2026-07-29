@@ -189,3 +189,14 @@ class TestSuggestedFixRendering(unittest.TestCase):
         cell = {"zh": "x", "gate_ok": True, "gate_flags": [], "drift": False,
                 "drift_notes": "", "uncertain": []}
         self.assertEqual(tch._suggested_block(cell), "")
+
+    def test_fix_uncertain_surfaces_as_badge(self):
+        # The revision's own model-flagged uncertainty must reach the badges,
+        # not be dropped (regression: _suggested_block hardcoded uncertain=[]).
+        fix = {"changed": True, "rationale": "r",
+               "item": {"text": {"zh": "但你耶和华。"}},
+               "gate_ok": True, "gate_flags": [], "drift": {"drift": False},
+               "uncertain": ["盾牌 rendering unsure"]}
+        html = tch._suggested_block(self._cell_with_fix(fix))
+        self.assertIn(">uncertain<", html)
+        self.assertIn("盾牌 rendering unsure", html)  # carried as tooltip text

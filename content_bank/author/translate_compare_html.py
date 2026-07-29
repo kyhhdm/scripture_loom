@@ -118,7 +118,7 @@ def _suggested_block(cell):
                            "gate_flags": fix.get("gate_flags", []),
                            "drift": (fix.get("drift") or {}).get("drift", False),
                            "drift_notes": (fix.get("drift") or {}).get("notes", ""),
-                           "uncertain": []})
+                           "uncertain": fix.get("uncertain", [])})
     if fix.get("changed"):
         zh = hl((fix.get("item") or {}).get("text", {}).get("zh", ""))
         head = f"<div class=zh>{zh}</div>"
