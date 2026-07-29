@@ -224,10 +224,19 @@ class VerdictsByItemTest(unittest.TestCase):
 
 class SectionBuildTest(unittest.TestCase):
     def _throughline(self):
+        # A section throughline is now a discovery question carrying its spine as a
+        # D7 leader_note reveal (section_reveal_check enforces the pairing); without
+        # it the gate would flag the item and drive an extra repair-loop llm call.
         return json.dumps([dict(id="php-s1-throughline", section="PHP-S1",
                                 dimension="D7", type="throughline", age_tier="all",
                                 difficulty=2, review_status="draft", version=1,
-                                text={"en": "The section is about gospel partnership."})])
+                                text={"en": "Where does this section's partnership lead?"},
+                                leader_reference=dict(
+                                    kind="leader_note",
+                                    text={"en": "The section is about gospel partnership."},
+                                    provenance=dict(reviewed_by="test",
+                                                    reviewed_date="2026-07-29",
+                                                    guardrail="WCF-1")))])
 
     def test_section_briefs_then_drafts_and_saves_verdicts(self):
         with tempfile.TemporaryDirectory() as d:
