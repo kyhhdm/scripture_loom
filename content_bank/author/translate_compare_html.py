@@ -77,7 +77,8 @@ def build_page(book, draft_run, translators, *, root=_ROOT):
                         "cat_zh": (p["item"].get("category") or {}).get("zh", ""),
                         "gate_ok": p.get("gate_ok", True),
                         "gate_flags": p.get("gate_flags", []),
-                        "drift": p.get("drift", {}).get("drift", False),
+                        "drift": (p.get("drift") or {}).get("drift", False),
+                        "drift_notes": (p.get("drift") or {}).get("notes", ""),
                         "uncertain": p.get("uncertain", [])}
         rows.append({"id": iid, "en": first.get("en", ""),
                      "cuv": _cuv_for(first.get("cuv_refs")),
@@ -87,16 +88,22 @@ def build_page(book, draft_run, translators, *, root=_ROOT):
             "rows": rows}
 
 
+def _badge(cls, label, tip):
+    """One flag badge; `tip` becomes a hover tooltip (title=) when non-empty."""
+    attr = f' title="{html.escape(tip, quote=True)}"' if tip else ""
+    return f'<span class="{cls}"{attr}>{label}</span>'
+
+
 def _flag_badges(cell):
     if cell is None:
         return "<span class=missing>—</span>"
     bits = []
     if not cell["gate_ok"]:
-        bits.append('<span class="bad">gate</span>')
+        bits.append(_badge("bad", "gate", "\n".join(cell["gate_flags"])))
     if cell["drift"]:
-        bits.append('<span class="bad">drift</span>')
+        bits.append(_badge("bad", "drift", cell.get("drift_notes", "")))
     if cell["uncertain"]:
-        bits.append('<span class="warn">uncertain</span>')
+        bits.append(_badge("warn", "uncertain", "\n".join(cell["uncertain"])))
     return " ".join(bits) or '<span class="ok">ok</span>'
 
 
@@ -163,8 +170,9 @@ def render_html(page):
 </style>
 <h1>Translation comparison — {esc(page['book'])} · draft run \
 <code>{esc(page['draft_run'])}</code></h1>
-<p>English ▸ CUV source ▸ one column per translator. Flags: gate (CUV/glossary \
-fail), drift (back-translation), uncertain (model-flagged). Citations: \
+<p>English ▸ CUV source ▸ one column per translator. Flags (hover a badge for the \
+reason): gate (CUV/glossary fail), drift (back-translation), uncertain \
+(model-flagged). Citations: \
 <span class="cite cite-verse">verse<sup class=citeref>REF</sup></span> \
 <span class="cite cite-doctrine">doctrine<sup class=citeref>STD</sup></span> \
 (a good ZH translation keeps every <verse> span, verbatim CUV).</p>
