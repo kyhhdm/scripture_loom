@@ -38,6 +38,14 @@ class TestTranslatePrompt(unittest.TestCase):
         self.assertIn("<verse ref=", p)
         self.assertIn("<doctrine std=", p)
 
+    def test_prompt_reserves_corner_brackets_for_scripture(self):
+        # 「」 is the Scripture convention; ordinary quotes must use “ ”.
+        p = btp.build(self._item(), "PHP", detected=[], glossary_entries=[])
+        self.assertIn("“", p)          # the ordinary-quote mark is named
+        self.assertIn("”", p)
+        low = p.lower()
+        self.assertTrue("reserve" in low and "scripture" in low)
+
     def test_prompt_instructs_nested_zh_form(self):
         # rules 2 & 8 must be reconciled: ZH Scripture is the tag AND 「…」 nested,
         # never a bare 「…」 without the <verse> tag.

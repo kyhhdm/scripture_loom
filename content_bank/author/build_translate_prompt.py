@@ -18,6 +18,10 @@ _RULES = """## Rules
    English — both together, e.g. <verse ref="PHP.1.6">「…CUV…」</verse>. Use the
    CUV text given below — do NOT translate the English quote yourself, and do
    NOT drop the tag in favour of bare 「…」.
+   RESERVE 「…」 STRICTLY FOR VERBATIM SCRIPTURE. For any other quoted text —
+   activity examples, answer options, dialogue, hypothetical phrases, a word
+   under discussion — use Chinese double quotes “…”, NEVER 「…」. Corner brackets
+   signal Scripture; ordinary quotes must not wear them.
 3. Use the SHORTEST contiguous CUV span that matches the English quote. A short
    woven quote stays short: "servants of Christ Jesus" -> 「基督耶稣的仆人」, NOT the
    whole of PHP.1.1. Only widen when the English phrase has no exact contiguous
