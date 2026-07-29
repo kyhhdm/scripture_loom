@@ -152,11 +152,14 @@ def _fix_prompt(item, notes):
               '"uncertain": [...]}.')
 
 
-def suggest_drift_fix(item, book, drift, *, glossary=None, model=None):
+def suggest_drift_fix(item, book, drift, *, glossary=None, model=None,
+                      drift_model=None):
     """Given a drift-flagged translated item, ask the model for a CUV-safe revision.
 
     Returns a suggested_fix dict (see plan), or None when ``drift`` did not fire.
     The original ``item`` is never mutated; on a declined fix it is returned as-is.
+    The revision is proposed by ``model``; the re-drift check uses ``drift_model``
+    when given (else ``model``), so a stronger reviewer can vet the fix.
     """
     if not drift.get("drift"):
         return None
@@ -169,7 +172,7 @@ def suggest_drift_fix(item, book, drift, *, glossary=None, model=None):
                 "gate_ok": not flags, "gate_flags": flags, "drift": drift}
     revised = _merge_zh(item, resp)
     flags = zh_gate_flags(revised, glossary)
-    new_drift = back_translate_review(revised, model=model)
+    new_drift = back_translate_review(revised, model=drift_model or model)
     return {"changed": True, "rationale": rationale, "item": revised,
             "gate_ok": not flags, "gate_flags": flags, "drift": new_drift,
             "terms": resp.get("terms", []), "uncertain": resp.get("uncertain", [])}

@@ -43,10 +43,10 @@ def out_dir_for(drafts_dir, backend, model):
 
 
 def proposal_for(item, book, *, glossary=None, model=None, max_repair=2,
-                 suggest_fixes=True):
+                 suggest_fixes=True, drift_model=None):
     out = translate_with_gates(item, book, glossary=glossary, model=model,
                                max_repair=max_repair)
-    drift = back_translate_review(out["item"], model=model)
+    drift = back_translate_review(out["item"], model=drift_model or model)
     proposal = {"id": item["id"],
                 "en": (item.get("text") or {}).get("en", ""),
                 "item": out["item"], "cuv_refs": out.get("cuv_refs", []),
@@ -54,15 +54,15 @@ def proposal_for(item, book, *, glossary=None, model=None, max_repair=2,
                 "gate_ok": out["gate_ok"], "gate_flags": out["gate_flags"],
                 "drift": drift}
     if suggest_fixes and drift["drift"]:
-        sug = suggest_drift_fix(out["item"], book, drift,
-                                glossary=glossary, model=model)
+        sug = suggest_drift_fix(out["item"], book, drift, glossary=glossary,
+                                model=model, drift_model=drift_model)
         if sug is not None:
             proposal["suggested_fix"] = sug
     return proposal
 
 
 def run_proposals(items, book, *, glossary=None, model=None, max_repair=2,
-                  concurrency=4, suggest_fixes=True):
+                  concurrency=4, suggest_fixes=True, drift_model=None):
     """Translate every item and return proposals in input order.
 
     Items are independent, so they run in a thread pool (each item's own
@@ -77,7 +77,7 @@ def run_proposals(items, book, *, glossary=None, model=None, max_repair=2,
             max_workers=max(1, concurrency)) as ex:
         futs = {ex.submit(proposal_for, it, book, glossary=glossary,
                           model=model, max_repair=max_repair,
-                          suggest_fixes=suggest_fixes): i
+                          suggest_fixes=suggest_fixes, drift_model=drift_model): i
                 for i, it in enumerate(items)}
         for fut in concurrent.futures.as_completed(futs):
             i = futs[fut]
@@ -114,6 +114,10 @@ def main(argv=None):
                          "instead of the store")
     ap.add_argument("--backend", choices=("llm_core", "claude"), default="llm_core")
     ap.add_argument("--model")
+    ap.add_argument("--drift-model",
+                    help="model for the back-translation drift review (and re-drift "
+                         "of a suggested fix); defaults to --model. Use a stronger "
+                         "model, e.g. deepseek-v4-pro, for more reliable drift flags.")
     ap.add_argument("--max-repair", type=int, default=2)
     ap.add_argument("--concurrency", type=int, default=4,
                     help="how many items to translate in parallel (default 4)")
@@ -140,7 +144,8 @@ def main(argv=None):
     proposals = run_proposals(items, args.book, glossary=glossary,
                               model=args.model, max_repair=args.max_repair,
                               concurrency=args.concurrency,
-                              suggest_fixes=args.suggest_fixes)
+                              suggest_fixes=args.suggest_fixes,
+                              drift_model=args.drift_model)
     write_proposals(proposals, out_dir)
     print(f"Done. proposals={len(proposals)}/{len(items)} -> {out_dir}")
     return 0
