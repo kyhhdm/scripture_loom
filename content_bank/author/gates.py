@@ -30,12 +30,24 @@ _VERSION_FILE = {"BSB": "bsb.json", "CUV": "cuv-simp.json"}
 _HAYSTACK_CACHE = {}
 
 
+_CJK = "\u3000-\u303f\u3400-\u4dbf\u4e00-\u9fff\uff00-\uffef"
+_WS_AFTER_CJK = re.compile(rf"(?<=[{_CJK}])\s+")
+_WS_BEFORE_CJK = re.compile(rf"\s+(?=[{_CJK}])")
+
+
 def _norm(s):
     # Drop straight/curly quotes AND CUV corner brackets \u300c\u300d\u300e\u300f so a nested
     # <verse ref>\u300c\u2026CUV\u2026\u300d</verse> verifies against the bracket-free corpus text.
     # (cuv_quote_check extracts text from inside \u300c\u300d before norming, so stripping
     # brackets here is a no-op there; the CUV haystack has no brackets either.)
     s = re.sub(r"[\"'\u201c\u201d\u2018\u2019\u300c\u300d\u300e\u300f]", "", s)
+    # CUV poetry/psalms carry Hebrew-cola spacing (a space mid-line) that correct
+    # Chinese prose omits; drop whitespace touching any CJK char (Chinese has no
+    # inter-word spaces) so a verbatim quote still matches. Latin word-spacing is
+    # untouched \u2014 English strings have no CJK chars, so these two subs are no-ops
+    # there and BSB comparison behavior is unchanged.
+    s = _WS_AFTER_CJK.sub("", s)
+    s = _WS_BEFORE_CJK.sub("", s)
     return re.sub(r"\s+", " ", s).strip().lower()
 
 
@@ -138,10 +150,89 @@ def quote_check(book, items):
     return flags
 
 
+# Scripture convention in Chinese content: corner brackets 「」. Ordinary quotes
+# (activity examples, answer options, dialogue) use “ ” and are NOT checked here.
+_ZH_SCRIPTURE_SPAN = re.compile(r"「([^」]{2,300})」")
+
+
+def _item_passage_ranges(item):
+    """The verse range(s) an item is 'about': its pericope/section passage resolved
+    to CUV-addressable ranges. Best-effort — returns [] if unresolvable."""
+    p = item.get("passage") or item.get("section") or ""
+    if not p:
+        return []
+    if "." in p:                         # already a ref-range, e.g. PHP.1.1-11
+        return [p]
+    book = p[:3]
+    try:
+        peri = corpus_bridge.pericopes(book)
+    except Exception:
+        return []
+    by_id = {x["id"]: x["range"] for x in peri}
+    if p in by_id:                       # pericope id, e.g. JON-004
+        return [by_id[p]]
+    try:                                 # section id, e.g. JON-S1 -> member pericopes
+        from corpus.lib import sections as _sections
+        ids = [x["id"] for x in peri]
+        for s in _sections.load(book)["sections"]:
+            if s["id"] == p:
+                i, j = ids.index(s["first_pericope"]), ids.index(s["last_pericope"])
+                return [by_id[k] for k in ids[i:j + 1]]
+    except Exception:
+        pass
+    return []
+
+
+def _declared_cuv(item):
+    """Normalized CUV text of everything the item declares: its <verse> refs plus
+    its passage/section range. This is the haystack a 「」 span must overlap to be
+    treated as an (attempted) Scripture quote."""
+    refs = set(_item_passage_ranges(item))
+    for _, s in _lang_strings(item):
+        for v in citation_tags.parse(s)[0]:
+            refs.add(v.ref)
+    texts = []
+    for r in refs:
+        try:
+            texts.append(_passage_plain(r, _ZH_VERSION))
+        except Exception:
+            continue
+    return _norm(" ".join(texts))
+
+
+def _overlaps_cuv(core, declared):
+    """True if the span shares any MIN_HAN-length contiguous run with the declared
+    CUV — i.e. it is clearly an attempt at the cited passage, not an ordinary quote."""
+    return any(core[i:i + MIN_HAN] in declared
+               for i in range(len(core) - MIN_HAN + 1))
+
+
+def _cuv_quote_misses(item):
+    declared = _declared_cuv(item)
+    misses = []
+    for lang, s in _lang_strings(item):
+        if lang != "zh":
+            continue
+        for span in _ZH_SCRIPTURE_SPAN.findall(s):
+            # A 「」 may (wrongly) wrap a <verse> tag: 「<verse ref>…</verse>」.
+            # citation_check validates the tag; strip tag markup so cuv_quote_check
+            # evaluates only the quoted text, not the angle-bracket noise.
+            span = citation_tags.strip_tags(span)
+            core = _norm(span.strip(" \t\n,.;:!?\"'—-…"))
+            if _han_len(core) < MIN_HAN:
+                continue
+            if core in declared:                 # verbatim CUV from a declared ref
+                continue
+            if _overlaps_cuv(core, declared):     # attempted verse, but wrong -> flag
+                misses.append(span)
+            # else: no overlap with any declared ref -> ordinary quote -> skip
+    return misses
+
+
 def cuv_quote_check(items):
     flags = {}
     for it in items:
-        misses = _quote_misses_for_lang(it, "zh")
+        misses = _cuv_quote_misses(it)
         if misses:
             flags[it["id"]] = misses
     return flags

@@ -114,6 +114,30 @@ class TestZhNestedFormAndRecallNet(unittest.TestCase):
         self.assertEqual(gates.citation_check([it]), {})
 
 
+class TestCuvPoetryWhitespace(unittest.TestCase):
+    """CUV poetry/psalms carry Hebrew-cola spacing (a space mid-line) that correct
+    Chinese prose omits. _norm must ignore whitespace adjacent to CJK characters so
+    a verbatim quote still verifies, while Latin word-spacing stays intact."""
+
+    def test_norm_drops_cjk_adjacent_whitespace_keeps_latin(self):
+        # CJK: the mid-line cola space is removed so the two forms are equal.
+        self.assertEqual(gates._norm("虽被驱逐， 我仍要仰望"),
+                         gates._norm("虽被驱逐，我仍要仰望"))
+        # Latin: word-spacing is preserved (removing it would merge words).
+        self.assertEqual(gates._norm("servants of Christ"), "servants of christ")
+        self.assertNotEqual(gates._norm("servants of Christ"),
+                            gates._norm("servantsofchrist"))
+
+    def test_cuv_quote_verifies_despite_cola_spacing(self):
+        # CUV JON.2.4 in the corpus is "我说：我从你眼前虽被驱逐， 我仍要仰望你的圣殿。"
+        # (note the space). The spoken quote, rendered without that space, must pass.
+        quote = "我从你眼前虽被驱逐，我仍要仰望你的圣殿。"
+        it = {"id": "JON-004-x", "passage": "JON.2.1-10", "dimension": "D5",
+              "type": "question",
+              "text": {"en": "q", "zh": f'约拿：<verse ref="JON.2.4">「{quote}」</verse>'}}
+        self.assertEqual(gates.citation_check([it], langs={"zh"}), {})
+
+
 class TestRunAllIncludesCitation(unittest.TestCase):
     def test_run_all_surfaces_verse_mismatch(self):
         it = _item('<verse ref="PHP.1.1">servants of Jesus Christ</verse>',
