@@ -214,6 +214,10 @@ def _cuv_quote_misses(item):
         if lang != "zh":
             continue
         for span in _ZH_SCRIPTURE_SPAN.findall(s):
+            # A 「」 may (wrongly) wrap a <verse> tag: 「<verse ref>…</verse>」.
+            # citation_check validates the tag; strip tag markup so cuv_quote_check
+            # evaluates only the quoted text, not the angle-bracket noise.
+            span = citation_tags.strip_tags(span)
             core = _norm(span.strip(" \t\n,.;:!?\"'—-…"))
             if _han_len(core) < MIN_HAN:
                 continue

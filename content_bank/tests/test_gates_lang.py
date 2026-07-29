@@ -92,6 +92,13 @@ class TestCuvQuoteOverlapScoped(unittest.TestCase):
         it = self._item("他说“这不是经文”。")
         self.assertEqual(gates.cuv_quote_check([it]), {})
 
+    def test_wrong_nested_tag_in_brackets_not_double_flagged(self):
+        # Model wrongly wrapped the tag: 「<verse>…</verse>」 (brackets outside).
+        # citation_check validates the tag; cuv_quote_check must strip the markup
+        # and see the verbatim CUV text, not flag the angle-bracket noise.
+        it = self._item('约拿「<verse ref="PHP.1.1">基督耶稣的仆人</verse>」。')
+        self.assertEqual(gates.cuv_quote_check([it]), {})
+
 
 class TestNormStripsAllQuoteGlyphs(unittest.TestCase):
     def test_norm_strips_straight_and_curly_quotes(self):
