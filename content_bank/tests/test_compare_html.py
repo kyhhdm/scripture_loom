@@ -105,6 +105,20 @@ class BuildModelTests(unittest.TestCase):
             self.assertIn("briefs", u)
             self.assertEqual(set(u["briefs"]), {"runA", "runB"})
 
+    def test_section_reveal_check_flags_throughline_missing_reveal(self):
+        # A throughline with no leader_reference is a HARD reveal-gate defect and
+        # must reach the review page's gate_problems even when the unit's passage
+        # range is unavailable (this run's units carry no corpus range at all).
+        self._write("runA", "PHP-003", [_item("a-003-thr-001", "D3",
+                                               type="throughline")])
+        model = compare_html.build_model("PHP", ["runA", "runB"], base=self.base)
+        unit = next(u for u in model["units"] if u["id"] == "PHP-003")
+        cards = [c for b in unit["dimensions"] for cell in b["cells"].values()
+                 for c in cell]
+        card = next(c for c in cards if c["id"] == "a-003-thr-001")
+        self.assertFalse(card["gate_ok"])
+        self.assertTrue(any("leader_reference" in p for p in card["gate_problems"]))
+
     def test_new_runs_layout_resolves(self):
         # runs/<slug>/{drafts,briefs,verdicts} should be preferred over a flat dir.
         newbase = pathlib.Path(self._tmp.name) / "nested"

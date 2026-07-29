@@ -14,13 +14,20 @@ _SHAPE = """## Produce the SECTION ARC CONTENT
 Under WCF ch.1 (inspired, sufficient, Scripture-interprets-Scripture), and only
 from what the text above states, draft:
 
-**THROUGHLINE (exactly one, dimension D7).** One or two sentences: what this whole
-section is about, in the text's own terms. This is what the zoom-out session prints.
+**THROUGHLINE (exactly one, dimension D7).** A discovery QUESTION (not a
+statement) that leads the reader to this section's spine — what the whole section
+is driving at, in the text's own terms. Attach the spine itself as a leader-only
+`leader_reference` (kind "leader_note"): the one- or two-sentence arc the reader
+checks against after answering. The stem must be answerable FROM the text and must
+not embed its own answer. This is what the zoom-out session prints.
 
-**THREADS (zero or more, dimension D7 or D3).** A word, phrase, or motif that RECURS
-across two or more of the section's pericopes and carries the section's argument.
-For each: a name, its member verse `refs` (e.g. MAT.1.22, MAT.2.15), and a one- or
-two-sentence interpretive note (what the recurrence teaches). A thread may extend
+**THREADS (zero or more, dimension D7 or D3).** For a word, phrase, or motif that
+RECURS across two or more of the section's pericopes and carries the section's
+argument: a discovery QUESTION that names the motif and asks what its recurrence
+reveals, its member verse `refs` (e.g. MAT.1.22, MAT.2.15), and a leader-only
+`leader_reference` holding the traced result (what the recurrence teaches). The
+reveal `kind` follows the dimension: D3 (tracked key word) -> "answer_key" (with
+the verse); D7 (interpretive movement) -> "leader_note". A thread may extend
 beyond this section — anchor it here if this section is its payoff.
 
 **QUESTIONS (2-4, dimension D5/D6/D7).** Cross-pericope discussion questions for the
@@ -52,11 +59,11 @@ Return ONLY a JSON array (no prose). Produce exactly one throughline, zero or mo
 threads, and 2-4 arc questions, using the section id <SID> (lower-case in ids) and
 book <BOOK>:
 
-- EXACTLY ONE throughline:
-  {"id":"<sid>-throughline","section":"<SID>","dimension":"D7","type":"throughline","age_tier":"all","difficulty":2,"review_status":"draft","text":{"en":"..."},"version":1}
-- ZERO OR MORE threads (only if the motif genuinely RECURS across 2+ pericopes):
-  {"id":"<sid>-thread-<slug>","section":"<SID>","dimension":"D7"|"D3","type":"thread","age_tier":"all","difficulty":2,"review_status":"draft","text":{"en":"<name + what the recurrence teaches>"},"refs":["<BOOK>.C.V","..."],"version":1}
-  (refs = >=2 member verses where the motif recurs)
+- EXACTLY ONE throughline — a D7 discovery question carrying its spine as a leader_note reveal:
+  {"id":"<sid>-throughline","section":"<SID>","dimension":"D7","type":"throughline","age_tier":"all","difficulty":2,"review_status":"draft","text":{"en":"<question stem leading to the spine>"},"leader_reference":{"kind":"leader_note","text":{"en":"<the one/two-sentence arc, in the text's own terms>"}},"version":1}
+- ZERO OR MORE threads (only if the motif genuinely RECURS across 2+ pericopes) — a discovery question carrying the traced result as its reveal:
+  {"id":"<sid>-thread-<slug>","section":"<SID>","dimension":"D7"|"D3","type":"thread","age_tier":"all","difficulty":2,"review_status":"draft","text":{"en":"<question naming the motif + asking what its recurrence reveals>"},"refs":["<BOOK>.C.V","..."],"leader_reference":{"kind":"leader_note"|"answer_key","text":{"en":"<name + what the recurrence teaches>"}},"version":1}
+  (refs = >=2 member verses where the motif recurs; a D3 thread's reveal kind is "answer_key" and adds "verse":{"en":"..."}, a D7 thread's is "leader_note")
 - 2-4 arc QUESTIONS answerable only ACROSS the section. EVERY question MUST carry a
   leader-only `leader_reference`. `kind` is EXACTLY "answer_key" or "leader_note"
   (no other value): a D5 question -> "answer_key" (with the verse it comes from);
@@ -65,7 +72,8 @@ book <BOOK>:
   {"id":"<sid>-q-<slug>","section":"<SID>","dimension":"D5","type":"question","age_tier":"youth"|"adult"|"all","difficulty":2|3,"review_status":"draft","text":{"en":"..."},"leader_reference":{"kind":"answer_key","text":{"en":"the concise correct answer, drawn across the section"},"verse":{"en":"Philippians 2:5-8"}},"version":1}
   D6/D7 (leader_note):
   {"id":"<sid>-q-<slug>","section":"<SID>","dimension":"D6"|"D7","type":"question","age_tier":"youth"|"adult"|"all","difficulty":2|3,"review_status":"draft","text":{"en":"..."},"leader_reference":{"kind":"leader_note","text":{"en":"point where the text leads; flag a common misreading; keep the question open"}},"version":1}
-  throughline and thread items need NO leader_reference.
+  Every throughline and thread MUST carry a leader_reference reveal whose kind
+  matches its dimension: D3 -> "answer_key" (with "verse"), D7 -> "leader_note".
 
 Keep exactly one throughline. Quoted words must be verbatim BSB, and every
 quoted span must be wrapped per the Citation tagging section above."""

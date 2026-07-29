@@ -100,6 +100,9 @@ def _run_gates(book, unit_items, notes):
     except Exception:
         notes.append("quote gate not run (corpus text unavailable)")
 
+    for unit, items in unit_items.items():
+        _merge(gates.section_reveal_check(items))
+
     skipped_range = False
     for unit, items in unit_items.items():
         allowed = _allowed(book, unit)
