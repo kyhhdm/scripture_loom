@@ -157,7 +157,6 @@ class TestSectionRevealCheck(unittest.TestCase):
     def test_d7_thread_uses_leader_note(self):
         ok = self._thread(dimension="D7",
                           leader_reference={"kind": "leader_note", "text": {"en": "x"}})
-        del ok["refs"]  # refs presence is thread_span's concern, not this gate's
         ok["refs"] = ["PHP.1.6", "PHP.2.5"]
         self.assertEqual(gates.section_reveal_check([ok]), {})
 
