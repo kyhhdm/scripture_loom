@@ -12,7 +12,8 @@ import pathlib
 from ..lib import content
 from . import glossary as _glossary
 from .build_cli import _run_slug
-from .translate import translate_with_gates, back_translate_review
+from .translate import (translate_with_gates, back_translate_review,
+                        suggest_drift_fix)
 
 
 def select_items(book, *, item_ids=None, status=None, store_dir=None):
@@ -41,20 +42,27 @@ def out_dir_for(drafts_dir, backend, model):
     return str(pathlib.Path(drafts_dir).parent / "translations" / slug)
 
 
-def proposal_for(item, book, *, glossary=None, model=None, max_repair=2):
+def proposal_for(item, book, *, glossary=None, model=None, max_repair=2,
+                 suggest_fixes=True):
     out = translate_with_gates(item, book, glossary=glossary, model=model,
                                max_repair=max_repair)
     drift = back_translate_review(out["item"], model=model)
-    return {"id": item["id"],
-            "en": (item.get("text") or {}).get("en", ""),
-            "item": out["item"], "cuv_refs": out.get("cuv_refs", []),
-            "terms": out["terms"], "uncertain": out["uncertain"],
-            "gate_ok": out["gate_ok"], "gate_flags": out["gate_flags"],
-            "drift": drift}
+    proposal = {"id": item["id"],
+                "en": (item.get("text") or {}).get("en", ""),
+                "item": out["item"], "cuv_refs": out.get("cuv_refs", []),
+                "terms": out["terms"], "uncertain": out["uncertain"],
+                "gate_ok": out["gate_ok"], "gate_flags": out["gate_flags"],
+                "drift": drift}
+    if suggest_fixes and drift["drift"]:
+        sug = suggest_drift_fix(out["item"], book, drift,
+                                glossary=glossary, model=model)
+        if sug is not None:
+            proposal["suggested_fix"] = sug
+    return proposal
 
 
 def run_proposals(items, book, *, glossary=None, model=None, max_repair=2,
-                  concurrency=4):
+                  concurrency=4, suggest_fixes=True):
     """Translate every item and return proposals in input order.
 
     Items are independent, so they run in a thread pool (each item's own
@@ -68,7 +76,8 @@ def run_proposals(items, book, *, glossary=None, model=None, max_repair=2,
     with concurrent.futures.ThreadPoolExecutor(
             max_workers=max(1, concurrency)) as ex:
         futs = {ex.submit(proposal_for, it, book, glossary=glossary,
-                          model=model, max_repair=max_repair): i
+                          model=model, max_repair=max_repair,
+                          suggest_fixes=suggest_fixes): i
                 for i, it in enumerate(items)}
         for fut in concurrent.futures.as_completed(futs):
             i = futs[fut]
@@ -79,8 +88,11 @@ def run_proposals(items, book, *, glossary=None, model=None, max_repair=2,
                 print(f"[FAIL] {it['id']}: {exc}")
                 continue
             results[i] = p
+            sug = p.get("suggested_fix")
             print(f"[ok] {it['id']}" + ("" if p["gate_ok"] else " (gate flags)")
-                  + (" (drift)" if p["drift"]["drift"] else ""))
+                  + (" (drift)" if p["drift"]["drift"] else "")
+                  + (" (fix suggested)" if sug and sug.get("changed")
+                     else " (fix: CUV-inherent)" if sug is not None else ""))
     return [p for p in results if p is not None]
 
 
@@ -105,6 +117,10 @@ def main(argv=None):
     ap.add_argument("--max-repair", type=int, default=2)
     ap.add_argument("--concurrency", type=int, default=4,
                     help="how many items to translate in parallel (default 4)")
+    ap.add_argument("--suggest-fixes", dest="suggest_fixes", action="store_true",
+                    default=True, help="propose a CUV-safe revision for drift-flagged items (default)")
+    ap.add_argument("--no-suggest-fixes", dest="suggest_fixes", action="store_false",
+                    help="skip drift fix suggestions")
     ap.add_argument("--out")
     args = ap.parse_args(argv)
 
@@ -123,7 +139,8 @@ def main(argv=None):
     glossary = _glossary.load_glossary()
     proposals = run_proposals(items, args.book, glossary=glossary,
                               model=args.model, max_repair=args.max_repair,
-                              concurrency=args.concurrency)
+                              concurrency=args.concurrency,
+                              suggest_fixes=args.suggest_fixes)
     write_proposals(proposals, out_dir)
     print(f"Done. proposals={len(proposals)}/{len(items)} -> {out_dir}")
     return 0
