@@ -100,6 +100,7 @@ uv run python -m content_bank.author.translate_cli \
 | `--backend {llm_core,claude}` | `llm_core` | `llm_core` = deepseek via credits; `claude` = subscription. |
 | `--model MODEL` | backend's default (`deepseek-v4-flash`) | Override the translator model. Sets the output slug. |
 | `--max-repair N` | `2` | Gate-repair rounds before a proposal is emitted with `gate_ok:false`. |
+| `--drift-model MODEL` | `--model` | Model for the back-translation **drift review** (and the re-drift of a suggested fix). Translation stays on `--model`; only the reviewer changes. Use a stronger model (e.g. `deepseek-v4-pro`) for quote-dense text — see below. |
 | `--suggest-fixes` / `--no-suggest-fixes` | **on** | For a **drift-flagged** proposal, make one extra CUV-safe LLM call proposing a revised zh (see below). Off skips it. |
 | `--concurrency N` | `4` | How many items to translate in parallel (each item's translate→repair→back-translate chain stays sequential). |
 | `--out DIR` | derived | Output dir. Defaults to `<drafts-dir>/../translations/<translator-slug>`. |
@@ -137,6 +138,26 @@ flagged cell — the revised zh (or a "no fix — CUV wording" note) with its ow
 gate/drift/uncertain badges and the rationale — so a human can accept or reject it.
 Promoting a suggestion into the store is a manual edit for now (no
 `--use-suggested` on `translate.promote` yet).
+
+**The suggested fix is only as good as the drift trigger.** The whole path fires only
+when the drift review returns `drift:true`, and that review is one LLM call. On
+quote-dense poetry the cheap translator (`deepseek-v4-flash`) gives **false-negative
+drift verdicts** — e.g. it rated a full-verse over-copy of Psalm 3:3 (where the
+English quoted only the opening "But You, O LORD") as "faithful", so no fix was
+proposed, while `deepseek-v4-pro` flagged the same text precisely and triggered a
+correct short-span revision. For quote-dense books, run the reviewer on a stronger
+model:
+
+```bash
+uv run python -m content_bank.author.translate_cli \
+    --book PSA --drafts-dir work/content_bank_build/PSA/runs/opus/drafts \
+    --drift-model deepseek-v4-pro
+```
+
+The **deterministic gates** remain the backstop regardless of the drift model: the
+over-copy above is also caught as `citation.verse_mismatch` (the expanded zh span does
+not match the short CUV span the English delimited), so a reviewer sees it via the gate
+badge even when the drift review misses it.
 
 ---
 
