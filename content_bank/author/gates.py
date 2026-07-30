@@ -14,6 +14,7 @@ Pure functions, each returning ``{item_id: [problems]}`` (empty dict = clean):
 Committed replacement for the untracked work/content_bank_build/quote_check.py.
 Stdlib + in-repo packages only; offline.
 """
+import collections
 import copy
 import json
 import pathlib
@@ -330,11 +331,55 @@ def _untagged_zh_quote_flags(item, langs):
     return out
 
 
+def _tagged_refs(item, lang):
+    """The <verse> refs and <doctrine> (std, ref) tagged across an item's fields
+    for one language, as lists (order/multiplicity preserved)."""
+    verse_refs, doctrine_keys = [], []
+    for l, s in _lang_strings(item):
+        if l != lang:
+            continue
+        verses, doctrines, _ = citation_tags.parse(s)
+        verse_refs += [v.ref for v in verses]
+        doctrine_keys += [(d.std, d.ref) for d in doctrines]
+    return verse_refs, doctrine_keys
+
+
+def _tag_correspondence_flags(item, langs):
+    """Rule 8 as a gate: a translation must neither invent nor drop a tag. The zh
+    <verse>/<doctrine> tag multiset must equal the en one. Runs only when the item
+    carries BOTH en and zh text and the zh side is in scope (so English-only draft
+    items at build time are untouched). Catches added tags (fabrication), dropped
+    tags, and duplications that the per-language content check cannot see."""
+    if langs is not None and "zh" not in langs:
+        return []
+    present = {l for l, _ in _lang_strings(item)}
+    if not {"en", "zh"} <= present:
+        return []
+    en_v, en_d = _tagged_refs(item, "en")
+    zh_v, zh_d = _tagged_refs(item, "zh")
+
+    def _diff(en_list, zh_list, render):
+        out = []
+        for key, n in (collections.Counter(zh_list)
+                       - collections.Counter(en_list)).items():
+            out.append(f"citation.added_tag: {render(key)} in zh not in en"
+                       + (f" (x{n})" if n > 1 else ""))
+        for key, n in (collections.Counter(en_list)
+                       - collections.Counter(zh_list)).items():
+            out.append(f"citation.dropped_tag: {render(key)} in en not in zh"
+                       + (f" (x{n})" if n > 1 else ""))
+        return out
+
+    return (_diff(en_v, zh_v, lambda r: f"<verse ref='{r}'>")
+            + _diff(en_d, zh_d, lambda k: f"<doctrine {k[0]} {k[1]}>"))
+
+
 def citation_check(items, *, langs=None):
     """Verify declared citations. quote-mode: <verse> inner text is verbatim in
     the corpus version for its language (equality for memory_verse, containment
     otherwise). basis-mode: <doctrine> ref resolves in WCF/WLC/WSC. Fail-closed
-    on malformed markup. quote_detect recall net flags untagged verbatim spans."""
+    on malformed markup. quote_detect recall net flags untagged verbatim spans.
+    Tag correspondence: a translation's zh tags must match its en tags (rule 8)."""
     flags = {}
     for it in items:
         problems = []
@@ -356,6 +401,7 @@ def citation_check(items, *, langs=None):
                     problems.append(f"citation.basis_unresolved: {d.std} {d.ref}")
         problems.extend(_untagged_quote_flags(it, langs))
         problems.extend(_untagged_zh_quote_flags(it, langs))
+        problems.extend(_tag_correspondence_flags(it, langs))
         if problems:
             flags[it["id"]] = problems
     return flags

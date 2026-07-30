@@ -119,14 +119,28 @@ def _suggested_block(cell):
                            "drift": (fix.get("drift") or {}).get("drift", False),
                            "drift_notes": (fix.get("drift") or {}).get("notes", ""),
                            "uncertain": fix.get("uncertain", [])})
-    if fix.get("changed"):
+    cuv_note = fix.get("cuv_note", "")
+    ref_html = ""
+    if cuv_note:
+        # CUV-inherent drift: nothing to revise, the CUV must stand.
+        head = "<div class=nofix>CUV stands — teach the divergence</div>"
+    elif fix.get("changed"):
         zh = hl((fix.get("item") or {}).get("text", {}).get("zh", ""))
         head = f"<div class=zh>{zh}</div>"
+        # The drift/fix often lands in the leader-note (answer), not the question
+        # text — render the revised reference so that change is visible too.
+        label, ref_zh, verse_zh = _leader_ref(fix.get("item") or {}, "zh")
+        ref_html = _ref_block(label, ref_zh, verse_zh)
     else:
         head = "<div class=nofix>no fix — CUV wording</div>"
+    note_html = (f"<div class=scuvnote><span class=reflabel>CUV divergence (teach):"
+                 f"</span> {html.escape(cuv_note)}</div>" if cuv_note else "")
+    addresses = fix.get("addresses", "")
+    addr = (f"<div class=saddr><span class=reflabel>Addresses drift:</span> "
+            f"{html.escape(addresses)}</div>" if addresses else "")
     rationale = html.escape(fix.get("rationale", ""))
     return (f"<div class=suggest><span class=reflabel>Suggested fix:</span> {head}"
-            f"<div class=srat>{rationale}</div>"
+            f"{ref_html}{note_html}{addr}<div class=srat>{rationale}</div>"
             f"<div class=badges>{badges}</div></div>")
 
 
@@ -193,6 +207,8 @@ def render_html(page):
  .cite-doctrine .citeref{{background:#f59e0b;color:#3a2600}}
  .suggest{{margin-top:6px;padding:6px;border-left:3px solid #f59e0b;background:#fffbeb}}
  .suggest .srat{{font-size:11px;color:#92400e;margin-top:2px}}
+ .suggest .saddr{{font-size:11px;color:#78350f;margin-top:2px}}
+ .suggest .scuvnote{{font-size:12px;color:#1e3a8a;background:#eff6ff;padding:4px;margin-top:3px;border-radius:3px}}
  .nofix{{font-style:italic;color:#92400e}}
 </style>
 <h1>Translation comparison — {esc(page['book'])} · draft run \

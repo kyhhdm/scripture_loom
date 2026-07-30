@@ -10,7 +10,7 @@ from content_bank.author import translate_cli as tc
 STORE = {"book": "PHP", "items": [
     {"id": "PHP-001-D1-01", "passage": "PHP.1.1-11", "dimension": "D1",
      "type": "question", "review_status": "reviewed",
-     "text": {"en": "servants of Christ Jesus?"}},
+     "text": {"en": 'the <verse ref="PHP.1.1">servants of Christ Jesus</verse>?'}},
     {"id": "PHP-001-D1-02", "passage": "PHP.1.1-11", "dimension": "D1",
      "type": "question", "review_status": "published",
      "text": {"en": "Who wrote the letter?"}},
@@ -44,7 +44,7 @@ class TestTranslateCli(unittest.TestCase):
                                return_value={"drift": False, "notes": ""}):
             p = translate_cli.proposal_for(item, "PHP", glossary=[])
         self.assertEqual(p["id"], "PHP-001-D1-01")
-        self.assertEqual(p["en"], "servants of Christ Jesus?")
+        self.assertEqual(p["en"], 'the <verse ref="PHP.1.1">servants of Christ Jesus</verse>?')
         self.assertTrue(p["gate_ok"])
         self.assertEqual(p["item"]["text"]["zh"], GOOD_ZH)
         self.assertIn("drift", p)

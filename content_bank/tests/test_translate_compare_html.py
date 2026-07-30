@@ -177,6 +177,46 @@ class TestSuggestedFixRendering(unittest.TestCase):
         self.assertIn("但你耶和华。", html)
         self.assertIn("removed added imagery", html)
 
+    def test_addresses_triggering_drift_rendered(self):
+        # The fix carries the drift notes that triggered it, so the reviewer sees
+        # triggering-drift -> revision -> re-check in one place.
+        fix = {"changed": True, "rationale": "restored imperative force",
+               "item": {"text": {"zh": "应当直说。"}},
+               "gate_ok": True, "gate_flags": [], "drift": {"drift": False},
+               "addresses": "softens the confessional duty"}
+        html = tch._suggested_block(self._cell_with_fix(fix))
+        self.assertIn("Addresses drift:", html)
+        self.assertIn("softens the confessional duty", html)
+
+    def test_no_addresses_no_block(self):
+        fix = {"changed": True, "rationale": "r", "item": {"text": {"zh": "x"}},
+               "gate_ok": True, "gate_flags": [], "drift": {"drift": False}}
+        self.assertNotIn("Addresses drift:", tch._suggested_block(self._cell_with_fix(fix)))
+
+    def test_cuv_inherent_note_rendered_no_revised_zh(self):
+        # CUV-inherent drift: show the teaching note, and the "CUV stands" head,
+        # not a (misleadingly identical) revised zh.
+        fix = {"changed": True, "rationale": "tried",
+               "item": {"text": {"zh": "我醒着，耶和华都保佑我"}},
+               "gate_ok": True, "gate_flags": [], "drift": {"drift": True},
+               "addresses": "wake again -> awake",
+               "cuv_note": "英文强调因果与次序，CUV译得较概括"}
+        html = tch._suggested_block(self._cell_with_fix(fix))
+        self.assertIn("CUV divergence (teach):", html)
+        self.assertIn("英文强调因果与次序，CUV译得较概括", html)
+        self.assertIn("CUV stands", html)
+
+    def test_revised_leader_note_rendered(self):
+        # When the fix lands in the leader_reference (answer/notes) and the question
+        # text is unchanged, the revised note must still be shown (the i14 case).
+        fix = {"changed": True, "rationale": "restored imperative",
+               "item": {"text": {"zh": "问题不变"},
+                        "leader_reference": {"kind": "leader_note",
+                                             "text": {"zh": "修订后的答案笔记"}}},
+               "gate_ok": True, "gate_flags": [], "drift": {"drift": False}}
+        html = tch._suggested_block(self._cell_with_fix(fix))
+        self.assertIn("修订后的答案笔记", html)   # the revised note is visible
+
     def test_declined_fix_renders_no_fix_note(self):
         fix = {"changed": False, "rationale": "CUV renders it this way",
                "item": {"text": {"zh": "但你。"}},

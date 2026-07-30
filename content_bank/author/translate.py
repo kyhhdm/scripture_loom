@@ -164,18 +164,70 @@ def suggest_drift_fix(item, book, drift, *, glossary=None, model=None,
     if not drift.get("drift"):
         return None
     glossary = _glossary.load_glossary() if glossary is None else glossary
-    resp = _extract_json(llm(_fix_prompt(item, drift.get("notes", "")), model))
+    triggering = drift.get("notes", "")
+    resp = _extract_json(llm(_fix_prompt(item, triggering), model))
     rationale = resp.get("reason", "")
-    if not resp.get("changed"):
-        flags = zh_gate_flags(item, glossary)
-        return {"changed": False, "rationale": rationale, "item": item,
-                "gate_ok": not flags, "gate_flags": flags, "drift": drift}
-    revised = _merge_zh(item, resp)
-    flags = zh_gate_flags(revised, glossary)
-    new_drift = back_translate_review(revised, model=drift_model or model)
-    return {"changed": True, "rationale": rationale, "item": revised,
-            "gate_ok": not flags, "gate_flags": flags, "drift": new_drift,
-            "terms": resp.get("terms", []), "uncertain": resp.get("uncertain", [])}
+    # Accept a revision ONLY if it is a genuine, CUV-safe, resolving fix: the text
+    # actually changed, it did NOT leave the CUV (no Scripture verse_mismatch), and
+    # the re-drift confirms the drift is gone. Every other outcome — no change, a
+    # CUV-leaving span, or an injected gloss that still drifts — means the drift
+    # cannot be resolved without touching the reader's Bible, so keep the CUV.
+    if resp.get("changed"):
+        revised = _merge_zh(item, resp)
+        if _zh_blob(revised) != _zh_blob(item):
+            flags = zh_gate_flags(revised, glossary)
+            if not _left_the_cuv(flags):
+                new_drift = back_translate_review(revised, model=drift_model or model)
+                if not new_drift.get("drift"):
+                    return {"changed": True, "rationale": rationale, "item": revised,
+                            "gate_ok": not flags, "gate_flags": flags,
+                            "drift": new_drift, "addresses": triggering,
+                            "terms": resp.get("terms", []),
+                            "uncertain": resp.get("uncertain", [])}
+    # No usable resolving fix: the CUV must stand and the drift is inherent to it.
+    # Keep the original verbatim and emit a leader-prep note explaining what the
+    # English stresses that the CUV renders differently.
+    flags = zh_gate_flags(item, glossary)
+    return {"changed": False, "rationale": rationale, "item": item,
+            "gate_ok": not flags, "gate_flags": flags, "drift": drift,
+            "addresses": triggering,
+            "cuv_note": _cuv_divergence_note(item, triggering, model)}
+
+
+def _left_the_cuv(flags):
+    """True if any gate flag is a Scripture verse_mismatch — the signature of a
+    revision that changed a <verse> span away from the verbatim CUV."""
+    return any("verse_mismatch" in f for f in flags)
+
+
+def _zh_blob(item):
+    """The item's zh text values joined — for detecting whether a fix changed anything."""
+    out = []
+    ref = item.get("leader_reference") or {}
+    for m in (item.get("text"), ref.get("text"), ref.get("verse"), item.get("category")):
+        if isinstance(m, dict) and isinstance(m.get("zh"), str):
+            out.append(m["zh"])
+    return "\n".join(out)
+
+
+_CUV_NOTE_HEAD = (
+    "A back-translation drift review found that the CUV wording of a Scripture quote "
+    "diverges in emphasis from the English — but the CUV is the reader's Bible and must "
+    "stand UNCHANGED. Write a SHORT leader-preparation note (1–2 sentences, in Chinese) "
+    "naming what the English/Hebrew stresses that the CUV renders differently, as "
+    "teaching guidance the leader can draw out at the table. Do NOT correct or criticize "
+    "the CUV, do NOT offer a replacement translation, and do NOT wrap anything in 「」 or "
+    "<verse> tags — this is a prose note, not Scripture.")
+
+
+def _cuv_divergence_note(item, notes, model=None):
+    """One short Chinese leader-prep note explaining the English↔CUV divergence."""
+    prompt = (_CUV_NOTE_HEAD
+              + "\n\n## Drift note\n" + (notes or "")
+              + "\n\n## Item (with its CUV zh)\n"
+              + json.dumps(item, ensure_ascii=False, indent=2)
+              + '\n\nReturn STRICT JSON ONLY: {"note": "..."}.')
+    return _extract_json(llm(prompt, model)).get("note", "")
 
 
 def _merge_zh_into_store_item(store_item, proposal_item):
