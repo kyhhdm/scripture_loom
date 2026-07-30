@@ -233,6 +233,12 @@ fastest way to spot a citation the translator failed to preserve.
   untagged short phrase). This is expected — the gate flags them (`gate_ok:false`) so
   they surface for review rather than shipping silently. A stronger translator flags
   fewer.
+- **Tag correspondence is enforced (rule 8).** A translation's zh `<verse>`/`<doctrine>`
+  tags must match the English item's tags — the gate flags `citation.added_tag` when the
+  translator invents a citation the English never declared (a common cheap-model habit:
+  wrapping a Chinese Scripture-ish phrase in a `<verse>` tag) and `citation.dropped_tag`
+  when it loses one. This catches fabricated tags even when their content is verbatim
+  CUV, which the per-verse content check alone cannot.
 - **Proposals are always written**, gated or not. `gate_ok:false` is a review signal,
   not a failure to emit.
 - **Runs are independent** — translate the same drafts with several models into separate

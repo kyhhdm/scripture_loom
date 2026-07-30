@@ -66,7 +66,8 @@ BAD = ('{"text": {"zh": "「基督耶稣的门徒」保罗和提摩太。"}, "te
 class TestTranslateWithGates(unittest.TestCase):
     def _item(self):
         return {"id": "PHP-001-D1-01", "passage": "PHP.1.1-11", "dimension": "D1",
-                "type": "question", "text": {"en": "servants of Christ Jesus?"}}
+                "type": "question",
+                "text": {"en": 'the <verse ref="PHP.1.1">servants of Christ Jesus</verse>?'}}
 
     def test_clean_translation_passes_gate(self):
         with mock.patch.object(translate, "llm", return_value=GOOD):
@@ -92,7 +93,8 @@ class TestTranslateWithGates(unittest.TestCase):
 class TestZhCitationGate(unittest.TestCase):
     def _item(self):
         return {"id": "PHP-001-D1-01", "passage": "PHP.1.1-11", "dimension": "D1",
-                "type": "question", "text": {"en": "servants of Christ Jesus?"}}
+                "type": "question",
+                "text": {"en": 'the <verse ref="PHP.1.1">servants of Christ Jesus</verse>?'}}
 
     def test_bad_zh_verse_tag_is_gate_flagged(self):
         # zh <verse> whose inner text is NOT the CUV wording -> flagged

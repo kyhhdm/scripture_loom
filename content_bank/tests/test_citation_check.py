@@ -74,7 +74,10 @@ class TestRecallNetAndLangs(unittest.TestCase):
         self.assertEqual(gates.citation_check([it]), {})
 
     def test_zh_verse_verified_against_cuv(self):
-        it = _item("q", iid="PHP-001-D1-02")
+        # A realistic translation mirrors the English tag (rule 8), so the en side
+        # carries the matching <verse ref="PHP.1.1"> the zh verifies against.
+        it = _item('Who are the <verse ref="PHP.1.1">servants of Christ Jesus</verse>?',
+                   iid="PHP-001-D1-02")
         it["text"]["zh"] = '谁是<verse ref="PHP.1.1">基督耶稣的仆人</verse>？'
         self.assertEqual(gates.citation_check([it]), {})
 
@@ -85,21 +88,73 @@ class TestRecallNetAndLangs(unittest.TestCase):
         self.assertEqual(gates.citation_check([it], langs={"zh"}), {})
 
 
+class TestTagCorrespondence(unittest.TestCase):
+    """Rule 8 enforced: a translation's zh <verse>/<doctrine> tags must match its en
+    tags. Catches fabricated/dropped/duplicated tags the per-language check misses."""
+
+    def _bilingual(self, en, zh):
+        return {"id": "T-1", "passage": "PSA-003", "dimension": "D7",
+                "type": "question", "text": {"en": en, "zh": zh}}
+
+    def test_added_verbatim_cuv_tag_flagged(self):
+        # zh invents a PSA.3.6 tag (with verbatim CUV) the en never declared. The
+        # per-language content check would PASS it; correspondence must catch it.
+        it = self._bilingual(
+            '<verse ref="PSA.3.3">a shield around me</verse>',
+            '「<verse ref="PSA.3.3">是我四围的盾牌</verse>」，又「<verse ref="PSA.3.6">成万的百姓</verse>」')
+        flags = gates.citation_check([it], langs={"zh"}).get("T-1", [])
+        self.assertTrue(any("added_tag" in f and "PSA.3.6" in f for f in flags))
+
+    def test_matching_tags_clean(self):
+        it = self._bilingual(
+            '<verse ref="PSA.3.3">a shield around me</verse>',
+            '「<verse ref="PSA.3.3">是我四围的盾牌</verse>」')
+        self.assertEqual(gates.citation_check([it], langs={"zh"}), {})
+
+    def test_dropped_tag_flagged(self):
+        it = self._bilingual('<verse ref="PSA.3.3">a shield around me</verse>',
+                             "四围的盾牌，没有标签")
+        flags = gates.citation_check([it], langs={"zh"}).get("T-1", [])
+        self.assertTrue(any("dropped_tag" in f and "PSA.3.3" in f for f in flags))
+
+    def test_duplicated_tag_flagged(self):
+        it = self._bilingual(
+            '<verse ref="PSA.3.3">a shield around me</verse>',
+            '「<verse ref="PSA.3.3">是我四围的盾牌</verse>」「<verse ref="PSA.3.3">是我四围的盾牌</verse>」')
+        flags = gates.citation_check([it], langs={"zh"}).get("T-1", [])
+        self.assertTrue(any("added_tag" in f and "PSA.3.3" in f for f in flags))
+
+    def test_en_only_item_not_checked(self):
+        # A build-time English-only draft item has no zh -> correspondence skipped.
+        it = {"id": "E-1", "passage": "PSA-003", "dimension": "D7", "type": "question",
+              "text": {"en": '<verse ref="PSA.3.3">a shield around me</verse>'}}
+        self.assertEqual(gates.citation_check([it]), {})
+
+    def test_doctrine_tag_correspondence(self):
+        it = self._bilingual(
+            '<doctrine std="WCF" ref="1.1">the light of nature</doctrine>',
+            '中文没有这个教义标签')
+        flags = gates.citation_check([it], langs={"zh"}).get("T-1", [])
+        self.assertTrue(any("dropped_tag" in f and "WCF" in f for f in flags))
+
+
 class TestZhNestedFormAndRecallNet(unittest.TestCase):
     """ZH Scripture form is <verse ref>「…verbatim CUV…」</verse> (tag + brackets);
     a bare 「…」 verbatim-CUV span (dropped tag) is flagged for repair."""
     _CUV = "基督耶稣的仆人"  # verbatim CUV substring of PHP.1.1
 
-    def _zh(self, zh):
+    _EN_TAG = 'Who are the <verse ref="PHP.1.1">servants of Christ Jesus</verse>?'
+
+    def _zh(self, zh, en="q"):
         return {"id": "PHP-001-D1-01", "passage": "PHP.1.1-11", "dimension": "D1",
-                "type": "question", "text": {"en": "q", "zh": zh}}
+                "type": "question", "text": {"en": en, "zh": zh}}
 
     def test_nested_tag_and_brackets_verifies_clean(self):
-        it = self._zh(f'谁是<verse ref="PHP.1.1">「{self._CUV}」</verse>？')
+        it = self._zh(f'谁是<verse ref="PHP.1.1">「{self._CUV}」</verse>？', en=self._EN_TAG)
         self.assertEqual(gates.citation_check([it]), {})
 
     def test_tag_without_brackets_still_verifies(self):
-        it = self._zh(f'谁是<verse ref="PHP.1.1">{self._CUV}</verse>？')
+        it = self._zh(f'谁是<verse ref="PHP.1.1">{self._CUV}</verse>？', en=self._EN_TAG)
         self.assertEqual(gates.citation_check([it]), {})
 
     def test_bare_cuv_brackets_without_tag_flagged(self):
@@ -134,7 +189,8 @@ class TestCuvPoetryWhitespace(unittest.TestCase):
         quote = "我从你眼前虽被驱逐，我仍要仰望你的圣殿。"
         it = {"id": "JON-004-x", "passage": "JON.2.1-10", "dimension": "D5",
               "type": "question",
-              "text": {"en": "q", "zh": f'约拿：<verse ref="JON.2.4">「{quote}」</verse>'}}
+              "text": {"en": 'Jonah: <verse ref="JON.2.4">I will look toward Your holy temple</verse>',
+                       "zh": f'约拿：<verse ref="JON.2.4">「{quote}」</verse>'}}
         self.assertEqual(gates.citation_check([it], langs={"zh"}), {})
 
 
