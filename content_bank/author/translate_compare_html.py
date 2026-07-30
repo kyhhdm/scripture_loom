@@ -119,9 +119,14 @@ def _suggested_block(cell):
                            "drift": (fix.get("drift") or {}).get("drift", False),
                            "drift_notes": (fix.get("drift") or {}).get("notes", ""),
                            "uncertain": fix.get("uncertain", [])})
+    ref_html = ""
     if fix.get("changed"):
         zh = hl((fix.get("item") or {}).get("text", {}).get("zh", ""))
         head = f"<div class=zh>{zh}</div>"
+        # The drift/fix often lands in the leader-note (answer), not the question
+        # text — render the revised reference so that change is visible too.
+        label, ref_zh, verse_zh = _leader_ref(fix.get("item") or {}, "zh")
+        ref_html = _ref_block(label, ref_zh, verse_zh)
     else:
         head = "<div class=nofix>no fix — CUV wording</div>"
     addresses = fix.get("addresses", "")
@@ -129,7 +134,7 @@ def _suggested_block(cell):
             f"{html.escape(addresses)}</div>" if addresses else "")
     rationale = html.escape(fix.get("rationale", ""))
     return (f"<div class=suggest><span class=reflabel>Suggested fix:</span> {head}"
-            f"{addr}<div class=srat>{rationale}</div>"
+            f"{ref_html}{addr}<div class=srat>{rationale}</div>"
             f"<div class=badges>{badges}</div></div>")
 
 

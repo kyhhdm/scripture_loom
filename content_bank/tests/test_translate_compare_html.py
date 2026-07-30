@@ -193,6 +193,17 @@ class TestSuggestedFixRendering(unittest.TestCase):
                "gate_ok": True, "gate_flags": [], "drift": {"drift": False}}
         self.assertNotIn("Addresses drift:", tch._suggested_block(self._cell_with_fix(fix)))
 
+    def test_revised_leader_note_rendered(self):
+        # When the fix lands in the leader_reference (answer/notes) and the question
+        # text is unchanged, the revised note must still be shown (the i14 case).
+        fix = {"changed": True, "rationale": "restored imperative",
+               "item": {"text": {"zh": "问题不变"},
+                        "leader_reference": {"kind": "leader_note",
+                                             "text": {"zh": "修订后的答案笔记"}}},
+               "gate_ok": True, "gate_flags": [], "drift": {"drift": False}}
+        html = tch._suggested_block(self._cell_with_fix(fix))
+        self.assertIn("修订后的答案笔记", html)   # the revised note is visible
+
     def test_declined_fix_renders_no_fix_note(self):
         fix = {"changed": False, "rationale": "CUV renders it this way",
                "item": {"text": {"zh": "但你。"}},
