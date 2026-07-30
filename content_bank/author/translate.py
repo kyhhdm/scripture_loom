@@ -167,33 +167,31 @@ def suggest_drift_fix(item, book, drift, *, glossary=None, model=None,
     triggering = drift.get("notes", "")
     resp = _extract_json(llm(_fix_prompt(item, triggering), model))
     rationale = resp.get("reason", "")
-    revised = _merge_zh(item, resp) if resp.get("changed") else item
-    # A revision that "resolves" the drift only by LEAVING the CUV (a Scripture
-    # verse_mismatch on the revised span) is not a usable fix — the CUV must stand.
-    # Discard it: fall back to the original CUV so the CUV-inherent path below keeps
-    # the reader's Bible intact and emits a teaching note instead of shipping a
-    # gate-failing revision.
-    if resp.get("changed") and _left_the_cuv(zh_gate_flags(revised, glossary)):
-        revised = item
-    if _zh_blob(revised) == _zh_blob(item):          # nothing usable changed
-        flags = zh_gate_flags(item, glossary)
-        result = {"changed": False, "rationale": rationale, "item": item,
-                  "gate_ok": not flags, "gate_flags": flags, "drift": drift,
-                  "addresses": triggering}
-    else:
-        flags = zh_gate_flags(revised, glossary)
-        new_drift = back_translate_review(revised, model=drift_model or model)
-        result = {"changed": True, "rationale": rationale, "item": revised,
-                  "gate_ok": not flags, "gate_flags": flags, "drift": new_drift,
-                  "addresses": triggering,
-                  "terms": resp.get("terms", []), "uncertain": resp.get("uncertain", [])}
-    # CUV-inherent drift: the shipped zh is unchanged (the fix kept the CUV, or its
-    # CUV-leaving revision was discarded above) yet drift persists — the divergence
-    # is in the CUV itself, which must stand. Offer a leader-prep note explaining what
-    # the English stresses that the CUV renders differently.
-    if result["drift"].get("drift") and _zh_blob(item) == _zh_blob(result["item"]):
-        result["cuv_note"] = _cuv_divergence_note(item, triggering, model)
-    return result
+    # Accept a revision ONLY if it is a genuine, CUV-safe, resolving fix: the text
+    # actually changed, it did NOT leave the CUV (no Scripture verse_mismatch), and
+    # the re-drift confirms the drift is gone. Every other outcome — no change, a
+    # CUV-leaving span, or an injected gloss that still drifts — means the drift
+    # cannot be resolved without touching the reader's Bible, so keep the CUV.
+    if resp.get("changed"):
+        revised = _merge_zh(item, resp)
+        if _zh_blob(revised) != _zh_blob(item):
+            flags = zh_gate_flags(revised, glossary)
+            if not _left_the_cuv(flags):
+                new_drift = back_translate_review(revised, model=drift_model or model)
+                if not new_drift.get("drift"):
+                    return {"changed": True, "rationale": rationale, "item": revised,
+                            "gate_ok": not flags, "gate_flags": flags,
+                            "drift": new_drift, "addresses": triggering,
+                            "terms": resp.get("terms", []),
+                            "uncertain": resp.get("uncertain", [])}
+    # No usable resolving fix: the CUV must stand and the drift is inherent to it.
+    # Keep the original verbatim and emit a leader-prep note explaining what the
+    # English stresses that the CUV renders differently.
+    flags = zh_gate_flags(item, glossary)
+    return {"changed": False, "rationale": rationale, "item": item,
+            "gate_ok": not flags, "gate_flags": flags, "drift": drift,
+            "addresses": triggering,
+            "cuv_note": _cuv_divergence_note(item, triggering, model)}
 
 
 def _left_the_cuv(flags):

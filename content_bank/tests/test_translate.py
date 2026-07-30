@@ -195,6 +195,25 @@ class TestSuggestDriftFix(unittest.TestCase):
         self.assertEqual(out["item"], item)           # the CUV is kept
         self.assertEqual(out["cuv_note"], "英文次序在CUV中被拉平")
 
+    def test_gloss_injecting_fix_that_still_drifts_is_discarded_and_noted(self):
+        # The i09 "inject a gloss" case: fix keeps the CUV span but prepends a prose
+        # paraphrase (gate-clean); re-drift STILL flags -> not a resolving fix ->
+        # discard the gloss, keep the CUV, emit the note. Calls: [fix, redrift, note].
+        item = {"id": "MV", "passage": "PSA-003", "dimension": "D4", "type": "question",
+                "text": {"en": 'Ps 3:5 — <verse ref="PSA.3.5">I wake again</verse>',
+                         "zh": 'Ps 3:5 — <verse ref="PSA.3.5">「我醒着」</verse>'}}
+        fix = ('{"changed": true, "reason": "glossed",'
+               ' "text": {"zh": "Ps 3:5 — 我再次醒来。<verse ref=\\"PSA.3.5\\">「我醒着」</verse>"},'
+               ' "terms": [], "uncertain": []}')   # CUV kept, prose gloss prepended
+        redrift = '{"drift": true, "notes": "still diverges"}'
+        note = '{"note": "英文强调次序"}'
+        with mock.patch.object(translate, "llm", side_effect=[fix, redrift, note]):
+            out = translate.suggest_drift_fix(
+                item, "PSA", {"drift": True, "notes": "n"}, glossary=[])
+        self.assertFalse(out["changed"])          # gloss discarded, not shipped
+        self.assertEqual(out["item"], item)       # CUV kept verbatim
+        self.assertEqual(out["cuv_note"], "英文强调次序")
+
     def test_bad_fix_recorded_gate_false_not_raised(self):
         # A changed fix that emits a bare 「…」 with no <verse> tag -> citation flag.
         bad = ('{"changed": true, "reason": "x",'
