@@ -5,6 +5,7 @@ import tempfile
 import unittest
 from unittest import mock
 from content_bank.author import translate_cli, translate, build_cli
+from content_bank.author import translate_cli as tc
 
 STORE = {"book": "PHP", "items": [
     {"id": "PHP-001-D1-01", "passage": "PHP.1.1-11", "dimension": "D1",
@@ -116,3 +117,61 @@ class TestDraftsInput(unittest.TestCase):
              / "PHP-001-D1-01.json")
         self.assertTrue(f.exists())
         self.assertEqual(os.environ.get("SCRIPTURE_LOOM_LLM_BACKEND"), "llm_core")
+
+
+class TestSuggestFixWiring(unittest.TestCase):
+    ITEM = {"id": "PSA-003-i14", "text": {"en": "But You, O LORD.", "zh": "但你。"}}
+
+    def _patch(self, drift, suggested):
+        gated = {"item": self.ITEM, "cuv_refs": [], "terms": [], "uncertain": [],
+                 "gate_ok": True, "gate_flags": []}
+        return (mock.patch.object(tc, "translate_with_gates", return_value=gated),
+                mock.patch.object(tc, "back_translate_review", return_value=drift),
+                mock.patch.object(tc, "suggest_drift_fix", return_value=suggested))
+
+    def test_drift_flagged_proposal_carries_suggested_fix(self):
+        sug = {"changed": True, "rationale": "x", "item": self.ITEM,
+               "gate_ok": True, "gate_flags": [], "drift": {"drift": False},
+               "terms": [], "uncertain": []}
+        a, b, c = self._patch({"drift": True, "notes": "n"}, sug)
+        with a, b, c as m:
+            p = tc.proposal_for(self.ITEM, "PSA", glossary=[], suggest_fixes=True)
+        self.assertIn("suggested_fix", p)
+        m.assert_called_once()
+
+    def test_no_drift_no_suggested_fix_and_no_call(self):
+        a, b, c = self._patch({"drift": False, "notes": ""}, None)
+        with a, b, c as m:
+            p = tc.proposal_for(self.ITEM, "PSA", glossary=[], suggest_fixes=True)
+        self.assertNotIn("suggested_fix", p)
+        m.assert_not_called()
+
+    def test_suggest_fixes_off_suppresses_call(self):
+        a, b, c = self._patch({"drift": True, "notes": "n"}, None)
+        with a, b, c as m:
+            p = tc.proposal_for(self.ITEM, "PSA", glossary=[], suggest_fixes=False)
+        self.assertNotIn("suggested_fix", p)
+        m.assert_not_called()
+
+    def test_drift_model_routes_drift_review_and_fix(self):
+        # --drift-model must reach BOTH the back-translation review and the
+        # re-drift inside suggest_drift_fix, while translation stays on --model.
+        sug = {"changed": True, "rationale": "x", "item": self.ITEM,
+               "gate_ok": True, "gate_flags": [], "drift": {"drift": False},
+               "terms": [], "uncertain": []}
+        a, b, c = self._patch({"drift": True, "notes": "n"}, sug)
+        with a, b as btr, c as sdf:
+            tc.proposal_for(self.ITEM, "PSA", glossary=[], model="flash",
+                            drift_model="pro", suggest_fixes=True)
+        # drift review ran on the drift model, not the translation model
+        self.assertEqual(btr.call_args.kwargs.get("model"), "pro")
+        # suggest_drift_fix received both the translation model and drift_model
+        self.assertEqual(sdf.call_args.kwargs.get("model"), "flash")
+        self.assertEqual(sdf.call_args.kwargs.get("drift_model"), "pro")
+
+    def test_drift_model_defaults_to_model(self):
+        a, b, c = self._patch({"drift": False, "notes": ""}, None)
+        with a, b as btr, c:
+            tc.proposal_for(self.ITEM, "PSA", glossary=[], model="flash",
+                            suggest_fixes=True)
+        self.assertEqual(btr.call_args.kwargs.get("model"), "flash")

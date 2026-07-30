@@ -160,3 +160,43 @@ class TestCategoryRendered(unittest.TestCase):
         self.assertIn("Category:", html)
         self.assertIn("人物与角色", html)
         self.assertIn("People &amp; roles", html)  # escaped en source
+
+
+class TestSuggestedFixRendering(unittest.TestCase):
+    def _cell_with_fix(self, fix):
+        return {"zh": "但你。", "ref_zh": "", "verse_zh": "", "cat_zh": "",
+                "gate_ok": True, "gate_flags": [], "drift": True,
+                "drift_notes": "adds shield imagery", "uncertain": [],
+                "suggested_fix": fix}
+
+    def test_changed_fix_renders_revised_zh_and_rationale(self):
+        fix = {"changed": True, "rationale": "removed added imagery",
+               "item": {"text": {"zh": "但你耶和华。"}},
+               "gate_ok": True, "gate_flags": [], "drift": {"drift": False}}
+        html = tch._suggested_block(self._cell_with_fix(fix))
+        self.assertIn("但你耶和华。", html)
+        self.assertIn("removed added imagery", html)
+
+    def test_declined_fix_renders_no_fix_note(self):
+        fix = {"changed": False, "rationale": "CUV renders it this way",
+               "item": {"text": {"zh": "但你。"}},
+               "gate_ok": True, "gate_flags": [], "drift": {"drift": True}}
+        html = tch._suggested_block(self._cell_with_fix(fix))
+        self.assertIn("CUV renders it this way", html)
+        self.assertNotIn("但你耶和华", html)  # no revised text shown
+
+    def test_cell_without_fix_renders_empty_block(self):
+        cell = {"zh": "x", "gate_ok": True, "gate_flags": [], "drift": False,
+                "drift_notes": "", "uncertain": []}
+        self.assertEqual(tch._suggested_block(cell), "")
+
+    def test_fix_uncertain_surfaces_as_badge(self):
+        # The revision's own model-flagged uncertainty must reach the badges,
+        # not be dropped (regression: _suggested_block hardcoded uncertain=[]).
+        fix = {"changed": True, "rationale": "r",
+               "item": {"text": {"zh": "但你耶和华。"}},
+               "gate_ok": True, "gate_flags": [], "drift": {"drift": False},
+               "uncertain": ["盾牌 rendering unsure"]}
+        html = tch._suggested_block(self._cell_with_fix(fix))
+        self.assertIn(">uncertain<", html)
+        self.assertIn("盾牌 rendering unsure", html)  # carried as tooltip text

@@ -33,6 +33,11 @@ _HAYSTACK_CACHE = {}
 _CJK = "\u3000-\u303f\u3400-\u4dbf\u4e00-\u9fff\uff00-\uffef"
 _WS_AFTER_CJK = re.compile(rf"(?<=[{_CJK}])\s+")
 _WS_BEFORE_CJK = re.compile(rf"\s+(?=[{_CJK}])")
+# CUV uses an em/en-dash as a typographic vocative separator that correct Chinese
+# prose omits \u2014 e.g. Ps 3:3 \u300c\u4f46\u4f60\u2014\u8036\u548c\u534e\u662f\u6211\u56db\u56f4\u7684\u76fe\u724c\u300d. Drop a dash run touching a
+# CJK char so a verbatim quote (which never reproduces the dash) still matches.
+# Between Latin (English em-dashes) it is untouched, so BSB comparison is unchanged.
+_DASH_TOUCHING_CJK = re.compile(rf"(?<=[{_CJK}])[\u2013\u2014]+|[\u2013\u2014]+(?=[{_CJK}])")
 
 
 def _norm(s):
@@ -48,6 +53,7 @@ def _norm(s):
     # there and BSB comparison behavior is unchanged.
     s = _WS_AFTER_CJK.sub("", s)
     s = _WS_BEFORE_CJK.sub("", s)
+    s = _DASH_TOUCHING_CJK.sub("", s)
     return re.sub(r"\s+", " ", s).strip().lower()
 
 

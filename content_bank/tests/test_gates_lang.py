@@ -122,3 +122,35 @@ class TestNormStripsAllQuoteGlyphs(unittest.TestCase):
                             'through me" in his final desperation.'},
         }
         self.assertEqual(gates.quote_check("1SA", [it]), {})
+
+
+class TestNormDropsCjkDash(unittest.TestCase):
+    # CUV Ps 3:3 is 「但你—耶和华是我四围的盾牌…」 — the em-dash is a typographic
+    # vocative separator no correct Chinese quote reproduces. Without stripping it,
+    # the gate cannot be satisfied by ANY rendering, which drives the repair loop.
+    def test_dash_touching_cjk_dropped(self):
+        self.assertEqual(gates._norm("但你—耶和华"), "但你耶和华")
+        self.assertEqual(gates._norm("盾牌–荣耀"), "盾牌荣耀")  # en-dash too
+
+    def test_english_em_dash_between_latin_untouched(self):
+        # No CJK on either side -> the dash stays; BSB comparison unchanged.
+        self.assertIn("—", gates._norm("glory—and"))
+
+    def test_short_cuv_span_for_partial_quote_passes(self):
+        # English quoted only the opening "But You, O LORD"; the matching short CUV
+        # span 「但你耶和华」 must PASS the zh citation gate (dash-normalized).
+        it = {"id": "P-1", "passage": "PSA-003", "dimension": "D7", "type": "question",
+              "text": {"en": "q", "zh": "问"},
+              "leader_reference": {"kind": "leader_note",
+                  "text": {"en": 'Then <verse ref="PSA.3.3">But You, O LORD</verse> answers.',
+                           "zh": '然后<verse ref="PSA.3.3">「但你耶和华」</verse>回答'}}}
+        self.assertEqual(gates.citation_check([it], langs={"zh"}), {})
+
+    def test_non_cuv_paraphrase_still_flagged(self):
+        # The fix must not blunt the gate: a real non-CUV rendering still flags.
+        it = {"id": "P-2", "passage": "PSA-003", "dimension": "D7", "type": "question",
+              "text": {"en": "q", "zh": "问"},
+              "leader_reference": {"kind": "leader_note",
+                  "text": {"en": 'Then <verse ref="PSA.3.3">But You, O LORD</verse> answers.',
+                           "zh": '然后<verse ref="PSA.3.3">「神必不救他」</verse>回答'}}}
+        self.assertIn("P-2", gates.citation_check([it], langs={"zh"}))
