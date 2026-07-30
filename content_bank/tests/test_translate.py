@@ -127,8 +127,9 @@ class TestSuggestDriftFix(unittest.TestCase):
         m.assert_not_called()
 
     def test_changed_fix_is_regated_and_redrifted(self):
+        # A genuine fix produces DIFFERENT text -> the changed branch (re-gate + re-drift).
         fix = ('{"changed": true, "reason": "removed added imagery",'
-               ' "text": {"zh": "但你耶和华。"}, "terms": [], "uncertain": []}')
+               ' "text": {"zh": "但你耶和华啊。"}, "terms": [], "uncertain": []}')
         redrift = '{"drift": false, "notes": "resolved"}'
         with mock.patch.object(translate, "llm", side_effect=[fix, redrift]):
             out = translate.suggest_drift_fix(
@@ -136,7 +137,7 @@ class TestSuggestDriftFix(unittest.TestCase):
                 glossary=[])
         self.assertTrue(out["changed"])
         self.assertEqual(out["rationale"], "removed added imagery")
-        self.assertEqual(out["item"]["text"]["zh"], "但你耶和华。")
+        self.assertEqual(out["item"]["text"]["zh"], "但你耶和华啊。")
         self.assertFalse(out["drift"]["drift"])       # re-drift ran
         self.assertIn("gate_ok", out)                 # re-gate ran
         # the TRIGGERING drift notes are preserved so the fix is auditable
@@ -162,18 +163,37 @@ class TestSuggestDriftFix(unittest.TestCase):
         self.assertEqual(out["cuv_note"], "英文强调因果与次序，CUV译得较概括")
 
     def test_cuv_inherent_noop_changed_fix_gets_note(self):
-        # The i09 case: model returns changed=true but the CUV text is unchanged and
-        # re-drift STILL flags -> CUV-inherent -> a divergence note is generated.
+        # The i09 "kept the CUV" case: model returns changed=true but the text is
+        # identical -> no usable change -> no re-drift; triggering drift persists ->
+        # CUV-inherent -> a divergence note is generated. Calls: [fix, note].
         fix = ('{"changed": true, "reason": "tried",'
                ' "text": {"zh": "但你耶和华。"}, "terms": [], "uncertain": []}')  # identical
-        redrift = '{"drift": true, "notes": "still diverges"}'
         note = '{"note": "英文的次序在CUV中被拉平"}'
-        with mock.patch.object(translate, "llm", side_effect=[fix, redrift, note]):
+        with mock.patch.object(translate, "llm", side_effect=[fix, note]):
             out = translate.suggest_drift_fix(
                 self.ITEM, "PSA", {"drift": True, "notes": "wake again -> awake"},
                 glossary=[])
-        self.assertTrue(out["drift"]["drift"])         # unresolved
+        self.assertFalse(out["changed"])               # no usable change
+        self.assertTrue(out["drift"]["drift"])         # triggering drift persists
         self.assertEqual(out["cuv_note"], "英文的次序在CUV中被拉平")
+
+    def test_cuv_departing_fix_discarded_and_noted(self):
+        # The i09 "left the CUV" case: fix changes the <verse> span to non-CUV to
+        # match the English (verse_mismatch). The revision is DISCARDED (CUV kept),
+        # and a divergence note is generated. Calls: [fix, note] (no re-drift).
+        item = {"id": "MV", "passage": "PSA-003", "dimension": "D4", "type": "question",
+                "text": {"en": 'Ps 3:5 — <verse ref="PSA.3.5">I wake again</verse>',
+                         "zh": 'Ps 3:5 — <verse ref="PSA.3.5">「我醒着」</verse>'}}
+        fix = ('{"changed": true, "reason": "matched English",'
+               ' "text": {"zh": "Ps 3:5 — <verse ref=\\"PSA.3.5\\">「我醒过来」</verse>"},'
+               ' "terms": [], "uncertain": []}')   # 我醒过来 is NOT verbatim CUV
+        note = '{"note": "英文次序在CUV中被拉平"}'
+        with mock.patch.object(translate, "llm", side_effect=[fix, note]):
+            out = translate.suggest_drift_fix(
+                item, "PSA", {"drift": True, "notes": "wake again -> awake"}, glossary=[])
+        self.assertFalse(out["changed"])              # CUV-leaving revision discarded
+        self.assertEqual(out["item"], item)           # the CUV is kept
+        self.assertEqual(out["cuv_note"], "英文次序在CUV中被拉平")
 
     def test_bad_fix_recorded_gate_false_not_raised(self):
         # A changed fix that emits a bare 「…」 with no <verse> tag -> citation flag.
