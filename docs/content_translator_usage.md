@@ -113,40 +113,59 @@ The back-translation review flags **drift** (softened/strengthened/added/removed
 doctrine) but does not act on it. When a proposal is drift-flagged, the translator
 makes **one** additional LLM call that proposes a **revised zh** resolving the drift,
 under a hard rule that it must keep every `「…」` a verbatim CUV span and every
-`<verse>`/`<doctrine>` tag intact — and if the drift exists only because the *CUV
-itself* renders the wording that way (unfixable without leaving the CUV), it returns
-the text unchanged and says so.
+`<verse>`/`<doctrine>` tag intact.
 
 This is **suggest-and-confirm**, not auto-fix: the revision rides on the proposal as a
-`suggested_fix` object and the original `item` is **never replaced**. The suggestion is
-re-gated and re-drift-checked, so its own `gate_ok` / `drift` / `uncertain` are recorded
-too. Shape:
+`suggested_fix` object and the original `item` is **never replaced**. A revision is
+**accepted only when it is genuinely usable** — it changed the text, it did *not* leave
+the CUV (no `citation.verse_mismatch`), AND the re-drift confirms the drift is gone.
+Any other outcome keeps the CUV verbatim and emits a note (see *CUV-inherent drift*
+below). Shape:
 
 ```jsonc
 "suggested_fix": {
-  "changed":   true,             // false = declined (CUV-inherent), text unchanged
+  "changed":   true,              // false = the CUV was kept (see cuv_note)
   "rationale": "removed shield imagery not in the English",
-  "item":      { …revised zh… },
+  "addresses": "the triggering drift notes — what this fix set out to resolve",
+  "item":      { …revised zh… },  // FULL revised item; the fix is often in the answer
   "gate_ok":   true, "gate_flags": [],
-  "drift":     {"drift": false}, // re-checked — did the fix work?
-  "uncertain": []
+  "drift":     {"drift": false},  // re-checked — did the fix work?
+  "uncertain": [],
+  "cuv_note":  ""                 // present ONLY for CUV-inherent drift (below)
 }
 ```
 
 On the **review page** (`translate_compare_html`) a `suggested_fix` renders beneath the
-flagged cell — the revised zh (or a "no fix — CUV wording" note) with its own
-gate/drift/uncertain badges and the rationale — so a human can accept or reject it.
-Promoting a suggestion into the store is a manual edit for now (no
-`--use-suggested` on `translate.promote` yet).
+flagged cell: the revised question text **and the revised leader-note/answer** (drift
+fixes frequently land in the answer, not the question), an **"Addresses drift:"** line
+(the triggering diagnosis), its own gate/drift/uncertain badges, and the rationale — so
+a human can accept or reject it. Promoting a suggestion into the store is a manual edit
+for now (no `--use-suggested` on `translate.promote` yet).
 
-**The suggested fix is only as good as the drift trigger.** The whole path fires only
-when the drift review returns `drift:true`, and that review is one LLM call. On
-quote-dense poetry the cheap translator (`deepseek-v4-flash`) gives **false-negative
-drift verdicts** — e.g. it rated a full-verse over-copy of Psalm 3:3 (where the
-English quoted only the opening "But You, O LORD") as "faithful", so no fix was
-proposed, while `deepseek-v4-pro` flagged the same text precisely and triggered a
-correct short-span revision. For quote-dense books, run the reviewer on a stronger
-model:
+### CUV-inherent drift and `cuv_note`
+
+Some drift **cannot be fixed**: the CUV itself renders a verse with a different emphasis
+than the English, and the CUV is the reader's Bible — it must ship **verbatim**. When a
+fix would only "resolve" the drift by touching the CUV — leaving it (a `verse_mismatch`),
+injecting a prose gloss that still drifts, or when the model simply cannot — the revision
+is **discarded**, the CUV is kept, and a short Chinese **leader-preparation note** is
+generated as `suggested_fix.cuv_note`. It names what the English/Hebrew stresses that the
+CUV flattens, framed as teaching guidance — **never** a correction of the CUV, **never**
+a replacement Scripture translation. The review page shows it as **"CUV divergence
+(teach):"** under a "CUV stands — teach the divergence" head.
+
+Example (Ps 3:5): English "I wake again, **for** the LORD sustains me" is sequential and
+causal; CUV `「我醒着」` reads as a continuous state. The CUV ships unchanged, and the note
+tells the leader to draw out the nuance at the table.
+
+### Reliability: the drift trigger
+
+The whole path fires only when the drift review returns `drift:true`, and that review is
+one LLM call. On quote-dense poetry the cheap translator (`deepseek-v4-flash`) gives
+**false-negative drift verdicts** — e.g. it rated a full-verse over-copy of Psalm 3:3
+(where the English quoted only the opening "But You, O LORD") as "faithful", while
+`deepseek-v4-pro` flagged the same text precisely. For quote-dense books, run the
+reviewer on a stronger model:
 
 ```bash
 uv run python -m content_bank.author.translate_cli \
