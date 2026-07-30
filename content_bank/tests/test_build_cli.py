@@ -169,6 +169,37 @@ class OrchestratorTest(unittest.TestCase):
             with self.assertRaises(build_cli.LLMUnavailable):
                 build_cli.run("MAT", units=["MAT-035"])
 
+    def test_concurrency_builds_all_units_manifest_consistent(self):
+        import time as _time
+        with tempfile.TemporaryDirectory() as d:
+            drafts = pathlib.Path(d) / "drafts"; drafts.mkdir()
+            briefs = pathlib.Path(d) / "briefs"
+            uids = [f"MAT-{i:03d}" for i in range(1, 9)]   # 8 independent units
+            m = manifest_mod.init_manifest("MAT", uids)
+            mpath = pathlib.Path(d) / "manifest.json"
+            manifest_mod.save(mpath, m)
+
+            # Fake unit build: overlap threads, write a draft, commit the stage via
+            # the REAL locked _commit_stage (what protects the shared manifest).
+            def fake_build(uid, book, *, manifest_obj, manifest_path, lock=None, **kw):
+                _time.sleep(0.01)
+                (drafts / f"{uid}.json").write_text("[]", encoding="utf-8")
+                build_cli._commit_stage(manifest_obj, manifest_path, uid, "drafted", lock)
+                return "drafted"
+
+            with mock.patch.object(build_cli, "build_pericope", side_effect=fake_build), \
+                 mock.patch.object(build_cli, "llm_configured", return_value=True):
+                res = build_cli.run("MAT", units=uids, kind="pericope",
+                                    manifest_path=mpath, drafts_dir=drafts,
+                                    briefs_dir=briefs, concurrency=4)
+            self.assertEqual(sorted(res["ok"]), sorted(uids))
+            self.assertEqual(res["failed"], {})
+            # the on-disk manifest is valid JSON with every unit advanced (no
+            # concurrent-write corruption or lost update)
+            saved = manifest_mod.load(mpath)
+            self.assertTrue(all(saved["units"][u]["stage"] == "drafted" for u in uids))
+            self.assertEqual(sorted(p.stem for p in drafts.glob("*.json")), sorted(uids))
+
     def test_claude_backend_skips_llm_core_config_gate(self):
         # backend=claude must NOT require ARK_API_KEY (subscription path);
         # llm_configured() is llm_core-specific and returns False here. Empty
