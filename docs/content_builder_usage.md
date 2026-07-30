@@ -33,7 +33,9 @@ A provider credential is required — the builder refuses before any network cal
 none is configured:
 
 - **`--backend llm_core`** (default) → deepseek via `ARK_API_KEY`. Put it in the repo
-  `.env` (git-ignored; see `.env.example`). Check: `llm_configured()` must be true.
+  `.env` (git-ignored; see `.env.example`). The same backend supports the Google
+  Gemini Developer API via `GEMINI_API_KEY` (or `GOOGLE_API_KEY`). Check:
+  `llm_configured()` must be true.
 - **`--backend claude`** → the `claude` CLI (Claude Code headless) must be on `PATH`;
   it uses your subscription, not API credits.
 
@@ -89,6 +91,10 @@ auto-routes to `runs/<model-id>/`, so runs never overwrite each other:
 uv run python -m content_bank.author.build_cli --book PHP --units PHP-001 PHP-002 \
     --model deepseek-v4-pro
 
+# Gemini 3.6 Flash (Google AI Studio/API; separate comparison run)
+uv run python -m content_bank.author.build_cli --book PHP --units PHP-002 \
+    --backend llm_core --model gemini-3.6-flash
+
 # Claude Opus (subscription)
 uv run python -m content_bank.author.build_cli --book PHP --units PHP-001 PHP-002 \
     --backend claude --model opus
@@ -113,10 +119,17 @@ uv run python -m content_bank.author.build_cli --book PHP --no-review
 | `--max-repair N` | `2` | Gate-repair rounds before a HARD-gate failure aborts the unit. |
 | `--limit N` | — | Cap how many units are built this run. |
 | `--dim-cap N` | `3` | Soft anti-padding cap per dimension (over-cap dims feed the repair loop, then log; never hard-fail). |
-| `--backend {llm_core,claude}` | `llm_core` | `llm_core` = deepseek via credits; `claude` = Claude Code headless via subscription. |
-| `--model MODEL` | backend's default | Override the model (`deepseek-v4-pro`; `opus`/`sonnet`). Determines the run slug. |
+| `--backend {llm_core,claude}` | `llm_core` | `llm_core` = registered API models (Volcengine DeepSeek or Google Gemini); `claude` = Claude Code headless via subscription. |
+| `--model MODEL` | backend's default | Override the model (`deepseek-v4-pro`, `gemini-3.6-flash`, `gemini-3.5-flash-lite`; or `opus`/`sonnet` with the Claude backend). Determines the run slug. |
 | `--run-root DIR` | `work/content_bank_build` | Build root holding `runs/<model>/`. |
 | `--manifest` / `--drafts-dir` / `--briefs-dir` / `--verdicts-dir` | derived | Explicit-path overrides (advanced / legacy). Passing `--manifest` or `--drafts-dir` switches off the automatic run layout. |
+
+Gemini free-tier requests may be used by Google to improve its products. Use the
+free tier only for corpus-based authoring material: never send family records,
+children's data, recordings, photos, or private reflection artifacts. Free-tier
+quotas are project-specific, so start with a single-unit build. Google also enforces
+Gemini API regional availability; the Developer API is not currently listed as
+available in mainland China.
 
 ---
 
@@ -177,6 +190,9 @@ export `decisions.json`. **Citation tags are highlighted** on the page — `<ver
 spans in green with the ref, `<doctrine>` in amber — so a reviewer can see and verify
 each citation (the tags are stripped only on the family-facing kit, never here). See
 the comparison-page design spec for details.
+
+For a machine-readable quality report with deterministic metrics plus a semantic
+D1–D8 dimension-fit audit, see `docs/content_quality_evaluator_usage.md`.
 
 **To translate the drafts into Chinese**, see the companion guide
 `docs/content_translator_usage.md` (the `translate_cli` tool and its own highlighted

@@ -307,9 +307,11 @@ def run(book, *, units=None, kind="all", review_on=False, max_repair=2,
             raise LLMUnavailable(
                 "backend=claude but the 'claude' CLI is not on PATH; install "
                 "Claude Code or use --backend llm_core")
-    elif not llm_configured():
+    elif not llm_configured(_effective_model(backend, model)):
         raise LLMUnavailable(
-            "no LLM credential (set ARK_API_KEY or llm_api_key); see CLAUDE.md")
+            "no credential for the selected LLM model (set ARK_API_KEY for "
+            "Volcengine or GEMINI_API_KEY/GOOGLE_API_KEY for Gemini, or configure "
+            "llm_api_key); see CLAUDE.md")
 
     slug = _run_slug(backend, model)
     if manifest_path is not None or drafts_dir is not None:

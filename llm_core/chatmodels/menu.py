@@ -384,6 +384,34 @@ inner_menu = {
         },
         "clsType": "LiteLLM2Chat",
     },
+    # Google Gemini Developer API (AI Studio). Keep the `gemini/` LiteLLM
+    # prefix: the unprefixed model id is interpreted as Vertex AI.
+    "gemini-3.6-flash": {
+        "id": "gemini/gemini-3.6-flash",
+        "output_max_token": 64000,
+        "max_token": 1000000,
+        # Paid Standard list prices; free-tier calls still log a useful
+        # list-price equivalent for cross-model cost comparisons.
+        "input_price": 1.50 / 1000000,
+        "output_price": 7.50 / 1000000,
+        "currency_code": "USD",
+        "provider": "gemini",
+        "timeout": 300,
+        "async_limit": 10,
+        "clsType": "LiteLLM2Chat",
+    },
+    "gemini-3.5-flash-lite": {
+        "id": "gemini/gemini-3.5-flash-lite",
+        "output_max_token": 64000,
+        "max_token": 1000000,
+        "input_price": 0.30 / 1000000,
+        "output_price": 2.50 / 1000000,
+        "currency_code": "USD",
+        "provider": "gemini",
+        "timeout": 300,
+        "async_limit": 10,
+        "clsType": "LiteLLM2Chat",
+    },
     # Migrated from mxconfig `/projects/mxsieve$chatmodel.inner_extra`.
     # Keep in sync manually when Volcengine endpoints rotate.
     #'BI-doubao-1.5pro-32k': {'id': 'ep-20250828103330-vgx8p',
