@@ -31,15 +31,20 @@ _MAX_ATTEMPTS = 2
 # analyst model (deepseek-v4-flash) is a Volcengine model keyed by ARK_API_KEY,
 # so the gate must recognize these — not just the settings.llm_* override.
 _PROVIDER_KEY_ENV = ("ARK_API_KEY", "VOLCENGINE_API_KEY", "OPENAI_API_KEY",
-                     "DEEPSEEK_API_KEY", "ANTHROPIC_API_KEY")
+                     "DEEPSEEK_API_KEY", "ANTHROPIC_API_KEY",
+                     "GEMINI_API_KEY", "GOOGLE_API_KEY")
 
 
-def llm_configured() -> bool:
-    """True when an in-recipe LLM call can actually reach a model — via an
+def llm_configured(model: str | None = None) -> bool:
+    """True when an in-recipe LLM call can actually reach ``model`` — via an
     explicit endpoint override (settings.llm_api_base/key, e.g. a self-hosted
     server) OR a provider key `chatmodels` picks up from the environment."""
     if settings.llm_api_key or settings.llm_api_base:
         return True
+    # Do not let an unrelated configured provider (normally ARK) pass the gate
+    # for a Gemini build that has no Google credential.
+    if model and model.startswith("gemini-"):
+        return any(os.environ.get(k) for k in ("GEMINI_API_KEY", "GOOGLE_API_KEY"))
     return any(os.environ.get(k) for k in _PROVIDER_KEY_ENV)
 
 
@@ -50,10 +55,11 @@ def run_sync_llm(system_prompt: str, user_message: str, caller: str = "",
     run_llm_batch task / POST /api/v1/llm/batch. Raises on unconfigured/unknown
     model or after bounded retry; callers (SOFT sites) catch and degrade
     fail-open."""
-    if not llm_configured():
+    if not llm_configured(model):
         raise RuntimeError(
             "analyst in-recipe LLM not configured (set llm_api_key/llm_api_base "
-            "or a provider key like ARK_API_KEY); SOFT sites degrade fail-open")
+            "or a provider key like ARK_API_KEY/GEMINI_API_KEY); "
+            "SOFT sites degrade fail-open")
 
     from llm_core.service import LLMService
 
@@ -109,10 +115,11 @@ def run_batch_llm(prompts: list[tuple[str, str]], caller: str = "",
     """
     if not prompts:
         return []
-    if not llm_configured():
+    if not llm_configured(model):
         raise RuntimeError(
             "analyst in-recipe LLM not configured (set llm_api_key/llm_api_base "
-            "or a provider key like ARK_API_KEY); SOFT sites degrade fail-open")
+            "or a provider key like ARK_API_KEY/GEMINI_API_KEY); "
+            "SOFT sites degrade fail-open")
 
     from llm_core.service import LLMService
 

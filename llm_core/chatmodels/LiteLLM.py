@@ -210,6 +210,8 @@ class LiteLLM2Chat(BaseChain, BaseModel):
             return 'anthropic'
         elif modelId.startswith('deepseek/'):
             return 'deepseek'
+        elif modelId.startswith('gemini/'):
+            return 'gemini'
         elif modelId.startswith('azure/'):
             return 'azure'
         elif modelId.startswith('bedrock/'):
@@ -247,6 +249,14 @@ class LiteLLM2Chat(BaseChain, BaseModel):
                 self.api_key = os.environ.get('DEEPSEEK_API_KEY')
             if not self.api_base:
                 self.api_base = 'https://api.deepseek.com'
+        elif self.provider == 'gemini':
+            # Google AI Studio / Gemini Developer API. The explicit LiteLLM
+            # prefix avoids interpreting an unprefixed Gemini model as Vertex AI.
+            if not self.api_key:
+                self.api_key = (os.environ.get('GEMINI_API_KEY')
+                                or os.environ.get('GOOGLE_API_KEY'))
+            if not modelId.startswith('gemini/'):
+                self.modelId = f'gemini/{modelId}'
 
     def create_llm(self):
         """Create sync LiteLLM client (LiteLLM uses functional API)."""
@@ -261,6 +271,8 @@ class LiteLLM2Chat(BaseChain, BaseModel):
                 os.environ.setdefault('ANTHROPIC_API_KEY', self.api_key)
             elif self.provider == 'deepseek':
                 os.environ.setdefault('DEEPSEEK_API_KEY', self.api_key)
+            elif self.provider == 'gemini':
+                os.environ.setdefault('GEMINI_API_KEY', self.api_key)
 
         self.llm = None  # Placeholder for compatibility
 
@@ -288,7 +300,12 @@ class LiteLLM2Chat(BaseChain, BaseModel):
         Precedence (lowest → highest): class default (temperature) → menu-level
         completion_kwargs → per-call overrides.
         """
-        params = {'temperature': self.temperature}
+        # Gemini 3.5+ deprecates sampling parameters and may reject them in
+        # future releases. Its thinking level supplies the generation policy.
+        params = ({} if self.provider == 'gemini'
+                  and self.modelId.startswith(('gemini/gemini-3.5-',
+                                               'gemini/gemini-3.6-'))
+                  else {'temperature': self.temperature})
         params.update(self.completion_kwargs)
         params.update(overrides)
         return params
