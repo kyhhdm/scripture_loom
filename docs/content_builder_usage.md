@@ -113,6 +113,7 @@ uv run python -m content_bank.author.build_cli --book PHP --no-review
 | `--max-repair N` | `2` | Gate-repair rounds before a HARD-gate failure aborts the unit. |
 | `--limit N` | — | Cap how many units are built this run. |
 | `--dim-cap N` | `3` | Soft anti-padding cap per dimension (over-cap dims feed the repair loop, then log; never hard-fail). |
+| `--concurrency N` | `1` | Build N units in parallel (default 1 = sequential). Units are independent; the shared manifest write is locked. Keep **low** for `--backend claude` (subscription usage-window limits); `llm_core`/deepseek can go higher. |
 | `--backend {llm_core,claude}` | `llm_core` | `llm_core` = deepseek via credits; `claude` = Claude Code headless via subscription. |
 | `--model MODEL` | backend's default | Override the model (`deepseek-v4-pro`; `opus`/`sonnet`). Determines the run slug. |
 | `--run-root DIR` | `work/content_bank_build` | Build root holding `runs/<model>/`. |
@@ -195,7 +196,12 @@ review page).
   rejects them; this is expected, not an error.
 - **Cost/latency.** `llm_core` flash is cheap and fast (a full PHP book with review ran
   ~$0.15 in this project's tests). The `claude` backend is slower per call (each is a
-  headless CLI invocation) and billed to the subscription.
+  headless CLI invocation) and billed to the subscription. Builds are **sequential by
+  default** — use `--concurrency N` to build units in parallel (units are independent;
+  the manifest write is locked). This is the biggest latency lever for a whole-book
+  opus run. Keep N **low** for `--backend claude` — parallel `claude -p` invocations
+  share the subscription's usage window and a large burst can hit its limit; `llm_core`
+  tolerates higher N.
 - **If a unit hard-fails on a stubborn gate**, retry it alone with a larger budget:
   `--units PHP-S1 --max-repair 4`. (Opus once failed a section on an invalid
   `leader_reference.kind`; the extra budget cleared it.)

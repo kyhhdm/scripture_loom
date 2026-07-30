@@ -6,12 +6,15 @@ Optional --review adds a two-lens adversarial pass. Items are written
 review_status "draft"; staging into the store stays a separate human-gated step.
 """
 import argparse
+import concurrent.futures
+import contextlib
 import json
 import os
 import pathlib
 import random
 import re
 import shutil
+import threading
 import time
 
 from . import (build_brief_prompt, build_draft_prompt, build_section_brief_prompt,
@@ -216,17 +219,25 @@ def _section_text(book, sid):
     return "\n\n".join(corpus_bridge.passage_text(p["range"]) for p in peris[i:j + 1])
 
 
+def _commit_stage(manifest_obj, manifest_path, uid, stage, lock=None):
+    """Advance a unit's manifest stage and persist — atomically under ``lock`` so
+    concurrent unit builds don't race on the shared manifest file. ``lock=None``
+    (the sequential default) is a no-op guard."""
+    with (lock or contextlib.nullcontext()):
+        manifest_mod.set_stage(manifest_obj, uid, stage)
+        manifest_mod.save(manifest_path, manifest_obj)
+
+
 def build_pericope(pid, book, *, drafts_dir, briefs_dir=None, verdicts_dir=None,
                    manifest_obj, manifest_path, review_on=False, max_repair=2,
-                   dim_cap=gates.DEFAULT_DIM_CAP, draft_stamp=None):
+                   dim_cap=gates.DEFAULT_DIM_CAP, draft_stamp=None, lock=None):
     briefs_dir = briefs_dir or _BRIEFS_DIR
     brief_path = pathlib.Path(briefs_dir) / f"{pid.lower()}.md"
     if manifest_obj["units"][pid]["stage"] == "pending" or not brief_path.exists():
         brief = _llm_with_backoff(build_brief_prompt.build(pid, book))
         brief_path.parent.mkdir(parents=True, exist_ok=True)
         brief_path.write_text(brief, encoding="utf-8")
-        manifest_mod.set_stage(manifest_obj, pid, "briefed")
-        manifest_mod.save(manifest_path, manifest_obj)
+        _commit_stage(manifest_obj, manifest_path, pid, "briefed", lock)
     else:
         brief = brief_path.read_text(encoding="utf-8")
 
@@ -248,22 +259,20 @@ def build_pericope(pid, book, *, drafts_dir, briefs_dir=None, verdicts_dir=None,
 
     _stamp_draft_provenance(items, draft_stamp)
     _write_json(pathlib.Path(drafts_dir) / f"{pid}.json", items)
-    manifest_mod.set_stage(manifest_obj, pid, "drafted")
-    manifest_mod.save(manifest_path, manifest_obj)
+    _commit_stage(manifest_obj, manifest_path, pid, "drafted", lock)
     return "drafted"
 
 
 def build_section(sid, book, *, drafts_dir, briefs_dir=None, verdicts_dir=None,
                   manifest_obj, manifest_path, review_on=False, max_repair=2,
-                  dim_cap=gates.DEFAULT_DIM_CAP, draft_stamp=None):
+                  dim_cap=gates.DEFAULT_DIM_CAP, draft_stamp=None, lock=None):
     briefs_dir = briefs_dir or _BRIEFS_DIR
     brief_path = pathlib.Path(briefs_dir) / f"{sid.lower()}.md"
     if manifest_obj["units"][sid]["stage"] == "pending" or not brief_path.exists():
         brief = _llm_with_backoff(build_section_brief_prompt.build(sid, book))
         brief_path.parent.mkdir(parents=True, exist_ok=True)
         brief_path.write_text(brief, encoding="utf-8")
-        manifest_mod.set_stage(manifest_obj, sid, "briefed")
-        manifest_mod.save(manifest_path, manifest_obj)
+        _commit_stage(manifest_obj, manifest_path, sid, "briefed", lock)
     else:
         brief = brief_path.read_text(encoding="utf-8")
 
@@ -284,8 +293,7 @@ def build_section(sid, book, *, drafts_dir, briefs_dir=None, verdicts_dir=None,
                                    dim_cap=dim_cap)
     _stamp_draft_provenance(items, draft_stamp)
     _write_json(pathlib.Path(drafts_dir) / f"{sid}.json", items)
-    manifest_mod.set_stage(manifest_obj, sid, "drafted")
-    manifest_mod.save(manifest_path, manifest_obj)
+    _commit_stage(manifest_obj, manifest_path, sid, "drafted", lock)
     return "drafted"
 
 
@@ -296,7 +304,7 @@ def _default_manifest_path(book):
 def run(book, *, units=None, kind="all", review_on=False, max_repair=2,
         limit=None, manifest_path=None, drafts_dir=None, briefs_dir=None,
         verdicts_dir=None, run_root=None, backend="llm_core", model=None,
-        dim_cap=gates.DEFAULT_DIM_CAP):
+        dim_cap=gates.DEFAULT_DIM_CAP, concurrency=1):
     os.environ["SCRIPTURE_LOOM_LLM_BACKEND"] = backend
     if model:
         os.environ["SCRIPTURE_LOOM_LLM_MODEL"] = model
@@ -343,27 +351,40 @@ def run(book, *, units=None, kind="all", review_on=False, max_repair=2,
 
     draft_stamp = {"model": _effective_model(backend, model), "backend": backend,
                    "run": slug}
-    ok, failed = [], {}
-    for uid in todo:
-        meta = m["units"][uid]
+    # A shared lock serializes the per-unit manifest writes; the slow LLM work runs
+    # concurrently. lock is unused (harmless) in the sequential path.
+    lock = threading.Lock()
+
+    def _build_one(uid):
+        fn = build_pericope if m["units"][uid]["kind"] == "pericope" else build_section
         try:
-            if meta["kind"] == "pericope":
-                build_pericope(uid, book, drafts_dir=drafts_dir, briefs_dir=briefs_dir,
-                               verdicts_dir=verdicts_dir, manifest_obj=m,
-                               manifest_path=manifest_path, review_on=review_on,
-                               max_repair=max_repair, dim_cap=dim_cap,
-                               draft_stamp=draft_stamp)
-            else:
-                build_section(uid, book, drafts_dir=drafts_dir, briefs_dir=briefs_dir,
-                              verdicts_dir=verdicts_dir, manifest_obj=m,
-                              manifest_path=manifest_path, review_on=review_on,
-                              max_repair=max_repair, dim_cap=dim_cap,
-                              draft_stamp=draft_stamp)
+            fn(uid, book, drafts_dir=drafts_dir, briefs_dir=briefs_dir,
+               verdicts_dir=verdicts_dir, manifest_obj=m, manifest_path=manifest_path,
+               review_on=review_on, max_repair=max_repair, dim_cap=dim_cap,
+               draft_stamp=draft_stamp, lock=lock)
+            return uid, None
+        except (GateError, RuntimeError, ValueError) as exc:
+            return uid, str(exc)
+
+    ok, failed = [], {}
+
+    def _record(uid, err):
+        if err is None:
             ok.append(uid)
             print(f"[ok] {uid}")
-        except (GateError, RuntimeError, ValueError) as exc:
-            failed[uid] = str(exc)
-            print(f"[FAIL] {uid}: {exc}")
+        else:
+            failed[uid] = err
+            print(f"[FAIL] {uid}: {err}")
+
+    if concurrency and concurrency > 1 and len(todo) > 1:
+        with concurrent.futures.ThreadPoolExecutor(
+                max_workers=min(concurrency, len(todo))) as ex:
+            for fut in concurrent.futures.as_completed(
+                    ex.submit(_build_one, uid) for uid in todo):
+                _record(*fut.result())
+    else:
+        for uid in todo:
+            _record(*_build_one(uid))
     return {"ok": ok, "failed": failed}
 
 
@@ -393,12 +414,18 @@ def main(argv=None):
                     help="anti-padding: soft per-dimension item cap per unit "
                          f"(default {gates.DEFAULT_DIM_CAP}); over-cap dimensions are "
                          "fed to the repair loop, then logged (never hard-fail)")
+    ap.add_argument("--concurrency", type=int, default=1,
+                    help="build N units in parallel (default 1 = sequential). Units "
+                         "are independent; the shared manifest write is locked. Keep "
+                         "LOW for --backend claude (subscription usage-window limits); "
+                         "llm_core/deepseek can go higher.")
     a = ap.parse_args(argv)
     res = run(a.book, units=a.units, kind=a.kind, review_on=a.review,
               max_repair=a.max_repair, limit=a.limit, manifest_path=a.manifest,
               drafts_dir=a.drafts_dir, briefs_dir=a.briefs_dir,
               verdicts_dir=a.verdicts_dir, run_root=a.run_root,
-              backend=a.backend, model=a.model, dim_cap=a.dim_cap)
+              backend=a.backend, model=a.model, dim_cap=a.dim_cap,
+              concurrency=a.concurrency)
     print(f"\nDone. ok={len(res['ok'])} failed={len(res['failed'])}")
     return 1 if res["failed"] else 0
 
