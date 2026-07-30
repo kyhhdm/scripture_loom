@@ -191,7 +191,8 @@ def suggest_drift_fix(item, book, drift, *, glossary=None, model=None,
     return {"changed": False, "rationale": rationale, "item": item,
             "gate_ok": not flags, "gate_flags": flags, "drift": drift,
             "addresses": triggering,
-            "cuv_note": _cuv_divergence_note(item, triggering, model)}
+            # the note is a drift-analysis task, so use the drift reviewer's model
+            "cuv_note": _cuv_divergence_note(item, triggering, drift_model or model)}
 
 
 def _left_the_cuv(flags):

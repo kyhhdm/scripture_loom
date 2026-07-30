@@ -166,6 +166,12 @@ budget):
   tag's inner text must be verbatim corpus (BSB for `en`, CUV for `zh`); a `<doctrine>`
   tag's ref must resolve in WCF/WLC/WSC; malformed markup fails closed. A recall net
   flags a verbatim quote left *outside* a tag (`citation.untagged_quote`) for repair.
+  For a **translation** (an item carrying both `en` and `zh`), it also enforces
+  **tag correspondence** (rule 8): the zh `<verse>`/`<doctrine>` tag multiset must equal
+  the en one — a fabricated tag is flagged `citation.added_tag`, a lost one
+  `citation.dropped_tag`. This catches an invented citation even when its content is
+  verbatim CUV, which the per-tag content check alone cannot; English-only draft items
+  are untouched.
 
 **SOFT** (advisory only — logged, never blocks):
 

@@ -214,6 +214,22 @@ class TestSuggestDriftFix(unittest.TestCase):
         self.assertEqual(out["item"], item)       # CUV kept verbatim
         self.assertEqual(out["cuv_note"], "英文强调次序")
 
+    def test_cuv_note_uses_drift_model_not_translation_model(self):
+        # The divergence note is a drift-ANALYSIS task, so it must use --drift-model
+        # (like the drift review), not the cheap translation --model.
+        seq = iter(['{"changed": false, "reason": "CUV"}', '{"note": "n"}'])
+        seen = []
+
+        def rec(prompt, model=None):
+            seen.append(model)
+            return next(seq)
+
+        with mock.patch.object(translate, "llm", side_effect=rec):
+            translate.suggest_drift_fix(self.ITEM, "PSA", {"drift": True, "notes": "x"},
+                                        glossary=[], model="flash", drift_model="pro")
+        self.assertEqual(seen[0], "flash")   # the fix attempt uses the translation model
+        self.assertEqual(seen[1], "pro")     # the CUV-divergence note uses the drift model
+
     def test_bad_fix_recorded_gate_false_not_raised(self):
         # A changed fix that emits a bare 「…」 with no <verse> tag -> citation flag.
         bad = ('{"changed": true, "reason": "x",'
