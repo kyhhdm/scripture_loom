@@ -141,13 +141,16 @@ class TestSuggestDriftFix(unittest.TestCase):
         self.assertIn("gate_ok", out)                 # re-gate ran
         # the TRIGGERING drift notes are preserved so the fix is auditable
         self.assertEqual(out["addresses"], "adds shield imagery")
+        self.assertNotIn("cuv_note", out)             # real fix -> no CUV-inherent note
         self.assertNotIn("zh_mutated", self.ITEM)     # original untouched key-wise
         self.assertEqual(self.ITEM["text"]["zh"], "但你耶和华。")  # original object intact
 
     def test_declined_fix_returns_original_unchanged(self):
+        # Declined = CUV-inherent, so a leader-prep divergence note is generated.
         fix = ('{"changed": false, "reason": "CUV renders it this way",'
                ' "text": {"zh": "但你耶和华。"}, "terms": [], "uncertain": []}')
-        with mock.patch.object(translate, "llm", side_effect=[fix]):
+        note = '{"note": "英文强调因果与次序，CUV译得较概括"}'
+        with mock.patch.object(translate, "llm", side_effect=[fix, note]):
             out = translate.suggest_drift_fix(
                 self.ITEM, "PSA", {"drift": True, "notes": "guards -> knows"},
                 glossary=[])
@@ -156,6 +159,21 @@ class TestSuggestDriftFix(unittest.TestCase):
         self.assertEqual(out["item"], self.ITEM)      # original returned
         self.assertEqual(out["drift"], {"drift": True, "notes": "guards -> knows"})
         self.assertEqual(out["addresses"], "guards -> knows")  # triggering notes kept
+        self.assertEqual(out["cuv_note"], "英文强调因果与次序，CUV译得较概括")
+
+    def test_cuv_inherent_noop_changed_fix_gets_note(self):
+        # The i09 case: model returns changed=true but the CUV text is unchanged and
+        # re-drift STILL flags -> CUV-inherent -> a divergence note is generated.
+        fix = ('{"changed": true, "reason": "tried",'
+               ' "text": {"zh": "但你耶和华。"}, "terms": [], "uncertain": []}')  # identical
+        redrift = '{"drift": true, "notes": "still diverges"}'
+        note = '{"note": "英文的次序在CUV中被拉平"}'
+        with mock.patch.object(translate, "llm", side_effect=[fix, redrift, note]):
+            out = translate.suggest_drift_fix(
+                self.ITEM, "PSA", {"drift": True, "notes": "wake again -> awake"},
+                glossary=[])
+        self.assertTrue(out["drift"]["drift"])         # unresolved
+        self.assertEqual(out["cuv_note"], "英文的次序在CUV中被拉平")
 
     def test_bad_fix_recorded_gate_false_not_raised(self):
         # A changed fix that emits a bare 「…」 with no <verse> tag -> citation flag.

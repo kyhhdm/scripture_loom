@@ -193,6 +193,19 @@ class TestSuggestedFixRendering(unittest.TestCase):
                "gate_ok": True, "gate_flags": [], "drift": {"drift": False}}
         self.assertNotIn("Addresses drift:", tch._suggested_block(self._cell_with_fix(fix)))
 
+    def test_cuv_inherent_note_rendered_no_revised_zh(self):
+        # CUV-inherent drift: show the teaching note, and the "CUV stands" head,
+        # not a (misleadingly identical) revised zh.
+        fix = {"changed": True, "rationale": "tried",
+               "item": {"text": {"zh": "我醒着，耶和华都保佑我"}},
+               "gate_ok": True, "gate_flags": [], "drift": {"drift": True},
+               "addresses": "wake again -> awake",
+               "cuv_note": "英文强调因果与次序，CUV译得较概括"}
+        html = tch._suggested_block(self._cell_with_fix(fix))
+        self.assertIn("CUV divergence (teach):", html)
+        self.assertIn("英文强调因果与次序，CUV译得较概括", html)
+        self.assertIn("CUV stands", html)
+
     def test_revised_leader_note_rendered(self):
         # When the fix lands in the leader_reference (answer/notes) and the question
         # text is unchanged, the revised note must still be shown (the i14 case).
