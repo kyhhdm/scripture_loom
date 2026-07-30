@@ -139,6 +139,8 @@ class TestSuggestDriftFix(unittest.TestCase):
         self.assertEqual(out["item"]["text"]["zh"], "但你耶和华。")
         self.assertFalse(out["drift"]["drift"])       # re-drift ran
         self.assertIn("gate_ok", out)                 # re-gate ran
+        # the TRIGGERING drift notes are preserved so the fix is auditable
+        self.assertEqual(out["addresses"], "adds shield imagery")
         self.assertNotIn("zh_mutated", self.ITEM)     # original untouched key-wise
         self.assertEqual(self.ITEM["text"]["zh"], "但你耶和华。")  # original object intact
 
@@ -153,6 +155,7 @@ class TestSuggestDriftFix(unittest.TestCase):
         self.assertEqual(out["rationale"], "CUV renders it this way")
         self.assertEqual(out["item"], self.ITEM)      # original returned
         self.assertEqual(out["drift"], {"drift": True, "notes": "guards -> knows"})
+        self.assertEqual(out["addresses"], "guards -> knows")  # triggering notes kept
 
     def test_bad_fix_recorded_gate_false_not_raised(self):
         # A changed fix that emits a bare 「…」 with no <verse> tag -> citation flag.

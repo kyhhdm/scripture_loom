@@ -164,17 +164,20 @@ def suggest_drift_fix(item, book, drift, *, glossary=None, model=None,
     if not drift.get("drift"):
         return None
     glossary = _glossary.load_glossary() if glossary is None else glossary
-    resp = _extract_json(llm(_fix_prompt(item, drift.get("notes", "")), model))
+    triggering = drift.get("notes", "")
+    resp = _extract_json(llm(_fix_prompt(item, triggering), model))
     rationale = resp.get("reason", "")
     if not resp.get("changed"):
         flags = zh_gate_flags(item, glossary)
         return {"changed": False, "rationale": rationale, "item": item,
-                "gate_ok": not flags, "gate_flags": flags, "drift": drift}
+                "gate_ok": not flags, "gate_flags": flags, "drift": drift,
+                "addresses": triggering}
     revised = _merge_zh(item, resp)
     flags = zh_gate_flags(revised, glossary)
     new_drift = back_translate_review(revised, model=drift_model or model)
     return {"changed": True, "rationale": rationale, "item": revised,
             "gate_ok": not flags, "gate_flags": flags, "drift": new_drift,
+            "addresses": triggering,
             "terms": resp.get("terms", []), "uncertain": resp.get("uncertain", [])}
 
 

@@ -177,6 +177,22 @@ class TestSuggestedFixRendering(unittest.TestCase):
         self.assertIn("但你耶和华。", html)
         self.assertIn("removed added imagery", html)
 
+    def test_addresses_triggering_drift_rendered(self):
+        # The fix carries the drift notes that triggered it, so the reviewer sees
+        # triggering-drift -> revision -> re-check in one place.
+        fix = {"changed": True, "rationale": "restored imperative force",
+               "item": {"text": {"zh": "应当直说。"}},
+               "gate_ok": True, "gate_flags": [], "drift": {"drift": False},
+               "addresses": "softens the confessional duty"}
+        html = tch._suggested_block(self._cell_with_fix(fix))
+        self.assertIn("Addresses drift:", html)
+        self.assertIn("softens the confessional duty", html)
+
+    def test_no_addresses_no_block(self):
+        fix = {"changed": True, "rationale": "r", "item": {"text": {"zh": "x"}},
+               "gate_ok": True, "gate_flags": [], "drift": {"drift": False}}
+        self.assertNotIn("Addresses drift:", tch._suggested_block(self._cell_with_fix(fix)))
+
     def test_declined_fix_renders_no_fix_note(self):
         fix = {"changed": False, "rationale": "CUV renders it this way",
                "item": {"text": {"zh": "但你。"}},

@@ -124,9 +124,12 @@ def _suggested_block(cell):
         head = f"<div class=zh>{zh}</div>"
     else:
         head = "<div class=nofix>no fix — CUV wording</div>"
+    addresses = fix.get("addresses", "")
+    addr = (f"<div class=saddr><span class=reflabel>Addresses drift:</span> "
+            f"{html.escape(addresses)}</div>" if addresses else "")
     rationale = html.escape(fix.get("rationale", ""))
     return (f"<div class=suggest><span class=reflabel>Suggested fix:</span> {head}"
-            f"<div class=srat>{rationale}</div>"
+            f"{addr}<div class=srat>{rationale}</div>"
             f"<div class=badges>{badges}</div></div>")
 
 
@@ -193,6 +196,7 @@ def render_html(page):
  .cite-doctrine .citeref{{background:#f59e0b;color:#3a2600}}
  .suggest{{margin-top:6px;padding:6px;border-left:3px solid #f59e0b;background:#fffbeb}}
  .suggest .srat{{font-size:11px;color:#92400e;margin-top:2px}}
+ .suggest .saddr{{font-size:11px;color:#78350f;margin-top:2px}}
  .nofix{{font-style:italic;color:#92400e}}
 </style>
 <h1>Translation comparison — {esc(page['book'])} · draft run \
