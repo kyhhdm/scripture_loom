@@ -22,12 +22,19 @@ _RULES = """## Rules
    activity examples, answer options, dialogue, hypothetical phrases, a word
    under discussion — use Chinese double quotes “…”, NEVER 「…」. Corner brackets
    signal Scripture; ordinary quotes must not wear them.
-3. Use the SHORTEST contiguous CUV span that matches the English quote. A short
-   woven quote stays short: "servants of Christ Jesus" -> 「基督耶稣的仆人」, NOT the
-   whole of PHP.1.1. Only widen when the English phrase has no exact contiguous
-   CUV match, and then only to the smallest containing CUV clause — NEVER pad a
-   partial quote with the rest of the verse (that breaks the sentence). Never
-   invent a non-CUV rendering.
+3. Match the CUV EXTENT to the English source. Two separate things — do not let
+   one override the other:
+   - WORDING is always verbatim CUV (rule 2). Never paraphrase, never translate the
+     English yourself, never substitute non-CUV wording.
+   - EXTENT — how much of the verse you quote — is set by the English: quote the CUV
+     that says what the English quoted, and stop there. English quoted a phrase ->
+     the matching CUV phrase ("servants of Christ Jesus" -> 「基督耶稣的仆人」). English
+     quoted a whole verse -> the whole CUV verse.
+   Same WORDS as the CUV; same AMOUNT as the English. Do NOT add CUV words the
+   English did not quote (that adds Scripture the source withheld), and do NOT
+   translate the English to cover a gap (that leaves the CUV). "Verbatim CUV" governs
+   the words, NOT the length — a short English quote takes a short CUV span, still
+   verbatim.
 4. Use the MANDATED glossary rendering for every listed theological term; do
    not substitute a synonym.
 5. Preserve every doctrinal claim exactly (see the Westminster frame): do not
@@ -40,10 +47,9 @@ _RULES = """## Rules
 8. PRESERVE every <verse ref=...>/<doctrine std=...> tag from the English —
    keep the tag, never emit a bare 「…」 quote without its surrounding <verse>
    tag. Inside a <verse> tag put the verbatim CUV wording for that ref wrapped
-   in 「…」: <verse ref="PHP.1.6">「…CUV…」</verse> — the SHORTEST CUV span that
-   matches (rule 3), never the whole verse for a short quote. Translate the
-   paraphrase inside a <doctrine> tag but copy its std/ref unchanged. Never
-   invent or drop a tag.
+   in 「…」: <verse ref="PHP.1.6">「…CUV…」</verse> — at the extent set by rule 3
+   (words = CUV, amount = the English). Translate the paraphrase inside a
+   <doctrine> tag but copy its std/ref unchanged. Never invent or drop a tag.
 
 ## Output — STRICT JSON ONLY, no prose:
 {"text": {"zh": "..."},
