@@ -277,6 +277,39 @@ class TelemetryCaptureTest(unittest.TestCase):
             self.assertNotIn("prompt", r)  # never the body, only a hash
 
 
+class GateTraceTest(unittest.TestCase):
+    def test_trace_records_initial_and_rounds(self):
+        from content_bank.author.routing import RouteConfig
+        bad = json.dumps([dict(id="mat-035-d1-a", dimension="D9", type="question",
+                               age_tier="child", difficulty=1, review_status="draft",
+                               version=1, passage="MAT-035", text={"en": "x"})])
+        good = json.dumps([dict(id="mat-035-d1-a", dimension="D1", type="question",
+                                age_tier="child", difficulty=1, review_status="draft",
+                                version=1, passage="MAT-035",
+                                text={"en": "Who came to Jesus?"})])
+        seq = iter(["brief text", bad, good])  # brief, dirty draft, repaired
+
+        def fake_llm(prompt, route):
+            return _result(next(seq))
+
+        with tempfile.TemporaryDirectory() as d:
+            traces = pathlib.Path(d) / "gate_traces"
+            m = manifest_mod.init_manifest("MAT", ["MAT-035"])
+            mpath = pathlib.Path(d) / "manifest.json"
+            manifest_mod.save(mpath, m)
+            with mock.patch("content_bank.author.build_cli.llm", fake_llm):
+                build_cli.build_pericope(
+                    "MAT-035", "MAT", routes=RouteConfig.single("llm_core", "m"),
+                    drafts_dir=pathlib.Path(d) / "drafts",
+                    briefs_dir=pathlib.Path(d) / "briefs",
+                    manifest_obj=m, manifest_path=mpath, review_on=False,
+                    max_repair=2, gate_trace_dir=traces)
+            trace = json.loads((traces / "MAT-035.json").read_text())
+        self.assertFalse(trace["first_pass_clean"])
+        self.assertGreaterEqual(len(trace["rounds"]), 1)
+        self.assertTrue(trace["final_pass"])
+
+
 class RunSlugTest(unittest.TestCase):
     def test_defaults_and_overrides(self):
         self.assertEqual(build_cli._run_slug("llm_core", None), "deepseek-v4-flash")
