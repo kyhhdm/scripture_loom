@@ -10,10 +10,28 @@ import json
 import re
 
 from . import build_translate_prompt, gates, glossary as _glossary, quote_detect, store_writer
-from .llm import llm
+from .llm import llm, route_from_env
+from .telemetry import record_call
 from ..lib import content, corpus_bridge
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.DOTALL)
+
+
+def _seam(prompt, route, *, stage, sink=None, attr=None):
+    """Call the LLM seam with an explicit Route, optionally recording telemetry.
+
+    Duck-typed on the seam's return so a test mock that patches ``translate.llm``
+    to return a plain string still works (``.text`` when present, else the value);
+    a CallRecord is appended only when a ``sink`` is supplied."""
+    route = route or route_from_env()
+    res = llm(prompt, route)
+    has = hasattr(res, "text")
+    if sink is not None:
+        a = attr or {}
+        record_call(sink, experiment=a.get("experiment"), stage=stage,
+                    unit_id=a.get("unit_id"), kind=a.get("kind"), attempt=1,
+                    route=route, prompt=prompt, result=res if has else None)
+    return res.text if has else res
 
 
 def _extract_json(text):
@@ -51,13 +69,13 @@ def _merge_zh(item, resp):
     return out
 
 
-def translate_item(item, book, *, glossary=None, model=None):
+def translate_item(item, book, *, glossary=None, route=None, sink=None, attr=None):
     glossary = _glossary.load_glossary() if glossary is None else glossary
     detected = quote_detect.detect_quotes(item, book)
     applicable = _applicable_glossary(item, glossary)
     prompt = build_translate_prompt.build(item, book, detected=detected,
                                           glossary_entries=applicable)
-    resp = _extract_json(llm(prompt, model))
+    resp = _extract_json(_seam(prompt, route, stage="translate", sink=sink, attr=attr))
     return {"item": _merge_zh(item, resp),
             "terms": resp.get("terms", []),
             "uncertain": resp.get("uncertain", []),
@@ -95,14 +113,17 @@ def _repair_prompt(item, flags):
               '"leader_reference": {...}, "terms": [...], "uncertain": [...]}.')
 
 
-def translate_with_gates(item, book, *, glossary=None, model=None, max_repair=2):
+def translate_with_gates(item, book, *, glossary=None, route=None, max_repair=2,
+                         sink=None, attr=None):
     glossary = _glossary.load_glossary() if glossary is None else glossary
-    out = translate_item(item, book, glossary=glossary, model=model)
+    out = translate_item(item, book, glossary=glossary, route=route, sink=sink,
+                         attr=attr)
     flags = zh_gate_flags(out["item"], glossary)
     rounds = 0
     while flags and rounds < max_repair:
         rounds += 1
-        resp = _extract_json(llm(_repair_prompt(out["item"], flags), model))
+        resp = _extract_json(_seam(_repair_prompt(out["item"], flags), route,
+                                   stage="translate_repair", sink=sink, attr=attr))
         out["item"] = _merge_zh(out["item"], resp)
         if "terms" in resp:
             out["terms"] = resp["terms"]
@@ -114,7 +135,7 @@ def translate_with_gates(item, book, *, glossary=None, model=None, max_repair=2)
     return out
 
 
-def back_translate_review(item, *, model=None):
+def back_translate_review(item, *, drift_route=None, sink=None, attr=None):
     zh = " ".join(s for l, s in gates._lang_strings(item) if l == "zh")
     en = " ".join(s for l, s in gates._lang_strings(item) if l == "en")
     if not zh.strip():
@@ -126,7 +147,7 @@ def back_translate_review(item, *, model=None):
         f"## Original English\n{en}\n\n## Chinese to check\n{zh}\n\n"
         f"## Westminster frame\n{corpus_bridge.wcf_chapter1_text()}\n\n"
         'Return STRICT JSON ONLY: {"drift": true|false, "notes": "concrete"}.')
-    v = _extract_json(llm(prompt, model))
+    v = _extract_json(_seam(prompt, drift_route, stage="drift", sink=sink, attr=attr))
     return {"drift": bool(v.get("drift")), "notes": v.get("notes", "")}
 
 
@@ -152,20 +173,22 @@ def _fix_prompt(item, notes):
               '"uncertain": [...]}.')
 
 
-def suggest_drift_fix(item, book, drift, *, glossary=None, model=None,
-                      drift_model=None):
+def suggest_drift_fix(item, book, drift, *, glossary=None, route=None,
+                      drift_route=None, sink=None, attr=None):
     """Given a drift-flagged translated item, ask the model for a CUV-safe revision.
 
     Returns a suggested_fix dict (see plan), or None when ``drift`` did not fire.
     The original ``item`` is never mutated; on a declined fix it is returned as-is.
-    The revision is proposed by ``model``; the re-drift check uses ``drift_model``
-    when given (else ``model``), so a stronger reviewer can vet the fix.
+    The revision is proposed on ``route``; the re-drift check and CUV-divergence
+    note use ``drift_route`` (else ``route``), so a stronger reviewer can vet the fix.
     """
     if not drift.get("drift"):
         return None
     glossary = _glossary.load_glossary() if glossary is None else glossary
+    drift_route = drift_route or route
     triggering = drift.get("notes", "")
-    resp = _extract_json(llm(_fix_prompt(item, triggering), model))
+    resp = _extract_json(_seam(_fix_prompt(item, triggering), route,
+                               stage="translate_fix", sink=sink, attr=attr))
     rationale = resp.get("reason", "")
     # Accept a revision ONLY if it is a genuine, CUV-safe, resolving fix: the text
     # actually changed, it did NOT leave the CUV (no Scripture verse_mismatch), and
@@ -177,7 +200,8 @@ def suggest_drift_fix(item, book, drift, *, glossary=None, model=None,
         if _zh_blob(revised) != _zh_blob(item):
             flags = zh_gate_flags(revised, glossary)
             if not _left_the_cuv(flags):
-                new_drift = back_translate_review(revised, model=drift_model or model)
+                new_drift = back_translate_review(revised, drift_route=drift_route,
+                                                  sink=sink, attr=attr)
                 if not new_drift.get("drift"):
                     return {"changed": True, "rationale": rationale, "item": revised,
                             "gate_ok": not flags, "gate_flags": flags,
@@ -191,8 +215,9 @@ def suggest_drift_fix(item, book, drift, *, glossary=None, model=None,
     return {"changed": False, "rationale": rationale, "item": item,
             "gate_ok": not flags, "gate_flags": flags, "drift": drift,
             "addresses": triggering,
-            # the note is a drift-analysis task, so use the drift reviewer's model
-            "cuv_note": _cuv_divergence_note(item, triggering, drift_model or model)}
+            # the note is a drift-analysis task, so use the drift reviewer's route
+            "cuv_note": _cuv_divergence_note(item, triggering, route=drift_route,
+                                             sink=sink, attr=attr)}
 
 
 def _left_the_cuv(flags):
@@ -221,14 +246,15 @@ _CUV_NOTE_HEAD = (
     "<verse> tags — this is a prose note, not Scripture.")
 
 
-def _cuv_divergence_note(item, notes, model=None):
+def _cuv_divergence_note(item, notes, *, route=None, sink=None, attr=None):
     """One short Chinese leader-prep note explaining the English↔CUV divergence."""
     prompt = (_CUV_NOTE_HEAD
               + "\n\n## Drift note\n" + (notes or "")
               + "\n\n## Item (with its CUV zh)\n"
               + json.dumps(item, ensure_ascii=False, indent=2)
               + '\n\nReturn STRICT JSON ONLY: {"note": "..."}.')
-    return _extract_json(llm(prompt, model)).get("note", "")
+    return _extract_json(_seam(prompt, route, stage="translate_note", sink=sink,
+                               attr=attr)).get("note", "")
 
 
 def _merge_zh_into_store_item(store_item, proposal_item):

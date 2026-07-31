@@ -6,12 +6,12 @@ translate.promote for the human-gated landing step.
 import argparse
 import concurrent.futures
 import json
-import os
 import pathlib
 
 from ..lib import content
 from . import glossary as _glossary
 from .build_cli import _run_slug
+from .routing import Route
 from .translate import (translate_with_gates, back_translate_review,
                         suggest_drift_fix)
 
@@ -42,11 +42,13 @@ def out_dir_for(drafts_dir, backend, model):
     return str(pathlib.Path(drafts_dir).parent / "translations" / slug)
 
 
-def proposal_for(item, book, *, glossary=None, model=None, max_repair=2,
-                 suggest_fixes=True, drift_model=None):
-    out = translate_with_gates(item, book, glossary=glossary, model=model,
-                               max_repair=max_repair)
-    drift = back_translate_review(out["item"], model=drift_model or model)
+def proposal_for(item, book, *, glossary=None, route=None, max_repair=2,
+                 suggest_fixes=True, drift_route=None, sink=None, attr=None):
+    attr = attr or {"unit_id": item.get("id"), "kind": "item"}
+    out = translate_with_gates(item, book, glossary=glossary, route=route,
+                               max_repair=max_repair, sink=sink, attr=attr)
+    drift = back_translate_review(out["item"], drift_route=drift_route or route,
+                                  sink=sink, attr=attr)
     proposal = {"id": item["id"],
                 "en": (item.get("text") or {}).get("en", ""),
                 "item": out["item"], "cuv_refs": out.get("cuv_refs", []),
@@ -55,14 +57,15 @@ def proposal_for(item, book, *, glossary=None, model=None, max_repair=2,
                 "drift": drift}
     if suggest_fixes and drift["drift"]:
         sug = suggest_drift_fix(out["item"], book, drift, glossary=glossary,
-                                model=model, drift_model=drift_model)
+                                route=route, drift_route=drift_route,
+                                sink=sink, attr=attr)
         if sug is not None:
             proposal["suggested_fix"] = sug
     return proposal
 
 
-def run_proposals(items, book, *, glossary=None, model=None, max_repair=2,
-                  concurrency=4, suggest_fixes=True, drift_model=None):
+def run_proposals(items, book, *, glossary=None, route=None, max_repair=2,
+                  concurrency=4, suggest_fixes=True, drift_route=None, sink=None):
     """Translate every item and return proposals in input order.
 
     Items are independent, so they run in a thread pool (each item's own
@@ -76,8 +79,9 @@ def run_proposals(items, book, *, glossary=None, model=None, max_repair=2,
     with concurrent.futures.ThreadPoolExecutor(
             max_workers=max(1, concurrency)) as ex:
         futs = {ex.submit(proposal_for, it, book, glossary=glossary,
-                          model=model, max_repair=max_repair,
-                          suggest_fixes=suggest_fixes, drift_model=drift_model): i
+                          route=route, max_repair=max_repair,
+                          suggest_fixes=suggest_fixes, drift_route=drift_route,
+                          sink=sink): i
                 for i, it in enumerate(items)}
         for fut in concurrent.futures.as_completed(futs):
             i = futs[fut]
@@ -128,7 +132,8 @@ def main(argv=None):
     ap.add_argument("--out")
     args = ap.parse_args(argv)
 
-    os.environ["SCRIPTURE_LOOM_LLM_BACKEND"] = args.backend
+    route = Route(args.backend, args.model)
+    drift_route = Route(args.backend, args.drift_model or args.model)
 
     if args.drafts_dir:
         items = load_drafts(args.drafts_dir)
@@ -142,10 +147,10 @@ def main(argv=None):
 
     glossary = _glossary.load_glossary()
     proposals = run_proposals(items, args.book, glossary=glossary,
-                              model=args.model, max_repair=args.max_repair,
+                              route=route, max_repair=args.max_repair,
                               concurrency=args.concurrency,
                               suggest_fixes=args.suggest_fixes,
-                              drift_model=args.drift_model)
+                              drift_route=drift_route)
     write_proposals(proposals, out_dir)
     print(f"Done. proposals={len(proposals)}/{len(items)} -> {out_dir}")
     return 0

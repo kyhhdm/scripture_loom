@@ -1,11 +1,11 @@
 import json
-import os
 import pathlib
 import tempfile
 import unittest
 from unittest import mock
 from content_bank.author import translate_cli, translate, build_cli
 from content_bank.author import translate_cli as tc
+from content_bank.author.routing import Route
 
 STORE = {"book": "PHP", "items": [
     {"id": "PHP-001-D1-01", "passage": "PHP.1.1-11", "dimension": "D1",
@@ -116,7 +116,6 @@ class TestDraftsInput(unittest.TestCase):
         f = (pathlib.Path(dd).parent / "translations" / "deepseek-v4-flash"
              / "PHP-001-D1-01.json")
         self.assertTrue(f.exists())
-        self.assertEqual(os.environ.get("SCRIPTURE_LOOM_LLM_BACKEND"), "llm_core")
 
 
 class TestSuggestFixWiring(unittest.TestCase):
@@ -161,17 +160,18 @@ class TestSuggestFixWiring(unittest.TestCase):
                "terms": [], "uncertain": []}
         a, b, c = self._patch({"drift": True, "notes": "n"}, sug)
         with a, b as btr, c as sdf:
-            tc.proposal_for(self.ITEM, "PSA", glossary=[], model="flash",
-                            drift_model="pro", suggest_fixes=True)
-        # drift review ran on the drift model, not the translation model
-        self.assertEqual(btr.call_args.kwargs.get("model"), "pro")
-        # suggest_drift_fix received both the translation model and drift_model
-        self.assertEqual(sdf.call_args.kwargs.get("model"), "flash")
-        self.assertEqual(sdf.call_args.kwargs.get("drift_model"), "pro")
+            tc.proposal_for(self.ITEM, "PSA", glossary=[],
+                            route=Route("llm_core", "flash"),
+                            drift_route=Route("llm_core", "pro"), suggest_fixes=True)
+        # drift review ran on the drift route, not the translation route
+        self.assertEqual(btr.call_args.kwargs.get("drift_route").model, "pro")
+        # suggest_drift_fix received both the translation route and drift_route
+        self.assertEqual(sdf.call_args.kwargs.get("route").model, "flash")
+        self.assertEqual(sdf.call_args.kwargs.get("drift_route").model, "pro")
 
-    def test_drift_model_defaults_to_model(self):
+    def test_drift_route_defaults_to_route(self):
         a, b, c = self._patch({"drift": False, "notes": ""}, None)
         with a, b as btr, c:
-            tc.proposal_for(self.ITEM, "PSA", glossary=[], model="flash",
-                            suggest_fixes=True)
-        self.assertEqual(btr.call_args.kwargs.get("model"), "flash")
+            tc.proposal_for(self.ITEM, "PSA", glossary=[],
+                            route=Route("llm_core", "flash"), suggest_fixes=True)
+        self.assertEqual(btr.call_args.kwargs.get("drift_route").model, "flash")

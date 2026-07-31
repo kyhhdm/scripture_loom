@@ -1,6 +1,7 @@
 import unittest
 from unittest import mock
 from content_bank.author import translate
+from content_bank.author.routing import Route
 
 ITEM = {"id": "PHP-001-D1-01", "passage": "PHP.1.1-11", "dimension": "D1",
         "type": "question", "review_status": "reviewed",
@@ -14,6 +15,34 @@ LLM_JSON = ('{"text": {"zh": "谁是「基督耶稣的仆人」？"},'
             ' "verse": {"zh": "腓立比书 1:1"}},'
             ' "terms": [{"en": "saints", "zh": "圣徒"}],'
             ' "uncertain": []}')
+
+
+class TestTranslateSeamRouting(unittest.TestCase):
+    def test_route_reaches_seam_and_sink_records(self):
+        import pathlib
+        import tempfile
+        from content_bank.author.telemetry import (LLMResult, TelemetrySink,
+                                                    TokenUsage)
+        seen = {}
+
+        def fake_llm(prompt, route):
+            seen["model"] = route.model
+            return LLMResult(text=LLM_JSON, usage=TokenUsage(input=5, output=9),
+                             requested_model=route.model, actual_model=route.model,
+                             stop_reason=None, duration_ms=1, usage_source="provider")
+
+        with tempfile.TemporaryDirectory() as d:
+            sink = TelemetrySink(pathlib.Path(d) / "calls.jsonl")
+            with mock.patch.object(translate, "llm", fake_llm):
+                translate.translate_item(ITEM, "PHP", glossary=[],
+                                         route=Route("llm_core", "flash"),
+                                         sink=sink, attr={"experiment": "e",
+                                                          "unit_id": "PHP-001-D1-01"})
+            records = list(sink.records())
+        self.assertEqual(seen["model"], "flash")
+        self.assertEqual(len(records), 1)
+        self.assertEqual(records[0]["stage"], "translate")
+        self.assertEqual(records[0]["unit_id"], "PHP-001-D1-01")
 
 
 class TestTranslateItem(unittest.TestCase):
@@ -220,13 +249,14 @@ class TestSuggestDriftFix(unittest.TestCase):
         seq = iter(['{"changed": false, "reason": "CUV"}', '{"note": "n"}'])
         seen = []
 
-        def rec(prompt, model=None):
-            seen.append(model)
+        def rec(prompt, route=None):
+            seen.append(route.model)
             return next(seq)
 
         with mock.patch.object(translate, "llm", side_effect=rec):
             translate.suggest_drift_fix(self.ITEM, "PSA", {"drift": True, "notes": "x"},
-                                        glossary=[], model="flash", drift_model="pro")
+                                        glossary=[], route=Route("llm_core", "flash"),
+                                        drift_route=Route("llm_core", "pro"))
         self.assertEqual(seen[0], "flash")   # the fix attempt uses the translation model
         self.assertEqual(seen[1], "pro")     # the CUV-divergence note uses the drift model
 
