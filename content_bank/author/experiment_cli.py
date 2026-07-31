@@ -241,6 +241,17 @@ def _experiment_has_book(exp_dir, book):
     return (exp_dir / book / "runs" / name / "drafts").is_dir()
 
 
+def _compare_filename(kind, names, books):
+    """A single output filename reflecting the compared experiments (and books when
+    a subset is requested): kind_<name1>__<name2>[__<book1>-<book2>].html, with the
+    experiment list collapsed to '<first>__and_N_more' if it would be too long."""
+    joined = "__".join(names)
+    if len(joined) > 80:
+        joined = f"{names[0]}__and_{len(names) - 1}_more"
+    tail = f"__{'-'.join(books)}" if len(books) == 1 else ""
+    return f"{kind}_{joined}{tail}.html"
+
+
 def _books_across(dirs, book):
     """Resolve the book set to render for a compare call: the explicit book, else
     every book found across the experiment dirs (sorted)."""
@@ -313,25 +324,20 @@ def main(argv=None):
         names = [n for n in a.experiments.split(",") if n]
         dirs = [pathlib.Path(a.out_root) / n for n in names]
         books = _books_across(dirs, a.book)
-        wrote = []
-        for book in books:
-            bdirs = [d for d in dirs if _experiment_has_book(d, book)]
-            if not bdirs:
-                continue
-            if a.cmd == "compare":
-                html = compare_html.render_experiments(book, bdirs)
-                default = f"{a.out_root}/compare_{book}.html"
-            else:
-                html = translate_compare_html.render_experiment_translations(book, bdirs)
-                default = f"{a.out_root}/compare_translations_{book}.html"
-            out_path = pathlib.Path(a.out) if (a.out and len(books) == 1) \
-                else pathlib.Path(default)
-            out_path.write_text(html, encoding="utf-8")
-            wrote.append(str(out_path))
-        for p in wrote:
-            print(f"Wrote {p}")
-        if not wrote:
-            print("Nothing to compare (no experiment contained the requested book).")
+        if not books:
+            print("Nothing to compare (no books found across the experiments).")
+            return 0
+        kind = "compare" if a.cmd == "compare" else "compare_translations"
+        if a.cmd == "compare":
+            html = compare_html.render_experiments(books, dirs)
+        else:
+            html = translate_compare_html.render_experiment_translations(books, dirs)
+        default = f"{a.out_root}/{_compare_filename(kind, names, books)}"
+        out_path = pathlib.Path(a.out or default)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(html, encoding="utf-8")
+        print(f"Wrote {out_path}  ({len(names)} experiments, {len(books)} books: "
+              f"{', '.join(books)})")
         return 0
     return 1
 

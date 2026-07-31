@@ -518,37 +518,66 @@ def _esc(s):
     return (str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
 
 
-def render_experiments(book, experiment_dirs):
-    """Render ONE comparison page whose columns are named experiments (#35).
-
-    Each ``experiment_dir`` is an ``experiments-out/<name>`` tree with a
-    ``manifest.json`` (route matrix + aggregate telemetry) and a nested
-    ``<book>/runs/<name>/{drafts,verdicts,briefs}``. Per-unit items, citation
-    highlighting, leader references, verdict badges, and accept/export are the
-    existing per-item rendering, unchanged.
-    """
+def _experiment_specs(experiment_dirs, book):
+    """Specs (name/matrix/aggregate/dirs) for the experiments that cover ``book``."""
     specs = []
     for d in experiment_dirs:
         d = pathlib.Path(d)
         manifest = json.loads((d / "manifest.json").read_text(encoding="utf-8"))
         name = manifest["name"]
         run_dir = d / book / "runs" / name
+        if not (run_dir / "drafts").is_dir():
+            continue
         specs.append({
             "name": name,
             "matrix": manifest.get("route_matrix", {}),
             "aggregate": manifest.get("aggregate", {}),
             "dirs": (run_dir / "drafts", run_dir / "verdicts", run_dir / "briefs"),
         })
-    by_name = {s["name"]: s["dirs"] for s in specs}
+    return specs
 
-    def resolve(run):
-        return by_name[run]
 
-    model = build_model(book, [s["name"] for s in specs], resolve=resolve)
-    model["title"] = f"Compare experiments — {book}"
-    model["matrix_html"] = _experiment_matrix_html(specs)
-    model["route_matrix"] = {s["name"]: s["matrix"] for s in specs}
-    model["telemetry"] = {s["name"]: s["aggregate"] for s in specs}
+def render_experiments(book, experiment_dirs):
+    """Render ONE comparison page whose columns are named experiments (#35).
+
+    ``book`` may be a single book code or a list of book codes; multiple books are
+    merged into one page (units are book-prefixed, so they stay distinct), each
+    book's units gated against its own book. Per-unit items, citation
+    highlighting, leader references, verdict badges, and accept/export are the
+    existing per-item rendering, unchanged.
+    """
+    books = [book] if isinstance(book, str) else list(book)
+    all_specs = {}          # name -> spec (first seen), for the route/telemetry matrix
+    runs_order, merged_units, notes = [], [], []
+    rubric_text = None
+    for b in books:
+        specs = _experiment_specs(experiment_dirs, b)
+        if not specs:
+            continue
+        by_name = {s["name"]: s["dirs"] for s in specs}
+        m = build_model(b, [s["name"] for s in specs],
+                        resolve=lambda run, bn=by_name: bn[run])
+        merged_units.extend(m["units"])
+        notes.extend(m.get("notes") or [])
+        rubric_text = m["rubric"]
+        for s in specs:
+            if s["name"] not in runs_order:
+                runs_order.append(s["name"])
+            all_specs.setdefault(s["name"], s)
+    seen = set()
+    notes = [n for n in notes if not (n in seen or seen.add(n))]
+    label = ", ".join(books)
+    model = {
+        "book": "+".join(books),
+        "runs": runs_order,
+        "notes": notes,
+        "rubric": rubric_text or (rubric.build() + "\n\n" + rubric.reference_criteria()),
+        "units": merged_units,
+        "title": f"Compare experiments — {label}",
+        "matrix_html": _experiment_matrix_html(list(all_specs.values())),
+        "route_matrix": {n: s["matrix"] for n, s in all_specs.items()},
+        "telemetry": {n: s["aggregate"] for n, s in all_specs.items()},
+    }
     return render_html(model)
 
 

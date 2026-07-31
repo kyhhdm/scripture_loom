@@ -236,6 +236,26 @@ class ExperimentColumnsTest(unittest.TestCase):
         # item text is embedded in the page data
         self.assertIn("Who wrote to the Philippians?", html)
 
+    def test_multiple_books_merge_into_one_page(self):
+        with tempfile.TemporaryDirectory() as root:
+            # one experiment spanning PHP + JON.
+            d = pathlib.Path(root) / "gp"
+            for book, unit, txt in (("PHP", "PHP-001", "Philippi question"),
+                                    ("JON", "JON-001", "Jonah question")):
+                rd = d / book / "runs" / "gp" / "drafts"
+                rd.mkdir(parents=True)
+                (rd / f"{unit}.json").write_text(json.dumps(
+                    [_item(f"{unit}-a", "D1", text=txt)]))
+            d.joinpath("manifest.json").write_text(json.dumps(
+                {"name": "gp", "route_matrix": {"draft": {"backend": "claude",
+                 "model": "opus"}}, "aggregate": {}}))
+            html = compare_html.render_experiments(["PHP", "JON"], [d])
+        # both books' units in the single page
+        self.assertIn("Philippi question", html)
+        self.assertIn("Jonah question", html)
+        self.assertIn("PHP-001-a", html)
+        self.assertIn("JON-001-a", html)
+
 
 if __name__ == "__main__":
     unittest.main()

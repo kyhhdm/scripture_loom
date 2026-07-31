@@ -92,13 +92,13 @@ uv run python -m content_bank.author.experiment_cli evaluate NAME
 # Translate an experiment's English drafts to CUV-aligned Chinese proposals
 uv run python -m content_bank.author.experiment_cli translate NAME [--concurrency N]
 
-# Draft comparison, one column per experiment. --book optional: omit to emit one
-# page per book found across the experiments (filters each page to the experiments
-# that actually contain that book).
+# Draft comparison, one column per experiment. --book optional: omit to include
+# every book found across the experiments. Writes ONE file named from the inputs
+# (e.g. compare_NAME_A__NAME_B.html), each book's units gated against its own book.
 uv run python -m content_bank.author.experiment_cli compare --experiments NAME_A,NAME_B
-uv run python -m content_bank.author.experiment_cli compare --book PHP --experiments NAME_A,NAME_B
+uv run python -m content_bank.author.experiment_cli compare --book PHP --experiments NAME_A,NAME_B --out review.html
 
-# ZH translation comparison: English ▸ CUV ▸ one zh column per experiment
+# ZH translation comparison: English ▸ CUV ▸ one zh column per experiment (one file)
 uv run python -m content_bank.author.experiment_cli compare-translations --experiments NAME_A,NAME_B
 ```
 

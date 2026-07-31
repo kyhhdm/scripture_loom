@@ -142,6 +142,19 @@ class RunnerTest(unittest.TestCase):
             self.assertTrue(ex._experiment_has_book(php, "PHP"))
             self.assertFalse(ex._experiment_has_book(php, "JON"))
 
+    def test_compare_filename_reflects_inputs(self):
+        # single output file named from the experiment list (+ book when narrowed)
+        self.assertEqual(
+            ex._compare_filename("compare", ["a", "b"], ["PHP", "JON"]),
+            "compare_a__b.html")
+        self.assertEqual(
+            ex._compare_filename("compare", ["a", "b"], ["PHP"]),
+            "compare_a__b__PHP.html")
+        long = [f"experiment_number_{i}" for i in range(9)]
+        self.assertTrue(
+            ex._compare_filename("compare", long, ["PHP"]).startswith(
+                "compare_experiment_number_0__and_8_more"))
+
     def test_snapshot_reports_unavailable_honestly(self):
         snap = ex._subscription_snapshot()
         self.assertFalse(snap["available"])

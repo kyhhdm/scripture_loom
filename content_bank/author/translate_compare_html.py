@@ -76,12 +76,17 @@ def _load_experiment_translations(exp_dir, book):
 
 def render_experiment_translations(book, experiment_dirs):
     """Render EN ▸ CUV ▸ one zh column per experiment, from each experiment's
-    translation proposals (Part 3 of the experiment comparison tools)."""
+    translation proposals. ``book`` may be a single code or a list; multiple books
+    merge into one page (rows are book-prefixed item ids, so they stay distinct)."""
+    books = [book] if isinstance(book, str) else list(book)
     names = [pathlib.Path(d).name for d in experiment_dirs]
-    loaded = {pathlib.Path(d).name: _load_experiment_translations(d, book)
-              for d in experiment_dirs}
-    page = {"book": book, "draft_run": "experiments", "translators": names,
-            "rows": _build_rows(loaded, names)}
+    rows = []
+    for b in books:
+        loaded = {pathlib.Path(d).name: _load_experiment_translations(d, b)
+                  for d in experiment_dirs}
+        rows.extend(_build_rows(loaded, names))
+    page = {"book": "+".join(books), "draft_run": "experiments",
+            "translators": names, "rows": rows}
     return render_html(page)
 
 
