@@ -10,6 +10,14 @@ self-publishes. Promotion to the store is a separate, human-gated step.
 For the vocabulary used below (pericope, section, brief, gate, r1/r2, provenance,
 citation tags), see `docs/content_build_terminology.md`.
 
+To run the pipeline with a **different model per stage** (a hybrid experiment) and
+capture per-call token/cost telemetry, gate traces, and a comparison page, use the
+named experiment runner instead — see `docs/content_experiment_usage.md`. Model
+selection is now driven by an explicit **route** (`--backend/--model` builds a
+single-model route for every stage; an experiment config assigns one per stage);
+the old `SCRIPTURE_LOOM_LLM_BACKEND`/`SCRIPTURE_LOOM_LLM_MODEL` mid-pipeline
+switching is gone.
+
 ---
 
 ## Recommended configuration (from this project's experiments)

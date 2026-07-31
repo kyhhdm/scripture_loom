@@ -1,0 +1,130 @@
+# Content-pipeline experiments (`experiment_cli.py`)
+
+A **named experiment** runs the real content-build pipeline (same deterministic
+gates and two-lens review as the standalone builder) with an explicit
+**per-stage model route**, retains normalized per-call token/timing telemetry and
+gate traces, runs the D1–D8 fit evaluator on a fixed evaluator route, and writes a
+self-contained, immutable result tree you can compare against other experiments.
+
+The **experiment name is the identity** — not a single model slug — so hybrid
+pipelines (e.g. Gemini brief/review, Opus draft, Sonnet repair) are first-class.
+
+Built per issue #35; design: `docs/superpowers/specs/2026-07-31-content-pipeline-experiments-design.md`.
+
+## Configuration
+
+An experiment is a JSON file under `experiments/` (see `experiments/example.json`):
+
+```json
+{
+  "schema_version": 1,
+  "name": "php_hybrid_v1",
+  "book": "PHP",
+  "units": ["PHP-001", "PHP-002"],
+  "routes": {
+    "brief":     {"backend": "llm_core", "model": "gemini-3.6-flash"},
+    "draft":     {"backend": "claude",   "model": "opus", "settings": {"effort": "high"}},
+    "repair":    {"backend": "claude",   "model": "sonnet"},
+    "review_r1": {"backend": "llm_core", "model": "gemini-3.6-flash"},
+    "review_r2": {"backend": "llm_core", "model": "gemini-3.6-flash"},
+    "revise":    {"backend": "claude",   "model": "sonnet"}
+  },
+  "gates": {"max_repair": 2, "dim_cap": 6},
+  "evaluator": {"backend": "claude", "model": "sonnet"}
+}
+```
+
+- Every LLM **stage** (`brief`, `draft`, `repair`, `review_r1`, `review_r2`,
+  `revise`) gets its own `{backend, model, settings?}` route.
+- `evaluator` is the **D1–D8 fit** route, fixed independently of `draft`.
+- `units: null` (or omit) ⇒ every pending/briefed unit of the book.
+- **No credentials in the config** — provider keys live in the environment
+  (`ARK_API_KEY`, `GEMINI_API_KEY`/`GOOGLE_API_KEY`, or the Claude subscription
+  login). Validation rejects any `api_key`/`token`-like field.
+
+The config is **immutable per name**: a `config_hash` folds in the config, the
+corpus revision (`git rev-parse HEAD:corpus/canon`), and a prompt-builder version.
+Re-running a name whose hash changed is refused; an identical hash resumes.
+
+## Commands
+
+```bash
+# Check a config (structure + credential-leak scan)
+uv run python -m content_bank.author.experiment_cli validate experiments/NAME.json
+
+# Run it — writes experiments-out/NAME/
+uv run python -m content_bank.author.experiment_cli run experiments/NAME.json
+
+# Resume an interrupted run (identical config only; completed units are skipped)
+uv run python -m content_bank.author.experiment_cli run experiments/NAME.json --resume
+
+# Rebuild the metrics report from an existing run (no new LLM calls)
+uv run python -m content_bank.author.experiment_cli evaluate NAME
+
+# One comparison page, one column per experiment
+uv run python -m content_bank.author.experiment_cli compare --book PHP --experiments NAME_A,NAME_B
+```
+
+## Result tree
+
+```
+experiments-out/NAME/
+  manifest.json            frozen config + config_hash + corpus_rev + route matrix
+                           + before/after subscription snapshots + aggregate telemetry
+  calls.jsonl              append-only, one CallRecord per LLM attempt
+  gate_traces/UNIT.json    initial flags, each repair round (route + tokens),
+                           item drops, first-pass vs final status
+  report.json              deterministic + D1-D8 fit metrics, extended (below)
+  PHP/runs/NAME/           drafts/  briefs/  verdicts/  (the built content)
+```
+
+### Telemetry honesty
+
+Each `CallRecord` carries a `usage_source`:
+
+- **`provider`** — real per-call usage from `claude -p --output-format json`
+  (input/output plus cache-creation/cache-read tokens).
+- **`local_estimate`** — llm_core's locally-tokenized token counts (no
+  cache/thinking breakdown). Cost there is derived from a price table; for the
+  subscription `claude` path cost is `null` (marginal cost ≈ 0 — raw tokens are the
+  truth).
+
+Records never contain credentials or prompt/response bodies — only a
+`prompt_hash`.
+
+### Subscription snapshot
+
+The individual Claude CLI exposes per-call usage but **no documented
+machine-readable remaining-allowance endpoint**, so account snapshots are
+best-effort and record an explicit `available: false` reason rather than scraping
+interactive output. (The quota is usage-metered, not call-count-metered; throttle a
+whole-book Opus run with build concurrency, not by reducing call count.)
+
+### Extended metrics (`report.json`)
+
+Calls and tokens by stage/backend/model; Claude calls specifically; tokens, time,
+and estimated cost per completed unit and per accepted item; first-pass and final
+gate rates; repairs and tokens per repaired unit; D1–D8 fit mismatch and
+missing/padded-dimension counts; and `evaluator_is_drafter` — whether the fit
+judge is the same model as the drafter.
+
+## Fair-comparison recipe
+
+To make a comparison measure the **pipeline routes** rather than noise, hold these
+identical across the experiments you compare:
+
+1. **Same units** — the exact same `units` list.
+2. **Same corpus revision** — run them at the same `HEAD:corpus/canon` (the
+   `config_hash` records it; a differing `corpus_rev` means they are not
+   comparable).
+3. **Same prompts and gates** — same `PROMPT_VERSION`, `max_repair`, and `dim_cap`.
+4. **Same evaluator route** — fix the `evaluator` block to one model across all
+   experiments, so quality deltas reflect the routes under test, not the judge.
+   Watch `evaluator_is_drafter`: a judge that is also the drafter is not
+   independent.
+
+Then vary only the one thing you are testing (e.g. the `draft` route).
+
+Product note: generated items are **draft-only**, WCF-1 constrained, and
+evidence-not-judgment; nothing here publishes to the store. Staging remains a
+separate, human-gated step.
