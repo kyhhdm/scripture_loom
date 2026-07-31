@@ -46,13 +46,16 @@ def _reviewer_prompt(lens, rubric_text, items, passage_text, brief):
             '{"verdict":"pass"|"fail","notes":"concrete"}. No prose.')
 
 
-def review(items, *, passage_text, brief, book, unit_id):
+def review(items, *, passage_text, brief, book, unit_id,
+           r1_route=None, r2_route=None):
+    r1_route = r1_route or route_from_env()
+    r2_route = r2_route or route_from_env()
     out = []
-    for name, lens, rubric_text in (
-            ("r1", _R1, rubric.build()),
-            ("r2", _R2, rubric.build() + "\n" + rubric.reference_criteria())):
+    for name, lens, rubric_text, route in (
+            ("r1", _R1, rubric.build(), r1_route),
+            ("r2", _R2, rubric.build() + "\n" + rubric.reference_criteria(), r2_route)):
         raw = llm(_reviewer_prompt(lens, rubric_text, items, passage_text, brief),
-                  route_from_env())
+                  route)
         out.append({"reviewer": name, "verdicts": _extract_json(raw)})
     return out
 
@@ -66,7 +69,8 @@ def _failed_ids(verdicts):
     return ids
 
 
-def revise(items, verdicts, *, passage_text, brief):
+def revise(items, verdicts, *, passage_text, brief, route=None):
+    route = route or route_from_env()
     failed = _failed_ids(verdicts)
     if not failed:
         return items
@@ -80,5 +84,5 @@ def revise(items, verdicts, *, passage_text, brief):
         f"## Reviewer verdicts (JSON)\n{json.dumps(verdicts, ensure_ascii=False)}\n\n"
         f"## Current items (JSON)\n{json.dumps(items, ensure_ascii=False)}\n\n"
         "Return ONLY the full corrected JSON array.")
-    raw = llm(prompt, route_from_env())
+    raw = llm(prompt, route)
     return _extract_json(raw)

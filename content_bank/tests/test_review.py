@@ -6,6 +6,7 @@ from unittest import mock
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))
 from content_bank.author import review
+from content_bank.author.routing import Route
 
 
 def _item(iid, **kw):
@@ -27,8 +28,36 @@ class ReviewTest(unittest.TestCase):
         merged = {v["reviewer"]: v["verdicts"] for v in verdicts}
         self.assertEqual(merged["r2"]["a"]["verdict"], "fail")
 
+    def test_review_uses_r1_and_r2_routes(self):
+        seen = []
+
+        def fake_llm(prompt, route):
+            seen.append(route.model)
+            return '{"verdicts": {}}'
+
+        with mock.patch.object(review, "llm", fake_llm):
+            review.review([_item("a")], passage_text="p", brief="b",
+                          book="PHP", unit_id="PHP-001",
+                          r1_route=Route("llm_core", "m1"),
+                          r2_route=Route("claude", "m2"))
+        self.assertEqual(seen, ["m1", "m2"])
+
 
 class ReviseTest(unittest.TestCase):
+    def test_revise_uses_given_route(self):
+        items = [_item("a")]
+        verdicts = [{"reviewer": "r1", "verdicts": {"a": {"verdict": "fail",
+                     "notes": "fix"}}}]
+        seen = {}
+
+        def fake_llm(prompt, route):
+            seen["model"] = route.model
+            return json.dumps(items)
+
+        with mock.patch.object(review, "llm", fake_llm):
+            review.revise(items, verdicts, passage_text="P", brief="B",
+                          route=Route("claude", "sonnet"))
+        self.assertEqual(seen["model"], "sonnet")
     def test_revise_returns_corrected_array(self):
         items = [_item("a"), _item("b")]
         verdicts = [{"reviewer": "r1", "verdicts": {"a": {"verdict": "fail",
