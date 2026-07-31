@@ -91,11 +91,24 @@ def _merge_eval(acc, book_eval, name):
 def _run_fit_evaluation(out, name, groups, evaluator_route, sink):
     """Run the deterministic + D1-D8-fit evaluator per book on an experiment's
     drafts and merge into one cross-book evaluator report. ``groups`` is
-    ``{book: units | None}``; drafts are read from ``out/<book>/runs/<name>/``."""
+    ``{book: units | None}``; drafts are read from ``out/<book>/runs/<name>/``.
+
+    Only units that actually produced a draft are evaluated — a unit that failed
+    to build (gates never came clean) has no draft file, so it is skipped here
+    rather than raising; the failure is already recorded in the build result."""
     eval_report = {"runs": {name: {"units": {}, "aggregate": {}}}}
     for book, units in groups.items():
+        drafts_dir = out / book / "runs" / name / "drafts"
+        present = ({p.stem for p in drafts_dir.glob("*.json")}
+                   if drafts_dir.is_dir() else set())
+        if units is None:
+            eval_units = None  # whole book -> evaluate every draft present
+        else:
+            eval_units = [u for u in units if u in present]
+            if not eval_units:
+                continue
         book_eval = quality_eval.evaluate(
-            book, [name], units=units, base=out,
+            book, [name], units=eval_units, base=out,
             evaluator_route=evaluator_route, sink=sink)
         _merge_eval(eval_report, book_eval, name)
     return eval_report

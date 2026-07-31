@@ -190,6 +190,30 @@ class RunnerTest(unittest.TestCase):
             self.assertFalse(written["metrics"]["evaluator_is_drafter"])
             self.assertEqual(written["metrics"]["evaluator"]["fit_misclassified"], 1)
 
+    def test_fit_evaluation_skips_units_that_failed_to_build(self):
+        # A unit that failed to build has no draft file; evaluation must skip it
+        # (only evaluate what was drafted) rather than raising FileNotFoundError.
+        with tempfile.TemporaryDirectory() as d:
+            out = pathlib.Path(d) / "exp"
+            # PHP requested PHP-002 + PHP-005 but only PHP-005 built a draft.
+            dd = out / "PHP" / "runs" / "exp" / "drafts"
+            dd.mkdir(parents=True)
+            (dd / "PHP-005.json").write_text(json.dumps([{"id": "PHP-005-a"}]))
+            seen = {}
+
+            def fake_eval(book, runs, **kw):
+                seen["units"] = kw.get("units")
+                return {"runs": {"exp": {"units": {}, "aggregate": {}}}}
+
+            with mock.patch("content_bank.author.quality_eval.evaluate",
+                            side_effect=fake_eval):
+                rep = ex._run_fit_evaluation(
+                    out, "exp", {"PHP": ["PHP-002", "PHP-005"]},
+                    ex.Route("llm_core", "m"), None)
+            # only the drafted unit was passed to the evaluator
+            self.assertEqual(seen["units"], ["PHP-005"])
+            self.assertIn("runs", rep)
+
     def test_snapshot_reports_unavailable_honestly(self):
         snap = ex._subscription_snapshot()
         self.assertFalse(snap["available"])
