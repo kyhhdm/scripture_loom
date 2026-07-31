@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "name": "php_hybrid_example",
+  "book": "PHP",
+  "units": ["PHP-001", "PHP-002"],
+  "routes": {
+    "brief":     {"backend": "llm_core", "model": "gemini-3.6-flash"},
+    "draft":     {"backend": "claude",   "model": "opus", "settings": {"effort": "high"}},
+    "repair":    {"backend": "claude",   "model": "sonnet"},
+    "review_r1": {"backend": "llm_core", "model": "gemini-3.6-flash"},
+    "review_r2": {"backend": "llm_core", "model": "gemini-3.6-flash"},
+    "revise":    {"backend": "claude",   "model": "sonnet"}
+  },
+  "gates": {"max_repair": 2, "dim_cap": 6},
+  "evaluator": {"backend": "claude", "model": "sonnet"}
+}
