@@ -33,6 +33,13 @@ class RepairPromptCitationHintTest(unittest.TestCase):
         self.assertNotIn("Fixing citation.* flags", without)
 
 
+def _result(text):
+    from content_bank.author.telemetry import LLMResult, TokenUsage
+    return LLMResult(text=text, usage=TokenUsage(), requested_model=None,
+                     actual_model=None, stop_reason=None, duration_ms=1,
+                     usage_source="local_estimate")
+
+
 class BackoffTest(unittest.TestCase):
     def test_retries_then_succeeds(self):
         calls = {"n": 0}
@@ -41,7 +48,7 @@ class BackoffTest(unittest.TestCase):
             calls["n"] += 1
             if calls["n"] < 3:
                 raise RuntimeError("rate limit")
-            return "ok"
+            return _result("ok")
 
         with mock.patch("content_bank.author.build_cli.llm", side_effect=flaky), \
              mock.patch("content_bank.author.build_cli.time.sleep"):
@@ -206,7 +213,7 @@ class RouteDrivenBuildTest(unittest.TestCase):
 
         def fake_llm(prompt, route):
             seen.append(route.model)
-            return "brief text" if len(seen) == 1 else clean_draft
+            return _result("brief text" if len(seen) == 1 else clean_draft)
 
         routes = RouteConfig(
             brief=Route("llm_core", "brief-m"), draft=Route("claude", "draft-m"),

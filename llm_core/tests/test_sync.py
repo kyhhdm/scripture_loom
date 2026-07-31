@@ -46,10 +46,34 @@ class RunSyncLLMTest(unittest.TestCase):
             out = sync.run_batch_llm([("s1", "u1"), ("s2", "u2")])
         self.assertEqual(out, ["a", ""])
 
+    def test_result_returns_text_and_summary(self):
+        fake = {"generations": [{"generation": "body", "error": None}],
+                "summary": {"model": "deepseek-v4-flash", "tokens_in_total": 10,
+                            "tokens_out_total": 4, "cost": 0.01}}
+        with mock.patch("llm_core.service.LLMService.run_batch_sync",
+                        return_value=fake), \
+                mock.patch.object(sync, "llm_configured", return_value=True):
+            text, summary = sync.run_sync_llm_result("s", "u",
+                                                     model="deepseek-v4-flash")
+        self.assertEqual(text, "body")
+        self.assertEqual(summary["tokens_in_total"], 10)
+        self.assertEqual(summary["cost"], 0.01)
+
+    def test_result_raises_on_errored_generation(self):
+        fake = {"generations": [{"generation": "", "error": "model_returned_empty"}],
+                "summary": {}}
+        with mock.patch("llm_core.service.LLMService.run_batch_sync",
+                        return_value=fake), \
+                mock.patch.object(sync, "llm_configured", return_value=True):
+            with self.assertRaises(RuntimeError):
+                sync.run_sync_llm_result("", "hi")
+
     def test_unconfigured_raises(self):
         with mock.patch.object(sync, "llm_configured", return_value=False):
             with self.assertRaises(RuntimeError):
                 sync.run_sync_llm("", "hi")
+            with self.assertRaises(RuntimeError):
+                sync.run_sync_llm_result("", "hi")
 
     def test_empty_batch_short_circuits(self):
         # No gate check, no LLM call for an empty batch.

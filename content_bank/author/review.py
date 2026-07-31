@@ -10,7 +10,8 @@ import json
 import re
 
 from . import rubric
-from .llm import llm, route_from_env
+from .llm import llm_text as llm
+from .llm import route_from_env
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.DOTALL)
 

@@ -23,13 +23,13 @@ import pathlib
 import re
 
 from . import compare_html, dimensions, gates
-from .llm import llm, route_from_env
+from .llm import llm_text, route_from_env
 
 
 def _env_fit_reviewer(prompt, model=None):
     """Transitional default fit reviewer: route via the legacy env backend.
     Task C2 replaces this with an explicit evaluator Route."""
-    return llm(prompt, route_from_env(model))
+    return llm_text(prompt, route_from_env(model))
 
 DIM_ORDER = tuple(f"D{i}" for i in range(1, 9))
 FIT_STATUSES = {"accurate", "mixed", "misclassified"}
