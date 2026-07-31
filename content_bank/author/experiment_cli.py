@@ -88,6 +88,19 @@ def _merge_eval(acc, book_eval, name):
         dst["aggregate"][k] = dst["aggregate"].get(k, 0) + v
 
 
+def _run_fit_evaluation(out, name, groups, evaluator_route, sink):
+    """Run the deterministic + D1-D8-fit evaluator per book on an experiment's
+    drafts and merge into one cross-book evaluator report. ``groups`` is
+    ``{book: units | None}``; drafts are read from ``out/<book>/runs/<name>/``."""
+    eval_report = {"runs": {name: {"units": {}, "aggregate": {}}}}
+    for book, units in groups.items():
+        book_eval = quality_eval.evaluate(
+            book, [name], units=units, base=out,
+            evaluator_route=evaluator_route, sink=sink)
+        _merge_eval(eval_report, book_eval, name)
+    return eval_report
+
+
 def run_experiment(config_path, *, out_root=_DEFAULT_OUT_ROOT, resume=False,
                    now, corpus_rev):
     """Execute one experiment; write its result tree; return the manifest dict.
@@ -121,7 +134,6 @@ def run_experiment(config_path, *, out_root=_DEFAULT_OUT_ROOT, resume=False,
 
     snap_before = _subscription_snapshot()
     build_result = {"ok": [], "failed": {}}
-    eval_report = {"runs": {name: {"units": {}, "aggregate": {}}}}
     for book, units in groups.items():
         run_rel = pathlib.Path(book) / "runs" / name
         _seed_run_manifest(book, out / run_rel / "manifest.json", units)
@@ -136,10 +148,7 @@ def run_experiment(config_path, *, out_root=_DEFAULT_OUT_ROOT, resume=False,
             sink=sink, experiment=name)
         build_result["ok"].extend(res.get("ok", []))
         build_result["failed"].update(res.get("failed", {}))
-        book_eval = quality_eval.evaluate(
-            book, [name], units=units, base=out,
-            evaluator_route=evaluator_route, sink=sink)
-        _merge_eval(eval_report, book_eval, name)
+    eval_report = _run_fit_evaluation(out, name, groups, evaluator_route, sink)
     snap_after = _subscription_snapshot()
 
     report = experiment_report.build_report(
@@ -215,15 +224,39 @@ def translate_experiment(name, *, out_root=_DEFAULT_OUT_ROOT, concurrency=4):
             "drift_model": drift_route.model, "books": summary}
 
 
-def evaluate_experiment(name, *, out_root=_DEFAULT_OUT_ROOT):
-    """Re-run reporting over an existing experiment out dir (no LLM calls beyond
-    telemetry already captured); returns the metrics dict."""
+def evaluate_experiment(name, *, out_root=_DEFAULT_OUT_ROOT, fit=False,
+                        fit_route=None, units=None):
+    """Report over an existing experiment. By default just re-aggregates the
+    persisted telemetry (no LLM calls). With ``fit=True`` it runs the D1-D8
+    classification-fit evaluator on the experiment's drafts using ``fit_route``
+    (an independent judge) — or the config's ``evaluator`` when unset — on the
+    given ``units`` (or every unit), rewrites report.json, and returns the metrics.
+    This is how an imported baseline gets fit-scored by the same judge as another
+    experiment for a fair classification-error comparison."""
     out = pathlib.Path(out_root) / name
     manifest = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
     routes = RouteConfig.from_experiment(manifest["config"]["routes"])
-    evaluator_route = Route.from_json(manifest["config"]["evaluator"])
-    return experiment_report.build_report(
-        out, draft_route=routes.draft, evaluator_route=evaluator_route)
+    evaluator_route = fit_route or Route.from_json(manifest["config"]["evaluator"])
+    if not fit:
+        return experiment_report.build_report(
+            out, draft_route=routes.draft, evaluator_route=evaluator_route)
+
+    if units:
+        groups = {}
+        for uid in units:
+            groups.setdefault(experiment_config.book_of_unit(uid), []).append(uid)
+    else:
+        groups = {b: None for b in _experiment_books(out)}
+    sink = TelemetrySink(out / "calls.jsonl")
+    eval_report = _run_fit_evaluation(out, name, groups, evaluator_route, sink)
+    report = experiment_report.build_report(
+        out, eval_report=eval_report, draft_route=routes.draft,
+        evaluator_route=evaluator_route)
+    (out / "report.json").write_text(
+        json.dumps({"experiment": name, "books": sorted(groups),
+                    "metrics": report, "evaluator_report": eval_report},
+                   ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return report
 
 
 def _now() -> str:
@@ -278,6 +311,13 @@ def main(argv=None):
     p_eval = sub.add_parser("evaluate", help="rebuild the report for an experiment")
     p_eval.add_argument("name")
     p_eval.add_argument("--out-root", default=_DEFAULT_OUT_ROOT)
+    p_eval.add_argument("--fit", action="store_true",
+                        help="run the D1-D8 classification-fit evaluator (LLM calls)")
+    p_eval.add_argument("--fit-backend", choices=("llm_core", "claude"),
+                        help="override the evaluator backend (independent judge)")
+    p_eval.add_argument("--fit-model", help="override the evaluator model")
+    p_eval.add_argument("--units", nargs="*",
+                        help="limit the fit evaluation to these unit ids")
 
     p_tr = sub.add_parser("translate", help="translate an experiment's drafts to ZH")
     p_tr.add_argument("name")
@@ -311,7 +351,10 @@ def main(argv=None):
         print(f"Done: experiment {man['name']} -> {a.out_root}/{man['name']}")
         return 0
     if a.cmd == "evaluate":
-        rep = evaluate_experiment(a.name, out_root=a.out_root)
+        fit_route = (Route(a.fit_backend or "llm_core", a.fit_model)
+                     if (a.fit_backend or a.fit_model) else None)
+        rep = evaluate_experiment(a.name, out_root=a.out_root, fit=a.fit,
+                                  fit_route=fit_route, units=a.units)
         print(json.dumps(rep, ensure_ascii=False, indent=2))
         return 0
     if a.cmd == "translate":

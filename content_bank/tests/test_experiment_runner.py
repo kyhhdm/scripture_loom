@@ -155,6 +155,41 @@ class RunnerTest(unittest.TestCase):
             ex._compare_filename("compare", long, ["PHP"]).startswith(
                 "compare_experiment_number_0__and_8_more"))
 
+    def test_evaluate_fit_runs_independent_judge_on_units(self):
+        with tempfile.TemporaryDirectory() as d:
+            out = pathlib.Path(d) / "out" / "php_opus_baseline"
+            out.mkdir(parents=True)
+            (out / "manifest.json").write_text(json.dumps({
+                "name": "php_opus_baseline", "books": ["PHP"],
+                "config": {"routes": {s: {"backend": "claude", "model": "opus"}
+                                     for s in ("brief", "draft", "repair",
+                                               "review_r1", "review_r2", "revise")},
+                           "evaluator": {"backend": "claude", "model": "opus"}}}))
+            seen = {}
+
+            def fake_eval(book, runs, **kw):
+                seen["units"] = kw.get("units")
+                seen["evaluator"] = kw.get("evaluator_route")
+                return {"runs": {"php_opus_baseline": {"units": {"PHP-002": {
+                    "dimension_fit": {"status_counts": {"accurate": 3, "mixed": 0,
+                                                        "misclassified": 1},
+                                      "adjusted_missing_dimensions": ["D5"]}}},
+                    "aggregate": {}}}}
+
+            with mock.patch("content_bank.author.quality_eval.evaluate",
+                            side_effect=fake_eval):
+                rep = ex.evaluate_experiment(
+                    "php_opus_baseline", out_root=str(pathlib.Path(d) / "out"),
+                    fit=True, fit_route=ex.Route("llm_core", "gemini-3.6-flash"),
+                    units=["PHP-002"])
+            # ran the independent judge (gemini), not the config's opus evaluator
+            self.assertEqual(seen["evaluator"].model, "gemini-3.6-flash")
+            self.assertEqual(seen["units"], ["PHP-002"])
+            # report.json rewritten with the fit results + independence flag
+            written = json.loads((out / "report.json").read_text())
+            self.assertFalse(written["metrics"]["evaluator_is_drafter"])
+            self.assertEqual(written["metrics"]["evaluator"]["fit_misclassified"], 1)
+
     def test_snapshot_reports_unavailable_honestly(self):
         snap = ex._subscription_snapshot()
         self.assertFalse(snap["available"])

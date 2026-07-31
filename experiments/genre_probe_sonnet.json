@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "name": "genre_probe_sonnet",
+  "units": ["PSA-003", "PHP-002", "JON-002", "ECC-018"],
+  "routes": {
+    "brief":     {"backend": "claude", "model": "sonnet"},
+    "draft":     {"backend": "claude", "model": "sonnet"},
+    "repair":    {"backend": "claude", "model": "sonnet"},
+    "review_r1": {"backend": "claude", "model": "sonnet"},
+    "review_r2": {"backend": "claude", "model": "sonnet"},
+    "revise":    {"backend": "claude", "model": "sonnet"}
+  },
+  "gates": {"max_repair": 2, "dim_cap": 6},
+  "evaluator": {"backend": "llm_core", "model": "gemini-3.6-flash"}
+}

@@ -89,6 +89,12 @@ uv run python -m content_bank.author.experiment_cli run experiments/NAME.json --
 # Rebuild the metrics report from an existing run (no new LLM calls)
 uv run python -m content_bank.author.experiment_cli evaluate NAME
 
+# Run the D1-D8 classification-fit evaluator with an INDEPENDENT judge (LLM calls).
+# Use this to fit-score an imported baseline with the same judge as another
+# experiment, for a fair classification-error comparison.
+uv run python -m content_bank.author.experiment_cli evaluate NAME \
+    --fit --fit-model gemini-3.6-flash --units PHP-002
+
 # Translate an experiment's English drafts to CUV-aligned Chinese proposals
 uv run python -m content_bank.author.experiment_cli translate NAME [--concurrency N]
 
@@ -176,7 +182,10 @@ identical across the experiments you compare:
 4. **Same evaluator route** — fix the `evaluator` block to one model across all
    experiments, so quality deltas reflect the routes under test, not the judge.
    Watch `evaluator_is_drafter`: a judge that is also the drafter is not
-   independent.
+   independent. For a **classification-error** comparison of two drafters (e.g.
+   sonnet vs opus), the evaluator must be a *third* model independent of both —
+   `evaluate <baseline> --fit --fit-model <judge> --units <ids>` fit-scores an
+   already-built experiment/baseline with that shared judge.
 
 Then vary only the one thing you are testing (e.g. the `draft` route).
 
