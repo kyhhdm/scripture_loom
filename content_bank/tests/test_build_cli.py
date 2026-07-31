@@ -173,7 +173,6 @@ class OrchestratorTest(unittest.TestCase):
         # backend=claude must NOT require ARK_API_KEY (subscription path);
         # llm_configured() is llm_core-specific and returns False here. Empty
         # work queue (unit already drafted) so no real build/LLM call happens.
-        import os
         with tempfile.TemporaryDirectory() as d:
             m = manifest_mod.init_manifest("MAT", ["MAT-035"])
             manifest_mod.set_stage(m, "MAT-035", "drafted")
@@ -187,14 +186,47 @@ class OrchestratorTest(unittest.TestCase):
                                     drafts_dir=pathlib.Path(d) / "drafts",
                                     backend="claude")
             self.assertEqual(res, {"ok": [], "failed": {}})
-            self.assertEqual(os.environ.get("SCRIPTURE_LOOM_LLM_BACKEND"), "claude")
-        os.environ.pop("SCRIPTURE_LOOM_LLM_BACKEND", None)
 
     def test_claude_backend_requires_cli_on_path(self):
         with mock.patch("content_bank.author.build_cli.shutil.which",
                         return_value=None):
             with self.assertRaises(build_cli.LLMUnavailable):
                 build_cli.run("MAT", units=["MAT-035"], backend="claude")
+
+
+class RouteDrivenBuildTest(unittest.TestCase):
+    def test_brief_and_draft_use_their_configured_models(self):
+        from content_bank.author.routing import Route, RouteConfig
+        clean_draft = json.dumps([dict(id="mat-035-d1-a", dimension="D1",
+                                       type="question", age_tier="child",
+                                       difficulty=1, review_status="draft",
+                                       version=1, passage="MAT-035",
+                                       text={"en": "Who came to Jesus?"})])
+        seen = []
+
+        def fake_llm(prompt, route):
+            seen.append(route.model)
+            return "brief text" if len(seen) == 1 else clean_draft
+
+        routes = RouteConfig(
+            brief=Route("llm_core", "brief-m"), draft=Route("claude", "draft-m"),
+            repair=Route("llm_core", "repair-m"), review_r1=Route("llm_core", "r1-m"),
+            review_r2=Route("llm_core", "r2-m"), revise=Route("llm_core", "revise-m"))
+        with tempfile.TemporaryDirectory() as d:
+            m = manifest_mod.init_manifest("MAT", ["MAT-035"])
+            mpath = pathlib.Path(d) / "manifest.json"
+            manifest_mod.save(mpath, m)
+            with mock.patch("content_bank.author.build_cli.llm", fake_llm), \
+                 mock.patch("content_bank.author.build_cli.run_all", return_value={}), \
+                 mock.patch("content_bank.author.gates.dimension_cap_check",
+                            return_value={}):
+                build_cli.build_pericope(
+                    "MAT-035", "MAT", routes=routes,
+                    drafts_dir=pathlib.Path(d) / "drafts",
+                    briefs_dir=pathlib.Path(d) / "briefs",
+                    manifest_obj=m, manifest_path=mpath, review_on=False)
+        self.assertEqual(seen[0], "brief-m")
+        self.assertEqual(seen[1], "draft-m")
 
 
 class RunSlugTest(unittest.TestCase):
