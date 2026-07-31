@@ -78,6 +78,16 @@ def _seed_run_manifest(book, manifest_path, units):
     manifest_mod.save(manifest_path, m)
 
 
+def _merge_eval(acc, book_eval, name):
+    """Fold one book's evaluator report into the cross-book accumulator (union of
+    per-unit results + summed aggregate counters under runs[name])."""
+    src = (book_eval.get("runs") or {}).get(name) or {}
+    dst = acc["runs"][name]
+    dst["units"].update(src.get("units") or {})
+    for k, v in (src.get("aggregate") or {}).items():
+        dst["aggregate"][k] = dst["aggregate"].get(k, 0) + v
+
+
 def run_experiment(config_path, *, out_root=_DEFAULT_OUT_ROOT, resume=False,
                    now, corpus_rev):
     """Execute one experiment; write its result tree; return the manifest dict.
@@ -85,7 +95,7 @@ def run_experiment(config_path, *, out_root=_DEFAULT_OUT_ROOT, resume=False,
     deterministic and unit-testable."""
     config = experiment_config.load(config_path)
     experiment_config.validate(config)
-    name, book = config["name"], config["book"]
+    name = config["name"]
     config_hash = experiment_config.config_hash(
         config, corpus_rev=corpus_rev,
         prompt_version=experiment_config.PROMPT_VERSION)
@@ -102,42 +112,49 @@ def run_experiment(config_path, *, out_root=_DEFAULT_OUT_ROOT, resume=False,
     gates_cfg = config.get("gates") or {}
     sink = TelemetrySink(out / "calls.jsonl")
 
-    run_rel = pathlib.Path(book) / "runs" / name
-    run_manifest_path = out / run_rel / "manifest.json"
-    if not resume and run_manifest_path.exists():
-        # A fresh (non-resume) run of an identical config re-seeds cleanly.
-        pass
-    _seed_run_manifest(book, run_manifest_path, config.get("units"))
+    # Group work by book (single-book config -> one group; cross-book config ->
+    # one group per BOOK- prefix). Each book builds into its own nested run dir; a
+    # single shared sink + gate_trace_dir span every book.
+    groups = experiment_config.books_and_units(config)
+    dim_cap = int(gates_cfg.get("dim_cap", gates.DEFAULT_DIM_CAP))
+    max_repair = int(gates_cfg.get("max_repair", 2))
 
     snap_before = _subscription_snapshot()
-    build_result = build_cli.run(
-        book, units=config.get("units"), routes=routes, review_on=True,
-        max_repair=int(gates_cfg.get("max_repair", 2)),
-        dim_cap=int(gates_cfg.get("dim_cap", gates.DEFAULT_DIM_CAP)),
-        manifest_path=run_manifest_path,
-        drafts_dir=out / run_rel / "drafts",
-        briefs_dir=out / run_rel / "briefs",
-        verdicts_dir=out / run_rel / "verdicts",
-        gate_trace_dir=out / "gate_traces",
-        sink=sink, experiment=name)
+    build_result = {"ok": [], "failed": {}}
+    eval_report = {"runs": {name: {"units": {}, "aggregate": {}}}}
+    for book, units in groups.items():
+        run_rel = pathlib.Path(book) / "runs" / name
+        _seed_run_manifest(book, out / run_rel / "manifest.json", units)
+        res = build_cli.run(
+            book, units=units, routes=routes, review_on=True,
+            max_repair=max_repair, dim_cap=dim_cap,
+            manifest_path=out / run_rel / "manifest.json",
+            drafts_dir=out / run_rel / "drafts",
+            briefs_dir=out / run_rel / "briefs",
+            verdicts_dir=out / run_rel / "verdicts",
+            gate_trace_dir=out / "gate_traces",
+            sink=sink, experiment=name)
+        build_result["ok"].extend(res.get("ok", []))
+        build_result["failed"].update(res.get("failed", {}))
+        book_eval = quality_eval.evaluate(
+            book, [name], units=units, base=out,
+            evaluator_route=evaluator_route, sink=sink)
+        _merge_eval(eval_report, book_eval, name)
     snap_after = _subscription_snapshot()
-
-    eval_report = quality_eval.evaluate(
-        book, [name], units=config.get("units"), base=out,
-        evaluator_route=evaluator_route, sink=sink)
 
     report = experiment_report.build_report(
         out, eval_report=eval_report, draft_route=routes.draft,
         evaluator_route=evaluator_route)
     (out / "report.json").write_text(
-        json.dumps({"experiment": name, "book": book, "metrics": report,
-                    "evaluator_report": eval_report},
+        json.dumps({"experiment": name, "books": sorted(groups),
+                    "metrics": report, "evaluator_report": eval_report},
                    ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     manifest = {
         "schema_version": 1,
         "name": name,
-        "book": book,
+        "book": config.get("book"),
+        "books": sorted(groups),
         "config": config,
         "config_hash": config_hash,
         "corpus_rev": corpus_rev,

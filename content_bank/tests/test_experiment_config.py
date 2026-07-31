@@ -50,6 +50,39 @@ class ConfigTest(unittest.TestCase):
         self.assertNotEqual(h1, h3)
         self.assertNotEqual(h1, h4)
 
+    def test_book_of_unit(self):
+        self.assertEqual(ec.book_of_unit("PHP-002"), "PHP")
+        self.assertEqual(ec.book_of_unit("PSA-003"), "PSA")
+        self.assertEqual(ec.book_of_unit("PHP-S1"), "PHP")
+
+    def test_multibook_config_validates(self):
+        cfg = {k: v for k, v in VALID.items() if k != "book"}
+        cfg["units"] = ["PSA-003", "PHP-002", "JON-002", "ECC-018"]
+        ec.validate(cfg)  # no raise
+
+    def test_multibook_requires_units(self):
+        cfg = {k: v for k, v in VALID.items() if k != "book"}
+        cfg["units"] = None
+        with self.assertRaises(ValueError):
+            ec.validate(cfg)
+
+    def test_multibook_rejects_unit_without_prefix(self):
+        cfg = {k: v for k, v in VALID.items() if k != "book"}
+        cfg["units"] = ["PHP-002", "nodash"]
+        with self.assertRaises(ValueError):
+            ec.validate(cfg)
+
+    def test_books_and_units_single_book(self):
+        self.assertEqual(ec.books_and_units(VALID), {"PHP": ["PHP-001"]})
+
+    def test_books_and_units_multibook_groups_by_prefix(self):
+        cfg = {k: v for k, v in VALID.items() if k != "book"}
+        cfg["units"] = ["PSA-003", "PHP-002", "JON-002", "PHP-005"]
+        groups = ec.books_and_units(cfg)
+        self.assertEqual(groups["PHP"], ["PHP-002", "PHP-005"])
+        self.assertEqual(groups["PSA"], ["PSA-003"])
+        self.assertEqual(groups["JON"], ["JON-002"])
+
     def test_immutable_guard(self):
         ec.check_immutable(None, "h")                   # first run ok
         ec.check_immutable({"config_hash": "h"}, "h")   # resume ok

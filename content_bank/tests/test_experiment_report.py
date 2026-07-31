@@ -50,6 +50,18 @@ class ReportTest(unittest.TestCase):
         self.assertEqual(rep["repaired_units"], 1)
         self.assertFalse(rep["evaluator_is_drafter"])
 
+    def test_counts_accepted_items_across_multiple_books(self):
+        with tempfile.TemporaryDirectory() as d:
+            out = pathlib.Path(d)
+            (out / "calls.jsonl").write_text(json.dumps(_call("draft")) + "\n")
+            for book, unit, n in (("PHP", "PHP-002", 2), ("JON", "JON-002", 3)):
+                dd = out / book / "runs" / "e" / "drafts"
+                dd.mkdir(parents=True)
+                (dd / f"{unit}.json").write_text(
+                    json.dumps([{"id": f"{unit}-{i}"} for i in range(n)]))
+            rep = experiment_report.build_report(out)
+        self.assertEqual(rep["accepted_items"], 5)
+
     def test_evaluator_is_drafter_true_when_same(self):
         with tempfile.TemporaryDirectory() as d:
             out = self._fixture(d)

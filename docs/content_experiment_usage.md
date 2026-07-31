@@ -38,6 +38,34 @@ An experiment is a JSON file under `experiments/` (see `experiments/example.json
   `revise`) gets its own `{backend, model, settings?}` route.
 - `evaluator` is the **D1–D8 fit** route, fixed independently of `draft`.
 - `units: null` (or omit) ⇒ every pending/briefed unit of the book.
+
+### Single-book vs cross-book
+
+- **Single-book:** set `"book"` and (optionally) `"units"` within it — as above.
+- **Cross-book:** **omit `"book"`** and list `"units"` spanning books; each unit's
+  book is derived from its `BOOK-` prefix. The runner groups units by book, builds
+  each group, and merges telemetry, gate traces, and the evaluator report under the
+  one experiment name. Useful for a genre-spread probe (`experiments/genre_probe.json`):
+
+  ```json
+  {
+    "schema_version": 1,
+    "name": "genre_probe",
+    "units": ["PSA-003", "PHP-002", "JON-002", "ECC-018"],
+    "routes": { "...": "one route per stage" },
+    "evaluator": {"backend": "claude", "model": "opus"}
+  }
+  ```
+
+  ```bash
+  uv run python -m content_bank.author.experiment_cli run experiments/genre_probe.json
+  ```
+
+  Results still land under one `experiments-out/genre_probe/`, with drafts nested
+  per book (`experiments-out/genre_probe/<BOOK>/runs/genre_probe/`), one shared
+  `calls.jsonl`, and `manifest.json`/`report.json` carrying a `books` list. The
+  comparison page is per-book, so view one genre at a time:
+  `compare --book JON --experiments genre_probe`.
 - **No credentials in the config** — provider keys live in the environment
   (`ARK_API_KEY`, `GEMINI_API_KEY`/`GOOGLE_API_KEY`, or the Claude subscription
   login). Validation rejects any `api_key`/`token`-like field.

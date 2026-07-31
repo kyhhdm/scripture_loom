@@ -68,6 +68,28 @@ class RunnerTest(unittest.TestCase):
                                         now="2026-07-31T00:00:00Z", corpus_rev="abc")
             self.assertEqual(man["config_hash"], h)
 
+    def test_multibook_runs_each_book_once(self):
+        cfg_dict = {k: v for k, v in CONFIG.items() if k != "book"}
+        cfg_dict["name"] = "mb"
+        cfg_dict["units"] = ["PHP-002", "JON-002", "PHP-005"]
+        with tempfile.TemporaryDirectory() as d:
+            cfg = pathlib.Path(d) / "mb.json"
+            cfg.write_text(json.dumps(cfg_dict))
+            with mock.patch("content_bank.author.build_cli.run",
+                            return_value={"ok": [], "failed": {}}) as run, \
+                 mock.patch("content_bank.author.quality_eval.evaluate",
+                            return_value={"runs": {}}), \
+                 mock.patch("content_bank.author.experiment_cli._seed_run_manifest"):
+                man = ex.run_experiment(cfg, out_root=d + "/out",
+                                        now="2026-07-31T00:00:00Z", corpus_rev="abc")
+            books = {c.args[0] for c in run.call_args_list}
+            units_for = {c.args[0]: c.kwargs["units"] for c in run.call_args_list}
+            self.assertEqual(books, {"PHP", "JON"})
+            self.assertEqual(units_for["PHP"], ["PHP-002", "PHP-005"])
+            self.assertEqual(units_for["JON"], ["JON-002"])
+            self.assertEqual(man["books"], ["JON", "PHP"])
+            self.assertIsNone(man["book"])
+
     def test_snapshot_reports_unavailable_honestly(self):
         snap = ex._subscription_snapshot()
         self.assertFalse(snap["available"])

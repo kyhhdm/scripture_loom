@@ -66,14 +66,15 @@ def build_report(out_dir, *, eval_report=None, draft_route=None,
     final_pass = sum(1 for t in traces.values() if t.get("final_pass"))
     repaired_units = [t for t in traces.values() if t.get("rounds")]
 
-    # Accepted items = items in the final drafts.
-    drafts_dir = _find_drafts_dir(out_dir)
+    # Accepted items = items in the final drafts, summed across every book's
+    # nested run dir (a cross-book experiment has one drafts dir per book).
     accepted_items = 0
-    for path in (sorted(drafts_dir.glob("*.json")) if drafts_dir else []):
-        try:
-            accepted_items += len(json.loads(path.read_text(encoding="utf-8")))
-        except (json.JSONDecodeError, OSError):
-            continue
+    for drafts_dir in _draft_dirs(out_dir):
+        for path in sorted(drafts_dir.glob("*.json")):
+            try:
+                accepted_items += len(json.loads(path.read_text(encoding="utf-8")))
+            except (json.JSONDecodeError, OSError):
+                continue
 
     total_tokens = total_in + total_out
     evaluator_is_drafter = bool(
@@ -111,12 +112,10 @@ def build_report(out_dir, *, eval_report=None, draft_route=None,
     return report
 
 
-def _find_drafts_dir(out_dir):
-    """Locate the nested <book>/runs/<name>/drafts written by the runner."""
-    for path in out_dir.glob("*/runs/*/drafts"):
-        if path.is_dir():
-            return path
-    return None
+def _draft_dirs(out_dir):
+    """Every nested <book>/runs/<name>/drafts written by the runner (one per book
+    for a cross-book experiment; typically one for a single-book experiment)."""
+    return [p for p in sorted(out_dir.glob("*/runs/*/drafts")) if p.is_dir()]
 
 
 def _fit_summary(eval_report):

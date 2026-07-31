@@ -27,6 +27,28 @@ def load(path) -> dict:
     return json.loads(pathlib.Path(path).read_text(encoding="utf-8"))
 
 
+def book_of_unit(unit_id: str) -> str:
+    """Derive a unit's book from its ``BOOK-...`` id (e.g. PHP-002 -> PHP,
+    PHP-S1 -> PHP). Raises ValueError if the id has no book prefix."""
+    if "-" not in unit_id:
+        raise ValueError(f"unit id {unit_id!r} has no BOOK- prefix")
+    return unit_id.split("-", 1)[0]
+
+
+def books_and_units(config: dict) -> dict:
+    """Group the config's work into ``{book: [units] | None}``.
+
+    Single-book config (``book`` set): ``{book: config['units']}`` (units may be
+    None ⇒ the whole book). Multi-book config (no ``book``): each explicit unit is
+    grouped by its ``BOOK-`` prefix, preserving order within a book."""
+    if config.get("book"):
+        return {config["book"]: config.get("units")}
+    groups: dict = {}
+    for uid in config.get("units") or []:
+        groups.setdefault(book_of_unit(uid), []).append(uid)
+    return groups
+
+
 def _scan_credentials(obj, where="config"):
     if isinstance(obj, dict):
         for k, v in obj.items():
@@ -43,9 +65,18 @@ def _scan_credentials(obj, where="config"):
 def validate(config: dict) -> None:
     """Raise ValueError on any structural problem or credential leak."""
     _scan_credentials(config)
-    for key in ("schema_version", "name", "book", "routes", "evaluator"):
+    for key in ("schema_version", "name", "routes", "evaluator"):
         if key not in config:
             raise ValueError(f"config missing required key: {key}")
+    # Single-book config sets `book`; multi-book config omits it and lists units
+    # spanning books (each unit's book is derived from its BOOK- prefix).
+    if not config.get("book"):
+        units = config.get("units")
+        if not units:
+            raise ValueError(
+                "config without `book` must list explicit cross-book `units`")
+        for uid in units:
+            book_of_unit(uid)  # raises if a unit has no BOOK- prefix
     routes = config["routes"]
     missing = [s for s in STAGES if s not in routes]
     if missing:
