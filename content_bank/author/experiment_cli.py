@@ -174,6 +174,47 @@ def run_experiment(config_path, *, out_root=_DEFAULT_OUT_ROOT, resume=False,
     return manifest
 
 
+_DEFAULT_TRANSLATE = {"backend": "llm_core", "model": "deepseek-v4-flash"}
+
+
+def translate_experiment(name, *, out_root=_DEFAULT_OUT_ROOT, concurrency=4):
+    """Translate an experiment's English drafts into CUV-aligned Chinese proposals.
+
+    Uses the config's ``translate`` (and optional ``drift``) route — defaulting to
+    the standard translator (deepseek-v4-flash) when unset — walks every book in
+    the experiment, writes proposals under each book's run dir, and appends per-call
+    telemetry to the experiment's shared calls.jsonl. Proposals stay draft-only;
+    promotion to the store remains a separate, human-gated step."""
+    from . import glossary as _glossary, translate_cli
+    from .build_cli import _run_slug
+
+    out = pathlib.Path(out_root) / name
+    manifest = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+    config = manifest["config"]
+    translate_route = Route.from_json(config.get("translate") or _DEFAULT_TRANSLATE)
+    drift_route = (Route.from_json(config["drift"]) if config.get("drift")
+                   else translate_route)
+    slug = _run_slug(translate_route.backend, translate_route.model)
+    sink = TelemetrySink(out / "calls.jsonl")
+    glossary = _glossary.load_glossary()
+
+    summary = {}
+    for book in manifest.get("books") or ([manifest["book"]] if manifest.get("book") else []):
+        drafts_dir = out / book / "runs" / name / "drafts"
+        if not drafts_dir.is_dir():
+            continue
+        items = translate_cli.load_drafts(drafts_dir)
+        proposals = translate_cli.run_proposals(
+            items, book, glossary=glossary, route=translate_route,
+            drift_route=drift_route, concurrency=concurrency, sink=sink)
+        out_dir = drafts_dir.parent / "translations" / slug
+        translate_cli.write_proposals(proposals, out_dir)
+        summary[book] = {"proposals": len(proposals), "items": len(items),
+                         "dir": str(out_dir)}
+    return {"experiment": name, "translate_model": translate_route.model,
+            "drift_model": drift_route.model, "books": summary}
+
+
 def evaluate_experiment(name, *, out_root=_DEFAULT_OUT_ROOT):
     """Re-run reporting over an existing experiment out dir (no LLM calls beyond
     telemetry already captured); returns the metrics dict."""
@@ -205,6 +246,11 @@ def main(argv=None):
     p_eval.add_argument("name")
     p_eval.add_argument("--out-root", default=_DEFAULT_OUT_ROOT)
 
+    p_tr = sub.add_parser("translate", help="translate an experiment's drafts to ZH")
+    p_tr.add_argument("name")
+    p_tr.add_argument("--out-root", default=_DEFAULT_OUT_ROOT)
+    p_tr.add_argument("--concurrency", type=int, default=4)
+
     p_cmp = sub.add_parser("compare", help="render an experiment-column comparison")
     p_cmp.add_argument("--book", required=True)
     p_cmp.add_argument("--experiments", required=True,
@@ -225,6 +271,11 @@ def main(argv=None):
     if a.cmd == "evaluate":
         rep = evaluate_experiment(a.name, out_root=a.out_root)
         print(json.dumps(rep, ensure_ascii=False, indent=2))
+        return 0
+    if a.cmd == "translate":
+        res = translate_experiment(a.name, out_root=a.out_root,
+                                   concurrency=a.concurrency)
+        print(json.dumps(res, ensure_ascii=False, indent=2))
         return 0
     if a.cmd == "compare":
         from . import compare_html

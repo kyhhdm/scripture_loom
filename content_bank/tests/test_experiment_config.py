@@ -83,6 +83,16 @@ class ConfigTest(unittest.TestCase):
         self.assertEqual(groups["PSA"], ["PSA-003"])
         self.assertEqual(groups["JON"], ["JON-002"])
 
+    def test_optional_translate_route_validated(self):
+        cfg = {**VALID, "translate": {"backend": "llm_core", "model": "deepseek-v4-flash"},
+               "drift": {"backend": "llm_core", "model": "deepseek-v4-pro"}}
+        ec.validate(cfg)  # no raise
+
+    def test_optional_translate_route_bad_backend_rejected(self):
+        cfg = {**VALID, "translate": {"backend": "openai", "model": "x"}}
+        with self.assertRaises(ValueError):
+            ec.validate(cfg)
+
     def test_immutable_guard(self):
         ec.check_immutable(None, "h")                   # first run ok
         ec.check_immutable({"config_hash": "h"}, "h")   # resume ok

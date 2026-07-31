@@ -81,7 +81,9 @@ def validate(config: dict) -> None:
     missing = [s for s in STAGES if s not in routes]
     if missing:
         raise ValueError(f"routes missing stages: {missing}")
-    for name, route in list(routes.items()) + [("evaluator", config["evaluator"])]:
+    extra = [(k, config[k]) for k in ("translate", "drift") if config.get(k)]
+    for name, route in (list(routes.items())
+                        + [("evaluator", config["evaluator"])] + extra):
         if route.get("backend") not in KNOWN_BACKENDS:
             raise ValueError(
                 f"route {name}: unknown backend {route.get('backend')!r} "

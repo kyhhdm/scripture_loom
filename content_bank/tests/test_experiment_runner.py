@@ -90,6 +90,41 @@ class RunnerTest(unittest.TestCase):
             self.assertEqual(man["books"], ["JON", "PHP"])
             self.assertIsNone(man["book"])
 
+    def test_translate_experiment_walks_books_and_writes_proposals(self):
+        with tempfile.TemporaryDirectory() as d:
+            out = pathlib.Path(d) / "out" / "gp"
+            # Minimal experiment: manifest with two books + a draft file each.
+            manifest = {"name": "gp", "books": ["PHP", "JON"],
+                        "config": {"translate": {"backend": "llm_core",
+                                                 "model": "deepseek-v4-flash"}}}
+            (out).mkdir(parents=True)
+            (out / "manifest.json").write_text(json.dumps(manifest))
+            for book, unit in (("PHP", "PHP-002"), ("JON", "JON-002")):
+                dd = out / book / "runs" / "gp" / "drafts"
+                dd.mkdir(parents=True)
+                (dd / f"{unit}.json").write_text(json.dumps(
+                    [{"id": f"{unit}-i1", "text": {"en": "Q?"}}]))
+            calls = []
+
+            def fake_run_proposals(items, book, **kw):
+                calls.append((book, kw.get("route").model, kw.get("sink") is not None))
+                return [{"id": items[0]["id"], "item": items[0], "gate_ok": True,
+                         "gate_flags": [], "drift": {"drift": False}, "cuv_refs": [],
+                         "terms": [], "uncertain": [], "en": "Q?"}]
+
+            with mock.patch("content_bank.author.translate_cli.run_proposals",
+                            side_effect=fake_run_proposals), \
+                 mock.patch("content_bank.author.glossary.load_glossary",
+                            return_value=[]):
+                res = ex.translate_experiment("gp", out_root=str(pathlib.Path(d) / "out"))
+            self.assertEqual({b for b, _, _ in calls}, {"PHP", "JON"})
+            self.assertTrue(all(model == "deepseek-v4-flash" for _, model, _ in calls))
+            self.assertTrue(all(has_sink for _, _, has_sink in calls))
+            self.assertEqual(res["translate_model"], "deepseek-v4-flash")
+            prop = (out / "PHP" / "runs" / "gp" / "translations"
+                    / "deepseek-v4-flash" / "PHP-002-i1.json")
+            self.assertTrue(prop.exists())
+
     def test_snapshot_reports_unavailable_honestly(self):
         snap = ex._subscription_snapshot()
         self.assertFalse(snap["available"])
