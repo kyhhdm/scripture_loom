@@ -38,6 +38,7 @@ def build_report(out_dir, *, eval_report=None, draft_route=None,
     tokens_out_by_stage = collections.Counter()
     claude_calls = 0
     total_in = total_out = 0
+    uncached_in = cache_creation_total = cache_read_total = 0
     cost_total = 0.0
     repair_calls = 0
     repair_tokens = 0
@@ -45,11 +46,22 @@ def build_report(out_dir, *, eval_report=None, draft_route=None,
         by_stage[c["stage"]] += 1
         by_backend[c["backend"]] += 1
         by_model[c.get("requested_model") or "(default)"] += 1
-        ti, to = _tok(c.get("usage"), "input"), _tok(c.get("usage"), "output")
+        u = c.get("usage")
+        # True input processed = uncached input + cache-creation + cache-read.
+        # With claude prompt caching the uncached `input` field is tiny; the bulk
+        # of every prompt lands in the cache buckets, so summing only `input`
+        # under-reports input by orders of magnitude.
+        ti_uncached = _tok(u, "input")
+        cc, cr = _tok(u, "cache_creation"), _tok(u, "cache_read")
+        ti = ti_uncached + cc + cr
+        to = _tok(u, "output")
         tokens_in_by_stage[c["stage"]] += ti
         tokens_out_by_stage[c["stage"]] += to
         total_in += ti
         total_out += to
+        uncached_in += ti_uncached
+        cache_creation_total += cc
+        cache_read_total += cr
         cost_total += c.get("cost_estimate") or 0.0
         if c["backend"] == "claude":
             claude_calls += 1
@@ -91,6 +103,9 @@ def build_report(out_dir, *, eval_report=None, draft_route=None,
         "tokens_in_by_stage": dict(tokens_in_by_stage),
         "tokens_out_by_stage": dict(tokens_out_by_stage),
         "tokens_in_total": total_in,
+        "tokens_in_uncached_total": uncached_in,
+        "cache_creation_total": cache_creation_total,
+        "cache_read_total": cache_read_total,
         "tokens_out_total": total_out,
         "estimated_cost": round(cost_total, 6),
         "units": n_units,

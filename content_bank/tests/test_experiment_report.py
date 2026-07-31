@@ -7,12 +7,13 @@ from content_bank.author import experiment_report
 from content_bank.author.routing import Route
 
 
-def _call(stage, backend="llm_core", model="m", tin=100, tout=40, cost=0.001):
+def _call(stage, backend="llm_core", model="m", tin=100, tout=40, cost=0.001,
+          cc=None, cr=None):
     return {"experiment": "e", "stage": stage, "unit_id": "PHP-001",
             "kind": "pericope", "attempt": 1, "backend": backend,
             "requested_model": model, "actual_model": model,
-            "usage": {"input": tin, "output": tout, "cache_creation": None,
-                      "cache_read": None, "thinking": None},
+            "usage": {"input": tin, "output": tout, "cache_creation": cc,
+                      "cache_read": cr, "thinking": None},
             "usage_source": "local_estimate", "cost_estimate": cost,
             "duration_ms": 5, "stop_reason": None, "success": True,
             "error": None, "prompt_hash": "h"}
@@ -61,6 +62,20 @@ class ReportTest(unittest.TestCase):
                     json.dumps([{"id": f"{unit}-{i}"} for i in range(n)]))
             rep = experiment_report.build_report(out)
         self.assertEqual(rep["accepted_items"], 5)
+
+    def test_input_total_includes_cache_tokens(self):
+        # claude prompt caching puts most input in cache_creation/cache_read, not
+        # the uncached `input` field; tokens_in must count all three.
+        with tempfile.TemporaryDirectory() as d:
+            out = pathlib.Path(d)
+            (out / "calls.jsonl").write_text(json.dumps(
+                _call("draft", tin=2, tout=9000, cc=20000, cr=16000)) + "\n")
+            rep = experiment_report.build_report(out)
+        self.assertEqual(rep["tokens_in_total"], 2 + 20000 + 16000)
+        self.assertEqual(rep["tokens_in_uncached_total"], 2)
+        self.assertEqual(rep["cache_creation_total"], 20000)
+        self.assertEqual(rep["cache_read_total"], 16000)
+        self.assertEqual(rep["tokens_in_by_stage"]["draft"], 36002)
 
     def test_evaluator_is_drafter_true_when_same(self):
         with tempfile.TemporaryDirectory() as d:
