@@ -125,6 +125,23 @@ class RunnerTest(unittest.TestCase):
                     / "deepseek-v4-flash" / "PHP-002-i1.json")
             self.assertTrue(prop.exists())
 
+    def test_books_across_discovers_and_filters(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = pathlib.Path(d)
+            # exp gp spans PHP+JON; baseline php only PHP.
+            for name, books in (("gp", ["PHP", "JON"]), ("php_base", ["PHP"])):
+                ed = root / name
+                ed.mkdir(parents=True)
+                (ed / "manifest.json").write_text(json.dumps(
+                    {"name": name, "books": books}))
+                for b in books:
+                    (ed / b / "runs" / name / "drafts").mkdir(parents=True)
+            gp, php = root / "gp", root / "php_base"
+            self.assertEqual(ex._books_across([gp, php], None), ["JON", "PHP"])
+            self.assertEqual(ex._books_across([gp, php], "PHP"), ["PHP"])
+            self.assertTrue(ex._experiment_has_book(php, "PHP"))
+            self.assertFalse(ex._experiment_has_book(php, "JON"))
+
     def test_snapshot_reports_unavailable_honestly(self):
         snap = ex._subscription_snapshot()
         self.assertFalse(snap["available"])

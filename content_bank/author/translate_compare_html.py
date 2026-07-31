@@ -55,6 +55,37 @@ def _leader_ref(item, lang):
 
 def build_page(book, draft_run, translators, *, root=_ROOT):
     loaded = {t: _load_translator(book, draft_run, t, root) for t in translators}
+    return {"book": book, "draft_run": draft_run, "translators": translators,
+            "rows": _build_rows(loaded, translators)}
+
+
+def _load_experiment_translations(exp_dir, book):
+    """All translation proposals for one experiment/book, keyed by item id (across
+    every translator-slug subdir under the experiment's run translations dir)."""
+    name = pathlib.Path(exp_dir).name
+    base = pathlib.Path(exp_dir) / book / "runs" / name / "translations"
+    out = {}
+    if base.is_dir():
+        for slug_dir in sorted(base.iterdir()):
+            if slug_dir.is_dir():
+                for path in sorted(slug_dir.glob("*.json")):
+                    p = json.loads(path.read_text(encoding="utf-8"))
+                    out[p["id"]] = p
+    return out
+
+
+def render_experiment_translations(book, experiment_dirs):
+    """Render EN ▸ CUV ▸ one zh column per experiment, from each experiment's
+    translation proposals (Part 3 of the experiment comparison tools)."""
+    names = [pathlib.Path(d).name for d in experiment_dirs]
+    loaded = {pathlib.Path(d).name: _load_experiment_translations(d, book)
+              for d in experiment_dirs}
+    page = {"book": book, "draft_run": "experiments", "translators": names,
+            "rows": _build_rows(loaded, names)}
+    return render_html(page)
+
+
+def _build_rows(loaded, translators):
     ids = []
     for t in translators:
         for iid in loaded[t]:
@@ -85,8 +116,7 @@ def build_page(book, draft_run, translators, *, root=_ROOT):
                      "cuv": _cuv_for(first.get("cuv_refs")),
                      "ref_label": ref_label, "ref_en": ref_en,
                      "verse_en": verse_en, "cat_en": cat_en, "cells": cells})
-    return {"book": book, "draft_run": draft_run, "translators": translators,
-            "rows": rows}
+    return rows
 
 
 def _badge(cls, label, tip):

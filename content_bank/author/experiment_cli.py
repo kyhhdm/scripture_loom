@@ -230,6 +230,28 @@ def _now() -> str:
     return dt.datetime.now(dt.timezone.utc).isoformat()
 
 
+def _experiment_books(exp_dir):
+    """Books an experiment covers, from its manifest (books list or single book)."""
+    manifest = json.loads((exp_dir / "manifest.json").read_text(encoding="utf-8"))
+    return manifest.get("books") or ([manifest["book"]] if manifest.get("book") else [])
+
+
+def _experiment_has_book(exp_dir, book):
+    name = exp_dir.name
+    return (exp_dir / book / "runs" / name / "drafts").is_dir()
+
+
+def _books_across(dirs, book):
+    """Resolve the book set to render for a compare call: the explicit book, else
+    every book found across the experiment dirs (sorted)."""
+    if book:
+        return [book]
+    found = set()
+    for d in dirs:
+        found.update(_experiment_books(d))
+    return sorted(found)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Named content-pipeline experiments")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -252,11 +274,20 @@ def main(argv=None):
     p_tr.add_argument("--concurrency", type=int, default=4)
 
     p_cmp = sub.add_parser("compare", help="render an experiment-column comparison")
-    p_cmp.add_argument("--book", required=True)
+    p_cmp.add_argument("--book", help="limit to one book; omit to emit one page per "
+                       "book found across the experiments")
     p_cmp.add_argument("--experiments", required=True,
                        help="comma-separated experiment names")
     p_cmp.add_argument("--out-root", default=_DEFAULT_OUT_ROOT)
-    p_cmp.add_argument("--out", help="output HTML path")
+    p_cmp.add_argument("--out", help="output HTML path (single-book only)")
+
+    p_ctr = sub.add_parser("compare-translations",
+                           help="render EN/CUV/zh review across experiments")
+    p_ctr.add_argument("--book", help="limit to one book; omit for all books found")
+    p_ctr.add_argument("--experiments", required=True,
+                       help="comma-separated experiment names")
+    p_ctr.add_argument("--out-root", default=_DEFAULT_OUT_ROOT)
+    p_ctr.add_argument("--out", help="output HTML path (single-book only)")
 
     a = ap.parse_args(argv)
     if a.cmd == "validate":
@@ -277,14 +308,30 @@ def main(argv=None):
                                    concurrency=a.concurrency)
         print(json.dumps(res, ensure_ascii=False, indent=2))
         return 0
-    if a.cmd == "compare":
-        from . import compare_html
+    if a.cmd in ("compare", "compare-translations"):
+        from . import compare_html, translate_compare_html
         names = [n for n in a.experiments.split(",") if n]
         dirs = [pathlib.Path(a.out_root) / n for n in names]
-        html = compare_html.render_experiments(a.book, dirs)
-        out_path = pathlib.Path(a.out or f"{a.out_root}/compare_{a.book}.html")
-        out_path.write_text(html, encoding="utf-8")
-        print(f"Wrote {out_path}")
+        books = _books_across(dirs, a.book)
+        wrote = []
+        for book in books:
+            bdirs = [d for d in dirs if _experiment_has_book(d, book)]
+            if not bdirs:
+                continue
+            if a.cmd == "compare":
+                html = compare_html.render_experiments(book, bdirs)
+                default = f"{a.out_root}/compare_{book}.html"
+            else:
+                html = translate_compare_html.render_experiment_translations(book, bdirs)
+                default = f"{a.out_root}/compare_translations_{book}.html"
+            out_path = pathlib.Path(a.out) if (a.out and len(books) == 1) \
+                else pathlib.Path(default)
+            out_path.write_text(html, encoding="utf-8")
+            wrote.append(str(out_path))
+        for p in wrote:
+            print(f"Wrote {p}")
+        if not wrote:
+            print("Nothing to compare (no experiment contained the requested book).")
         return 0
     return 1
 

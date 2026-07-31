@@ -89,9 +89,36 @@ uv run python -m content_bank.author.experiment_cli run experiments/NAME.json --
 # Rebuild the metrics report from an existing run (no new LLM calls)
 uv run python -m content_bank.author.experiment_cli evaluate NAME
 
-# One comparison page, one column per experiment
+# Translate an experiment's English drafts to CUV-aligned Chinese proposals
+uv run python -m content_bank.author.experiment_cli translate NAME [--concurrency N]
+
+# Draft comparison, one column per experiment. --book optional: omit to emit one
+# page per book found across the experiments (filters each page to the experiments
+# that actually contain that book).
+uv run python -m content_bank.author.experiment_cli compare --experiments NAME_A,NAME_B
 uv run python -m content_bank.author.experiment_cli compare --book PHP --experiments NAME_A,NAME_B
+
+# ZH translation comparison: English ▸ CUV ▸ one zh column per experiment
+uv run python -m content_bank.author.experiment_cli compare-translations --experiments NAME_A,NAME_B
 ```
+
+## Translation step
+
+`translate NAME` translates an experiment's English drafts into CUV-aligned Chinese
+proposals (same gates + back-translation drift review as the standalone
+`translate_cli`), per book, appending per-call telemetry (stages `translate`,
+`translate_repair`, `drift`, `translate_fix`, `translate_note`) to the experiment's
+`calls.jsonl`. The translator model comes from the config's optional `translate`
+route (default `llm_core`/`deepseek-v4-flash`), with an optional separate `drift`
+route for the back-translation reviewer:
+
+```json
+  "translate": {"backend": "llm_core", "model": "deepseek-v4-flash"},
+  "drift":     {"backend": "llm_core", "model": "deepseek-v4-pro"}
+```
+
+Proposals land at `experiments-out/NAME/<BOOK>/runs/NAME/translations/<translate-slug>/`
+and stay draft-only — promotion to the store is a separate, human-gated step.
 
 ## Result tree
 
