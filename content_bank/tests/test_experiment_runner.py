@@ -158,7 +158,9 @@ class RunnerTest(unittest.TestCase):
     def test_evaluate_fit_runs_independent_judge_on_units(self):
         with tempfile.TemporaryDirectory() as d:
             out = pathlib.Path(d) / "out" / "php_opus_baseline"
-            out.mkdir(parents=True)
+            dd = out / "PHP" / "runs" / "php_opus_baseline" / "drafts"
+            dd.mkdir(parents=True)
+            (dd / "PHP-002.json").write_text(json.dumps([{"id": "PHP-002-a"}]))
             (out / "manifest.json").write_text(json.dumps({
                 "name": "php_opus_baseline", "books": ["PHP"],
                 "config": {"routes": {s: {"backend": "claude", "model": "opus"}
