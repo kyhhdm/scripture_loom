@@ -154,22 +154,27 @@ def _card(item, run, gate_flags, unit_verdicts):
     }
 
 
-def build_model(book, runs, base=None):
+def build_model(book, runs, base=None, resolve=None):
     """Assemble the nested comparison model: unit -> dimension -> run -> [item cards].
 
     Raises FileNotFoundError if a named run directory is missing. A run missing a
     given unit file contributes zero items for that unit (no error) — that raggedness
-    is the padding signal the reviewer is looking for.
+    is the padding signal the reviewer is looking for. ``resolve(run) ->
+    (draft_dir, verdicts_dir, briefs_dir)`` overrides the default run-dir lookup
+    (used by the experiment-column renderer, whose columns live in separate dirs).
     """
     base = pathlib.Path(base) if base else DEFAULT_BASE
     book_dir = base / book
     notes = []
+    if resolve is None:
+        def resolve(run):
+            return _resolve_run(book_dir, run)
 
     run_items = {}   # run -> {unit_id: [items]}
     verdicts = {}    # run -> {unit_id: {item_id: [...]}}
     briefs_dirs = {}  # run -> briefs dir or None
     for run in runs:
-        draft_dir, verdicts_dir, briefs_dir = _resolve_run(book_dir, run)
+        draft_dir, verdicts_dir, briefs_dir = resolve(run)
         run_items[run] = {
             f.stem: json.loads(f.read_text(encoding="utf-8"))
             for f in sorted(pathlib.Path(draft_dir).glob("*.json"))
@@ -273,6 +278,11 @@ details.brief > summary { padding: 8px 12px; cursor: pointer; font-weight: 600; 
 .cite-doctrine .citeref { background: #f59e0b; color: #3a2600; }
 .legend { font-size: 12px; color: #888; }
 .legend .cite { padding: 0 4px; }
+table.matrix { border-collapse: collapse; font-size: 12px; }
+table.matrix th, table.matrix td { border: 1px solid #8886; padding: 3px 8px;
+  text-align: left; }
+table.matrix th.stage { color: #888; font-weight: 600; }
+table.matrix thead th { background: #8882; }
 </style>
 <header>
   <h1>__TITLE__</h1>
@@ -284,6 +294,7 @@ details.brief > summary { padding: 8px 12px; cursor: pointer; font-weight: 600; 
     <span class="cite cite-doctrine">doctrine<sup class="citeref">STD</sup></span></span>
 </header>
 <div id="note">__NOTE__</div>
+__MATRIX__
 <details class="ref" id="rubric">
   <summary>Rubric — the seven axes every item is judged against</summary>
   <div class="refbody" id="rubric-body"></div>
@@ -450,14 +461,95 @@ tally();
 
 
 def render_html(model):
-    title = f"Compare runs — {model['book']}"
+    title = model.get("title") or f"Compare runs — {model['book']}"
     note = "  ·  ".join(model.get("notes") or [])
     data = json.dumps(model, ensure_ascii=False).replace("</", "<\\/")
     return (_PAGE
             .replace("__TITLE__", title)
             .replace("__RUNS__", ", ".join(model["runs"]))
             .replace("__NOTE__", note)
+            .replace("__MATRIX__", model.get("matrix_html", ""))
             .replace("__DATA__", data))
+
+
+_STAGE_ORDER = ("brief", "draft", "repair", "review_r1", "review_r2", "revise",
+                "evaluate")
+_AGG_LABELS = (("calls_total", "calls"), ("claude_calls", "claude calls"),
+               ("tokens_in_total", "tok in"), ("tokens_out_total", "tok out"),
+               ("estimated_cost", "est cost"), ("first_pass_gate_rate", "1st-pass gate"),
+               ("final_gate_rate", "final gate"),
+               ("evaluator_is_drafter", "eval=drafter"))
+
+
+def _experiment_matrix_html(specs):
+    """A static route-matrix + telemetry table, one column per experiment, so the
+    reviewer sees which model ran each stage and the aggregate efficiency."""
+    names = [s["name"] for s in specs]
+    head = "".join(f"<th>{_esc(n)}</th>" for n in names)
+    rows = []
+    for stage in _STAGE_ORDER:
+        cells = "".join(
+            f"<td>{_esc((s['matrix'].get(stage) or {}).get('backend') or '·')}"
+            f" / {_esc((s['matrix'].get(stage) or {}).get('model') or '·')}</td>"
+            for s in specs)
+        rows.append(f"<tr><th class='stage'>{stage}</th>{cells}</tr>")
+    for key, label in _AGG_LABELS:
+        cells = "".join(f"<td>{_esc(_fmt_agg((s.get('aggregate') or {}).get(key)))}</td>"
+                        for s in specs)
+        rows.append(f"<tr><th class='stage'>{label}</th>{cells}</tr>")
+    return (
+        "<details class='ref' id='routes' open><summary>Experiment route matrix "
+        "&amp; telemetry</summary><div class='refbody'>"
+        "<table class='matrix'><thead><tr><th>stage</th>" + head + "</tr></thead>"
+        "<tbody>" + "".join(rows) + "</tbody></table></div></details>")
+
+
+def _fmt_agg(v):
+    if v is None:
+        return "·"
+    if isinstance(v, bool):
+        return "yes" if v else "no"
+    if isinstance(v, float):
+        return f"{v:.3f}"
+    return str(v)
+
+
+def _esc(s):
+    return (str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
+
+
+def render_experiments(book, experiment_dirs):
+    """Render ONE comparison page whose columns are named experiments (#35).
+
+    Each ``experiment_dir`` is an ``experiments-out/<name>`` tree with a
+    ``manifest.json`` (route matrix + aggregate telemetry) and a nested
+    ``<book>/runs/<name>/{drafts,verdicts,briefs}``. Per-unit items, citation
+    highlighting, leader references, verdict badges, and accept/export are the
+    existing per-item rendering, unchanged.
+    """
+    specs = []
+    for d in experiment_dirs:
+        d = pathlib.Path(d)
+        manifest = json.loads((d / "manifest.json").read_text(encoding="utf-8"))
+        name = manifest["name"]
+        run_dir = d / book / "runs" / name
+        specs.append({
+            "name": name,
+            "matrix": manifest.get("route_matrix", {}),
+            "aggregate": manifest.get("aggregate", {}),
+            "dirs": (run_dir / "drafts", run_dir / "verdicts", run_dir / "briefs"),
+        })
+    by_name = {s["name"]: s["dirs"] for s in specs}
+
+    def resolve(run):
+        return by_name[run]
+
+    model = build_model(book, [s["name"] for s in specs], resolve=resolve)
+    model["title"] = f"Compare experiments — {book}"
+    model["matrix_html"] = _experiment_matrix_html(specs)
+    model["route_matrix"] = {s["name"]: s["matrix"] for s in specs}
+    model["telemetry"] = {s["name"]: s["aggregate"] for s in specs}
+    return render_html(model)
 
 
 def main(argv=None):

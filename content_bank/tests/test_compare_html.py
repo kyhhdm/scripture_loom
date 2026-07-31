@@ -202,5 +202,40 @@ class RenderTests(unittest.TestCase):
         self.assertIn(r"\*\*", html)
 
 
+class ExperimentColumnsTest(unittest.TestCase):
+    def _experiment(self, root, name, matrix, aggregate, items):
+        d = pathlib.Path(root) / name
+        run_dir = d / "PHP" / "runs" / name
+        (run_dir / "drafts").mkdir(parents=True)
+        (run_dir / "drafts" / "PHP-001.json").write_text(json.dumps(items))
+        d.joinpath("manifest.json").write_text(json.dumps(
+            {"name": name, "route_matrix": matrix, "aggregate": aggregate}))
+        return d
+
+    def test_render_shows_route_matrix_and_items(self):
+        with tempfile.TemporaryDirectory() as root:
+            a = self._experiment(
+                root, "exp_a",
+                {"draft": {"backend": "claude", "model": "opus"},
+                 "review_r1": {"backend": "llm_core", "model": "gemini-3.6-flash"}},
+                {"calls_total": 10, "claude_calls": 4, "evaluator_is_drafter": False},
+                [_item("a-1", "D1", text="Who wrote to the Philippians?")])
+            b = self._experiment(
+                root, "exp_b",
+                {"draft": {"backend": "llm_core", "model": "deepseek-v4-flash"}},
+                {"calls_total": 6, "claude_calls": 0, "evaluator_is_drafter": True},
+                [_item("b-1", "D1", text="Name the author.")])
+            html = compare_html.render_experiments("PHP", [a, b])
+        # both experiment names appear
+        self.assertIn("exp_a", html)
+        self.assertIn("exp_b", html)
+        # a stage->model cell from the route matrix (static, not JS-rendered)
+        self.assertIn("opus", html)
+        self.assertIn("deepseek-v4-flash", html)
+        self.assertIn("route matrix", html.lower())
+        # item text is embedded in the page data
+        self.assertIn("Who wrote to the Philippians?", html)
+
+
 if __name__ == "__main__":
     unittest.main()
