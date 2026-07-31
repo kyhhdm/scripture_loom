@@ -37,7 +37,7 @@ class BackoffTest(unittest.TestCase):
     def test_retries_then_succeeds(self):
         calls = {"n": 0}
 
-        def flaky(_p):
+        def flaky(_p, _route):
             calls["n"] += 1
             if calls["n"] < 3:
                 raise RuntimeError("rate limit")

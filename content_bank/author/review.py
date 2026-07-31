@@ -10,7 +10,7 @@ import json
 import re
 
 from . import rubric
-from .llm import llm
+from .llm import llm, route_from_env
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.DOTALL)
 
@@ -51,7 +51,8 @@ def review(items, *, passage_text, brief, book, unit_id):
     for name, lens, rubric_text in (
             ("r1", _R1, rubric.build()),
             ("r2", _R2, rubric.build() + "\n" + rubric.reference_criteria())):
-        raw = llm(_reviewer_prompt(lens, rubric_text, items, passage_text, brief))
+        raw = llm(_reviewer_prompt(lens, rubric_text, items, passage_text, brief),
+                  route_from_env())
         out.append({"reviewer": name, "verdicts": _extract_json(raw)})
     return out
 
@@ -79,5 +80,5 @@ def revise(items, verdicts, *, passage_text, brief):
         f"## Reviewer verdicts (JSON)\n{json.dumps(verdicts, ensure_ascii=False)}\n\n"
         f"## Current items (JSON)\n{json.dumps(items, ensure_ascii=False)}\n\n"
         "Return ONLY the full corrected JSON array.")
-    raw = llm(prompt)
+    raw = llm(prompt, route_from_env())
     return _extract_json(raw)

@@ -1,10 +1,13 @@
 """The single LLM seam for content-bank authoring.
 
-Rendered prompt in, completion text out. This is the swappable/mockable ``llm()``
-seam issue #16's standalone builder (``build_cli.py``) calls after
-``build_brief_prompt.build(...)`` and ``build_draft_prompt.build(...)``.
+Rendered prompt + an explicit ``Route`` in, completion text out. This is the
+swappable/mockable ``llm()`` seam the standalone builder (``build_cli.py``) and
+the experiment runner (#35) call after the prompt builders. Routing is now
+**explicit per call** (a ``Route``) instead of process-wide
+``SCRIPTURE_LOOM_LLM_BACKEND``/``SCRIPTURE_LOOM_LLM_MODEL`` env vars, so one build
+can draft on one model and review on another.
 
-Two backends, selected by ``SCRIPTURE_LOOM_LLM_BACKEND`` (default ``llm_core``):
+Two backends, chosen by ``route.backend``:
 
 - ``llm_core`` — the vendored synchronous mxlens path (default model
   deepseek-v4-flash, billed to API credits). Cheap and fast; the quality ceiling
@@ -17,9 +20,15 @@ Two backends, selected by ``SCRIPTURE_LOOM_LLM_BACKEND`` (default ``llm_core``):
 
 Both are pure "prompt in, text out" and raise ``RuntimeError`` on failure, so the
 builder's backoff + per-unit isolation handle either identically.
+
+``route_from_env(model)`` is a transitional bridge for call sites not yet
+rethreaded onto an explicit RouteConfig; it also serves as the documented "env as
+a default source" for a single-model run.
 """
 import os
 import subprocess
+
+from .routing import Route
 
 # Built-in tools disabled for a pure single-shot completion (the prompts are
 # fully self-contained; the model must not shell out or read files). NOTE: do
@@ -30,27 +39,34 @@ _CLAUDE_NO_TOOLS = ["Bash", "Read", "Edit", "Write", "Glob", "Grep",
 _CLAUDE_TIMEOUT_S = 900
 
 
-def llm(prompt: str, model: str | None = None) -> str:
-    """Send one fully-rendered prompt, return the completion text.
+def route_from_env(model: str | None = None) -> Route:
+    """Build a Route from the legacy env vars (transitional bridge / single-model
+    default source). ``model`` overrides ``SCRIPTURE_LOOM_LLM_MODEL``."""
+    backend = os.environ.get("SCRIPTURE_LOOM_LLM_BACKEND") or "llm_core"
+    return Route(backend, model or os.environ.get("SCRIPTURE_LOOM_LLM_MODEL") or None)
 
-    Backend from ``SCRIPTURE_LOOM_LLM_BACKEND`` (``llm_core`` default, or
-    ``claude``). ``model`` defaults to ``SCRIPTURE_LOOM_LLM_MODEL`` if set, else
-    the backend's own default (deepseek-v4-flash / opus). Raises ``RuntimeError``
-    on failure.
+
+def llm(prompt: str, route: Route) -> str:
+    """Send one fully-rendered prompt via ``route``; return the completion text.
+
+    Raises ``RuntimeError`` on failure. (Task B2 upgrades this to return a
+    structured ``LLMResult``; ``llm_text()`` will then preserve this text
+    contract.)
     """
-    if model is None:
-        model = os.environ.get("SCRIPTURE_LOOM_LLM_MODEL") or None
-    if os.environ.get("SCRIPTURE_LOOM_LLM_BACKEND") == "claude":
-        return _claude_cli_llm(prompt, model)
+    if route.backend == "claude":
+        return _claude_cli_llm(prompt, route.model, route.settings)
     from llm_core import run_sync_llm
 
-    return run_sync_llm("", prompt, caller="content_bank", model=model)
+    return run_sync_llm("", prompt, caller="content_bank", model=route.model)
 
 
-def _claude_cli_llm(prompt: str, model: str | None = None) -> str:
+def _claude_cli_llm(prompt: str, model: str | None = None,
+                    settings: dict | None = None) -> str:
     """One headless Claude Code completion via ``claude -p`` (subscription auth).
 
     Prompt goes on stdin (so it never collides with the variadic tool flags).
+    ``settings`` (e.g. ``{"effort": ...}``) is honored on the structured JSON path
+    added in Task B2; the text path ignores unsupported settings.
     """
     argv = ["claude", "-p", "--model", model or "opus",
             "--output-format", "text",

@@ -17,7 +17,7 @@ import time
 from . import (build_brief_prompt, build_draft_prompt, build_section_brief_prompt,
                build_section_draft_prompt, gates, manifest as manifest_mod)
 from .gates import run_all
-from .llm import llm
+from .llm import llm, route_from_env
 from llm_core import llm_configured
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.DOTALL)
@@ -102,7 +102,7 @@ def _llm_with_backoff(prompt, *, tries=4, base=2.0):
     last = None
     for attempt in range(1, tries + 1):
         try:
-            return llm(prompt)
+            return llm(prompt, route_from_env())
         except RuntimeError as exc:  # rate-limit / transient; llm_core already retried
             last = exc
             if attempt == tries:

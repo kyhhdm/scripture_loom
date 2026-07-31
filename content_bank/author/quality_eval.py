@@ -23,7 +23,13 @@ import pathlib
 import re
 
 from . import compare_html, dimensions, gates
-from .llm import llm
+from .llm import llm, route_from_env
+
+
+def _env_fit_reviewer(prompt, model=None):
+    """Transitional default fit reviewer: route via the legacy env backend.
+    Task C2 replaces this with an explicit evaluator Route."""
+    return llm(prompt, route_from_env(model))
 
 DIM_ORDER = tuple(f"D{i}" for i in range(1, 9))
 FIT_STATUSES = {"accurate", "mixed", "misclassified"}
@@ -176,7 +182,7 @@ def _parse_fit(raw, items):
     return rows
 
 
-def evaluate_dimension_fit(items, *, brief=None, reviewer=llm, model=None):
+def evaluate_dimension_fit(items, *, brief=None, reviewer=_env_fit_reviewer, model=None):
     """Run one semantic fit review and return item results plus coverage summary."""
     rows = _parse_fit(reviewer(build_dimension_fit_prompt(items, brief), model=model), items)
     assigned = {item["id"]: item.get("dimension") for item in items}
@@ -212,7 +218,7 @@ def _gate_results(book, unit, items, dim_cap):
 
 def evaluate(book, runs, *, units=None, base=None, dimension_fit=True,
              fit_backend="llm_core", fit_model="gemini-3.6-flash", dim_cap=3,
-             reviewer=llm):
+             reviewer=_env_fit_reviewer):
     """Evaluate selected runs and return a JSON-serializable report."""
     base = pathlib.Path(base) if base else compare_html.DEFAULT_BASE
     selected = set(units or [])
