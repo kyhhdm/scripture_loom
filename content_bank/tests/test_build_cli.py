@@ -236,6 +236,47 @@ class RouteDrivenBuildTest(unittest.TestCase):
         self.assertEqual(seen[1], "draft-m")
 
 
+class TelemetryCaptureTest(unittest.TestCase):
+    def test_each_stage_records_a_callrecord(self):
+        from content_bank.author.routing import RouteConfig
+        from content_bank.author.telemetry import TelemetrySink
+        clean_draft = json.dumps([dict(id="mat-035-d1-a", dimension="D1",
+                                       type="question", age_tier="child",
+                                       difficulty=1, review_status="draft",
+                                       version=1, passage="MAT-035",
+                                       text={"en": "Who came to Jesus?"})])
+        seq = iter(["brief text", clean_draft])
+
+        def fake_llm(prompt, route):
+            return _result(next(seq))
+
+        with tempfile.TemporaryDirectory() as d:
+            sink = TelemetrySink(pathlib.Path(d) / "calls.jsonl")
+            m = manifest_mod.init_manifest("MAT", ["MAT-035"])
+            mpath = pathlib.Path(d) / "manifest.json"
+            manifest_mod.save(mpath, m)
+            with mock.patch("content_bank.author.build_cli.llm", fake_llm), \
+                 mock.patch("content_bank.author.build_cli.run_all", return_value={}), \
+                 mock.patch("content_bank.author.gates.dimension_cap_check",
+                            return_value={}):
+                build_cli.build_pericope(
+                    "MAT-035", "MAT", routes=RouteConfig.single("llm_core", "m"),
+                    drafts_dir=pathlib.Path(d) / "drafts",
+                    briefs_dir=pathlib.Path(d) / "briefs",
+                    manifest_obj=m, manifest_path=mpath, review_on=False,
+                    sink=sink, experiment="exp1")
+            records = list(sink.records())
+        stages = {r["stage"] for r in records}
+        self.assertIn("brief", stages)
+        self.assertIn("draft", stages)
+        for r in records:
+            self.assertEqual(r["experiment"], "exp1")
+            self.assertEqual(r["unit_id"], "MAT-035")
+            self.assertEqual(r["backend"], "llm_core")
+            self.assertTrue(r["prompt_hash"])
+            self.assertNotIn("prompt", r)  # never the body, only a hash
+
+
 class RunSlugTest(unittest.TestCase):
     def test_defaults_and_overrides(self):
         self.assertEqual(build_cli._run_slug("llm_core", None), "deepseek-v4-flash")
@@ -286,7 +327,8 @@ class SectionBuildTest(unittest.TestCase):
             mpath = pathlib.Path(d) / "manifest.json"
             manifest_mod.save(mpath, m)
             seq = iter(["SECTION BRIEF TEXT", self._throughline()])
-            r_pass = json.dumps({"php-s1-throughline": {"verdict": "pass", "notes": ""}})
+            r_pass = _result(json.dumps(
+                {"php-s1-throughline": {"verdict": "pass", "notes": ""}}))
             with mock.patch("content_bank.author.build_cli._llm_with_backoff",
                             side_effect=lambda *_a, **_k: next(seq)), \
                  mock.patch("content_bank.author.review.llm",
@@ -353,7 +395,8 @@ class ReviewFlowTest(unittest.TestCase):
                                      type="question", age_tier="child", difficulty=1,
                                      review_status="draft", version=1, passage="MAT-035",
                                      text={"en": "Who came to Jesus?"})])
-            r_pass = json.dumps({"mat-035-d1-a": {"verdict": "pass", "notes": ""}})
+            r_pass = _result(json.dumps({"mat-035-d1-a": {"verdict": "pass",
+                                                          "notes": ""}}))
             # _llm_with_backoff yields brief + draft; review.llm yields the two verdicts.
             seq = iter(["BRIEF", clean])
             with mock.patch("content_bank.author.build_cli._llm_with_backoff",

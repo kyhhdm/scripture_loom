@@ -89,3 +89,23 @@ class NullSink:
 
 def prompt_hash(prompt: str) -> str:
     return hashlib.sha256(prompt.encode("utf-8")).hexdigest()
+
+
+def record_call(sink, *, experiment, stage, unit_id, kind, attempt, route, prompt,
+                result=None, error=None) -> None:
+    """Append one CallRecord for an LLM attempt. ``result`` is an ``LLMResult`` on
+    success; on failure pass ``error`` and leave ``result`` None (usage empty).
+    No-op when ``sink`` is falsy."""
+    if not sink:
+        return
+    usage = result.usage.as_dict() if result else TokenUsage().as_dict()
+    sink.add(CallRecord(
+        experiment=experiment, stage=stage, unit_id=unit_id, kind=kind,
+        attempt=attempt, backend=route.backend, requested_model=route.model,
+        actual_model=result.actual_model if result else None,
+        usage=usage,
+        usage_source=result.usage_source if result else "none",
+        cost_estimate=result.cost_estimate if result else None,
+        duration_ms=result.duration_ms if result else 0,
+        stop_reason=result.stop_reason if result else None,
+        success=result is not None, error=error, prompt_hash=prompt_hash(prompt)))
