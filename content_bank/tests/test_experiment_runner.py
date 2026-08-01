@@ -216,6 +216,31 @@ class RunnerTest(unittest.TestCase):
             self.assertEqual(seen["units"], ["PHP-005"])
             self.assertIn("runs", rep)
 
+    def test_reuse_drafts_threads_source_run_dir_per_book(self):
+        cfg_dict = {k: v for k, v in CONFIG.items() if k != "book"}
+        cfg_dict["name"] = "hybrid"
+        cfg_dict["units"] = ["PHP-002", "JON-002"]
+        with tempfile.TemporaryDirectory() as d:
+            cfg = pathlib.Path(d) / "hybrid.json"
+            cfg.write_text(json.dumps(cfg_dict))
+            with mock.patch("content_bank.author.build_cli.run",
+                            return_value={"ok": [], "failed": {}}) as run, \
+                 mock.patch("content_bank.author.quality_eval.evaluate",
+                            return_value={"runs": {}}), \
+                 mock.patch("content_bank.author.experiment_cli._seed_run_manifest"):
+                man = ex.run_experiment(cfg, out_root=d + "/out",
+                                        now="2026-08-01T00:00:00Z", corpus_rev="abc",
+                                        reuse_drafts="genre_probe")
+            reuse_by_book = {c.args[0]: c.kwargs.get("reuse_dir")
+                             for c in run.call_args_list}
+            self.assertEqual(
+                reuse_by_book["PHP"],
+                pathlib.Path(d + "/out") / "genre_probe" / "PHP" / "runs" / "genre_probe")
+            self.assertEqual(
+                reuse_by_book["JON"],
+                pathlib.Path(d + "/out") / "genre_probe" / "JON" / "runs" / "genre_probe")
+            self.assertEqual(man["reused_drafts_from"], "genre_probe")
+
     def test_snapshot_reports_unavailable_honestly(self):
         snap = ex._subscription_snapshot()
         self.assertFalse(snap["available"])

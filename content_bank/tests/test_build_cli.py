@@ -310,6 +310,64 @@ class GateTraceTest(unittest.TestCase):
         self.assertTrue(trace["final_pass"])
 
 
+class RawDraftReuseTest(unittest.TestCase):
+    def _clean(self, pid):
+        return json.dumps([dict(id=f"{pid.lower()}-d1-a", dimension="D1",
+                                type="question", age_tier="child", difficulty=1,
+                                review_status="draft", version=1, passage=pid,
+                                text={"en": "Who came to Jesus?"})])
+
+    def test_persists_raw_draft_then_reuse_skips_brief_and_draft(self):
+        from content_bank.author.routing import RouteConfig
+        with tempfile.TemporaryDirectory() as d:
+            src = pathlib.Path(d) / "src"
+            seq = iter(["brief text", self._clean("MAT-035")])  # brief, then draft
+            calls = []
+
+            def fake_llm(prompt, route):
+                calls.append(route.model)
+                return _result(next(seq))
+
+            m = manifest_mod.init_manifest("MAT", ["MAT-035"])
+            mp = src / "manifest.json"
+            manifest_mod.save(mp, m)
+            r_pass = _result(json.dumps({"mat-035-d1-a": {"verdict": "pass",
+                                                          "notes": ""}}))
+            with mock.patch("content_bank.author.build_cli.llm", fake_llm), \
+                 mock.patch("content_bank.author.review.llm",
+                            side_effect=[r_pass, r_pass]):
+                build_cli.build_pericope(
+                    "MAT-035", "MAT", routes=RouteConfig.single("llm_core"),
+                    drafts_dir=src / "drafts", briefs_dir=src / "briefs",
+                    verdicts_dir=src / "verdicts", raw_drafts_dir=src / "raw_drafts",
+                    manifest_obj=m, manifest_path=mp, review_on=True, max_repair=1)
+            # raw pre-review draft was persisted
+            self.assertTrue((src / "raw_drafts" / "MAT-035.json").exists())
+            n_calls_first = len(calls)
+            self.assertGreaterEqual(n_calls_first, 2)  # brief + draft happened
+
+            # Now REUSE: a second experiment reads src's brief+raw draft, no build_cli.llm
+            dst = pathlib.Path(d) / "dst"
+            m2 = manifest_mod.init_manifest("MAT", ["MAT-035"])
+            mp2 = dst / "manifest.json"
+            manifest_mod.save(mp2, m2)
+
+            def boom(prompt, route):
+                raise AssertionError("reuse must not call the draft/brief seam")
+
+            with mock.patch("content_bank.author.build_cli.llm", boom), \
+                 mock.patch("content_bank.author.review.llm",
+                            side_effect=[r_pass, r_pass]):
+                stage = build_cli.build_pericope(
+                    "MAT-035", "MAT", routes=RouteConfig.single("llm_core"),
+                    drafts_dir=dst / "drafts", briefs_dir=dst / "briefs",
+                    verdicts_dir=dst / "verdicts", reuse_dir=src,
+                    manifest_obj=m2, manifest_path=mp2, review_on=True, max_repair=1)
+            self.assertEqual(stage, "drafted")
+            self.assertTrue((dst / "drafts" / "MAT-035.json").exists())
+            self.assertEqual((dst / "briefs" / "mat-035.md").read_text(), "brief text")
+
+
 class RunSlugTest(unittest.TestCase):
     def test_defaults_and_overrides(self):
         self.assertEqual(build_cli._run_slug("llm_core", None), "deepseek-v4-flash")

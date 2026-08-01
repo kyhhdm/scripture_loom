@@ -115,10 +115,14 @@ def _run_fit_evaluation(out, name, groups, evaluator_route, sink):
 
 
 def run_experiment(config_path, *, out_root=_DEFAULT_OUT_ROOT, resume=False,
-                   now, corpus_rev):
+                   now, corpus_rev, reuse_drafts=None):
     """Execute one experiment; write its result tree; return the manifest dict.
     ``now`` (ISO timestamp) and ``corpus_rev`` are injected so the core is
-    deterministic and unit-testable."""
+    deterministic and unit-testable. ``reuse_drafts`` (a source experiment name)
+    freezes brief+draft: each unit's frozen pre-review draft and brief are read
+    from that source's run dir, so only the downstream review/revise/repair
+    stages run — no brief/draft LLM calls (skip the expensive opus generation and
+    iterate cheap ops against an identical draft)."""
     config = experiment_config.load(config_path)
     experiment_config.validate(config)
     name = config["name"]
@@ -145,11 +149,14 @@ def run_experiment(config_path, *, out_root=_DEFAULT_OUT_ROOT, resume=False,
     dim_cap = int(gates_cfg.get("dim_cap", gates.DEFAULT_DIM_CAP))
     max_repair = int(gates_cfg.get("max_repair", 2))
 
+    reuse_root = pathlib.Path(out_root) / reuse_drafts if reuse_drafts else None
     snap_before = _subscription_snapshot()
     build_result = {"ok": [], "failed": {}}
     for book, units in groups.items():
         run_rel = pathlib.Path(book) / "runs" / name
         _seed_run_manifest(book, out / run_rel / "manifest.json", units)
+        reuse_dir = (reuse_root / book / "runs" / reuse_drafts
+                     if reuse_root else None)
         res = build_cli.run(
             book, units=units, routes=routes, review_on=True,
             max_repair=max_repair, dim_cap=dim_cap,
@@ -158,7 +165,7 @@ def run_experiment(config_path, *, out_root=_DEFAULT_OUT_ROOT, resume=False,
             briefs_dir=out / run_rel / "briefs",
             verdicts_dir=out / run_rel / "verdicts",
             gate_trace_dir=out / "gate_traces",
-            sink=sink, experiment=name)
+            sink=sink, experiment=name, reuse_dir=reuse_dir)
         build_result["ok"].extend(res.get("ok", []))
         build_result["failed"].update(res.get("failed", {}))
     eval_report = _run_fit_evaluation(out, name, groups, evaluator_route, sink)
@@ -181,6 +188,7 @@ def run_experiment(config_path, *, out_root=_DEFAULT_OUT_ROOT, resume=False,
         "config_hash": config_hash,
         "corpus_rev": corpus_rev,
         "prompt_version": experiment_config.PROMPT_VERSION,
+        "reused_drafts_from": reuse_drafts,
         "created_at": now,
         "route_matrix": _route_matrix(config),
         "subscription_before": snap_before,
@@ -320,6 +328,11 @@ def main(argv=None):
     p_run.add_argument("config")
     p_run.add_argument("--resume", action="store_true")
     p_run.add_argument("--out-root", default=_DEFAULT_OUT_ROOT)
+    p_run.add_argument("--reuse-drafts", metavar="SOURCE_EXPERIMENT",
+                       help="freeze brief+draft: reuse SOURCE's frozen pre-review "
+                            "drafts and briefs, running only the downstream stages "
+                            "(no brief/draft LLM calls — skips the expensive opus "
+                            "generation)")
 
     p_eval = sub.add_parser("evaluate", help="rebuild the report for an experiment")
     p_eval.add_argument("name")
@@ -360,8 +373,10 @@ def main(argv=None):
         return 0
     if a.cmd == "run":
         man = run_experiment(a.config, out_root=a.out_root, resume=a.resume,
-                             now=_now(), corpus_rev=_corpus_rev())
-        print(f"Done: experiment {man['name']} -> {a.out_root}/{man['name']}")
+                             now=_now(), corpus_rev=_corpus_rev(),
+                             reuse_drafts=a.reuse_drafts)
+        print(f"Done: experiment {man['name']} -> {a.out_root}/{man['name']}"
+              + (f"  (reused drafts from {a.reuse_drafts})" if a.reuse_drafts else ""))
         return 0
     if a.cmd == "evaluate":
         fit_route = (Route(a.fit_backend or "llm_core", a.fit_model)

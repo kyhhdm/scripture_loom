@@ -86,6 +86,10 @@ uv run python -m content_bank.author.experiment_cli run experiments/NAME.json
 # Resume an interrupted run (identical config only; completed units are skipped)
 uv run python -m content_bank.author.experiment_cli run experiments/NAME.json --resume
 
+# Reuse a source experiment's frozen drafts: skip brief+draft (no opus calls) and
+# run only the downstream review/revise/repair stages with THIS config's routes.
+uv run python -m content_bank.author.experiment_cli run experiments/NAME.json --reuse-drafts SOURCE
+
 # Rebuild the metrics report from an existing run (no new LLM calls)
 uv run python -m content_bank.author.experiment_cli evaluate NAME
 
@@ -136,8 +140,34 @@ experiments-out/NAME/
   gate_traces/UNIT.json    initial flags, each repair round (route + tokens),
                            item drops, first-pass vs final status
   report.json              deterministic + D1-D8 fit metrics, extended (below)
-  PHP/runs/NAME/           drafts/  briefs/  verdicts/  (the built content)
+  PHP/runs/NAME/           drafts/  raw_drafts/  briefs/  verdicts/
 ```
+
+`raw_drafts/` holds each unit's **pre-review** draft (the raw draft-model output,
+before review/revise). It's what `--reuse-drafts` reads.
+
+## Reuse a frozen draft (iterate cheap stages without re-paying opus)
+
+The draft stage is the expensive, quality-defining one (often opus). To test
+whether *cheaper* models can do the downstream review/revise/repair stages without
+hurting quality, draft **once**, then run many experiments that reuse that frozen
+draft and vary only the ops routes:
+
+```bash
+uv run python -m content_bank.author.experiment_cli run experiments/genre_probe.json
+uv run python -m content_bank.author.experiment_cli run experiments/hybrid_A.json --reuse-drafts genre_probe
+uv run python -m content_bank.author.experiment_cli run experiments/hybrid_B.json --reuse-drafts genre_probe
+```
+
+Each `--reuse-drafts` run reads the source's `raw_drafts/` and `briefs/`, makes
+**no brief or draft LLM calls** (so no opus cost or latency, and the draft route's
+credential isn't required), and runs only review→revise→re-gate→evaluate with the
+reusing config's routes. Because every reuse run starts from an *identical* draft,
+the comparison cleanly isolates the ops stages.
+
+Note: `raw_drafts/` is captured going forward — an experiment built before this
+shipped has none, so **re-run the source once** to freeze its drafts before
+reusing them. The manifest records `reused_drafts_from`.
 
 ### Telemetry honesty
 
