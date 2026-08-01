@@ -202,6 +202,52 @@ class RenderTests(unittest.TestCase):
         self.assertIn(r"\*\*", html)
 
 
+class RawDraftDiffTest(unittest.TestCase):
+    def _run(self, root, run, unit, final_items, raw_items):
+        rd = pathlib.Path(root) / "PHP" / run
+        (rd / "drafts").mkdir(parents=True)
+        (rd / "drafts" / f"{unit}.json").write_text(json.dumps(final_items))
+        (rd / "raw_drafts").mkdir(parents=True)
+        (rd / "raw_drafts" / f"{unit}.json").write_text(json.dumps(raw_items))
+
+    def test_changed_retagged_and_dropped_surface(self):
+        with tempfile.TemporaryDirectory() as root:
+            # raw: 3 items. final: item a edited, item b retagged D2->D7, item c dropped.
+            raw = [_item("a", "D1", text="Old question?"),
+                   _item("b", "D2", text="Kept text"),
+                   _item("c", "D1", text="Dropped one")]
+            final = [_item("a", "D1", text="New question?"),
+                     _item("b", "D7", text="Kept text")]
+            self._run(root, "runA", "PHP-001", final, raw)
+            model = compare_html.build_model("PHP", ["runA"],
+                                             resolve=lambda r: (
+                                                 pathlib.Path(root) / "PHP" / r / "drafts",
+                                                 pathlib.Path(root) / "PHP" / r / "verdicts",
+                                                 None))
+            cards = {c["id"]: c
+                     for blk in model["units"][0]["dimensions"]
+                     for c in blk["cells"]["runA"]}
+        # edited item carries its first-round text + changed flag
+        self.assertTrue(cards["a"]["changed"])
+        self.assertEqual(cards["a"]["raw_text_en"], "Old question?")
+        # retagged item shows old dimension
+        self.assertTrue(cards["b"]["changed"])
+        self.assertEqual(cards["b"]["raw_dimension"], "D2")
+        # dropped item appears as a dropped ghost card
+        self.assertTrue(cards["c"].get("dropped"))
+
+    def test_no_raw_dir_is_graceful(self):
+        with tempfile.TemporaryDirectory() as root:
+            rd = pathlib.Path(root) / "PHP" / "runA" / "drafts"
+            rd.mkdir(parents=True)
+            (rd / "PHP-001.json").write_text(json.dumps([_item("a", "D1")]))
+            model = compare_html.build_model("PHP", ["runA"],
+                                             resolve=lambda r: (rd, rd.parent, None))
+            card = model["units"][0]["dimensions"][0]["cells"]["runA"][0]
+        self.assertNotIn("changed", card)      # no raw drafts -> no before/after noise
+        self.assertNotIn("raw_text_en", card)
+
+
 class ExperimentColumnsTest(unittest.TestCase):
     def _experiment(self, root, name, matrix, aggregate, items):
         d = pathlib.Path(root) / name
