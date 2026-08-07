@@ -552,7 +552,20 @@ def main(argv=None):
                     help="anti-padding: soft per-dimension item cap per unit "
                          f"(default {gates.DEFAULT_DIM_CAP}); over-cap dimensions are "
                          "fed to the repair loop, then logged (never hard-fail)")
+    ap.add_argument("--group", action="store_true",
+                    help="batch each section-group (a section + its pericopes) into "
+                         "one LLM call per stage; cuts request count on the "
+                         "claude/Opus subscription backend. --units selects groups by "
+                         "section id; --limit bounds the number of groups")
     a = ap.parse_args(argv)
+    if a.group:
+        from . import build_group
+        res = build_group.group_run(
+            a.book, units=a.units, review_on=a.review, max_repair=a.max_repair,
+            limit=a.limit, run_root=a.run_root, backend=a.backend, model=a.model,
+            dim_cap=a.dim_cap)
+        print(f"\nDone. ok={len(res['ok'])} failed={len(res['failed'])}")
+        return 1 if res["failed"] else 0
     res = run(a.book, units=a.units, kind=a.kind, review_on=a.review,
               max_repair=a.max_repair, limit=a.limit, manifest_path=a.manifest,
               drafts_dir=a.drafts_dir, briefs_dir=a.briefs_dir,
