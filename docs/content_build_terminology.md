@@ -215,6 +215,26 @@ not confer human review."*
 
 ---
 
+## Group mode
+
+**Group** — a *section-group*: a section plus the pericopes in its span (e.g. `PHP-S2`
++ `PHP-002..PHP-006`). Sections partition the book, so every pericope belongs to exactly
+one group. `content_bank/author/build_group.py:groups_for_book`.
+
+**Group mode** (`build_cli --group`) — an execution mode that batches all of a group's
+units into **one LLM call per stage** (brief, draft, repair, review r1/r2, revise),
+each returning a `{"units": {unit_id: payload}}` envelope that is split back into the
+per-unit briefs/drafts/verdicts. Cuts request count on the `claude`/Opus subscription
+backend (which meters call count as well as tokens): ~`4(N+1)` calls → ~5 for a group
+of `N+1` units. Downstream (gates, manifest, store, provenance) stays per-unit and
+byte-identical; only the LLM I/O is batched. A `stop_reason==max_tokens` / missing-unit
+/ unparseable envelope triggers **bisection** — the group is split and its halves
+retried down to singletons. Batched telemetry is attributed to the section id with
+`kind: "group"` (per-call counts kept; per-unit token split lost). Design:
+`docs/superpowers/specs/2026-08-07-group-batched-content-build-design.md`.
+
+---
+
 ## Model / run / provenance
 
 **backend** — which LLM path runs: `llm_core` (deepseek via API credits, default) or

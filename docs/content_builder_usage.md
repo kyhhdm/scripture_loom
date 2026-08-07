@@ -127,6 +127,7 @@ uv run python -m content_bank.author.build_cli --book PHP --no-review
 | `--max-repair N` | `2` | Gate-repair rounds before a HARD-gate failure aborts the unit. |
 | `--limit N` | — | Cap how many units are built this run. |
 | `--dim-cap N` | `3` | Soft anti-padding cap per dimension (over-cap dims feed the repair loop, then log; never hard-fail). |
+| `--group` | off | Batch each **section-group** (a section + its pericopes) into one LLM call per stage — see *Group mode* below. `--units` selects groups by section id; `--limit` bounds the number of groups. |
 | `--backend {llm_core,claude}` | `llm_core` | `llm_core` = registered API models (Volcengine DeepSeek or Google Gemini); `claude` = Claude Code headless via subscription. |
 | `--model MODEL` | backend's default | Override the model (`deepseek-v4-pro`, `gemini-3.6-flash`, `gemini-3.5-flash-lite`; or `opus`/`sonnet` with the Claude backend). Determines the run slug. |
 | `--run-root DIR` | `work/content_bank_build` | Build root holding `runs/<model>/`. |
@@ -163,6 +164,48 @@ available in mainland China.
 
 Failures are isolated per unit — a unit that raises is recorded in the run's `failed`
 list and the others continue. The command exits non-zero if any unit failed.
+
+---
+
+## Group mode (`--group`)
+
+The per-unit walk above costs roughly `4(N+1)` LLM calls for a section spanning `N`
+pericopes (a *group* of `N+1` units). On the `claude`/Opus **subscription** backend,
+whose usage windows meter request *count* as well as tokens, that exhausts the window
+fast — even though a section and its pericopes share almost all of their context.
+
+`--group` batches a whole section-group into **one call per stage**. Each stage sends a
+single prompt wrapping every unit's existing per-unit prompt and asks for one
+`{"units": {"<unit_id>": …}}` envelope, which is split back into the same per-unit
+artifacts. For a 6-unit group this is ~5 calls instead of ~24. Example:
+
+```bash
+uv run python -m content_bank.author.build_cli \
+    --book PHP --group --backend claude --model opus
+```
+
+What changes and what does not:
+
+- **Batched:** brief (1 call), draft (1 call), gate-**repair** (only the units that
+  flagged, 1 call/round), review **r1** (1 call) and **r2** (1 call), and **revise**
+  (only the units with a failed item, 1 call). The two review lenses stay independent
+  calls — drafting and review are never folded together.
+- **Unchanged and per-unit:** the deterministic gates, the manifest stages, provenance
+  stamping, the `runs/<slug>/{briefs,drafts,verdicts}` layout, and everything
+  `compare_html` reads. Group mode only batches the LLM I/O.
+- **Truncation guard:** if a batched response is cut off (`stop_reason == max_tokens`),
+  omits a unit, or won't parse, the group is **split in half and each half retried**,
+  recursing down to a single unit; a lone unit that still won't complete fails just that
+  unit (isolated in `failed`). Two half-calls still beat `N` per-unit calls, and no unit
+  is silently dropped.
+- **Telemetry tradeoff:** batched calls are attributed to the section id with
+  `kind: "group"`, so per-**call** counts survive but per-**unit** token attribution
+  does not. `--group` is **orthogonal to `--backend`** (it works with any backend; the
+  call-count win only matters against a subscription window).
+- **Resumability:** units already at `drafted` are skipped, so a re-run continues a
+  partially-built group.
+
+Design: `docs/superpowers/specs/2026-08-07-group-batched-content-build-design.md`.
 
 ---
 
