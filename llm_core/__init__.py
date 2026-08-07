@@ -10,6 +10,7 @@ Public seam:
     run_batch_llm([(system, user), ...])      -> list[str]
     llm_configured()                          -> bool
 """
-from llm_core.sync import llm_configured, run_batch_llm, run_sync_llm
+from llm_core.sync import (llm_configured, run_batch_llm, run_sync_llm,
+                           run_sync_llm_result)
 
-__all__ = ["run_sync_llm", "run_batch_llm", "llm_configured"]
+__all__ = ["run_sync_llm", "run_sync_llm_result", "run_batch_llm", "llm_configured"]

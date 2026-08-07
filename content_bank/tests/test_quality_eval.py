@@ -2,8 +2,17 @@ import json
 import pathlib
 import tempfile
 import unittest
+from unittest import mock
 
 from content_bank.author import quality_eval
+from content_bank.author.routing import Route
+from content_bank.author.telemetry import LLMResult, TokenUsage
+
+
+def _fit_result(text):
+    return LLMResult(text=text, usage=TokenUsage(input=3, output=5),
+                     requested_model="sonnet", actual_model="sonnet",
+                     stop_reason="end_turn", duration_ms=1, usage_source="provider")
 
 
 def _item(iid, dim, text="Question text", **extra):
@@ -59,6 +68,30 @@ class DimensionFitTest(unittest.TestCase):
         self.assertEqual(result["status_counts"]["misclassified"], 1)
         self.assertEqual(result["adjusted_dimension_counts"]["D7"], 1)
         self.assertIn("D6", result["adjusted_missing_dimensions"])
+
+    def test_fit_uses_given_route_and_records_telemetry(self):
+        from content_bank.author.telemetry import TelemetrySink
+        items = [_item("d1", "D1")]
+        raw = json.dumps([{"id": "d1", "status": "accurate",
+                           "suggested_dimension": "D1", "confidence": 0.9,
+                           "reason": "identifies a person"}])
+        seen = {}
+
+        def fake_llm(prompt, route):
+            seen["model"] = route.model
+            return _fit_result(raw)
+
+        with tempfile.TemporaryDirectory() as d:
+            sink = TelemetrySink(pathlib.Path(d) / "calls.jsonl")
+            with mock.patch.object(quality_eval, "llm", fake_llm):
+                quality_eval.evaluate_dimension_fit(
+                    items, route=Route("claude", "sonnet"), sink=sink,
+                    unit_id="PHP-001")
+            records = list(sink.records())
+        self.assertEqual(seen["model"], "sonnet")
+        self.assertEqual(len(records), 1)
+        self.assertEqual(records[0]["stage"], "evaluate")
+        self.assertEqual(records[0]["unit_id"], "PHP-001")
 
     def test_rejects_missing_or_reordered_item_results(self):
         items = [_item("a", "D1"), _item("b", "D2")]

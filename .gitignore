@@ -15,3 +15,6 @@ corpus/sources/private/
 # copyrighted reference material — Ligonier ZH Westminster Standards, used
 # only for term-level glossary extraction, never redistributed/shipped
 work/glossary_build/standards_zh/
+
+# experiment run outputs (#35) — regenerable, never committed
+experiments-out/

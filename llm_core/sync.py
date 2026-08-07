@@ -96,6 +96,36 @@ def run_sync_llm(system_prompt: str, user_message: str, caller: str = "",
         f"(caller={caller}, model={resolved}): {last_err}")
 
 
+def run_sync_llm_result(system_prompt: str, user_message: str, caller: str = "",
+                        model: str | None = None) -> tuple[str, dict]:
+    """Like ``run_sync_llm`` but returns ``(text, summary)`` so callers can keep
+    the provider/estimate usage metadata (tokens_in_total, tokens_out_total, cost,
+    model, elapsed_s) instead of discarding it. Raises on unconfigured/unknown
+    model or on an empty/errored generation."""
+    if not llm_configured(model):
+        raise RuntimeError(
+            "analyst in-recipe LLM not configured (set llm_api_key/llm_api_base "
+            "or a provider key like ARK_API_KEY/GEMINI_API_KEY)")
+
+    from llm_core.service import LLMService
+
+    resolved = model or settings.analyst_llm_model
+    messages = ([{"role": "system", "content": system_prompt}] if system_prompt else []) \
+        + [{"role": "user", "content": user_message}]
+    try:
+        out = LLMService.run_batch_sync(
+            [messages], model=resolved, build_overrides=_build_overrides(),
+            cache=settings.analyst_llm_cache_enabled)
+    except ValueError as exc:
+        raise RuntimeError(f"analyst LLM: unknown model {resolved!r}: {exc}") from exc
+    gen = out["generations"][0]
+    if gen.get("error") or not gen.get("generation"):
+        raise RuntimeError(
+            f"analyst LLM failed (caller={caller}, model={resolved}): "
+            f"{gen.get('error') or 'empty'}")
+    return gen["generation"], out["summary"]
+
+
 def _build_overrides() -> dict:
     o = {}
     if settings.llm_api_base:

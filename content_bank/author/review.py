@@ -10,7 +10,8 @@ import json
 import re
 
 from . import rubric
-from .llm import llm
+from .llm import llm, route_from_env
+from .telemetry import record_call
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.DOTALL)
 
@@ -46,13 +47,20 @@ def _reviewer_prompt(lens, rubric_text, items, passage_text, brief):
             '{"verdict":"pass"|"fail","notes":"concrete"}. No prose.')
 
 
-def review(items, *, passage_text, brief, book, unit_id):
+def review(items, *, passage_text, brief, book, unit_id, r1_route=None,
+           r2_route=None, sink=None, experiment=None, kind=None):
+    r1_route = r1_route or route_from_env()
+    r2_route = r2_route or route_from_env()
     out = []
-    for name, lens, rubric_text in (
-            ("r1", _R1, rubric.build()),
-            ("r2", _R2, rubric.build() + "\n" + rubric.reference_criteria())):
-        raw = llm(_reviewer_prompt(lens, rubric_text, items, passage_text, brief))
-        out.append({"reviewer": name, "verdicts": _extract_json(raw)})
+    for name, lens, rubric_text, route in (
+            ("r1", _R1, rubric.build(), r1_route),
+            ("r2", _R2, rubric.build() + "\n" + rubric.reference_criteria(), r2_route)):
+        prompt = _reviewer_prompt(lens, rubric_text, items, passage_text, brief)
+        res = llm(prompt, route)
+        record_call(sink, experiment=experiment, stage=f"review_{name}",
+                    unit_id=unit_id, kind=kind, attempt=1, route=route,
+                    prompt=prompt, result=res)
+        out.append({"reviewer": name, "verdicts": _extract_json(res.text)})
     return out
 
 
@@ -65,7 +73,9 @@ def _failed_ids(verdicts):
     return ids
 
 
-def revise(items, verdicts, *, passage_text, brief):
+def revise(items, verdicts, *, passage_text, brief, route=None, sink=None,
+           experiment=None, unit_id=None, kind=None):
+    route = route or route_from_env()
     failed = _failed_ids(verdicts)
     if not failed:
         return items
@@ -79,5 +89,7 @@ def revise(items, verdicts, *, passage_text, brief):
         f"## Reviewer verdicts (JSON)\n{json.dumps(verdicts, ensure_ascii=False)}\n\n"
         f"## Current items (JSON)\n{json.dumps(items, ensure_ascii=False)}\n\n"
         "Return ONLY the full corrected JSON array.")
-    raw = llm(prompt)
-    return _extract_json(raw)
+    res = llm(prompt, route)
+    record_call(sink, experiment=experiment, stage="revise", unit_id=unit_id,
+                kind=kind, attempt=1, route=route, prompt=prompt, result=res)
+    return _extract_json(res.text)

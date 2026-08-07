@@ -136,10 +136,14 @@ def _leader_ref(item):
     }
 
 
-def _card(item, run, gate_flags, unit_verdicts):
+def _lr_text(item):
+    return (((item.get("leader_reference") or {}).get("text") or {}).get("en")) or ""
+
+
+def _card(item, run, gate_flags, unit_verdicts, raw_by_id=None, has_raw=False):
     iid = item.get("id")
     problems = gate_flags.get(iid, [])
-    return {
+    card = {
         "id": iid,
         "run": run,
         "dimension": item.get("dimension"),
@@ -152,48 +156,104 @@ def _card(item, run, gate_flags, unit_verdicts):
         "gate_problems": problems,
         "verdict": unit_verdicts.get(iid),
     }
+    # First-round (pre-review) counterpart, so the reviewer sees what repair/revise
+    # changed. Only when raw drafts exist for this run (graceful on legacy runs).
+    if has_raw:
+        raw = (raw_by_id or {}).get(iid)
+        if raw is None:
+            card["origin"] = "added"      # appeared during review (rare)
+        else:
+            raw_text = (raw.get("text") or {}).get("en") or ""
+            card["raw_text_en"] = raw_text
+            card["raw_dimension"] = raw.get("dimension")
+            card["raw_leader_ref"] = _leader_ref(raw)
+            card["changed"] = bool(
+                raw_text != card["text_en"]
+                or raw.get("dimension") != item.get("dimension")
+                or _lr_text(raw) != _lr_text(item))
+    return card
 
 
-def build_model(book, runs, base=None):
+def _dropped_card(raw_item, run):
+    """A first-round item that review/revise DROPPED (in raw, absent from final)."""
+    return {
+        "id": raw_item.get("id"),
+        "run": run,
+        "dimension": raw_item.get("dimension"),
+        "type": raw_item.get("type"),
+        "age_tier": raw_item.get("age_tier"),
+        "difficulty": raw_item.get("difficulty"),
+        "text_en": (raw_item.get("text") or {}).get("en") or "(no en text)",
+        "leader_ref": _leader_ref(raw_item),
+        "dropped": True,
+    }
+
+
+def build_model(book, runs, base=None, resolve=None):
     """Assemble the nested comparison model: unit -> dimension -> run -> [item cards].
 
     Raises FileNotFoundError if a named run directory is missing. A run missing a
     given unit file contributes zero items for that unit (no error) — that raggedness
-    is the padding signal the reviewer is looking for.
+    is the padding signal the reviewer is looking for. ``resolve(run) ->
+    (draft_dir, verdicts_dir, briefs_dir)`` overrides the default run-dir lookup
+    (used by the experiment-column renderer, whose columns live in separate dirs).
     """
     base = pathlib.Path(base) if base else DEFAULT_BASE
     book_dir = base / book
     notes = []
+    if resolve is None:
+        def resolve(run):
+            return _resolve_run(book_dir, run)
 
     run_items = {}   # run -> {unit_id: [items]}
     verdicts = {}    # run -> {unit_id: {item_id: [...]}}
     briefs_dirs = {}  # run -> briefs dir or None
+    raw_items = {}   # run -> {unit_id: {item_id: raw_item}}
+    has_raw = {}     # run -> bool (first-round drafts available?)
     for run in runs:
-        draft_dir, verdicts_dir, briefs_dir = _resolve_run(book_dir, run)
+        draft_dir, verdicts_dir, briefs_dir = resolve(run)
         run_items[run] = {
             f.stem: json.loads(f.read_text(encoding="utf-8"))
             for f in sorted(pathlib.Path(draft_dir).glob("*.json"))
         }
         verdicts[run] = _load_verdicts(verdicts_dir)
         briefs_dirs[run] = briefs_dir
+        raw_dir = pathlib.Path(draft_dir).parent / "raw_drafts"
+        has_raw[run] = raw_dir.is_dir()
+        raw_items[run] = {
+            f.stem: {it.get("id"): it for it in json.loads(f.read_text(encoding="utf-8"))}
+            for f in sorted(raw_dir.glob("*.json"))
+        } if has_raw[run] else {}
 
     gate_flags = {run: _run_gates(book, run_items[run], notes) for run in runs}
 
     all_units = sorted({u for run in runs for u in run_items[run]})
     units = []
     for unit in all_units:
+        final_ids = {run: {it.get("id") for it in run_items[run].get(unit, [])}
+                     for run in runs}
+        # dropped = first-round items whose id is gone from the final draft.
+        dropped = {run: [r for rid, r in raw_items[run].get(unit, {}).items()
+                         if rid not in final_ids[run]] for run in runs}
         present = {it.get("dimension") for run in runs
                    for it in run_items[run].get(unit, []) if it.get("dimension")}
+        present |= {r.get("dimension") for run in runs for r in dropped[run]
+                    if r.get("dimension")}
         ordered = [d for d in DIM_ORDER if d in present] + \
                   [d for d in sorted(present) if d not in DIM_ORDER]
         blocks = []
         for dim in ordered:
             cells, counts = {}, {}
             for run in runs:
+                raw_by_id = raw_items[run].get(unit, {})
                 items = [it for it in run_items[run].get(unit, [])
                          if it.get("dimension") == dim]
-                cells[run] = [_card(it, run, gate_flags[run],
-                                    verdicts[run].get(unit, {})) for it in items]
+                cards = [_card(it, run, gate_flags[run], verdicts[run].get(unit, {}),
+                               raw_by_id=raw_by_id, has_raw=has_raw[run])
+                         for it in items]
+                cards += [_dropped_card(r, run) for r in dropped[run]
+                          if r.get("dimension") == dim]
+                cells[run] = cards
                 counts[run] = len(items)
             blocks.append({"dimension": dim, "counts": counts, "cells": cells})
         unit_briefs = {run: _load_brief(unit, briefs_dirs[run]) for run in runs}
@@ -273,6 +333,22 @@ details.brief > summary { padding: 8px 12px; cursor: pointer; font-weight: 600; 
 .cite-doctrine .citeref { background: #f59e0b; color: #3a2600; }
 .legend { font-size: 12px; color: #888; }
 .legend .cite { padding: 0 4px; }
+.card.changed { border-left: 3px solid #f59e0b; }
+.chip.changed { background: #f59e0b33; }
+.chip.retag { background: #a855f733; font-weight: 600; }
+.chip.drop { background: #ef444433; }
+.card.dropped { opacity: .6; border-style: dashed; }
+.card.dropped .txt { text-decoration: line-through; }
+details.firstdraft { margin: 6px 0 2px; font-size: 12px; }
+details.firstdraft > summary { cursor: pointer; color: #b45309; }
+.firstdraft .fdbody { margin-top: 4px; padding: 6px 8px; border-left: 2px solid #f59e0baa;
+  background: #f59e0b14; border-radius: 0 4px 4px 0; }
+.firstdraft .raw { color: #555; }
+table.matrix { border-collapse: collapse; font-size: 12px; }
+table.matrix th, table.matrix td { border: 1px solid #8886; padding: 3px 8px;
+  text-align: left; }
+table.matrix th.stage { color: #888; font-weight: 600; }
+table.matrix thead th { background: #8882; }
 </style>
 <header>
   <h1>__TITLE__</h1>
@@ -281,9 +357,12 @@ details.brief > summary { padding: 8px 12px; cursor: pointer; font-weight: 600; 
   <span style="color:#888;font-size:12px">runs: __RUNS__</span>
   <span class="legend">citations:
     <span class="cite cite-verse">verse<sup class="citeref">REF</sup></span>
-    <span class="cite cite-doctrine">doctrine<sup class="citeref">STD</sup></span></span>
+    <span class="cite cite-doctrine">doctrine<sup class="citeref">STD</sup></span>
+    · <span class="chip changed">changed</span> repair/revise edited it (expand "1st draft")
+    · <span class="chip drop">dropped in review</span></span>
 </header>
 <div id="note">__NOTE__</div>
+__MATRIX__
 <details class="ref" id="rubric">
   <summary>Rubric — the seven axes every item is judged against</summary>
   <div class="refbody" id="rubric-body"></div>
@@ -297,7 +376,7 @@ const KEY = 'slreview:' + DATA.book;
 const state = JSON.parse(localStorage.getItem(KEY) || '{}');
 let TOTAL = 0;
 for (const u of DATA.units) for (const b of u.dimensions)
-  for (const r of DATA.runs) TOTAL += (b.cells[r] || []).length;
+  for (const r of DATA.runs) TOTAL += (b.cells[r] || []).filter(x => !x.dropped).length;
 
 function save() { localStorage.setItem(KEY, JSON.stringify(state)); }
 function tally() {
@@ -333,9 +412,40 @@ function md(src) {
     .join('');
 }
 
+function lrefHtml(lr) {
+  if (!lr || !lr.text_en) return '';
+  const kind = (lr.kind === 'answer_key') ? 'Answer key'
+    : (lr.kind === 'leader_note') ? 'Leader note' : (lr.kind || 'Leader ref');
+  return '<div class="lref"><span class="lref-kind">' + esc(kind) + '</span>' +
+    (lr.verse_en ? '<span class="lref-verse">' + hlCite(lr.verse_en) + '</span>' : '') +
+    '<div>' + hlCite(lr.text_en) + '</div></div>';
+}
+
+function firstDraftBlock(c) {
+  // Collapsible "1st draft" showing what repair/revise changed. Only when changed.
+  if (!c.changed) return '';
+  const retag = (c.raw_dimension && c.raw_dimension !== c.dimension)
+    ? '<span class="chip retag">' + esc(c.raw_dimension) + ' → ' + esc(c.dimension) + '</span>'
+    : '';
+  return '<details class="firstdraft"><summary>1st draft ▸ changed by review</summary>' +
+    '<div class="fdbody">' + retag +
+    '<div class="raw">' + hlCite(c.raw_text_en || '') + '</div>' +
+    lrefHtml(c.raw_leader_ref) + '</div></details>';
+}
+
 function card(c) {
   const el = document.createElement('div');
-  el.className = 'card' + (state[c.id] === true ? ' acc' : '');
+  if (c.dropped) {
+    el.className = 'card dropped';
+    el.innerHTML =
+      '<div class="txt">' + hlCite(c.text_en) + '</div>' + lrefHtml(c.leader_ref) +
+      '<div class="chips"><span class="chip drop">dropped in review</span>' +
+      '<span class="chip">' + esc(c.dimension) + '</span>' +
+      '<span class="chip">' + esc(c.type) + '</span></div>';
+    return el;
+  }
+  el.className = 'card' + (state[c.id] === true ? ' acc' : '') +
+    (c.changed ? ' changed' : '');
   const gate = c.gate_ok
     ? '<span class="chip ok">gate ok</span>'
     : '<span class="chip flag" title="' + escAttr(c.gate_problems.join('; ')) + '">gate flag</span>';
@@ -343,21 +453,15 @@ function card(c) {
   if (c.verdict) for (const v of c.verdict)
     verdict += '<span class="chip ' + esc(v.verdict) + '" title="' + escAttr(v.notes) + '">' +
       esc(v.reviewer) + ':' + esc(v.verdict) + '</span>';
-  let lref = '';
-  if (c.leader_ref && c.leader_ref.text_en) {
-    const lr = c.leader_ref;
-    const kind = (lr.kind === 'answer_key') ? 'Answer key'
-      : (lr.kind === 'leader_note') ? 'Leader note' : (lr.kind || 'Leader ref');
-    lref = '<div class="lref"><span class="lref-kind">' + esc(kind) + '</span>' +
-      (lr.verse_en ? '<span class="lref-verse">' + hlCite(lr.verse_en) + '</span>' : '') +
-      '<div>' + hlCite(lr.text_en) + '</div></div>';
-  }
+  const changed = c.changed ? '<span class="chip changed" title="repair/revise edited this">changed</span>'
+    : (c.origin === 'added' ? '<span class="chip changed">added in review</span>' : '');
   el.innerHTML =
     '<label><input type="checkbox" ' + (state[c.id] === true ? 'checked' : '') + '>' +
-    '<span class="txt">' + hlCite(c.text_en) + '</span></label>' + lref +
+    '<span class="txt">' + hlCite(c.text_en) + '</span></label>' + lrefHtml(c.leader_ref) +
+    firstDraftBlock(c) +
     '<div class="chips"><span class="chip">' + esc(c.age_tier) + '</span>' +
     '<span class="chip">diff ' + esc(c.difficulty) + '</span>' +
-    '<span class="chip">' + esc(c.type) + '</span>' + gate + verdict + '</div>';
+    '<span class="chip">' + esc(c.type) + '</span>' + gate + verdict + changed + '</div>';
   el.querySelector('input').addEventListener('change', e => {
     state[c.id] = e.target.checked;
     el.classList.toggle('acc', e.target.checked);
@@ -450,14 +554,124 @@ tally();
 
 
 def render_html(model):
-    title = f"Compare runs — {model['book']}"
+    title = model.get("title") or f"Compare runs — {model['book']}"
     note = "  ·  ".join(model.get("notes") or [])
     data = json.dumps(model, ensure_ascii=False).replace("</", "<\\/")
     return (_PAGE
             .replace("__TITLE__", title)
             .replace("__RUNS__", ", ".join(model["runs"]))
             .replace("__NOTE__", note)
+            .replace("__MATRIX__", model.get("matrix_html", ""))
             .replace("__DATA__", data))
+
+
+_STAGE_ORDER = ("brief", "draft", "repair", "review_r1", "review_r2", "revise",
+                "evaluate")
+_AGG_LABELS = (("calls_total", "calls"), ("claude_calls", "claude calls"),
+               ("tokens_in_total", "tok in"), ("tokens_out_total", "tok out"),
+               ("estimated_cost", "est cost"), ("first_pass_gate_rate", "1st-pass gate"),
+               ("final_gate_rate", "final gate"),
+               ("evaluator_is_drafter", "eval=drafter"))
+
+
+def _experiment_matrix_html(specs):
+    """A static route-matrix + telemetry table, one column per experiment, so the
+    reviewer sees which model ran each stage and the aggregate efficiency."""
+    names = [s["name"] for s in specs]
+    head = "".join(f"<th>{_esc(n)}</th>" for n in names)
+    rows = []
+    for stage in _STAGE_ORDER:
+        cells = "".join(
+            f"<td>{_esc((s['matrix'].get(stage) or {}).get('backend') or '·')}"
+            f" / {_esc((s['matrix'].get(stage) or {}).get('model') or '·')}</td>"
+            for s in specs)
+        rows.append(f"<tr><th class='stage'>{stage}</th>{cells}</tr>")
+    for key, label in _AGG_LABELS:
+        cells = "".join(f"<td>{_esc(_fmt_agg((s.get('aggregate') or {}).get(key)))}</td>"
+                        for s in specs)
+        rows.append(f"<tr><th class='stage'>{label}</th>{cells}</tr>")
+    return (
+        "<details class='ref' id='routes' open><summary>Experiment route matrix "
+        "&amp; telemetry</summary><div class='refbody'>"
+        "<table class='matrix'><thead><tr><th>stage</th>" + head + "</tr></thead>"
+        "<tbody>" + "".join(rows) + "</tbody></table></div></details>")
+
+
+def _fmt_agg(v):
+    if v is None:
+        return "·"
+    if isinstance(v, bool):
+        return "yes" if v else "no"
+    if isinstance(v, float):
+        return f"{v:.3f}"
+    return str(v)
+
+
+def _esc(s):
+    return (str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
+
+
+def _experiment_specs(experiment_dirs, book):
+    """Specs (name/matrix/aggregate/dirs) for the experiments that cover ``book``."""
+    specs = []
+    for d in experiment_dirs:
+        d = pathlib.Path(d)
+        manifest = json.loads((d / "manifest.json").read_text(encoding="utf-8"))
+        name = manifest["name"]
+        run_dir = d / book / "runs" / name
+        if not (run_dir / "drafts").is_dir():
+            continue
+        specs.append({
+            "name": name,
+            "matrix": manifest.get("route_matrix", {}),
+            "aggregate": manifest.get("aggregate", {}),
+            "dirs": (run_dir / "drafts", run_dir / "verdicts", run_dir / "briefs"),
+        })
+    return specs
+
+
+def render_experiments(book, experiment_dirs):
+    """Render ONE comparison page whose columns are named experiments (#35).
+
+    ``book`` may be a single book code or a list of book codes; multiple books are
+    merged into one page (units are book-prefixed, so they stay distinct), each
+    book's units gated against its own book. Per-unit items, citation
+    highlighting, leader references, verdict badges, and accept/export are the
+    existing per-item rendering, unchanged.
+    """
+    books = [book] if isinstance(book, str) else list(book)
+    all_specs = {}          # name -> spec (first seen), for the route/telemetry matrix
+    runs_order, merged_units, notes = [], [], []
+    rubric_text = None
+    for b in books:
+        specs = _experiment_specs(experiment_dirs, b)
+        if not specs:
+            continue
+        by_name = {s["name"]: s["dirs"] for s in specs}
+        m = build_model(b, [s["name"] for s in specs],
+                        resolve=lambda run, bn=by_name: bn[run])
+        merged_units.extend(m["units"])
+        notes.extend(m.get("notes") or [])
+        rubric_text = m["rubric"]
+        for s in specs:
+            if s["name"] not in runs_order:
+                runs_order.append(s["name"])
+            all_specs.setdefault(s["name"], s)
+    seen = set()
+    notes = [n for n in notes if not (n in seen or seen.add(n))]
+    label = ", ".join(books)
+    model = {
+        "book": "+".join(books),
+        "runs": runs_order,
+        "notes": notes,
+        "rubric": rubric_text or (rubric.build() + "\n\n" + rubric.reference_criteria()),
+        "units": merged_units,
+        "title": f"Compare experiments — {label}",
+        "matrix_html": _experiment_matrix_html(list(all_specs.values())),
+        "route_matrix": {n: s["matrix"] for n, s in all_specs.items()},
+        "telemetry": {n: s["aggregate"] for n, s in all_specs.items()},
+    }
+    return render_html(model)
 
 
 def main(argv=None):

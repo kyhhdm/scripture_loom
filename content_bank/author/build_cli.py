@@ -14,11 +14,26 @@ import re
 import shutil
 import time
 
+from dataclasses import dataclass
+
 from . import (build_brief_prompt, build_draft_prompt, build_section_brief_prompt,
-               build_section_draft_prompt, gates, manifest as manifest_mod)
+               build_section_draft_prompt, gates, manifest as manifest_mod, routing)
 from .gates import run_all
 from .llm import llm
+from .telemetry import NullSink, record_call
 from llm_core import llm_configured
+
+
+@dataclass
+class _Attr:
+    """Telemetry attribution shared by every LLM call for one unit."""
+    sink: object = None
+    experiment: str | None = None
+    unit_id: str | None = None
+    kind: str | None = None
+
+
+_NO_ATTR = _Attr()
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.DOTALL)
 _BRIEFS_DIR = pathlib.Path(__file__).parent / "briefs"
@@ -98,16 +113,26 @@ def _parse_items(text):
     return json.loads(body[start:end + 1])
 
 
-def _llm_with_backoff(prompt, *, tries=4, base=2.0):
+def _llm_with_backoff(prompt, route=None, *, attr=_NO_ATTR, stage=None,
+                      tries=4, base=2.0):
+    route = route or routing.Route("llm_core")
     last = None
     for attempt in range(1, tries + 1):
         try:
-            return llm(prompt)
+            res = llm(prompt, route)
         except RuntimeError as exc:  # rate-limit / transient; llm_core already retried
+            record_call(attr.sink, experiment=attr.experiment, stage=stage,
+                        unit_id=attr.unit_id, kind=attr.kind, attempt=attempt,
+                        route=route, prompt=prompt, error=str(exc))
             last = exc
             if attempt == tries:
                 break
             time.sleep(base ** attempt + random.uniform(0, 1))
+            continue
+        record_call(attr.sink, experiment=attr.experiment, stage=stage,
+                    unit_id=attr.unit_id, kind=attr.kind, attempt=attempt,
+                    route=route, prompt=prompt, result=res)
+        return res.text
     raise last
 
 
@@ -141,20 +166,35 @@ def _merge_flags(*dicts):
     return merged
 
 
-def _repair_to_clean(prompt, items, book, allowed, *, max_repair, dim_cap, where):
+def _repair_to_clean(prompt, items, book, allowed, *, max_repair, dim_cap, where,
+                     repair_route, attr=_NO_ATTR, trace=None):
     """Drive HARD (run_all) + SOFT (dimension_cap) gates through the repair loop.
     Both tiers are fed to the model each round so it fixes/prunes; after the budget,
     remaining HARD flags fail the unit, remaining SOFT (anti-padding) flags only log
-    — a passage may legitimately exceed the cap, so padding never hard-blocks."""
+    — a passage may legitimately exceed the cap, so padding never hard-blocks.
+    When ``trace`` (a dict) is given, records the initial flags, each repair round,
+    item drops, and first-pass/final status for the experiment gate trace."""
+    n_in = len(items)
     hard = run_all(book, items, allowed)
     soft = gates.dimension_cap_check(items, cap=dim_cap)
+    if trace is not None:
+        trace["initial"] = {"hard": hard, "soft": soft}
+        trace["first_pass_clean"] = not (hard or soft)
+        trace.setdefault("rounds", [])
     rounds = 0
     while (hard or soft) and rounds < max_repair:
         rounds += 1
         repair = _repair_prompt(prompt, items, _merge_flags(hard, soft))
-        items = _parse_items(_llm_with_backoff(repair))
+        items = _parse_items(_llm_with_backoff(repair, repair_route, attr=attr,
+                                               stage="repair"))
         hard = run_all(book, items, allowed)
         soft = gates.dimension_cap_check(items, cap=dim_cap)
+        if trace is not None:
+            trace["rounds"].append({"round": rounds, "hard": hard, "soft": soft,
+                                    "route": repair_route.model})
+    if trace is not None:
+        trace["final_pass"] = not hard
+        trace["item_drops"] = n_in - len(items)
     if hard:
         raise GateError(f"hard gates unclean after {where}{max_repair} repair(s): {hard}")
     if soft:
@@ -162,11 +202,16 @@ def _repair_to_clean(prompt, items, book, allowed, *, max_repair, dim_cap, where
     return items
 
 
-def _draft_with_repair(prompt, book, allowed, *, max_repair=2,
-                       dim_cap=gates.DEFAULT_DIM_CAP):
-    items = _parse_items(_llm_with_backoff(prompt))
+def _draft_with_repair(prompt, book, allowed, *, draft_route=None,
+                       repair_route=None, max_repair=2,
+                       dim_cap=gates.DEFAULT_DIM_CAP, attr=_NO_ATTR, trace=None):
+    draft_route = draft_route or routing.Route("llm_core")
+    repair_route = repair_route or routing.Route("llm_core")
+    items = _parse_items(_llm_with_backoff(prompt, draft_route, attr=attr,
+                                           stage="draft"))
     return _repair_to_clean(prompt, items, book, allowed, max_repair=max_repair,
-                            dim_cap=dim_cap, where="")
+                            dim_cap=dim_cap, where="", repair_route=repair_route,
+                            attr=attr, trace=trace)
 
 
 def _write_json(path, obj):
@@ -195,9 +240,38 @@ def _stamp_draft_provenance(items, stamp):
     return items
 
 
-def _regate(prompt, items, book, allowed, *, max_repair, dim_cap=gates.DEFAULT_DIM_CAP):
+def _save_raw_draft(raw_drafts_dir, unit_id, items):
+    """Persist the first-pass (pre-review) draft so a later run can reuse it and
+    skip the expensive draft LLM call. No-op when no dir is given."""
+    if raw_drafts_dir is None:
+        return
+    _write_json(pathlib.Path(raw_drafts_dir) / f"{unit_id}.json", items)
+
+
+def _reuse_raw_draft(reuse_dir, unit_id):
+    """Load a frozen pre-review draft from a source run's raw_drafts dir."""
+    path = pathlib.Path(reuse_dir) / "raw_drafts" / f"{unit_id}.json"
+    if not path.exists():
+        raise GateError(
+            f"--reuse-drafts: no raw draft for {unit_id} at {path}. The source run "
+            "must have been built AFTER raw-draft persistence shipped (re-run it "
+            "once to capture raw_drafts/).")
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _reuse_brief(reuse_dir, unit_id):
+    """Load the brief a source run saved, so reuse skips the brief LLM call too."""
+    path = pathlib.Path(reuse_dir) / "briefs" / f"{unit_id.lower()}.md"
+    if not path.exists():
+        raise GateError(f"--reuse-drafts: no brief for {unit_id} at {path}")
+    return path.read_text(encoding="utf-8")
+
+
+def _regate(prompt, items, book, allowed, *, repair_route, max_repair,
+            dim_cap=gates.DEFAULT_DIM_CAP, attr=_NO_ATTR, trace=None):
     return _repair_to_clean(prompt, items, book, allowed, max_repair=max_repair,
-                            dim_cap=dim_cap, where="review+")
+                            dim_cap=dim_cap, where="review+", repair_route=repair_route,
+                            attr=attr, trace=trace)
 
 
 def _passage_text(book, pid):
@@ -216,13 +290,25 @@ def _section_text(book, sid):
     return "\n\n".join(corpus_bridge.passage_text(p["range"]) for p in peris[i:j + 1])
 
 
-def build_pericope(pid, book, *, drafts_dir, briefs_dir=None, verdicts_dir=None,
-                   manifest_obj, manifest_path, review_on=False, max_repair=2,
-                   dim_cap=gates.DEFAULT_DIM_CAP, draft_stamp=None):
+def build_pericope(pid, book, *, routes=None, drafts_dir, briefs_dir=None,
+                   verdicts_dir=None, manifest_obj, manifest_path, review_on=False,
+                   max_repair=2, dim_cap=gates.DEFAULT_DIM_CAP, draft_stamp=None,
+                   sink=None, experiment=None, gate_trace_dir=None,
+                   raw_drafts_dir=None, reuse_dir=None):
+    routes = routes or routing.RouteConfig.single("llm_core")
+    attr = _Attr(sink, experiment, pid, "pericope")
+    trace = {} if gate_trace_dir else None
     briefs_dir = briefs_dir or _BRIEFS_DIR
     brief_path = pathlib.Path(briefs_dir) / f"{pid.lower()}.md"
-    if manifest_obj["units"][pid]["stage"] == "pending" or not brief_path.exists():
-        brief = _llm_with_backoff(build_brief_prompt.build(pid, book))
+    if reuse_dir is not None:
+        brief = _reuse_brief(reuse_dir, pid)
+        brief_path.parent.mkdir(parents=True, exist_ok=True)
+        brief_path.write_text(brief, encoding="utf-8")
+        manifest_mod.set_stage(manifest_obj, pid, "briefed")
+        manifest_mod.save(manifest_path, manifest_obj)
+    elif manifest_obj["units"][pid]["stage"] == "pending" or not brief_path.exists():
+        brief = _llm_with_backoff(build_brief_prompt.build(pid, book), routes.brief,
+                                  attr=attr, stage="brief")
         brief_path.parent.mkdir(parents=True, exist_ok=True)
         brief_path.write_text(brief, encoding="utf-8")
         manifest_mod.set_stage(manifest_obj, pid, "briefed")
@@ -234,18 +320,31 @@ def build_pericope(pid, book, *, drafts_dir, briefs_dir=None, verdicts_dir=None,
     prompt = build_draft_prompt.build(pid, book, brief)
     if review_on:
         from . import review as review_mod
-        items = _parse_items(_llm_with_backoff(prompt))
+        if reuse_dir is not None:
+            items = _reuse_raw_draft(reuse_dir, pid)     # skip the opus draft call
+        else:
+            items = _parse_items(_llm_with_backoff(prompt, routes.draft, attr=attr,
+                                                   stage="draft"))
+            _save_raw_draft(raw_drafts_dir, pid, items)
         passage = _passage_text(book, pid)
         verdicts = review_mod.review(items, passage_text=passage, brief=brief,
-                                     book=book, unit_id=pid)
+                                     book=book, unit_id=pid,
+                                     r1_route=routes.review_r1,
+                                     r2_route=routes.review_r2,
+                                     sink=sink, experiment=experiment, kind="pericope")
         _save_verdicts(verdicts_dir, pid, verdicts)
-        items = review_mod.revise(items, verdicts, passage_text=passage, brief=brief)
-        items = _regate(prompt, items, book, allowed, max_repair=max_repair,
-                        dim_cap=dim_cap)
+        items = review_mod.revise(items, verdicts, passage_text=passage, brief=brief,
+                                  route=routes.revise, sink=sink,
+                                  experiment=experiment, unit_id=pid, kind="pericope")
+        items = _regate(prompt, items, book, allowed, repair_route=routes.repair,
+                        max_repair=max_repair, dim_cap=dim_cap, attr=attr, trace=trace)
     else:
-        items = _draft_with_repair(prompt, book, allowed, max_repair=max_repair,
-                                   dim_cap=dim_cap)
+        items = _draft_with_repair(prompt, book, allowed, draft_route=routes.draft,
+                                   repair_route=routes.repair, max_repair=max_repair,
+                                   dim_cap=dim_cap, attr=attr, trace=trace)
 
+    if gate_trace_dir:
+        _write_json(pathlib.Path(gate_trace_dir) / f"{pid}.json", trace)
     _stamp_draft_provenance(items, draft_stamp)
     _write_json(pathlib.Path(drafts_dir) / f"{pid}.json", items)
     manifest_mod.set_stage(manifest_obj, pid, "drafted")
@@ -253,13 +352,25 @@ def build_pericope(pid, book, *, drafts_dir, briefs_dir=None, verdicts_dir=None,
     return "drafted"
 
 
-def build_section(sid, book, *, drafts_dir, briefs_dir=None, verdicts_dir=None,
-                  manifest_obj, manifest_path, review_on=False, max_repair=2,
-                  dim_cap=gates.DEFAULT_DIM_CAP, draft_stamp=None):
+def build_section(sid, book, *, routes=None, drafts_dir, briefs_dir=None,
+                  verdicts_dir=None, manifest_obj, manifest_path, review_on=False,
+                  max_repair=2, dim_cap=gates.DEFAULT_DIM_CAP, draft_stamp=None,
+                  sink=None, experiment=None, gate_trace_dir=None,
+                  raw_drafts_dir=None, reuse_dir=None):
+    routes = routes or routing.RouteConfig.single("llm_core")
+    attr = _Attr(sink, experiment, sid, "section")
+    trace = {} if gate_trace_dir else None
     briefs_dir = briefs_dir or _BRIEFS_DIR
     brief_path = pathlib.Path(briefs_dir) / f"{sid.lower()}.md"
-    if manifest_obj["units"][sid]["stage"] == "pending" or not brief_path.exists():
-        brief = _llm_with_backoff(build_section_brief_prompt.build(sid, book))
+    if reuse_dir is not None:
+        brief = _reuse_brief(reuse_dir, sid)
+        brief_path.parent.mkdir(parents=True, exist_ok=True)
+        brief_path.write_text(brief, encoding="utf-8")
+        manifest_mod.set_stage(manifest_obj, sid, "briefed")
+        manifest_mod.save(manifest_path, manifest_obj)
+    elif manifest_obj["units"][sid]["stage"] == "pending" or not brief_path.exists():
+        brief = _llm_with_backoff(build_section_brief_prompt.build(sid, book),
+                                  routes.brief, attr=attr, stage="brief")
         brief_path.parent.mkdir(parents=True, exist_ok=True)
         brief_path.write_text(brief, encoding="utf-8")
         manifest_mod.set_stage(manifest_obj, sid, "briefed")
@@ -272,16 +383,29 @@ def build_section(sid, book, *, drafts_dir, briefs_dir=None, verdicts_dir=None,
     if review_on:
         from . import review as review_mod
         passage = _section_text(book, sid)
-        items = _parse_items(_llm_with_backoff(prompt))
+        if reuse_dir is not None:
+            items = _reuse_raw_draft(reuse_dir, sid)     # skip the opus draft call
+        else:
+            items = _parse_items(_llm_with_backoff(prompt, routes.draft, attr=attr,
+                                                   stage="draft"))
+            _save_raw_draft(raw_drafts_dir, sid, items)
         verdicts = review_mod.review(items, passage_text=passage, brief=brief,
-                                     book=book, unit_id=sid)
+                                     book=book, unit_id=sid,
+                                     r1_route=routes.review_r1,
+                                     r2_route=routes.review_r2,
+                                     sink=sink, experiment=experiment, kind="section")
         _save_verdicts(verdicts_dir, sid, verdicts)
-        items = review_mod.revise(items, verdicts, passage_text=passage, brief=brief)
-        items = _regate(prompt, items, book, allowed, max_repair=max_repair,
-                        dim_cap=dim_cap)
+        items = review_mod.revise(items, verdicts, passage_text=passage, brief=brief,
+                                  route=routes.revise, sink=sink,
+                                  experiment=experiment, unit_id=sid, kind="section")
+        items = _regate(prompt, items, book, allowed, repair_route=routes.repair,
+                        max_repair=max_repair, dim_cap=dim_cap, attr=attr, trace=trace)
     else:
-        items = _draft_with_repair(prompt, book, allowed, max_repair=max_repair,
-                                   dim_cap=dim_cap)
+        items = _draft_with_repair(prompt, book, allowed, draft_route=routes.draft,
+                                   repair_route=routes.repair, max_repair=max_repair,
+                                   dim_cap=dim_cap, attr=attr, trace=trace)
+    if gate_trace_dir:
+        _write_json(pathlib.Path(gate_trace_dir) / f"{sid}.json", trace)
     _stamp_draft_provenance(items, draft_stamp)
     _write_json(pathlib.Path(drafts_dir) / f"{sid}.json", items)
     manifest_mod.set_stage(manifest_obj, sid, "drafted")
@@ -293,27 +417,50 @@ def _default_manifest_path(book):
     return pathlib.Path("work/content_bank_build") / book / "manifest.json"
 
 
+def _check_routes_available(routes, stages=routing.STAGES):
+    """Fail fast if any route in use lacks its credential/CLI. Checks each
+    distinct (backend, model) once, so a hybrid experiment surfaces every gap.
+    ``stages`` limits the check (reuse mode skips brief+draft, which don't run)."""
+    seen = set()
+    for stage in stages:
+        r = getattr(routes, stage)
+        key = (r.backend, r.model)
+        if key in seen:
+            continue
+        seen.add(key)
+        if r.backend == "claude":
+            if shutil.which("claude") is None:
+                raise LLMUnavailable(
+                    "a route uses backend=claude but the 'claude' CLI is not on "
+                    "PATH; install Claude Code or use llm_core")
+        elif not llm_configured(_effective_model(r.backend, r.model)):
+            raise LLMUnavailable(
+                f"no credential for route model {_effective_model(r.backend, r.model)!r}"
+                " (set ARK_API_KEY for Volcengine or GEMINI_API_KEY/GOOGLE_API_KEY "
+                "for Gemini, or configure llm_api_key); see CLAUDE.md")
+
+
 def run(book, *, units=None, kind="all", review_on=False, max_repair=2,
         limit=None, manifest_path=None, drafts_dir=None, briefs_dir=None,
         verdicts_dir=None, run_root=None, backend="llm_core", model=None,
-        dim_cap=gates.DEFAULT_DIM_CAP):
-    os.environ["SCRIPTURE_LOOM_LLM_BACKEND"] = backend
-    if model:
-        os.environ["SCRIPTURE_LOOM_LLM_MODEL"] = model
+        routes=None, dim_cap=gates.DEFAULT_DIM_CAP, sink=None, experiment=None,
+        gate_trace_dir=None, raw_drafts_dir=None, reuse_dir=None):
+    sink = sink or NullSink()
+    # Explicit per-stage routing replaces the old process-wide env switching.
+    # The normal CLI passes backend/model -> a single-model RouteConfig; the
+    # experiment runner passes an explicit hybrid `routes`.
+    if routes is None:
+        routes = routing.RouteConfig.single(backend, model)
+    draft_backend, draft_model = routes.draft.backend, routes.draft.model
+    # Reuse mode skips brief+draft, so those routes' credentials aren't needed;
+    # only the downstream (repair/review/revise) routes must be available.
+    if reuse_dir is None:
+        _check_routes_available(routes)
     else:
-        os.environ.pop("SCRIPTURE_LOOM_LLM_MODEL", None)
-    if backend == "claude":
-        if shutil.which("claude") is None:
-            raise LLMUnavailable(
-                "backend=claude but the 'claude' CLI is not on PATH; install "
-                "Claude Code or use --backend llm_core")
-    elif not llm_configured(_effective_model(backend, model)):
-        raise LLMUnavailable(
-            "no credential for the selected LLM model (set ARK_API_KEY for "
-            "Volcengine or GEMINI_API_KEY/GOOGLE_API_KEY for Gemini, or configure "
-            "llm_api_key); see CLAUDE.md")
+        _check_routes_available(
+            routes, ("repair", "review_r1", "review_r2", "revise"))
 
-    slug = _run_slug(backend, model)
+    slug = _run_slug(draft_backend, draft_model)
     if manifest_path is not None or drafts_dir is not None:
         # Legacy / explicit-dir mode (advanced use and existing tests).
         manifest_path = pathlib.Path(manifest_path or _default_manifest_path(book))
@@ -331,8 +478,12 @@ def run(book, *, units=None, kind="all", review_on=False, max_repair=2,
         briefs_dir = pathlib.Path(briefs_dir) if briefs_dir else layout["briefs"]
         verdicts_dir = (pathlib.Path(verdicts_dir) if verdicts_dir
                         else layout["verdicts"])
-        print(f"[run] model={_effective_model(backend, model)} slug={slug} "
-              f"-> {layout['run_dir']}")
+        print(f"[run] model={_effective_model(draft_backend, draft_model)} "
+              f"slug={slug} -> {layout['run_dir']}")
+
+    # Persist the pre-review draft next to the drafts (unless reusing frozen ones).
+    if raw_drafts_dir is None and reuse_dir is None:
+        raw_drafts_dir = pathlib.Path(drafts_dir).parent / "raw_drafts"
 
     if units:
         todo = list(units)
@@ -343,24 +494,30 @@ def run(book, *, units=None, kind="all", review_on=False, max_repair=2,
     if limit:
         todo = todo[:limit]
 
-    draft_stamp = {"model": _effective_model(backend, model), "backend": backend,
-                   "run": slug}
+    draft_stamp = {"model": _effective_model(draft_backend, draft_model),
+                   "backend": draft_backend, "run": slug}
     ok, failed = [], {}
     for uid in todo:
         meta = m["units"][uid]
         try:
             if meta["kind"] == "pericope":
-                build_pericope(uid, book, drafts_dir=drafts_dir, briefs_dir=briefs_dir,
-                               verdicts_dir=verdicts_dir, manifest_obj=m,
-                               manifest_path=manifest_path, review_on=review_on,
-                               max_repair=max_repair, dim_cap=dim_cap,
-                               draft_stamp=draft_stamp)
+                build_pericope(uid, book, routes=routes, drafts_dir=drafts_dir,
+                               briefs_dir=briefs_dir, verdicts_dir=verdicts_dir,
+                               manifest_obj=m, manifest_path=manifest_path,
+                               review_on=review_on, max_repair=max_repair,
+                               dim_cap=dim_cap, draft_stamp=draft_stamp,
+                               sink=sink, experiment=experiment,
+                               gate_trace_dir=gate_trace_dir,
+                               raw_drafts_dir=raw_drafts_dir, reuse_dir=reuse_dir)
             else:
-                build_section(uid, book, drafts_dir=drafts_dir, briefs_dir=briefs_dir,
-                              verdicts_dir=verdicts_dir, manifest_obj=m,
-                              manifest_path=manifest_path, review_on=review_on,
-                              max_repair=max_repair, dim_cap=dim_cap,
-                              draft_stamp=draft_stamp)
+                build_section(uid, book, routes=routes, drafts_dir=drafts_dir,
+                              briefs_dir=briefs_dir, verdicts_dir=verdicts_dir,
+                              manifest_obj=m, manifest_path=manifest_path,
+                              review_on=review_on, max_repair=max_repair,
+                              dim_cap=dim_cap, draft_stamp=draft_stamp,
+                              sink=sink, experiment=experiment,
+                              gate_trace_dir=gate_trace_dir,
+                              raw_drafts_dir=raw_drafts_dir, reuse_dir=reuse_dir)
             ok.append(uid)
             print(f"[ok] {uid}")
         except (GateError, RuntimeError, ValueError) as exc:

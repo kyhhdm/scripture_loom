@@ -15,6 +15,26 @@ def _proposal(iid, zh, gate_ok=True, leader_reference=None):
             "gate_ok": gate_ok, "gate_flags": [], "drift": {"drift": False, "notes": ""}}
 
 
+class TestExperimentTranslations(unittest.TestCase):
+    def _write(self, root, exp, book, slug, iid, zh):
+        d = (pathlib.Path(root) / exp / book / "runs" / exp / "translations" / slug)
+        d.mkdir(parents=True)
+        (d / f"{iid}.json").write_text(json.dumps(_proposal(iid, zh)),
+                                       encoding="utf-8")
+
+    def test_renders_one_zh_column_per_experiment(self):
+        with tempfile.TemporaryDirectory() as root:
+            self._write(root, "exp_a", "PHP", "deepseek-v4-flash", "PHP-001-i1", "甲译")
+            self._write(root, "exp_b", "PHP", "opus", "PHP-001-i1", "乙译")
+            html = tch.render_experiment_translations(
+                "PHP", [pathlib.Path(root) / "exp_a", pathlib.Path(root) / "exp_b"])
+        self.assertIn("exp_a", html)
+        self.assertIn("exp_b", html)
+        self.assertIn("甲译", html)
+        self.assertIn("乙译", html)
+        self.assertIn("servants of Christ Jesus?", html)  # English column
+
+
 class TestFlagTooltips(unittest.TestCase):
     def _cell(self, **over):
         cell = {"gate_ok": True, "gate_flags": [], "drift": False,

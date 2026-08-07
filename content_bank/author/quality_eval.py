@@ -23,7 +23,15 @@ import pathlib
 import re
 
 from . import compare_html, dimensions, gates
-from .llm import llm
+from .llm import llm, llm_text, route_from_env
+from .telemetry import record_call
+
+
+def _env_fit_reviewer(prompt, model=None):
+    """Legacy default fit reviewer callable: route via the env backend. Used when
+    no explicit evaluator ``route`` is supplied (the --fit-backend/--fit-model CLI
+    path and tests that inject their own reviewer)."""
+    return llm_text(prompt, route_from_env(model))
 
 DIM_ORDER = tuple(f"D{i}" for i in range(1, 9))
 FIT_STATUSES = {"accurate", "mixed", "misclassified"}
@@ -176,9 +184,22 @@ def _parse_fit(raw, items):
     return rows
 
 
-def evaluate_dimension_fit(items, *, brief=None, reviewer=llm, model=None):
-    """Run one semantic fit review and return item results plus coverage summary."""
-    rows = _parse_fit(reviewer(build_dimension_fit_prompt(items, brief), model=model), items)
+def evaluate_dimension_fit(items, *, brief=None, reviewer=_env_fit_reviewer,
+                           model=None, route=None, sink=None, unit_id=None):
+    """Run one semantic fit review and return item results plus coverage summary.
+
+    With an explicit ``route`` the seam is called directly and (if a ``sink`` is
+    given) a ``stage="evaluate"`` CallRecord is recorded; otherwise the legacy
+    ``reviewer(prompt, model=...)`` callable is used."""
+    prompt = build_dimension_fit_prompt(items, brief)
+    if route is not None:
+        res = llm(prompt, route)
+        record_call(sink, experiment=None, stage="evaluate", unit_id=unit_id,
+                    kind=None, attempt=1, route=route, prompt=prompt, result=res)
+        raw = res.text
+    else:
+        raw = reviewer(prompt, model=model)
+    rows = _parse_fit(raw, items)
     assigned = {item["id"]: item.get("dimension") for item in items}
     status_counts = collections.Counter(row["status"] for row in rows)
     suggested = collections.Counter(row["suggested_dimension"] for row in rows)
@@ -212,22 +233,29 @@ def _gate_results(book, unit, items, dim_cap):
 
 def evaluate(book, runs, *, units=None, base=None, dimension_fit=True,
              fit_backend="llm_core", fit_model="gemini-3.6-flash", dim_cap=3,
-             reviewer=llm):
-    """Evaluate selected runs and return a JSON-serializable report."""
+             reviewer=_env_fit_reviewer, evaluator_route=None, sink=None):
+    """Evaluate selected runs and return a JSON-serializable report.
+
+    ``evaluator_route`` (a routing.Route) fixes the D1-D8 fit reviewer explicitly
+    and independently of the draft route; when set it overrides fit_backend/
+    fit_model and routes telemetry to ``sink``. Without it the legacy env-backed
+    ``reviewer`` callable is used."""
     base = pathlib.Path(base) if base else compare_html.DEFAULT_BASE
     selected = set(units or [])
+    fit_backend_report = (evaluator_route.backend if evaluator_route else fit_backend)
+    fit_model_report = (evaluator_route.model if evaluator_route else fit_model)
     report = {
         "schema_version": 1,
         "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(),
         "book": book,
         "requested_units": list(units or []),
         "dimension_fit_reviewer": {
-            "enabled": bool(dimension_fit), "backend": fit_backend,
-            "model": fit_model if dimension_fit else None,
+            "enabled": bool(dimension_fit), "backend": fit_backend_report,
+            "model": fit_model_report if dimension_fit else None,
         },
         "runs": {},
     }
-    if dimension_fit:
+    if dimension_fit and evaluator_route is None:
         os.environ["SCRIPTURE_LOOM_LLM_BACKEND"] = fit_backend
 
     for run in runs:
@@ -255,9 +283,10 @@ def evaluate(book, runs, *, units=None, base=None, dimension_fit=True,
             if dimension_fit:
                 brief = compare_html._load_brief(unit, briefs_dir)
                 unit_report["dimension_fit"] = evaluate_dimension_fit(
-                    items, brief=brief, reviewer=reviewer, model=fit_model)
+                    items, brief=brief, reviewer=reviewer, model=fit_model,
+                    route=evaluator_route, sink=sink, unit_id=unit)
                 unit_report["dimension_fit"]["reviewer_is_draft_model"] = \
-                    fit_model in draft_models
+                    fit_model_report in draft_models
                 for status, n in unit_report["dimension_fit"]["status_counts"].items():
                     totals[f"fit_{status}"] += n
             run_report["units"][unit] = unit_report

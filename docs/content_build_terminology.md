@@ -257,3 +257,25 @@ validator-guaranteed partition, verifies proposed boundary markers, and **stages
 result to `work/section_seeds/<book>.json` for human review and manual copy into
 `corpus/canon/structure/sections/<book>.json`. It is not part of the corpus
 deterministic rebuild. See `docs/content_section_seeder_usage.md`.
+
+---
+
+## Experiments (per-stage routing & telemetry)
+
+**route** — an explicit `(backend, model, settings)` for one LLM stage. **RouteConfig**
+maps a route to each stage (`brief`, `draft`, `repair`, `review_r1`, `review_r2`,
+`revise`); the normal builder uses one route for every stage, an experiment assigns
+one per stage. Replaces the old process-wide backend/model env vars.
+
+**experiment** — a named, immutable configuration (`experiments/NAME.json`) that fixes
+every stage's route plus a separate **evaluator** route, runs the real pipeline, and
+writes a self-contained result tree under `experiments-out/NAME/`. The name, not a
+model slug, is the identity. See `docs/content_experiment_usage.md`.
+
+**route matrix** — the stage→backend/model table for an experiment, shown as a column
+header on the experiment comparison page.
+
+**CallRecord / telemetry** — one append-only `calls.jsonl` entry per LLM attempt
+(stage, unit, tokens, cost estimate, duration, stop reason), tagged with a
+`usage_source` (`provider` from `claude -p` JSON, or `local_estimate` from llm_core).
+Never stores credentials or prompt bodies — only a `prompt_hash`.

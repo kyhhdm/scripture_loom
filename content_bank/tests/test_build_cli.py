@@ -33,15 +33,22 @@ class RepairPromptCitationHintTest(unittest.TestCase):
         self.assertNotIn("Fixing citation.* flags", without)
 
 
+def _result(text):
+    from content_bank.author.telemetry import LLMResult, TokenUsage
+    return LLMResult(text=text, usage=TokenUsage(), requested_model=None,
+                     actual_model=None, stop_reason=None, duration_ms=1,
+                     usage_source="local_estimate")
+
+
 class BackoffTest(unittest.TestCase):
     def test_retries_then_succeeds(self):
         calls = {"n": 0}
 
-        def flaky(_p):
+        def flaky(_p, _route):
             calls["n"] += 1
             if calls["n"] < 3:
                 raise RuntimeError("rate limit")
-            return "ok"
+            return _result("ok")
 
         with mock.patch("content_bank.author.build_cli.llm", side_effect=flaky), \
              mock.patch("content_bank.author.build_cli.time.sleep"):
@@ -173,7 +180,6 @@ class OrchestratorTest(unittest.TestCase):
         # backend=claude must NOT require ARK_API_KEY (subscription path);
         # llm_configured() is llm_core-specific and returns False here. Empty
         # work queue (unit already drafted) so no real build/LLM call happens.
-        import os
         with tempfile.TemporaryDirectory() as d:
             m = manifest_mod.init_manifest("MAT", ["MAT-035"])
             manifest_mod.set_stage(m, "MAT-035", "drafted")
@@ -187,14 +193,179 @@ class OrchestratorTest(unittest.TestCase):
                                     drafts_dir=pathlib.Path(d) / "drafts",
                                     backend="claude")
             self.assertEqual(res, {"ok": [], "failed": {}})
-            self.assertEqual(os.environ.get("SCRIPTURE_LOOM_LLM_BACKEND"), "claude")
-        os.environ.pop("SCRIPTURE_LOOM_LLM_BACKEND", None)
 
     def test_claude_backend_requires_cli_on_path(self):
         with mock.patch("content_bank.author.build_cli.shutil.which",
                         return_value=None):
             with self.assertRaises(build_cli.LLMUnavailable):
                 build_cli.run("MAT", units=["MAT-035"], backend="claude")
+
+
+class RouteDrivenBuildTest(unittest.TestCase):
+    def test_brief_and_draft_use_their_configured_models(self):
+        from content_bank.author.routing import Route, RouteConfig
+        clean_draft = json.dumps([dict(id="mat-035-d1-a", dimension="D1",
+                                       type="question", age_tier="child",
+                                       difficulty=1, review_status="draft",
+                                       version=1, passage="MAT-035",
+                                       text={"en": "Who came to Jesus?"})])
+        seen = []
+
+        def fake_llm(prompt, route):
+            seen.append(route.model)
+            return _result("brief text" if len(seen) == 1 else clean_draft)
+
+        routes = RouteConfig(
+            brief=Route("llm_core", "brief-m"), draft=Route("claude", "draft-m"),
+            repair=Route("llm_core", "repair-m"), review_r1=Route("llm_core", "r1-m"),
+            review_r2=Route("llm_core", "r2-m"), revise=Route("llm_core", "revise-m"))
+        with tempfile.TemporaryDirectory() as d:
+            m = manifest_mod.init_manifest("MAT", ["MAT-035"])
+            mpath = pathlib.Path(d) / "manifest.json"
+            manifest_mod.save(mpath, m)
+            with mock.patch("content_bank.author.build_cli.llm", fake_llm), \
+                 mock.patch("content_bank.author.build_cli.run_all", return_value={}), \
+                 mock.patch("content_bank.author.gates.dimension_cap_check",
+                            return_value={}):
+                build_cli.build_pericope(
+                    "MAT-035", "MAT", routes=routes,
+                    drafts_dir=pathlib.Path(d) / "drafts",
+                    briefs_dir=pathlib.Path(d) / "briefs",
+                    manifest_obj=m, manifest_path=mpath, review_on=False)
+        self.assertEqual(seen[0], "brief-m")
+        self.assertEqual(seen[1], "draft-m")
+
+
+class TelemetryCaptureTest(unittest.TestCase):
+    def test_each_stage_records_a_callrecord(self):
+        from content_bank.author.routing import RouteConfig
+        from content_bank.author.telemetry import TelemetrySink
+        clean_draft = json.dumps([dict(id="mat-035-d1-a", dimension="D1",
+                                       type="question", age_tier="child",
+                                       difficulty=1, review_status="draft",
+                                       version=1, passage="MAT-035",
+                                       text={"en": "Who came to Jesus?"})])
+        seq = iter(["brief text", clean_draft])
+
+        def fake_llm(prompt, route):
+            return _result(next(seq))
+
+        with tempfile.TemporaryDirectory() as d:
+            sink = TelemetrySink(pathlib.Path(d) / "calls.jsonl")
+            m = manifest_mod.init_manifest("MAT", ["MAT-035"])
+            mpath = pathlib.Path(d) / "manifest.json"
+            manifest_mod.save(mpath, m)
+            with mock.patch("content_bank.author.build_cli.llm", fake_llm), \
+                 mock.patch("content_bank.author.build_cli.run_all", return_value={}), \
+                 mock.patch("content_bank.author.gates.dimension_cap_check",
+                            return_value={}):
+                build_cli.build_pericope(
+                    "MAT-035", "MAT", routes=RouteConfig.single("llm_core", "m"),
+                    drafts_dir=pathlib.Path(d) / "drafts",
+                    briefs_dir=pathlib.Path(d) / "briefs",
+                    manifest_obj=m, manifest_path=mpath, review_on=False,
+                    sink=sink, experiment="exp1")
+            records = list(sink.records())
+        stages = {r["stage"] for r in records}
+        self.assertIn("brief", stages)
+        self.assertIn("draft", stages)
+        for r in records:
+            self.assertEqual(r["experiment"], "exp1")
+            self.assertEqual(r["unit_id"], "MAT-035")
+            self.assertEqual(r["backend"], "llm_core")
+            self.assertTrue(r["prompt_hash"])
+            self.assertNotIn("prompt", r)  # never the body, only a hash
+
+
+class GateTraceTest(unittest.TestCase):
+    def test_trace_records_initial_and_rounds(self):
+        from content_bank.author.routing import RouteConfig
+        bad = json.dumps([dict(id="mat-035-d1-a", dimension="D9", type="question",
+                               age_tier="child", difficulty=1, review_status="draft",
+                               version=1, passage="MAT-035", text={"en": "x"})])
+        good = json.dumps([dict(id="mat-035-d1-a", dimension="D1", type="question",
+                                age_tier="child", difficulty=1, review_status="draft",
+                                version=1, passage="MAT-035",
+                                text={"en": "Who came to Jesus?"})])
+        seq = iter(["brief text", bad, good])  # brief, dirty draft, repaired
+
+        def fake_llm(prompt, route):
+            return _result(next(seq))
+
+        with tempfile.TemporaryDirectory() as d:
+            traces = pathlib.Path(d) / "gate_traces"
+            m = manifest_mod.init_manifest("MAT", ["MAT-035"])
+            mpath = pathlib.Path(d) / "manifest.json"
+            manifest_mod.save(mpath, m)
+            with mock.patch("content_bank.author.build_cli.llm", fake_llm):
+                build_cli.build_pericope(
+                    "MAT-035", "MAT", routes=RouteConfig.single("llm_core", "m"),
+                    drafts_dir=pathlib.Path(d) / "drafts",
+                    briefs_dir=pathlib.Path(d) / "briefs",
+                    manifest_obj=m, manifest_path=mpath, review_on=False,
+                    max_repair=2, gate_trace_dir=traces)
+            trace = json.loads((traces / "MAT-035.json").read_text())
+        self.assertFalse(trace["first_pass_clean"])
+        self.assertGreaterEqual(len(trace["rounds"]), 1)
+        self.assertTrue(trace["final_pass"])
+
+
+class RawDraftReuseTest(unittest.TestCase):
+    def _clean(self, pid):
+        return json.dumps([dict(id=f"{pid.lower()}-d1-a", dimension="D1",
+                                type="question", age_tier="child", difficulty=1,
+                                review_status="draft", version=1, passage=pid,
+                                text={"en": "Who came to Jesus?"})])
+
+    def test_persists_raw_draft_then_reuse_skips_brief_and_draft(self):
+        from content_bank.author.routing import RouteConfig
+        with tempfile.TemporaryDirectory() as d:
+            src = pathlib.Path(d) / "src"
+            seq = iter(["brief text", self._clean("MAT-035")])  # brief, then draft
+            calls = []
+
+            def fake_llm(prompt, route):
+                calls.append(route.model)
+                return _result(next(seq))
+
+            m = manifest_mod.init_manifest("MAT", ["MAT-035"])
+            mp = src / "manifest.json"
+            manifest_mod.save(mp, m)
+            r_pass = _result(json.dumps({"mat-035-d1-a": {"verdict": "pass",
+                                                          "notes": ""}}))
+            with mock.patch("content_bank.author.build_cli.llm", fake_llm), \
+                 mock.patch("content_bank.author.review.llm",
+                            side_effect=[r_pass, r_pass]):
+                build_cli.build_pericope(
+                    "MAT-035", "MAT", routes=RouteConfig.single("llm_core"),
+                    drafts_dir=src / "drafts", briefs_dir=src / "briefs",
+                    verdicts_dir=src / "verdicts", raw_drafts_dir=src / "raw_drafts",
+                    manifest_obj=m, manifest_path=mp, review_on=True, max_repair=1)
+            # raw pre-review draft was persisted
+            self.assertTrue((src / "raw_drafts" / "MAT-035.json").exists())
+            n_calls_first = len(calls)
+            self.assertGreaterEqual(n_calls_first, 2)  # brief + draft happened
+
+            # Now REUSE: a second experiment reads src's brief+raw draft, no build_cli.llm
+            dst = pathlib.Path(d) / "dst"
+            m2 = manifest_mod.init_manifest("MAT", ["MAT-035"])
+            mp2 = dst / "manifest.json"
+            manifest_mod.save(mp2, m2)
+
+            def boom(prompt, route):
+                raise AssertionError("reuse must not call the draft/brief seam")
+
+            with mock.patch("content_bank.author.build_cli.llm", boom), \
+                 mock.patch("content_bank.author.review.llm",
+                            side_effect=[r_pass, r_pass]):
+                stage = build_cli.build_pericope(
+                    "MAT-035", "MAT", routes=RouteConfig.single("llm_core"),
+                    drafts_dir=dst / "drafts", briefs_dir=dst / "briefs",
+                    verdicts_dir=dst / "verdicts", reuse_dir=src,
+                    manifest_obj=m2, manifest_path=mp2, review_on=True, max_repair=1)
+            self.assertEqual(stage, "drafted")
+            self.assertTrue((dst / "drafts" / "MAT-035.json").exists())
+            self.assertEqual((dst / "briefs" / "mat-035.md").read_text(), "brief text")
 
 
 class RunSlugTest(unittest.TestCase):
@@ -247,7 +418,8 @@ class SectionBuildTest(unittest.TestCase):
             mpath = pathlib.Path(d) / "manifest.json"
             manifest_mod.save(mpath, m)
             seq = iter(["SECTION BRIEF TEXT", self._throughline()])
-            r_pass = json.dumps({"php-s1-throughline": {"verdict": "pass", "notes": ""}})
+            r_pass = _result(json.dumps(
+                {"php-s1-throughline": {"verdict": "pass", "notes": ""}}))
             with mock.patch("content_bank.author.build_cli._llm_with_backoff",
                             side_effect=lambda *_a, **_k: next(seq)), \
                  mock.patch("content_bank.author.review.llm",
@@ -314,7 +486,8 @@ class ReviewFlowTest(unittest.TestCase):
                                      type="question", age_tier="child", difficulty=1,
                                      review_status="draft", version=1, passage="MAT-035",
                                      text={"en": "Who came to Jesus?"})])
-            r_pass = json.dumps({"mat-035-d1-a": {"verdict": "pass", "notes": ""}})
+            r_pass = _result(json.dumps({"mat-035-d1-a": {"verdict": "pass",
+                                                          "notes": ""}}))
             # _llm_with_backoff yields brief + draft; review.llm yields the two verdicts.
             seq = iter(["BRIEF", clean])
             with mock.patch("content_bank.author.build_cli._llm_with_backoff",
