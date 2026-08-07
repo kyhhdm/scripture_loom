@@ -11,6 +11,10 @@ layout).
 
 ## Source-text layer
 
+> For how these two layers are actually produced — the deterministic pericope
+> seeder vs. the LLM-proposed, human-gated section seeder, and how a
+> section-group binds them — see `docs/content_structure_layers.md`.
+
 **Pericope** — a single, self-contained passage unit (e.g. `PHP-001` = Philippians
 1:1–11). Pericopes are the base unit of authoring; their ids and ranges come from the
 corpus (`corpus.lib`, via `content_bank/lib/corpus_bridge.py`).

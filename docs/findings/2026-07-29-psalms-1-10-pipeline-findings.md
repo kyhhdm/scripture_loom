@@ -6,7 +6,7 @@
   wisdom, penitential lament, imprecatory lament, royal/messianic, creation praise — with
   the theological cruxes those carry (the Psalm 2:7 "today I have begotten you" adoptionism
   trap, the Psalm 8 / Hebrews 2 man-vs-Christ reading, imprecation, the Sheol/afterlife
-  question). It follows the OT-narrative pilot (`docs/2026-07-28-jonah-pilot-findings.md`).
+  question). It follows the OT-narrative pilot (`docs/findings/2026-07-28-jonah-pilot-findings.md`).
 
 ## What ran
 

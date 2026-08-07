@@ -5,7 +5,7 @@
 work the fluency of *timeline, events, and logic progressions that cross pericopes*
 within a book — and does that need any change before the full content-bank build starts?
 **Method:** Empirical probe, same play as the genre probe
-(`docs/2026-07-19-genre-dimension-probe-findings.md`). Hand-author a small set of
+(`docs/findings/2026-07-19-genre-dimension-probe-findings.md`). Hand-author a small set of
 **cross-pericope** items (each unanswerable from any single pericope) across all eight
 dimensions D1–D8 for one narrative span and one epistle span, using real BSB
 public-domain text served through the corpus license gate under the WCF-1 guardrail.
