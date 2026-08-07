@@ -4,6 +4,7 @@
   "book": "PHP",
   "units": ["PHP-S2"],
   "execution": "group",
+  "draft_batch_size": 4,
   "routes": {
     "brief":     {"backend": "claude", "model": "opus"},
     "draft":     {"backend": "claude", "model": "opus"},

@@ -167,6 +167,7 @@ def run_experiment(config_path, *, out_root=_DEFAULT_OUT_ROOT, resume=False,
             res = build_group.group_run(
                 book, units=units, routes=routes, review_on=True,
                 max_repair=max_repair, dim_cap=dim_cap,
+                draft_batch_size=int(config.get("draft_batch_size", 4)),
                 manifest_path=out / run_rel / "manifest.json",
                 drafts_dir=out / run_rel / "drafts",
                 briefs_dir=out / run_rel / "briefs",

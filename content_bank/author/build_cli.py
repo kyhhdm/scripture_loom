@@ -557,13 +557,18 @@ def main(argv=None):
                          "one LLM call per stage; cuts request count on the "
                          "claude/Opus subscription backend. --units selects groups by "
                          "section id; --limit bounds the number of groups")
+    ap.add_argument("--draft-batch-size", type=int, default=4,
+                    help="in --group mode, cap units per DRAFT call (default 4; the "
+                         "draft stage is where the model drops units at large group "
+                         "sizes). Other stages stay full-group; <=0 disables the cap. "
+                         "Ignored for non-group builds")
     a = ap.parse_args(argv)
     if a.group:
         from . import build_group
         res = build_group.group_run(
             a.book, units=a.units, review_on=a.review, max_repair=a.max_repair,
             limit=a.limit, run_root=a.run_root, backend=a.backend, model=a.model,
-            dim_cap=a.dim_cap)
+            dim_cap=a.dim_cap, draft_batch_size=a.draft_batch_size)
         print(f"\nDone. ok={len(res['ok'])} failed={len(res['failed'])}")
         return 1 if res["failed"] else 0
     res = run(a.book, units=a.units, kind=a.kind, review_on=a.review,

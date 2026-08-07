@@ -115,25 +115,41 @@ def _allowed_for(book, unit_id):
     return gates.pericope_allowed(book, unit_id)
 
 
-def group_draft_items(unit_ids, book, briefs, *, route, sink=None, experiment=None,
-                      section_id=None):
-    """One batched draft call → ``{unit_id: raw items}`` (no gates). The gate+repair
-    pass is applied per-unit by the caller, at the point that matches the per-unit
-    builder (after draft when review is off, after revise when review is on)."""
-    return group_call(
-        lambda ids: build_group_prompt.draft_envelope(ids, book, briefs),
-        unit_ids, route=route, sink=sink, experiment=experiment,
-        stage="draft", section_id=section_id)
+def _draft_chunks(unit_ids, batch_size):
+    """Split the draft unit list into consecutive chunks of at most ``batch_size``.
+    ``None``/``<= 0`` means no cap (the whole group in one draft call)."""
+    if not batch_size or batch_size <= 0 or len(unit_ids) <= batch_size:
+        return [list(unit_ids)]
+    return [unit_ids[i:i + batch_size]
+            for i in range(0, len(unit_ids), batch_size)]
+
+
+def group_draft_items(unit_ids, book, briefs, *, route, batch_size=None, sink=None,
+                      experiment=None, section_id=None):
+    """Batched draft → ``{unit_id: raw items}`` (no gates). The draft stage is chunked
+    at ``batch_size`` units per call (default uncapped): draft is the only stage where
+    the model drops units at large group sizes, so capping it keeps each call reliable
+    and off the bisection guard. Each chunk still passes through the guard. The
+    gate+repair pass is applied per-unit by the caller, at the point that matches the
+    per-unit builder (after draft when review is off, after revise when review is on)."""
+    out = {}
+    for chunk in _draft_chunks(unit_ids, batch_size):
+        out.update(group_call(
+            lambda ids: build_group_prompt.draft_envelope(ids, book, briefs),
+            chunk, route=route, sink=sink, experiment=experiment,
+            stage="draft", section_id=section_id))
+    return out
 
 
 def build_group_drafts(unit_ids, book, briefs, *, routes, max_repair=2,
-                       dim_cap=gates.DEFAULT_DIM_CAP, sink=None, experiment=None,
-                       section_id=None, traces=None):
-    """The no-review path: one batched draft call → per-unit gates + bounded repair →
-    ``{unit_id: items}`` (mirrors the per-unit ``_draft_with_repair``). Gates are
-    per-unit and deterministic; only the repair LLM call costs a request."""
-    raw = group_draft_items(unit_ids, book, briefs, route=routes.draft, sink=sink,
-                            experiment=experiment, section_id=section_id)
+                       dim_cap=gates.DEFAULT_DIM_CAP, batch_size=None, sink=None,
+                       experiment=None, section_id=None, traces=None):
+    """The no-review path: batched draft (chunked at ``batch_size``) → per-unit gates +
+    bounded repair → ``{unit_id: items}`` (mirrors the per-unit ``_draft_with_repair``).
+    Gates are per-unit and deterministic; only the repair LLM call costs a request."""
+    raw = group_draft_items(unit_ids, book, briefs, route=routes.draft,
+                            batch_size=batch_size, sink=sink, experiment=experiment,
+                            section_id=section_id)
     out = {}
     for u in unit_ids:
         allowed = _allowed_for(book, u)
@@ -169,7 +185,8 @@ def _save_group_verdicts(verdicts_dir, group_verdicts, unit_ids):
 
 def _build_one_group(section_id, pericope_ids, book, *, routes, briefs_dir,
                      drafts_dir, verdicts_dir, gate_trace_dir, m, manifest_path,
-                     review_on, max_repair, dim_cap, draft_stamp, sink, experiment):
+                     review_on, max_repair, dim_cap, draft_stamp, sink, experiment,
+                     draft_batch_size=None):
     """Drive one group through the batched pipeline, writing per-unit artifacts and
     advancing each unit's manifest stage. Units already ``drafted`` are skipped.
 
@@ -194,7 +211,8 @@ def _build_one_group(section_id, pericope_ids, book, *, routes, briefs_dir,
 
     traces = {}
     if review_on:
-        raw = group_draft_items(unit_ids, book, briefs, route=routes.draft, sink=sink,
+        raw = group_draft_items(unit_ids, book, briefs, route=routes.draft,
+                                batch_size=draft_batch_size, sink=sink,
                                 experiment=experiment, section_id=section_id)
         ctx = {u: _ctx_for(book, u) for u in unit_ids}
         for u in unit_ids:
@@ -220,7 +238,8 @@ def _build_one_group(section_id, pericope_ids, book, *, routes, briefs_dir,
             traces[u] = trace
     else:
         drafts = build_group_drafts(unit_ids, book, briefs, routes=routes,
-                                    max_repair=max_repair, dim_cap=dim_cap, sink=sink,
+                                    max_repair=max_repair, dim_cap=dim_cap,
+                                    batch_size=draft_batch_size, sink=sink,
                                     experiment=experiment, section_id=section_id,
                                     traces=traces)
 
@@ -236,11 +255,14 @@ def _build_one_group(section_id, pericope_ids, book, *, routes, briefs_dir,
     return unit_ids
 
 
+DEFAULT_DRAFT_BATCH = 4
+
+
 def group_run(book, *, units=None, review_on=True, max_repair=2, limit=None,
               run_root=None, backend="llm_core", model=None, routes=None,
-              dim_cap=gates.DEFAULT_DIM_CAP, sink=None, experiment=None,
-              manifest_path=None, drafts_dir=None, briefs_dir=None, verdicts_dir=None,
-              gate_trace_dir=None):
+              dim_cap=gates.DEFAULT_DIM_CAP, draft_batch_size=DEFAULT_DRAFT_BATCH,
+              sink=None, experiment=None, manifest_path=None, drafts_dir=None,
+              briefs_dir=None, verdicts_dir=None, gate_trace_dir=None):
     """Batched per-group build. ``units`` selects groups by section id; omitted, walks
     every group with a not-yet-``drafted`` unit. ``limit`` bounds the number of groups.
 
@@ -295,7 +317,8 @@ def group_run(book, *, units=None, review_on=True, max_repair=2, limit=None,
                 drafts_dir=drafts_dir, verdicts_dir=verdicts_dir,
                 gate_trace_dir=gate_trace_dir, m=m, manifest_path=manifest_path,
                 review_on=review_on, max_repair=max_repair, dim_cap=dim_cap,
-                draft_stamp=draft_stamp, sink=sink, experiment=experiment)
+                draft_stamp=draft_stamp, sink=sink, experiment=experiment,
+                draft_batch_size=draft_batch_size)
             ok.extend(built)
             for u in built:
                 print(f"[ok] {u}")

@@ -128,6 +128,7 @@ uv run python -m content_bank.author.build_cli --book PHP --no-review
 | `--limit N` | — | Cap how many units are built this run. |
 | `--dim-cap N` | `3` | Soft anti-padding cap per dimension (over-cap dims feed the repair loop, then log; never hard-fail). |
 | `--group` | off | Batch each **section-group** (a section + its pericopes) into one LLM call per stage — see *Group mode* below. `--units` selects groups by section id; `--limit` bounds the number of groups. |
+| `--draft-batch-size N` | `4` | In `--group` mode, cap units per **draft** call (the stage that drops units at large group sizes). Other stages stay full-group; `<=0` disables the cap. Ignored without `--group`. |
 | `--backend {llm_core,claude}` | `llm_core` | `llm_core` = registered API models (Volcengine DeepSeek or Google Gemini); `claude` = Claude Code headless via subscription. |
 | `--model MODEL` | backend's default | Override the model (`deepseek-v4-pro`, `gemini-3.6-flash`, `gemini-3.5-flash-lite`; or `opus`/`sonnet` with the Claude backend). Determines the run slug. |
 | `--run-root DIR` | `work/content_bank_build` | Build root holding `runs/<model>/`. |
@@ -201,6 +202,11 @@ What changes and what does not:
   recursing down to a single unit; a lone unit that still won't complete fails just that
   unit (isolated in `failed`). Two half-calls still beat `N` per-unit calls, and no unit
   is silently dropped.
+- **Draft batch cap (`--draft-batch-size`, default 4):** the *draft* stage is the one
+  place the model tends to omit units at large group sizes, which then triggers the
+  bisection guard and eats the draft-stage savings. Capping draft at ~4 units per call
+  keeps each draft reliable and off the guard, while brief/review/revise stay batched
+  over the whole group. Set `0` to disable and draft the whole group in one call.
 - **Telemetry tradeoff:** batched calls are attributed to the section id with
   `kind: "group"`, so per-**call** counts survive but per-**unit** token attribution
   does not. `--group` is **orthogonal to `--backend`** (it works with any backend; the

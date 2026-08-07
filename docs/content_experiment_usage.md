@@ -61,6 +61,11 @@ An experiment is a JSON file under `experiments/` (see `experiments/example.json
   whole group); omit `units` to build every group in the book. A batched call that
   truncates or omits a unit is split and retried down to singletons (the bisection
   guard), so no unit is dropped.
+- `"draft_batch_size"` (optional, default `4`) caps how many units go into a single
+  **draft** call. Draft is the one stage where the model tends to drop units at large
+  group sizes (which then triggers bisection); capping it keeps each draft call reliable
+  while brief/review/revise stay batched over the whole group. `0` disables the cap
+  (whole group in one draft call). Only meaningful with `"execution": "group"`.
 - **Not supported with `--reuse-drafts`** (group mode does not persist reusable
   per-unit raw drafts) — run `per_unit` to reuse frozen drafts.
 

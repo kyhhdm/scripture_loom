@@ -85,6 +85,47 @@ class TestGroupCall(unittest.TestCase):
                                        route=routing.Route("claude", "opus"))
 
 
+class TestDraftChunking(unittest.TestCase):
+    def test_draft_chunks_uncapped(self):
+        ids = ["a", "b", "c"]
+        for bs in (None, 0, -1, 3, 9):
+            self.assertEqual(build_group._draft_chunks(ids, bs), [ids])
+
+    def test_draft_chunks_capped(self):
+        ids = ["a", "b", "c", "d", "e", "f"]
+        self.assertEqual(build_group._draft_chunks(ids, 4),
+                         [["a", "b", "c", "d"], ["e", "f"]])
+
+    def test_group_draft_items_issues_one_call_per_chunk(self):
+        ids = ["u0", "u1", "u2", "u3", "u4", "u5"]
+        seen = []
+
+        def fake_group_call(build_prompt, chunk, **kw):
+            seen.append(list(chunk))
+            return {u: [u] for u in chunk}
+        with mock.patch.object(build_group, "group_call",
+                               side_effect=fake_group_call):
+            out = build_group.group_draft_items(
+                ids, "PHP", {u: "b" for u in ids},
+                route=routing.Route("claude", "opus"), batch_size=4)
+        self.assertEqual(seen, [["u0", "u1", "u2", "u3"], ["u4", "u5"]])
+        self.assertEqual(set(out), set(ids))         # all units merged back
+
+    def test_group_draft_items_uncapped_single_call(self):
+        ids = ["u0", "u1", "u2", "u3", "u4", "u5"]
+        calls = {"n": 0}
+
+        def fake_group_call(build_prompt, chunk, **kw):
+            calls["n"] += 1
+            return {u: [u] for u in chunk}
+        with mock.patch.object(build_group, "group_call",
+                               side_effect=fake_group_call):
+            build_group.group_draft_items(
+                ids, "PHP", {u: "b" for u in ids},
+                route=routing.Route("claude", "opus"), batch_size=0)
+        self.assertEqual(calls["n"], 1)
+
+
 class TestBuildGroupStages(unittest.TestCase):
     def test_drafts_gate_each_unit(self):
         ids = ["PHP-S1", "PHP-001"]
@@ -203,6 +244,15 @@ class TestCliGroupDispatch(unittest.TestCase):
                                  "--model", "opus", "--units", "PHP-S1"])
         self.assertEqual(rc, 0)
         g.assert_called_once()
+        self.assertEqual(g.call_args.kwargs["draft_batch_size"], 4)  # default
+
+    def test_group_flag_passes_draft_batch_size(self):
+        from content_bank.author import build_cli
+        with mock.patch("content_bank.author.build_group.group_run",
+                        return_value={"ok": ["PHP-S1"], "failed": {}}) as g:
+            build_cli.main(["--book", "PHP", "--group", "--units", "PHP-S1",
+                            "--draft-batch-size", "2"])
+        self.assertEqual(g.call_args.kwargs["draft_batch_size"], 2)
 
 
 if __name__ == "__main__":
