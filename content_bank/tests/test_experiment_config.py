@@ -36,6 +36,36 @@ class ConfigTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             ec.validate(bad)
 
+    def test_execution_group_passes(self):
+        ec.validate({**VALID, "execution": "group"})  # no raise
+
+    def test_execution_default_is_per_unit(self):
+        ec.validate(VALID)  # execution omitted -> valid (per_unit)
+
+    def test_unknown_execution_rejected(self):
+        with self.assertRaises(ValueError):
+            ec.validate({**VALID, "execution": "batch"})
+
+    def test_execution_changes_hash(self):
+        h1 = ec.config_hash(VALID, corpus_rev="abc", prompt_version="1")
+        h2 = ec.config_hash({**VALID, "execution": "group"},
+                            corpus_rev="abc", prompt_version="1")
+        self.assertNotEqual(h1, h2)
+
+    def test_draft_batch_size_valid(self):
+        ec.validate({**VALID, "execution": "group", "draft_batch_size": 4})
+        ec.validate({**VALID, "execution": "group", "draft_batch_size": 0})
+
+    def test_negative_draft_batch_size_rejected(self):
+        with self.assertRaises(ValueError):
+            ec.validate({**VALID, "draft_batch_size": -1})
+
+    def test_draft_batch_size_changes_hash(self):
+        h1 = ec.config_hash(VALID, corpus_rev="abc", prompt_version="1")
+        h2 = ec.config_hash({**VALID, "draft_batch_size": 2},
+                            corpus_rev="abc", prompt_version="1")
+        self.assertNotEqual(h1, h2)
+
     def test_bad_max_repair_rejected(self):
         bad = {**VALID, "gates": {"max_repair": 99, "dim_cap": 6}}
         with self.assertRaises(ValueError):

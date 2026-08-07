@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "name": "php_s2_per_unit",
+  "book": "PHP",
+  "units": ["PHP-S2", "PHP-002", "PHP-003", "PHP-004", "PHP-005", "PHP-006"],
+  "execution": "per_unit",
+  "routes": {
+    "brief":     {"backend": "claude", "model": "opus"},
+    "draft":     {"backend": "claude", "model": "opus"},
+    "repair":    {"backend": "claude", "model": "opus"},
+    "review_r1": {"backend": "claude", "model": "opus"},
+    "review_r2": {"backend": "claude", "model": "opus"},
+    "revise":    {"backend": "claude", "model": "opus"}
+  },
+  "gates": {"max_repair": 2, "dim_cap": 6},
+  "evaluator": {"backend": "claude", "model": "opus"}
+}

@@ -93,6 +93,12 @@ def validate(config: dict) -> None:
         raise ValueError("gates.max_repair out of range 0..10")
     if int(gates.get("dim_cap", 6)) < 1:
         raise ValueError("gates.dim_cap must be >= 1")
+    execution = config.get("execution", "per_unit")
+    if execution not in ("per_unit", "group"):
+        raise ValueError(
+            f"execution must be 'per_unit' or 'group', got {execution!r}")
+    if int(config.get("draft_batch_size", 4)) < 0:
+        raise ValueError("draft_batch_size must be >= 0 (0 disables the cap)")
 
 
 def config_hash(config: dict, *, corpus_rev: str, prompt_version: str) -> str:

@@ -23,7 +23,8 @@ import json
 import pathlib
 import subprocess
 
-from . import build_cli, experiment_config, experiment_report, gates, quality_eval
+from . import (build_cli, build_group, experiment_config, experiment_report, gates,
+               quality_eval)
 from .routing import Route, RouteConfig
 from .telemetry import TelemetrySink
 
@@ -148,6 +149,11 @@ def run_experiment(config_path, *, out_root=_DEFAULT_OUT_ROOT, resume=False,
     groups = experiment_config.books_and_units(config)
     dim_cap = int(gates_cfg.get("dim_cap", gates.DEFAULT_DIM_CAP))
     max_repair = int(gates_cfg.get("max_repair", 2))
+    execution = config.get("execution", "per_unit")
+    if execution == "group" and reuse_drafts:
+        raise ValueError(
+            "--reuse-drafts is not supported with execution='group' (group mode "
+            "does not persist reusable per-unit raw drafts); run per_unit to reuse")
 
     reuse_root = pathlib.Path(out_root) / reuse_drafts if reuse_drafts else None
     snap_before = _subscription_snapshot()
@@ -155,17 +161,31 @@ def run_experiment(config_path, *, out_root=_DEFAULT_OUT_ROOT, resume=False,
     for book, units in groups.items():
         run_rel = pathlib.Path(book) / "runs" / name
         _seed_run_manifest(book, out / run_rel / "manifest.json", units)
-        reuse_dir = (reuse_root / book / "runs" / reuse_drafts
-                     if reuse_root else None)
-        res = build_cli.run(
-            book, units=units, routes=routes, review_on=True,
-            max_repair=max_repair, dim_cap=dim_cap,
-            manifest_path=out / run_rel / "manifest.json",
-            drafts_dir=out / run_rel / "drafts",
-            briefs_dir=out / run_rel / "briefs",
-            verdicts_dir=out / run_rel / "verdicts",
-            gate_trace_dir=out / "gate_traces",
-            sink=sink, experiment=name, reuse_dir=reuse_dir)
+        if execution == "group":
+            # Group execution selects groups by SECTION id; a group's drafts/briefs/
+            # verdicts and gate traces land in the same run dirs the report reads.
+            res = build_group.group_run(
+                book, units=units, routes=routes, review_on=True,
+                max_repair=max_repair, dim_cap=dim_cap,
+                draft_batch_size=int(config.get("draft_batch_size", 4)),
+                manifest_path=out / run_rel / "manifest.json",
+                drafts_dir=out / run_rel / "drafts",
+                briefs_dir=out / run_rel / "briefs",
+                verdicts_dir=out / run_rel / "verdicts",
+                gate_trace_dir=out / "gate_traces",
+                sink=sink, experiment=name)
+        else:
+            reuse_dir = (reuse_root / book / "runs" / reuse_drafts
+                         if reuse_root else None)
+            res = build_cli.run(
+                book, units=units, routes=routes, review_on=True,
+                max_repair=max_repair, dim_cap=dim_cap,
+                manifest_path=out / run_rel / "manifest.json",
+                drafts_dir=out / run_rel / "drafts",
+                briefs_dir=out / run_rel / "briefs",
+                verdicts_dir=out / run_rel / "verdicts",
+                gate_trace_dir=out / "gate_traces",
+                sink=sink, experiment=name, reuse_dir=reuse_dir)
         build_result["ok"].extend(res.get("ok", []))
         build_result["failed"].update(res.get("failed", {}))
     eval_report = _run_fit_evaluation(out, name, groups, evaluator_route, sink)
@@ -184,6 +204,7 @@ def run_experiment(config_path, *, out_root=_DEFAULT_OUT_ROOT, resume=False,
         "name": name,
         "book": config.get("book"),
         "books": sorted(groups),
+        "execution": execution,
         "config": config,
         "config_hash": config_hash,
         "corpus_rev": corpus_rev,

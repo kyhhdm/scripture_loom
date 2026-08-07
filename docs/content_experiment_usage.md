@@ -38,6 +38,39 @@ An experiment is a JSON file under `experiments/` (see `experiments/example.json
   `revise`) gets its own `{backend, model, settings?}` route.
 - `evaluator` is the **D1–D8 fit** route, fixed independently of `draft`.
 - `units: null` (or omit) ⇒ every pending/briefed unit of the book.
+- `"execution"` (optional, default `"per_unit"`) selects how units are batched — see
+  below.
+
+### Execution mode: `per_unit` vs `group`
+
+```json
+{ "...": "...", "execution": "group", "units": ["PHP-S2"] }
+```
+
+- **`per_unit`** (default) — one LLM call per stage **per unit**, the standard walk.
+- **`group`** — batch a **section-group** (a section + its pericopes) into **one call
+  per stage**, cutting request count on the `claude`/Opus subscription backend
+  (~`4(N+1)` → ~5 calls for a group of `N+1` units). It runs the *same* stages, gates,
+  and review semantics and writes the *same* per-unit artifacts (drafts, verdicts,
+  briefs, and **gate traces**), so `report.json` metrics — `first_pass_gate_rate`,
+  `final_gate_rate`, tokens, `calls_by_stage` — are computed identically and are
+  directly comparable to a `per_unit` experiment. Group mode gates at the same point
+  the per-unit builder does (after revise when review is on), so the gate rates mean
+  the same thing across modes.
+- In `group` mode, **`units` selects groups by section id** (e.g. `"PHP-S2"` builds its
+  whole group); omit `units` to build every group in the book. A batched call that
+  truncates or omits a unit is split and retried down to singletons (the bisection
+  guard), so no unit is dropped.
+- `"draft_batch_size"` (optional, default `4`) caps how many units go into a single
+  **draft** call. Draft is the one stage where the model tends to drop units at large
+  group sizes (which then triggers bisection); capping it keeps each draft call reliable
+  while brief/review/revise stay batched over the whole group. `0` disables the cap
+  (whole group in one draft call). Only meaningful with `"execution": "group"`.
+- **Not supported with `--reuse-drafts`** (group mode does not persist reusable
+  per-unit raw drafts) — run `per_unit` to reuse frozen drafts.
+
+To A/B group vs per-unit fairly: run two experiments with identical routes that differ
+only in `"execution"`, then `compare --experiments per_unit_name,group_name`.
 
 ### Single-book vs cross-book
 
