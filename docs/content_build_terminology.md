@@ -230,8 +230,12 @@ of `N+1` units. Downstream (gates, manifest, store, provenance) stays per-unit a
 byte-identical; only the LLM I/O is batched. A `stop_reason==max_tokens` / missing-unit
 / unparseable envelope triggers **bisection** — the group is split and its halves
 retried down to singletons. Batched telemetry is attributed to the section id with
-`kind: "group"` (per-call counts kept; per-unit token split lost). Design:
-`docs/superpowers/specs/2026-08-07-group-batched-content-build-design.md`.
+`kind: "group"` (per-call counts kept; per-unit token split lost). Enabled by
+`build_cli --group` or an experiment's `"execution": "group"`; the **draft** stage is
+chunked at `--draft-batch-size` / `draft_batch_size` units (default 4), the one stage
+where the model drops units at large group sizes. Design:
+`docs/superpowers/specs/2026-08-07-group-batched-content-build-design.md` and
+`docs/superpowers/specs/2026-08-07-draft-batch-size-cap-design.md`.
 
 ---
 

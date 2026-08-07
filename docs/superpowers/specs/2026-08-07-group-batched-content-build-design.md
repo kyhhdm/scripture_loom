@@ -192,11 +192,24 @@ group). Omitting `--units` walks all groups with any unit not yet `drafted`.
    per-unit `4(N+1)` baseline via a counting mock.
 7. `--no-review` path: draft + batched repair only, no review/revise calls.
 
-## Follow-ups (out of scope for v1)
+## Follow-ups
 
-- Wire group mode into `experiment_cli.py` per-stage routing (so a hybrid experiment
-  can batch on one route and review on another).
-- A/B measurement (Opus per-unit vs Opus group-batched) on cost **and** quality
-  (gate pass rate, r1/r2 fail rate, dropped-item count) on a real section, per the
-  nondeterministic-system verification discipline — recommended before adopting group
-  mode as the default authoring path.
+Status as of 2026-08-07 (all delivered after v1, same branch):
+
+- **DONE — wired into `experiment_cli.py`.** An optional `"execution": "group"` config
+  field routes an experiment's per-book build through `group_run`, writing the same
+  per-unit artifacts + gate traces so `report.json` metrics are directly comparable to a
+  `per_unit` experiment. This required aligning group review-on mode to the per-unit
+  gate point (draft → review → revise → gate once, dropping the earlier post-draft
+  gate) so `first_pass_gate_rate` measures the same thing. Configs
+  `experiments/php_s2_{per_unit,group}.json` are a matched A/B pair.
+- **DONE — A/B measured on PHP-S2** (Opus per-unit vs group): call count **34 → 9**
+  (3.8×), input tokens **−60%**, quality comparable (n=1: group had a lower r1/r2 fail
+  rate and needed 0 gate-repair rounds vs 4). Comparison page built via `compare_html`.
+  Finding: the **draft** stage omitted units at 6-per-call and bisected to 5 calls.
+- **DONE — draft-stage batch cap** to close that gap:
+  `--draft-batch-size` / config `draft_batch_size` (default 4), draft-only. Spec:
+  `docs/superpowers/specs/2026-08-07-draft-batch-size-cap-design.md`.
+
+Still open: a repeated (K-trial) A/B before adopting group mode as the **default**
+authoring path — the single-trial quality edge is suggestive, not conclusive.
