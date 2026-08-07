@@ -41,6 +41,60 @@ class RunnerTest(unittest.TestCase):
             self.assertIn("routes", run.call_args.kwargs)
             self.assertEqual(run.call_args.kwargs["experiment"], "t1")
 
+    def test_group_execution_dispatches_to_group_run(self):
+        cfg_dict = {**CONFIG, "name": "g1", "execution": "group",
+                    "units": ["PHP-S2"]}
+        with tempfile.TemporaryDirectory() as d:
+            cfg = pathlib.Path(d) / "g1.json"
+            cfg.write_text(json.dumps(cfg_dict))
+            with mock.patch("content_bank.author.build_group.group_run",
+                            return_value={"ok": ["PHP-S2"], "failed": {}}) as grp, \
+                 mock.patch("content_bank.author.build_cli.run") as per_unit, \
+                 mock.patch("content_bank.author.quality_eval.evaluate",
+                            return_value={"runs": {}}), \
+                 mock.patch("content_bank.author.experiment_cli._seed_run_manifest"):
+                man = ex.run_experiment(cfg, out_root=d + "/out",
+                                        now="2026-08-07T00:00:00Z", corpus_rev="abc")
+            grp.assert_called_once()
+            per_unit.assert_not_called()
+            kw = grp.call_args.kwargs
+            self.assertEqual(kw["units"], ["PHP-S2"])
+            self.assertEqual(kw["experiment"], "g1")
+            self.assertIn("routes", kw)
+            # writes into runs/<name>/ and captures gate traces (report reads both)
+            self.assertTrue(str(kw["drafts_dir"]).endswith("PHP/runs/g1/drafts"))
+            self.assertTrue(str(kw["gate_trace_dir"]).endswith("g1/gate_traces"))
+            self.assertEqual(man["execution"], "group")
+
+    def test_per_unit_execution_still_uses_build_cli_run(self):
+        with tempfile.TemporaryDirectory() as d:
+            cfg = self._write_cfg(d)  # CONFIG has no `execution` -> per_unit
+            with mock.patch("content_bank.author.build_cli.run",
+                            return_value={"ok": ["PHP-001"], "failed": {}}) as per_unit, \
+                 mock.patch("content_bank.author.build_group.group_run") as grp, \
+                 mock.patch("content_bank.author.quality_eval.evaluate",
+                            return_value={"runs": {}}), \
+                 mock.patch("content_bank.author.experiment_cli._seed_run_manifest"):
+                man = ex.run_experiment(cfg, out_root=d + "/out",
+                                        now="2026-08-07T00:00:00Z", corpus_rev="abc")
+            per_unit.assert_called_once()
+            grp.assert_not_called()
+            self.assertEqual(man["execution"], "per_unit")
+
+    def test_group_execution_rejects_reuse_drafts(self):
+        cfg_dict = {**CONFIG, "name": "g2", "execution": "group",
+                    "units": ["PHP-S2"]}
+        with tempfile.TemporaryDirectory() as d:
+            cfg = pathlib.Path(d) / "g2.json"
+            cfg.write_text(json.dumps(cfg_dict))
+            with mock.patch("content_bank.author.quality_eval.evaluate",
+                            return_value={"runs": {}}), \
+                 mock.patch("content_bank.author.experiment_cli._seed_run_manifest"), \
+                 self.assertRaises(ValueError):
+                ex.run_experiment(cfg, out_root=d + "/out",
+                                  now="2026-08-07T00:00:00Z", corpus_rev="abc",
+                                  reuse_drafts="src")
+
     def test_resume_refuses_changed_config(self):
         with tempfile.TemporaryDirectory() as d:
             cfg = self._write_cfg(d)

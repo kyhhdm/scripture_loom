@@ -159,6 +159,41 @@ class TestGroupRun(unittest.TestCase):
         self.assertEqual(res2["ok"], [])
 
 
+class TestGroupRunExplicitDirs(unittest.TestCase):
+    def test_explicit_dirs_and_gate_traces(self):
+        counter = {"n": 0}
+        fake = _stage_llm(counter)
+        with tempfile.TemporaryDirectory() as d, \
+             mock.patch("content_bank.author.build_group.llm", side_effect=fake), \
+             mock.patch("content_bank.author.build_cli.run_all", return_value={}), \
+             mock.patch("content_bank.author.gates.dimension_cap_check",
+                        return_value={}), \
+             mock.patch("content_bank.author.review.llm", side_effect=fake), \
+             mock.patch("content_bank.author.build_cli._check_routes_available"):
+            base = pathlib.Path(d)
+            run_rel = base / "PHP" / "runs" / "exp1"
+            mpath = run_rel / "manifest.json"
+            # seed the run manifest the experiment runner would create
+            groups = build_group.groups_for_book("PHP")
+            m = manifest_mod.init_manifest(
+                "PHP", [p for _, pids in groups for p in pids],
+                [sid for sid, _ in groups])
+            manifest_mod.save(mpath, m)
+            res = build_group.group_run(
+                "PHP", units=["PHP-S1"], review_on=True, backend="claude",
+                model="opus", manifest_path=mpath, drafts_dir=run_rel / "drafts",
+                briefs_dir=run_rel / "briefs", verdicts_dir=run_rel / "verdicts",
+                gate_trace_dir=base / "gate_traces")
+            self.assertIn("PHP-001", res["ok"])
+            # drafts written to the EXPLICIT dir, not runs/<slug>/
+            self.assertTrue((run_rel / "drafts" / "PHP-001.json").exists())
+            # gate traces written per unit with the report's required keys
+            trace = json.loads(
+                (base / "gate_traces" / "PHP-001.json").read_text())
+            self.assertIn("first_pass_clean", trace)
+            self.assertIn("final_pass", trace)
+
+
 class TestCliGroupDispatch(unittest.TestCase):
     def test_group_flag_calls_group_run(self):
         from content_bank.author import build_cli

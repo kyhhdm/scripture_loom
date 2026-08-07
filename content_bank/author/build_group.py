@@ -14,6 +14,7 @@ a singleton that still truncates raises for that unit only. See
 ``docs/superpowers/specs/2026-08-07-group-batched-content-build-design.md``.
 """
 import json
+import pathlib
 import re
 
 from corpus.lib import sections as _sections
@@ -114,16 +115,25 @@ def _allowed_for(book, unit_id):
     return gates.pericope_allowed(book, unit_id)
 
 
+def group_draft_items(unit_ids, book, briefs, *, route, sink=None, experiment=None,
+                      section_id=None):
+    """One batched draft call → ``{unit_id: raw items}`` (no gates). The gate+repair
+    pass is applied per-unit by the caller, at the point that matches the per-unit
+    builder (after draft when review is off, after revise when review is on)."""
+    return group_call(
+        lambda ids: build_group_prompt.draft_envelope(ids, book, briefs),
+        unit_ids, route=route, sink=sink, experiment=experiment,
+        stage="draft", section_id=section_id)
+
+
 def build_group_drafts(unit_ids, book, briefs, *, routes, max_repair=2,
                        dim_cap=gates.DEFAULT_DIM_CAP, sink=None, experiment=None,
                        section_id=None, traces=None):
-    """One batched draft call → per-unit gates + bounded repair → ``{unit_id: items}``.
-    Gates are per-unit and deterministic; only the repair LLM call is batched-free here
-    (repair reuses the unit's own draft sub-pack as context, per ``_repair_to_clean``)."""
-    raw = group_call(
-        lambda ids: build_group_prompt.draft_envelope(ids, book, briefs),
-        unit_ids, route=routes.draft, sink=sink, experiment=experiment,
-        stage="draft", section_id=section_id)
+    """The no-review path: one batched draft call → per-unit gates + bounded repair →
+    ``{unit_id: items}`` (mirrors the per-unit ``_draft_with_repair``). Gates are
+    per-unit and deterministic; only the repair LLM call costs a request."""
+    raw = group_draft_items(unit_ids, book, briefs, route=routes.draft, sink=sink,
+                            experiment=experiment, section_id=section_id)
     out = {}
     for u in unit_ids:
         allowed = _allowed_for(book, u)
@@ -157,11 +167,18 @@ def _save_group_verdicts(verdicts_dir, group_verdicts, unit_ids):
         build_cli._write_json(verdicts_dir / f"{u}.json", by_item)
 
 
-def _build_one_group(section_id, pericope_ids, book, *, routes, layout, m,
-                     manifest_path, review_on, max_repair, dim_cap, draft_stamp,
-                     sink, experiment):
+def _build_one_group(section_id, pericope_ids, book, *, routes, briefs_dir,
+                     drafts_dir, verdicts_dir, gate_trace_dir, m, manifest_path,
+                     review_on, max_repair, dim_cap, draft_stamp, sink, experiment):
     """Drive one group through the batched pipeline, writing per-unit artifacts and
-    advancing each unit's manifest stage. Units already ``drafted`` are skipped."""
+    advancing each unit's manifest stage. Units already ``drafted`` are skipped.
+
+    The stage order mirrors the per-unit builder exactly so gate traces are
+    comparable: brief → draft → (review → revise → **gate+repair**) when review is on;
+    brief → draft → **gate+repair** when it is off. The gate+repair pass runs once, at
+    the same point the per-unit builder gates, so ``first_pass_gate_rate`` measures the
+    same thing across execution modes."""
+    briefs_dir, drafts_dir = pathlib.Path(briefs_dir), pathlib.Path(drafts_dir)
     unit_ids = [u for u in unit_ids_for_group(section_id, pericope_ids)
                 if m["units"][u]["stage"] != "drafted"]
     if not unit_ids:
@@ -169,39 +186,51 @@ def _build_one_group(section_id, pericope_ids, book, *, routes, layout, m,
 
     briefs = build_group_briefs(unit_ids, book, route=routes.brief, sink=sink,
                                 experiment=experiment, section_id=section_id)
+    briefs_dir.mkdir(parents=True, exist_ok=True)
     for u in unit_ids:
-        brief_path = layout["briefs"] / f"{u.lower()}.md"
-        brief_path.parent.mkdir(parents=True, exist_ok=True)
-        brief_path.write_text(briefs[u], encoding="utf-8")
+        (briefs_dir / f"{u.lower()}.md").write_text(briefs[u], encoding="utf-8")
         manifest_mod.set_stage(m, u, "briefed")
     manifest_mod.save(manifest_path, m)
 
-    drafts = build_group_drafts(unit_ids, book, briefs, routes=routes,
-                                max_repair=max_repair, dim_cap=dim_cap, sink=sink,
-                                experiment=experiment, section_id=section_id)
-
+    traces = {}
     if review_on:
+        raw = group_draft_items(unit_ids, book, briefs, route=routes.draft, sink=sink,
+                                experiment=experiment, section_id=section_id)
         ctx = {u: _ctx_for(book, u) for u in unit_ids}
         for u in unit_ids:
             ctx[u]["brief"] = briefs[u]
         group_verdicts = review_mod.review_group(
-            drafts, ctx_by_unit=ctx, book=book, r1_route=routes.review_r1,
+            raw, ctx_by_unit=ctx, book=book, r1_route=routes.review_r1,
             r2_route=routes.review_r2, sink=sink, experiment=experiment,
             section_id=section_id)
-        _save_group_verdicts(layout["verdicts"], group_verdicts, unit_ids)
+        if verdicts_dir is not None:
+            _save_group_verdicts(pathlib.Path(verdicts_dir), group_verdicts, unit_ids)
         revised = review_mod.revise_group(
-            drafts, group_verdicts, ctx_by_unit=ctx, route=routes.revise, sink=sink,
+            raw, group_verdicts, ctx_by_unit=ctx, route=routes.revise, sink=sink,
             experiment=experiment, section_id=section_id)
+        drafts = {}
         for u in unit_ids:
             allowed = _allowed_for(book, u)
             prompt = build_group_prompt._draft_subpack(u, book, briefs[u])
+            trace = {}
             drafts[u] = build_cli._regate(prompt, revised[u], book, allowed,
                                           repair_route=routes.repair,
-                                          max_repair=max_repair, dim_cap=dim_cap)
+                                          max_repair=max_repair, dim_cap=dim_cap,
+                                          trace=trace)
+            traces[u] = trace
+    else:
+        drafts = build_group_drafts(unit_ids, book, briefs, routes=routes,
+                                    max_repair=max_repair, dim_cap=dim_cap, sink=sink,
+                                    experiment=experiment, section_id=section_id,
+                                    traces=traces)
 
+    if gate_trace_dir is not None:
+        for u in unit_ids:
+            build_cli._write_json(pathlib.Path(gate_trace_dir) / f"{u}.json",
+                                  traces.get(u, {}))
     for u in unit_ids:
         items = build_cli._stamp_draft_provenance(drafts[u], draft_stamp)
-        build_cli._write_json(layout["drafts"] / f"{u}.json", items)
+        build_cli._write_json(drafts_dir / f"{u}.json", items)
         manifest_mod.set_stage(m, u, "drafted")
         manifest_mod.save(manifest_path, m)
     return unit_ids
@@ -209,10 +238,17 @@ def _build_one_group(section_id, pericope_ids, book, *, routes, layout, m,
 
 def group_run(book, *, units=None, review_on=True, max_repair=2, limit=None,
               run_root=None, backend="llm_core", model=None, routes=None,
-              dim_cap=gates.DEFAULT_DIM_CAP, sink=None, experiment=None):
+              dim_cap=gates.DEFAULT_DIM_CAP, sink=None, experiment=None,
+              manifest_path=None, drafts_dir=None, briefs_dir=None, verdicts_dir=None,
+              gate_trace_dir=None):
     """Batched per-group build. ``units`` selects groups by section id; omitted, walks
     every group with a not-yet-``drafted`` unit. ``limit`` bounds the number of groups.
-    Returns ``{"ok": [unit_id,...], "failed": {unit_id: error}}``."""
+
+    Two output modes, matching ``build_cli.run``: passing ``manifest_path``/
+    ``drafts_dir`` uses those explicit dirs (the experiment runner directs output to
+    ``runs/<name>/`` and captures ``gate_trace_dir``); otherwise the per-model run
+    layout ``runs/<slug>/`` is computed from ``run_root``. Returns
+    ``{"ok": [unit_id,...], "failed": {unit_id: error}}``."""
     sink = sink or NullSink()
     if routes is None:
         routes = routing.RouteConfig.single(backend, model)
@@ -220,13 +256,26 @@ def group_run(book, *, units=None, review_on=True, max_repair=2, limit=None,
 
     draft_backend, draft_model = routes.draft.backend, routes.draft.model
     slug = build_cli._run_slug(draft_backend, draft_model)
-    layout = build_cli._run_layout(book, slug, root=run_root)
-    m = build_cli._load_run_manifest(book, layout, root=run_root)
-    manifest_path = layout["manifest"]
-    for key in ("briefs", "drafts", "verdicts"):
-        layout[key].mkdir(parents=True, exist_ok=True)
-    print(f"[group-run] model={build_cli._effective_model(draft_backend, draft_model)} "
-          f"slug={slug} -> {layout['run_dir']}")
+    if manifest_path is not None or drafts_dir is not None:
+        # Explicit-dir mode (experiment runner / advanced use).
+        manifest_path = pathlib.Path(manifest_path
+                                     or build_cli._default_manifest_path(book))
+        m = manifest_mod.load(manifest_path)
+        drafts_dir = pathlib.Path(drafts_dir or manifest_path.parent / "drafts")
+        briefs_dir = (pathlib.Path(briefs_dir) if briefs_dir
+                      else manifest_path.parent / "briefs")
+        verdicts_dir = (pathlib.Path(verdicts_dir) if verdicts_dir
+                        else manifest_path.parent / "verdicts")
+    else:
+        layout = build_cli._run_layout(book, slug, root=run_root)
+        m = build_cli._load_run_manifest(book, layout, root=run_root)
+        manifest_path = layout["manifest"]
+        drafts_dir, briefs_dir, verdicts_dir = (
+            layout["drafts"], layout["briefs"], layout["verdicts"])
+        print(f"[group-run] model={build_cli._effective_model(draft_backend, draft_model)} "
+              f"slug={slug} -> {layout['run_dir']}")
+    for d in (drafts_dir, briefs_dir, verdicts_dir):
+        pathlib.Path(d).mkdir(parents=True, exist_ok=True)
 
     draft_stamp = {"model": build_cli._effective_model(draft_backend, draft_model),
                    "backend": draft_backend, "run": slug}
@@ -242,10 +291,11 @@ def group_run(book, *, units=None, review_on=True, max_repair=2, limit=None,
     for section_id, pericope_ids in groups:
         try:
             built = _build_one_group(
-                section_id, pericope_ids, book, routes=routes, layout=layout, m=m,
-                manifest_path=manifest_path, review_on=review_on,
-                max_repair=max_repair, dim_cap=dim_cap, draft_stamp=draft_stamp,
-                sink=sink, experiment=experiment)
+                section_id, pericope_ids, book, routes=routes, briefs_dir=briefs_dir,
+                drafts_dir=drafts_dir, verdicts_dir=verdicts_dir,
+                gate_trace_dir=gate_trace_dir, m=m, manifest_path=manifest_path,
+                review_on=review_on, max_repair=max_repair, dim_cap=dim_cap,
+                draft_stamp=draft_stamp, sink=sink, experiment=experiment)
             ok.extend(built)
             for u in built:
                 print(f"[ok] {u}")

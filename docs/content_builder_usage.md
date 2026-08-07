@@ -186,10 +186,13 @@ uv run python -m content_bank.author.build_cli \
 
 What changes and what does not:
 
-- **Batched:** brief (1 call), draft (1 call), gate-**repair** (only the units that
-  flagged, 1 call/round), review **r1** (1 call) and **r2** (1 call), and **revise**
-  (only the units with a failed item, 1 call). The two review lenses stay independent
-  calls — drafting and review are never folded together.
+- **Batched (review on):** brief (1 call) → draft (1 call) → review **r1** (1 call) and
+  **r2** (1 call) → **revise** (only the units with a failed item, 1 call) →
+  gate-**repair** (only the units still flagged after revise, 1 call/round). The order
+  mirrors the per-unit builder exactly — the gate check runs once, after revise — so
+  gate rates are comparable across modes. The two review lenses stay independent calls;
+  drafting and review are never folded together. With `--no-review` the flow is draft →
+  gate-repair.
 - **Unchanged and per-unit:** the deterministic gates, the manifest stages, provenance
   stamping, the `runs/<slug>/{briefs,drafts,verdicts}` layout, and everything
   `compare_html` reads. Group mode only batches the LLM I/O.
